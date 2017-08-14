@@ -5,8 +5,8 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour {
 
     public static BuildManager instance;
-    public GameObject standardUnitPrefab;
-    public GameObject secondaryUnitPrefab;
+    public UnitBlueprint standardUnitPrefab;
+    public UnitBlueprint secondaryUnitPrefab;
 
     void Awake()
     {
@@ -27,16 +27,36 @@ public class BuildManager : MonoBehaviour {
         
     }
 
-    private GameObject unitToBuild;
+    private UnitBlueprint unitToBuild;
 
-    public GameObject getUnitToBuild()
+    public UnitBlueprint getUnitToBuild()
     {
         return unitToBuild;
     }
 
-    public void setUnitToBuild(GameObject unit)
+    public bool CanBuild { get { return unitToBuild != null; } }
+
+    public void BuildUnitOn(Node node)
+    {
+        if (PlayerStats.Money < unitToBuild.cost)
+        {
+            Debug.Log("Not enough money to build that!");
+            return;
+        }
+
+        PlayerStats.Money -= unitToBuild.cost;
+
+
+        GameObject unit = (GameObject) Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        node.unit = unit;
+
+        Debug.Log("Unit built ! Money left: " +PlayerStats.Money);
+    }
+
+    public void SelectUnitToBuild(UnitBlueprint unit)
     {
         unitToBuild = unit;
+
     }
 
 }

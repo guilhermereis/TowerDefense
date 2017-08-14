@@ -6,7 +6,8 @@ public class Node : MonoBehaviour {
     public Color hoverColor;
     public Vector3 positionOffset;
 
-    private GameObject turret;
+    [Header("Optional")]
+    public GameObject unit;
 
 
     private Renderer rend;
@@ -31,21 +32,24 @@ public class Node : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (buildManager.getUnitToBuild() == null)
+        if (!buildManager.CanBuild)
         {
             return;
         }
 
-        if (turret != null)
+        if (unit != null)
         {
             Debug.Log("Can't build there! - TODO: Display on screen.");
             return;
         }
+        Debug.Log("Gonna call !");
+        buildManager.BuildUnitOn(this);
 
-        //Build a turret
-        GameObject turretToBuild = buildManager.getUnitToBuild();
-        turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+    }
 
+    public Vector3 GetBuildPosition()
+    {
+        return transform.position + positionOffset;
     }
 
     void OnMouseEnter()
@@ -53,7 +57,7 @@ public class Node : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (buildManager.getUnitToBuild() == null)
+        if (!buildManager.CanBuild)
         {
             return;
         }
