@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WandererController : PawnController
 {
-    
+    private GameObject offender;
     protected override void Awake()
     {
         base.Awake();
@@ -25,7 +25,6 @@ public class WandererController : PawnController
     public override void OnBattle()
     {
         base.OnBattle();
-        Debug.Log("Battling");
     }
 
 
@@ -40,7 +39,11 @@ public class WandererController : PawnController
         base.OnTriggerEnter(other);
         if(other.gameObject.tag == "Ally")
         {
-            speed = 1;
+            if(other.gameObject.GetComponent<PawnController>().target == this)
+            {
+                speed = 1;
+            
+            }
         }
 
         //base.OnTriggerEnter(other);

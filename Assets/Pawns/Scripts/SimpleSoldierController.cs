@@ -4,7 +4,7 @@ using System.Collections;
 public class SimpleSoldierController : PawnController {
 
     private SimpleSoldierCharacter character;
-    public float lastAttack;
+    public float attackCountdown = 0f;
 
     public void SetTarget(GameObject _target)
     {
@@ -31,8 +31,9 @@ public class SimpleSoldierController : PawnController {
     // Update is called once per frame
     protected override void Update() {
         base.Update();
+        attackCountdown -= Time.deltaTime;
 
-	}
+    }
 
     public override void OnMoving()
     {
@@ -53,15 +54,18 @@ public class SimpleSoldierController : PawnController {
 
         if (target != null)
         {
-           if (Time.time >character.attackRate + lastAttack)
+            
+           if (attackCountdown <=0)
            {
-             target.GetComponent<PawnCharacter>().Damage(character.attack);
+            Debug.DrawLine(transform.position, target.transform.position);
+            target.GetComponent<PawnCharacter>().Damage(character.attack);
+            attackCountdown = 1 / character.attackRate;
            }
-           lastAttack += Time.time;
+     
         }else
             ChangeState(PawnState.Homing);
 
-           
+        
        
 
         

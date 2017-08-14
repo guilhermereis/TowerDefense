@@ -12,8 +12,10 @@ public class PawnCharacter : MonoBehaviour {
     public virtual void Damage(float _damage)
     {
         health -= _damage;
+        Debug.Log(health);
         if(health <= 0)
         {
+            
             Destroy(gameObject);
             return;
         }

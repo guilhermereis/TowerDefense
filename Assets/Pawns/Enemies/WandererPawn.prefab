@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114168789959604866}
   - component: {fileID: 114700906066300348}
   - component: {fileID: 135218088848744410}
+  - component: {fileID: 114171259623386668}
   m_Layer: 0
   m_Name: WandererPawn
   m_TagString: Enemy
@@ -112,6 +113,21 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114171259623386668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1164128760067590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582ecddf17da3144a8a7fea8362c4b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  defense: 1
+  attack: 1
+  attackRate: 1
 --- !u!114 &114700906066300348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,7 +139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4efc1cf05bd18f4f9e4aacaec0b1b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 2
+  finalDestination: {fileID: 0}
   speed: 5
+  target: {fileID: 0}
+  homePosition: {x: 0, y: 0, z: 0}
 --- !u!135 &135218088848744410
 SphereCollider:
   m_ObjectHideFlags: 1
