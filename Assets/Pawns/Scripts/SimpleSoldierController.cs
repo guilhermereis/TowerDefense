@@ -32,7 +32,6 @@ public class SimpleSoldierController : PawnController {
     protected override void Update() {
         base.Update();
         attackCountdown -= Time.deltaTime;
-
     }
 
     public override void OnMoving()
@@ -49,26 +48,20 @@ public class SimpleSoldierController : PawnController {
 
     public override void OnBattle()
     {
+
         base.OnBattle();
-        //Debug.Log("Battling");
 
         if (target != null)
         {
-            
-           if (attackCountdown <=0)
-           {
-            Debug.DrawLine(transform.position, target.transform.position);
-            target.GetComponent<PawnCharacter>().Damage(character.attack);
-            attackCountdown = 1 / character.attackRate;
-           }
-     
+			if (attackCountdown <= 0)
+			{
+				Debug.DrawLine(transform.position, target.transform.position);
+				target.GetComponent<PawnCharacter>().Damage(character.attack);
+				attackCountdown = 1 / character.attackRate;
+			}
         }else
             ChangeState(PawnState.Homing);
-
-        
-       
-
-        
+		
     }
 
     //enemy in range of attack
@@ -76,6 +69,7 @@ public class SimpleSoldierController : PawnController {
     {
 
         base.OnTriggerEnter(other);
+
         if (other.gameObject.tag == "Enemy" && other.gameObject == target)
         {
             Debug.Log("Started Battle");
@@ -88,6 +82,7 @@ public class SimpleSoldierController : PawnController {
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
+
         if (other.gameObject.tag == "Enemy")
         {
             Debug.Log("Started Battle");

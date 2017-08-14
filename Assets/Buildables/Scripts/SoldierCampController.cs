@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CampController : MonoBehaviour {
+public class SoldierCampController : MonoBehaviour {
 
     delegate void EnemyOutOfReachDelegate(GameObject target);
     delegate void SetEnemyDelegate(GameObject target);
