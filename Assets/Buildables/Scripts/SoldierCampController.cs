@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierCampController : MonoBehaviour {
+public class SoldierCampController : BuildableController {
 
     delegate void EnemyOutOfReachDelegate(GameObject target);
     delegate void SetEnemyDelegate(GameObject target);
@@ -16,13 +16,18 @@ public class SoldierCampController : MonoBehaviour {
     
     // Use this for initialization
 	void Start () {
+		Health = 50;
+		IsUpgradable = true;
+		Defense = 2;
         soldiersController = new SimpleSoldierController[soldiersCount];
         for (int i = 0; i < transform.childCount; i++)
         {
             SimpleSoldierController ssc = (SimpleSoldierController)transform.GetChild(i).GetComponent<SimpleSoldierController>();
-            enemyOutOfReach += ssc.ForgetTarget;
-            soldiersController[i] = ssc;
-            //setEnemy += ssc.SetTarget; 
+			//binding enemyOutOfReachDelegate
+			enemyOutOfReach += ssc.ForgetTarget;
+
+			soldiersController[i] = ssc;
+            
         }
 	}
 	
