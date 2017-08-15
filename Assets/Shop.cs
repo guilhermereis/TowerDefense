@@ -2,6 +2,11 @@
 
 public class Shop : MonoBehaviour {
 
+    public UnitBlueprint standardUnit;
+    public UnitBlueprint missileLauncher;
+
+
+
     BuildManager buildManager;
 
     void Start()
@@ -9,16 +14,16 @@ public class Shop : MonoBehaviour {
         buildManager = BuildManager.instance;
     }
 
-    public void PurchaseStandardUnit()
+    public void SelectStandardUnit()
     {
-        Debug.Log("Standard Turret Purchased");
-        buildManager.setUnitToBuild(buildManager.standardUnitPrefab);
+        Debug.Log("Standard Turret Selected");
+        buildManager.SelectUnitToBuild(standardUnit);
     }
 
-    public void PurchaseSecondaryUnit()
+    public void SelectSecondaryUnit()
     {
-        Debug.Log("Secondary Turret Purchased");
-        buildManager.setUnitToBuild(buildManager.secondaryUnitPrefab);
+        Debug.Log("Secondary Turret Selected");
+        buildManager.SelectUnitToBuild(missileLauncher);
     }
 
 }
