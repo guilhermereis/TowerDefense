@@ -22,10 +22,7 @@ public class CameraController : MonoBehaviour {
     void Update () {
         Vector3 rightMovement = rightVector * panSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
         Vector3 upMovement = forwardVector * perspectiveRatio * panSpeed * Time.deltaTime * Input.GetAxis("Vertical");
-        Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
-
-        float horizontalDistance = Vector3.Magnitude(((transform.position + rightMovement) - cameraStartPosition));
-        float verticalDistance = Vector3.Magnitude(((transform.position + upMovement) - cameraStartPosition));
+        Vector3 heading = Vector3.Normalize(rightMovement + upMovement);        
 
         if (Input.mousePosition.y >= Screen.height - panBorderThickness){
             upMovement = forwardVector * perspectiveRatio * panSpeed * Time.deltaTime * 1;
@@ -39,6 +36,9 @@ public class CameraController : MonoBehaviour {
         if (Input.mousePosition.x <= panBorderThickness){
             rightMovement = rightVector * panSpeed * Time.deltaTime * -1;
         }
+
+        float horizontalDistance = Vector3.Magnitude(((transform.position + rightMovement) - cameraStartPosition));
+        float verticalDistance = Vector3.Magnitude(((transform.position + upMovement) - cameraStartPosition));
 
         if (horizontalDistance < panLimit.x) {
             transform.position += rightMovement;
