@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3311554}
   - component: {fileID: 2311554}
   - component: {fileID: 11411554}
+  - component: {fileID: 114587723693792706}
+  - component: {fileID: 64726139656057402}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -24,13 +26,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111554}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &2311554
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -41,7 +43,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 0
+  m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: ad755755bc7b5d34e9d0bb3440aa6e7a, type: 2}
@@ -83,9 +85,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 411554}
   _material: {fileID: 2100000, guid: ad755755bc7b5d34e9d0bb3440aa6e7a, type: 2}
-  _gridSize: {x: 2, y: 2}
-  _rows: 3
-  _columns: 3
+  _gridSize: {x: 30, y: 30}
+  _rows: 20
+  _columns: 20
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -97,3 +99,29 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111554}
   m_IsPrefabParent: 1
+--- !u!64 &64726139656057402
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111554}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114587723693792706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8de2df2fc01dc584fa12330048b7c387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionCube: {fileID: 0}
