@@ -11,15 +11,8 @@ public class TileMap : MonoBehaviour {
 	}
     void BuildMesh()
     {
-
-
-
-
-
-
-
-
-
+        
+        
 
         MeshFilter mesh_filter = GetComponent<MeshFilter>();
         MeshRenderer mesh_renderer = GetComponent<MeshRenderer>();
