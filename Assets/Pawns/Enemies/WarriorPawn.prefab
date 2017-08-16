@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114259367806044188}
   - component: {fileID: 114279201298563666}
   - component: {fileID: 135076864024672862}
+  - component: {fileID: 114883886630062610}
   m_Layer: 0
   m_Name: WarriorPawn
   m_TagString: Enemy
@@ -41,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643799150267160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -28.17, y: 1.49, z: -8.12}
+  m_LocalPosition: {x: -28.17, y: 1.49, z: -2.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,10 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b074752b74c8a1642bdd6498d7deb4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1000
   health: 1000
   defense: 250
   attack: 700
   attackRate: 0.5
+  healthBar: {fileID: 0}
 --- !u!114 &114279201298563666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,6 +136,21 @@ MonoBehaviour:
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
   attackCountdown: 0
+--- !u!114 &114883886630062610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1643799150267160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb336695bcc10b74d888f295f14b653a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tex: {fileID: 10904, guid: 0000000000000000f000000000000000, type: 0}
+  hpBarPrefab: {fileID: 1419856877115170, guid: 851d77b0ff520d442af9944588f5321e,
+    type: 2}
+  canvas: {fileID: 0}
 --- !u!135 &135076864024672862
 SphereCollider:
   m_ObjectHideFlags: 1

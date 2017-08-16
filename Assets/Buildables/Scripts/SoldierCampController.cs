@@ -18,7 +18,7 @@ public class SoldierCampController : BuildableController {
 	//default number of spawned soldiers
     private int soldiersCount = 3;
     
-
+	
 
     // Use this for initialization
 	void Start () {

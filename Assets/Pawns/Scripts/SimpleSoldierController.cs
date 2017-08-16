@@ -3,9 +3,13 @@ using System.Collections.Generic;
 
 public class SimpleSoldierController : PawnController {
 
-	private SoldierCampController camp;
-    private SimpleSoldierCharacter character;
+	public SoldierCampController camp;
+
+	
+	private SimpleSoldierCharacter character;
+
 	private List<GameObject> enemiesInRange;
+
 	public float attackCountdown = 0f;
 
 
