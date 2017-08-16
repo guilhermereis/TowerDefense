@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 33348408973404830}
   - component: {fileID: 136262963409526090}
   - component: {fileID: 23459877039044236}
-  m_Layer: 2
+  - component: {fileID: 114813416805115190}
+  - component: {fileID: 114128775342723726}
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +83,29 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1146990180613330}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114128775342723726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1146990180613330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae9d29d69009a744bb95be3374dfeaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114813416805115190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1146990180613330}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661ccd5506019e445b9441cf508f404c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 0.2794118, g: 0.2794118, b: 0.2794118, a: 0.597}
 --- !u!136 &136262963409526090
 CapsuleCollider:
   m_ObjectHideFlags: 1

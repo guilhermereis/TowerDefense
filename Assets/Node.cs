@@ -55,21 +55,29 @@ public class Node : MonoBehaviour {
         }
             
     }
+    public void SetUnit(GameObject _unit)
+    {
+        unit = _unit;
+        StructureUI obj = (StructureUI)unit.GetComponent<StructureUI>();
+        //obj.SetNodeThatSitsOn(this);
+
+    }
     void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
+
+        if (unit != null)
+        {
+            buildManager.SelectNode(this);
+            return;
+        }
 
         if (!buildManager.CanBuild)
         {
             return;
         }
 
-        if (unit != null)
-        {
-            Debug.Log("Can't build there! - TODO: Display on screen.");
-            return;
-        }
         Debug.Log("Gonna call !");
         buildManager.BuildUnitOn(this);
 

@@ -7,6 +7,8 @@ public class BuildManager : MonoBehaviour {
     public static BuildManager instance;
     public UnitBlueprint standardUnitPrefab;
     public UnitBlueprint secondaryUnitPrefab;
+    public NodeUI nodeUI;
+    public StructureUI structureUI;
 
     void Awake()
     {
@@ -28,6 +30,7 @@ public class BuildManager : MonoBehaviour {
     }
 
     private UnitBlueprint unitToBuild;
+    private Node selectedNode;
 
     public UnitBlueprint getUnitToBuild()
     {
@@ -40,6 +43,7 @@ public class BuildManager : MonoBehaviour {
     {
         GameObject preview = (GameObject)Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
         node.preview = preview;
+        
     }
 
     public void BuildUnitOn(Node node)
@@ -54,14 +58,39 @@ public class BuildManager : MonoBehaviour {
 
 
         GameObject unit = (GameObject) Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
-        node.unit = unit;
+        node.SetUnit(unit);
+        
 
         Debug.Log("Unit built ! Money left: " +PlayerStats.Money);
     }
+    public void SelectStructure(Structure structure)
+    {
+        unitToBuild = null;
 
+
+        structureUI.SetTarget(structure);
+    }
+
+    public void SelectNode(Node node)
+    {
+        if (selectedNode == node)
+        {
+            DeselectNode();
+        }
+        selectedNode = node;
+        unitToBuild = null;
+
+        nodeUI.SetTarget(node);
+    }
+    public void DeselectNode()
+    {
+        selectedNode = null;
+        nodeUI.Hide();
+    }
     public void SelectUnitToBuild(UnitBlueprint unit)
     {
         unitToBuild = unit;
+        DeselectNode();
 
     }
 
