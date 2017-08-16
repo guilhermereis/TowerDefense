@@ -10,7 +10,10 @@ public class Node : MonoBehaviour {
     public GameObject unit;
 
 
+    public GameObject preview;
+
     private Renderer rend;
+    private Renderer previewRenderer;
     private Color startColor;
 
     BuildManager buildManager;
@@ -27,6 +30,31 @@ public class Node : MonoBehaviour {
 	void Update () {
 		
 	}
+    void OnMouseExit()
+    {
+        rend.material.color = startColor;
+        Destroy(this.preview);
+    }
+    void OnMouseEnter()
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        if (!buildManager.CanBuild)
+        {
+            return;
+        }
+
+        rend.material.color = hoverColor;
+
+        if (this.preview == null && this.unit == null)
+        {
+            buildManager.BuildPreviewOn(this);
+            previewRenderer = preview.GetComponent<Renderer>();
+            previewRenderer.material.color = Color.green;
+        }
+            
+    }
     void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -52,21 +80,7 @@ public class Node : MonoBehaviour {
         return transform.position + positionOffset;
     }
 
-    void OnMouseEnter()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+    
 
-        if (!buildManager.CanBuild)
-        {
-            return;
-        }
-
-        rend.material.color = hoverColor;
-    }
-
-    void OnMouseExit()
-    {
-        rend.material.color = startColor;
-    }
+    
 }

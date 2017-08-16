@@ -36,6 +36,12 @@ public class BuildManager : MonoBehaviour {
 
     public bool CanBuild { get { return unitToBuild != null; } }
 
+    public void BuildPreviewOn(Node node)
+    {
+        GameObject preview = (GameObject)Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        node.preview = preview;
+    }
+
     public void BuildUnitOn(Node node)
     {
         if (PlayerStats.Money < unitToBuild.cost)
