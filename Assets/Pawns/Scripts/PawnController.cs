@@ -24,7 +24,6 @@ public class PawnController : MonoBehaviour {
     {
         nav = GetComponent<NavMeshAgent>();
         nav.speed = speed;
-        Debug.Log("i was here");
     }
 
     public PawnState CurrentState {  get { return currentState; }
@@ -53,6 +52,7 @@ public class PawnController : MonoBehaviour {
 
         }else if (currentState == PawnState.Walking)
         {
+			nav.isStopped = false;
             nav.SetDestination(finalDestination.position);
 
         }else if(currentState == PawnState.Battle)
@@ -64,9 +64,15 @@ public class PawnController : MonoBehaviour {
             if (target != null)
             {
                 nav.SetDestination(target.transform.position);
+
             }
-            else
-                ChangeState(PawnState.Homing);
+			else
+			{
+				if (gameObject.tag == "Ally")
+					ChangeState(PawnState.Homing);
+				else
+					ChangeState(PawnState.Walking);
+			}
         }
         else if(currentState == PawnState.Homing)
         {
@@ -76,7 +82,7 @@ public class PawnController : MonoBehaviour {
             else
             {
                 nav.SetDestination(homePosition);
-                Debug.Log("Going Home");
+                //Debug.Log("Going Home");
             }
         }
 	}

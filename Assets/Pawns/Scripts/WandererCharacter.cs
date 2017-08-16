@@ -6,8 +6,8 @@ public class WandererCharacter : PawnCharacter {
 
 
 
-    public override void Damage(float _damage)
-    {
-        base.Damage(_damage);
-    }
+	public override bool Damage(float _damage)
+	{
+		return base.Damage(_damage);
+	}
 }

@@ -9,15 +9,23 @@ public class PawnCharacter : MonoBehaviour {
     private bool isEnemy;
 	
 
-    public virtual void Damage(float _damage)
+
+	public virtual void OnDying()
+	{
+		Destroy(gameObject);
+	}
+
+    public virtual bool Damage(float _damage)
     {
         health -= _damage;
-        Debug.Log(health);
+        //Debug.Log(health);
         if(health <= 0)
         {
-            
-            Destroy(gameObject);
-            return;
+			return true;
+            //Destroy(gameObject);
+            //return;
         }
+
+		return false;
     }
 }

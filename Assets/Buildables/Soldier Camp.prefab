@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 23588716772352688}
   - component: {fileID: 195720852017371342}
   - component: {fileID: 54993213555122122}
-  - component: {fileID: 114384408665238680}
   - component: {fileID: 135036480086733818}
   - component: {fileID: 114959107420222782}
   - component: {fileID: 114916301463732960}
@@ -48,7 +47,6 @@ GameObject:
   - component: {fileID: 23618420030547120}
   - component: {fileID: 195570193456313634}
   - component: {fileID: 54230497703824510}
-  - component: {fileID: 114072823657751912}
   - component: {fileID: 135898539653758056}
   - component: {fileID: 114540226550963854}
   - component: {fileID: 114122744362148842}
@@ -72,7 +70,6 @@ GameObject:
   - component: {fileID: 23480274474663310}
   - component: {fileID: 195446309186917484}
   - component: {fileID: 54999695240997246}
-  - component: {fileID: 114798850312793758}
   - component: {fileID: 135524415269970690}
   - component: {fileID: 114625511611511222}
   - component: {fileID: 114508414945956690}
@@ -358,17 +355,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114072823657751912
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1520427471300210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114122744362148842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -384,17 +370,6 @@ MonoBehaviour:
   defense: 1
   attack: 50
   attackRate: 0.5
---- !u!114 &114384408665238680
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1269565343443938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114508414945956690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -421,6 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81ee6aaa3b260b48b6e7884bb7048b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealthState: 0
   enemies: []
   soldiersController: []
 --- !u!114 &114540226550963854
@@ -457,17 +433,6 @@ MonoBehaviour:
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
   attackCountdown: 0
---- !u!114 &114798850312793758
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1751933318274024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114916301463732960
 MonoBehaviour:
   m_ObjectHideFlags: 1
