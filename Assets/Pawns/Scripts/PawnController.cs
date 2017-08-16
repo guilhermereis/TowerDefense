@@ -43,6 +43,23 @@ public class PawnController : MonoBehaviour {
         }
     }
 
+
+	protected bool IsAtLocation()
+	{
+		float dist = nav.remainingDistance;
+		if (!nav.pathPending)
+		{
+			if(nav.remainingDistance <= nav.stoppingDistance)
+			{
+				if(!nav.hasPath || nav.velocity.magnitude == 0f)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
     // Update is called once per frame
     protected virtual void Update () {
         //Debug.DrawLine(transform.position, finalDestination.position);
@@ -54,6 +71,9 @@ public class PawnController : MonoBehaviour {
         {
 			nav.isStopped = false;
             nav.SetDestination(finalDestination.position);
+			if (IsAtLocation())
+				Destroy(gameObject);
+			
 
         }else if(currentState == PawnState.Battle)
         {

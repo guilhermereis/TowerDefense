@@ -31,7 +31,7 @@ public class SoldierCampController : BuildableController {
             SimpleSoldierController ssc = (SimpleSoldierController)transform.GetChild(i).GetComponent<SimpleSoldierController>();
 			//binding enemyOutOfReachDelegate
 			enemyOutOfReach += ssc.ForgetTarget;
-			soldiersController[i] = ssc;
+			soldiersController.Add(ssc);
             
         }
 	}
