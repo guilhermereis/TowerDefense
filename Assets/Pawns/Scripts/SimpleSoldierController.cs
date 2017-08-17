@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class SimpleSoldierController : PawnController {
 
-    private SimpleSoldierCharacter character;
-    public float attackCountdown = 0f;
+	public SoldierCampController camp;
+
+	
+	private SimpleSoldierCharacter character;
+
+	private List<GameObject> enemiesInRange;
+
+	public float attackCountdown = 0f;
+
 
     public void SetTarget(GameObject _target)
     {
@@ -27,11 +34,17 @@ public class SimpleSoldierController : PawnController {
         currentState = PawnState.Idle;
         homePosition = transform.position;
         character = (SimpleSoldierCharacter)GetComponent<SimpleSoldierCharacter>();
+		camp = (SoldierCampController)GetComponentInParent<SoldierCampController>();
+		enemiesInRange = new List<GameObject>();
+
     }
     // Update is called once per frame
     protected override void Update() {
         base.Update();
         attackCountdown -= Time.deltaTime;
+		if(target != null && enemiesInRange.Contains(target)){
+			ChangeState(PawnState.Battle);
+		}
     }
 
     public override void OnMoving()
@@ -56,7 +69,13 @@ public class SimpleSoldierController : PawnController {
 			if (attackCountdown <= 0)
 			{
 				Debug.DrawLine(transform.position, target.transform.position);
-				target.GetComponent<PawnCharacter>().Damage(character.attack);
+				//we are goint to apply damage to target and if the target is dead, we are going to
+				//tell the camp and so the camp can gives another target or we're going back
+				if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+				{
+					camp.UpdateEnemies(target);
+					target = null;
+				}
 				attackCountdown = 1 / character.attackRate;
 			}
         }else
@@ -69,14 +88,21 @@ public class SimpleSoldierController : PawnController {
     {
 
         base.OnTriggerEnter(other);
+		Debug.DrawLine(other.gameObject.transform.position, transform.position);
 
         if (other.gameObject.tag == "Enemy" && other.gameObject == target)
         {
-            Debug.Log("Started Battle");
+			enemiesInRange.Add(other.gameObject);
+            //Debug.Log("Started Battle");
             //nav.isStopped = true;
             ChangeState(PawnState.Battle);
 
-        }
+		}
+		else if(other.gameObject.tag == "Enemy")
+		{
+			enemiesInRange.Add(other.gameObject);
+			
+		}
     }
 
     protected override void OnTriggerExit(Collider other)
@@ -85,9 +111,10 @@ public class SimpleSoldierController : PawnController {
 
         if (other.gameObject.tag == "Enemy")
         {
-            Debug.Log("Started Battle");
+            //Debug.Log("Started Battle");
             nav.isStopped = false;
-            if(target != null)
+			enemiesInRange.Remove(other.gameObject);
+			if (target != null)
             {
                 ChangeState(PawnState.FindTarget);
             }
