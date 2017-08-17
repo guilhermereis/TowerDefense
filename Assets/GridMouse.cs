@@ -13,6 +13,9 @@ public class GridMouse : MonoBehaviour {
     private float tile_size;
     private Vector3 currentTileCoord;
 
+    [SerializeField]
+    public Property[,] propertiesMatrix;
+
     private Ray ray;
     private RaycastHit hitInfo;
 
@@ -42,6 +45,8 @@ public class GridMouse : MonoBehaviour {
         //_material.SetTextureScale("_MainTex", new Vector2(_columns, _rows));
         _material.SetTextureScale("_MainTex", new Vector2(_gridSize.x, _gridSize.y));
 
+        propertiesMatrix = new Property[Mathf.FloorToInt(_gridSize.x),Mathf.FloorToInt(_gridSize.y)];
+
     }
 
     void Start()
@@ -62,6 +67,7 @@ public class GridMouse : MonoBehaviour {
             Vector3 position = CoordToPosition(x, z);
             Debug.Log("x: " + x + ", z: " + z);
             Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
+            propertiesMatrix[x, z] = new Property("Obstacle");
         }
     }
 	void Update () {
@@ -83,4 +89,15 @@ public class GridMouse : MonoBehaviour {
     {
         return new Vector3(-_gridSize.x / 2 + 0.5f + x, 0f + ZOffset + 0.5f, -_gridSize.y / 2 + 0.5f + y);
     }
+
+    public struct Property
+    {
+        string type;
+
+        public Property(string _type = "Normal")
+        {
+            type = _type;
+        }
+    }
+
 }
