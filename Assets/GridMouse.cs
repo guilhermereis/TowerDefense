@@ -82,6 +82,7 @@ public class GridMouse : MonoBehaviour {
             Debug.Log("x: " + x + ", z: " + z);
             selectionCube.transform.position = position;
             //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
+            Debug.Log("Property of this tile: "+propertiesMatrix[x,z].type);
         }
             
 	}
@@ -92,7 +93,7 @@ public class GridMouse : MonoBehaviour {
 
     public struct Property
     {
-        string type;
+        public string type;
 
         public Property(string _type = "Normal")
         {
