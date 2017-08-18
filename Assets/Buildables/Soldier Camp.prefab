@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 33308096789980166}
   m_Layer: 0
   m_Name: Soldier Camp
-  m_TagString: Untagged
+  m_TagString: Build
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -366,10 +366,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801eab7732faa5d45936f70416d7f569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   health: 100
   defense: 1
   attack: 50
   attackRate: 0.5
+  healthBar: {fileID: 0}
 --- !u!114 &114508414945956690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,10 +383,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801eab7732faa5d45936f70416d7f569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   health: 100
   defense: 1
   attack: 50
   attackRate: 0.5
+  healthBar: {fileID: 0}
 --- !u!114 &114530973319225746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +403,7 @@ MonoBehaviour:
   currentHealthState: 0
   enemies: []
   soldiersController: []
+  simpleSoldier: {fileID: 0}
 --- !u!114 &114540226550963854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,6 +420,7 @@ MonoBehaviour:
   speed: 5
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
+  camp: {fileID: 0}
   attackCountdown: 0
 --- !u!114 &114625511611511222
 MonoBehaviour:
@@ -432,6 +438,7 @@ MonoBehaviour:
   speed: 5
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
+  camp: {fileID: 0}
   attackCountdown: 0
 --- !u!114 &114916301463732960
 MonoBehaviour:
@@ -444,10 +451,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801eab7732faa5d45936f70416d7f569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   health: 100
   defense: 1
   attack: 50
   attackRate: 0.5
+  healthBar: {fileID: 0}
 --- !u!114 &114959107420222782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -464,6 +473,7 @@ MonoBehaviour:
   speed: 5
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
+  camp: {fileID: 0}
   attackCountdown: 0
 --- !u!135 &135036480086733818
 SphereCollider:

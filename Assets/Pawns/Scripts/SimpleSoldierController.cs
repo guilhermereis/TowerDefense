@@ -5,6 +5,7 @@ public class SimpleSoldierController : PawnController {
 
 	public SoldierCampController camp;
 
+	private SwordsmanAnimatorController anim;
 	
 	private SimpleSoldierCharacter character;
 
@@ -17,6 +18,7 @@ public class SimpleSoldierController : PawnController {
     {
         target = _target;
         ChangeState(PawnState.FindTarget);   
+
     }
 
     public void ForgetTarget(GameObject _target)
@@ -36,7 +38,7 @@ public class SimpleSoldierController : PawnController {
         character = (SimpleSoldierCharacter)GetComponent<SimpleSoldierCharacter>();
 		camp = (SoldierCampController)GetComponentInParent<SoldierCampController>();
 		enemiesInRange = new List<GameObject>();
-
+		anim = (SwordsmanAnimatorController)GetComponent<SwordsmanAnimatorController>();
     }
     // Update is called once per frame
     protected override void Update() {
@@ -68,17 +70,22 @@ public class SimpleSoldierController : PawnController {
         {
 			if (attackCountdown <= 0)
 			{
+				anim.isAttacking = true;
 				Debug.DrawLine(transform.position, target.transform.position);
 				//we are goint to apply damage to target and if the target is dead, we are going to
 				//tell the camp and so the camp can gives another target or we're going back
 				if (target.GetComponent<PawnCharacter>().Damage(character.attack))
 				{
+
 					camp.UpdateEnemies(target);
 					target = null;
 				}
+					
 				attackCountdown = 1 / character.attackRate;
-			}
-        }else
+			}else
+				anim.isAttacking = false;
+		}
+		else
             ChangeState(PawnState.Homing);
 		
     }

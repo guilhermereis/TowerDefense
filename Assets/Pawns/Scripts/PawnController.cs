@@ -5,7 +5,7 @@ using System.Collections;
 public class PawnController : MonoBehaviour {
 
     //controller variables
-    public enum PawnState { Idle, Battle, Walking,FindTarget,Homing };
+    public enum PawnState { Idle, Battle, Walking,FindTarget,Homing, Destroying };
     public enum PawnType {Wanderer, Hunter, Boss}
     public PawnState currentState = PawnState.Walking;
     protected PawnType type = PawnType.Wanderer;
