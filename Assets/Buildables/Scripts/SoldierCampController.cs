@@ -83,7 +83,11 @@ public class SoldierCampController : BuildableController {
         //todo delegate to who has this target stop to attack
         if(other.gameObject.tag == "Enemy")
         {
-            enemyOutOfReach(other.gameObject);
+			enemies.Remove(other.gameObject);
+			if (enemies.Count > 0)
+				UpdateEnemies(enemies[0]);
+			else
+				enemyOutOfReach(other.gameObject);
         }
 
     }

@@ -9,8 +9,15 @@ public class BuildableController : MonoBehaviour {
 	private float tileSize;
 	private float defense;
 	private float health;
+	private float maxHealth = 100;
 	private bool isUpgradable;
 	public HealthState currentHealthState = HealthState.good;
+
+
+	protected virtual void Awake()
+	{
+		health = maxHealth;
+	}
 
 	public float Defense
 	{
@@ -69,6 +76,7 @@ public class BuildableController : MonoBehaviour {
 		if (currentHealthState != newState)
 		{
 			currentHealthState = newState;
+			OnChangeHealthState();
 			return true;
 		}
 		else
@@ -82,11 +90,27 @@ public class BuildableController : MonoBehaviour {
 
 		}else if(currentHealthState == HealthState.damaged)
 		{
-
-		}else if(currentHealthState == HealthState.damaged)
+			Debug.Log("Damaged");
+		}else if(currentHealthState == HealthState.destroyed)
 		{
-
+			Debug.Log("Destroyed");
 		}
 
+	}
+
+	public virtual bool Damage(float _damage)
+	{
+		health -= _damage;
+		float fillAmount = health / maxHealth;
+		if (fillAmount >= 0.2f && fillAmount <= 0.75f)
+		{
+			ChangeState(HealthState.damaged);
+		}else if(fillAmount <= 0)
+		{
+			ChangeState(HealthState.destroyed);
+			return true;
+		}
+		
+		return false;
 	}
 }
