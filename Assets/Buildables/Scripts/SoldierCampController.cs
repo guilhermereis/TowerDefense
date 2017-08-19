@@ -17,7 +17,8 @@ public class SoldierCampController : BuildableController {
 
 	//default number of spawned soldiers
     private int soldiersCount = 3;
-    
+
+	private int nextEnemy = 0;
 	
 
     // Use this for initialization
@@ -34,6 +35,7 @@ public class SoldierCampController : BuildableController {
 			soldiersController.Add(ssc);
             
         }
+		soldiersCount = soldiersController.Count;
 	}
 	
 	// Update is called once per frame
@@ -51,20 +53,24 @@ public class SoldierCampController : BuildableController {
     //when an enemy get in range;
     private void OnTriggerEnter(Collider other)
     {
-
-        if(other.gameObject.tag == "Enemy" && !other.isTrigger)
-        {
-            enemies.Add(other.gameObject);
-
-			if (enemies.Count > 1)
+		if (!other.isTrigger)
+		{
+			if(other.gameObject.tag == "Enemy" && !other.isTrigger)
 			{
-				soldiersController[enemies.LastIndexOf(other.gameObject)].SetTarget(other.gameObject);
+				enemies.Add(other.gameObject);
+				//bug.Log(enemies.LastIndexOf(other.gameObject));
+				if (enemies.Count > 1 && nextEnemy < soldiersCount -1)
+				{
+					soldiersController[nextEnemy].SetTarget(other.gameObject);
+					nextEnemy++;
+				
+				}
+				else
+				{
+					SetSoldierTarget(other.gameObject);
+				}
 			}
-			else
-			{
-				SetSoldierTarget(other.gameObject);
-			}
-        }
+		}
 
     }
 
@@ -80,15 +86,40 @@ public class SoldierCampController : BuildableController {
 
     private void OnTriggerExit(Collider other)
     {
-        //todo delegate to who has this target stop to attack
-        if(other.gameObject.tag == "Enemy")
-        {
-			enemies.Remove(other.gameObject);
-			if (enemies.Count > 0)
-				UpdateEnemies(enemies[0]);
-			else
-				enemyOutOfReach(other.gameObject);
-        }
+		//todo delegate to who has this target stop to attack
+
+		if (!other.isTrigger)
+		{
+			if (other.gameObject.tag == "Enemy" && !other.gameObject.GetComponent<PawnCharacter>().isDying)
+			{
+				
+				enemies.Remove(other.gameObject);
+				if (enemies.Count > 0)
+				{
+					for (int i = 0; i < soldiersCount; i++)
+					{
+						if(soldiersController[nextEnemy].target == other.gameObject)
+						{
+							soldiersController[nextEnemy].target = null;
+							Debug.Log(other.gameObject.name);
+							break;
+						}
+					}
+					SetSoldierTarget(enemies[0]);
+				}
+				else
+					enemyOutOfReach(other.gameObject);
+			}
+			else if(other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<PawnCharacter>().isDying)
+			{
+				Debug.Log("i am dying");
+			}
+			else if(other.gameObject.tag == "Enemy")
+			{
+				Debug.Log("nothing is happening");
+			}
+		}
+
 
     }
 

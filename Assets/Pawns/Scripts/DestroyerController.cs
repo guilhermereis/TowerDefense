@@ -70,7 +70,7 @@ public class DestroyerController : PawnController {
 
 	protected override void OnTriggerEnter(Collider other)
 	{
-		Debug.Log(other.name);
+		//Debug.Log(other.name);
 		
 		base.OnTriggerEnter(other);
 		if (other.gameObject.tag.Equals("Build") && target == null)

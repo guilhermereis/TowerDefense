@@ -8,7 +8,7 @@ public class PawnCharacter : MonoBehaviour {
     public float defense;
     public float attack;
     public float attackRate;
-    private bool isEnemy;
+    public bool isDying;
 	public PawnHealthBarGUI healthBar;
 
 
@@ -28,6 +28,7 @@ public class PawnCharacter : MonoBehaviour {
 
 	public virtual void OnDying()
 	{
+		isDying = true;
 		Destroy(gameObject);
 	}
 
