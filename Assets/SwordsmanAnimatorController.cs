@@ -3,8 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordsmanAnimatorController : MonoBehaviour {
-    public bool isAttacking = false;
     public Animator animInstance;
+
+    public bool isAttacking = false;
+    public float speed = 0f;
+
+    public void setIsAttacking(bool newIsAttacking) {
+        if (newIsAttacking){
+            weightLerp = 0.85f;
+        }
+        else weightLerp = 0.2f;
+        isAttacking = newIsAttacking;
+    }
+
     private float weightLerp = 0f;
 
 	// Use this for initialization
@@ -14,20 +25,17 @@ public class SwordsmanAnimatorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown("g"))
-        {
-            isAttacking = true;
-            if (animInstance) {
-                animInstance.Play("Attack", 1, 0f);
-            }
+        if (isAttacking){
+            weightLerp += 0.1f * Time.deltaTime;
+        }else {
+            weightLerp -= 0.1f * Time.deltaTime;
         }
-        if (Input.GetKeyUp("g")){
-            isAttacking = false;
-        }
-        
+        weightLerp = Mathf.Clamp(weightLerp, 0f, 1f);
+
         if (animInstance) {
             animInstance.SetBool("IsAttacking", isAttacking);
-            animInstance.SetLayerWeight(1, isAttacking ? 1f:0f);
+            animInstance.SetFloat("Speed", speed/4f);
+            animInstance.SetLayerWeight(1, weightLerp);
         }
 	}
 

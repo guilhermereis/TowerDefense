@@ -91,6 +91,7 @@ public class GridMouse : MonoBehaviour {
         return new Vector3(-_gridSize.x / 2 + 0.5f + x, 0f + ZOffset + 0.5f, -_gridSize.y / 2 + 0.5f + y);
     }
 
+    [System.Serializable]
     public struct Property
     {
         public string type;
