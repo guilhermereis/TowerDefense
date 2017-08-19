@@ -35,7 +35,10 @@ public class PawnCharacter : MonoBehaviour {
     public virtual bool Damage(float _damage)
     {
 
-        health -= _damage;
+		float realDamage = _damage - defense;
+		if (realDamage < 0)
+			realDamage = 0;
+        health -= realDamage;
 		healthBar.UpdateHealthBar(health, maxHealth);
 		//Debug.Log(health);
 		if (health <= 0)

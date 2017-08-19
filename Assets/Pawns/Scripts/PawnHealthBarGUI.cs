@@ -30,8 +30,6 @@ public class PawnHealthBarGUI : MonoBehaviour {
 		if(Healthbar != null)
 		{
 			Healthbar.transform.SetParent(canvas.transform, false);
-			
-			
 			Healthbar.SetActive(false);
 		}
 
