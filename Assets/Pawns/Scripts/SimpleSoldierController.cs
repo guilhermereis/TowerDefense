@@ -47,6 +47,7 @@ public class SimpleSoldierController : PawnController {
 		if(target != null && enemiesInRange.Contains(target)){
 			ChangeState(PawnState.Battle);
 		}
+        anim.speed = nav.velocity.magnitude;
     }
 
     public override void OnMoving()
@@ -68,22 +69,23 @@ public class SimpleSoldierController : PawnController {
 
         if (target != null)
         {
-			if (attackCountdown <= 0)
-			{
-				anim.isAttacking = true;
-				Debug.DrawLine(transform.position, target.transform.position);
-				//we are goint to apply damage to target and if the target is dead, we are going to
-				//tell the camp and so the camp can gives another target or we're going back
-				if (target.GetComponent<PawnCharacter>().Damage(character.attack))
-				{
+            if (attackCountdown <= 0)
+            {
+                anim.setIsAttacking(true);
+                Debug.DrawLine(transform.position, target.transform.position);
+                //we are goint to apply damage to target and if the target is dead, we are going to
+                //tell the camp and so the camp can gives another target or we're going back
+                if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+                {
 
-					camp.UpdateEnemies(target);
-					target = null;
-				}
-					
-				attackCountdown = 1 / character.attackRate;
-			}else
-				anim.isAttacking = false;
+                    camp.UpdateEnemies(target);
+                    target = null;
+                }
+
+                attackCountdown = 1 / character.attackRate;
+            }
+            else
+                anim.setIsAttacking(false);
 		}
 		else
             ChangeState(PawnState.Homing);
