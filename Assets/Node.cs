@@ -79,7 +79,7 @@ public class Node : MonoBehaviour {
         }
 
         Debug.Log("Gonna call !");
-        buildManager.BuildUnitOn(this);
+        //buildManager.BuildUnitOn(this);
 
     }
 

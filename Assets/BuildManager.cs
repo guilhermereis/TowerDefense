@@ -5,10 +5,11 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour {
 
     public static BuildManager instance;
-    public UnitBlueprint standardUnitPrefab;
-    public UnitBlueprint secondaryUnitPrefab;
     public NodeUI nodeUI;
     public StructureUI structureUI;
+    private UnitBlueprint unitToBuild;
+    private Node selectedNode;
+    private Vector3 selectedSquare;
 
     void Awake()
     {
@@ -29,8 +30,7 @@ public class BuildManager : MonoBehaviour {
         
     }
 
-    private UnitBlueprint unitToBuild;
-    private Node selectedNode;
+
 
     public UnitBlueprint getUnitToBuild()
     {
@@ -39,6 +39,12 @@ public class BuildManager : MonoBehaviour {
 
     public bool CanBuild { get { return unitToBuild != null; } }
 
+
+    public void BuildPreviewOn(ref GameObject temporaryInstance,Vector3 position)
+    {
+        if (temporaryInstance !=null && unitToBuild != null)
+            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, Quaternion.identity);        
+    }
     public void BuildPreviewOn(Node node)
     {
         GameObject preview = (GameObject)Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
@@ -46,23 +52,19 @@ public class BuildManager : MonoBehaviour {
         
     }
 
-    public void BuildUnitOn(Node node)
+    public void BuildUnitOn(Vector3 position)
     {
         if (PlayerStats.Money < unitToBuild.cost)
         {
             Debug.Log("Not enough money to build that!");
             return;
         }
-
         PlayerStats.Money -= unitToBuild.cost;
 
-
-        GameObject unit = (GameObject) Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
-        node.SetUnit(unit);
-        
-
-        Debug.Log("Unit built ! Money left: " +PlayerStats.Money);
+        GameObject newObstacleCube = Instantiate(unitToBuild.prefab, position, Quaternion.identity);
+        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
+    
     public void SelectStructure(Structure structure)
     {
         unitToBuild = null;
@@ -90,8 +92,7 @@ public class BuildManager : MonoBehaviour {
     public void SelectUnitToBuild(UnitBlueprint unit)
     {
         unitToBuild = unit;
-        DeselectNode();
-
+        //DeselectNode();
     }
 
 }
