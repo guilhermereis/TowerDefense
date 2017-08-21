@@ -78,7 +78,7 @@ public class SimpleSoldierController : PawnController {
 			if (attackCountdown <= 0)
 			{
 				anim.setIsAttacking(true);
-				swordHit.Play();
+				//swordHit.Play();
 				Debug.DrawLine(transform.position, target.transform.position);
 				//we are goint to apply damage to target and if the target is dead, we are going to
 				//tell the camp and so the camp can gives another target or we're going back

@@ -5,10 +5,11 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour {
 
     public static BuildManager instance;
-    public UnitBlueprint standardUnitPrefab;
-    public UnitBlueprint secondaryUnitPrefab;
-    public NodeUI nodeUI;
-    public StructureUI structureUI;
+    public GameObject optionsObject;
+    public GameObject shopObject;
+    private UnitBlueprint unitToBuild;
+    private UnitBlueprint selectedUnit;
+    private Vector2 selectedPosition;
 
     void Awake()
     {
@@ -26,11 +27,22 @@ public class BuildManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //toggle UI
+            shopObject.SetActive(!shopObject.activeSelf);
+        }
     }
 
-    private UnitBlueprint unitToBuild;
-    private Node selectedNode;
+    public UnitBlueprint getSelectedUnit()
+    {
+        return selectedUnit;
+    }
+
+    public Vector2 getSelectedPosition()
+    {
+        return selectedPosition;
+    }
 
     public UnitBlueprint getUnitToBuild()
     {
@@ -39,6 +51,12 @@ public class BuildManager : MonoBehaviour {
 
     public bool CanBuild { get { return unitToBuild != null; } }
 
+
+    public void BuildPreviewOn(ref GameObject temporaryInstance,Vector3 position)
+    {
+        if (temporaryInstance !=null && unitToBuild != null)
+            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, Quaternion.identity);        
+    }
     public void BuildPreviewOn(Node node)
     {
         GameObject preview = (GameObject)Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
@@ -46,31 +64,42 @@ public class BuildManager : MonoBehaviour {
         
     }
 
-    public void BuildUnitOn(Node node)
+    public void BuildUnitOn(ref GameObject temp, Vector3 position)
     {
         if (PlayerStats.Money < unitToBuild.cost)
         {
             Debug.Log("Not enough money to build that!");
             return;
         }
-
         PlayerStats.Money -= unitToBuild.cost;
-
-
-        GameObject unit = (GameObject) Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
-        node.SetUnit(unit);
         
-
-        Debug.Log("Unit built ! Money left: " +PlayerStats.Money);
+        temp = Instantiate(unitToBuild.prefab, position, Quaternion.identity);
+        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
+
+
+    public void SelectBuilding(UnitBlueprint unit,Vector2 position)
+    {
+        unitToBuild = null;
+        //if (selectedUnit == unit)
+        selectedUnit = unit;
+        selectedPosition = position;
+    }
+    public void ShowOptions()
+    {
+        optionsObject.SetActive(true);
+    }
+    public void HideOptions()
+    {
+        optionsObject.SetActive(false);
+    }
+
     public void SelectStructure(Structure structure)
     {
         unitToBuild = null;
 
-
-        structureUI.SetTarget(structure);
     }
-
+    /*
     public void SelectNode(Node node)
     {
         if (selectedNode == node)
@@ -87,11 +116,11 @@ public class BuildManager : MonoBehaviour {
         selectedNode = null;
         nodeUI.Hide();
     }
+    */
     public void SelectUnitToBuild(UnitBlueprint unit)
     {
         unitToBuild = unit;
-        DeselectNode();
-
+        //DeselectNode();
     }
 
 }

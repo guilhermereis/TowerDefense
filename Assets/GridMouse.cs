@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridMouse : MonoBehaviour {
 
 
+    public static GridMouse instance;
     public float ZOffset;
     private TileMap _tileMap;
     public Transform selectionCube;
@@ -12,9 +13,22 @@ public class GridMouse : MonoBehaviour {
     public Transform gridTransform;
     private float tile_size;
     private Vector3 currentTileCoord;
+    private BuildManager buildManager;
+    private Vector3 previousPosition;
+    private int prevX;
+    private int prevZ;
+    private GameObject temporaryInstance;
+    private Vector3 position;
+    GameObject temp;
 
     [SerializeField]
     public Property[,] propertiesMatrix;
+
+    [SerializeField]
+    public bool[,] previewMatrix;
+
+    [SerializeField]
+    public GameObject[,] matrixOfGameObjects;
 
     private Ray ray;
     private RaycastHit hitInfo;
@@ -35,10 +49,19 @@ public class GridMouse : MonoBehaviour {
     [SerializeField]
     private int _columns;
     */
-
+    void Awake()
+    {
+        if (instance != null) //if instance has been set before 
+        {
+            Debug.LogError("More than one GridMouse in scene !");
+            return;
+        }
+        instance = this;
+    }
     public void UpdateGrid()
     {
 
+        buildManager = BuildManager.instance;
         _transform.position = new Vector3(0f, ZOffset, 0f);
         _transform.localScale = new Vector3(_gridSize.x, _gridSize.y, 1.0f);
 
@@ -46,13 +69,25 @@ public class GridMouse : MonoBehaviour {
         _material.SetTextureScale("_MainTex", new Vector2(_gridSize.x, _gridSize.y));
 
         propertiesMatrix = new Property[Mathf.FloorToInt(_gridSize.x),Mathf.FloorToInt(_gridSize.y)];
+        previewMatrix = new bool[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
+        matrixOfGameObjects = new GameObject[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
+
+        for (int k = 0; k < previewMatrix.GetLength(0); k++)
+        {
+            for (int l = 0; l < previewMatrix.GetLength(1); l++)
+            {
+                previewMatrix[k, l] = false;
+            }
+        }
+            
+
 
     }
 
     void Start()
     {
         UpdateGrid();
-        Debug.Log("Gonna run script !!!");
+        //Debug.Log("Gonna run script !!!");
 
     }
     void OnMouseDown()
@@ -65,9 +100,28 @@ public class GridMouse : MonoBehaviour {
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             Vector3 position = CoordToPosition(x, z);
-            Debug.Log("x: " + x + ", z: " + z);
-            Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
-            propertiesMatrix[x, z] = new Property("Obstacle");
+            //Debug.Log("x: " + x + ", z: " + z);
+            if (propertiesMatrix[x, z].unit != null)
+            {
+                buildManager.SelectBuilding(propertiesMatrix[x, z].unit, new Vector2(x,z));
+                buildManager.ShowOptions();
+                Debug.Log("Selecionou a posição: "+x+", "+z);
+            }
+            else
+            {
+                if (buildManager.getUnitToBuild() != null)
+                {
+                    matrixOfGameObjects[x, z] = new GameObject();
+                    buildManager.BuildUnitOn(ref matrixOfGameObjects[x, z], position);
+                    //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
+                    propertiesMatrix[x, z] = new Property(buildManager.getUnitToBuild(), ref matrixOfGameObjects[x, z], "Obstacle");
+                    Debug.Log("Construiu na posição " + x + ", " + z);
+                }
+                else
+                {
+                    buildManager.HideOptions();
+                }
+            }
         }
     }
 	void Update () {
@@ -78,11 +132,42 @@ public class GridMouse : MonoBehaviour {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
-            Vector3 position = CoordToPosition(x, z);
-            Debug.Log("x: " + x + ", z: " + z);
+            position = CoordToPosition(x, z);
+            //Debug.Log("x: " + x + ", z: " + z);
+            //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
             selectionCube.transform.position = position;
+            if (previousPosition == position)
+            {
+                
+                if (previewMatrix[x, z] == false)
+                {
+
+                    temporaryInstance = new GameObject();
+                    buildManager.BuildPreviewOn(ref temporaryInstance, position);
+                    previewMatrix[x, z] = true;
+                    //Debug.Log("construiu preview !");
+                }
+                
+            }
+            else
+            {
+                //Debug.Log("moveu !");
+                if (temporaryInstance != null)
+                {
+                    Destroy(temporaryInstance);
+                    
+                    previewMatrix[prevX,prevZ] = false;
+                                       
+                    //Debug.Log("destruiu preview !");
+                }
+                             
+            }
+            previousPosition = position;
+            prevX = x;
+            prevZ = z;
+            //previewMatrix[x, z] = true;
             //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
-            Debug.Log("Property of this tile: "+propertiesMatrix[x,z].type);
+            //Debug.Log("Property of this tile: "+propertiesMatrix[x,z].type);
         }
             
 	}
@@ -95,10 +180,14 @@ public class GridMouse : MonoBehaviour {
     public struct Property
     {
         public string type;
+        public UnitBlueprint unit;
+        public GameObject builtGameObject;
 
-        public Property(string _type = "Normal")
+        public Property(UnitBlueprint _unit, ref GameObject _builtGameObject, string _type = "Normal")
         {
             type = _type;
+            unit = _unit;
+            builtGameObject = _builtGameObject;
         }
     }
 

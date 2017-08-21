@@ -39,7 +39,10 @@ public class PawnCharacter : MonoBehaviour {
 		if (realDamage < 0)
 			realDamage = 0;
         health -= realDamage;
-		healthBar.UpdateHealthBar(health, maxHealth);
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealthBar(health, maxHealth);
+        }
 		//Debug.Log(health);
 		if (health <= 0)
         {

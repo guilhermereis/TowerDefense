@@ -69,7 +69,7 @@ public class Node : MonoBehaviour {
 
         if (unit != null)
         {
-            buildManager.SelectNode(this);
+            //buildManager.SelectNode(this);
             return;
         }
 
@@ -79,7 +79,7 @@ public class Node : MonoBehaviour {
         }
 
         Debug.Log("Gonna call !");
-        buildManager.BuildUnitOn(this);
+        //buildManager.BuildUnitOn(this);
 
     }
 
