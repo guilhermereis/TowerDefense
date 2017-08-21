@@ -4,24 +4,43 @@ using UnityEngine;
 
 public class SoldierCampController : BuildableController {
 
-    delegate void EnemyOutOfReachDelegate(GameObject target);
+	[HideInInspector]
+    public delegate void EnemyOutOfReachDelegate(GameObject target);
     delegate void SetEnemyDelegate(GameObject target);
 
-    public List<GameObject> enemies;
-    public List<SimpleSoldierController> soldiersController;
+	[HideInInspector]
+	public List<GameObject> enemies;
+	[HideInInspector]
+	public List<SimpleSoldierController> soldiersController;
 
 	public GameObject simpleSoldier;
-
-	EnemyOutOfReachDelegate enemyOutOfReach;
-    SetEnemyDelegate setEnemy;
+	[HideInInspector]
+	private EnemyOutOfReachDelegate enemyOutOfReach;
+	SetEnemyDelegate setEnemy;
 
 	//default number of spawned soldiers
     private int soldiersCount = 3;
 
 	private int nextEnemy = 0;
-	
 
-    // Use this for initialization
+	public EnemyOutOfReachDelegate EnemyOutOfReach
+	{
+		get
+		{
+			return enemyOutOfReach;
+		}
+
+		set
+		{
+			enemyOutOfReach = value;
+		}
+	}
+
+
+
+
+
+	// Use this for initialization
 	void Start () {
 		Health = 50;
 		IsUpgradable = true;
@@ -31,7 +50,6 @@ public class SoldierCampController : BuildableController {
         {
             SimpleSoldierController ssc = (SimpleSoldierController)transform.GetChild(i).GetComponent<SimpleSoldierController>();
 			//binding enemyOutOfReachDelegate
-			enemyOutOfReach += ssc.ForgetTarget;
 			soldiersController.Add(ssc);
             
         }
@@ -108,7 +126,7 @@ public class SoldierCampController : BuildableController {
 					SetSoldierTarget(enemies[0]);
 				}
 				else
-					enemyOutOfReach(other.gameObject);
+					EnemyOutOfReach(other.gameObject);
 			}
 			else if(other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<PawnCharacter>().isDying)
 			{

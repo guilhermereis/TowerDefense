@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 public class SimpleSoldierController : PawnController {
-
+	[HideInInspector]
 	public SoldierCampController camp;
 
 	private SwordsmanAnimatorController anim;
@@ -36,8 +36,12 @@ public class SimpleSoldierController : PawnController {
         base.Awake();
         currentState = PawnState.Idle;
         homePosition = transform.position;
-        character = (SimpleSoldierCharacter)GetComponent<SimpleSoldierCharacter>();
-		camp = (SoldierCampController)GetComponentInParent<SoldierCampController>();
+
+		character = GetComponent<SimpleSoldierCharacter>();
+
+		camp = GetComponentInParent<SoldierCampController>();
+		camp.EnemyOutOfReach += ForgetTarget;
+
 		enemiesInRange = new List<GameObject>();
 		anim = (SwordsmanAnimatorController)GetComponent<SwordsmanAnimatorController>();
 		swordHit = GetComponent<AudioSource>();
