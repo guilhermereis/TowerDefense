@@ -104,6 +104,7 @@ public class GridMouse : MonoBehaviour {
             if (propertiesMatrix[x, z].unit != null)
             {
                 buildManager.SelectBuilding(propertiesMatrix[x, z].unit, new Vector2(x,z));
+                buildManager.ShowOptions();
                 Debug.Log("Selecionou a posição: "+x+", "+z);
             }
             else
@@ -115,6 +116,10 @@ public class GridMouse : MonoBehaviour {
                     //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
                     propertiesMatrix[x, z] = new Property(buildManager.getUnitToBuild(), ref matrixOfGameObjects[x, z], "Obstacle");
                     Debug.Log("Construiu na posição " + x + ", " + z);
+                }
+                else
+                {
+                    buildManager.HideOptions();
                 }
             }
         }

@@ -69,7 +69,7 @@ public class Node : MonoBehaviour {
 
         if (unit != null)
         {
-            buildManager.SelectNode(this);
+            //buildManager.SelectNode(this);
             return;
         }
 

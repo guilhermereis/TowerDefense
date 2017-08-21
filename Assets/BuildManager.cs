@@ -5,12 +5,10 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour {
 
     public static BuildManager instance;
-    public NodeUI nodeUI;
-    public StructureUI structureUI;
+    public GameObject optionsObject;
+    public GameObject shopObject;
     private UnitBlueprint unitToBuild;
-    private Node selectedNode;
     private UnitBlueprint selectedUnit;
-    private Vector3 selectedSquare;
     private Vector2 selectedPosition;
 
     void Awake()
@@ -29,7 +27,11 @@ public class BuildManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //toggle UI
+            shopObject.SetActive(!shopObject.activeSelf);
+        }
     }
 
     public UnitBlueprint getSelectedUnit()
@@ -79,19 +81,25 @@ public class BuildManager : MonoBehaviour {
     public void SelectBuilding(UnitBlueprint unit,Vector2 position)
     {
         unitToBuild = null;
+        //if (selectedUnit == unit)
         selectedUnit = unit;
         selectedPosition = position;
     }
-
+    public void ShowOptions()
+    {
+        optionsObject.SetActive(true);
+    }
+    public void HideOptions()
+    {
+        optionsObject.SetActive(false);
+    }
 
     public void SelectStructure(Structure structure)
     {
         unitToBuild = null;
 
-
-        structureUI.SetTarget(structure);
     }
-
+    /*
     public void SelectNode(Node node)
     {
         if (selectedNode == node)
@@ -108,6 +116,7 @@ public class BuildManager : MonoBehaviour {
         selectedNode = null;
         nodeUI.Hide();
     }
+    */
     public void SelectUnitToBuild(UnitBlueprint unit)
     {
         unitToBuild = unit;
