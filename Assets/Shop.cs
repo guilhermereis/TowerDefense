@@ -4,9 +4,6 @@ public class Shop : MonoBehaviour {
 
     public UnitBlueprint standardUnit;
     public UnitBlueprint missileLauncher;
-
-
-
     BuildManager buildManager;
 
     void Start()

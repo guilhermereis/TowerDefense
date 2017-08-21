@@ -9,7 +9,9 @@ public class BuildManager : MonoBehaviour {
     public StructureUI structureUI;
     private UnitBlueprint unitToBuild;
     private Node selectedNode;
+    private UnitBlueprint selectedUnit;
     private Vector3 selectedSquare;
+    private Vector2 selectedPosition;
 
     void Awake()
     {
@@ -30,7 +32,15 @@ public class BuildManager : MonoBehaviour {
         
     }
 
+    public UnitBlueprint getSelectedUnit()
+    {
+        return selectedUnit;
+    }
 
+    public Vector2 getSelectedPosition()
+    {
+        return selectedPosition;
+    }
 
     public UnitBlueprint getUnitToBuild()
     {
@@ -52,7 +62,7 @@ public class BuildManager : MonoBehaviour {
         
     }
 
-    public void BuildUnitOn(Vector3 position)
+    public void BuildUnitOn(ref GameObject temp, Vector3 position)
     {
         if (PlayerStats.Money < unitToBuild.cost)
         {
@@ -60,11 +70,20 @@ public class BuildManager : MonoBehaviour {
             return;
         }
         PlayerStats.Money -= unitToBuild.cost;
-
-        GameObject newObstacleCube = Instantiate(unitToBuild.prefab, position, Quaternion.identity);
+        
+        temp = Instantiate(unitToBuild.prefab, position, Quaternion.identity);
         Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
-    
+
+
+    public void SelectBuilding(UnitBlueprint unit,Vector2 position)
+    {
+        unitToBuild = null;
+        selectedUnit = unit;
+        selectedPosition = position;
+    }
+
+
     public void SelectStructure(Structure structure)
     {
         unitToBuild = null;

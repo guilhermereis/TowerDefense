@@ -25,11 +25,14 @@ public class DestroyerController : PawnController {
 		speed = 5;
 		if (CurrentState == PawnState.Destroying)
 		{
-			nav.SetDestination(target.transform.position);
-			if (IsAtLocation())
-			{
-				ChangeState(PawnState.Battle);
-			}
+            if (nav != null&&target!=null)
+            {
+                nav.SetDestination(target.transform.position);
+                if (IsAtLocation())
+                {
+                    ChangeState(PawnState.Battle);
+                }
+            }
 		}
 	}
 

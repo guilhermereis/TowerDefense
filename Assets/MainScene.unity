@@ -216,9 +216,11 @@ MonoBehaviour:
   standardUnit:
     prefab: {fileID: 1511144347461752, guid: 6116e45c5c3ed9c428299182404115a4, type: 2}
     cost: 100
+    sell_cost: 50
   missileLauncher:
     prefab: {fileID: 1848844145821628, guid: b97083469700c3846a093e53547dc5dc, type: 2}
     cost: 200
+    sell_cost: 100
 --- !u!1 &131182209
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +344,7 @@ GameObject:
   - component: {fileID: 177297009}
   - component: {fileID: 177297008}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -424,7 +426,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 177297010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 309557879}
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &177297010
@@ -545,8 +558,9 @@ GameObject:
   - component: {fileID: 309557878}
   - component: {fileID: 309557877}
   - component: {fileID: 309557876}
+  - component: {fileID: 309557879}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Options
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -627,6 +641,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 309557874}
+--- !u!114 &309557879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 309557874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76df188ec9ebb8e46a1674e5e8380690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &327205326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,12 +1611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7a3fabaf9413c4b8add956ea3cafea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardUnitPrefab:
-    prefab: {fileID: 1511144347461752, guid: 6116e45c5c3ed9c428299182404115a4, type: 2}
-    cost: 100
-  secondaryUnitPrefab:
-    prefab: {fileID: 1848844145821628, guid: b97083469700c3846a093e53547dc5dc, type: 2}
-    cost: 200
   nodeUI: {fileID: 0}
   structureUI: {fileID: 0}
 --- !u!114 &1421049513
@@ -2086,7 +2105,7 @@ GameObject:
   - component: {fileID: 1722501015}
   - component: {fileID: 1722501014}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: ButtonSell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2168,7 +2187,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1722501016}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 309557879}
+        m_MethodName: Sell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1722501016
