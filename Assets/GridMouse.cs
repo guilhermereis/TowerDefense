@@ -108,11 +108,14 @@ public class GridMouse : MonoBehaviour {
             }
             else
             {
-                matrixOfGameObjects[x,z] = new GameObject();
-                buildManager.BuildUnitOn(ref matrixOfGameObjects[x, z], position);
-                //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
-                propertiesMatrix[x, z] = new Property(buildManager.getUnitToBuild(),ref matrixOfGameObjects[x, z], "Obstacle");
-                Debug.Log("Construiu na posição " + x + ", " + z);
+                if (buildManager.getUnitToBuild() != null)
+                {
+                    matrixOfGameObjects[x, z] = new GameObject();
+                    buildManager.BuildUnitOn(ref matrixOfGameObjects[x, z], position);
+                    //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
+                    propertiesMatrix[x, z] = new Property(buildManager.getUnitToBuild(), ref matrixOfGameObjects[x, z], "Obstacle");
+                    Debug.Log("Construiu na posição " + x + ", " + z);
+                }
             }
         }
     }
