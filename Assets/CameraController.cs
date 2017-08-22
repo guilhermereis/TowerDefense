@@ -126,9 +126,11 @@ public class CameraController : MonoBehaviour {
 
         //Camera Pressure/Relief when out of bounds to return to rest position
         cameraDistanceFromStart = Vector3.Magnitude(transform.position - cameraStartPosition);
+        
+
         if (cameraDistanceFromStart > panLimit + 10* panMultiplier) {
-            float influence = 0.001f * cameraDistanceFromStart * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f) * Time.deltaTime - panMultiplier/1000f;
-            transform.position = Vector3.Lerp(transform.position, cameraStartPosition, 0.005f + influence);
+            float influence = Time.deltaTime * 0.005f * cameraDistanceFromStart * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f); //- panMultiplier/100f;
+            transform.position = Vector3.Lerp(transform.position, cameraStartPosition, 0.001f + influence);
         }
 
     }
