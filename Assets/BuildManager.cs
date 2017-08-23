@@ -54,8 +54,15 @@ public class BuildManager : MonoBehaviour {
 
     public void BuildPreviewOn(ref GameObject temporaryInstance,Vector3 position)
     {
-        if (temporaryInstance !=null && unitToBuild != null)
-            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, Quaternion.identity);        
+        if (temporaryInstance != null && unitToBuild != null)
+        {
+            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, Quaternion.identity);
+            MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
+            for (int i = 0; i < list.Length; i++)
+            {
+                Destroy(list[i]);
+            }
+        }
     }
     public void BuildPreviewOn(Node node)
     {
