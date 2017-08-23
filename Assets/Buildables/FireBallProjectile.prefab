@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114564663577930152}
   - component: {fileID: 54817432652714842}
   - component: {fileID: 135238883336854748}
+  - component: {fileID: 135139854680049112}
   m_Layer: 0
   m_Name: FireBallProjectile
   m_TagString: Untagged
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1482542767437364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.737328, y: 3.579, z: 27.963684}
+  m_LocalPosition: {x: 0, y: 0.872, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,6 +115,18 @@ MonoBehaviour:
   speed: 20
   explosionParticlePrefab: {fileID: 1097344307565240, guid: 1de16174ccd6fca4082fc229a242a7db,
     type: 2}
+--- !u!135 &135139854680049112
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1482542767437364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.3083415
+  m_Center: {x: 0.08055419, y: 0, z: -0.08}
 --- !u!135 &135238883336854748
 SphereCollider:
   m_ObjectHideFlags: 1

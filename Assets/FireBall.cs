@@ -10,15 +10,16 @@ public class FireBall : MonoBehaviour {
 	public float speed;
 	public GameObject explosionParticlePrefab;
 	private Vector3 dir;
+	private List<Rigidbody> targets;
 	// Use this for initialization
 	void Start () {
 		range = 20f;
 		rig = GetComponent<Rigidbody>();
 		dir = ((transform.position + transform.forward * range) - transform.position);
 		//Quaternion lookRotation = Quaternion.LookRotation(dir);
-
+		targets = new List<Rigidbody>();
 		//Vector3 rotation = lookRotation.eulerAngles;
-		Debug.Log(transform.rotation.eulerAngles);
+		//Debug.Log(transform.rotation.eulerAngles);
 		//transform.rotation = Quaternion.Euler(0f, 270, 0f);
 	}
 
@@ -37,6 +38,20 @@ public class FireBall : MonoBehaviour {
 	{
 		
 		Instantiate(explosionParticlePrefab,collision.contacts[0].point, Quaternion.identity);
+		for (int i = 0; i < targets.Count; i++)
+		{
+			Debug.Log(targets[i].name);
+			//targets[i].AddExplosionForce(1000, collision.contacts[0].point, 5,3);
+		}
 		Destroy(gameObject);
+
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if(!other.isTrigger && other.gameObject.tag == "Enemy")
+		{
+			targets.Add(other.GetComponent<Rigidbody>());
+		}
 	}
 }

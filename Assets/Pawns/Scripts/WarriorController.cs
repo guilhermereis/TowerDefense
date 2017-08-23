@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorController : PawnController {
+public class WarriorController : EnemyController {
 
 	private WarriorCharacter character;
 	public float attackCountdown = 0f;
@@ -10,6 +10,7 @@ public class WarriorController : PawnController {
 
 	// Use this for initialization
 	void Start () {
+		weight = 2;
 		enemiesInRange = new List<GameObject>();
 		character = (WarriorCharacter)GetComponent<WarriorCharacter>();
 	}
@@ -76,7 +77,7 @@ public class WarriorController : PawnController {
 	protected override void OnTriggerExit(Collider other)
 	{
 		base.OnTriggerExit(other);
-		if (other.gameObject.tag.Equals("Enemy"))
+		if (other.gameObject.tag.Equals("Ally"))
 		{
 			enemiesInRange.Remove(other.gameObject);
 			if (target != null)

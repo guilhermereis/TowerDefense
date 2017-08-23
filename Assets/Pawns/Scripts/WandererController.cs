@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WandererController : PawnController
+public class WandererController : EnemyController
 {
     private GameObject offender;
-    protected override void Awake()
+
+
+	private void Start()
+	{
+		weight = 1;	
+	}
+
+	protected override void Awake()
     {
         base.Awake();
         speed = 2;

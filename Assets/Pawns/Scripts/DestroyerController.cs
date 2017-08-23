@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyerController : PawnController {
+public class DestroyerController : EnemyController {
 
 	float attackCountdown = 0;
 	DestroyerCharacter character;
@@ -10,7 +10,7 @@ public class DestroyerController : PawnController {
 
 	// Use this for initialization
 	void Start () {
-		
+		weight = 3;
 	}
 
 	protected override void Awake()

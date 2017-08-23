@@ -49,7 +49,7 @@ public class CatapultController : BuildableController {
 
 	private void LaunchProjectile()
 	{
-		Debug.Log(transform.rotation.eulerAngles);
+		//Debug.Log(transform.rotation.eulerAngles);
 		GameObject projectile = Instantiate(bulletPrefab, launchOrigin.position, transform.rotation);
 		projectile.transform.parent = gameObject.transform;
 		projectile.transform.localRotation = Quaternion.identity;
