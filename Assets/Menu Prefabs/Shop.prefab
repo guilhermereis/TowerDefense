@@ -247,14 +247,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standardUnit:
+    name: Tower
     prefab: {fileID: 1511144347461752, guid: 6116e45c5c3ed9c428299182404115a4, type: 2}
     cost: 100
     sell_cost: 50
     position: {x: 0, y: 0}
   missileLauncher:
+    name: Camp
     prefab: {fileID: 1848844145821628, guid: b97083469700c3846a093e53547dc5dc, type: 2}
     cost: 200
     sell_cost: 100
+    position: {x: 0, y: 0}
+  towerLevel2:
+    name: Tower2
+    prefab: {fileID: 1372810626166394, guid: 347f325be9a4523469fffbddd4f8f170, type: 2}
+    cost: 150
+    sell_cost: 75
     position: {x: 0, y: 0}
 --- !u!114 &114735968319195274
 MonoBehaviour:
