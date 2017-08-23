@@ -3,6 +3,7 @@
 [System.Serializable]
 public class UnitBlueprint{
 
+    public string name;
     public GameObject prefab;
     public int cost;
     public int sell_cost;

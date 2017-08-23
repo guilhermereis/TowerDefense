@@ -22,7 +22,7 @@ public class GridMouse : MonoBehaviour {
     GameObject temp;
 
     [SerializeField]
-    public Property[,] propertiesMatrix;
+    public PropertyScript.Property[,] propertiesMatrix;
 
     [SerializeField]
     public bool[,] previewMatrix;
@@ -68,7 +68,7 @@ public class GridMouse : MonoBehaviour {
         //_material.SetTextureScale("_MainTex", new Vector2(_columns, _rows));
         _material.SetTextureScale("_MainTex", new Vector2(_gridSize.x, _gridSize.y));
 
-        propertiesMatrix = new Property[Mathf.FloorToInt(_gridSize.x),Mathf.FloorToInt(_gridSize.y)];
+        propertiesMatrix = new PropertyScript.Property[Mathf.FloorToInt(_gridSize.x),Mathf.FloorToInt(_gridSize.y)];
         previewMatrix = new bool[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
         matrixOfGameObjects = new GameObject[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
 
@@ -114,7 +114,7 @@ public class GridMouse : MonoBehaviour {
                     matrixOfGameObjects[x, z] = new GameObject();
                     buildManager.BuildUnitOn(ref matrixOfGameObjects[x, z], position);
                     //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
-                    propertiesMatrix[x, z] = new Property(buildManager.getUnitToBuild(), ref matrixOfGameObjects[x, z], "Obstacle");
+                    propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref matrixOfGameObjects[x, z], "Obstacle");
                     Debug.Log("Construiu na posição " + x + ", " + z);
                 }
                 else
@@ -171,24 +171,10 @@ public class GridMouse : MonoBehaviour {
         }
             
 	}
-    Vector3 CoordToPosition(int x, int y)
+    public Vector3 CoordToPosition(int x, int y)
     {
         return new Vector3(-_gridSize.x / 2 + 0.5f + x, 0f + ZOffset + 0.5f, -_gridSize.y / 2 + 0.5f + y);
     }
 
-    [System.Serializable]
-    public struct Property
-    {
-        public string type;
-        public UnitBlueprint unit;
-        public GameObject builtGameObject;
-
-        public Property(UnitBlueprint _unit, ref GameObject _builtGameObject, string _type = "Normal")
-        {
-            type = _type;
-            unit = _unit;
-            builtGameObject = _builtGameObject;
-        }
-    }
-
+    
 }

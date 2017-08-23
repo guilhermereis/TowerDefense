@@ -122,5 +122,9 @@ public class BuildManager : MonoBehaviour {
         unitToBuild = unit;
         //DeselectNode();
     }
+    public void DeselectUnitToBuild()
+    {
+        unitToBuild = null;
+    }
 
 }
