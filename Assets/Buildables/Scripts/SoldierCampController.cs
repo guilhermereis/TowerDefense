@@ -13,13 +13,16 @@ public class SoldierCampController : BuildableController {
 	[HideInInspector]
 	public List<SimpleSoldierController> soldiersController;
 
-	public GameObject simpleSoldier;
+	public GameObject simpleSoldierPrefab;
+
 	[HideInInspector]
 	private EnemyOutOfReachDelegate enemyOutOfReach;
 	SetEnemyDelegate setEnemy;
 
+	public Transform spawnPoint;
+
 	//default number of spawned soldiers
-    private int soldiersCount = 3;
+    public int soldiersCount = 3;
 
 	private int nextEnemy = 0;
 
@@ -46,13 +49,21 @@ public class SoldierCampController : BuildableController {
 		IsUpgradable = true;
 		Defense = 2;
 		soldiersController = new List<SimpleSoldierController>();
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            SimpleSoldierController ssc = (SimpleSoldierController)transform.GetChild(i).GetComponent<SimpleSoldierController>();
+		float distance = 1.5f;
+		Vector3 spawnLocation = spawnPoint.position;
+		for (int i = 0; i < soldiersCount; i++)
+		{
+			spawnLocation += spawnPoint.transform.forward * distance;
+
+			GameObject soldier = Instantiate(simpleSoldierPrefab, spawnLocation, spawnPoint.rotation);
+			soldier.transform.parent = gameObject.transform;
+
+
+			SimpleSoldierController ssc = (SimpleSoldierController)soldier.GetComponent<SimpleSoldierController>();
 			//binding enemyOutOfReachDelegate
 			soldiersController.Add(ssc);
-            
-        }
+
+		}
 		soldiersCount = soldiersController.Count;
 	}
 	
@@ -116,11 +127,12 @@ public class SoldierCampController : BuildableController {
 				{
 					for (int i = 0; i < soldiersCount; i++)
 					{
-						if(soldiersController[nextEnemy].target == other.gameObject)
+						if(soldiersController[i].target == other.gameObject)
 						{
-							soldiersController[nextEnemy].target = null;
+							soldiersController[i].target = null;
 							Debug.Log(other.gameObject.name);
-							break;
+							//nextEnemy++;
+							//break;
 						}
 					}
 					SetSoldierTarget(enemies[0]);

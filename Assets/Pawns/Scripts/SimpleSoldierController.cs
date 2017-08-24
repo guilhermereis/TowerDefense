@@ -30,13 +30,8 @@ public class SimpleSoldierController : PawnController {
             ChangeState(PawnState.Homing);
         }
     }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        currentState = PawnState.Idle;
-        homePosition = transform.position;
-
+	private void Start()
+	{
 		character = GetComponent<SimpleSoldierCharacter>();
 
 		camp = GetComponentInParent<SoldierCampController>();
@@ -45,13 +40,25 @@ public class SimpleSoldierController : PawnController {
 		enemiesInRange = new List<GameObject>();
 		anim = (SwordsmanAnimatorController)GetComponent<SwordsmanAnimatorController>();
 		swordHit = GetComponent<AudioSource>();
+
+		
+	}
+
+	protected override void Awake()
+    {
+        base.Awake();
+        currentState = PawnState.Idle;
+        homePosition = transform.position;
+
+		
     }
     // Update is called once per frame
     protected override void Update() {
         base.Update();
 		anim.speed = nav.velocity.magnitude;
 		attackCountdown -= Time.deltaTime;
-		if(target != null && enemiesInRange.Contains(target)){
+
+		if (target != null && enemiesInRange.Contains(target)){
 			ChangeState(PawnState.Battle);
 		}
     }
@@ -91,7 +98,7 @@ public class SimpleSoldierController : PawnController {
 					
 				attackCountdown = 1 / character.attackRate;
 			}else
-				anim.isAttacking = false;
+				anim.setIsAttacking(true);
 		}
 		else
             ChangeState(PawnState.Homing);
@@ -101,43 +108,46 @@ public class SimpleSoldierController : PawnController {
     //enemy in range of attack
     protected override void OnTriggerEnter(Collider other)
     {
-
+		
         base.OnTriggerEnter(other);
 		Debug.DrawLine(other.gameObject.transform.position, transform.position);
-
-        if (other.gameObject.tag == "Enemy" && other.gameObject == target)
-        {
-			enemiesInRange.Add(other.gameObject);
-            //Debug.Log("Started Battle");
-            //nav.isStopped = true;
-            ChangeState(PawnState.Battle);
-
-		}
-		else if(other.gameObject.tag == "Enemy")
+		if (!other.isTrigger)
 		{
-			enemiesInRange.Add(other.gameObject);
+			if (other.gameObject.tag == "Enemy" )
+			{
+				enemiesInRange.Add(other.gameObject);
+				//Debug.Log("Started Battle");
+				//nav.isStopped = true;
+				if(other.gameObject == target)
+					ChangeState(PawnState.Battle);
+
+			}
 			
+
 		}
     }
 
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
+		if (!other.isTrigger)
+		{
+			if (other.gameObject.tag == "Enemy")
+			{
+				//Debug.Log("Started Battle");
+				nav.isStopped = false;
+				enemiesInRange.Remove(other.gameObject);
+				if (target != null)
+				{
+					ChangeState(PawnState.FindTarget);
+				}
+				else
+				{
+					ChangeState(PawnState.Homing);
+				}
 
-        if (other.gameObject.tag == "Enemy")
-        {
-            //Debug.Log("Started Battle");
-            nav.isStopped = false;
-			enemiesInRange.Remove(other.gameObject);
-			if (target != null)
-            {
-                ChangeState(PawnState.FindTarget);
-            }
-            else
-            {
-                ChangeState(PawnState.Homing);
-            }
+			}
 
-        }
+		}
     }
 }

@@ -10,11 +10,11 @@ public class EnemyData : MonoBehaviour {
 
 	private void Start()
 	{
-		int[] wave = getCombinaton(5,10);
-		for (int i = 0; i < wave.Length; i++)
-		{
-			Debug.Log(wave[i]);
-		}
+		//int[] wave = getCombinaton(5,10);
+		//for (int i = 0; i < wave.Length; i++)
+		//{
+		//	Debug.Log(wave[i]);
+		//}
 	}
 
 	int[] getCombinaton(int monsters, int score)
@@ -25,7 +25,7 @@ public class EnemyData : MonoBehaviour {
 		while(i < monsters)
 		{
 			int m = Mathf.RoundToInt( Random.Range(1f, 3f));
-
+			
 
 			if( sum + m <= score)
 			{
