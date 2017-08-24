@@ -56,7 +56,7 @@ public class BuildManager : MonoBehaviour {
     {
         if (temporaryInstance != null && unitToBuild != null)
         {
-            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, Quaternion.identity);
+            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
             for (int i = 0; i < list.Length; i++)
             {
@@ -75,7 +75,7 @@ public class BuildManager : MonoBehaviour {
         }
         PlayerStats.Money -= unitToBuild.cost;
         
-        temp = Instantiate(unitToBuild.prefab, position, Quaternion.identity);
+        temp = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 

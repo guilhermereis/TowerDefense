@@ -83,7 +83,8 @@ public class PawnController : MonoBehaviour {
         {
             if (target != null)
             {
-                nav.SetDestination(target.transform.position);
+                if (nav!=null)
+                    nav.SetDestination(target.transform.position);
 
             }
 			else

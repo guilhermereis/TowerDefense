@@ -454,10 +454,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8bea5406bd9ff041bf17bf571156291, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &571407963 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 411554, guid: 67538840444c28d46adbcf4d78954909, type: 2}
-  m_PrefabInternal: {fileID: 1328734672}
 --- !u!1001 &665826597
 Prefab:
   m_ObjectHideFlags: 0
@@ -475,7 +471,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4929381753380124, guid: e93807c4d2e417247abfcdcef5382953, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.91
       objectReference: {fileID: 0}
     - target: {fileID: 4929381753380124, guid: e93807c4d2e417247abfcdcef5382953, type: 2}
       propertyPath: m_LocalRotation.x
@@ -847,7 +843,14 @@ Prefab:
         type: 2}
       propertyPath: missileLauncher.prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1848844145821628, guid: b97083469700c3846a093e53547dc5dc,
+        type: 2}
+    - target: {fileID: 114734933048269720, guid: 567fb22a4bf48a14d8b5d203bf037dbc,
+        type: 2}
+      propertyPath: standardUnit.prefab
+      value: 
+      objectReference: {fileID: 1511144347461752, guid: 6116e45c5c3ed9c428299182404115a4,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 567fb22a4bf48a14d8b5d203bf037dbc, type: 2}
   m_IsPrefabParent: 0
@@ -1154,77 +1157,10 @@ Prefab:
       objectReference: {fileID: 665826598}
     - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
         type: 2}
-      propertyPath: _gridSize.x
-      value: 42
-      objectReference: {fileID: 0}
-    - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
-      propertyPath: _gridSize.y
-      value: 42
-      objectReference: {fileID: 0}
-    - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
-      propertyPath: _rows
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
-      propertyPath: _columns
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
-      propertyPath: _transform
-      value: 
-      objectReference: {fileID: 571407963}
-    - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
-      propertyPath: _material
-      value: 
-      objectReference: {fileID: 2100000, guid: ad755755bc7b5d34e9d0bb3440aa6e7a, type: 2}
-    - target: {fileID: 11411554, guid: 67538840444c28d46adbcf4d78954909, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 64726139656057402, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
-      propertyPath: gridTransform
-      value: 
-      objectReference: {fileID: 571407963}
-    - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
       propertyPath: ZOffset
       value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 411554, guid: 67538840444c28d46adbcf4d78954909, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 42
-      objectReference: {fileID: 0}
-    - target: {fileID: 411554, guid: 67538840444c28d46adbcf4d78954909, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 42
-      objectReference: {fileID: 0}
-    - target: {fileID: 114587723693792706, guid: 67538840444c28d46adbcf4d78954909,
-        type: 2}
-      propertyPath: obstacleCube
-      value: 
-      objectReference: {fileID: 4810755917094426, guid: 6116e45c5c3ed9c428299182404115a4,
-        type: 2}
-    - target: {fileID: 111554, guid: 67538840444c28d46adbcf4d78954909, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311554, guid: 67538840444c28d46adbcf4d78954909, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11411554, guid: 67538840444c28d46adbcf4d78954909, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67538840444c28d46adbcf4d78954909, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1408019317
