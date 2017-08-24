@@ -92,7 +92,7 @@ public class GridMouse : MonoBehaviour {
     }
     void OnMouseDown()
     {
-        Debug.Log("MOUSE DOWN");
+        Debug.Log("Mouse Down");
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity))
@@ -117,6 +117,7 @@ public class GridMouse : MonoBehaviour {
                     //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
                     propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref matrixOfGameObjects[x, z], "Obstacle");
                     Debug.Log("Construiu na posição " + x + ", " + z);
+                    Debug.Log("Position = "+position);
                 }
                 else
                 {
@@ -137,7 +138,8 @@ public class GridMouse : MonoBehaviour {
             position = CoordToPosition(x, z);
             //Debug.Log("x: " + x + ", z: " + z);
             //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
-            selectionCube.transform.position = position;
+            Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
+            selectionCube.transform.position = positionCube;
             if (previousPosition == position)
             {
                 
@@ -175,7 +177,7 @@ public class GridMouse : MonoBehaviour {
 	}
     public Vector3 CoordToPosition(int x, int y)
     {
-        return new Vector3(-_gridSize.x / 2 + 0.5f + x, 0f + ZOffset + 0.5f, -_gridSize.y / 2 + 0.5f + y);
+        return new Vector3(-_gridSize.x / 2 + 0.5f + x, 0f + ZOffset, -_gridSize.y / 2 + 0.5f + y);
     }
 
     
