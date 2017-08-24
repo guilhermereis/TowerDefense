@@ -39,7 +39,8 @@ public class PawnHealthBarGUI : MonoBehaviour {
 	private void Update()
 	{
 		
-		Healthbar.transform.position = (Vector3.up * 2) + transform.position;// Camera.main.WorldToScreenPoint((Vector3.up * 3) + transform.position);
+        if(Healthbar != null)
+		    Healthbar.transform.position = (Vector3.up * 2) + transform.position;// Camera.main.WorldToScreenPoint((Vector3.up * 3) + transform.position);
 	}
 
 	public void UpdateHealthBar(float health,float maxHealth)

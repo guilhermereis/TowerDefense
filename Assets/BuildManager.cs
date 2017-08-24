@@ -62,13 +62,8 @@ public class BuildManager : MonoBehaviour {
             {
                 Destroy(list[i]);
             }
+            temporaryInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
         }
-    }
-    public void BuildPreviewOn(Node node)
-    {
-        GameObject preview = (GameObject)Instantiate(unitToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
-        node.preview = preview;
-        
     }
 
     public void BuildUnitOn(ref GameObject temp, Vector3 position)

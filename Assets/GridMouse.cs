@@ -92,6 +92,7 @@ public class GridMouse : MonoBehaviour {
     }
     void OnMouseDown()
     {
+        Debug.Log("MOUSE DOWN");
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity))
@@ -120,6 +121,7 @@ public class GridMouse : MonoBehaviour {
                 else
                 {
                     buildManager.HideOptions();
+                    Debug.Log("Hide Options");
                 }
             }
         }

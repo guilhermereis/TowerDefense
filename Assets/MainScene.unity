@@ -539,7 +539,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 65885215077851128, guid: e93807c4d2e417247abfcdcef5382953,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 65885215077851128, guid: e93807c4d2e417247abfcdcef5382953, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e93807c4d2e417247abfcdcef5382953, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &665826598 stripped
@@ -879,6 +885,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114734933048269720, guid: 567fb22a4bf48a14d8b5d203bf037dbc,
+        type: 2}
+      propertyPath: missileLauncher.prefab
+      value: 
+      objectReference: {fileID: 2027777975}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 567fb22a4bf48a14d8b5d203bf037dbc, type: 2}
   m_IsPrefabParent: 0
@@ -1709,6 +1720,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224494824187211380, guid: 851d77b0ff520d442af9944588f5321e,
     type: 2}
   m_PrefabInternal: {fileID: 1702740468}
+--- !u!1 &2027777975 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1848844145821628, guid: b97083469700c3846a093e53547dc5dc,
+    type: 2}
+  m_PrefabInternal: {fileID: 353348474}
 --- !u!1 &2069556302
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public class Node : MonoBehaviour {
 
         if (this.preview == null && this.unit == null)
         {
-            buildManager.BuildPreviewOn(this);
+            //buildManager.BuildPreviewOn(this);
             previewRenderer = preview.GetComponent<Renderer>();
             previewRenderer.material.color = Color.green;
         }
