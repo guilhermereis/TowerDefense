@@ -10,7 +10,7 @@ public class WeaponPlacer : MonoBehaviour {
     private void Start(){
         if (attachSocket != null)
         {
-            transform.localScale = characterWhoWields.transform.localScale;
+            //transform.localScale = characterWhoWields.transform.localScale;
             transform.position = attachSocket.transform.position;
             transform.rotation = attachSocket.transform.rotation;
         }
