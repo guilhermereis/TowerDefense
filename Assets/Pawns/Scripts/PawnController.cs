@@ -20,7 +20,7 @@ public class PawnController : MonoBehaviour {
     //used for allied troopers
     public Vector3 homePosition;
     public List<Transform> waypoints;
-    int nextWaypoint = 0; 
+    int nextWaypoint = 1; 
 
     protected virtual void Awake()
     {
@@ -84,13 +84,22 @@ public class PawnController : MonoBehaviour {
         }else if (currentState == PawnState.Walking)
         {
 			nav.isStopped = false;
-            nav.SetDestination(waypoints[nextWaypoint].position);
+           
+            
+           
             if (IsAtLocation())
             {
-                nextWaypoint++;
-                if (nextWaypoint > waypoints.Count)
+               
+
+                if (nextWaypoint < waypoints.Count)
+                {
+                    nav.SetDestination(waypoints[nextWaypoint].position);
+                    nextWaypoint++;
+                }
+                else
                     ChangeState(PawnState.Battle);
 
+                
             }
 			
 

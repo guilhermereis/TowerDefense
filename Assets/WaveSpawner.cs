@@ -41,14 +41,17 @@ public class WaveSpawner : MonoBehaviour {
         waveNumber++;
         BeginSpawn();
     }
-
+    
 
 	void BeginSpawn()
 	{
         int[] combination = currentWave.GetCombinaton();
         for (int i = 0; i < combination.Length; i++)
         {
-            GameObject monster = Instantiate(monstersPrefab[combination[i] -1], spawnLocation.position,Quaternion.identity);
+            int monsterIndex = combination[i] - 1;
+           
+
+            GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocation.position,Quaternion.identity);
             monsterBatch.Add(monster);
         }
         
