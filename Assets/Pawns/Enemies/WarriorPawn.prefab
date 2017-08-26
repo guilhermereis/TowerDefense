@@ -118,6 +118,7 @@ MonoBehaviour:
   defense: 250
   attack: 700
   attackRate: 0.5
+  isDying: 0
   healthBar: {fileID: 0}
 --- !u!114 &114279201298563666
 MonoBehaviour:
@@ -135,6 +136,16 @@ MonoBehaviour:
   speed: 2
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  weight: 0
   attackCountdown: 0
 --- !u!114 &114883886630062610
 MonoBehaviour:

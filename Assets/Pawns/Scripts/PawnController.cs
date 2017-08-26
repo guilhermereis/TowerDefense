@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PawnController : MonoBehaviour {
 
@@ -18,12 +19,25 @@ public class PawnController : MonoBehaviour {
 
     //used for allied troopers
     public Vector3 homePosition;
-    
+    public List<Transform> waypoints;
+    int nextWaypoint = 0; 
 
     protected virtual void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
         nav.speed = speed;
+        waypoints = new List<Transform>();
+        GameObject waypoint = GameObject.FindGameObjectWithTag("Waypoint");
+        Debug.Log(waypoint.name);
+        for (int i = 0; i < waypoint.transform.childCount; i++)
+        {
+            waypoints.Add(waypoint.transform.GetChild(i));
+        }
+    }
+
+    private void Start()
+    {
+        
     }
 
     public PawnState CurrentState {  get { return currentState; }
@@ -70,9 +84,14 @@ public class PawnController : MonoBehaviour {
         }else if (currentState == PawnState.Walking)
         {
 			nav.isStopped = false;
-            nav.SetDestination(finalDestination.position);
-			if (IsAtLocation())
-				Destroy(gameObject);
+            nav.SetDestination(waypoints[nextWaypoint].position);
+            if (IsAtLocation())
+            {
+                nextWaypoint++;
+                if (nextWaypoint > waypoints.Count)
+                    ChangeState(PawnState.Battle);
+
+            }
 			
 
         }else if(currentState == PawnState.Battle)
