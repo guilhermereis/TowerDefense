@@ -118,6 +118,7 @@ MonoBehaviour:
   defense: 1
   attack: 1
   attackRate: 1
+  isDying: 0
   healthBar: {fileID: 0}
 --- !u!114 &114365445079594372
 MonoBehaviour:
@@ -147,9 +148,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 2
   finalDestination: {fileID: 0}
-  speed: 5
+  speed: 1.3
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
+  waypoints: []
+  weight: 0
 --- !u!135 &135218088848744410
 SphereCollider:
   m_ObjectHideFlags: 1

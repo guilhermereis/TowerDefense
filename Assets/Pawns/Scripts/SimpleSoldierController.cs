@@ -91,7 +91,6 @@ public class SimpleSoldierController : PawnController {
 				//tell the camp and so the camp can gives another target or we're going back
 				if (target.GetComponent<PawnCharacter>().Damage(character.attack))
 				{
-					
 					target = null;
 					camp.UpdateEnemies(target);
 				}

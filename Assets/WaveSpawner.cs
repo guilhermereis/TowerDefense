@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour {
 
+    
     public List<GameObject> monsterBatch;
     public GameObject[] monstersPrefab;
 
@@ -12,27 +13,29 @@ public class WaveSpawner : MonoBehaviour {
 
     public Transform spawnLocation;
 
-    public float preparationTime = 30.0f;
-    float countDown;
+    
 
 
     private void Start()
     {
         //monsterBatch = new List<GameObject>();
-        countDown = preparationTime;
+       
+       
 
     }
 
     private void Update()
     {
-        if (countDown <= 0)
+        if(GameController.gc.gameState == GameController.GameState.BeginWave)
         {
             CreateWave();
-            countDown = preparationTime;
-
+            GameController.gc.ChangeGameState(GameController.GameState.Action);
         }
-
-        countDown -= Time.deltaTime;
+        if( transform.childCount == 0 && GameController.gc.gameState == GameController.GameState.Action)
+        {
+            GameController.gc.ChangeGameState(GameController.GameState.EndWave);
+        }
+        
     }
 
     void CreateWave()
@@ -53,7 +56,11 @@ public class WaveSpawner : MonoBehaviour {
 
             GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocation.position,Quaternion.identity);
             monsterBatch.Add(monster);
+            monster.transform.parent = transform;
         }
-        
-	}
+
+       
+
+
+    }
 }
