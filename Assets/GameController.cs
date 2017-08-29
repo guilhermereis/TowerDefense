@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
     public enum GameState { Preparation, BeginWave, Action ,EndWave, GameOver }
 
     public GameState gameState;
+    bool game_over = false;
 
     public static GameController gc; 
 
@@ -38,7 +39,10 @@ public class GameController : MonoBehaviour {
             countDown -= Time.deltaTime;
         }else if(gameState == GameState.GameOver)
         {
-            Debug.Log("Game Over Man");
+            if (!game_over) {
+                Debug.Log("Game Over Man");
+                game_over = true;
+            }
         }
 
 
