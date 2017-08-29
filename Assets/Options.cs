@@ -50,10 +50,13 @@ public class Options : MonoBehaviour {
             //destroys the current object
             Destroy(gridMouse.propertiesMatrix[x, y].builtGameObject);
             Vector3 position3D = gridMouse.CoordToPosition(x, y);
-            gridMouse.matrixOfGameObjects[x, y] = new GameObject();
+            GameObject gameObject = new GameObject();
+            gridMouse.arrayListOfGameObjects.Add(gameObject);
+            gameObject.GetComponent<BuildableController>().setArrayListPosition(gridMouse.arrayListOfGameObjects.Count);
+            //gridMouse.matrixOfGameObjects[x, y] = new GameObject();
             //builds the upgraded version
-            buildManager.BuildUnitOn(ref gridMouse.matrixOfGameObjects[x, y], position3D);
-            gridMouse.propertiesMatrix[x, y] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.matrixOfGameObjects[x, y], "Obstacle");
+            buildManager.BuildUnitOn(ref gameObject, position3D);
+            gridMouse.propertiesMatrix[x, y] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gameObject, "Obstacle");
             //Debug.Log("Construiu na posição " + x + ", " + z);
         }
     }

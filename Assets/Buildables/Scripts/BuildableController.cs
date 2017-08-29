@@ -11,15 +11,24 @@ public class BuildableController : MonoBehaviour {
 	private float health;
 	private float maxHealth = 100;
 	private bool isUpgradable;
+    private int arrayListPosition;
 	public HealthState currentHealthState = HealthState.good;
 
 
 	protected virtual void Awake()
 	{
 		health = maxHealth;
-	}
+        arrayListPosition = -1;
+    }
 
-	public float Defense
+    public void setArrayListPosition(int position) {
+        arrayListPosition = position;
+    }
+    public int getArrayListPosition()
+    {
+        return arrayListPosition;
+    }
+    public float Defense
 	{
 		get
 		{

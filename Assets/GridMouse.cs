@@ -28,7 +28,7 @@ public class GridMouse : MonoBehaviour {
     public bool[,] previewMatrix;
 
     [SerializeField]
-    public GameObject[,] matrixOfGameObjects;
+    public ArrayList arrayListOfGameObjects;
 
     private Ray ray;
     private RaycastHit hitInfo;
@@ -70,7 +70,8 @@ public class GridMouse : MonoBehaviour {
 
         propertiesMatrix = new PropertyScript.Property[Mathf.FloorToInt(_gridSize.x),Mathf.FloorToInt(_gridSize.y)];
         previewMatrix = new bool[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
-        matrixOfGameObjects = new GameObject[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
+        //matrixOfGameObjects = new GameObject[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
+        arrayListOfGameObjects = new ArrayList();
 
         for (int k = 0; k < previewMatrix.GetLength(0); k++)
         {
@@ -92,10 +93,10 @@ public class GridMouse : MonoBehaviour {
     }
     void OnMouseDown()
     {
-        Debug.Log("Mouse Down");
+        //Debug.Log("Mouse Down");
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
@@ -107,15 +108,25 @@ public class GridMouse : MonoBehaviour {
                 buildManager.SelectBuilding(propertiesMatrix[x, z].unit, new Vector2(x,z));
                 buildManager.ShowOptions();
                 Debug.Log("Selecionou a posição: "+x+", "+z);
+                //Destroy(hitInfo.transform.gameObject);
             }
             else
             {
                 if (buildManager.getUnitToBuild() != null)
                 {
-                    matrixOfGameObjects[x, z] = new GameObject();
-                    buildManager.BuildUnitOn(ref matrixOfGameObjects[x, z], position);
+                    GameObject gameObject = new GameObject();
+                    arrayListOfGameObjects.Add(gameObject);
+                    if (gameObject == null)
+                    {
+                        Debug.Log("Gameobject = NULL !!!");
+                        gameObject.GetComponent<BuildableController>().setArrayListPosition(arrayListOfGameObjects.Count);
+                    }
+                    
+                    //matrixOfGameObjects[x, z] = new GameObject();
+                    //buildManager.BuildUnitOn(ref matrixOfGameObjects[x, z], position);
+                    buildManager.BuildUnitOn(ref gameObject, position);
                     //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
-                    propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref matrixOfGameObjects[x, z], "Obstacle");
+                    propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gameObject, "Obstacle");
                     Debug.Log("Construiu na posição " + x + ", " + z);
                     Debug.Log("Position = "+position);
                 }
@@ -130,9 +141,10 @@ public class GridMouse : MonoBehaviour {
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
-        if (GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
+            Debug.Log("Hitou " + hitInfo.transform.gameObject);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             position = CoordToPosition(x, z);
