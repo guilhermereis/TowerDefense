@@ -21,5 +21,12 @@ public class DebugOptions : MonoBehaviour {
         }
         
     }
-    
+    public void doSaveAll()
+    {
+        Debug.Log("Gonna save all !");
+    }
+    public void doLoadAll()
+    {
+        Debug.Log("Gonna load all !");
+    }
 }
