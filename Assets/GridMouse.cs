@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 [RequireComponent(typeof(TileMap))]
@@ -85,6 +87,14 @@ public class GridMouse : MonoBehaviour {
 
 
     }
+    public static List<T> CloneList<T>(List<T> oldList)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        MemoryStream stream = new MemoryStream();
+        formatter.Serialize(stream, oldList);
+        stream.Position = 0;
+        return (List<T>)formatter.Deserialize(stream);
+    }
 
     void Start()
     {
@@ -102,7 +112,7 @@ public class GridMouse : MonoBehaviour {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
-            Vector3 position = CoordToPosition(x, z);
+            position = CoordToPosition(x, z);
             //Debug.Log("x: " + x + ", z: " + z);
             if (propertiesMatrix[x, z].unit != null)
             {
@@ -115,17 +125,8 @@ public class GridMouse : MonoBehaviour {
             {
                 if (buildManager.getUnitToBuild() != null)
                 {
-                    ListOfGameObjects.Add(gameObject);
-                    int AddedElmtIndex = ListOfGameObjects.Count - 1;
-                    if (gameObject == null)
-                    {
-                        Debug.Log("Gameobject = NULL !!!");
-                        gameObject.GetComponent<BuildableController>().setArrayListPosition(AddedElmtIndex);
-                    }
+                    buildUnitAndAddItToTheList(position);
                     
-                    //matrixOfGameObjects[x, z] = new GameObject();
-                    //buildManager.BuildUnitOn(ref matrixOfGameObjects[x, z], position);
-                    buildManager.BuildUnitOn(ref ListOfGameObjects,AddedElmtIndex, position);
                     //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
                     //propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gameObject, "Obstacle");
                     Debug.Log("Construiu na posição " + x + ", " + z);
@@ -138,6 +139,14 @@ public class GridMouse : MonoBehaviour {
                 }
             }
         }
+    }
+    public void buildUnitAndAddItToTheList(Vector3 myPosition) {
+        GameObject gameObj = new GameObject();
+        ListOfGameObjects.Add(gameObj);
+        int AddedElmtIndex = ListOfGameObjects.Count - 1;
+
+        buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition);
+        gameObj.GetComponent<BuildableController>().setArrayListPosition(AddedElmtIndex);
     }
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);

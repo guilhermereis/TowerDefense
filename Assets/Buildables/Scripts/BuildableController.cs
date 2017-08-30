@@ -8,7 +8,7 @@ public class BuildableController : MonoBehaviour {
 
 	private float tileSize;
 	private float defense;
-	private float health;
+	private float health { get; set; }
 	private float maxHealth = 100;
 	private bool isUpgradable;
     private int arrayListPosition;

@@ -14,4 +14,20 @@ public class PropertyScript  {
             builtGameObject = _builtGameObject;
         }
     }
-}
+
+    [System.Serializable]
+    public struct StructureState
+    {
+        public string structureName;
+        public Transform transform;
+        public float currentHealth;
+        public StructureState(string _structureName, Transform _transform, float _currentHealth)
+        {
+            structureName = _structureName;
+            transform = _transform;
+            currentHealth = _currentHealth;
+        }
+    }
+
+
+    }
