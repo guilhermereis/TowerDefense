@@ -141,12 +141,11 @@ public class GridMouse : MonoBehaviour {
         }
     }
     public void buildUnitAndAddItToTheList(Vector3 myPosition) {
-        GameObject gameObj = new GameObject();
-        ListOfGameObjects.Add(gameObj);
+        ListOfGameObjects.Add(new GameObject());
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition);
-        gameObj.GetComponent<BuildableController>().setArrayListPosition(AddedElmtIndex);
+        ListOfGameObjects[AddedElmtIndex].GetComponent<BuildableController>().setArrayListPosition(AddedElmtIndex);
     }
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);

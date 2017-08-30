@@ -77,7 +77,7 @@ public class BuildManager : MonoBehaviour {
         */
 
         tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
-        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
+        //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
 

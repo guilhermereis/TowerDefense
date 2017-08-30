@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugOptions : MonoBehaviour {
+public class DebugOptions : MonoBehaviour
+{
 
     GridMouse gridMouse;
     BuildManager buildManager;
@@ -25,7 +26,7 @@ public class DebugOptions : MonoBehaviour {
         {
             Destroy(gridMouse.ListOfGameObjects[i]);
         }
-        
+
     }
     public void doSaveAll()
     {
@@ -35,7 +36,7 @@ public class DebugOptions : MonoBehaviour {
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
             bc = gridMouse.ListOfGameObjects[i].GetComponent<BuildableController>();
-            PropertyScript.StructureState state = 
+            PropertyScript.StructureState state =
                 new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
                                                   gridMouse.ListOfGameObjects[i].transform,
                                                     bc.Health);
@@ -45,15 +46,20 @@ public class DebugOptions : MonoBehaviour {
     }
     public void doLoadAll()
     {
-        Debug.Log("Gonna load all "+listOfStates.Count+" !");
+        Debug.Log("Gonna load all " + listOfStates.Count + " !");
         for (int i = 0; i < listOfStates.Count; i++)
         {
-            if (listOfStates[i].structureName == "Tower(Clone)") {
+            if (listOfStates[i].structureName == "Tower(Clone)")
+            {
                 shop.SelectStandardUnit();
                 gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position);
-                Debug.Log("Loaded " + listOfStates[i].position+".");
+                Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
-            
+            else
+            {
+                Debug.Log("DID NOT LOAD");
+            }
+
         }
     }
 }
