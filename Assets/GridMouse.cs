@@ -154,7 +154,7 @@ public class GridMouse : MonoBehaviour {
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
-            Debug.Log("Hitou " + hitInfo.transform.gameObject);
+            //Debug.Log("Hitou " + hitInfo.transform.gameObject);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             position = CoordToPosition(x, z);

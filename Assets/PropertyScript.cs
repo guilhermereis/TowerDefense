@@ -20,12 +20,14 @@ public class PropertyScript  {
     {
         public string structureName;
         public Transform transform;
+        public Vector3 position;
         public float currentHealth;
         public StructureState(string _structureName, Transform _transform, float _currentHealth)
         {
             structureName = _structureName;
             transform = _transform;
             currentHealth = _currentHealth;
+            position = _transform.position;
         }
     }
 
