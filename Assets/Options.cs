@@ -42,6 +42,7 @@ public class Options : MonoBehaviour {
         }
     }
     void BuildTheNextLevelStructure() {
+        /*
         if (buildManager.getUnitToBuild() != null)
         {
             Vector2 SelectedPosition = buildManager.getSelectedPosition();
@@ -59,6 +60,7 @@ public class Options : MonoBehaviour {
             gridMouse.propertiesMatrix[x, y] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gameObject, "Obstacle");
             //Debug.Log("Construiu na posição " + x + ", " + z);
         }
+        */
     }
 	
 }

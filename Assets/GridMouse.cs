@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(TileMap))]
@@ -28,7 +29,7 @@ public class GridMouse : MonoBehaviour {
     public bool[,] previewMatrix;
 
     [SerializeField]
-    public ArrayList arrayListOfGameObjects;
+    public List<GameObject> ListOfGameObjects;
 
     private Ray ray;
     private RaycastHit hitInfo;
@@ -71,7 +72,7 @@ public class GridMouse : MonoBehaviour {
         propertiesMatrix = new PropertyScript.Property[Mathf.FloorToInt(_gridSize.x),Mathf.FloorToInt(_gridSize.y)];
         previewMatrix = new bool[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
         //matrixOfGameObjects = new GameObject[Mathf.FloorToInt(_gridSize.x), Mathf.FloorToInt(_gridSize.y)];
-        arrayListOfGameObjects = new ArrayList();
+        ListOfGameObjects = new List<GameObject>();
 
         for (int k = 0; k < previewMatrix.GetLength(0); k++)
         {
@@ -114,19 +115,19 @@ public class GridMouse : MonoBehaviour {
             {
                 if (buildManager.getUnitToBuild() != null)
                 {
-                    GameObject gameObject = new GameObject();
-                    arrayListOfGameObjects.Add(gameObject);
+                    ListOfGameObjects.Add(gameObject);
+                    int AddedElmtIndex = ListOfGameObjects.Count - 1;
                     if (gameObject == null)
                     {
                         Debug.Log("Gameobject = NULL !!!");
-                        gameObject.GetComponent<BuildableController>().setArrayListPosition(arrayListOfGameObjects.Count);
+                        gameObject.GetComponent<BuildableController>().setArrayListPosition(AddedElmtIndex);
                     }
                     
                     //matrixOfGameObjects[x, z] = new GameObject();
                     //buildManager.BuildUnitOn(ref matrixOfGameObjects[x, z], position);
-                    buildManager.BuildUnitOn(ref gameObject, position);
+                    buildManager.BuildUnitOn(ref ListOfGameObjects,AddedElmtIndex, position);
                     //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
-                    propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gameObject, "Obstacle");
+                    //propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gameObject, "Obstacle");
                     Debug.Log("Construiu na posição " + x + ", " + z);
                     Debug.Log("Position = "+position);
                 }

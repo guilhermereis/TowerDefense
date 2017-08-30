@@ -15,6 +15,11 @@ public class DebugOptions : MonoBehaviour {
     {
 
         Debug.Log("Gonna destroy all !");
+        for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
+        {
+            Destroy(gridMouse.ListOfGameObjects[i]);
+        }
+        
     }
     
 }

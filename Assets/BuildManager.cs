@@ -66,7 +66,7 @@ public class BuildManager : MonoBehaviour {
         }
     }
 
-    public void BuildUnitOn(ref GameObject temp, Vector3 position)
+    public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position)
     {
         if (PlayerStats.Money < unitToBuild.cost)
         {
@@ -75,7 +75,7 @@ public class BuildManager : MonoBehaviour {
         }
         PlayerStats.Money -= unitToBuild.cost;
         
-        temp = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
+        tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
