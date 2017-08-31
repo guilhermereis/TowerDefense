@@ -19,7 +19,11 @@ public class SoldierCampController : BuildableController {
 	private EnemyOutOfReachDelegate enemyOutOfReach;
 	SetEnemyDelegate setEnemy;
 
+    public float spawnCountdown = 0;
+    //spawns soldiers each 2 seconds. 
+    public float spawnRate = 0.5f;
 	public Transform spawnPoint;
+
 
 	//default number of spawned soldiers
     public int soldiersCount = 3;
@@ -49,34 +53,35 @@ public class SoldierCampController : BuildableController {
 		IsUpgradable = true;
 		Defense = 2;
 		soldiersController = new List<SimpleSoldierController>();
-		float distance = 1.5f;
-		Vector3 spawnLocation = spawnPoint.position;
-		for (int i = 0; i < soldiersCount; i++)
-		{
-			spawnLocation += spawnPoint.transform.forward * distance;
-
-			GameObject soldier = Instantiate(simpleSoldierPrefab, spawnLocation, spawnPoint.rotation);
-			soldier.transform.parent = gameObject.transform;
-
-
-			SimpleSoldierController ssc = (SimpleSoldierController)soldier.GetComponent<SimpleSoldierController>();
-			//binding enemyOutOfReachDelegate
-			soldiersController.Add(ssc);
-
-		}
-		soldiersCount = soldiersController.Count;
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+        int soldiers = transform.childCount;
+        //spawns soldiers if there are enemies and is not above the soldiers limit
+        if(spawnCountdown <=0 && (enemies.Count > 0) && soldiersController.Count < soldiersCount )
+        {
+            InstantiateSoldiers();
+            spawnCountdown = 1 / spawnRate;
+        }
+
+        spawnCountdown -= Time.deltaTime;
 	}
 
 	public void InstantiateSoldiers()
 	{
-		//Instantiate<SimpleSoldierController>(simpleSoldier,transform.po)
-		//soldiersController
-	}
+      
+        //soldiersController
+        Vector3 spawnLocation = spawnPoint.position;
+        GameObject soldier = Instantiate(simpleSoldierPrefab, spawnLocation, spawnPoint.rotation);
+        soldier.transform.parent = gameObject.transform;
+        SimpleSoldierController ssc = (SimpleSoldierController)soldier.GetComponent<SimpleSoldierController>();
+       
+        soldiersController.Add(ssc);
+        ssc.SetTarget(enemies[0]);
+    }
 
 
     //when an enemy get in range;
@@ -84,20 +89,9 @@ public class SoldierCampController : BuildableController {
     {
 		if (!other.isTrigger)
 		{
-			if(other.gameObject.tag == "Enemy" && !other.isTrigger)
+			if(other.gameObject.tag == "Enemy")
 			{
 				enemies.Add(other.gameObject);
-				//bug.Log(enemies.LastIndexOf(other.gameObject));
-				if (enemies.Count > 1 && nextEnemy < soldiersCount -1)
-				{
-					soldiersController[nextEnemy].SetTarget(other.gameObject);
-					nextEnemy++;
-				
-				}
-				else
-				{
-					SetSoldierTarget(other.gameObject);
-				}
 			}
 		}
 
