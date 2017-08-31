@@ -8,6 +8,8 @@ public class Options : MonoBehaviour {
     GridMouse gridMouse;
     Shop shop;
 
+    
+
     // Use this for initialization
     void Start () {
         buildManager = BuildManager.instance;
@@ -15,6 +17,14 @@ public class Options : MonoBehaviour {
         shop = Shop.instance;
     }
 
+    public void coolRemoveAt(int position)
+    {
+        GameObject lastObject = gridMouse.ListOfGameObjects[gridMouse.ListOfGameObjects.Count - 1];
+        lastObject.GetComponent<BuildableController>().setArrayListPosition(position);
+        gridMouse.ListOfGameObjects[position] = lastObject;
+        gridMouse.ListOfGameObjects.RemoveAt(gridMouse.ListOfGameObjects.Count - 1);
+       
+    }
     public void Sell() {
 
         UnitBlueprint SelectedUnit = buildManager.getSelectedUnit();
@@ -25,7 +35,8 @@ public class Options : MonoBehaviour {
             string name = buildManager.getSelectedGameObject().name;
             BuildableController buildable = 
                 buildManager.getSelectedGameObject().GetComponent<BuildableController>();
-            gridMouse.ListOfGameObjects.RemoveAt(buildable.getArrayListPosition());
+            //gridMouse.ListOfGameObjects.RemoveAt(buildable.getArrayListPosition());
+            coolRemoveAt(buildable.getArrayListPosition());
             Destroy(buildManager.getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
             Debug.Log("Vendeu "+name);
