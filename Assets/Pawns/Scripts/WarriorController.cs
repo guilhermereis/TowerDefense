@@ -90,10 +90,11 @@ public class WarriorController : EnemyController {
 		if (other.gameObject.tag.Equals("Ally"))
 		{
 			enemiesInRange.Remove(other.gameObject);
-			if (target != null)
-				ChangeState(PawnState.FindTarget);
-			else { }
-			//	enemiesInRange.Remove(other.gameObject);
+            ChangeState(PawnState.Walking);
+			//if (target != null)
+			//	ChangeState(PawnState.FindTarget);
+			//else { }
+			////	enemiesInRange.Remove(other.gameObject);
 
 		}
 	}
