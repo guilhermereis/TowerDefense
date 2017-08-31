@@ -111,7 +111,9 @@ public class GridMouse : MonoBehaviour {
         //Debug.Log("Mouse Down");
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
