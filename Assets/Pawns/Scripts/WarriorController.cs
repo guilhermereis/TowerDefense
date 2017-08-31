@@ -35,13 +35,19 @@ public class WarriorController : EnemyController {
 			if (attackCountdown <= 0)
 			{
 				Debug.DrawLine(transform.position, target.transform.position);
-				if (target.GetComponent<PawnCharacter>().Damage(character.attack))
-				{
-					enemiesInRange.Remove(target);
-					target.GetComponent<PawnCharacter>().OnDying();
-					target = null;
-				}
-				attackCountdown = 1 / character.attackRate;
+                if (target.tag == "Ally")
+                {
+                    if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+                    {
+                        enemiesInRange.Remove(target);
+                        target.GetComponent<PawnCharacter>().OnDying();
+                        target = null;
+                    }
+                }
+                else if (target.tag == "Castle")
+                    target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
+
+                attackCountdown = 1 / character.attackRate;
 			}
 
 		}
@@ -71,7 +77,11 @@ public class WarriorController : EnemyController {
 		{
 			enemiesInRange.Add(other.gameObject);
 			//Debug.Break();
-		}
+		}else if (other.gameObject.tag == "Castle")
+        {
+            target = other.gameObject;
+            ChangeState(PawnState.Battle);
+        }
 	}
 
 	protected override void OnTriggerExit(Collider other)

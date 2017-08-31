@@ -6,24 +6,24 @@ public class GameController : MonoBehaviour {
     [HideInInspector]
     public enum GameState { Preparation, BeginWave, Action ,EndWave, GameOver }
 
-    public GameState gameState;
+    public static GameState gameState;
     bool game_over = false;
-
-    public static GameController gc; 
+    
+    
 
     public float preparationTime = 30.0f;
     float countDown;
 
     // Use this for initialization
     void Start () {
-        gc = this;
         gameState = GameState.Preparation;
         countDown = preparationTime;
-        
+       
 	}
 
-    public void ChangeGameState(GameState newState)
+    public static void ChangeGameState(GameState newState)
     {
+        Debug.Log(newState);
         if (gameState != newState)
             gameState = newState;
     }
@@ -37,7 +37,8 @@ public class GameController : MonoBehaviour {
                 ChangeGameState(GameState.BeginWave);
             }
             countDown -= Time.deltaTime;
-        }else if(gameState == GameState.GameOver)
+        }
+        else if(gameState == GameState.GameOver)
         {
             if (!game_over) {
                 Debug.Log("Game Over Man");

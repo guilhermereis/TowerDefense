@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class WandererController : EnemyController
 {
-    private GameObject offender;
+    
+    public float attackCountdown = 0f;
+    private WandererCharacter character;
 
 
 	private void Start()
 	{
-		weight = 1;	
+		weight = 1;
+        character = GetComponent<WandererCharacter>();
 	}
 
 	protected override void Awake()
@@ -32,6 +35,17 @@ public class WandererController : EnemyController
     public override void OnBattle()
     {
         base.OnBattle();
+        if (target != null)
+        {
+            if (attackCountdown <= 0)
+            {
+                target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
+                attackCountdown = 1 / character.attackRate;
+            }
+            attackCountdown -= Time.deltaTime;
+        }
+
+
     }
 
 
@@ -51,6 +65,9 @@ public class WandererController : EnemyController
                 speed = 1;
             
             }
+        }else if(other.gameObject.tag == "Castle")
+        {
+            target = other.gameObject;
         }
 
         //base.OnTriggerEnter(other);

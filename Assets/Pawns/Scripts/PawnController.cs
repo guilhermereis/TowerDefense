@@ -137,6 +137,9 @@ public class PawnController : MonoBehaviour {
                 //Debug.Log("Going Home");
             }
         }
+
+        if (GameController.gameState == GameController.GameState.GameOver)
+            ChangeState(PawnState.Idle);
 	}
 
     public virtual void OnMoving() { }

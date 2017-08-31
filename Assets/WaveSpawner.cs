@@ -28,14 +28,14 @@ public class WaveSpawner : MonoBehaviour {
 
     private void Update()
     {
-        if(GameController.gc.gameState == GameController.GameState.BeginWave)
+        if(GameController.gameState == GameController.GameState.BeginWave)
         {
             CreateWave();
-            GameController.gc.ChangeGameState(GameController.GameState.Action);
+           
         }
-        if( transform.childCount == 0 && GameController.gc.gameState == GameController.GameState.Action)
+        if( transform.childCount == 0 && GameController.gameState == GameController.GameState.Action)
         {
-            GameController.gc.ChangeGameState(GameController.GameState.EndWave);
+            GameController.ChangeGameState(GameController.GameState.EndWave);
         }
         
         if(isWaving)
@@ -55,11 +55,7 @@ public class WaveSpawner : MonoBehaviour {
        
     }
     
-    private IEnumerator WaitandSpawn(int monsterIndex)
-    {
-        yield return new WaitForSeconds(3);
-
-    }
+   
 
 	void BeginSpawn()
 	{
@@ -69,13 +65,17 @@ public class WaveSpawner : MonoBehaviour {
             int monsterIndex = combination[spawningMonster] - 1;
             GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocation.position, Quaternion.identity);
             monsterBatch.Add(monster);
+
             monster.transform.parent = transform;
             spawningMonster++;
             timer = spawnTimer;
 
         }
         if (spawningMonster >= combination.Length)
+        {
             isWaving = false;
+            GameController.ChangeGameState(GameController.GameState.Action);
+        }
 
         timer -= Time.deltaTime;
 

@@ -51,12 +51,19 @@ public class DestroyerController : EnemyController {
 			{
 				
 				Debug.DrawLine(transform.position, target.transform.position);
-				//we are goint to apply damage to target and if the target is dead, we are going to
-				//tell the camp and so the camp can gives another target or we're going back
-				if (target.GetComponent<BuildableController>().Damage(character.attack))
-				{
-					target = null;
-				}
+                //we are goint to apply damage to target and if the target is dead, we are going to
+                //tell the camp and so the camp can gives another target or we're going back
+                if(target.tag == "Build")
+                {
+                    if (target.GetComponent<BuildableController>().Damage(character.attack))
+				    {
+					    target = null;
+				    }
+
+                }else if( target.tag == "Castle")
+                {
+                    target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
+                }
 
 				attackCountdown = 1 / character.attackRate;
 			}
@@ -81,7 +88,11 @@ public class DestroyerController : EnemyController {
 			target = other.gameObject;
 			ChangeState(PawnState.Destroying);
 
-		}
+		}else if( other.gameObject.tag.Equals("Castle"))
+        {
+            target = other.gameObject;
+            ChangeState(PawnState.Battle);
+        }
 	}
 
 	protected override void OnTriggerExit(Collider other)
