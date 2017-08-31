@@ -61,6 +61,10 @@ public class GridMouse : MonoBehaviour {
         }
         instance = this;
     }
+    public Vector2 getGridSize()
+    {
+        return _gridSize;
+    }
     public void UpdateGrid()
     {
 

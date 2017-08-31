@@ -25,6 +25,7 @@ public class DebugOptions : MonoBehaviour
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
             Destroy(gridMouse.ListOfGameObjects[i]);
+            //gridMouse.ListOfGameObjects.RemoveAt(i);
         }
 
     }
@@ -52,7 +53,13 @@ public class DebugOptions : MonoBehaviour
             if (listOfStates[i].structureName == "Tower(Clone)")
             {
                 shop.SelectStandardUnit();
-                gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position);
+                Vector2 gridSize = gridMouse.getGridSize();
+                int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
+                int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
+
+                gridMouse.propertiesMatrix[x,z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
             else

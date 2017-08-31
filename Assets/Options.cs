@@ -23,6 +23,9 @@ public class Options : MonoBehaviour {
             PlayerStats.Money += SelectedUnit.sell_cost;
             Debug.Log("Sold for " + SelectedUnit.sell_cost + ". Current Money: " + PlayerStats.Money);
             string name = buildManager.getSelectedGameObject().name;
+            BuildableController buildable = 
+                buildManager.getSelectedGameObject().GetComponent<BuildableController>();
+            gridMouse.ListOfGameObjects.RemoveAt(buildable.getArrayListPosition());
             Destroy(buildManager.getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
             Debug.Log("Vendeu "+name);
