@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 public class PropertyScript  {
     [System.Serializable]
     public struct Property
@@ -7,11 +8,11 @@ public class PropertyScript  {
         public UnitBlueprint unit;
         public GameObject builtGameObject;
 
-        public Property(UnitBlueprint _unit, ref GameObject _builtGameObject, string _type = "Normal")
+        public Property(UnitBlueprint _unit, ref List<GameObject> ListOfGameObjects, int indexOfBuiltGameObject,string _type = "Normal")
         {
             type = _type;
             unit = _unit;
-            builtGameObject = _builtGameObject;
+            builtGameObject = ListOfGameObjects[indexOfBuiltGameObject];
         }
     }
 
