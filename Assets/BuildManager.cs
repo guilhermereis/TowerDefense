@@ -10,6 +10,7 @@ public class BuildManager : MonoBehaviour {
     private UnitBlueprint unitToBuild;
     private UnitBlueprint selectedUnit;
     private Vector2 selectedPosition;
+    private GameObject selectedGameObject;
 
     void Awake()
     {
@@ -75,18 +76,36 @@ public class BuildManager : MonoBehaviour {
         }
         PlayerStats.Money -= unitToBuild.cost;
         */
-
+        
         tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
+        tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
+        tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
 
-    public void SelectBuilding(UnitBlueprint unit,Vector2 position)
+    public void SelectBuilding(UnitBlueprint unit, Vector2 position)
     {
         unitToBuild = null;
         //if (selectedUnit == unit)
         selectedUnit = unit;
         selectedPosition = position;
+    }
+    public void SelectBuilding(int indexOfSelectedObject)
+    {
+        unitToBuild = null;
+
+        GridMouse gridMouse = GridMouse.instance;
+        BuildableController buildable =
+                gridMouse.ListOfGameObjects[indexOfSelectedObject].GetComponent<BuildableController>();
+        
+        //if (selectedUnit == unit)
+        selectedUnit = buildable.getUnitBlueprint();
+        selectedGameObject = gridMouse.ListOfGameObjects[indexOfSelectedObject];
+        //selectedPosition = position;
+    }
+    public GameObject getSelectedGameObject() {
+        return selectedGameObject;
     }
     public void ShowOptions()
     {

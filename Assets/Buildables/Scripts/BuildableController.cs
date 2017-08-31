@@ -12,6 +12,7 @@ public class BuildableController : MonoBehaviour {
 	private float maxHealth = 100;
 	private bool isUpgradable;
     private int arrayListPosition;
+    private UnitBlueprint unitBlueprint;
 	public HealthState currentHealthState = HealthState.good;
 
 
@@ -27,6 +28,14 @@ public class BuildableController : MonoBehaviour {
     public int getArrayListPosition()
     {
         return arrayListPosition;
+    }
+    public void setUnitBlueprint(UnitBlueprint _unitBlueprint)
+    {
+        unitBlueprint = _unitBlueprint;
+    }
+    public UnitBlueprint getUnitBlueprint()
+    {
+        return unitBlueprint;
     }
     public float Defense
 	{

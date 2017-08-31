@@ -20,14 +20,12 @@ public class Options : MonoBehaviour {
         UnitBlueprint SelectedUnit = buildManager.getSelectedUnit();
         if (SelectedUnit != null)
         {
-            Vector2 SelectedPosition = buildManager.getSelectedPosition();
             PlayerStats.Money += SelectedUnit.sell_cost;
             Debug.Log("Sold for " + SelectedUnit.sell_cost + ". Current Money: " + PlayerStats.Money);
-            int x = Mathf.FloorToInt(SelectedPosition.x);
-            int y = Mathf.FloorToInt(SelectedPosition.y);
-            Destroy(gridMouse.propertiesMatrix[x, y].builtGameObject);
+            string name = buildManager.getSelectedGameObject().name;
+            Destroy(buildManager.getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
-            Debug.Log("Vendeu a posição: " + x + ", " + y);
+            Debug.Log("Vendeu "+name);
         }
     }
     public void Upgrade() {
@@ -57,7 +55,7 @@ public class Options : MonoBehaviour {
             //destroys the current object
             Destroy(gridMouse.propertiesMatrix[x, y].builtGameObject);
             int added_index = gridMouse.buildUnitAndAddItToTheList(position);
-            gridMouse.propertiesMatrix[x, y] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+            //gridMouse.propertiesMatrix[x, y] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
         }
         
     }
