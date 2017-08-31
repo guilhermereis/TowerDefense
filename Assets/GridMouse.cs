@@ -61,6 +61,10 @@ public class GridMouse : MonoBehaviour {
         }
         instance = this;
     }
+    public Vector2 getGridSize()
+    {
+        return _gridSize;
+    }
     public void UpdateGrid()
     {
 
@@ -107,13 +111,51 @@ public class GridMouse : MonoBehaviour {
         //Debug.Log("Mouse Down");
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             position = CoordToPosition(x, z);
             //Debug.Log("x: " + x + ", z: " + z);
+
+
+            //If I hit a Tower
+            if (hitInfo.transform.gameObject.name == "Tower(Clone)")
+            {
+                BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
+                buildManager.SelectBuilding(buildable.getArrayListPosition());
+            }
+            //If I hit the Grid
+            if (hitInfo.transform.gameObject.name == "Grid")
+            {
+                if (propertiesMatrix[x, z].unit != null)
+                {
+
+                    buildManager.SelectBuilding(propertiesMatrix[x, z].unit, propertiesMatrix[x, z].builtGameObject);
+                    buildManager.ShowOptions();
+                    Debug.Log("Selecionou a posição: " + x + ", " + z);
+                    //Destroy(hitInfo.transform.gameObject);
+                }
+                else
+                {
+                    if (buildManager.getUnitToBuild() != null)
+                    {
+                        int added_index = buildUnitAndAddItToTheList(position);
+                        propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                        Debug.Log("Construiu na posição " + x + ", " + z);
+                        Debug.Log("Position = " + position);
+                    }
+                    else
+                    {
+                        buildManager.HideOptions();
+                        Debug.Log("Hide Options");
+                    }
+                }
+            }
+            /*
             if (propertiesMatrix[x, z].unit != null)
             {
                 buildManager.SelectBuilding(propertiesMatrix[x, z].unit, new Vector2(x,z));
@@ -126,7 +168,7 @@ public class GridMouse : MonoBehaviour {
                 if (buildManager.getUnitToBuild() != null)
                 {
                     int added_index = buildUnitAndAddItToTheList(position);
-                    propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects,added_index, "Obstacle");
+                    //propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects,added_index, "Obstacle");
                     Debug.Log("Construiu na posição " + x + ", " + z);
                     Debug.Log("Position = "+position);
                 }
@@ -136,6 +178,7 @@ public class GridMouse : MonoBehaviour {
                     Debug.Log("Hide Options");
                 }
             }
+            */
         }
     }
     public int buildUnitAndAddItToTheList(Vector3 myPosition) {
@@ -143,7 +186,6 @@ public class GridMouse : MonoBehaviour {
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition);
-        ListOfGameObjects[AddedElmtIndex].GetComponent<BuildableController>().setArrayListPosition(AddedElmtIndex);
         return AddedElmtIndex;
     }
 	void Update () {

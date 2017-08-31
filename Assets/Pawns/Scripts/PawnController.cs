@@ -66,7 +66,7 @@ public class PawnController : MonoBehaviour {
 	protected bool IsAtLocation()
 	{
 		float dist = nav.remainingDistance;
-        Debug.Log(dist);
+        //Debug.Log(dist);
 		if (!nav.pathPending)
 		{
 			if(nav.remainingDistance <= nav.stoppingDistance)
