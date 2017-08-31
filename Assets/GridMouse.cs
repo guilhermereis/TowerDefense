@@ -125,10 +125,8 @@ public class GridMouse : MonoBehaviour {
             {
                 if (buildManager.getUnitToBuild() != null)
                 {
-                    buildUnitAndAddItToTheList(position);
-                    
-                    //Transform newObstacleCube = Instantiate(obstacleCube, position, Quaternion.identity) as Transform;
-                    //propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gameObject, "Obstacle");
+                    int added_index = buildUnitAndAddItToTheList(position);
+                    propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects,added_index, "Obstacle");
                     Debug.Log("Construiu na posição " + x + ", " + z);
                     Debug.Log("Position = "+position);
                 }
@@ -140,12 +138,13 @@ public class GridMouse : MonoBehaviour {
             }
         }
     }
-    public void buildUnitAndAddItToTheList(Vector3 myPosition) {
+    public int buildUnitAndAddItToTheList(Vector3 myPosition) {
         ListOfGameObjects.Add(new GameObject());
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition);
         ListOfGameObjects[AddedElmtIndex].GetComponent<BuildableController>().setArrayListPosition(AddedElmtIndex);
+        return AddedElmtIndex;
     }
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
