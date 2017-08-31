@@ -28,6 +28,7 @@ public class DebugOptions : MonoBehaviour
             Destroy(gridMouse.ListOfGameObjects[i]);
             //gridMouse.ListOfGameObjects.RemoveAt(i);
         }
+        gridMouse.ListOfGameObjects.Clear();
         Debug.Log("SIZEEEE: " + gridMouse.ListOfGameObjects.Count);
 
     }
