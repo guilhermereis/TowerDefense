@@ -5,11 +5,12 @@ using UnityEngine;
 public class DebugOptions : MonoBehaviour
 {
 
+
     GridMouse gridMouse;
     BuildManager buildManager;
     List<PropertyScript.StructureState> listOfStates;
     Shop shop;
-
+    
     void Start()
     {
         gridMouse = GridMouse.instance;
@@ -27,6 +28,7 @@ public class DebugOptions : MonoBehaviour
             Destroy(gridMouse.ListOfGameObjects[i]);
             //gridMouse.ListOfGameObjects.RemoveAt(i);
         }
+        Debug.Log("SIZEEEE: " + gridMouse.ListOfGameObjects.Count);
 
     }
     public void doSaveAll()
