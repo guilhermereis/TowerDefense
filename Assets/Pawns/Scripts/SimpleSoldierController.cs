@@ -73,7 +73,11 @@ public class SimpleSoldierController : PawnController {
         base.OnIdle();
     }
 
-    
+    public override void OnHoming()
+    {
+        base.OnHoming();
+        anim.setIsAttacking(false);
+    }
 
     public override void OnBattle()
     {
@@ -88,17 +92,17 @@ public class SimpleSoldierController : PawnController {
 				//swordHit.Play();
 				Debug.DrawLine(transform.position, target.transform.position);
 				//we are goint to apply damage to target and if the target is dead, we are going to
-				//tell the camp and so the camp can gives another target or we're going back
+				//tell the camp and so the camp can gives another target or we're going back home.
 				if (target.GetComponent<PawnCharacter>().Damage(character.attack))
 				{
-					target = null;
-					camp.UpdateEnemies(target);
                     target.GetComponent<PawnCharacter>().OnDying();
+					camp.UpdateEnemies(target);
+					target = null;
                 }
 					
 				attackCountdown = 1 / character.attackRate;
 			}else
-				anim.setIsAttacking(true);
+				anim.setIsAttacking(false);
 		}
 		else
             ChangeState(PawnState.Homing);

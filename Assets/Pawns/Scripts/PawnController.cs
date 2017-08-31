@@ -139,13 +139,13 @@ public class PawnController : MonoBehaviour {
         else if(currentState == PawnState.Homing)
         {
             Vector3 tolerance = homePosition - transform.position;
-            if (homePosition == transform.position || tolerance.magnitude < 0.5)
-                ChangeState(PawnState.Idle);
-            else
+            nav.SetDestination(homePosition);
+            if (IsAtLocation())
             {
-                nav.SetDestination(homePosition);
-                //Debug.Log("Going Home");
+               ChangeState(PawnState.Idle);
+
             }
+            
         }
 
         if (GameController.gameState == GameController.GameState.GameOver)
@@ -160,6 +160,8 @@ public class PawnController : MonoBehaviour {
     {
 
     }
+
+    public virtual void OnHoming() { }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
