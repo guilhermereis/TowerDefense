@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour {
 
 	private GameObject target;
-	private float speed = 30f;
+	private float speed = 4f;
 	private float towerAttack;
 
 	public GameObject Target
