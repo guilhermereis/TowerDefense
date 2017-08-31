@@ -18,6 +18,8 @@ public class PawnController : MonoBehaviour {
     protected NavMeshAgent nav;
     public float speed;
 
+    public Vector3 currentDestination;
+
     public GameObject target;
 
     //used for allied troopers
@@ -64,6 +66,7 @@ public class PawnController : MonoBehaviour {
 	protected bool IsAtLocation()
 	{
 		float dist = nav.remainingDistance;
+        Debug.Log(dist);
 		if (!nav.pathPending)
 		{
 			if(nav.remainingDistance <= nav.stoppingDistance)
@@ -87,23 +90,17 @@ public class PawnController : MonoBehaviour {
         }else if (currentState == PawnState.Walking)
         {
 			nav.isStopped = false;
-           
-            
-           
-            if (IsAtLocation())
+
+            //to fix
+            if (nextWaypoint < waypoints.Count)
             {
-               
-
-                if (nextWaypoint < waypoints.Count)
-                {
-                    nav.SetDestination(waypoints[nextWaypoint].position);
-                    nextWaypoint++;
-                }
-                else
-                    ChangeState(PawnState.Battle);
-
-                
+                currentDestination = waypoints[nextWaypoint].position;
+                nav.SetDestination(currentDestination);
             }
+
+
+            if (IsAtLocation())
+                nextWaypoint++;
 			
 
         }else if(currentState == PawnState.Battle)
@@ -114,8 +111,21 @@ public class PawnController : MonoBehaviour {
         {
             if (target != null)
             {
-                if (nav!=null)
+                if (nav != null)
+                {
                     nav.SetDestination(target.transform.position);
+                    //if(nav.hasPath)
+                    //else
+                    //{
+                    //    if (gameObject.tag == "Ally")
+                    //        //ChangeState(PawnState.Homing);
+                    //        Debug.Log("");
+                    //    else
+                    //        ChangeState(PawnState.Walking);
+                         
+                    //}
+                   
+                }
 
             }
 			else

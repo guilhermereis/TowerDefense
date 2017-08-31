@@ -93,7 +93,8 @@ public class SimpleSoldierController : PawnController {
 				{
 					target = null;
 					camp.UpdateEnemies(target);
-				}
+                    target.GetComponent<PawnCharacter>().OnDying();
+                }
 					
 				attackCountdown = 1 / character.attackRate;
 			}else
