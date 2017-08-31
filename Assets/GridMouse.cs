@@ -128,7 +128,7 @@ public class GridMouse : MonoBehaviour {
                 if (propertiesMatrix[x, z].unit != null)
                 {
 
-                    buildManager.SelectBuilding(propertiesMatrix[x, z].unit, new Vector2(x, z));
+                    buildManager.SelectBuilding(propertiesMatrix[x, z].unit, propertiesMatrix[x, z].builtGameObject);
                     buildManager.ShowOptions();
                     Debug.Log("Selecionou a posição: " + x + ", " + z);
                     //Destroy(hitInfo.transform.gameObject);

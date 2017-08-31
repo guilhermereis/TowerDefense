@@ -84,12 +84,14 @@ public class BuildManager : MonoBehaviour {
     }
 
 
-    public void SelectBuilding(UnitBlueprint unit, Vector2 position)
+    //public void SelectBuilding(UnitBlueprint unit, Vector2 position)
+    public void SelectBuilding(UnitBlueprint unit, GameObject gameObject)
     {
         unitToBuild = null;
         //if (selectedUnit == unit)
         selectedUnit = unit;
-        selectedPosition = position;
+        selectedGameObject = gameObject;
+        selectedPosition = gameObject.transform.position;
     }
     public void SelectBuilding(int indexOfSelectedObject)
     {
