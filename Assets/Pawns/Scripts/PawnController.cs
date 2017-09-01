@@ -71,10 +71,11 @@ public class PawnController : MonoBehaviour {
 		{
 			if(nav.remainingDistance <= nav.stoppingDistance)
 			{
-				if(!nav.hasPath || nav.velocity.magnitude == 0f)
-				{
-					return true;
-				}
+                return true;
+				//if(!nav.hasPath || nav.velocity.magnitude == 0f)
+				//{
+				//	return true;
+				//}
 			}
 		}
 		return false;
