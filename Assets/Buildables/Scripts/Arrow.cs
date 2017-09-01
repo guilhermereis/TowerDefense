@@ -61,7 +61,7 @@ public class Arrow : MonoBehaviour {
 	{
 		if (other.gameObject.tag.Equals("Enemy"))
 		{
-			if(other.gameObject != null)
+			if(other.gameObject != null && other.gameObject == target)
 			{
 				if (other.gameObject.GetComponent<PawnCharacter>().Damage(TowerAttack))
 				{
