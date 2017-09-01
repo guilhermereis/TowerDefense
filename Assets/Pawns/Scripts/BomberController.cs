@@ -56,8 +56,10 @@ public class BomberController : EnemyController {
         {
             other.gameObject.GetComponent<CastleHealth>().ApplyDamage(character.attack);
             Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
+            //Camera.main.GetComponent<CameraShake>().PlayShake();
             if (character.Damage(character.health))
                 character.OnDying();
+
         }
     }
     protected override void OnTriggerExit(Collider other)
