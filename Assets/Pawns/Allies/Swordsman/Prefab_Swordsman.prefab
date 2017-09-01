@@ -155,8 +155,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4622179924033480}
   - component: {fileID: 95423733610828344}
-  - component: {fileID: 114791708465306216}
   - component: {fileID: 114123685337657396}
+  - component: {fileID: 135932757767017460}
+  - component: {fileID: 136018193701499332}
+  - component: {fileID: 195546703763988072}
+  - component: {fileID: 114505588522171296}
+  - component: {fileID: 114057594854989394}
+  - component: {fileID: 114871323391049772}
+  - component: {fileID: 82339152171786462}
   m_Layer: 0
   m_Name: Prefab_Swordsman
   m_TagString: Untagged
@@ -1393,7 +1399,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1116111874419370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.3246512, y: 0.5, z: -11.24}
+  m_LocalPosition: {x: -0.4173818, y: -1.000002, z: -16.57088}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4218859135301054}
@@ -1680,6 +1686,86 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1743569325608934}
   m_Mesh: {fileID: 4300000, guid: 4aad63df56caeb64bab74240b7215096, type: 3}
+--- !u!82 &82339152171786462
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1116111874419370}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 54f7ec8171e21354787a91763342aeee, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95423733610828344
 Animator:
   serializedVersion: 3
@@ -1710,6 +1796,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attachSocket: {fileID: 1953671685502204}
   characterWhoWields: {fileID: 1116111874419370}
+--- !u!114 &114057594854989394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1116111874419370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d635517253f9364a99a22aebc8b57c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  finalDestination: {fileID: 0}
+  speed: 5
+  currentDestination: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
+  homePosition: {x: 0, y: 0, z: 0}
+  waypoints: []
+  camp: {fileID: 0}
+  attackCountdown: 0
 --- !u!114 &114123685337657396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1724,7 +1830,7 @@ MonoBehaviour:
   animInstance: {fileID: 95423733610828344}
   isAttacking: 0
   speed: 0
---- !u!114 &114791708465306216
+--- !u!114 &114505588522171296
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1732,12 +1838,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116111874419370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe2ee132a3119574282f99d34158d5cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 801eab7732faa5d45936f70416d7f569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animInstance: {fileID: 0}
-  isAttacking: 0
-  speed: 0
+  maxHealth: 1000
+  health: 1000
+  defense: 5
+  attack: 100
+  attackRate: 0.5
+  isDying: 0
+  healthBar: {fileID: 0}
+--- !u!114 &114871323391049772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1116111874419370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb336695bcc10b74d888f295f14b653a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tex: {fileID: 10904, guid: 0000000000000000f000000000000000, type: 0}
+  hpBarPrefab: {fileID: 1419856877115170, guid: 851d77b0ff520d442af9944588f5321e,
+    type: 2}
+  canvas: {fileID: 0}
+--- !u!135 &135932757767017460
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1116111874419370}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 1.22, z: 0}
+--- !u!136 &136018193701499332
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1116111874419370}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.32
+  m_Height: 2.07
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.98, z: 0}
 --- !u!137 &137077332589043650
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1816,3 +1966,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -37.942024, y: 8.646633, z: 0}
     m_Extent: {x: 101.119194, y: 28.390469, z: 109.16023}
   m_DirtyAABB: 0
+--- !u!195 &195546703763988072
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1116111874419370}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 160
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

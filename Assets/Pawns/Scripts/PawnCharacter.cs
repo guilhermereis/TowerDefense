@@ -11,7 +11,7 @@ public class PawnCharacter : MonoBehaviour {
     public bool isDying;
 	public PawnHealthBarGUI healthBar;
 
-
+    
 
 	private void Awake()
 	{
@@ -23,6 +23,7 @@ public class PawnCharacter : MonoBehaviour {
 	private void Start()
 	{
 		healthBar = (PawnHealthBarGUI)GetComponent<PawnHealthBarGUI>();
+        
 		
 	}
 
@@ -34,8 +35,8 @@ public class PawnCharacter : MonoBehaviour {
 
     public virtual bool Damage(float _damage)
     {
-
-		float realDamage = _damage - defense;
+        gameObject.GetComponent<AudioSource>().Play();
+        float realDamage = _damage - defense;
 		if (realDamage < 0)
 			realDamage = 0;
         health -= realDamage;
