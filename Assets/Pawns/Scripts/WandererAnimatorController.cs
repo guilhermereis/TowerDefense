@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WandererAnimatorController : MonoBehaviour {
-    public Animator animInstance;
+    private Animator anim;
 
     public bool isAttacking = false;
     public float speed = 0f;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        anim = (Animator)GetComponent<Animator>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (animInstance)
+        
+        if (anim)
         {
-            animInstance.SetBool("IsAttacking", isAttacking);
-            animInstance.SetFloat("Speed", speed / 4f);
+            anim.SetBool("IsAttacking", isAttacking);
+            anim.SetFloat("Speed", speed);
         }
     }
 }
