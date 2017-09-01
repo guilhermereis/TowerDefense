@@ -23,10 +23,18 @@ public class PawnHealthBarGUI : MonoBehaviour {
 
 	private void Start()
 	{
+        Canvas[] canvasArray = FindObjectsOfType<Canvas>();
+        for (int i = 0; i < canvasArray.Length; i++)
+        {
+            if (canvasArray[i].tag.Equals("canvas"))
+            {
+               
+                canvas = canvasArray[i];
+                break;
+            }
+        }
 
-		canvas = FindObjectOfType<Canvas>();
-
-		Healthbar = Instantiate<GameObject>(hpBarPrefab);
+        Healthbar = Instantiate<GameObject>(hpBarPrefab);
 		if(Healthbar != null)
 		{
 			Healthbar.transform.SetParent(canvas.transform, false);
@@ -40,7 +48,10 @@ public class PawnHealthBarGUI : MonoBehaviour {
 	{
 		
         if(Healthbar != null)
-		    Healthbar.transform.position = (Vector3.up * 2) + transform.position;// Camera.main.WorldToScreenPoint((Vector3.up * 3) + transform.position);
+        {
+		    Healthbar.transform.position = (transform.up* 2) + transform.position;// Camera.main.WorldToScreenPoint((Vector3.up * 3) + transform.position);
+            Healthbar.transform.rotation = Camera.main.transform.rotation;
+        }
 	}
 
 	public void UpdateHealthBar(float health,float maxHealth)
