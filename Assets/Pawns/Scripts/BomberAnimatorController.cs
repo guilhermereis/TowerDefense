@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WandererAnimatorController : MonoBehaviour {
+public class BomberAnimatorController : MonoBehaviour {
     private Animator anim;
 
     public bool isAttacking = false;
