@@ -39,6 +39,10 @@ public class BuildManager : MonoBehaviour {
     {
         return selectedUnit;
     }
+    public void DeselectSelectedUnit()
+    {
+        selectedUnit = null;
+    }
 
     public Vector2 getSelectedPosition()
     {

@@ -48,8 +48,8 @@ public class Options : MonoBehaviour {
             {
                 buildManager.SelectUnitToBuild(shop.towerLevel2);
                 BuildTheNextLevelStructure();
-                buildManager.SelectUnitToBuild(shop.standardUnit);
                 buildManager.DeselectUnitToBuild();
+                buildManager.DeselectSelectedUnit();
                 Debug.Log("Upgraded unit: " + "Tower");
             }
             else
