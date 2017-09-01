@@ -71,8 +71,8 @@ public class TowerController : BuildableController {
 			enemies.Add(other.gameObject);
 			if(target == null)
 			{
-				int index = enemies.FindIndex(t=> t.GetInstanceID() == other.gameObject.GetInstanceID());
-				enemies.RemoveAt(index);
+				//int index = enemies.FindIndex(t=> t.GetInstanceID() == other.gameObject.GetInstanceID());
+				//enemies.RemoveAt(index);
 				target = other.gameObject;
 			}
 		}
@@ -82,13 +82,12 @@ public class TowerController : BuildableController {
 
 	private void OnTriggerExit(Collider other)
 	{
-		if(other.gameObject == target)
+        enemies.Remove(other.gameObject);
+        if (other.gameObject == target)
 		{
-			if(enemies.Count > 0)
-			{
-				target = enemies[0];
-				enemies.RemoveAt(0);
-			}else
+            if (enemies.Count > 0)
+                target = enemies[0];
+            else
 				target = null;
 		}
 
