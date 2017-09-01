@@ -7,13 +7,15 @@ public class WandererController : EnemyController
     
     public float attackCountdown = 0f;
     private WandererCharacter character;
+    private WandererAnimatorController anim;
 
 
 	private void Start()
 	{
 		weight = 1;
         character = GetComponent<WandererCharacter>();
-	}
+        anim = (WandererAnimatorController)GetComponent<WandererAnimatorController>();
+    }
 
 	protected override void Awake()
     {
@@ -52,7 +54,8 @@ public class WandererController : EnemyController
     // Update is called once per frame
     protected override void Update () {
         base.Update();
-	}
+        anim.speed = nav.velocity.magnitude;
+    }
 
     protected override void OnTriggerEnter(Collider other)
     {
