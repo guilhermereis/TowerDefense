@@ -48,6 +48,7 @@ public class Options : MonoBehaviour {
             {
                 buildManager.SelectUnitToBuild(shop.towerLevel2);
                 BuildTheNextLevelStructure();
+                buildManager.SelectUnitToBuild(shop.standardUnit);
                 buildManager.DeselectUnitToBuild();
                 Debug.Log("Upgraded unit: " + "Tower");
             }
@@ -62,12 +63,14 @@ public class Options : MonoBehaviour {
         
         if (buildManager.getUnitToBuild() != null)
         {
-            Vector2 SelectedPosition = buildManager.getSelectedPosition();
-            int x = Mathf.FloorToInt(SelectedPosition.x);
-            int y = Mathf.FloorToInt(SelectedPosition.y);
-            Vector3 position = gridMouse.CoordToPosition(x, y);
+
+            Vector2 gridSize = gridMouse.getGridSize();
+            Vector3 SelectedPosition = buildManager.getSelectedGameObject().transform.position;
+            int x = Mathf.FloorToInt(SelectedPosition.x + gridSize.x / 2);
+            int z = Mathf.FloorToInt(SelectedPosition.z + gridSize.y / 2);
+            Vector3 position = gridMouse.CoordToPosition(x, z);
             //destroys the current object
-            Destroy(gridMouse.propertiesMatrix[x, y].builtGameObject);
+            Destroy(gridMouse.propertiesMatrix[x, z].builtGameObject);
             int added_index = gridMouse.buildUnitAndAddItToTheList(position);
             //gridMouse.propertiesMatrix[x, y] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
         }
