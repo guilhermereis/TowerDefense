@@ -41,7 +41,6 @@ public class WandererController : EnemyController
         {
             if (attackCountdown <= 0)
             {
-                Debug.Log("HAHAHAHA");
                 anim.setIsAttacking(true);
                 target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
                 attackCountdown = 1 / character.attackRate;
