@@ -41,6 +41,7 @@ public class WandererController : EnemyController
         {
             if (attackCountdown <= 0)
             {
+                anim.setIsAttacking(true);
                 target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
                 attackCountdown = 1 / character.attackRate;
             }
@@ -71,6 +72,7 @@ public class WandererController : EnemyController
         }else if(other.gameObject.tag == "Castle")
         {
             target = other.gameObject;
+            ChangeState(PawnState.Battle);
         }
 
         //base.OnTriggerEnter(other);
