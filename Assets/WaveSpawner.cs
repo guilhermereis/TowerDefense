@@ -10,10 +10,11 @@ public class WaveSpawner : MonoBehaviour {
 
     private Wave currentWave;
     public int waveNumber = 1;
+    public float waveProgression = 0;
 
     public Transform spawnLocation;
-
     bool isWaving = false;
+   
     float spawnTimer = 2f;
     float timer = 0;
     int[] combination;
@@ -30,24 +31,32 @@ public class WaveSpawner : MonoBehaviour {
     {
         if(GameController.gameState == GameController.GameState.BeginWave)
         {
-            CreateWave();
-           
+            if (!isWaving)
+            {
+                CreateWave();
+            }
+            else
+            {
+                waveProgression = spawningMonster / combination.Length;
+                //Debug.Log(waveProgression);
+                SpawnMonsters();
+            }
+
+
         }
         if( transform.childCount == 0 && GameController.gameState == GameController.GameState.Action)
         {
             GameController.ChangeGameState(GameController.GameState.EndWave);
+            spawningMonster = 0;
         }
         
-        if(isWaving)
-        {
-            BeginSpawn();
-        }
+        
 
     }
 
     void CreateWave()
     {
-
+        Debug.Log("Creting wave...");
         currentWave = new Wave(waveNumber * 2, waveNumber);
         combination = currentWave.GetCombinaton();
         waveNumber++;
@@ -57,7 +66,7 @@ public class WaveSpawner : MonoBehaviour {
     
    
 
-	void BeginSpawn()
+	void SpawnMonsters()
 	{
         
         if(timer <= 0)
