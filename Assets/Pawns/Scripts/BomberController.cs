@@ -9,10 +9,13 @@ public class BomberController : EnemyController {
     private BomberCharacter character;
     public GameObject explosionParticlePrefab;
 
+    private BomberAnimatorController anim;
+
     private void Start()
     {
         weight = 3;
         character = (BomberCharacter)GetComponent<BomberCharacter>();
+        anim = (BomberAnimatorController)GetComponentInChildren<BomberAnimatorController>();
     }
 
     protected override void Awake()
@@ -43,6 +46,7 @@ public class BomberController : EnemyController {
     protected override void Update()
     {
         base.Update();
+        anim.speed = nav.velocity.magnitude;
     }
 
     protected override void OnTriggerEnter(Collider other)
