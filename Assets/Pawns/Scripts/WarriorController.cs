@@ -37,22 +37,9 @@ public class WarriorController : EnemyController {
 		{
 			if (attackCountdown <= 0)
 			{
-				Debug.DrawLine(transform.position, target.transform.position);
-                if (target.tag == "Ally")
-                {
-                    if (target.GetComponent<PawnCharacter>().Damage(character.attack))
-                    {
-                        enemiesInRange.Remove(target);
-                        target.GetComponent<PawnCharacter>().OnDying();
-                        target = null;
-                    }
-                }
-                else if (target.tag == "Castle")
-                    target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
-
-                attackCountdown = 1 / character.attackRate;
+                anim.setIsAttacking(true);
+                Debug.DrawLine(transform.position, target.transform.position);
 			}
-
 		}
 		else
 		{
@@ -102,6 +89,19 @@ public class WarriorController : EnemyController {
 		}
 	}
 
+    public void processHit() {
+        if (target.tag == "Ally")
+        {
+            if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+            {
+                enemiesInRange.Remove(target);
+                target.GetComponent<PawnCharacter>().OnDying();
+                target = null;
+            }
+        }
+        else if (target.tag == "Castle")
+            target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
 
-
+        attackCountdown = 1 / character.attackRate;
+    }
 }
