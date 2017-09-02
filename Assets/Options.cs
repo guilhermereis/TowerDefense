@@ -30,7 +30,7 @@ public class Options : MonoBehaviour {
         UnitBlueprint SelectedUnit = buildManager.getSelectedUnit();
         if (SelectedUnit != null)
         {
-            PlayerStats.Money += SelectedUnit.sell_cost;
+            PlayerStats.AddMoney(SelectedUnit.sell_cost);
             Debug.Log("Sold for " + SelectedUnit.sell_cost + ". Current Money: " + PlayerStats.Money);
             string name = buildManager.getSelectedGameObject().name;
             BuildableController buildable = 

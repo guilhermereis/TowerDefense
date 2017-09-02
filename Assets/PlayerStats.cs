@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
@@ -9,7 +8,12 @@ public class PlayerStats : MonoBehaviour {
 
     void Start()
     {
-        Money = StartMoney;
+        AddMoney(StartMoney);
+    }
+    public static void AddMoney(int amount)
+    {
+        Money += amount;
+        GameObject.Find("MoneyText").GetComponent<Text>().text = "Money: "+ Money;
     }
 
 }
