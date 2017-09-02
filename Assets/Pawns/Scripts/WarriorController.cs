@@ -7,18 +7,21 @@ public class WarriorController : EnemyController {
 	private WarriorCharacter character;
 	public float attackCountdown = 0f;
 	private List<GameObject> enemiesInRange;
+    private WarriorGoblingAnimatorController anim;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		weight = 2;
 		enemiesInRange = new List<GameObject>();
 		character = (WarriorCharacter)GetComponent<WarriorCharacter>();
-	}
+        anim = (WarriorGoblingAnimatorController)GetComponentInChildren<WarriorGoblingAnimatorController>();
+    }
 	
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update();
-		if(target!= null && enemiesInRange.Contains(target))
+        anim.speed = nav.velocity.magnitude;
+        if (target!= null && enemiesInRange.Contains(target))
 		{
 			ChangeState(PawnState.Battle);
 		}
