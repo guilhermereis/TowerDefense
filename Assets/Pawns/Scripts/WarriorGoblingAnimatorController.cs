@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WarriorGoblingAnimatorController : MonoBehaviour {
     private Animator anim;
+    private WarriorController controller;
 
     public bool isAttacking = false;
     public float speed = 0f;
@@ -14,7 +15,7 @@ public class WarriorGoblingAnimatorController : MonoBehaviour {
         {
             weightLerp = 0.85f;
         }
-        else weightLerp = 0.2f;
+        else weightLerp = 0f;
         isAttacking = newIsAttacking;
     }
 
@@ -23,6 +24,7 @@ public class WarriorGoblingAnimatorController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         anim = (Animator)GetComponent<Animator>();
+        controller = (WarriorController)GetComponentInParent<WarriorController>();
     }
 	
 	// Update is called once per frame
@@ -30,10 +32,6 @@ public class WarriorGoblingAnimatorController : MonoBehaviour {
         if (isAttacking)
         {
             weightLerp += 0.1f * Time.deltaTime;
-        }
-        else
-        {
-            weightLerp -= 0.1f * Time.deltaTime;
         }
         weightLerp = Mathf.Clamp(weightLerp, 0f, 1f);
 
@@ -43,5 +41,14 @@ public class WarriorGoblingAnimatorController : MonoBehaviour {
             anim.SetFloat("Speed", speed);
             anim.SetLayerWeight(1, weightLerp);
         }
+    }
+
+    public void AttackEnd(int i)
+    {
+        setIsAttacking(false);
+    }
+
+    public void Hit(int i) {
+        controller.processHit() ;
     }
 }
