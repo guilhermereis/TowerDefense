@@ -73,13 +73,13 @@ public class BuildManager : MonoBehaviour {
 
     public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position)
     {
-        /*if (PlayerStats.Money < unitToBuild.cost)
+        if (PlayerStats.Money < unitToBuild.cost)
         {
             Debug.Log("Not enough money to build that!");
             return;
         }
-        PlayerStats.Money -= unitToBuild.cost;
-        */
+        PlayerStats.AddMoney(-1* unitToBuild.cost);
+        
         
         tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
