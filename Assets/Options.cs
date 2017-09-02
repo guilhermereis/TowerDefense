@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Options : MonoBehaviour {
 
     BuildManager buildManager;
     GridMouse gridMouse;
     Shop shop;
-
-    
 
     // Use this for initialization
     void Start () {

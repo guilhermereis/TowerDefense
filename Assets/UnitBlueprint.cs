@@ -7,6 +7,7 @@ public class UnitBlueprint{
     public GameObject prefab;
     public int cost;
     public int sell_cost;
+    public int upgrade_cost;
     public Vector2 position;
 
 	// Use this for initialization
