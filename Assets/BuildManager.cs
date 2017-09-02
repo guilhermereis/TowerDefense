@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildManager : MonoBehaviour {
 
@@ -95,7 +95,7 @@ public class BuildManager : MonoBehaviour {
         //if (selectedUnit == unit)
         selectedUnit = unit;
         selectedGameObject = gameObject;
-        selectedPosition = gameObject.transform.position;
+        selectedPosition = gameObject.transform.position;        
     }
     public void SelectBuilding(int indexOfSelectedObject)
     {
@@ -116,6 +116,8 @@ public class BuildManager : MonoBehaviour {
     public void ShowOptions()
     {
         optionsObject.SetActive(true);
+        GameObject.Find("ButtonUpgradeText").GetComponent<Text>().text = "Upgrade $" + selectedUnit.upgrade_cost;
+        GameObject.Find("ButtonSellText").GetComponent<Text>().text = "Sell $" + selectedUnit.sell_cost;
     }
     public void HideOptions()
     {

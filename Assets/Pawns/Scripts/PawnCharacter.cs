@@ -30,6 +30,7 @@ public class PawnCharacter : MonoBehaviour {
 	public virtual void OnDying()
 	{
 		isDying = true;
+        PlayerStats.AddMoney(10);
 		Destroy(gameObject);
 	}
 

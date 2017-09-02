@@ -128,6 +128,7 @@ public class GridMouse : MonoBehaviour {
             {
                 BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
                 buildManager.SelectBuilding(buildable.getArrayListPosition());
+                buildManager.ShowOptions();
             }
             //If I hit the Grid
             if (hitInfo.transform.gameObject.name == "Grid")

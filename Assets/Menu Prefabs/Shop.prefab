@@ -101,7 +101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &114169928860510718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -251,18 +251,21 @@ MonoBehaviour:
     prefab: {fileID: 1511144347461752, guid: 6116e45c5c3ed9c428299182404115a4, type: 2}
     cost: 100
     sell_cost: 50
+    upgrade_cost: 95
     position: {x: 0, y: 0}
   missileLauncher:
     name: Camp
-    prefab: {fileID: 1848844145821628, guid: b97083469700c3846a093e53547dc5dc, type: 2}
+    prefab: {fileID: 0}
     cost: 200
     sell_cost: 100
+    upgrade_cost: 0
     position: {x: 0, y: 0}
   towerLevel2:
     name: Tower2
     prefab: {fileID: 1372810626166394, guid: 347f325be9a4523469fffbddd4f8f170, type: 2}
     cost: 150
     sell_cost: 75
+    upgrade_cost: 0
     position: {x: 0, y: 0}
 --- !u!114 &114735968319195274
 MonoBehaviour:
@@ -486,9 +489,9 @@ RectTransform:
   m_Father: {fileID: 224951514712109658}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101.850006, y: -34.949997}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224275132614567954
@@ -541,9 +544,9 @@ RectTransform:
   m_Father: {fileID: 224951514712109658}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 281.85, y: -34.949997}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224951514712109658
