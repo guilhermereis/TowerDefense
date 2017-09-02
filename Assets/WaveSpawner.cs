@@ -8,6 +8,10 @@ public class WaveSpawner : MonoBehaviour {
     public List<GameObject> monsterBatch;
     public GameObject[] monstersPrefab;
 
+    public int[] monstersType;
+
+    public int totalMonsters = 3;
+
     private Wave currentWave;
     public int waveNumber = 1;
     public float waveProgression = 0;
@@ -19,10 +23,10 @@ public class WaveSpawner : MonoBehaviour {
     float timer = 0;
     int[] combination;
     int spawningMonster = 0;
+
     private void Start()
     {
-        //monsterBatch = new List<GameObject>();
-       
+        monstersType = new int[totalMonsters];
        
 
     }
@@ -54,12 +58,22 @@ public class WaveSpawner : MonoBehaviour {
 
     }
 
+    public void FillMonstersType()
+    {
+        for (int i = 0; i < combination.Length; i++)
+        {
+
+            monstersType[combination[i]-1]++;
+        }
+    }
+
     void CreateWave()
     {
-        Debug.Log("Creting wave...");
+        
         currentWave = new Wave(waveNumber * 2, waveNumber);
         combination = currentWave.GetCombinaton();
         waveNumber++;
+        FillMonstersType();
         isWaving = true;
        
     }

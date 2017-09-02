@@ -57,8 +57,7 @@ public class TowerController : BuildableController {
 	{
 		//Debug.DrawLine(attackPoint.transform.position, target.transform.position, Color.blue,2f);
 		GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
-		Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
-		newArrow.TowerAttack = AttackPower;
+        Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
 		newArrow.Target = target;
 		
 
@@ -66,7 +65,7 @@ public class TowerController : BuildableController {
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag.Equals("Enemy"))
+		if (other.gameObject.tag.Equals("Enemy") && !other.isTrigger)
 		{
 			enemies.Add(other.gameObject);
 			if(target == null)
@@ -83,7 +82,7 @@ public class TowerController : BuildableController {
 	private void OnTriggerExit(Collider other)
 	{
         enemies.Remove(other.gameObject);
-        if (other.gameObject == target)
+        if (other.gameObject == target && other.GetType() == typeof(CapsuleCollider))
 		{
             if (enemies.Count > 0)
                 target = enemies[0];

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour {
+public class Arrow : Projectile {
 
 	private GameObject target;
 	private float speed = 4f;
@@ -36,7 +36,8 @@ public class Arrow : MonoBehaviour {
 
 	private void Start()
 	{
-		//towerAttack = GetComponentInParent<TowerController>().AttackPower;
+        //towerAttack = GetComponentInParent<TowerController>().AttackPower;
+        attackPower = 100f;
 	}
 
 	private void Update()
@@ -57,20 +58,21 @@ public class Arrow : MonoBehaviour {
 
 	}
 
-	private void OnTriggerEnter(Collider other)
+	public override void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag.Equals("Enemy"))
-		{
-			if(other.gameObject != null && other.gameObject == target)
-			{
-				if (other.gameObject.GetComponent<PawnCharacter>().Damage(TowerAttack))
-				{
-					other.gameObject.GetComponent<PawnCharacter>().OnDying();
-				}
 
-			}
-				Destroy(gameObject);
-				return;
-		}
+        if (other.gameObject == target && other.GetType() == typeof(CapsuleCollider) )
+        {
+            if (other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower))
+            {
+                other.gameObject.GetComponent<PawnCharacter>().OnDying();
+            }
+
+            Destroy(gameObject);
+            return;
+
+        }
+
+       
 	}
 }
