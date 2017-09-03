@@ -14,6 +14,8 @@ public class TowerController : BuildableController {
 	public GameObject attackPoint;
 	public GameObject arrowPrefab;
 
+    public GameObject arrowSoundPrefab;
+
 	public float AttackPower
 	{
 		get
@@ -41,7 +43,7 @@ public class TowerController : BuildableController {
 
 		if (attackCooldown <= 0)
 		{
-			if( target != null)
+			if( target != null && !target.gameObject.GetComponent<PawnCharacter>().isDying)
 			{
 				Fire();
 				attackCooldown = 1 / fireRate;
@@ -65,6 +67,9 @@ public class TowerController : BuildableController {
         Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
         arrow.transform.parent = transform;
         newArrow.Target = target;
+
+        Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+
 		
 
 	}

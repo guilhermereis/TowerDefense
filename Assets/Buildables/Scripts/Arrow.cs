@@ -8,6 +8,7 @@ public class Arrow : Projectile {
 	public float speed = 6f;
 	private float towerAttack;
     public GameObject damagePrefabParticle;
+    public GameObject bloodPrefabParticle;
 
 	public GameObject Target
 	{
@@ -66,6 +67,8 @@ public class Arrow : Projectile {
         {
 
             Instantiate(damagePrefabParticle, target.transform.position + Vector3.up *0.5f, Quaternion.Euler(new Vector3(-90,0,0)));
+            Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+
             if (other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower))
             {
                 GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
