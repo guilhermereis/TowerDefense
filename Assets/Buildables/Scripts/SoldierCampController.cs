@@ -87,7 +87,7 @@ public class SoldierCampController : BuildableController {
     //when an enemy get in range;
     private void OnTriggerEnter(Collider other)
     {
-		if (!other.isTrigger)
+		if (other.GetType() == typeof(CapsuleCollider))
 		{
 			if(other.gameObject.tag == "Enemy")
 			{
@@ -111,7 +111,7 @@ public class SoldierCampController : BuildableController {
     {
 		//todo delegate to who has this target stop to attack
 
-		if (!other.isTrigger)
+		if (other.GetType() == typeof(CapsuleCollider))
 		{
 			if (other.gameObject.tag == "Enemy" && !other.gameObject.GetComponent<PawnCharacter>().isDying)
 			{

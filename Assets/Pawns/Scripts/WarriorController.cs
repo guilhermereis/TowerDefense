@@ -51,26 +51,30 @@ public class WarriorController : EnemyController {
 	protected override void OnTriggerEnter(Collider other)
 	{
 		base.OnTriggerEnter(other);
-		//Debug.Log(other.gameObject.tag);
-		//Debug.Assert(other.isTrigger);
-		if(other.gameObject.tag == "Ally" && target == null)
-		{
-			enemiesInRange.Add(other.gameObject);
-
-			target = other.gameObject;
-			ChangeState(PawnState.Battle);
-		}else if(other.gameObject == target)
-		{
-			ChangeState(PawnState.Battle);
-		}
-		else if(other.gameObject.tag == "Ally")
-		{
-			enemiesInRange.Add(other.gameObject);
-			//Debug.Break();
-		}else if (other.gameObject.tag == "Castle")
+        //Debug.Log(other.gameObject.tag);
+        //Debug.Assert(other.isTrigger);
+        if(other.GetType() == typeof(CapsuleCollider))
         {
-            target = other.gameObject;
-            ChangeState(PawnState.Battle);
+            if (other.gameObject.tag == "Ally" && target == null)
+		    {
+			    enemiesInRange.Add(other.gameObject);
+
+			    target = other.gameObject;
+			    ChangeState(PawnState.Battle);
+		    }else if(other.gameObject == target)
+		    {
+			    ChangeState(PawnState.Battle);
+		    }
+		    else if(other.gameObject.tag == "Ally")
+		    {
+			    enemiesInRange.Add(other.gameObject);
+			    //Debug.Break();
+		    }else if (other.gameObject.tag == "Castle")
+            {
+                target = other.gameObject;
+                ChangeState(PawnState.Battle);
+            }
+
         }
 	}
 

@@ -7,7 +7,7 @@ public class TowerController : BuildableController {
 	public GameObject target;
 	private float fireRate = 0.7f;
 	private float attackCooldown = 0f;
-	private List<GameObject> enemies;
+	public List<GameObject> enemies;
 	private float attackPower;
 
 	[Header("Arrow")]
@@ -46,7 +46,12 @@ public class TowerController : BuildableController {
 				Fire();
 				attackCooldown = 1 / fireRate;
 
-			}
+            }
+            else
+            {
+                if (enemies.Count > 0)
+                    target = enemies[0];
+            }
 		}
 
 		attackCooldown -= Time.deltaTime;
@@ -58,14 +63,15 @@ public class TowerController : BuildableController {
 		//Debug.DrawLine(attackPoint.transform.position, target.transform.position, Color.blue,2f);
 		GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
         Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
-		newArrow.Target = target;
+        arrow.transform.parent = transform;
+        newArrow.Target = target;
 		
 
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag.Equals("Enemy") && !other.isTrigger)
+		if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(CapsuleCollider))
 		{
 			enemies.Add(other.gameObject);
 			if(target == null)
@@ -81,14 +87,18 @@ public class TowerController : BuildableController {
 
 	private void OnTriggerExit(Collider other)
 	{
-        enemies.Remove(other.gameObject);
-        if (other.gameObject == target && other.GetType() == typeof(CapsuleCollider))
-		{
-            if (enemies.Count > 0)
-                target = enemies[0];
-            else
-				target = null;
-		}
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            enemies.Remove(other.gameObject);
+            if (other.gameObject == target && other.GetType() == typeof(CapsuleCollider))
+		    {
+                if (enemies.Count > 0)
+                    target = enemies[0];
+                else
+				    target = null;
+		    }
+
+        }
 
 		
 	}

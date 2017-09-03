@@ -49,6 +49,8 @@ public class BomberController : EnemyController {
         anim.speed = nav.velocity.magnitude;
     }
 
+   
+
     protected override void OnTriggerEnter(Collider other)
     {
 

@@ -35,11 +35,13 @@ public class PawnHealthBarGUI : MonoBehaviour {
         }
 
         Healthbar = Instantiate<GameObject>(hpBarPrefab);
-		if(Healthbar != null)
-		{
-			Healthbar.transform.SetParent(canvas.transform, false);
-			Healthbar.SetActive(false);
-		}
+        if (Healthbar != null)
+        {
+            Healthbar.transform.SetParent(canvas.transform, false);
+            Healthbar.SetActive(false);
+        }
+        else
+            Debug.Log("f");
 
 		
 	}

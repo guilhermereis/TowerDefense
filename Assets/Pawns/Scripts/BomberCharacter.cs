@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class BomberCharacter : PawnCharacter {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+	
 
     private void Awake()
     {

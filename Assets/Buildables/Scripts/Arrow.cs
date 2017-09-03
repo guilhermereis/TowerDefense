@@ -5,8 +5,9 @@ using UnityEngine;
 public class Arrow : Projectile {
 
 	private GameObject target;
-	private float speed = 4f;
+	public float speed = 6f;
 	private float towerAttack;
+    public GameObject damagePrefabParticle;
 
 	public GameObject Target
 	{
@@ -37,7 +38,7 @@ public class Arrow : Projectile {
 	private void Start()
 	{
         //towerAttack = GetComponentInParent<TowerController>().AttackPower;
-        attackPower = 100f;
+        attackPower = 400f;
 	}
 
 	private void Update()
@@ -60,11 +61,14 @@ public class Arrow : Projectile {
 
 	public override void OnTriggerEnter(Collider other)
 	{
-
+        Debug.Log(other.tag);
         if (other.gameObject == target && other.GetType() == typeof(CapsuleCollider) )
         {
+
+            Instantiate(damagePrefabParticle, target.transform.position + Vector3.up *0.5f, Quaternion.Euler(new Vector3(-90,0,0)));
             if (other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower))
             {
+                GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
                 other.gameObject.GetComponent<PawnCharacter>().OnDying();
             }
 
@@ -72,7 +76,6 @@ public class Arrow : Projectile {
             return;
 
         }
-
        
 	}
 }
