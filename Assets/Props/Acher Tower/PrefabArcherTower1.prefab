@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039271061935134}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.5458225, y: -1.0000015, z: -12.60551}
+  m_LocalPosition: {x: 0.5067643, y: -1.0000017, z: -14.48146}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.02}
   m_Children:
   - {fileID: 4966791718331460}
@@ -124,8 +124,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealthState: 0
   target: {fileID: 0}
+  enemies: []
   attackPoint: {fileID: 1311651594420930}
   arrowPrefab: {fileID: 1701221001243858, guid: 5d2007d58e37719429671996f895010e,
+    type: 2}
+  arrowSoundPrefab: {fileID: 1372849123093944, guid: 3e63fb5ebfb2736428ab93128296cbc7,
     type: 2}
 --- !u!135 &135684830449922710
 SphereCollider:
