@@ -11,6 +11,7 @@ public class BuildManager : MonoBehaviour {
     private UnitBlueprint selectedUnit;
     private Vector2 selectedPosition;
     private GameObject selectedGameObject;
+    private GridMouse gridMouse;
 
     void Awake()
     {
@@ -23,7 +24,7 @@ public class BuildManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-		
+        gridMouse = GridMouse.instance;
 	}
 	
 	// Update is called once per frame
@@ -61,7 +62,14 @@ public class BuildManager : MonoBehaviour {
     {
         if (temporaryInstance != null && unitToBuild != null)
         {
-            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
+            Vector2 gridSize = gridMouse.getGridSize();
+            Vector3 newPosition;
+            if (unitToBuild == Shop.instance.missileLauncher)
+                newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+            else
+                newPosition = position;
+            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
+            //temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
             for (int i = 0; i < list.Length; i++)
             {
@@ -79,9 +87,14 @@ public class BuildManager : MonoBehaviour {
             return;
         }
         PlayerStats.AddMoney(-1* unitToBuild.cost);
-        
-        
-        tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
+
+        Vector3 newPosition;
+        if (unitToBuild == Shop.instance.missileLauncher)
+            newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+        else
+            newPosition = position;
+        tempList[index] = Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
+        //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
