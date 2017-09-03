@@ -147,6 +147,9 @@ public class GridMouse : MonoBehaviour {
                     {
                         int added_index = buildUnitAndAddItToTheList(position);
                         propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                        propertiesMatrix[x+1, z+1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                        propertiesMatrix[x, z+1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                        propertiesMatrix[x+1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
                         Debug.Log("Construiu na posição " + x + ", " + z);
                         Debug.Log("Position = " + position);
                     }
