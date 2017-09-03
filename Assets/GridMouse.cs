@@ -133,10 +133,19 @@ public class GridMouse : MonoBehaviour {
             //If I hit the Grid
             if (hitInfo.transform.gameObject.name == "Grid")
             {
+                PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
                 if (propertiesMatrix[x, z].unit != null)
-                {
+                    propertyInQuestion = propertiesMatrix[x, z];
+                else if (propertiesMatrix[x+1, z+1].unit != null)
+                    propertyInQuestion = propertiesMatrix[x+1, z+1];
+                else if (propertiesMatrix[x, z + 1].unit != null)
+                    propertyInQuestion = propertiesMatrix[x, z + 1];
+                else if (propertiesMatrix[x + 1, z].unit != null)
+                    propertyInQuestion = propertiesMatrix[x + 1, z];
 
-                    buildManager.SelectBuilding(propertiesMatrix[x, z].unit, propertiesMatrix[x, z].builtGameObject);
+                if (propertyInQuestion.unit != null)
+                {
+                    buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
                     buildManager.ShowOptions();
                     Debug.Log("Selecionou a posição: " + x + ", " + z);
                     //Destroy(hitInfo.transform.gameObject);
@@ -160,30 +169,6 @@ public class GridMouse : MonoBehaviour {
                     }
                 }
             }
-            /*
-            if (propertiesMatrix[x, z].unit != null)
-            {
-                buildManager.SelectBuilding(propertiesMatrix[x, z].unit, new Vector2(x,z));
-                buildManager.ShowOptions();
-                Debug.Log("Selecionou a posição: "+x+", "+z);
-                //Destroy(hitInfo.transform.gameObject);
-            }
-            else
-            {
-                if (buildManager.getUnitToBuild() != null)
-                {
-                    int added_index = buildUnitAndAddItToTheList(position);
-                    //propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects,added_index, "Obstacle");
-                    Debug.Log("Construiu na posição " + x + ", " + z);
-                    Debug.Log("Position = "+position);
-                }
-                else
-                {
-                    buildManager.HideOptions();
-                    Debug.Log("Hide Options");
-                }
-            }
-            */
         }
     }
     public int buildUnitAndAddItToTheList(Vector3 myPosition) {
