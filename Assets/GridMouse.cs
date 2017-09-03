@@ -134,14 +134,17 @@ public class GridMouse : MonoBehaviour {
             if (hitInfo.transform.gameObject.name == "Grid")
             {
                 PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
-                if (propertiesMatrix[x, z].unit != null)
-                    propertyInQuestion = propertiesMatrix[x, z];
-                else if (propertiesMatrix[x+1, z+1].unit != null)
-                    propertyInQuestion = propertiesMatrix[x+1, z+1];
-                else if (propertiesMatrix[x, z + 1].unit != null)
-                    propertyInQuestion = propertiesMatrix[x, z + 1];
-                else if (propertiesMatrix[x + 1, z].unit != null)
-                    propertyInQuestion = propertiesMatrix[x + 1, z];
+                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                {
+                    if (propertiesMatrix[x, z].unit != null)
+                        propertyInQuestion = propertiesMatrix[x, z];
+                    else if (propertiesMatrix[x + 1, z + 1].unit != null)
+                        propertyInQuestion = propertiesMatrix[x + 1, z + 1];
+                    else if (propertiesMatrix[x, z + 1].unit != null)
+                        propertyInQuestion = propertiesMatrix[x, z + 1];
+                    else if (propertiesMatrix[x + 1, z].unit != null)
+                        propertyInQuestion = propertiesMatrix[x + 1, z];
+                }
 
                 if (propertyInQuestion.unit != null)
                 {
@@ -156,9 +159,12 @@ public class GridMouse : MonoBehaviour {
                     {
                         int added_index = buildUnitAndAddItToTheList(position);
                         propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                        propertiesMatrix[x+1, z+1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                        propertiesMatrix[x, z+1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                        propertiesMatrix[x+1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                        if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                        {
+                            propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                            propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                            propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                        }
                         Debug.Log("Construiu na posição " + x + ", " + z);
                         Debug.Log("Position = " + position);
                     }

@@ -63,7 +63,11 @@ public class BuildManager : MonoBehaviour {
         if (temporaryInstance != null && unitToBuild != null)
         {
             Vector2 gridSize = gridMouse.getGridSize();
-            Vector3 newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+            Vector3 newPosition;
+            if (unitToBuild == Shop.instance.missileLauncher)
+                newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+            else
+                newPosition = position;
             temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
             //temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
@@ -84,7 +88,11 @@ public class BuildManager : MonoBehaviour {
         }
         PlayerStats.AddMoney(-1* unitToBuild.cost);
 
-        Vector3 newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+        Vector3 newPosition;
+        if (unitToBuild == Shop.instance.missileLauncher)
+            newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+        else
+            newPosition = position;
         tempList[index] = Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
