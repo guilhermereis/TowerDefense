@@ -33,6 +33,16 @@ public class Options : MonoBehaviour {
                 buildManager.getSelectedGameObject().GetComponent<BuildableController>();
             //gridMouse.ListOfGameObjects.RemoveAt(buildable.getArrayListPosition());
             coolRemoveAt(buildable.getArrayListPosition());
+            //------------------------------------------------------------------------
+            //before Destroying the object, remove it's entry from the matrix
+            Vector2 gridSize = gridMouse.getGridSize();
+            Vector3 SelectedPosition = buildManager.getSelectedGameObject().transform.position;
+            int x = Mathf.FloorToInt(SelectedPosition.x + gridSize.x / 2);
+            int z = Mathf.FloorToInt(SelectedPosition.z + gridSize.y / 2);
+            Vector3 position = gridMouse.CoordToPosition(x, z);
+            gridMouse.propertiesMatrix[x, z].unit = null;
+            //------------------------------------------------------------------------
+
             Destroy(buildManager.getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
             Debug.Log("Vendeu "+name);
