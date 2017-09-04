@@ -11,7 +11,7 @@ public class PawnCharacter : MonoBehaviour {
     public bool isDying;
 	public PawnHealthBarGUI healthBar;
     public AudioSource painSoundPrefab;
-    
+        
 
 
     private void Awake()
