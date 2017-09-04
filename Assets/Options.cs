@@ -51,6 +51,7 @@ public class Options : MonoBehaviour {
 
             Destroy(buildManager.getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
+            buildManager.HideOptions();
             Debug.Log("Vendeu "+name);
         }
     }
@@ -62,6 +63,7 @@ public class Options : MonoBehaviour {
                 BuildTheNextLevelStructure();
                 buildManager.DeselectUnitToBuild();
                 buildManager.DeselectSelectedUnit();
+                buildManager.HideOptions();
                 Debug.Log("Upgraded unit: " + "Tower");
             }
             else
@@ -84,7 +86,7 @@ public class Options : MonoBehaviour {
             //destroys the current object
             Destroy(gridMouse.propertiesMatrix[x, z].builtGameObject);
             int added_index = gridMouse.buildUnitAndAddItToTheList(position);
-            //gridMouse.propertiesMatrix[x, y] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+            gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
         }
         
     }
