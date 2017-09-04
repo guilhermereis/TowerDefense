@@ -219,7 +219,7 @@ public class GridMouse : MonoBehaviour {
                 //stepped over a track tile
                 if (propertiesMatrix[x, z].type == "Track")
                 {
-
+                    //don't build
                 }
                 else
                 {//if the logic doens't involve going over track tiles
@@ -247,7 +247,11 @@ public class GridMouse : MonoBehaviour {
                     {
                         //if the logic doens't involve going over track tiles
                         Destroy(temporaryInstance);
-                        previewMatrix[prevX, prevZ] = false;
+                        int instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
+                        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
+
+                        previewMatrix[instance_x, instance_z] = false;
+                        //previewMatrix[prevX, prevZ] = false;
                     }
                                        
                     //Debug.Log("destruiu preview !");
