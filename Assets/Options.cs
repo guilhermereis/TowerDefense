@@ -51,6 +51,7 @@ public class Options : MonoBehaviour {
 
             Destroy(buildManager.getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
+            buildManager.HideOptions();
             Debug.Log("Vendeu "+name);
         }
     }
@@ -62,6 +63,7 @@ public class Options : MonoBehaviour {
                 BuildTheNextLevelStructure();
                 buildManager.DeselectUnitToBuild();
                 buildManager.DeselectSelectedUnit();
+                buildManager.HideOptions();
                 Debug.Log("Upgraded unit: " + "Tower");
             }
             else
