@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour {
@@ -21,38 +22,49 @@ public class WaveSpawner : MonoBehaviour {
    
     float spawnTimer = 2f;
     float timer = 0;
-    int[] combination;
-    int spawningMonster = 0;
+    public int[] combination;
+    public int spawningMonster = 0;
+
+    public Canvas hud;
 
     private void Start()
     {
         monstersType = new int[totalMonsters];
-       
+        Canvas[] canvas = FindObjectsOfType<Canvas>();
+        for (int i = 0; i < canvas.Length; i++)
+        {
+            if (canvas[i].CompareTag("HUD"))
+            {
+                hud = canvas[i];
+                break;
+            }
+
+        }
 
     }
 
     private void Update()
     {
-        if(GameController.gameState == GameController.GameState.BeginWave)
+        if(GameController.gameState == GameState.BeginWave)
         {
             if (!isWaving)
             {
                 CreateWave();
             }
             else
-            {
-                waveProgression = spawningMonster / combination.Length;
-                //Debug.Log(waveProgression);
+            {              //Debug.Log(waveProgression);
                 SpawnMonsters();
             }
 
 
         }
-        if( transform.childCount == 0 && GameController.gameState == GameController.GameState.Action)
+        else if(GameController.gameState == GameState.Action)
         {
-            GameController.ChangeGameState(GameController.GameState.EndWave);
-            spawningMonster = 0;
+            //hud.transform.Find("Wave").transform.Find("Progress").GetComponent<Text>().text = "100%";
+            if(transform.childCount == 0)
+                GameController.ChangeGameState(GameState.EndWave);
         }
+
         
         
 
@@ -60,20 +72,22 @@ public class WaveSpawner : MonoBehaviour {
 
     public void FillMonstersType()
     {
+        monstersType = new int[totalMonsters];
         for (int i = 0; i < combination.Length; i++)
         {
-
             monstersType[combination[i]-1]++;
+           
         }
     }
 
     void CreateWave()
     {
-        
+        spawningMonster = 0;
         currentWave = new Wave(waveNumber * 2, waveNumber);
         combination = currentWave.GetCombinaton();
         waveNumber++;
         FillMonstersType();
+        monsterBatch.Clear();
         isWaving = true;
        
     }
@@ -93,11 +107,16 @@ public class WaveSpawner : MonoBehaviour {
             spawningMonster++;
             timer = spawnTimer;
 
+            //wave progression
+            waveProgression = (float)spawningMonster / (float)combination.Length;
+            hud.transform.Find("Wave").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
+
+
         }
         if (spawningMonster >= combination.Length)
         {
             isWaving = false;
-            GameController.ChangeGameState(GameController.GameState.Action);
+            GameController.ChangeGameState(GameState.Action);
         }
 
         timer -= Time.deltaTime;

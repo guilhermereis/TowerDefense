@@ -119,10 +119,10 @@ public class SimpleSoldierController : PawnController {
 		{
 			if (other.gameObject.tag == "Enemy" )
 			{
-				enemiesInRange.Add(other.gameObject);
-				//Debug.Log("Started Battle");
-				//nav.isStopped = true;
-				if(other.gameObject == target)
+                enemiesInRange.Add(other.gameObject);
+                //Debug.Log("Started Battle");
+                //nav.isStopped = true;
+                if (other.gameObject == target)
 					ChangeState(PawnState.Battle);
 
 			}

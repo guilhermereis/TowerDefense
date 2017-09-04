@@ -67,6 +67,7 @@ public class SoldierCampController : BuildableController {
             spawnCountdown = 1 / spawnRate;
         }
 
+
         spawnCountdown -= Time.deltaTime;
 	}
 
