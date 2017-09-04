@@ -37,8 +37,25 @@ public class Options : MonoBehaviour {
             //before Destroying the object, remove it's entry from the matrix
             Vector2 gridSize = gridMouse.getGridSize();
             Vector3 SelectedPosition = buildManager.getSelectedGameObject().transform.position;
-            int x = Mathf.FloorToInt(SelectedPosition.x -0.5f + gridSize.x / 2);
-            int z = Mathf.FloorToInt(SelectedPosition.z -0.5f + gridSize.y / 2);
+            int x;
+            int z;
+            if (SelectedUnit == Shop.instance.standardUnit)
+            {
+                //tower
+                x = Mathf.FloorToInt(SelectedPosition.x + gridSize.x / 2);
+                z = Mathf.FloorToInt(SelectedPosition.z + gridSize.y / 2);
+            }
+            else
+            {   
+                //soldier camp
+                //have to subtract 0.5 from each axis
+                //because we want the center of the bottom-right tile
+                //not the center of the four tiles
+                //(which the game object's transform points to)
+                x = Mathf.FloorToInt(SelectedPosition.x - 0.5f + gridSize.x / 2);
+                z = Mathf.FloorToInt(SelectedPosition.z - 0.5f + gridSize.y / 2);
+            }
+            
             Vector3 position = gridMouse.CoordToPosition(x, z);
             gridMouse.propertiesMatrix[x, z].unit = null;
             if (SelectedUnit == Shop.instance.missileLauncher)

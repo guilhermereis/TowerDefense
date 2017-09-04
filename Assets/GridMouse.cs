@@ -104,8 +104,16 @@ public class GridMouse : MonoBehaviour {
     void Start()
     {
         UpdateGrid();
-        //Debug.Log("Gonna run script !!!");
+        ReadSpecialTiles();
 
+    }
+    void ReadSpecialTiles()
+    {
+        GameObject Track = GameObject.Find("CubeTrack");
+        foreach (Transform child in Track.transform)
+        {
+
+        }
     }
     void OnMouseDown()
     {
