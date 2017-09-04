@@ -30,7 +30,7 @@ public class CastleHealth : MonoBehaviour {
         health -= damage;
         if(health <=0)
         {
-            GameController.ChangeGameState(GameController.GameState.GameOver);
+            GameController.ChangeGameState(GameState.GameOver);
             gameObject.SetActive(false);
             
         }

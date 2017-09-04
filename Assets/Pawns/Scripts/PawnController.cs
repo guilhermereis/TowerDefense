@@ -149,7 +149,7 @@ public class PawnController : MonoBehaviour {
             
         }
 
-        if (GameController.gameState == GameController.GameState.GameOver)
+        if (GameController.gameState == GameState.GameOver)
             ChangeState(PawnState.Idle);
 	}
 

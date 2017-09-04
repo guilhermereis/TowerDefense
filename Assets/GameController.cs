@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState { Preparation, BeginWave, Action, EndWave, GameOver }
+
 public class GameController : MonoBehaviour {
     [HideInInspector]
-    public enum GameState { Preparation, BeginWave, Action ,EndWave, GameOver }
+    
 
     public static GameState gameState;
     bool game_over = false;
@@ -34,6 +36,7 @@ public class GameController : MonoBehaviour {
         {
             if(countDown <= 0)
             {
+                countDown = preparationTime;
                 ChangeGameState(GameState.BeginWave);
             }
             countDown -= Time.deltaTime;
@@ -45,7 +48,13 @@ public class GameController : MonoBehaviour {
                 game_over = true;
             }
         }
+        else if(gameState == GameState.EndWave)
+        {
+            ChangeGameState(GameState.Preparation);
+        }
 
 
 	}
+
+
 }
