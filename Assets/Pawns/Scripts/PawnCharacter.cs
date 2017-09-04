@@ -11,6 +11,7 @@ public class PawnCharacter : MonoBehaviour {
     public bool isDying;
 	public PawnHealthBarGUI healthBar;
     public AudioSource painSoundPrefab;
+    
 
 
     private void Awake()
@@ -37,6 +38,9 @@ public class PawnCharacter : MonoBehaviour {
         PlayerStats.AddMoney(10);
      
         Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
+
+        
+
         Destroy(gameObject);
 	}
 
