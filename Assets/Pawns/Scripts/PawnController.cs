@@ -33,7 +33,7 @@ public class PawnController : MonoBehaviour {
         nav.speed = speed;
         waypoints = new List<Transform>();
         GameObject waypoint = GameObject.FindGameObjectWithTag("Waypoint");
-        Debug.Log(waypoint.name);
+        //Debug.Log(waypoint.name);
         for (int i = 0; i < waypoint.transform.childCount; i++)
         {
             waypoints.Add(waypoint.transform.GetChild(i));

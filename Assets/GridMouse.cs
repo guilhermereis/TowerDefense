@@ -104,8 +104,24 @@ public class GridMouse : MonoBehaviour {
     void Start()
     {
         UpdateGrid();
-        //Debug.Log("Gonna run script !!!");
+        ReadSpecialTiles();
 
+    }
+    void ReadSpecialTiles()
+    {
+        GameObject Track = GameObject.Find("CubeTrack");
+        int x;
+        int z;
+        Debug.Log("Child Count = " + Track.transform.childCount);
+        foreach (Transform child in Track.transform)
+        {
+            //tower
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            Debug.Log(x + "," + z + " = Track");
+            propertiesMatrix[x, z] = new PropertyScript.Property("Track");
+        }
+        Track.SetActive(false);
     }
     void OnMouseDown()
     {
@@ -229,7 +245,7 @@ public class GridMouse : MonoBehaviour {
             prevZ = z;
             //previewMatrix[x, z] = true;
             //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
-            //Debug.Log("Property of this tile: "+propertiesMatrix[x,z].type);
+            Debug.Log("Property of this tile: "+propertiesMatrix[x,z].type);
         }
             
 	}

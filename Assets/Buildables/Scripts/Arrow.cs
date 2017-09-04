@@ -62,7 +62,7 @@ public class Arrow : Projectile {
 
 	public override void OnTriggerEnter(Collider other)
 	{
-        Debug.Log(other.tag);
+        //Debug.Log(other.tag);
         if (other.gameObject == target && other.GetType() == typeof(CapsuleCollider) )
         {
 
