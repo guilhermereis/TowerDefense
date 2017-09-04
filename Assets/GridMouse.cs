@@ -118,7 +118,7 @@ public class GridMouse : MonoBehaviour {
             //tower
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            Debug.Log(x + "," + z + " = Track");
+            //Debug.Log(x + "," + z + " = Track");
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
         Track.SetActive(false);
@@ -216,25 +216,43 @@ public class GridMouse : MonoBehaviour {
             selectionCube.transform.position = positionCube;
             if (previousPosition == position)
             {
-                
-                if (previewMatrix[x, z] == false)
+                //stepped over a track tile
+                if (propertiesMatrix[x, z].type == "Track")
                 {
-
-                    temporaryInstance = new GameObject();
-                    buildManager.BuildPreviewOn(ref temporaryInstance, position);
-                    previewMatrix[x, z] = true;
-                    //Debug.Log("construiu preview !");
+                    //don't build
                 }
-                
+                else
+                {//if the logic doens't involve going over track tiles
+                    if (previewMatrix[x, z] == false)
+                    {
+
+                        temporaryInstance = new GameObject();
+                        buildManager.BuildPreviewOn(ref temporaryInstance, position);
+                        previewMatrix[x, z] = true;
+                        //Debug.Log("construiu preview !");
+                    }
+                }
             }
             else
             {
                 //Debug.Log("moveu !");
                 if (temporaryInstance != null)
                 {
-                    Destroy(temporaryInstance);
-                    
-                    previewMatrix[prevX,prevZ] = false;
+                    //stepped over a track tile
+                    if (propertiesMatrix[x, z].type == "Track")
+                    {
+
+                    }
+                    else
+                    {
+                        //if the logic doens't involve going over track tiles
+                        Destroy(temporaryInstance);
+                        int instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
+                        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
+
+                        previewMatrix[instance_x, instance_z] = false;
+                        //previewMatrix[prevX, prevZ] = false;
+                    }
                                        
                     //Debug.Log("destruiu preview !");
                 }
