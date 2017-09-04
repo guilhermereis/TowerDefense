@@ -8,6 +8,13 @@ public class PropertyScript  {
         public UnitBlueprint unit;
         public GameObject builtGameObject;
 
+        public Property(string _type)
+        {
+            type = _type;
+            unit = null;
+            builtGameObject = null;
+        }
+
         public Property(UnitBlueprint _unit, ref List<GameObject> ListOfGameObjects, int indexOfBuiltGameObject,string _type = "Normal")
         {
             type = _type;
