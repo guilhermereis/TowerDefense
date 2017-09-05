@@ -109,7 +109,7 @@ public class WaveSpawner : MonoBehaviour {
 
             //wave progression
             waveProgression = (float)spawningMonster / (float)combination.Length;
-            hud.transform.Find("Wave").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
+            hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
 
 
         }
