@@ -35,7 +35,8 @@ public class WarriorController : EnemyController {
 		
 		if (target != null)
 		{
-			if (attackCountdown <= 0)
+            LookToTarget();
+            if (attackCountdown <= 0)
 			{
                 anim.setIsAttacking(true);
                 Debug.DrawLine(transform.position, target.transform.position);
@@ -53,9 +54,11 @@ public class WarriorController : EnemyController {
 		base.OnTriggerEnter(other);
         //Debug.Log(other.gameObject.tag);
         //Debug.Assert(other.isTrigger);
-        if(other.GetType() == typeof(CapsuleCollider))
+        if(other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Ally")
         {
-            if (other.gameObject.tag == "Ally" && target == null)
+            enemiesInRange.Add(other.gameObject);
+
+            if (target == null)
 		    {
 			    enemiesInRange.Add(other.gameObject);
 
@@ -65,18 +68,15 @@ public class WarriorController : EnemyController {
 		    {
 			    ChangeState(PawnState.Battle);
 		    }
-		    else if(other.gameObject.tag == "Ally")
-		    {
-			    enemiesInRange.Add(other.gameObject);
-			    //Debug.Break();
-		    }else if (other.gameObject.tag == "Castle")
-            {
-                target = other.gameObject;
-                ChangeState(PawnState.Battle);
-            }
+		    
 
         }
-	}
+        else if (other.gameObject.tag == "Castle")
+        {
+            target = other.gameObject;
+            ChangeState(PawnState.Battle);
+        }
+    }
 
 	protected override void OnTriggerExit(Collider other)
 	{
@@ -85,17 +85,21 @@ public class WarriorController : EnemyController {
 		{
 			enemiesInRange.Remove(other.gameObject);
             ChangeState(PawnState.Walking);
-			//if (target != null)
-			//	ChangeState(PawnState.FindTarget);
-			//else { }
-			////	enemiesInRange.Remove(other.gameObject);
+            if (target != null)
+                ChangeState(PawnState.FindTarget);
+            else { }
+            //	enemiesInRange.Remove(other.gameObject);
 
-		}
-	}
+        }
+    }
 
     public void processHit() {
         if (target.tag == "Ally")
         {
+
+           
+
+
             if (target.GetComponent<PawnCharacter>().Damage(character.attack))
             {
                 enemiesInRange.Remove(target);

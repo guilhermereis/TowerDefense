@@ -174,4 +174,11 @@ public class PawnController : MonoBehaviour {
 
     }
 
+    protected void LookToTarget()
+    {
+        Vector3 lookDir = (target.transform.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(lookDir);
+        Vector3 rotation = lookRotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+    }
 }

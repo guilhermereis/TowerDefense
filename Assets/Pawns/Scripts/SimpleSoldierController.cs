@@ -89,11 +89,13 @@ public class SimpleSoldierController : PawnController {
 			if (attackCountdown <= 0)
 			{
 				anim.setIsAttacking(true);
-				//swordHit.Play();
+                //swordHit.Play();
+                LookToTarget();
 				Debug.DrawLine(transform.position, target.transform.position);
-				//we are goint to apply damage to target and if the target is dead, we are going to
-				//tell the camp and so the camp can gives another target or we're going back home.
-				if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+                //we are goint to apply damage to target and if the target is dead, we are going to
+                //tell the camp and so the camp can gives another target or we're going back home.
+                swordHit.Play();
+                if (target.GetComponent<PawnCharacter>().Damage(character.attack))
 				{
                     target.GetComponent<PawnCharacter>().OnDying();
 					camp.UpdateEnemies(target);
@@ -101,8 +103,8 @@ public class SimpleSoldierController : PawnController {
                 }
 					
 				attackCountdown = 1 / character.attackRate;
-			}else
-				anim.setIsAttacking(false);
+			}
+				//anim.setIsAttacking(false);
 		}
 		else
             ChangeState(PawnState.Homing);
@@ -115,18 +117,15 @@ public class SimpleSoldierController : PawnController {
 		
         base.OnTriggerEnter(other);
 		Debug.DrawLine(other.gameObject.transform.position, transform.position);
-		if (other.GetType() == typeof(CapsuleCollider))
+		if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Enemy")
 		{
-			if (other.gameObject.tag == "Enemy" )
-			{
-                enemiesInRange.Add(other.gameObject);
-                //Debug.Log("Started Battle");
-                //nav.isStopped = true;
-                if (other.gameObject == target)
-					ChangeState(PawnState.Battle);
-
-			}
 			
+            enemiesInRange.Add(other.gameObject);
+            //Debug.Log("Started Battle");
+            //nav.isStopped = true;
+            if (other.gameObject == target)
+				ChangeState(PawnState.Battle);
+
 
 		}
     }

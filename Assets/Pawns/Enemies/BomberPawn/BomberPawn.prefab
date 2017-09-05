@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 114368387715813238}
   - component: {fileID: 114223207288151504}
   - component: {fileID: 114244301670892682}
-  - component: {fileID: 135611374970123322}
   m_Layer: 0
   m_Name: BomberPawn
   m_TagString: Enemy
@@ -443,18 +442,6 @@ MonoBehaviour:
   hpBarPrefab: {fileID: 1419856877115170, guid: 851d77b0ff520d442af9944588f5321e,
     type: 2}
   canvas: {fileID: 0}
---- !u!135 &135611374970123322
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1525383979681094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.23
-  m_Center: {x: 0, y: 0.5, z: 0.16}
 --- !u!136 &136015300867520358
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -462,7 +449,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1525383979681094}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.15
   m_Height: 0.71
