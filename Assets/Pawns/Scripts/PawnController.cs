@@ -110,6 +110,7 @@ public class PawnController : MonoBehaviour {
         }
         else if(currentState == PawnState.FindTarget)
         {
+            nav.isStopped = false;
             if (target != null)
             {
                 if (nav != null)
