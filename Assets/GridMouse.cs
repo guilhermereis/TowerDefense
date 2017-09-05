@@ -207,9 +207,11 @@ public class GridMouse : MonoBehaviour {
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
             //Debug.Log("Hitou " + hitInfo.transform.gameObject);
-            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
+            int x = Mathf.FloorToInt(hitInfo.point.x +0.5f + _gridSize.x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z +0.5f + _gridSize.y / 2);
             position = CoordToPosition(x, z);
+            
+
             //Debug.Log("x: " + x + ", z: " + z);
             //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
@@ -217,18 +219,27 @@ public class GridMouse : MonoBehaviour {
             if (previousPosition == position)
             {
                 //stepped over a track tile
-                if (propertiesMatrix[x, z].type == "Track")
+                if (propertiesMatrix[x, z].type == "Track"
+                    ||propertiesMatrix[x+1, z+1].type == "Track"
+                    || propertiesMatrix[x, z + 1].type == "Track"
+                    || propertiesMatrix[x + 1, z].type == "Track")
                 {
                     //don't build
                 }
                 else
                 {//if the logic doens't involve going over track tiles
-                    if (previewMatrix[x, z] == false)
+                    if (previewMatrix[x, z] == false
+                        && previewMatrix[x+1, z+1] == false
+                        && previewMatrix[x+1, z] == false
+                        && previewMatrix[x, z+1] == false)
                     {
 
                         temporaryInstance = new GameObject();
                         buildManager.BuildPreviewOn(ref temporaryInstance, position);
                         previewMatrix[x, z] = true;
+                        previewMatrix[x + 1, z + 1] = true;
+                        previewMatrix[x + 1, z] = true;
+                        previewMatrix[x, z + 1] = true;
                         //Debug.Log("construiu preview !");
                     }
                 }
@@ -239,18 +250,25 @@ public class GridMouse : MonoBehaviour {
                 if (temporaryInstance != null)
                 {
                     //stepped over a track tile
-                    if (propertiesMatrix[x, z].type == "Track")
+                    if (propertiesMatrix[x, z].type == "Track"
+                        || propertiesMatrix[x+1, z+1].type == "Track"
+                        || propertiesMatrix[x+1, z].type == "Track"
+                        || propertiesMatrix[x, z+1].type == "Track")
                     {
 
                     }
                     else
                     {
                         //if the logic doens't involve going over track tiles
+                        
+                        int instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x -0.5f + _gridSize.x / 2);
+                        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z  -0.5f + _gridSize.y / 2);
                         Destroy(temporaryInstance);
-                        int instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
-                        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
 
                         previewMatrix[instance_x, instance_z] = false;
+                        previewMatrix[instance_x + 1, instance_z + 1] = false;
+                        previewMatrix[instance_x + 1, instance_z] = false;
+                        previewMatrix[instance_x, instance_z + 1] = false;
                         //previewMatrix[prevX, prevZ] = false;
                     }
                                        
