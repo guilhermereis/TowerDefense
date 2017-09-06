@@ -219,14 +219,12 @@ public class GridMouse : MonoBehaviour {
     }
     void RotateAccordingly(int x, int z)
     {
-        if (!rotated)
             if (z > instance_z + 1)
             {
                 Debug.Log("Rotate up from " + rotation);
                 rotation = new Vector3(-90, 180, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-                rotated = true;
             }
             else if (x > instance_x + 1)
             {
@@ -234,7 +232,6 @@ public class GridMouse : MonoBehaviour {
                 rotation = new Vector3(-90, -90, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-                rotated = true;
             }
             else if (x < instance_x)
             {
@@ -242,7 +239,6 @@ public class GridMouse : MonoBehaviour {
                 rotation = new Vector3(-90,90, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-                rotated = true;
             }
             else if (z < instance_z)
             {
@@ -250,7 +246,6 @@ public class GridMouse : MonoBehaviour {
                 rotation = new Vector3(-90, 0, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-                rotated = true;
             }
     }
 	void Update () {
@@ -279,7 +274,11 @@ public class GridMouse : MonoBehaviour {
                 {
                     //don't build
                     //ROTATE !
-                    RotateAccordingly(x, z);       
+                    if (!rotated)
+                    {
+                        RotateAccordingly(x, z);
+                        rotated = true;
+                    }
                 }
                 else
                 {//if the logic doens't involve going over track tiles
