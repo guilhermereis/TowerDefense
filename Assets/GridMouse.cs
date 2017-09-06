@@ -204,6 +204,34 @@ public class GridMouse : MonoBehaviour {
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition);
         return AddedElmtIndex;
     }
+    void RotateAccordingly(int x, int z)
+    {
+        if (!rotated)
+            if (z > instance_z + 1)
+            {
+                Debug.Log("Rotate up from " + rotation);
+                rotation = new Vector3(-90, 180, 0);
+                Debug.Log("New rotation = " + rotation);
+                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+                rotated = true;
+            }
+            else if (x > instance_x + 1)
+            {
+                Debug.Log("Rotate right from " + rotation);
+                rotation = new Vector3(-90, -90, 0);
+                Debug.Log("New rotation = " + rotation);
+                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+                rotated = true;
+            }
+            else if (x < instance_x)
+            {
+                Debug.Log("Rotate left from " + rotation);
+                rotation = new Vector3(-90,90, 0);
+                Debug.Log("New rotation = " + rotation);
+                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+                rotated = true;
+            }
+    }
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
@@ -230,17 +258,7 @@ public class GridMouse : MonoBehaviour {
                 {
                     //don't build
                     //ROTATE !
-                    if (z > instance_z + 1)
-                    {
-                        if (!rotated)
-                        {
-                            Debug.Log("Rotate up from " + rotation);
-                            rotation = new Vector3(rotation.x, rotation.y + 180, rotation.z);
-                            Debug.Log("New rotation = " + rotation);
-                            temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-                            rotated = true;
-                        }
-                    }
+                    RotateAccordingly(x, z);       
                 }
                 else
                 {//if the logic doens't involve going over track tiles
@@ -252,6 +270,7 @@ public class GridMouse : MonoBehaviour {
 
                         temporaryInstance = new GameObject();
                         buildManager.BuildPreviewOn(ref temporaryInstance, position);
+                        rotated = false;
                         previewMatrix[x, z] = true;
                         previewMatrix[x + 1, z + 1] = true;
                         previewMatrix[x + 1, z] = true;
@@ -271,7 +290,7 @@ public class GridMouse : MonoBehaviour {
                         || propertiesMatrix[x+1, z].type == "Track"
                         || propertiesMatrix[x, z+1].type == "Track")
                     {
-
+                        RotateAccordingly(x, z);
                     }
                     else
                     {
