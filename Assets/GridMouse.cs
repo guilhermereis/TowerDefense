@@ -244,6 +244,14 @@ public class GridMouse : MonoBehaviour {
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
                 rotated = true;
             }
+            else if (z < instance_z)
+            {
+                Debug.Log("Rotate down from " + rotation);
+                rotation = new Vector3(-90, 0, 0);
+                Debug.Log("New rotation = " + rotation);
+                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+                rotated = true;
+            }
     }
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
