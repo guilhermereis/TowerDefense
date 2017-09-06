@@ -137,9 +137,15 @@ public class GridMouse : MonoBehaviour {
             
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
+            
+
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             position = CoordToPosition(x, z);
+            if (temporaryInstance != null)
+            {
+                position = temporaryInstance.transform.position;
+            }
             //Debug.Log("x: " + x + ", z: " + z);
 
 
@@ -177,7 +183,10 @@ public class GridMouse : MonoBehaviour {
                 {
                     if (buildManager.getUnitToBuild() != null)
                     {
-                        int added_index = buildUnitAndAddItToTheList(position);
+                        Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
+                        int added_index = buildUnitAndAddItToTheList(newPosition);
+                        Destroy(temporaryInstance);
+                        //int added_index = buildUnitAndAddItToTheList(position);
                         propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
                         if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
                         {
@@ -196,6 +205,10 @@ public class GridMouse : MonoBehaviour {
                 }
             }
         }
+    }
+    public Vector3 getPreviewRotation()
+    {
+        return this.rotation;
     }
     public int buildUnitAndAddItToTheList(Vector3 myPosition) {
         ListOfGameObjects.Add(new GameObject());
