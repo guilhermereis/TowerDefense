@@ -145,6 +145,8 @@ public class GridMouse : MonoBehaviour {
             if (temporaryInstance != null)
             {
                 position = temporaryInstance.transform.position;
+                x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
+                z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
             }
             //Debug.Log("x: " + x + ", z: " + z);
 
@@ -291,10 +293,14 @@ public class GridMouse : MonoBehaviour {
                         temporaryInstance = new GameObject();
                         buildManager.BuildPreviewOn(ref temporaryInstance, position);
                         rotated = false;
-                        previewMatrix[x, z] = true;
-                        previewMatrix[x + 1, z + 1] = true;
-                        previewMatrix[x + 1, z] = true;
-                        previewMatrix[x, z + 1] = true;
+
+                        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
+                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
+
+                        previewMatrix[instance_x, instance_z] = true;
+                        previewMatrix[instance_x + 1, instance_z + 1] = true;
+                        previewMatrix[instance_x + 1, instance_z] = true;
+                        previewMatrix[instance_x, instance_z + 1] = true;
                         //Debug.Log("construiu preview !");
                     }
                 }
