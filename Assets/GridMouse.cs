@@ -21,8 +21,12 @@ public class GridMouse : MonoBehaviour {
     private Vector3 previousPosition;
     private int prevX;
     private int prevZ;
+    private int instance_x;
+    private int instance_z;
     private GameObject temporaryInstance;
     private Vector3 position;
+    private Vector3 rotation = new Vector3(-90, 0, 0);
+    private bool rotated = false;
     GameObject temp;
 
     [SerializeField]
@@ -225,6 +229,18 @@ public class GridMouse : MonoBehaviour {
                     || propertiesMatrix[x + 1, z].type == "Track")
                 {
                     //don't build
+                    //ROTATE !
+                    if (z > instance_z + 1)
+                    {
+                        if (!rotated)
+                        {
+                            Debug.Log("Rotate up from " + rotation);
+                            rotation = new Vector3(rotation.x, rotation.y + 180, rotation.z);
+                            Debug.Log("New rotation = " + rotation);
+                            temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+                            rotated = true;
+                        }
+                    }
                 }
                 else
                 {//if the logic doens't involve going over track tiles
@@ -261,8 +277,8 @@ public class GridMouse : MonoBehaviour {
                     {
                         //if the logic doens't involve going over track tiles
                         
-                        int instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x -0.5f + _gridSize.x / 2);
-                        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z  -0.5f + _gridSize.y / 2);
+                        instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x -0.5f + _gridSize.x / 2);
+                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z  -0.5f + _gridSize.y / 2);
                         Destroy(temporaryInstance);
 
                         previewMatrix[instance_x, instance_z] = false;
