@@ -263,7 +263,7 @@ public class GridMouse : MonoBehaviour {
             prevZ = z;
             //previewMatrix[x, z] = true;
             //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
-            Debug.Log("Property of this tile: "+propertiesMatrix[x,z].type);
+            //Debug.Log("Property of this tile: "+propertiesMatrix[x,z].type);
         }
             
 	}
