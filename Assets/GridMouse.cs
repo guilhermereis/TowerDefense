@@ -128,158 +128,128 @@ public class GridMouse : MonoBehaviour {
         }
         Track.SetActive(false);
     }
-    private void HandleBuildingSoldierCamp()
+    //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
+    private bool CheckIfHitStructure()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        return
+            hitInfo.transform.gameObject.name == "Tower(Clone)"
+            || hitInfo.transform.gameObject.name == "PrefabCamp(Clone)";
+    }
+    private void HandleBuildingSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
+    {
         if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
 
         {
-            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
-
-
-            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
-            position = CoordToPosition(x, z);
-            if (temporaryInstance != null)
-            {
-                position = temporaryInstance.transform.position;
-                x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
-                z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
-            }
-            //Debug.Log("x: " + x + ", z: " + z);
-
-
-            //If I hit a Tower
-            if (hitInfo.transform.gameObject.name == "Tower(Clone)")
-            {
-                BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
-                buildManager.SelectBuilding(buildable.getArrayListPosition());
-                buildManager.ShowOptions();
-            }
+            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);            
+            
             //If I hit the Grid
             if (hitInfo.transform.gameObject.name == "Grid")
             {
-                PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
-                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                if (temporaryInstance != null)
                 {
-                    if (propertiesMatrix[x, z].unit != null)
-                        propertyInQuestion = propertiesMatrix[x, z];
-                    else if (propertiesMatrix[x + 1, z + 1].unit != null)
-                        propertyInQuestion = propertiesMatrix[x + 1, z + 1];
-                    else if (propertiesMatrix[x, z + 1].unit != null)
-                        propertyInQuestion = propertiesMatrix[x, z + 1];
-                    else if (propertiesMatrix[x + 1, z].unit != null)
-                        propertyInQuestion = propertiesMatrix[x + 1, z];
-                }
+                    position = temporaryInstance.transform.position;
+                    x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
+                    z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
 
-                if (propertyInQuestion.unit != null)
-                {
-                    buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-                    buildManager.ShowOptions();
-                    Debug.Log("Selecionou a posição: " + x + ", " + z);
-                    //Destroy(hitInfo.transform.gameObject);
-                }
-                else
-                {
-                    if (buildManager.getUnitToBuild() != null)
                     {
-                        
-                        Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
-                        
-                        int added_index = buildUnitAndAddItToTheList(newPosition);
-                        Destroy(temporaryInstance);
-                        //int added_index = buildUnitAndAddItToTheList(position);
-                        propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                        if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                        if (buildManager.getUnitToBuild() != null)
                         {
-                            propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                            propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                            propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+
+                            Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
+
+                            int added_index = buildUnitAndAddItToTheList(newPosition);
+                            Destroy(temporaryInstance);
+                            //int added_index = buildUnitAndAddItToTheList(position);
+                            propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                            if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                            {
+                                propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                            }
+                            Debug.Log("Construiu na posição " + x + ", " + z);
+                            Debug.Log("Position = " + position);
                         }
-                        Debug.Log("Construiu na posição " + x + ", " + z);
-                        Debug.Log("Position = " + position);
-                    }
-                    else
-                    {
-                        buildManager.HideOptions();
-                        Debug.Log("Hide Options");
+                        else
+                        {
+                            buildManager.HideOptions();
+                            Debug.Log("Hide Options");
+                        }
                     }
                 }
             }
         }
     }
-    private void HandleBuildingTower()
+    //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
+    private void HandleBuildingTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
         //Debug.Log("Mouse Down");
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
         if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
 
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
-            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
-            position = CoordToPosition(x, z);
-            //Debug.Log("x: " + x + ", z: " + z);
 
-
-            //If I hit a Tower
-            if (hitInfo.transform.gameObject.name == "Tower(Clone)")
-            {
-                BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
-                buildManager.SelectBuilding(buildable.getArrayListPosition());
-                buildManager.ShowOptions();
-            }
+            
             //If I hit the Grid
             if (hitInfo.transform.gameObject.name == "Grid")
             {
-                PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
-                
-                if (propertyInQuestion.unit != null)
-                {
-                    buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-                    buildManager.ShowOptions();
-                    Debug.Log("Selecionou a posição: " + x + ", " + z);
-                    //Destroy(hitInfo.transform.gameObject);
-                }
-                else
-                {
-                    if (buildManager.getUnitToBuild() != null)
+                if (temporaryInstance != null) { 
+
+                    position = temporaryInstance.transform.position;
+                    x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
+                    z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
+
+
                     {
-                        if (temporaryInstance != null)
+                        if (buildManager.getUnitToBuild() != null)
                         {
-                            position = temporaryInstance.transform.position;
-                            x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
-                            z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
+                            int added_index = buildUnitAndAddItToTheList(position);
+                            Destroy(temporaryInstance);
+                            propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                            Debug.Log("Construiu na posição " + x + ", " + z);
+                            Debug.Log("Position = " + position);
                         }
-                        int added_index = buildUnitAndAddItToTheList(position);
-                        Destroy(temporaryInstance);
-                        propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                        Debug.Log("Construiu na posição " + x + ", " + z);
-                        Debug.Log("Position = " + position);
+                        else
+                        {
+                            buildManager.HideOptions();
+                            Debug.Log("Hide Options");
+                        }
                     }
-                    else
-                    {
-                        buildManager.HideOptions();
-                        Debug.Log("Hide Options");
-                    }
-                }
+            }
             }
         }
     }
     void OnMouseDown()
     {
-        //Debug.Log("Mouse Down");
-        if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
+        int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
+        PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
+
+        if (propertyInQuestion.unit != null) // If the tile contains a Structure
         {
-            HandleBuildingSoldierCamp();
+            buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
+            buildManager.ShowOptions();
+            Debug.Log("Selecionou a posição: " + x + ", " + z);
+            //Destroy(hitInfo.transform.gameObject);
         }
-        else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+        else if (CheckIfHitStructure()) // If I hit a Structure
         {
-            HandleBuildingTower();
+            BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
+            buildManager.SelectBuilding(buildable.getArrayListPosition());
+            buildManager.ShowOptions();
+        }
+        else // Build something
+        {
+            if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+            {
+                HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
+            }
+            else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+            {
+                HandleBuildingTower(ray, hitInfo, didHit, x, z);
+            }
         }
     }
     public Vector3 getPreviewRotation()
