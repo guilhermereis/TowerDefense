@@ -21,8 +21,12 @@ public class GridMouse : MonoBehaviour {
     private Vector3 previousPosition;
     private int prevX;
     private int prevZ;
+    private int instance_x;
+    private int instance_z;
     private GameObject temporaryInstance;
     private Vector3 position;
+    private Vector3 rotation = new Vector3(-90, 0, 0);
+    private bool rotated = false;
     GameObject temp;
 
     [SerializeField]
@@ -118,7 +122,8 @@ public class GridMouse : MonoBehaviour {
             //tower
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Debug.Log(x + "," + z + " = Track");
+            //Vector3 position = CoordToPosition(x, z);
+            Debug.Log(x + "," + z + " = Track");
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
         Track.SetActive(false);
@@ -133,9 +138,17 @@ public class GridMouse : MonoBehaviour {
             
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
+            
+
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             position = CoordToPosition(x, z);
+            if (temporaryInstance != null)
+            {
+                position = temporaryInstance.transform.position;
+                x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
+                z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
+            }
             //Debug.Log("x: " + x + ", z: " + z);
 
 
@@ -173,7 +186,10 @@ public class GridMouse : MonoBehaviour {
                 {
                     if (buildManager.getUnitToBuild() != null)
                     {
-                        int added_index = buildUnitAndAddItToTheList(position);
+                        Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
+                        int added_index = buildUnitAndAddItToTheList(newPosition);
+                        Destroy(temporaryInstance);
+                        //int added_index = buildUnitAndAddItToTheList(position);
                         propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
                         if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
                         {
@@ -193,12 +209,47 @@ public class GridMouse : MonoBehaviour {
             }
         }
     }
+    public Vector3 getPreviewRotation()
+    {
+        return this.rotation;
+    }
     public int buildUnitAndAddItToTheList(Vector3 myPosition) {
         ListOfGameObjects.Add(new GameObject());
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition);
         return AddedElmtIndex;
+    }
+    void RotateAccordingly(int x, int z)
+    {
+            if (z > instance_z + 1)
+            {
+                Debug.Log("Rotate up from " + rotation);
+                rotation = new Vector3(-90, 180, 0);
+                Debug.Log("New rotation = " + rotation);
+                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+            }
+            else if (x > instance_x + 1)
+            {
+                Debug.Log("Rotate right from " + rotation);
+                rotation = new Vector3(-90, -90, 0);
+                Debug.Log("New rotation = " + rotation);
+                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+            }
+            else if (x < instance_x)
+            {
+                Debug.Log("Rotate left from " + rotation);
+                rotation = new Vector3(-90,90, 0);
+                Debug.Log("New rotation = " + rotation);
+                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+            }
+            else if (z < instance_z)
+            {
+                Debug.Log("Rotate down from " + rotation);
+                rotation = new Vector3(-90, 0, 0);
+                Debug.Log("New rotation = " + rotation);
+                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
+            }
     }
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -207,9 +258,11 @@ public class GridMouse : MonoBehaviour {
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
             //Debug.Log("Hitou " + hitInfo.transform.gameObject);
-            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
+            int x = Mathf.FloorToInt(hitInfo.point.x +0.5f + _gridSize.x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z +0.5f + _gridSize.y / 2);
             position = CoordToPosition(x, z);
+            
+
             //Debug.Log("x: " + x + ", z: " + z);
             //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
@@ -217,18 +270,38 @@ public class GridMouse : MonoBehaviour {
             if (previousPosition == position)
             {
                 //stepped over a track tile
-                if (propertiesMatrix[x, z].type == "Track")
+                if (propertiesMatrix[x, z].type == "Track"
+                    ||propertiesMatrix[x+1, z+1].type == "Track"
+                    || propertiesMatrix[x, z + 1].type == "Track"
+                    || propertiesMatrix[x + 1, z].type == "Track")
                 {
                     //don't build
+                    //ROTATE !
+                    if (!rotated)
+                    {
+                        RotateAccordingly(x, z);
+                        rotated = true;
+                    }
                 }
                 else
                 {//if the logic doens't involve going over track tiles
-                    if (previewMatrix[x, z] == false)
+                    if (previewMatrix[x, z] == false
+                        && previewMatrix[x+1, z+1] == false
+                        && previewMatrix[x+1, z] == false
+                        && previewMatrix[x, z+1] == false)
                     {
 
                         temporaryInstance = new GameObject();
                         buildManager.BuildPreviewOn(ref temporaryInstance, position);
-                        previewMatrix[x, z] = true;
+                        rotated = false;
+
+                        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
+                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
+
+                        previewMatrix[instance_x, instance_z] = true;
+                        previewMatrix[instance_x + 1, instance_z + 1] = true;
+                        previewMatrix[instance_x + 1, instance_z] = true;
+                        previewMatrix[instance_x, instance_z + 1] = true;
                         //Debug.Log("construiu preview !");
                     }
                 }
@@ -239,18 +312,25 @@ public class GridMouse : MonoBehaviour {
                 if (temporaryInstance != null)
                 {
                     //stepped over a track tile
-                    if (propertiesMatrix[x, z].type == "Track")
+                    if (propertiesMatrix[x, z].type == "Track"
+                        || propertiesMatrix[x+1, z+1].type == "Track"
+                        || propertiesMatrix[x+1, z].type == "Track"
+                        || propertiesMatrix[x, z+1].type == "Track")
                     {
-
+                        RotateAccordingly(x, z);
                     }
                     else
                     {
                         //if the logic doens't involve going over track tiles
+                        
+                        instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x -0.5f + _gridSize.x / 2);
+                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z  -0.5f + _gridSize.y / 2);
                         Destroy(temporaryInstance);
-                        int instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
-                        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
 
                         previewMatrix[instance_x, instance_z] = false;
+                        previewMatrix[instance_x + 1, instance_z + 1] = false;
+                        previewMatrix[instance_x + 1, instance_z] = false;
+                        previewMatrix[instance_x, instance_z + 1] = false;
                         //previewMatrix[prevX, prevZ] = false;
                     }
                                        
@@ -263,7 +343,9 @@ public class GridMouse : MonoBehaviour {
             prevZ = z;
             //previewMatrix[x, z] = true;
             //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
-            Debug.Log("Property of this tile: "+propertiesMatrix[x,z].type);
+
+            Debug.Log("TILE: "+x+","+z+" OF TYPE: "+ propertiesMatrix[x, z].type);
+            //Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
         }
             
 	}
