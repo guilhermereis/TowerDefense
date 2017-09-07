@@ -148,8 +148,8 @@ public class GridMouse : MonoBehaviour {
                 if (temporaryInstance != null)
                 {
                     position = temporaryInstance.transform.position;
-                    x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
-                    z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
+                    x = Mathf.FloorToInt(position.x -0.5f + _gridSize.x / 2);
+                    z = Mathf.FloorToInt(position.z -0.5f + _gridSize.y / 2);
 
                     {
                         if (buildManager.getUnitToBuild() != null)
@@ -169,11 +169,6 @@ public class GridMouse : MonoBehaviour {
                             }
                             Debug.Log("Construiu na posição " + x + ", " + z);
                             Debug.Log("Position = " + position);
-                        }
-                        else
-                        {
-                            buildManager.HideOptions();
-                            Debug.Log("Hide Options");
                         }
                     }
                 }
@@ -209,11 +204,6 @@ public class GridMouse : MonoBehaviour {
                             Debug.Log("Construiu na posição " + x + ", " + z);
                             Debug.Log("Position = " + position);
                         }
-                        else
-                        {
-                            buildManager.HideOptions();
-                            Debug.Log("Hide Options");
-                        }
                     }
             }
             }
@@ -245,10 +235,17 @@ public class GridMouse : MonoBehaviour {
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
                 HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
+                buildManager.DeselectUnitToBuild();
             }
             else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
             {
                 HandleBuildingTower(ray, hitInfo, didHit, x, z);
+                buildManager.DeselectUnitToBuild();
+            }
+            else //if there's nothing to build, then hide the options
+            {                
+                buildManager.HideOptions();
+                Debug.Log("Hide Options");
             }
         }
     }
@@ -443,8 +440,8 @@ public class GridMouse : MonoBehaviour {
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
             //Debug.Log("Hitou " + hitInfo.transform.gameObject);
-            int x = Mathf.FloorToInt(hitInfo.point.x + 0.5f + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z + 0.5f + _gridSize.y / 2);
+            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             position = CoordToPosition(x, z);
 
 
