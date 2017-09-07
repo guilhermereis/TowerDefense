@@ -336,23 +336,10 @@ public class GridMouse : MonoBehaviour {
             }
     }
 
-    private void HandlePreviewSoldierCamp()
+    private void HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit,int x, int z)
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (didHit)
         {
-            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
-            //Debug.Log("Hitou " + hitInfo.transform.gameObject);
-            int x = Mathf.FloorToInt(hitInfo.point.x + 0.5f + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z + 0.5f + _gridSize.y / 2);
-            position = CoordToPosition(x, z);
-
-
-            //Debug.Log("x: " + x + ", z: " + z);
-            //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
-            Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
-            selectionCube.transform.position = positionCube;
             if (previousPosition == position)
             {
                 //stepped over a track tile
@@ -434,21 +421,10 @@ public class GridMouse : MonoBehaviour {
             //Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
         }
     }
-    private void HandlePreviewTower()
+    private void HandlePreviewTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (didHit)
         {
-            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
-            //Debug.Log("Hitou " + hitInfo.transform.gameObject);
-            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
-            position = CoordToPosition(x, z);
-            //Debug.Log("x: " + x + ", z: " + z);
-            //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
-            Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
-            selectionCube.transform.position = positionCube;
             if (previousPosition == position)
             {
                 //stepped over a track tile
@@ -503,15 +479,32 @@ public class GridMouse : MonoBehaviour {
     }
 
 	void Update () {
-        if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+
+        if (didHit)
         {
-            HandlePreviewSoldierCamp();
-        }
-        else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
-        {
-            HandlePreviewTower();
-        }
-            
+            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
+            //Debug.Log("Hitou " + hitInfo.transform.gameObject);
+            int x = Mathf.FloorToInt(hitInfo.point.x + 0.5f + _gridSize.x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z + 0.5f + _gridSize.y / 2);
+            position = CoordToPosition(x, z);
+
+
+            //Debug.Log("x: " + x + ", z: " + z);
+            //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
+            Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
+            selectionCube.transform.position = positionCube;
+
+            if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+            {
+                HandlePreviewSoldierCamp(ray, hitInfo, didHit, x, z);
+            }
+            else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+            {
+                HandlePreviewTower(ray, hitInfo, didHit, x, z);
+            }
+        }    
 	}
     public Vector3 CoordToPosition(int x, int y)
     {
