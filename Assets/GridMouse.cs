@@ -128,17 +128,16 @@ public class GridMouse : MonoBehaviour {
         }
         Track.SetActive(false);
     }
-    void OnMouseDown()
+    private void HandleBuildingSoldierCamp()
     {
-        //Debug.Log("Mouse Down");
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
         if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-            
+
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
-            
+
 
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
@@ -186,7 +185,9 @@ public class GridMouse : MonoBehaviour {
                 {
                     if (buildManager.getUnitToBuild() != null)
                     {
+                        
                         Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
+                        
                         int added_index = buildUnitAndAddItToTheList(newPosition);
                         Destroy(temporaryInstance);
                         //int added_index = buildUnitAndAddItToTheList(position);
@@ -207,6 +208,89 @@ public class GridMouse : MonoBehaviour {
                     }
                 }
             }
+        }
+    }
+    private void HandleBuildingTower()
+    {
+        //Debug.Log("Mouse Down");
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+
+        {
+            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
+            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
+            position = CoordToPosition(x, z);
+            if (temporaryInstance != null)
+            {
+                position = temporaryInstance.transform.position;
+                x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
+                z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
+            }
+            //Debug.Log("x: " + x + ", z: " + z);
+
+
+            //If I hit a Tower
+            if (hitInfo.transform.gameObject.name == "Tower(Clone)")
+            {
+                BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
+                buildManager.SelectBuilding(buildable.getArrayListPosition());
+                buildManager.ShowOptions();
+            }
+            //If I hit the Grid
+            if (hitInfo.transform.gameObject.name == "Grid")
+            {
+                PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
+                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                {
+                    if (propertiesMatrix[x, z].unit != null)
+                        propertyInQuestion = propertiesMatrix[x, z];
+                    else if (propertiesMatrix[x + 1, z + 1].unit != null)
+                        propertyInQuestion = propertiesMatrix[x + 1, z + 1];
+                    else if (propertiesMatrix[x, z + 1].unit != null)
+                        propertyInQuestion = propertiesMatrix[x, z + 1];
+                    else if (propertiesMatrix[x + 1, z].unit != null)
+                        propertyInQuestion = propertiesMatrix[x + 1, z];
+                }
+
+                if (propertyInQuestion.unit != null)
+                {
+                    buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
+                    buildManager.ShowOptions();
+                    Debug.Log("Selecionou a posição: " + x + ", " + z);
+                    //Destroy(hitInfo.transform.gameObject);
+                }
+                else
+                {
+                    if (buildManager.getUnitToBuild() != null)
+                    {
+                        int added_index = buildUnitAndAddItToTheList(position);
+                        Destroy(temporaryInstance);
+                        propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                        Debug.Log("Construiu na posição " + x + ", " + z);
+                        Debug.Log("Position = " + position);
+                    }
+                    else
+                    {
+                        buildManager.HideOptions();
+                        Debug.Log("Hide Options");
+                    }
+                }
+            }
+        }
+    }
+    void OnMouseDown()
+    {
+        //Debug.Log("Mouse Down");
+        if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+        {
+            HandleBuildingSoldierCamp();
+        }
+        else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+        {
+            HandleBuildingTower();
         }
     }
     public Vector3 getPreviewRotation()
@@ -251,17 +335,19 @@ public class GridMouse : MonoBehaviour {
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
     }
-	void Update () {
+
+    private void HandlePreviewSoldierCamp()
+    {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
+
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
             //Debug.Log("Hitou " + hitInfo.transform.gameObject);
-            int x = Mathf.FloorToInt(hitInfo.point.x +0.5f + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z +0.5f + _gridSize.y / 2);
+            int x = Mathf.FloorToInt(hitInfo.point.x + 0.5f + _gridSize.x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z + 0.5f + _gridSize.y / 2);
             position = CoordToPosition(x, z);
-            
+
 
             //Debug.Log("x: " + x + ", z: " + z);
             //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
@@ -271,7 +357,7 @@ public class GridMouse : MonoBehaviour {
             {
                 //stepped over a track tile
                 if (propertiesMatrix[x, z].type == "Track"
-                    ||propertiesMatrix[x+1, z+1].type == "Track"
+                    || propertiesMatrix[x + 1, z + 1].type == "Track"
                     || propertiesMatrix[x, z + 1].type == "Track"
                     || propertiesMatrix[x + 1, z].type == "Track")
                 {
@@ -286,9 +372,9 @@ public class GridMouse : MonoBehaviour {
                 else
                 {//if the logic doens't involve going over track tiles
                     if (previewMatrix[x, z] == false
-                        && previewMatrix[x+1, z+1] == false
-                        && previewMatrix[x+1, z] == false
-                        && previewMatrix[x, z+1] == false)
+                        && previewMatrix[x + 1, z + 1] == false
+                        && previewMatrix[x + 1, z] == false
+                        && previewMatrix[x, z + 1] == false)
                     {
 
                         temporaryInstance = new GameObject();
@@ -313,18 +399,18 @@ public class GridMouse : MonoBehaviour {
                 {
                     //stepped over a track tile
                     if (propertiesMatrix[x, z].type == "Track"
-                        || propertiesMatrix[x+1, z+1].type == "Track"
-                        || propertiesMatrix[x+1, z].type == "Track"
-                        || propertiesMatrix[x, z+1].type == "Track")
+                        || propertiesMatrix[x + 1, z + 1].type == "Track"
+                        || propertiesMatrix[x + 1, z].type == "Track"
+                        || propertiesMatrix[x, z + 1].type == "Track")
                     {
                         RotateAccordingly(x, z);
                     }
                     else
                     {
                         //if the logic doens't involve going over track tiles
-                        
-                        instance_x =  Mathf.FloorToInt(temporaryInstance.transform.position.x -0.5f + _gridSize.x / 2);
-                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z  -0.5f + _gridSize.y / 2);
+
+                        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
+                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
                         Destroy(temporaryInstance);
 
                         previewMatrix[instance_x, instance_z] = false;
@@ -333,10 +419,10 @@ public class GridMouse : MonoBehaviour {
                         previewMatrix[instance_x, instance_z + 1] = false;
                         //previewMatrix[prevX, prevZ] = false;
                     }
-                                       
+
                     //Debug.Log("destruiu preview !");
                 }
-                             
+
             }
             previousPosition = position;
             prevX = x;
@@ -344,8 +430,86 @@ public class GridMouse : MonoBehaviour {
             //previewMatrix[x, z] = true;
             //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
 
-            Debug.Log("TILE: "+x+","+z+" OF TYPE: "+ propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
             //Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
+        }
+    }
+    private void HandlePreviewTower()
+    {
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        {
+            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
+            //Debug.Log("Hitou " + hitInfo.transform.gameObject);
+            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
+            position = CoordToPosition(x, z);
+            //Debug.Log("x: " + x + ", z: " + z);
+            //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
+            Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
+            selectionCube.transform.position = positionCube;
+            if (previousPosition == position)
+            {
+                //stepped over a track tile
+                if (propertiesMatrix[x, z].type == "Track")
+                {
+                    //don't build
+                }
+                else
+                {//if the logic doens't involve going over track tiles
+                    if (previewMatrix[x, z] == false)
+                    {
+
+                        temporaryInstance = new GameObject();
+                        buildManager.BuildPreviewOn(ref temporaryInstance, position);
+                        previewMatrix[x, z] = true;
+                        //Debug.Log("construiu preview !");
+                    }
+                }
+            }
+            else
+            {
+                //Debug.Log("moveu !");
+                if (temporaryInstance != null)
+                {
+                    //stepped over a track tile
+                    if (propertiesMatrix[x, z].type == "Track")
+                    {
+
+                    }
+                    else
+                    {
+                        //if the logic doens't involve going over track tiles
+                        Destroy(temporaryInstance);
+                        int instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
+                        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
+
+                        previewMatrix[instance_x, instance_z] = false;
+                        //previewMatrix[prevX, prevZ] = false;
+                    }
+
+                    //Debug.Log("destruiu preview !");
+                }
+
+            }
+            previousPosition = position;
+            prevX = x;
+            prevZ = z;
+            //previewMatrix[x, z] = true;
+            //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
+            Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
+        }
+    }
+
+	void Update () {
+        if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+        {
+            HandlePreviewSoldierCamp();
+        }
+        else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+        {
+            HandlePreviewTower();
         }
             
 	}
