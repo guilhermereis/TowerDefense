@@ -123,7 +123,7 @@ public class GridMouse : MonoBehaviour {
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             //Vector3 position = CoordToPosition(x, z);
-            Debug.Log(x + "," + z + " = Track");
+            //Debug.Log(x + "," + z + " = Track");
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
         Track.SetActive(false);
@@ -243,9 +243,12 @@ public class GridMouse : MonoBehaviour {
                 buildManager.DeselectUnitToBuild();
             }
             else //if there's nothing to build, then hide the options
-            {                
-                buildManager.HideOptions();
-                Debug.Log("Hide Options");
+            {
+                if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                {
+                    buildManager.HideOptions();
+                    Debug.Log("Hide Options");
+                }
             }
         }
     }
@@ -439,17 +442,14 @@ public class GridMouse : MonoBehaviour {
         if (didHit)
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
-            //Debug.Log("Hitou " + hitInfo.transform.gameObject);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             position = CoordToPosition(x, z);
 
-
-            //Debug.Log("x: " + x + ", z: " + z);
-            //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
+            
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
