@@ -20,11 +20,12 @@ public class WarriorController : EnemyController {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update();
+        
         anim.speed = nav.velocity.magnitude;
-        if (target!= null && enemiesInRange.Contains(target))
-		{
-			ChangeState(PawnState.Battle);
-		}
+  //      if (target!= null && enemiesInRange.Contains(target))
+		//{
+		//	ChangeState(PawnState.Battle);
+		//}
 		attackCountdown -= Time.deltaTime;
 	}
 
@@ -60,8 +61,6 @@ public class WarriorController : EnemyController {
 
             if (target == null)
 		    {
-			    enemiesInRange.Add(other.gameObject);
-
 			    target = other.gameObject;
 			    ChangeState(PawnState.Battle);
 		    }else if(other.gameObject == target)
@@ -84,10 +83,10 @@ public class WarriorController : EnemyController {
 		if (other.gameObject.tag.Equals("Ally"))
 		{
 			enemiesInRange.Remove(other.gameObject);
-            ChangeState(PawnState.Walking);
-            if (target != null)
+           
+            if (other.gameObject == target)
                 ChangeState(PawnState.FindTarget);
-            else { }
+           
             //	enemiesInRange.Remove(other.gameObject);
 
         }

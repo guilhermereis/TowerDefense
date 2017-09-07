@@ -21,8 +21,14 @@ public class PawnHealthBarGUI : MonoBehaviour {
 		}
 	}
 
-	private void Start()
+    public Vector3 heightOffset;
+
+
+    private void Start()
 	{
+
+        //getting the height 
+       
         Canvas[] canvasArray = FindObjectsOfType<Canvas>();
         for (int i = 0; i < canvasArray.Length; i++)
         {
@@ -51,7 +57,7 @@ public class PawnHealthBarGUI : MonoBehaviour {
 		
         if(Healthbar != null)
         {
-		    Healthbar.transform.position = (transform.up* 2) + transform.position;// Camera.main.WorldToScreenPoint((Vector3.up * 3) + transform.position);
+		    Healthbar.transform.position = heightOffset + transform.position;// Camera.main.WorldToScreenPoint((Vector3.up * 3) + transform.position);
             Healthbar.transform.rotation = Camera.main.transform.rotation;
         }
 	}

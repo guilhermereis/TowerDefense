@@ -15,7 +15,7 @@ public class PawnController : MonoBehaviour {
     protected PawnType type = PawnType.Wanderer;
 
     public Transform finalDestination;
-    protected NavMeshAgent nav;
+    public NavMeshAgent nav;
     public float speed;
 
     public Vector3 currentDestination;

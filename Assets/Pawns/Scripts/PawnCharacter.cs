@@ -23,10 +23,7 @@ public class PawnCharacter : MonoBehaviour {
 
 	private void Start()
 	{
-        if (gameObject.name == "BomberPawn")
-        {
-            Debug.Log("Bomber");
-        }
+       
         healthBar = (PawnHealthBarGUI)GetComponent<PawnHealthBarGUI>();
         
 		
@@ -46,8 +43,11 @@ public class PawnCharacter : MonoBehaviour {
 
     public virtual bool Damage(float _damage)
     {
-       
-       
+        if (gameObject.name == "PrefabGoblinKing")
+        {
+            Debug.Log("PrefabGoblinKing");
+        }
+
         float realDamage = _damage - defense;
 		if (realDamage < 0)
 			realDamage = 0;

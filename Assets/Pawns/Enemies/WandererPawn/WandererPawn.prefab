@@ -36,6 +36,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1396155608238032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4004954162261192}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4004954162261192
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1396155608238032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: -0.032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4207796857008322}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4207796857008322
 Transform:
   m_ObjectHideFlags: 1
@@ -45,7 +73,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.532, y: -1.000002, z: -16.624584}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_Children: []
+  m_Children:
+  - {fileID: 4004954162261192}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,6 +158,7 @@ MonoBehaviour:
   hpBarPrefab: {fileID: 1419856877115170, guid: 851d77b0ff520d442af9944588f5321e,
     type: 2}
   canvas: {fileID: 0}
+  heightOffset: {x: 0, y: 1.4, z: 0}
 --- !u!114 &114700906066300348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 2
   finalDestination: {fileID: 0}
+  nav: {fileID: 0}
   speed: 1.3
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
