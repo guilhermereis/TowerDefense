@@ -223,12 +223,6 @@ public class GridMouse : MonoBehaviour {
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             position = CoordToPosition(x, z);
-            if (temporaryInstance != null)
-            {
-                position = temporaryInstance.transform.position;
-                x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
-                z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
-            }
             //Debug.Log("x: " + x + ", z: " + z);
 
 
@@ -243,18 +237,7 @@ public class GridMouse : MonoBehaviour {
             if (hitInfo.transform.gameObject.name == "Grid")
             {
                 PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
-                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
-                {
-                    if (propertiesMatrix[x, z].unit != null)
-                        propertyInQuestion = propertiesMatrix[x, z];
-                    else if (propertiesMatrix[x + 1, z + 1].unit != null)
-                        propertyInQuestion = propertiesMatrix[x + 1, z + 1];
-                    else if (propertiesMatrix[x, z + 1].unit != null)
-                        propertyInQuestion = propertiesMatrix[x, z + 1];
-                    else if (propertiesMatrix[x + 1, z].unit != null)
-                        propertyInQuestion = propertiesMatrix[x + 1, z];
-                }
-
+                
                 if (propertyInQuestion.unit != null)
                 {
                     buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
@@ -266,6 +249,12 @@ public class GridMouse : MonoBehaviour {
                 {
                     if (buildManager.getUnitToBuild() != null)
                     {
+                        if (temporaryInstance != null)
+                        {
+                            position = temporaryInstance.transform.position;
+                            x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
+                            z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
+                        }
                         int added_index = buildUnitAndAddItToTheList(position);
                         Destroy(temporaryInstance);
                         propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
@@ -364,8 +353,8 @@ public class GridMouse : MonoBehaviour {
                         && previewMatrix[x, z + 1] == false)
                     {
 
-                        temporaryInstance = new GameObject();
-                        buildManager.BuildPreviewOn(ref temporaryInstance, position);
+
+                        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
                         rotated = false;
 
                         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
@@ -416,8 +405,7 @@ public class GridMouse : MonoBehaviour {
             prevZ = z;
             //previewMatrix[x, z] = true;
             //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
-
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            
             //Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
         }
     }
@@ -437,8 +425,7 @@ public class GridMouse : MonoBehaviour {
                     if (previewMatrix[x, z] == false)
                     {
 
-                        temporaryInstance = new GameObject();
-                        buildManager.BuildPreviewOn(ref temporaryInstance, position);
+                        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
                         previewMatrix[x, z] = true;
                         //Debug.Log("construiu preview !");
                     }
@@ -474,7 +461,7 @@ public class GridMouse : MonoBehaviour {
             prevZ = z;
             //previewMatrix[x, z] = true;
             //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
-            Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
+            //Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
         }
     }
 
@@ -495,6 +482,7 @@ public class GridMouse : MonoBehaviour {
             //Debug.Log("previewMatrix[x, z] = " + previewMatrix[x, z]);
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {

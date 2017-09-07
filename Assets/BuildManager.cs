@@ -58,7 +58,7 @@ public class BuildManager : MonoBehaviour {
     public bool CanBuild { get { return unitToBuild != null; } }
 
 
-    public void BuildPreviewOn(ref GameObject temporaryInstance,Vector3 position)
+    public GameObject BuildPreviewOn(GameObject temporaryInstance,Vector3 position)
     {
         if (temporaryInstance != null && unitToBuild != null)
         {
@@ -77,6 +77,7 @@ public class BuildManager : MonoBehaviour {
             }
             temporaryInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
         }
+        return temporaryInstance;
     }
 
     public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position)
