@@ -11,14 +11,14 @@ public class PawnCharacter : MonoBehaviour {
     public bool isDying;
 	public PawnHealthBarGUI healthBar;
     public AudioSource painSoundPrefab;
+
+    public GameObject coinEffectPrefab;
         
 
 
     private void Awake()
 	{
 		health = maxHealth;
-		
-
 	}
 
 	private void Start()
@@ -36,22 +36,22 @@ public class PawnCharacter : MonoBehaviour {
      
         Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
 
-        
+        //Instantiate(coinEffectPrefab, transform.position, Quaternion.identity);
+
+
 
         Destroy(gameObject);
 	}
 
     public virtual bool Damage(float _damage)
     {
-        if (gameObject.name == "PrefabGoblinKing")
-        {
-            Debug.Log("PrefabGoblinKing");
-        }
 
         float realDamage = _damage - defense;
 		if (realDamage < 0)
 			realDamage = 0;
+
         health -= realDamage;
+
         if (healthBar != null)
         {
             healthBar.UpdateHealthBar(health, maxHealth);
