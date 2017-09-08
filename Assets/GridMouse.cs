@@ -312,7 +312,15 @@ public class GridMouse : MonoBehaviour {
                     if (!rotated)
                     {
                         RotateAccordingly(x, z);
-                        //SetPreviewColor(Color.green);
+                        if (propertiesMatrix[x, z].type == "Track")
+                        {
+                            SetPreviewColor(Color.green);
+                        }
+                        else
+                        {
+                            SetPreviewColor(Color.red);
+                        }
+                        
                         rotated = true;
                     }
                 }
@@ -351,9 +359,14 @@ public class GridMouse : MonoBehaviour {
                         || propertiesMatrix[x, z + 1].type == "Track")
                     {
                         RotateAccordingly(x, z);
-                        SetPreviewColor(Color.green);
-                        //temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
-                        //temporaryInstance.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+                        if (propertiesMatrix[x, z].type == "Track")
+                        {
+                            SetPreviewColor(Color.green);
+                        }
+                        else
+                        {
+                            SetPreviewColor(Color.red);
+                        }
                     }
                     else
                     {
