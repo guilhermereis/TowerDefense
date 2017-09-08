@@ -285,6 +285,15 @@ public class GridMouse : MonoBehaviour {
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
     }
+    private void SetPreviewColor(Color color)
+    {
+        foreach (Material matt in temporaryInstance.GetComponent<MeshRenderer>().materials)
+        {
+            matt.SetColor("_Color", color);
+            
+
+        }
+    }
 
     private void HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit,int x, int z)
     {
@@ -303,7 +312,7 @@ public class GridMouse : MonoBehaviour {
                     if (!rotated)
                     {
                         RotateAccordingly(x, z);
-                        temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
+                        SetPreviewColor(Color.green);
                         rotated = true;
                     }
                 }
@@ -318,7 +327,7 @@ public class GridMouse : MonoBehaviour {
 
                         temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
                         rotated = false;
-
+                        SetPreviewColor(Color.red);
                         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
                         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
 
@@ -342,12 +351,14 @@ public class GridMouse : MonoBehaviour {
                         || propertiesMatrix[x, z + 1].type == "Track")
                     {
                         RotateAccordingly(x, z);
-                        temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
+                        SetPreviewColor(Color.green);
+                        //temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
+                        //temporaryInstance.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
                     }
                     else
                     {
                         //if the logic doens't involve going over track tiles
-
+                        SetPreviewColor(Color.red);
                         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
                         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
                         Destroy(temporaryInstance);
