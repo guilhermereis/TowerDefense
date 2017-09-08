@@ -64,15 +64,26 @@ public class PawnHealthBarGUI : MonoBehaviour {
 
 	public void UpdateHealthBar(float health,float maxHealth)
 	{
-		Healthbar.SetActive(true);
-		float updatedHealth = health / maxHealth ;
-		
-		Healthbar.transform.GetChild(0).GetComponentInChildren<Image>().fillAmount = updatedHealth;
-		//Debug.Log(Healthbar.transform.GetChild(0).GetComponentInChildren<Image>().name);
-		if (health <= 0)
-		{
-			Destroy(Healthbar);
-		}
+
+       
+        if (gameObject != null)
+        {
+		    Healthbar.SetActive(true);
+		    float updatedHealth = health / maxHealth;
+            if (updatedHealth >= 0)
+                Healthbar.transform.GetChild(0).GetComponentInChildren<Image>().fillAmount = updatedHealth;
+            else
+            {
+                Healthbar.SetActive(false);
+                this.enabled = false;
+            }
+            //Debug.Log(Healthbar.transform.GetChild(0).GetComponentInChildren<Image>().name);
+
+
+        }
+
+    
+
 	}
 
 

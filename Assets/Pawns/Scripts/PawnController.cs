@@ -10,7 +10,7 @@ public class PawnController : MonoBehaviour {
 
     //controller variables
     [HideInInspector]
-    public enum PawnState { Idle, Battle, Walking,FindTarget,Homing, Destroying };
+    public enum PawnState { Idle, Battle, Walking,FindTarget,Homing, Destroying, Dead};
     [HideInInspector]
     public enum PawnType {Wanderer, Hunter, Boss}
 
@@ -151,6 +151,10 @@ public class PawnController : MonoBehaviour {
 
             }
             
+        }
+        else if (currentState == PawnState.Dead)
+        {
+            nav.isStopped = true;
         }
 
         if (GameController.gameState == GameState.GameOver)

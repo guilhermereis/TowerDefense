@@ -42,9 +42,9 @@ public class PawnCharacter : MonoBehaviour {
         {
             gameObject.GetComponent<PawnController>().deadPawn(gameObject);
         }
-
-        Destroy(gameObject);
-	}
+        gameObject.GetComponent<PawnController>().ChangeState(PawnController.PawnState.Dead);
+        //Destroy(gameObject);
+    }
 
     public virtual bool Damage(float _damage)
     {
