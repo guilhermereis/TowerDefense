@@ -10,6 +10,7 @@ public class GridMouse : MonoBehaviour {
 
 
     public static GridMouse instance;
+    public GameObject Track;
     public float ZOffset;
     private TileMap _tileMap;
     public Transform selectionCube;
@@ -113,7 +114,8 @@ public class GridMouse : MonoBehaviour {
     }
     void ReadSpecialTiles()
     {
-        GameObject Track = GameObject.Find("CubeTrack");
+
+        Track.SetActive(true);
         int x;
         int z;
         Debug.Log("Child Count = " + Track.transform.childCount);
@@ -312,6 +314,7 @@ public class GridMouse : MonoBehaviour {
                     if (!rotated)
                     {
                         RotateAccordingly(x, z);
+                        temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
                         rotated = true;
                     }
                 }
@@ -350,6 +353,7 @@ public class GridMouse : MonoBehaviour {
                         || propertiesMatrix[x, z + 1].type == "Track")
                     {
                         RotateAccordingly(x, z);
+                        temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
                     }
                     else
                     {
@@ -449,7 +453,7 @@ public class GridMouse : MonoBehaviour {
             
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
