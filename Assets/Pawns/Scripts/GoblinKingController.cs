@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class GoblinKingController : EnemyController {
 
-	private GoblinKingCharacter character;
+    public GameObject handBone;
+    public GameObject soldierThrowPrefab;
 	public float attackCountdown = 0f;
-	private List<GameObject> enemiesInRange;
+
+    private GoblinKingCharacter character;
+    private List<GameObject> enemiesInRange;
     private GoblinKingAnimatorController anim;
+    private Transform handSocketTransform;
+
+    private bool throwFinished = true;
 
     // Use this for initialization
     void Start () {
@@ -15,60 +21,63 @@ public class GoblinKingController : EnemyController {
 		enemiesInRange = new List<GameObject>();
 		character = (GoblinKingCharacter)GetComponent<GoblinKingCharacter>();
         anim = (GoblinKingAnimatorController)GetComponentInChildren<GoblinKingAnimatorController>();
+        handSocketTransform = handBone.transform;
     }
 	
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update();
         anim.speed = nav.velocity.magnitude;
-        if (target!= null && enemiesInRange.Contains(target))
-		{
-			ChangeState(PawnState.Battle);
-		}
-		attackCountdown -= Time.deltaTime;
+
+        if (throwFinished) {
+            float value = attackCountdown - Time.deltaTime;
+            attackCountdown = Mathf.Max(0, value);
+            ChangeState(PawnState.Walking);
+        }
+
+        if (throwFinished && attackCountdown <= 0) {
+            target = GetNewTarget();
+
+            if (target != null)
+            {
+                Debug.Log("New Target: " + target);
+                attackCountdown = 1f / character.attackRate;
+                throwFinished = false;
+                anim.isAttacking = true;
+                ChangeState(PawnState.Battle);
+            }
+            else {
+                anim.isAttacking = false;
+                ChangeState(PawnState.Walking);
+                Debug.Log("No Target, walk");
+            }
+        }
 	}
 
-	public override void OnBattle()
+    private GameObject GetNewTarget() {
+        GameObject returnTarget = null;
+
+        if (enemiesInRange.Count > 0) {
+            returnTarget = enemiesInRange[0];
+        }
+        return returnTarget;
+    }
+
+    public override void OnBattle()
 	{
 		base.OnBattle();
 		nav.isStopped = true;
-		
-		if (target != null)
-		{
+        if(target != null) {
             LookToTarget();
-            if (attackCountdown <= 0)
-			{
-                Debug.DrawLine(transform.position, target.transform.position);
-			}
-		}
-		else
-		{
-			ChangeState(PawnState.Walking);
-		}
-	}
-
+        }
+    }
 
 	protected override void OnTriggerEnter(Collider other)
 	{
 		base.OnTriggerEnter(other);
-        //Debug.Log(other.gameObject.tag);
-        //Debug.Assert(other.isTrigger);
-        if(other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Ally")
+        if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Ally")
         {
             enemiesInRange.Add(other.gameObject);
-
-            if (target == null)
-		    {
-			    enemiesInRange.Add(other.gameObject);
-
-			    target = other.gameObject;
-			    ChangeState(PawnState.Battle);
-		    }else if(other.gameObject == target)
-		    {
-			    ChangeState(PawnState.Battle);
-		    }
-		    
-
         }
         else if (other.gameObject.tag == "Castle")
         {
@@ -77,35 +86,43 @@ public class GoblinKingController : EnemyController {
         }
     }
 
-	protected override void OnTriggerExit(Collider other)
-	{
-		base.OnTriggerExit(other);
-		if (other.gameObject.tag.Equals("Ally"))
-		{
-			enemiesInRange.Remove(other.gameObject);
-            ChangeState(PawnState.Walking);
-            if (target != null)
-                ChangeState(PawnState.FindTarget);
-            else { }
-            //	enemiesInRange.Remove(other.gameObject);
-
-        }
-    }
-
-    public void processHit() {
-        if (target.tag == "Ally")
+    protected override void OnTriggerExit(Collider other)
+    {
+        base.OnTriggerExit(other);
+        if (other.gameObject.tag.Equals("Ally"))
         {
-
-            if (target.GetComponent<PawnCharacter>().Damage(character.attack))
-            {
-                enemiesInRange.Remove(target);
-                target.GetComponent<PawnCharacter>().OnDying();
+            enemiesInRange.Remove(other.gameObject);
+            if (target == other.gameObject) {
                 target = null;
             }
         }
-        else if (target.tag == "Castle")
-            target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
+    }
 
-        attackCountdown = 1 / character.attackRate;
+    public void Grab(string str) { 
+        switch (str) {
+            case "Pick":
+                if (target.tag == "Ally")
+                {
+                    if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+                    {
+                        enemiesInRange.Remove(target);
+                        target.GetComponent<PawnCharacter>().OnDying();
+                        GameObject holdingSoldier = Instantiate(soldierThrowPrefab);
+                        Vector3 handPosition = new Vector3(handBone.transform.position.x + 0.103f, handBone.transform.position.y - 0.109f, handBone.transform.position.z - 0.19f);
+                        Quaternion handRotation = handBone.transform.rotation * Quaternion.Euler(90f, 0f, 0f);
+                        holdingSoldier.transform.SetPositionAndRotation(handPosition, handRotation);
+
+                        target = null;
+                    }
+                }
+                break;
+            case "End":
+                throwFinished = true;
+                anim.isAttacking = false;
+                break;
+
+            default:
+                break;
+        }
     }
 }
