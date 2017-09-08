@@ -174,7 +174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 0
   speed: 4
-  damagePrefabParticle: {fileID: 0}
+  damagePrefabParticle: {fileID: 1074846246918774, guid: 834a4738c2cab8f489ef212477bf3c21,
+    type: 2}
+  bloodPrefabParticle: {fileID: 1207112873092018, guid: 7654f29edee977141a921116fe25e761,
+    type: 2}
 --- !u!135 &135246716893445682
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -246,7 +249,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -124581740
+  randomSeed: 1275184033
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -398,8 +401,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.09
+      scalar: 0.93
+      minScalar: 0.48
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3511,10 +3514,10 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1051223791
+  randomSeed: 553582029
   InitialModule:
     serializedVersion: 3
     enabled: 1
