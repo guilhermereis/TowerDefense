@@ -97,14 +97,6 @@ public class GridMouse : MonoBehaviour {
 
 
     }
-    public static List<T> CloneList<T>(List<T> oldList)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream stream = new MemoryStream();
-        formatter.Serialize(stream, oldList);
-        stream.Position = 0;
-        return (List<T>)formatter.Deserialize(stream);
-    }
 
     void Start()
     {
@@ -114,8 +106,6 @@ public class GridMouse : MonoBehaviour {
     }
     void ReadSpecialTiles()
     {
-
-        Track.SetActive(true);
         int x;
         int z;
         Debug.Log("Child Count = " + Track.transform.childCount);
@@ -128,7 +118,6 @@ public class GridMouse : MonoBehaviour {
             //Debug.Log(x + "," + z + " = Track");
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
-        Track.SetActive(false);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private bool CheckIfHitStructure()
