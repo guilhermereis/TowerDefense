@@ -38,7 +38,10 @@ public class PawnCharacter : MonoBehaviour {
 
         //Instantiate(coinEffectPrefab, transform.position, Quaternion.identity);
 
-
+        if (gameObject.tag.Equals("Enemy"))
+        {
+            gameObject.GetComponent<PawnController>().deadPawn(gameObject);
+        }
 
         Destroy(gameObject);
 	}

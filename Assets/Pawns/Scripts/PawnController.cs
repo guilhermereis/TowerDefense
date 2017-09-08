@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class PawnController : MonoBehaviour {
 
+    public delegate void DeadPawnDelegate(GameObject enemy);
+    public DeadPawnDelegate deadPawn;
+
     //controller variables
     [HideInInspector]
     public enum PawnState { Idle, Battle, Walking,FindTarget,Homing, Destroying };

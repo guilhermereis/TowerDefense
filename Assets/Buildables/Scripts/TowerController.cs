@@ -74,11 +74,21 @@ public class TowerController : BuildableController {
 
 	}
 
-	private void OnTriggerEnter(Collider other)
+
+    void RemoveDeadEnemy(GameObject _enemy)
+    {
+        enemies.Remove(_enemy);
+    }
+
+    private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(CapsuleCollider))
+        Debug.Log(other.GetType());
+
+		if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider))
 		{
+            other.gameObject.GetComponent<PawnController>().deadPawn += RemoveDeadEnemy;
 			enemies.Add(other.gameObject);
+            
 			if(target == null)
 			{
 				//int index = enemies.FindIndex(t=> t.GetInstanceID() == other.gameObject.GetInstanceID());
@@ -90,12 +100,14 @@ public class TowerController : BuildableController {
 
 	void ChangeTarget() { }
 
+   
+
 	private void OnTriggerExit(Collider other)
 	{
         if (other.gameObject.CompareTag("Enemy"))
         {
             enemies.Remove(other.gameObject);
-            if (other.gameObject == target && other.GetType() == typeof(CapsuleCollider))
+            if (other.gameObject == target && other.GetType() == typeof(BoxCollider))
 		    {
                 if (enemies.Count > 0)
                     target = enemies[0];

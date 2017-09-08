@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4696426810310540}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: spine_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4572520249881518}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 4123723167136476}
   - component: {fileID: 198014638004599080}
   - component: {fileID: 199285455120901084}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4513210506742946}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,13 +81,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4930369242518636}
-  - component: {fileID: 136015300867520358}
   - component: {fileID: 195916399515499062}
   - component: {fileID: 54143812083553234}
   - component: {fileID: 114368387715813238}
   - component: {fileID: 114223207288151504}
   - component: {fileID: 114244301670892682}
-  m_Layer: 0
+  - component: {fileID: 65501096606037584}
+  m_Layer: 10
   m_Name: BomberPawn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4518809112333162}
   - component: {fileID: 95530724222240126}
   - component: {fileID: 114313989603613870}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PrefabBomberGoblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4560180510648798}
   - component: {fileID: 198620437163340502}
   - component: {fileID: 199447428980058684}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4940677081870258}
   - component: {fileID: 137818621854195688}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4932499630761706}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 33959259262431858}
   - component: {fileID: 23852297408032670}
   - component: {fileID: 64558748114836012}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Keg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,8 +279,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1525383979681094}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.70710677}
-  m_LocalPosition: {x: 10.67563, y: -1.06, z: -15.791471}
+  m_LocalRotation: {x: -0, y: 0.9947504, z: -0, w: -0.102331236}
+  m_LocalPosition: {x: -8.673, y: -0.99100006, z: -14.461}
   m_LocalScale: {x: 1.0000006, y: 1.0000004, z: 1.0000004}
   m_Children:
   - {fileID: 4518809112333162}
@@ -365,8 +365,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: Infinity
   m_AngularDrag: Infinity
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -384,6 +384,18 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: c756101e6861cd5499e2b8f88a4f6775, type: 3}
+--- !u!65 &65501096606037584
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1525383979681094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.56, z: 0}
 --- !u!95 &95530724222240126
 Animator:
   serializedVersion: 3
@@ -475,19 +487,6 @@ MonoBehaviour:
     type: 2}
   canvas: {fileID: 0}
   heightOffset: {x: 0, y: 1.4, z: 0}
---- !u!136 &136015300867520358
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1525383979681094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.15
-  m_Height: 0.71
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!137 &137818621854195688
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

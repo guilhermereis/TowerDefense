@@ -117,7 +117,7 @@ public class SimpleSoldierController : PawnController {
 		
         base.OnTriggerEnter(other);
 		Debug.DrawLine(other.gameObject.transform.position, transform.position);
-		if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Enemy")
+		if (other.GetType() == typeof(BoxCollider) && other.gameObject.tag == "Enemy")
 		{
 			
             enemiesInRange.Add(other.gameObject);
@@ -133,7 +133,7 @@ public class SimpleSoldierController : PawnController {
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
-		if (other.GetType() == typeof(CapsuleCollider))
+		if (other.GetType() == typeof(BoxCollider))
 		{
 			if (other.gameObject.tag == "Enemy")
 			{
