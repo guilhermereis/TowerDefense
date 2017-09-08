@@ -312,7 +312,7 @@ public class GridMouse : MonoBehaviour {
                     if (!rotated)
                     {
                         RotateAccordingly(x, z);
-                        SetPreviewColor(Color.green);
+                        //SetPreviewColor(Color.green);
                         rotated = true;
                     }
                 }
