@@ -54,7 +54,7 @@ public class Arrow : Projectile {
 	{
         if (target != null)
         {
-            Vector3 dir = target.transform.position - transform.position;
+            Vector3 dir = target.GetComponent<BoxCollider>().center + target.transform.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = lookRotation.eulerAngles;
             transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);

@@ -295,9 +295,9 @@ GameObject:
   - component: {fileID: 135588369043511902}
   - component: {fileID: 195750782766517710}
   - component: {fileID: 54392471231201872}
-  - component: {fileID: 136545974855680002}
   - component: {fileID: 114369030417113696}
   - component: {fileID: 114135005722417592}
+  - component: {fileID: 65939452666710998}
   m_Layer: 10
   m_Name: PrefabGoblinKing
   m_TagString: Enemy
@@ -546,7 +546,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1613466630584316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.94, y: -1.0000021, z: -18.026041}
+  m_LocalPosition: {x: -5.551188, y: -0.99100006, z: -16.535471}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4503017928751562}
@@ -905,6 +905,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65939452666710998
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613466630584316}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.02, z: 0.79}
+  m_Center: {x: 0, y: 1.02, z: 0.02}
 --- !u!95 &95735165088862018
 Animator:
   serializedVersion: 3
@@ -1006,19 +1018,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.84
   m_Center: {x: 0, y: 0.09, z: 0}
---- !u!136 &136545974855680002
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1613466630584316}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.22
-  m_Height: 1.75
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.85, z: 0.12}
 --- !u!137 &137825487721451988
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
