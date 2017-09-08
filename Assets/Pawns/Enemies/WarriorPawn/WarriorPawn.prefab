@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1643799150267160}
   m_IsPrefabParent: 1
+--- !u!1 &1081755504264076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4035195354012594}
+  m_Layer: 10
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1290910082274536
 GameObject:
   m_ObjectHideFlags: 1
@@ -20,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4822700254040890}
   - component: {fileID: 137522972015580562}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +52,7 @@ GameObject:
   - component: {fileID: 4125465590594906}
   - component: {fileID: 95292107977096968}
   - component: {fileID: 114791258418497676}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PrefabWarriorGobling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4436887328510860}
   - component: {fileID: 137581166506437904}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,14 +83,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4040930271961352}
-  - component: {fileID: 136860904629601370}
   - component: {fileID: 195554753281369540}
   - component: {fileID: 54294987974155368}
   - component: {fileID: 114259367806044188}
   - component: {fileID: 114279201298563666}
   - component: {fileID: 135076864024672862}
   - component: {fileID: 114883886630062610}
-  m_Layer: 0
+  - component: {fileID: 65498303594393002}
+  m_Layer: 10
   m_Name: WarriorPawn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -90,7 +105,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4826269639566916}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: hand_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +120,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4107520060965370}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: hand_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,13 +137,26 @@ GameObject:
   - component: {fileID: 4303939633077158}
   - component: {fileID: 33827695746698674}
   - component: {fileID: 23578571286708754}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4035195354012594
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081755504264076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.655, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4040930271961352}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4040930271961352
 Transform:
   m_ObjectHideFlags: 1
@@ -136,10 +164,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643799150267160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.66626, y: -0.98, z: -15.716917}
+  m_LocalPosition: {x: 9.03521, y: -0.99100006, z: -16.780493}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4125465590594906}
+  - {fileID: 4035195354012594}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -276,11 +305,23 @@ Rigidbody:
   m_Mass: 1
   m_Drag: Infinity
   m_AngularDrag: Infinity
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65498303594393002
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1643799150267160}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.61, y: 1.6, z: 0.64}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!95 &95292107977096968
 Animator:
   serializedVersion: 3
@@ -318,6 +359,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
+  coinEffectPrefab: {fileID: 1305955009832706, guid: f24eef603f675644a87d74c950ed34ee,
+    type: 2}
 --- !u!114 &114279201298563666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,6 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 2
   finalDestination: {fileID: 0}
+  nav: {fileID: 0}
   speed: 1.2
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
@@ -374,6 +418,7 @@ MonoBehaviour:
   hpBarPrefab: {fileID: 1419856877115170, guid: 851d77b0ff520d442af9944588f5321e,
     type: 2}
   canvas: {fileID: 0}
+  heightOffset: {x: 0, y: 1.655, z: 0}
 --- !u!135 &135076864024672862
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -386,19 +431,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.84
   m_Center: {x: 0, y: 0.6, z: 0}
---- !u!136 &136860904629601370
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1643799150267160}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.29
-  m_Height: 1.75
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.78, z: 0}
 --- !u!137 &137522972015580562
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

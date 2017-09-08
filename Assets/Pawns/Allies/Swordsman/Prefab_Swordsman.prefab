@@ -1809,6 +1809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   finalDestination: {fileID: 0}
+  nav: {fileID: 0}
   speed: 5
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
@@ -1850,6 +1851,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
+  coinEffectPrefab: {fileID: 1305955009832706, guid: f24eef603f675644a87d74c950ed34ee,
+    type: 2}
 --- !u!114 &114871323391049772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1865,6 +1868,7 @@ MonoBehaviour:
   hpBarPrefab: {fileID: 1419856877115170, guid: 851d77b0ff520d442af9944588f5321e,
     type: 2}
   canvas: {fileID: 0}
+  heightOffset: {x: 0, y: 0, z: 0}
 --- !u!135 &135932757767017460
 SphereCollider:
   m_ObjectHideFlags: 1

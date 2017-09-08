@@ -11,22 +11,19 @@ public class PawnCharacter : MonoBehaviour {
     public bool isDying;
 	public PawnHealthBarGUI healthBar;
     public AudioSource painSoundPrefab;
+
+    public GameObject coinEffectPrefab;
         
 
 
     private void Awake()
 	{
 		health = maxHealth;
-		
-
 	}
 
 	private void Start()
 	{
-        if (gameObject.name == "BomberPawn")
-        {
-            Debug.Log("Bomber");
-        }
+       
         healthBar = (PawnHealthBarGUI)GetComponent<PawnHealthBarGUI>();
         
 		
@@ -39,19 +36,25 @@ public class PawnCharacter : MonoBehaviour {
      
         Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
 
-        
+        //Instantiate(coinEffectPrefab, transform.position, Quaternion.identity);
+
+        if (gameObject.tag.Equals("Enemy"))
+        {
+            gameObject.GetComponent<PawnController>().deadPawn(gameObject);
+        }
 
         Destroy(gameObject);
 	}
 
     public virtual bool Damage(float _damage)
     {
-       
-       
+
         float realDamage = _damage - defense;
 		if (realDamage < 0)
 			realDamage = 0;
+
         health -= realDamage;
+
         if (healthBar != null)
         {
             healthBar.UpdateHealthBar(health, maxHealth);

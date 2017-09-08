@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4207796857008322}
   - component: {fileID: 137858669728666802}
-  - component: {fileID: 136428856360653246}
   - component: {fileID: 195151488877590528}
   - component: {fileID: 54222595059916078}
   - component: {fileID: 114700906066300348}
@@ -29,13 +28,42 @@ GameObject:
   - component: {fileID: 114365445079594372}
   - component: {fileID: 95421419676321358}
   - component: {fileID: 114110908478182464}
-  m_Layer: 0
+  - component: {fileID: 65538482460542702}
+  m_Layer: 10
   m_Name: WandererPawn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1396155608238032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4004954162261192}
+  m_Layer: 10
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4004954162261192
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1396155608238032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: -0.032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4207796857008322}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4207796857008322
 Transform:
   m_ObjectHideFlags: 1
@@ -43,9 +71,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1164128760067590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.532, y: -1.000002, z: -16.624584}
+  m_LocalPosition: {x: 3.0034866, y: -0.99100006, z: -16.002438}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_Children: []
+  m_Children:
+  - {fileID: 4004954162261192}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60,10 +89,22 @@ Rigidbody:
   m_Drag: Infinity
   m_AngularDrag: Infinity
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65538482460542702
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1164128760067590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.46, y: 0.88, z: 0.34}
+  m_Center: {x: 0, y: 0.33, z: 0.000097975135}
 --- !u!95 &95421419676321358
 Animator:
   serializedVersion: 3
@@ -114,6 +155,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
+  coinEffectPrefab: {fileID: 1305955009832706, guid: f24eef603f675644a87d74c950ed34ee,
+    type: 2}
 --- !u!114 &114365445079594372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,6 +172,7 @@ MonoBehaviour:
   hpBarPrefab: {fileID: 1419856877115170, guid: 851d77b0ff520d442af9944588f5321e,
     type: 2}
   canvas: {fileID: 0}
+  heightOffset: {x: 0, y: 1.4, z: 0}
 --- !u!114 &114700906066300348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 2
   finalDestination: {fileID: 0}
+  nav: {fileID: 0}
   speed: 1.3
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
@@ -161,19 +206,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.35
   m_Center: {x: 0, y: 0.37, z: 0.15}
---- !u!136 &136428856360653246
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1164128760067590}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.12879147
-  m_Height: 0.69000006
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.29, z: 0}
 --- !u!137 &137858669728666802
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class PawnController : MonoBehaviour {
 
+    public delegate void DeadPawnDelegate(GameObject enemy);
+    public DeadPawnDelegate deadPawn;
+
     //controller variables
     [HideInInspector]
     public enum PawnState { Idle, Battle, Walking,FindTarget,Homing, Destroying };
@@ -15,7 +18,7 @@ public class PawnController : MonoBehaviour {
     protected PawnType type = PawnType.Wanderer;
 
     public Transform finalDestination;
-    protected NavMeshAgent nav;
+    public NavMeshAgent nav;
     public float speed;
 
     public Vector3 currentDestination;
