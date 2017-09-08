@@ -97,14 +97,6 @@ public class GridMouse : MonoBehaviour {
 
 
     }
-    public static List<T> CloneList<T>(List<T> oldList)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream stream = new MemoryStream();
-        formatter.Serialize(stream, oldList);
-        stream.Position = 0;
-        return (List<T>)formatter.Deserialize(stream);
-    }
 
     void Start()
     {
@@ -114,8 +106,6 @@ public class GridMouse : MonoBehaviour {
     }
     void ReadSpecialTiles()
     {
-
-        Track.SetActive(true);
         int x;
         int z;
         Debug.Log("Child Count = " + Track.transform.childCount);
@@ -128,7 +118,6 @@ public class GridMouse : MonoBehaviour {
             //Debug.Log(x + "," + z + " = Track");
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
-        Track.SetActive(false);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private bool CheckIfHitStructure()
@@ -157,20 +146,23 @@ public class GridMouse : MonoBehaviour {
                         if (buildManager.getUnitToBuild() != null)
                         {
 
-                            Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
-
-                            int added_index = buildUnitAndAddItToTheList(newPosition);
-                            Destroy(temporaryInstance);
-                            //int added_index = buildUnitAndAddItToTheList(position);
-                            propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                            if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                            if (CheckIfGameObjectIsOfColor(Color.green))
                             {
-                                propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                                propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                                propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
+
+                                int added_index = buildUnitAndAddItToTheList(newPosition);
+                                Destroy(temporaryInstance);
+                                //int added_index = buildUnitAndAddItToTheList(position);
+                                propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                                {
+                                    propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                    propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                    propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                }
+                                Debug.Log("Construiu na posição " + x + ", " + z);
+                                Debug.Log("Position = " + position);
                             }
-                            Debug.Log("Construiu na posição " + x + ", " + z);
-                            Debug.Log("Position = " + position);
                         }
                     }
                 }
@@ -200,11 +192,14 @@ public class GridMouse : MonoBehaviour {
                     {
                         if (buildManager.getUnitToBuild() != null)
                         {
-                            int added_index = buildUnitAndAddItToTheList(position);
-                            Destroy(temporaryInstance);
-                            propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                            Debug.Log("Construiu na posição " + x + ", " + z);
-                            Debug.Log("Position = " + position);
+                            if (CheckIfGameObjectIsOfColor(Color.green))
+                            {
+                                int added_index = buildUnitAndAddItToTheList(position);
+                                Destroy(temporaryInstance);
+                                propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                Debug.Log("Construiu na posição " + x + ", " + z);
+                                Debug.Log("Position = " + position);
+                            }
                         }
                     }
             }
@@ -237,12 +232,12 @@ public class GridMouse : MonoBehaviour {
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
                 HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
-                buildManager.DeselectUnitToBuild();
+                //buildManager.DeselectUnitToBuild();
             }
             else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
             {
                 HandleBuildingTower(ray, hitInfo, didHit, x, z);
-                buildManager.DeselectUnitToBuild();
+                //buildManager.DeselectUnitToBuild();
             }
             else //if there's nothing to build, then hide the options
             {
@@ -296,6 +291,24 @@ public class GridMouse : MonoBehaviour {
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
     }
+    private bool CheckIfGameObjectIsOfColor(Color color)
+    {
+        bool result = false;
+        foreach (Material matt in temporaryInstance.GetComponent<MeshRenderer>().materials)
+        {
+            if (matt.color == color)
+                result = true;
+        }
+        return result;
+    }
+    private void SetPreviewColor(Color color)
+    {
+        foreach (Material matt in temporaryInstance.GetComponent<MeshRenderer>().materials)
+        {
+            Debug.Log("SETTING matt: " + matt.name);
+            matt.SetColor("_Color", color);
+        }
+    }
 
     private void HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit,int x, int z)
     {
@@ -314,7 +327,15 @@ public class GridMouse : MonoBehaviour {
                     if (!rotated)
                     {
                         RotateAccordingly(x, z);
-                        temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
+                        if (propertiesMatrix[x, z].type == "Track")
+                        {
+                            SetPreviewColor(Color.green);
+                        }
+                        else
+                        {
+                            SetPreviewColor(Color.red);
+                        }
+                        
                         rotated = true;
                     }
                 }
@@ -329,7 +350,7 @@ public class GridMouse : MonoBehaviour {
 
                         temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
                         rotated = false;
-
+                        SetPreviewColor(Color.red);
                         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
                         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
 
@@ -353,12 +374,19 @@ public class GridMouse : MonoBehaviour {
                         || propertiesMatrix[x, z + 1].type == "Track")
                     {
                         RotateAccordingly(x, z);
-                        temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
+                        if (propertiesMatrix[x, z].type == "Track")
+                        {
+                            SetPreviewColor(Color.green);
+                        }
+                        else
+                        {
+                            SetPreviewColor(Color.red);
+                        }
                     }
                     else
                     {
                         //if the logic doens't involve going over track tiles
-
+                        SetPreviewColor(Color.red);
                         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
                         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
                         Destroy(temporaryInstance);

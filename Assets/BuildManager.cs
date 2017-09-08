@@ -76,6 +76,7 @@ public class BuildManager : MonoBehaviour {
                 Destroy(list[i]);
             }
             temporaryInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
+            temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
         }
         return temporaryInstance;
     }
