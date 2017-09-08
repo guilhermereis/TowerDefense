@@ -146,20 +146,23 @@ public class GridMouse : MonoBehaviour {
                         if (buildManager.getUnitToBuild() != null)
                         {
 
-                            Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
-
-                            int added_index = buildUnitAndAddItToTheList(newPosition);
-                            Destroy(temporaryInstance);
-                            //int added_index = buildUnitAndAddItToTheList(position);
-                            propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                            if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                            if (CheckIfGameObjectIsOfColor(Color.green))
                             {
-                                propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                                propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                                propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
+
+                                int added_index = buildUnitAndAddItToTheList(newPosition);
+                                Destroy(temporaryInstance);
+                                //int added_index = buildUnitAndAddItToTheList(position);
+                                propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                                {
+                                    propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                    propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                    propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                }
+                                Debug.Log("Construiu na posição " + x + ", " + z);
+                                Debug.Log("Position = " + position);
                             }
-                            Debug.Log("Construiu na posição " + x + ", " + z);
-                            Debug.Log("Position = " + position);
                         }
                     }
                 }
@@ -189,11 +192,14 @@ public class GridMouse : MonoBehaviour {
                     {
                         if (buildManager.getUnitToBuild() != null)
                         {
-                            int added_index = buildUnitAndAddItToTheList(position);
-                            Destroy(temporaryInstance);
-                            propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                            Debug.Log("Construiu na posição " + x + ", " + z);
-                            Debug.Log("Position = " + position);
+                            if (CheckIfGameObjectIsOfColor(Color.green))
+                            {
+                                int added_index = buildUnitAndAddItToTheList(position);
+                                Destroy(temporaryInstance);
+                                propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                                Debug.Log("Construiu na posição " + x + ", " + z);
+                                Debug.Log("Position = " + position);
+                            }
                         }
                     }
             }
@@ -226,12 +232,12 @@ public class GridMouse : MonoBehaviour {
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
                 HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
-                buildManager.DeselectUnitToBuild();
+                //buildManager.DeselectUnitToBuild();
             }
             else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
             {
                 HandleBuildingTower(ray, hitInfo, didHit, x, z);
-                buildManager.DeselectUnitToBuild();
+                //buildManager.DeselectUnitToBuild();
             }
             else //if there's nothing to build, then hide the options
             {
@@ -285,13 +291,22 @@ public class GridMouse : MonoBehaviour {
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
     }
+    private bool CheckIfGameObjectIsOfColor(Color color)
+    {
+        bool result = false;
+        foreach (Material matt in temporaryInstance.GetComponent<MeshRenderer>().materials)
+        {
+            if (matt.color == color)
+                result = true;
+        }
+        return result;
+    }
     private void SetPreviewColor(Color color)
     {
         foreach (Material matt in temporaryInstance.GetComponent<MeshRenderer>().materials)
         {
+            Debug.Log("SETTING matt: " + matt.name);
             matt.SetColor("_Color", color);
-            
-
         }
     }
 
