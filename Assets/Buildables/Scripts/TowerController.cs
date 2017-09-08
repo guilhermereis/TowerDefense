@@ -64,11 +64,14 @@ public class TowerController : BuildableController {
 	{
 		//Debug.DrawLine(attackPoint.transform.position, target.transform.position, Color.blue,2f);
 		GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
-        Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
-        arrow.transform.parent = transform;
-        newArrow.Target = target;
+        if(arrow != null)
+        {
+            Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
+            arrow.transform.parent = transform;
+            newArrow.Target = target;
 
-        Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+            Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+        }
 
 		
 
