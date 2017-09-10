@@ -107,11 +107,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de2df2fc01dc584fa12330048b7c387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Track: {fileID: 0}
   ZOffset: -1
   selectionCube: {fileID: 0}
   obstacleCube: {fileID: 4810755917094426, guid: 6116e45c5c3ed9c428299182404115a4,
     type: 2}
   gridTransform: {fileID: 411554}
+  ListOfGameObjects: []
   _transform: {fileID: 411554}
   _material: {fileID: 2100000, guid: ad755755bc7b5d34e9d0bb3440aa6e7a, type: 2}
   _gridSize: {x: 42, y: 42}

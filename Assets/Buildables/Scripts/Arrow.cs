@@ -62,7 +62,7 @@ public class Arrow : Projectile {
             transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
            
         }
-		if(target == null)
+        if (target == null || target.GetComponent<PawnController>().currentState == PawnController.PawnState.Dead)
 		{
 			Destroy(gameObject);
 			return;
@@ -73,7 +73,7 @@ public class Arrow : Projectile {
 	public override void OnTriggerEnter(Collider other)
 	{
         Debug.Log(other);
-        if (other.gameObject == target && other.GetType() == typeof(BoxCollider) )
+        if (other.gameObject == target )
         {
 
             Instantiate(damagePrefabParticle, target.transform.position + Vector3.up *0.5f, Quaternion.Euler(new Vector3(-90,0,0)));

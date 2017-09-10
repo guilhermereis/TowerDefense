@@ -58,22 +58,27 @@ public class Options : MonoBehaviour {
             
             Vector3 position = gridMouse.CoordToPosition(x, z);
             gridMouse.propertiesMatrix[x, z].unit = null;
+            gridMouse.previewMatrix[x, z] = false;            
             if (SelectedUnit == Shop.instance.missileLauncher)
             {
                 gridMouse.propertiesMatrix[x + 1, z + 1].unit = null;
                 gridMouse.propertiesMatrix[x, z + 1].unit = null;
                 gridMouse.propertiesMatrix[x + 1, z].unit = null;
+
+                gridMouse.previewMatrix[x + 1, z + 1] = false;
+                gridMouse.previewMatrix[x, z + 1] = false;
+                gridMouse.previewMatrix[x + 1, z] = false;
             }
             //------------------------------------------------------------------------
 
             Destroy(buildManager.getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
             buildManager.HideOptions();
-            Debug.Log("Vendeu "+name);
+            Debug.Log("Vendeu "+name+" na posição "+x+", "+z);
         }
     }
     public void Upgrade() {
-        Debug.Log("Going to upgrade !");
+        Debug.Log("Going to upgrade "+ buildManager.getSelectedUnit().name+"!");
         if (buildManager.getSelectedUnit() != null) {
             if (buildManager.getSelectedUnit().name == "Tower")
             {

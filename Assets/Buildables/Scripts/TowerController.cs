@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+public enum TowerAmmo { Arrow,ArrowFire, CannonBall}
+
 public class TowerController : BuildableController {
 
 	[Header("Attack")]
@@ -13,29 +15,25 @@ public class TowerController : BuildableController {
 	[Header("Arrow")]
 	public GameObject attackPoint;
 	public GameObject arrowPrefab;
-
     public GameObject arrowSoundPrefab;
 
-	public float AttackPower
-	{
-		get
-		{
-			return attackPower;
-		}
+    [Header("CannonBall")]
+    public GameObject cannonPoint;
+    public GameObject cannonballPrefab;
 
-		set
-		{
-			attackPower = value;
-		}
-	}
+
+    [Header("Weapon")]
+    public TowerAmmo currentAmmo;
+
+	
 
 	// Use this for initialization
 	void Start () {
-		AttackPower = 400f;
 		Health = 100f;
 		Defense = 5f;
 		IsUpgradable = true;
 		enemies = new List<GameObject>();
+        //currentAmmo = TowerAmmo.Arrow;
 	}
 	
 	// Update is called once per frame
@@ -62,13 +60,49 @@ public class TowerController : BuildableController {
 
 	void Fire()
 	{
-		//Debug.DrawLine(attackPoint.transform.position, target.transform.position, Color.blue,2f);
-		GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
-        Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
-        arrow.transform.parent = transform;
-        newArrow.Target = target;
+        //Debug.DrawLine(attackPoint.transform.position, target.transform.position, Color.blue,2f);
+        if(currentAmmo == TowerAmmo.Arrow)
+        {
+            GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
+            if(arrow != null)
+            {
+                Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
+                arrow.transform.parent = transform;
+                newArrow.Target = target;
 
-        Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+                Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+            }
+        }
+        else if( currentAmmo == TowerAmmo.ArrowFire)
+        {
+            GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
+            if (arrow != null)
+            {
+                Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
+                arrow.transform.parent = transform;
+                newArrow.Target = target;
+
+                Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+            }
+        }else if( currentAmmo == TowerAmmo.CannonBall)
+        {
+            //0 right
+            //90 south
+            //-90 north
+            //180 left
+
+            GameObject rCannonBall = Instantiate(cannonballPrefab, cannonPoint.transform.position, Quaternion.identity);
+            rCannonBall.transform.parent = transform;
+
+            GameObject dCannonBall = Instantiate(cannonballPrefab, cannonPoint.transform.position, Quaternion.Euler(new Vector3(0,90,0)));
+            dCannonBall.transform.parent = transform;
+
+            GameObject uCannonBall = Instantiate(cannonballPrefab, cannonPoint.transform.position, Quaternion.Euler(new Vector3(0, -90, 0)));
+            uCannonBall.transform.parent = transform;
+
+            GameObject lCannonBall = Instantiate(cannonballPrefab, cannonPoint.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)));
+            lCannonBall.transform.parent = transform;
+        }
 
 		
 
@@ -80,11 +114,11 @@ public class TowerController : BuildableController {
         enemies.Remove(_enemy);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
 	{
         Debug.Log(other.GetType());
 
-		if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider))
+        if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider))
 		{
             other.gameObject.GetComponent<PawnController>().deadPawn += RemoveDeadEnemy;
 			enemies.Add(other.gameObject);
@@ -102,7 +136,7 @@ public class TowerController : BuildableController {
 
    
 
-	private void OnTriggerExit(Collider other)
+	public override void OnTriggerExit(Collider other)
 	{
         if (other.gameObject.CompareTag("Enemy"))
         {
