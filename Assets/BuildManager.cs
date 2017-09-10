@@ -12,6 +12,7 @@ public class BuildManager : MonoBehaviour {
     private UnitBlueprint selectedUnit;
     private Vector2 selectedPosition;
     private GameObject selectedGameObject;
+    private GameObject LastSelectedGameObject;
     private GridMouse gridMouse;
 
     void Awake()
@@ -119,14 +120,20 @@ public class BuildManager : MonoBehaviour {
     public void SelectBuilding(UnitBlueprint unit, GameObject gameObject)
     {
         unitToBuild = null;
+        if (LastSelectedGameObject != null)
+            LastSelectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
         //if (selectedUnit == unit)
         selectedUnit = unit;
         selectedGameObject = gameObject;
-        selectedPosition = gameObject.transform.position;        
+        selectedPosition = gameObject.transform.position;
+        selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
+        LastSelectedGameObject = selectedGameObject;
     }
     public void SelectBuilding(int indexOfSelectedObject)
     {
         unitToBuild = null;
+        if (LastSelectedGameObject != null)
+            LastSelectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         GridMouse gridMouse = GridMouse.instance;
         BuildableController buildable =
@@ -135,7 +142,9 @@ public class BuildManager : MonoBehaviour {
         //if (selectedUnit == unit)
         selectedUnit = buildable.getUnitBlueprint();
         selectedGameObject = gridMouse.ListOfGameObjects[indexOfSelectedObject];
+        selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
         //selectedPosition = position;
+        LastSelectedGameObject = selectedGameObject;
     }
     public GameObject getSelectedGameObject() {
         return selectedGameObject;
