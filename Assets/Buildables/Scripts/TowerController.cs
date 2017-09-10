@@ -114,7 +114,7 @@ public class TowerController : BuildableController {
         enemies.Remove(_enemy);
     }
 
-    public void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
 	{
         Debug.Log(other.GetType());
 
@@ -136,7 +136,7 @@ public class TowerController : BuildableController {
 
    
 
-	public void OnTriggerExit(Collider other)
+	public override void OnTriggerExit(Collider other)
 	{
         if (other.gameObject.CompareTag("Enemy"))
         {

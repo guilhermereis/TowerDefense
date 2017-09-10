@@ -16,6 +16,7 @@ public class BuildableController : MonoBehaviour {
 	public HealthState currentHealthState = HealthState.good;
 
 
+
 	protected virtual void Awake()
 	{
 		health = maxHealth;
@@ -131,4 +132,12 @@ public class BuildableController : MonoBehaviour {
 		
 		return false;
 	}
+    public virtual void OnTriggerEnter(Collider other)
+    {
+
+    }
+    public virtual void OnTriggerExit(Collider other)
+    {
+
+    }
 }

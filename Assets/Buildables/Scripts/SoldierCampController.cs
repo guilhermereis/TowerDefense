@@ -86,7 +86,7 @@ public class SoldierCampController : BuildableController {
 
 
     //when an enemy get in range;
-    private void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
 		if (other.GetType() == typeof(BoxCollider))
 		{
@@ -108,7 +108,7 @@ public class SoldierCampController : BuildableController {
 		}
 	}
 
-    private void OnTriggerExit(Collider other)
+    public override void OnTriggerExit(Collider other)
     {
 		//todo delegate to who has this target stop to attack
 
