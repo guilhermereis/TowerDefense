@@ -78,16 +78,16 @@ public class Options : MonoBehaviour {
         }
     }
     public void Upgrade() {
-        Debug.Log("Going to upgrade !");
+        Debug.Log("Going to upgrade "+ buildManager.getSelectedUnit().name+"!");
         if (buildManager.getSelectedUnit() != null) {
-            if (buildManager.getSelectedUnit().name == "PrefabArcherTower1")
+            if (buildManager.getSelectedUnit().name == "Tower")
             {
                 buildManager.SelectUnitToBuild(shop.towerLevel2);
                 BuildTheNextLevelStructure();
                 buildManager.DeselectUnitToBuild();
                 buildManager.DeselectSelectedUnit();
                 buildManager.HideOptions();
-                Debug.Log("Upgraded unit: " + "PrefabArcherTower1");
+                Debug.Log("Upgraded unit: " + "Tower");
             }
             else
             {

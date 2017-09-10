@@ -118,7 +118,7 @@ public class TowerController : BuildableController {
 	{
         Debug.Log(other.GetType());
 
-		if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider))
+        if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider))
 		{
             other.gameObject.GetComponent<PawnController>().deadPawn += RemoveDeadEnemy;
 			enemies.Add(other.gameObject);
