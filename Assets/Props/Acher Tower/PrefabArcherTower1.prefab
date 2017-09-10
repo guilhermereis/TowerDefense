@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 33655206847042078}
   - component: {fileID: 135210725114474632}
   - component: {fileID: 23200857156435516}
+  - component: {fileID: 114619752382789004}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -109,7 +110,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227386745171654}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -203,6 +204,18 @@ MonoBehaviour:
   cannonPoint: {fileID: 0}
   cannonballPrefab: {fileID: 0}
   currentAmmo: 0
+--- !u!114 &114619752382789004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227386745171654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad361865a926a147b9a57b69139e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 1039271061935134}
 --- !u!135 &135210725114474632
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -74,7 +74,9 @@ public class BuildManager : MonoBehaviour {
                 newPosition = position;
             }
             temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
-            temporaryInstance.transform.Find("Sphere").gameObject.SetActive(true);
+            //temporaryInstance.transform.Find("Sphere").gameObject.SetActive(true);
+            temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
+
             //sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //temporaryInstance.transform.parent = sphere.transform;
 
@@ -108,7 +110,7 @@ public class BuildManager : MonoBehaviour {
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
-        tempList[index].transform.Find("Sphere").gameObject.SetActive(false);
+        tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
