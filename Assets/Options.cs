@@ -80,14 +80,14 @@ public class Options : MonoBehaviour {
     public void Upgrade() {
         Debug.Log("Going to upgrade !");
         if (buildManager.getSelectedUnit() != null) {
-            if (buildManager.getSelectedUnit().name == "Tower")
+            if (buildManager.getSelectedUnit().name == "PrefabArcherTower1")
             {
                 buildManager.SelectUnitToBuild(shop.towerLevel2);
                 BuildTheNextLevelStructure();
                 buildManager.DeselectUnitToBuild();
                 buildManager.DeselectSelectedUnit();
                 buildManager.HideOptions();
-                Debug.Log("Upgraded unit: " + "Tower");
+                Debug.Log("Upgraded unit: " + "PrefabArcherTower1");
             }
             else
             {

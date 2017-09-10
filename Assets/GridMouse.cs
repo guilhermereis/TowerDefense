@@ -123,7 +123,7 @@ public class GridMouse : MonoBehaviour {
     private bool CheckIfHitStructure()
     {
         return
-            hitInfo.transform.gameObject.name == "Tower(Clone)"
+            hitInfo.transform.gameObject.name == "PrefabArcherTower1(Clone)"
             || hitInfo.transform.gameObject.name == "PrefabCamp(Clone)";
     }
     private void HandleBuildingSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)

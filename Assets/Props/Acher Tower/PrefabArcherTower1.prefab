@@ -22,9 +22,26 @@ GameObject:
   - component: {fileID: 33727929702400414}
   - component: {fileID: 23353713990250818}
   - component: {fileID: 114442042962244442}
-  - component: {fileID: 135684830449922710}
   m_Layer: 0
   m_Name: PrefabArcherTower1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1227386745171654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4128730666270372}
+  - component: {fileID: 33655206847042078}
+  - component: {fileID: 135210725114474632}
+  - component: {fileID: 23200857156435516}
+  m_Layer: 0
+  m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +62,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4128730666270372
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227386745171654}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.5067643, y: -1, z: -9.4}
+  m_LocalScale: {x: 500, y: 250.00006, z: 500.00012}
+  m_Children: []
+  m_Father: {fileID: 4966584673600714}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4966584673600714
 Transform:
   m_ObjectHideFlags: 1
@@ -52,10 +82,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039271061935134}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -4.5177183, y: -1, z: -17.6}
+  m_LocalPosition: {x: 0.5067643, y: -1, z: -9.4}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.02}
   m_Children:
   - {fileID: 4966791718331460}
+  - {fileID: 4128730666270372}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -72,6 +103,38 @@ Transform:
   m_Father: {fileID: 4966584673600714}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!23 &23200857156435516
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227386745171654}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 846ea46ae95975b47a02e3be182230e3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23353713990250818
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -104,6 +167,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33655206847042078
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227386745171654}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33727929702400414
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -130,15 +200,18 @@ MonoBehaviour:
     type: 2}
   arrowSoundPrefab: {fileID: 1372849123093944, guid: 3e63fb5ebfb2736428ab93128296cbc7,
     type: 2}
---- !u!135 &135684830449922710
+  cannonPoint: {fileID: 0}
+  cannonballPrefab: {fileID: 0}
+  currentAmmo: 0
+--- !u!135 &135210725114474632
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1039271061935134}
+  m_GameObject: {fileID: 1227386745171654}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 165.7
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

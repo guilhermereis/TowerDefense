@@ -7,6 +7,7 @@ public class BuildManager : MonoBehaviour {
     public static BuildManager instance;
     public GameObject optionsObject;
     public GameObject shopObject;
+    public GameObject sphere;
     private UnitBlueprint unitToBuild;
     private UnitBlueprint selectedUnit;
     private Vector2 selectedPosition;
@@ -65,10 +66,18 @@ public class BuildManager : MonoBehaviour {
             Vector2 gridSize = gridMouse.getGridSize();
             Vector3 newPosition;
             if (unitToBuild == Shop.instance.missileLauncher)
+            {
                 newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+            }
             else
+            {
                 newPosition = position;
+            }
             temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
+            temporaryInstance.transform.Find("Sphere").gameObject.SetActive(true);
+            //sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            //temporaryInstance.transform.parent = sphere.transform;
+
             //temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
             for (int i = 0; i < list.Length; i++)
@@ -99,6 +108,7 @@ public class BuildManager : MonoBehaviour {
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
+        tempList[index].transform.Find("Sphere").gameObject.SetActive(false);
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
