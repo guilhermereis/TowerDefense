@@ -123,7 +123,7 @@ public class GridMouse : MonoBehaviour {
     private bool CheckIfHitStructure()
     {
         return
-            hitInfo.transform.gameObject.name == "Tower(Clone)"
+            hitInfo.transform.gameObject.name == "PrefabArcherTower1(Clone)"
             || hitInfo.transform.gameObject.name == "PrefabCamp(Clone)";
     }
     private void HandleBuildingSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
@@ -481,7 +481,7 @@ public class GridMouse : MonoBehaviour {
             
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {

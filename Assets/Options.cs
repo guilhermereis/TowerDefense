@@ -78,7 +78,7 @@ public class Options : MonoBehaviour {
         }
     }
     public void Upgrade() {
-        Debug.Log("Going to upgrade !");
+        Debug.Log("Going to upgrade "+ buildManager.getSelectedUnit().name+"!");
         if (buildManager.getSelectedUnit() != null) {
             if (buildManager.getSelectedUnit().name == "Tower")
             {

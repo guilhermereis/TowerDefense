@@ -114,11 +114,11 @@ public class TowerController : BuildableController {
         enemies.Remove(_enemy);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
 	{
         Debug.Log(other.GetType());
 
-		if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider))
+        if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider))
 		{
             other.gameObject.GetComponent<PawnController>().deadPawn += RemoveDeadEnemy;
 			enemies.Add(other.gameObject);
@@ -136,7 +136,7 @@ public class TowerController : BuildableController {
 
    
 
-	private void OnTriggerExit(Collider other)
+	public override void OnTriggerExit(Collider other)
 	{
         if (other.gameObject.CompareTag("Enemy"))
         {
