@@ -53,7 +53,7 @@ public class DebugOptions : MonoBehaviour
         Debug.Log("Gonna load all " + listOfStates.Count + " !");
         for (int i = 0; i < listOfStates.Count; i++)
         {
-            if (listOfStates[i].structureName == "Tower(Clone)")
+            if (listOfStates[i].structureName == "PrefabArcherTower1(Clone)")
             {
                 shop.SelectStandardUnit();
                 int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position);

@@ -158,6 +158,7 @@ public class BuildManager : MonoBehaviour {
     public void HideOptions()
     {
         optionsObject.SetActive(false);
+        selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void SelectStructure(Structure structure)
