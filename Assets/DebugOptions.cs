@@ -69,12 +69,19 @@ public class DebugOptions : MonoBehaviour
             {
                 shop.SelectSecondaryUnit();
                 Vector3 newPosition = new Vector3(listOfStates[i].position.x - 0.5f, listOfStates[i].position.y, listOfStates[i].position.z - 0.5f);
-                int added_index = gridMouse.buildUnitAndAddItToTheList(newPosition);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(newPosition, listOfStates[i].rotation);
                 Vector2 gridSize = gridMouse.getGridSize();
-                int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
-                int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
+
+                //int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
+                //int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
+
+                int x = Mathf.FloorToInt(newPosition.x + gridSize.x / 2);
+                int z = Mathf.FloorToInt(newPosition.z + gridSize.y / 2);
 
                 gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
 
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }

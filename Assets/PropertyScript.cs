@@ -29,6 +29,7 @@ public class PropertyScript  {
         public string structureName;
         public Transform transform;
         public Vector3 position;
+        public Quaternion rotation;
         public float currentHealth;
         public StructureState(string _structureName, Transform _transform, float _currentHealth)
         {
@@ -36,6 +37,7 @@ public class PropertyScript  {
             transform = _transform;
             currentHealth = _currentHealth;
             position = _transform.position;
+            rotation = _transform.rotation;
         }
     }
 
