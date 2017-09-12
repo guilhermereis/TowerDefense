@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 114279201298563666}
   - component: {fileID: 135076864024672862}
   - component: {fileID: 114883886630062610}
-  - component: {fileID: 65498303594393002}
+  - component: {fileID: 136506528161580460}
   m_Layer: 10
   m_Name: WarriorPawn
   m_TagString: Enemy
@@ -164,7 +164,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643799150267160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.6577997, y: -1.000002, z: -16.547104}
+  m_LocalPosition: {x: 9.427, y: -0.99100006, z: -16.780493}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4125465590594906}
@@ -310,18 +310,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65498303594393002
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1643799150267160}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.74, y: 1.54, z: 1.1}
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!95 &95292107977096968
 Animator:
   serializedVersion: 3
@@ -431,6 +419,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.35
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!136 &136506528161580460
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1643799150267160}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.23
+  m_Height: 1.37
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.67, z: 0}
 --- !u!137 &137522972015580562
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

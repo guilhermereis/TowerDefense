@@ -47,6 +47,7 @@ public class BomberController : EnemyController {
     {
         base.Update();
         anim.speed = nav.velocity.magnitude;
+
     }
 
    
@@ -60,7 +61,10 @@ public class BomberController : EnemyController {
             Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
             //Camera.main.GetComponent<CameraShake>().PlayShake();
             if (character.Damage(character.health))
+            {
                 character.OnDying();
+                Instantiate(gameObject.GetComponent<BomberCharacter>().prefabExplosionSound, transform);
+            }
 
         }
     }

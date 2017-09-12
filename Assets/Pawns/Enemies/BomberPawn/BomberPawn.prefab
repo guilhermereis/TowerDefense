@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 114368387715813238}
   - component: {fileID: 114223207288151504}
   - component: {fileID: 114244301670892682}
-  - component: {fileID: 65501096606037584}
+  - component: {fileID: 136695953901081674}
   m_Layer: 10
   m_Name: BomberPawn
   m_TagString: Enemy
@@ -384,18 +384,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: c756101e6861cd5499e2b8f88a4f6775, type: 3}
---- !u!65 &65501096606037584
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1525383979681094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.55, y: 0.67, z: 0.31}
-  m_Center: {x: 0, y: 0.42, z: 0}
 --- !u!95 &95530724222240126
 Animator:
   serializedVersion: 3
@@ -434,6 +422,8 @@ MonoBehaviour:
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
   coinEffectPrefab: {fileID: 1305955009832706, guid: f24eef603f675644a87d74c950ed34ee,
+    type: 2}
+  prefabExplosionSound: {fileID: 1789373182071342, guid: ba0d12a98afe5ea469e792c5066e4328,
     type: 2}
 --- !u!114 &114244301670892682
 MonoBehaviour:
@@ -487,6 +477,19 @@ MonoBehaviour:
     type: 2}
   canvas: {fileID: 0}
   heightOffset: {x: 0, y: 1.4, z: 0}
+--- !u!136 &136695953901081674
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1525383979681094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.13
+  m_Height: 0.75
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.34, z: 0}
 --- !u!137 &137818621854195688
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
