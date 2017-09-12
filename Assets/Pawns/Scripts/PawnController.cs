@@ -70,6 +70,10 @@ public class PawnController : MonoBehaviour {
 	{
 		float dist = nav.remainingDistance;
         //Debug.Log(dist);
+
+       
+
+
 		if (!nav.pathPending)
 		{
 			if(nav.remainingDistance <= nav.stoppingDistance)
@@ -88,7 +92,14 @@ public class PawnController : MonoBehaviour {
     protected virtual void Update () {
         //Debug.DrawLine(transform.position, finalDestination.position);
         //Debug.Log(finalDestination.transform);
-        if(currentState == PawnState.Idle)
+
+        if (gameObject.GetComponent<PawnCharacter>().isSlow)
+            nav.speed = 0.5f;
+        else
+            nav.speed = speed;
+
+
+        if (currentState == PawnState.Idle)
         {
 
         }else if (currentState == PawnState.Walking)

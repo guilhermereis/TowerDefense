@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : Projectile {
 
-	private GameObject target;
+	public GameObject target;
 	public float speed = 1f;
 	private float towerAttack;
     public GameObject damagePrefabParticle;
@@ -46,15 +46,15 @@ public class Arrow : Projectile {
     private void Start()
 	{
         //towerAttack = GetComponentInParent<TowerController>().AttackPower;
-        attackPower = 400f;
+        //attackPower = 400f;
         
 	}
 
-	private void Update()
+	public virtual void Update()
 	{
         if (target != null)
         {
-            Vector3 dir = target.GetComponent<BoxCollider>().center + target.transform.position - transform.position;
+            Vector3 dir = target.GetComponent<CapsuleCollider>().center + target.transform.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = lookRotation.eulerAngles;
             transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
@@ -72,7 +72,7 @@ public class Arrow : Projectile {
 
 	public override void OnTriggerEnter(Collider other)
 	{
-        Debug.Log(other);
+        //Debug.Log(other);
         if (other.gameObject == target )
         {
 

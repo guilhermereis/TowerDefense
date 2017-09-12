@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BomberCharacter : PawnCharacter {
 
-	
+    public GameObject prefabExplosionSound;
 
     private void Awake()
     {

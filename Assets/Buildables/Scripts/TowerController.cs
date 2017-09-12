@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public enum TowerAmmo { Arrow,ArrowFire, CannonBall}
+public enum TowerAmmo { Arrow,ArrowFire, CannonBall, Lightning}
 
 public class TowerController : BuildableController {
 
 	[Header("Attack")]
 	public GameObject target;
-	private float fireRate = 0.7f;
-	private float attackCooldown = 0f;
+	public float fireRate = 0.7f;
+    public float attackCooldown { get;set; }
 	public List<GameObject> enemies;
 	private float attackPower;
 
@@ -21,6 +21,9 @@ public class TowerController : BuildableController {
     public GameObject cannonPoint;
     public GameObject cannonballPrefab;
 
+    [Header("Lightning")]
+    public GameObject lightningPrefab;
+    public LineRenderer lightningLine;
 
     [Header("Weapon")]
     public TowerAmmo currentAmmo;
@@ -29,36 +32,44 @@ public class TowerController : BuildableController {
 
 	// Use this for initialization
 	void Start () {
-		Health = 100f;
+        attackPower = 100;
+        Health = 100f;
 		Defense = 5f;
 		IsUpgradable = true;
 		enemies = new List<GameObject>();
         //currentAmmo = TowerAmmo.Arrow;
+        lightningLine.positionCount = 2;
+        lightningLine.SetWidth(.2f, .2f);
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-		if (attackCooldown <= 0)
+	public virtual void Update () {
+        
+        if (attackCooldown <= 0)
 		{
+          
 			if( target != null && !target.gameObject.GetComponent<PawnCharacter>().isDying)
 			{
+
 				Fire();
-				attackCooldown = 1 / fireRate;
+                //lightningLine.enabled = false;
+                attackCooldown = 1 / fireRate;
 
             }
             else
             {
                 if (enemies.Count > 0)
                     target = enemies[0];
+               
+                    
             }
 		}
-
-		attackCooldown -= Time.deltaTime;
+        
+        attackCooldown -= Time.deltaTime;
 
 	}
 
-	void Fire()
+	public virtual void Fire()
 	{
         //Debug.DrawLine(attackPoint.transform.position, target.transform.position, Color.blue,2f);
         if(currentAmmo == TowerAmmo.Arrow)
@@ -81,6 +92,7 @@ public class TowerController : BuildableController {
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
+                newArrow.attackPower = attackPower;
 
                 Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
             }
@@ -103,13 +115,14 @@ public class TowerController : BuildableController {
             GameObject lCannonBall = Instantiate(cannonballPrefab, cannonPoint.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)));
             lCannonBall.transform.parent = transform;
         }
+        
 
 		
 
 	}
 
-
-    void RemoveDeadEnemy(GameObject _enemy)
+    //removes dead enemy from current enemies list;
+    public void RemoveDeadEnemy(GameObject _enemy)
     {
         enemies.Remove(_enemy);
     }
@@ -118,7 +131,7 @@ public class TowerController : BuildableController {
 	{
         Debug.Log(other.GetType());
 
-        if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider))
+        if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(CapsuleCollider))
 		{
             other.gameObject.GetComponent<PawnController>().deadPawn += RemoveDeadEnemy;
 			enemies.Add(other.gameObject);
@@ -141,7 +154,7 @@ public class TowerController : BuildableController {
         if (other.gameObject.CompareTag("Enemy"))
         {
             enemies.Remove(other.gameObject);
-            if (other.gameObject == target && other.GetType() == typeof(BoxCollider))
+            if (other.gameObject == target && other.GetType() == typeof(CapsuleCollider))
 		    {
                 if (enemies.Count > 0)
                     target = enemies[0];
