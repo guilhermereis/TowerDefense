@@ -260,6 +260,14 @@ public class GridMouse : MonoBehaviour {
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition);
         return AddedElmtIndex;
     }
+    public int buildUnitAndAddItToTheList(Vector3 myPosition, Quaternion rotation)
+    {
+        ListOfGameObjects.Add(new GameObject());
+        int AddedElmtIndex = ListOfGameObjects.Count - 1;
+
+        buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition,rotation);
+        return AddedElmtIndex;
+    }
     void RotateAccordingly(int x, int z)
     {
             if (z > instance_z + 1)

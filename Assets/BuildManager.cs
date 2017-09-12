@@ -114,7 +114,27 @@ public class BuildManager : MonoBehaviour {
         tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
+    public void BuildUnitOn(ref List<GameObject> tempList, int index, Vector3 position, Quaternion rotation)
+    {
+        if (PlayerStats.Money < unitToBuild.cost)
+        {
+            Debug.Log("Not enough money to build that!");
+            return;
+        }
+        PlayerStats.AddMoney(-1 * unitToBuild.cost);
 
+        Vector3 newPosition;
+        if (unitToBuild == Shop.instance.missileLauncher)
+            newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+        else
+            newPosition = position;
+        tempList[index] = Instantiate(unitToBuild.prefab, newPosition, rotation);
+        //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
+        tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
+        tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
+        tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
+    }
 
     //public void SelectBuilding(UnitBlueprint unit, Vector2 position)
     public void SelectBuilding(UnitBlueprint unit, GameObject gameObject)
@@ -158,6 +178,7 @@ public class BuildManager : MonoBehaviour {
     public void HideOptions()
     {
         optionsObject.SetActive(false);
+        selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void SelectStructure(Structure structure)
