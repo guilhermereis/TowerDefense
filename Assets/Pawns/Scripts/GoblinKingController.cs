@@ -111,7 +111,8 @@ public class GoblinKingController : EnemyController {
                         Vector3 handPosition = new Vector3(handBone.transform.position.x + 0.103f, handBone.transform.position.y - 0.109f, handBone.transform.position.z - 0.19f);
                         Quaternion handRotation = handBone.transform.rotation * Quaternion.Euler(90f, 0f, 0f);
                         holdingSoldier.transform.SetPositionAndRotation(handPosition, handRotation);
-
+                        FixedJoint joint = holdingSoldier.GetComponentInChildren<FixedJoint>();
+                        joint.connectedBody = handBone.GetComponent<Rigidbody>();
                         target = null;
                     }
                 }

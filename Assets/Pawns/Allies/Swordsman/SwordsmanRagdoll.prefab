@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 4619904157673206}
   - component: {fileID: 54920667969418684}
   - component: {fileID: 65905142464996188}
+  - component: {fileID: 138122621169387320}
   m_Layer: 0
   m_Name: pelvis
   m_TagString: Untagged
@@ -1156,7 +1157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1813425191251776}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 11.694738, y: -0.99100006, z: -16.05237}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4711548909659634}
@@ -2005,6 +2006,19 @@ SkinnedMeshRenderer:
     m_Center: {x: -37.942024, y: 8.646633, z: 0}
     m_Extent: {x: 101.119194, y: 28.390469, z: 109.16023}
   m_DirtyAABB: 0
+--- !u!138 &138122621169387320
+FixedJoint:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1360782004301844}
+  m_ConnectedBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144004189168329052
 CharacterJoint:
   m_ObjectHideFlags: 1
