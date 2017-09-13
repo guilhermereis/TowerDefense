@@ -5,6 +5,9 @@ public enum TowerAmmo { Arrow,ArrowFire, CannonBall, Lightning}
 
 public class TowerController : BuildableController {
 
+
+
+
 	[Header("Attack")]
 	public GameObject target;
 	public float fireRate = 0.7f;
@@ -28,10 +31,13 @@ public class TowerController : BuildableController {
     [Header("Weapon")]
     public TowerAmmo currentAmmo;
 
+
+    [Header("Build Effect")]
+    ParticleSystem buildSmokeEffectPrefab;
 	
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
         attackPower = 100;
         Health = 100f;
 		Defense = 5f;
@@ -40,6 +46,12 @@ public class TowerController : BuildableController {
         //currentAmmo = TowerAmmo.Arrow;
         lightningLine.positionCount = 2;
         lightningLine.SetWidth(.2f, .2f);
+
+        //buildSmokeEffectPrefab = GetComponentInChildren<ParticleSystem>();
+        //Instantiate(buildSmokeEffectPrefab, transform.position, Quaternion.identity);
+
+
+
 	}
 	
 	// Update is called once per frame

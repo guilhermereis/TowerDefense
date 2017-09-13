@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4007721915439428}
   - component: {fileID: 198934108853391290}
   - component: {fileID: 199536682127163778}
+  - component: {fileID: 114277872379610126}
   m_Layer: 0
   m_Name: PS_BuildSmokes
   m_TagString: Untagged
@@ -41,6 +42,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114277872379610126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980762818018120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d52ac2d4ad8e647b5ba207c51bade3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisParticleSystem: {fileID: 0}
 --- !u!198 &198934108853391290
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -50,7 +63,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 3
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -100,7 +113,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1834897142
+  randomSeed: 1405874108
   InitialModule:
     serializedVersion: 3
     enabled: 1
