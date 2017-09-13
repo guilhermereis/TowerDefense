@@ -166,4 +166,20 @@ public class TowerController : BuildableController {
 
 		
 	}
+    public float getFireRate()
+    {
+        return fireRate;
+    }
+    public float getAttackPower()
+    {
+        return attackPower;
+    }
+    public void setFireRate(float _fireRate)
+    {
+        fireRate = _fireRate;
+    }
+    public void setAttackPower(float _attackPower)
+    {
+        attackPower = _attackPower;
+    }
 }
