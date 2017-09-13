@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour {
         }
         else if(gameState == GameState.GameOver)
         {
+            Time.timeScale = 1;
+
             if (!game_over) {
                 Debug.Log("Game Over Man");
                 game_over = true;
@@ -50,6 +52,7 @@ public class GameController : MonoBehaviour {
         }
         else if(gameState == GameState.EndWave)
         {
+            Time.timeScale = 1;
             ChangeGameState(GameState.Preparation);
         }
 
