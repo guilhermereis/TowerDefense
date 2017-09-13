@@ -6,6 +6,7 @@ public class BuildManager : MonoBehaviour {
 
     public static BuildManager instance;
     public GameObject optionsObject;
+    public GameObject extraOptionsObject;
     public GameObject shopObject;
     public GameObject sphere;
     private UnitBlueprint unitToBuild;
@@ -171,12 +172,14 @@ public class BuildManager : MonoBehaviour {
     }
     public void ShowOptions()
     {
+        extraOptionsObject.SetActive(true);
         optionsObject.SetActive(true);
         GameObject.Find("ButtonUpgradeText").GetComponent<Text>().text = "Upgrade $" + selectedUnit.upgrade_cost;
         GameObject.Find("ButtonSellText").GetComponent<Text>().text = "Sell $" + selectedUnit.sell_cost;
     }
     public void HideOptions()
     {
+        extraOptionsObject.SetActive(false);
         optionsObject.SetActive(false);
         selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
