@@ -70,7 +70,7 @@ public class PawnHealthBarGUI : MonoBehaviour {
         {
 		    Healthbar.SetActive(true);
 		    float updatedHealth = health / maxHealth;
-            if (updatedHealth >= 0)
+            if (updatedHealth > 0)
                 Healthbar.transform.GetChild(0).GetComponentInChildren<Image>().fillAmount = updatedHealth;
             else
             {

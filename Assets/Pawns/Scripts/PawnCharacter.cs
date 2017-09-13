@@ -73,7 +73,7 @@ public class PawnCharacter : MonoBehaviour {
 
 		return false;
     }
-
+    //thread responsible for slow state.
     IEnumerator SlowTime(float _slowAmount)
     {
 
