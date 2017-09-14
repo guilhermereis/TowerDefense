@@ -75,8 +75,9 @@ public class Arrow : Projectile {
         //Debug.Log(other);
         if (other.gameObject == target )
         {
-
-            Instantiate(damagePrefabParticle, target.transform.position + Vector3.up *0.5f, Quaternion.Euler(new Vector3(-90,0,0)));
+            //spawn vfx for damage
+            //Instantiate(damagePrefabParticle, target.transform.position + Vector3.up *0.5f, Quaternion.Euler(new Vector3(-90,0,0)));
+            Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
             Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
 
             if (other.gameObject.GetComponent<PawnCharacter>().Damage(towerAttack))
