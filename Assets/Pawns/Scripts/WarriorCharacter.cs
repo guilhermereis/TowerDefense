@@ -14,11 +14,18 @@ public class WarriorCharacter : PawnCharacter {
         base.OnDying();
         WarriorGoblingAnimatorController anim = (WarriorGoblingAnimatorController)GetComponentInChildren<WarriorGoblingAnimatorController>();
         anim.isDead = true;
-        Debug.Log("Dyingmotherfucker");
     }
 
     public void DeathEnd()
     {
+        PawnDeathAnimation deathScript = (PawnDeathAnimation)GetComponent<PawnDeathAnimation>();
+        if (deathScript)
+            deathScript.Die(this);
+    }
+
+    public override void OnDeathAnimationEnd()
+    {
+        base.OnDeathAnimationEnd();
         Destroy(gameObject);
     }
 }

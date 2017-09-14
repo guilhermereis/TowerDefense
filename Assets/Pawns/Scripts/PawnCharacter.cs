@@ -73,6 +73,12 @@ public class PawnCharacter : MonoBehaviour {
 
 		return false;
     }
+
+    //Called when Death animation has ended
+    public virtual void OnDeathAnimationEnd() {
+
+    }
+
     //thread responsible for slow state.
     IEnumerator SlowTime(float _slowAmount)
     {

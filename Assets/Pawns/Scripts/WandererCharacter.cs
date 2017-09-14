@@ -12,7 +12,14 @@ public class WandererCharacter : PawnCharacter {
     }
 
     public void DeathEnd() {
-        Destroy(gameObject);
+        PawnDeathAnimation deathScript = (PawnDeathAnimation)GetComponent<PawnDeathAnimation>();
+        if(deathScript)
+            deathScript.Die(this);
     }
 
+    public override void OnDeathAnimationEnd()
+    {
+        base.OnDeathAnimationEnd();
+        Destroy(gameObject);
+    }
 }

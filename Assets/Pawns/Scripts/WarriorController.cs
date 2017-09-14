@@ -94,10 +94,7 @@ public class WarriorController : EnemyController {
 
     public void processHit() {
         if (target.tag == "Ally")
-        {
-
-           
-
+        {  
 
             if (target.GetComponent<PawnCharacter>().Damage(character.attack))
             {
