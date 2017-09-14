@@ -40,7 +40,6 @@ public class GoblinKingController : EnemyController {
 
             if (target != null)
             {
-                Debug.Log("New Target: " + target);
                 attackCountdown = 1f / character.attackRate;
                 throwFinished = false;
                 anim.isAttacking = true;
@@ -49,7 +48,6 @@ public class GoblinKingController : EnemyController {
             else {
                 anim.isAttacking = false;
                 ChangeState(PawnState.Walking);
-                Debug.Log("No Target, walk");
             }
         }
 	}

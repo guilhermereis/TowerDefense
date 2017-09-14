@@ -8,4 +8,24 @@ public class WarriorCharacter : PawnCharacter {
 	{
 		attack = 700;
 	}
+
+    public override void OnDying()
+    {
+        base.OnDying();
+        WarriorGoblingAnimatorController anim = (WarriorGoblingAnimatorController)GetComponentInChildren<WarriorGoblingAnimatorController>();
+        anim.isDead = true;
+    }
+
+    public void DeathEnd()
+    {
+        PawnDeathAnimation deathScript = (PawnDeathAnimation)GetComponent<PawnDeathAnimation>();
+        if (deathScript)
+            deathScript.Die(this);
+    }
+
+    public override void OnDeathAnimationEnd()
+    {
+        base.OnDeathAnimationEnd();
+        Destroy(gameObject);
+    }
 }

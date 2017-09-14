@@ -165,7 +165,8 @@ public class PawnController : MonoBehaviour {
         }
         else if (currentState == PawnState.Dead)
         {
-            nav.isStopped = true;
+            if (nav.isActiveAndEnabled)
+                nav.isStopped = true;
         }
 
         if (GameController.gameState == GameState.GameOver)

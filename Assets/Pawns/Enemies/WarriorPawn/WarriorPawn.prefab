@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 135076864024672862}
   - component: {fileID: 114883886630062610}
   - component: {fileID: 136506528161580460}
+  - component: {fileID: 114239521450911384}
   m_Layer: 10
   m_Name: WarriorPawn
   m_TagString: Enemy
@@ -327,6 +328,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114239521450911384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1643799150267160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4a845bbb7ad0b448ab75156853b812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTargetDepth: 1.5
+  deathFallSpeed: 0.5
 --- !u!114 &114259367806044188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -344,6 +358,7 @@ MonoBehaviour:
   attack: 700
   attackRate: 0.5
   isDying: 0
+  isSlow: 0
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
@@ -391,6 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   speed: 0
+  isDead: 0
 --- !u!114 &114883886630062610
 MonoBehaviour:
   m_ObjectHideFlags: 1
