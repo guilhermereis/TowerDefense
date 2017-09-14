@@ -5,9 +5,11 @@ using UnityEngine;
 public class WarriorGoblingAnimatorController : MonoBehaviour {
     private Animator anim;
     private WarriorController controller;
+    private WarriorCharacter character;
 
     public bool isAttacking = false;
     public float speed = 0f;
+    public bool isDead = false;
 
     public void setIsAttacking(bool newIsAttacking)
     {
@@ -25,22 +27,31 @@ public class WarriorGoblingAnimatorController : MonoBehaviour {
     void Start () {
         anim = (Animator)GetComponent<Animator>();
         controller = (WarriorController)GetComponentInParent<WarriorController>();
+        character = (WarriorCharacter)GetComponentInParent<WarriorCharacter>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (isAttacking)
-        {
-            weightLerp += 0.1f * Time.deltaTime;
-        }
-        weightLerp = Mathf.Clamp(weightLerp, 0f, 1f);
+        if (isDead) {
+            if (anim) {
+                anim.SetLayerWeight(1, 0);
+                anim.SetBool("Dead", isDead);
+            }
+        } else {
+            if (isAttacking)
+            {
+                weightLerp += 0.1f * Time.deltaTime;
+            }
+            weightLerp = Mathf.Clamp(weightLerp, 0f, 1f);
 
-        if (anim)
-        {
-            anim.SetBool("IsAttacking", isAttacking);
-            anim.SetFloat("Speed", speed);
-            anim.SetLayerWeight(1, weightLerp);
+            if (anim)
+            {
+                anim.SetBool("IsAttacking", isAttacking);
+                anim.SetFloat("Speed", speed);
+                anim.SetLayerWeight(1, weightLerp);
+            }
         }
+        
     }
 
     public void AttackEnd(int i)
@@ -50,5 +61,9 @@ public class WarriorGoblingAnimatorController : MonoBehaviour {
 
     public void Hit(int i) {
         controller.processHit() ;
+    }
+
+    public void DeathEnd() {
+        character.DeathEnd();
     }
 }
