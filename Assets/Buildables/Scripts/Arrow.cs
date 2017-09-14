@@ -79,7 +79,7 @@ public class Arrow : Projectile {
             Instantiate(damagePrefabParticle, target.transform.position + Vector3.up *0.5f, Quaternion.Euler(new Vector3(-90,0,0)));
             Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
 
-            if (other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower))
+            if (other.gameObject.GetComponent<PawnCharacter>().Damage(towerAttack))
             {
                 GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
                 other.gameObject.GetComponent<PawnCharacter>().OnDying();

@@ -34,7 +34,7 @@ public class IceArrow : Arrow {
         if (other.gameObject == target)
         {
 
-            target.GetComponent<PawnCharacter>().StartCoroutine("SlowTime", transform.parent.gameObject.GetComponent<TowerSlowController>().slowAmount);
+            target.GetComponent<PawnCharacter>().StartCoroutine("SlowTime", transform.parent.gameObject.GetComponent<TowerSlowController>().SlowAmount);
 
             Destroy(gameObject);
             return;

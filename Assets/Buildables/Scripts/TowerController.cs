@@ -4,18 +4,16 @@ using System.Collections.Generic;
 public enum TowerAmmo { Arrow,ArrowFire, CannonBall, Lightning}
 
 public class TowerController : BuildableController {
-
-
-
-
-	[Header("Attack")]
+    #region Attack
+    [Header("Attack")]
 	public GameObject target;
 	public float fireRate = 0.7f;
-    public float attackCooldown { get;set; }
+    public float attackCooldown { get; set; }
 	public List<GameObject> enemies;
 	private float attackPower;
+    #endregion
 
-	[Header("Arrow")]
+    [Header("Arrow")]
 	public GameObject attackPoint;
 	public GameObject arrowPrefab;
     public GameObject arrowSoundPrefab;
@@ -34,26 +32,35 @@ public class TowerController : BuildableController {
 
     [Header("Build Effect")]
     ParticleSystem buildSmokeEffectPrefab;
-	
 
-	// Use this for initialization
-	public void Start () {
+   
+
+   
+
+    // Use this for initialization
+    public void Start () {
         attackPower = 100;
         Health = 100f;
 		Defense = 5f;
 		IsUpgradable = true;
 		enemies = new List<GameObject>();
         //currentAmmo = TowerAmmo.Arrow;
-        lightningLine.positionCount = 2;
-        lightningLine.SetWidth(.2f, .2f);
+        
 
-        //buildSmokeEffectPrefab = GetComponentInChildren<ParticleSystem>();
+        
+       
+      
         //Instantiate(buildSmokeEffectPrefab, transform.position, Quaternion.identity);
 
 
 
 	}
 	
+    public void BuildEffect()
+    {
+        buildSmokeEffectPrefab.Play();
+    }
+
 	// Update is called once per frame
 	public virtual void Update () {
         
@@ -92,6 +99,7 @@ public class TowerController : BuildableController {
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
+                newArrow.TowerAttack = attackPower;
 
                 Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
             }

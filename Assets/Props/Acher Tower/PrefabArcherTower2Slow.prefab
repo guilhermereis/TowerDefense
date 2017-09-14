@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1712867522992376}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.4692378, y: -1, z: -14.56}
+  m_LocalPosition: {x: 3.4825366, y: -1.0000021, z: -17.627258}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4409896886620558}
@@ -238,7 +238,6 @@ MonoBehaviour:
   lightningPrefab: {fileID: 0}
   lightningLine: {fileID: 0}
   currentAmmo: 0
-  slowAmount: 5
 --- !u!114 &114290707413137430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,7 +285,7 @@ ParticleSystem:
   simulationSpeed: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

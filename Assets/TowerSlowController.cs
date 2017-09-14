@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class TowerSlowController : TowerController {
 
+#region Slow
+    private float slowAmount;
 
-    public float slowAmount  = 5.0f;
+    public float SlowAmount
+    {
+        get
+        {
+            return slowAmount;
+        }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	public override void Update () {
+        set
+        {
+            slowAmount = value;
+        }
+    }
+#endregion
+    // Use this for initialization
+    void Start()
+    {
+        SlowAmount = 5.0f;
+    }
+
+    // Update is called once per frame
+    public override void Update () {
         if (attackCooldown <= 0)
         {
 
