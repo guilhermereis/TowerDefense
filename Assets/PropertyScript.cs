@@ -31,6 +31,9 @@ public class PropertyScript  {
         public Vector3 position;
         public Quaternion rotation;
         public float currentHealth;
+        public int attackPowerLVL;
+        public int fireRateLVL;
+
         public StructureState(string _structureName, Transform _transform, float _currentHealth)
         {
             structureName = _structureName;
@@ -38,6 +41,8 @@ public class PropertyScript  {
             currentHealth = _currentHealth;
             position = _transform.position;
             rotation = _transform.rotation;
+            attackPowerLVL = 0;
+            fireRateLVL = 0;
         }
     }
 

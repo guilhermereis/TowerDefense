@@ -37,9 +37,15 @@ public class DebugOptions : MonoBehaviour
         Debug.Log("Gonna save all !");
         listOfStates = new List<PropertyScript.StructureState>();
         BuildableController bc;
+        TowerController tc;
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
+            //Get information from the Buildable
             bc = gridMouse.ListOfGameObjects[i].GetComponent<BuildableController>();
+            //--------------------------------------------------------------------------
+            //Get information from the TowerController
+            tc = gridMouse.ListOfGameObjects[i].GetComponent<TowerController>();
+            //--------------------------------------------------------------------------
             PropertyScript.StructureState state =
                 new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
                                                   gridMouse.ListOfGameObjects[i].transform,
