@@ -7,10 +7,10 @@ public class TowerController : BuildableController {
     #region Attack
     [Header("Attack")]
 	public GameObject target;
-	public float fireRate = 0.7f;
     public float attackCooldown { get; set; }
 	public List<GameObject> enemies;
 	private float attackPower;
+    public float fireRate = 0.7f;
     #endregion
 
     [Header("Arrow")]

@@ -232,12 +232,12 @@ public class GridMouse : MonoBehaviour {
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
                 HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
-                //buildManager.DeselectUnitToBuild();
+                buildManager.DeselectUnitToBuild();
             }
             else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
             {
                 HandleBuildingTower(ray, hitInfo, didHit, x, z);
-                //buildManager.DeselectUnitToBuild();
+                buildManager.DeselectUnitToBuild();
             }
             else //if there's nothing to build, then hide the options
             {
