@@ -113,6 +113,10 @@ public class BuildManager : MonoBehaviour {
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
         tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        if(tempList[index].GetComponent<TowerController>() != null)
+        {
+            tempList[index].GetComponent<TowerController>().BuildEffect();
+        }
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
     public void BuildUnitOn(ref List<GameObject> tempList, int index, Vector3 position, Quaternion rotation)
