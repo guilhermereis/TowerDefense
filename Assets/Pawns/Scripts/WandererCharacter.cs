@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class WandererCharacter : PawnCharacter {
 
+    public override void OnDying()
+    {
+        base.OnDying();
+        WandererAnimatorController anim = (WandererAnimatorController)GetComponent<WandererAnimatorController>();
+        anim.isDead = true;
+    }
 
+    public void DeathEnd() {
+        Destroy(gameObject);
+    }
 
-	
 }
