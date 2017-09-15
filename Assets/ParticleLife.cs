@@ -7,10 +7,16 @@ public class ParticleLife : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         thisParticleSystem = this.GetComponent<ParticleSystem>();
-        if (!thisParticleSystem.main.loop)
+        if (thisParticleSystem.main.playOnAwake)
         {
-            Destroy(gameObject, 3);
+            if (!thisParticleSystem.main.loop)
+            {
+                Destroy(gameObject, 3);
+            }
+
         }
+
+
 	}
 	
 	// Update is called once per frame
