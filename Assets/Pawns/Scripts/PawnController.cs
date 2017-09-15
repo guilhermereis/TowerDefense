@@ -59,8 +59,12 @@ public class PawnController : MonoBehaviour {
 
     public void ChangeState(PawnState newstate)
     {
-        if(currentState != newstate)
+        if (currentState == PawnState.Dead)
+            return;
+
+        if (currentState != newstate)
         {
+
             currentState = newstate;
         }
     }
@@ -99,75 +103,83 @@ public class PawnController : MonoBehaviour {
             nav.speed = speed;
 
 
-        if (currentState == PawnState.Idle)
-        {
-            nav.isStopped = true;
-        }else if (currentState == PawnState.Walking)
-        {
-			nav.isStopped = false;
+        if (currentState != PawnState.Dead) {
 
-            //to fix
-            if (nextWaypoint < waypoints.Count)
+            if (currentState == PawnState.Idle)
             {
-                currentDestination = waypoints[nextWaypoint].position;
-                nav.SetDestination(currentDestination);
+                nav.isStopped = true;
             }
-
-
-            if (IsAtLocation())
-                nextWaypoint++;
-			
-
-        }else if(currentState == PawnState.Battle)
-        {
-            OnBattle();
-        }
-        else if(currentState == PawnState.FindTarget)
-        {
-            nav.isStopped = false;
-            if (target != null)
+            else if (currentState == PawnState.Walking)
             {
-                if (nav != null)
+                nav.isStopped = false;
+
+                //to fix
+                if (nextWaypoint < waypoints.Count)
                 {
-                    nav.SetDestination(target.transform.position);
-                    //if(nav.hasPath)
-                    //else
-                    //{
-                    //    if (gameObject.tag == "Ally")
-                    //        //ChangeState(PawnState.Homing);
-                    //        Debug.Log("");
-                    //    else
-                    //        ChangeState(PawnState.Walking);
-                         
-                    //}
-                   
+                    currentDestination = waypoints[nextWaypoint].position;
+                    nav.SetDestination(currentDestination);
+                }
+
+
+                if (IsAtLocation())
+                    nextWaypoint++;
+
+
+            }
+            else if (currentState == PawnState.Battle)
+            {
+                OnBattle();
+            }
+            else if (currentState == PawnState.FindTarget)
+            {
+                nav.isStopped = false;
+                if (target != null)
+                {
+                    if (nav != null)
+                    {
+                        nav.SetDestination(target.transform.position);
+                        //if(nav.hasPath)
+                        //else
+                        //{
+                        //    if (gameObject.tag == "Ally")
+                        //        //ChangeState(PawnState.Homing);
+                        //        Debug.Log("");
+                        //    else
+                        //        ChangeState(PawnState.Walking);
+
+                        //}
+
+                    }
+
+                }
+                else
+                {
+                    if (gameObject.tag == "Ally")
+                        ChangeState(PawnState.Homing);
+                    else
+                        ChangeState(PawnState.Walking);
+                }
+            }
+            else if (currentState == PawnState.Homing)
+            {
+                Vector3 tolerance = homePosition - transform.position;
+                nav.SetDestination(homePosition);
+                if (IsAtLocation())
+                {
+                    ChangeState(PawnState.Idle);
+
                 }
 
             }
-			else
-			{
-				if (gameObject.tag == "Ally")
-					ChangeState(PawnState.Homing);
-				else
-					ChangeState(PawnState.Walking);
-			}
-        }
-        else if(currentState == PawnState.Homing)
-        {
-            Vector3 tolerance = homePosition - transform.position;
-            nav.SetDestination(homePosition);
-            if (IsAtLocation())
-            {
-               ChangeState(PawnState.Idle);
 
-            }
-            
         }
-        else if (currentState == PawnState.Dead)
+        else
         {
             if (nav.isActiveAndEnabled)
                 nav.isStopped = true;
         }
+
+        
 
         if (GameController.gameState == GameState.GameOver)
             ChangeState(PawnState.Idle);

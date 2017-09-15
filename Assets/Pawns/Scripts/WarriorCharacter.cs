@@ -9,9 +9,9 @@ public class WarriorCharacter : PawnCharacter {
 		attack = 700;
 	}
 
-    public override void OnDying()
+    public override void Die()
     {
-        base.OnDying();
+        base.Die();
         WarriorGoblingAnimatorController anim = (WarriorGoblingAnimatorController)GetComponentInChildren<WarriorGoblingAnimatorController>();
         anim.isDead = true;
     }

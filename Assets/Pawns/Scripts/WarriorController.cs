@@ -34,8 +34,12 @@ public class WarriorController : EnemyController {
 		base.OnBattle();
 		nav.isStopped = true;
 		
-		if (target != null && !target.GetComponent<PawnCharacter>().isDying)
+		if (target != null)
 		{
+            if (target.GetComponent<PawnCharacter>() != null)
+                if (target.GetComponent<PawnCharacter>().isDead)
+                    ChangeState(PawnState.Walking);
+
             LookToTarget();
             if (attackCountdown <= 0)
 			{
@@ -55,13 +59,13 @@ public class WarriorController : EnemyController {
 		base.OnTriggerEnter(other);
         //Debug.Log(other.gameObject.tag);
         //Debug.Assert(other.isTrigger);
-        if(other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Ally")
+        if(other.gameObject.tag == "Ally")
         {
-            if (!other.gameObject.GetComponent<PawnCharacter>().isDying)
+            if (!other.gameObject.GetComponent<PawnCharacter>().isDead)
             {
                 enemiesInRange.Add(other.gameObject);
 
-                if (target == null || target.GetComponent<PawnCharacter>().isDying)
+                if (target == null || target.GetComponent<PawnCharacter>().isDead)
 		        {
 			        target = other.gameObject;
 			        ChangeState(PawnState.Battle);
@@ -88,7 +92,7 @@ public class WarriorController : EnemyController {
 		{
 			enemiesInRange.Remove(other.gameObject);
            
-            if (other.gameObject == target && !target.GetComponent<PawnCharacter>().isDying)
+            if (other.gameObject == target && !target.GetComponent<PawnCharacter>().isDead)
                 ChangeState(PawnState.FindTarget);
            
             //	enemiesInRange.Remove(other.gameObject);
@@ -103,7 +107,6 @@ public class WarriorController : EnemyController {
             if (target.GetComponent<PawnCharacter>().Damage(character.attack))
             {
                 enemiesInRange.Remove(target);
-                target.GetComponent<PawnCharacter>().OnDying();
                 target = null;
             }
         }

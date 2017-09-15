@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class WandererCharacter : PawnCharacter {
 
-    public override void OnDying()
+    public override void Die()
     {
-        base.OnDying();
+        base.Die();
         WandererAnimatorController anim = (WandererAnimatorController)GetComponent<WandererAnimatorController>();
         anim.isDead = true;
     }
