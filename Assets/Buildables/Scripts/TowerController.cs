@@ -10,7 +10,9 @@ public class TowerController : BuildableController {
     public float attackCooldown { get; set; }
 	public List<GameObject> enemies;
 	private float attackPower;
-    public float fireRate = 0.7f;
+    private float fireRate = 0.7f;
+    public int attackPowerLVL = 0;
+    public int fireRateLVL = 0;
     #endregion
 
     [Header("Arrow")]
@@ -87,8 +89,82 @@ public class TowerController : BuildableController {
         attackCooldown -= Time.deltaTime;
 
 	}
+    public void SetFireRateAndAttackPower()
+    {
 
-	public virtual void Fire()
+        if (attackPowerLVL == 0)
+        {
+            attackPower = 100;
+        }
+        else if (attackPower == 1)
+        {
+            attackPower = 150;
+        }
+        else if (attackPower == 2)
+        {
+            attackPower = 200;
+        }
+        else if (attackPower == 3)
+        {
+            attackPower = 250;
+        }
+        if (fireRateLVL == 0)
+        {
+            fireRate = 0.7f;
+        }
+        else if (fireRateLVL == 1)
+        {
+            fireRate = 1.1f;
+        }
+        else if (fireRateLVL == 2)
+        {
+            fireRate = 1.5f;
+        }
+        else if (fireRateLVL == 3)
+        {
+            fireRate = 1.9f;
+        }
+    }
+
+    public void SetFireRateAndAttackPowerByLVL(int _fireRateLVL, int _attackPowerLVL)
+    {
+        fireRateLVL = _fireRateLVL;
+        attackPowerLVL = _attackPowerLVL;
+        if (attackPowerLVL == 0)
+        {
+            attackPower = 100;
+        }
+        else if (attackPower == 1)
+        {
+            attackPower = 150;
+        }
+        else if (attackPower == 2)
+        {
+            attackPower = 200;
+        }
+        else if (attackPower == 3)
+        {
+            attackPower = 250;
+        }
+        if (fireRateLVL == 0)
+        {
+            fireRate = 0.7f;
+        }
+        else if (fireRateLVL == 1)
+        {
+            fireRate = 1.1f;
+        }
+        else if (fireRateLVL == 2)
+        {
+            fireRate = 1.5f;
+        }
+        else if (fireRateLVL == 3)
+        {
+            fireRate = 1.9f;
+        }
+    }
+
+    public virtual void Fire()
 	{
         //Debug.DrawLine(attackPoint.transform.position, target.transform.position, Color.blue,2f);
         if(currentAmmo == TowerAmmo.Arrow)
@@ -201,5 +277,22 @@ public class TowerController : BuildableController {
     public void setAttackPower(float _attackPower)
     {
         attackPower = _attackPower;
+    }
+
+    public void setFireRateLVL(int _fireRateLVL)
+    {
+        fireRateLVL = _fireRateLVL;
+    }
+    public void setAttackPowerLVL(int _attackPowerLVL)
+    {
+        attackPowerLVL = _attackPowerLVL;
+    }
+    public float getFireRateLVL()
+    {
+        return fireRateLVL;
+    }
+    public float getAttackPowerLVL()
+    {
+        return attackPowerLVL;
     }
 }

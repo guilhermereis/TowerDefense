@@ -34,7 +34,7 @@ public class PropertyScript  {
         public int attackPowerLVL;
         public int fireRateLVL;
 
-        public StructureState(string _structureName, Transform _transform, float _currentHealth)
+        public StructureState(string _structureName, Transform _transform, float _currentHealth, float _fireRateLVL, float _attackPowerLVL)
         {
             structureName = _structureName;
             transform = _transform;
