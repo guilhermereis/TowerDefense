@@ -5,31 +5,30 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour {
 
 
-    public float duration = 0.5f;
-    public float speed = 1.0f;
-    public float magnitude = 0.1f;
+    public float defaultDuration = 0.5f;
+    public float defaultSpeed = 1.0f;
+    public float defaultMagnitude = 0.1f;
 
     Vector3 originalPosition;
 
-    bool test = true;
 	// Use this for initialization
 	void Start () {
 		
 	}
     
 	
-    public void PlayShake()
+    public void PlayShake(float duration, float speed, float magnitude)
     {
         originalPosition = transform.localPosition;
-        Debug.Log(originalPosition);
         StopCoroutine("Shake");
-        StartCoroutine("Shake");
+        StartCoroutine(Shake(duration, speed, magnitude));
     }
 
-    IEnumerator Shake()
+    IEnumerator Shake(float duration, float speed, float magnitude)
     {
         float elapsed = 0.0f;
         float randomStart = Random.Range(-1, 1.0f);
+        Vector3 elapsedShake = new Vector3(0f, 0f, 0f);
 
         while(elapsed< duration)
         {
@@ -41,26 +40,19 @@ public class CameraShake : MonoBehaviour {
             float damper = 1.0f - Mathf.Clamp(2.0f * percentCompleted - 1.0f, 0.0f, 1.0f);
             float alpha = randomStart + speed * percentCompleted;
 
-            float x = Mathf.PerlinNoise(alpha, 0.0f) * 2.0f - 1.0f;
-            float z = Mathf.PerlinNoise(0.0f, alpha) * 2.0f - 1.0f;
+            float x = (Mathf.PerlinNoise(alpha, 0.0f) * 2.0f - 1.0f);
+            float z = (Mathf.PerlinNoise(0.0f, alpha) * 2.0f - 1.0f);
 
             x *= magnitude * damper;
             z *= magnitude * damper;
 
-            transform.localPosition = new Vector3(x, this.originalPosition.y, z);
+            elapsedShake += new Vector3(x, 0f, z);
+            transform.localPosition += new Vector3(x, 0f, z);
 
             yield return null;
         }
 
-        transform.localPosition = originalPosition;
+        Vector3 deltaShake = originalPosition - elapsedShake;
+        transform.localPosition += deltaShake;
     }
-
-	// Update is called once per frame
-	void Update () {
-        if (test)
-        {
-            PlayShake();
-            test = false;
-        }
-	}
 }

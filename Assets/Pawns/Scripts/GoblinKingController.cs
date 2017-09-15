@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GoblinKingController : EnemyController {
 
+    private CameraManager cameraManager;
     public GameObject handBone;
     public GameObject soldierThrowPrefab;
-	public float attackCountdown = 0f;
+    public float attackCountdown = 0f;
 
     private GoblinKingCharacter character;
     private List<GameObject> enemiesInRange;
@@ -16,17 +17,18 @@ public class GoblinKingController : EnemyController {
     private bool throwFinished = true;
 
     // Use this for initialization
-    void Start () {
-		weight = 2;
-		enemiesInRange = new List<GameObject>();
-		character = (GoblinKingCharacter)GetComponent<GoblinKingCharacter>();
+    void Start() {
+        weight = 2;
+        enemiesInRange = new List<GameObject>();
+        character = (GoblinKingCharacter)GetComponent<GoblinKingCharacter>();
         anim = (GoblinKingAnimatorController)GetComponentInChildren<GoblinKingAnimatorController>();
         handSocketTransform = handBone.transform;
+        cameraManager = GameObject.Find("/GameMode/CameraManager").GetComponent<CameraManager>();
     }
-	
-	// Update is called once per frame
-	protected override void Update () {
-		base.Update();
+
+    // Update is called once per frame
+    protected override void Update() {
+        base.Update();
         anim.speed = nav.velocity.magnitude;
 
         if (throwFinished) {
@@ -50,7 +52,7 @@ public class GoblinKingController : EnemyController {
                 ChangeState(PawnState.Walking);
             }
         }
-	}
+    }
 
     private GameObject GetNewTarget() {
         GameObject returnTarget = null;
@@ -62,17 +64,17 @@ public class GoblinKingController : EnemyController {
     }
 
     public override void OnBattle()
-	{
-		base.OnBattle();
-		nav.isStopped = true;
-        if(target != null) {
+    {
+        base.OnBattle();
+        nav.isStopped = true;
+        if (target != null) {
             LookToTarget();
         }
     }
 
-	protected override void OnTriggerEnter(Collider other)
-	{
-		base.OnTriggerEnter(other);
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
         if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Ally")
         {
             enemiesInRange.Add(other.gameObject);
@@ -96,7 +98,7 @@ public class GoblinKingController : EnemyController {
         }
     }
 
-    public void Grab(string str) { 
+    public void Grab(string str) {
         switch (str) {
             case "Pick":
                 if (target.tag == "Ally")
@@ -123,5 +125,9 @@ public class GoblinKingController : EnemyController {
             default:
                 break;
         }
+    }
+
+    public void Step() {
+        cameraManager.shakeCamera(0.5f, 5f, 1f);
     }
 }

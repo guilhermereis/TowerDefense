@@ -942,6 +942,9 @@ MonoBehaviour:
   homePosition: {x: 0, y: 0, z: 0}
   waypoints: []
   weight: 0
+  handBone: {fileID: 1284208273796616}
+  soldierThrowPrefab: {fileID: 1813425191251776, guid: 379a4b6340e82fb43920b42d6f7d3ba4,
+    type: 2}
   attackCountdown: 0
 --- !u!114 &114369030417113696
 MonoBehaviour:
@@ -960,6 +963,7 @@ MonoBehaviour:
   attack: 9000
   attackRate: 0.01
   isDying: 0
+  isSlow: 0
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
