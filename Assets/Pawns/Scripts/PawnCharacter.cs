@@ -10,7 +10,7 @@ public class PawnCharacter : MonoBehaviour {
     public float defense;
     public float attack;
     public float attackRate;
-    public bool isDying;
+    public bool isDead;
     public bool isSlow;
 	public PawnHealthBarGUI healthBar;
     public AudioSource painSoundPrefab;
@@ -32,9 +32,9 @@ public class PawnCharacter : MonoBehaviour {
 		
 	}
 
-	public virtual void OnDying()
+	public virtual void Die()
 	{
-		isDying = true;
+		isDead = true;
 
         
 
@@ -69,7 +69,7 @@ public class PawnCharacter : MonoBehaviour {
 
     public virtual bool Damage(float _damage)
     {
-        if (!isDying)
+        if (!isDead)
         {
             float realDamage = _damage - defense;
 		    if (realDamage < 0)
@@ -85,7 +85,7 @@ public class PawnCharacter : MonoBehaviour {
 		    //Debug.Log(health);
 		    if (health <= 0)
             {
-                OnDying();
+                Die();
 			    return true;
                 //Destroy(gameObject);
                 //return;

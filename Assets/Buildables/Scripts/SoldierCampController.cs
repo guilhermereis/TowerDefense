@@ -99,7 +99,7 @@ public class SoldierCampController : BuildableController {
 	{
 		if (enemies.Remove(_target))
 		{
-			_target.GetComponent<PawnCharacter>().OnDying();
+			_target.GetComponent<PawnCharacter>().Die();
 			if (enemies.Count > 0)
 				SetSoldierTarget(enemies[0]);
 		}
@@ -111,7 +111,7 @@ public class SoldierCampController : BuildableController {
 
 		if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Enemy")
 		{
-			if (!other.gameObject.GetComponent<PawnCharacter>().isDying)
+			if (!other.gameObject.GetComponent<PawnCharacter>().isDead)
 			{
 				
 				enemies.Remove(other.gameObject);
