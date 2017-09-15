@@ -50,6 +50,7 @@ public class DebugOptions : MonoBehaviour
                 new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
                                                   gridMouse.ListOfGameObjects[i].transform,
                                                     bc.Health,tc.fireRateLVL,tc.attackPowerLVL);
+            Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
             listOfStates.Add(state);
             Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
