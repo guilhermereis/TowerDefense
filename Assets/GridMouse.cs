@@ -8,6 +8,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(TileMap))]
 public class GridMouse : MonoBehaviour {
 
+    //ignore layer 10 (monsters)
+    private int layerMask = ~(1 << 10);
 
     public static GridMouse instance;
     public GameObject Track;
@@ -209,7 +211,7 @@ public class GridMouse : MonoBehaviour {
     void OnMouseDown()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
         int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
         int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
         PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
@@ -270,28 +272,30 @@ public class GridMouse : MonoBehaviour {
     }
     void RotateAccordingly(int x, int z)
     {
-            if (z > instance_z + 1)
+            bool inside_width = x <= instance_x + 1 && x >= instance_x;
+            bool inside_height = z<=instance_z+1 && z>=instance_z;
+            if (z > instance_z + 1 && inside_width)
             {
                 Debug.Log("Rotate up from " + rotation);
                 rotation = new Vector3(-90, 180, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
-            else if (x > instance_x + 1)
+            else if (x > instance_x + 1 && inside_height)
             {
                 Debug.Log("Rotate right from " + rotation);
                 rotation = new Vector3(-90, -90, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
-            else if (x < instance_x)
+            else if (x < instance_x && inside_height)
             {
                 Debug.Log("Rotate left from " + rotation);
                 rotation = new Vector3(-90,90, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
-            else if (z < instance_z)
+            else if (z < instance_z && inside_width)
             {
                 Debug.Log("Rotate down from " + rotation);
                 rotation = new Vector3(-90, 0, 0);
@@ -477,7 +481,7 @@ public class GridMouse : MonoBehaviour {
 
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
 
         if (didHit)
         {
