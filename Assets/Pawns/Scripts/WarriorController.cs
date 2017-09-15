@@ -34,7 +34,7 @@ public class WarriorController : EnemyController {
 		base.OnBattle();
 		nav.isStopped = true;
 		
-		if (target != null)
+		if (target != null && !target.GetComponent<PawnCharacter>().isDying)
 		{
             LookToTarget();
             if (attackCountdown <= 0)
@@ -57,16 +57,20 @@ public class WarriorController : EnemyController {
         //Debug.Assert(other.isTrigger);
         if(other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Ally")
         {
-            enemiesInRange.Add(other.gameObject);
+            if (!other.gameObject.GetComponent<PawnCharacter>().isDying)
+            {
+                enemiesInRange.Add(other.gameObject);
 
-            if (target == null)
-		    {
-			    target = other.gameObject;
-			    ChangeState(PawnState.Battle);
-		    }else if(other.gameObject == target)
-		    {
-			    ChangeState(PawnState.Battle);
-		    }
+                if (target == null || target.GetComponent<PawnCharacter>().isDying)
+		        {
+			        target = other.gameObject;
+			        ChangeState(PawnState.Battle);
+		        }else if(other.gameObject == target)
+		        {
+			        ChangeState(PawnState.Battle);
+		        }
+
+            }
 		    
 
         }
@@ -84,7 +88,7 @@ public class WarriorController : EnemyController {
 		{
 			enemiesInRange.Remove(other.gameObject);
            
-            if (other.gameObject == target)
+            if (other.gameObject == target && !target.GetComponent<PawnCharacter>().isDying)
                 ChangeState(PawnState.FindTarget);
            
             //	enemiesInRange.Remove(other.gameObject);

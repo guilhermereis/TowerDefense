@@ -58,9 +58,9 @@ public class SimpleSoldierController : PawnController {
 		anim.speed = nav.velocity.magnitude;
 		attackCountdown -= Time.deltaTime;
 
-		if (target != null && enemiesInRange.Contains(target)){
-			ChangeState(PawnState.Battle);
-		}
+		//if (target != null && enemiesInRange.Contains(target) && !gameObject.GetComponent<PawnCharacter>().isDying){
+		//	ChangeState(PawnState.Battle);
+		//}
     }
 
     public override void OnMoving()
