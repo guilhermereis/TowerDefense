@@ -8,4 +8,26 @@ public class GoblinKingCharacter : PawnCharacter {
 	{
 		attack = 7000;
 	}
+
+    public override void OnDying()
+    {
+        base.OnDying();
+        GoblinKingAnimatorController anim = (GoblinKingAnimatorController)GetComponent<GoblinKingAnimatorController>();
+        GoblinKingController controller = (GoblinKingController)GetComponent<GoblinKingController>();
+        controller.isDead = true;
+        anim.isDead = true;
+    }
+
+    public void DeathEnd()
+    {
+        PawnDeathAnimation deathScript = (PawnDeathAnimation)GetComponent<PawnDeathAnimation>();
+        if (deathScript)
+            deathScript.Die(this);
+    }
+
+    public override void OnDeathAnimationEnd()
+    {
+        base.OnDeathAnimationEnd();
+        Destroy(gameObject);
+    }
 }

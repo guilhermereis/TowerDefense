@@ -28,22 +28,31 @@ public class WandererAnimatorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (isAttacking)
+        if (isDead)
         {
-            weightLerp += 0.1f * Time.deltaTime;
+            if (anim)
+            {
+                anim.SetLayerWeight(1, 0);
+                anim.SetBool("Dead", isDead);
+            }
         }
-        else
-        {
-            weightLerp -= 0.1f * Time.deltaTime;
-        }
-        weightLerp = Mathf.Clamp(weightLerp, 0f, 1f);
+        else {
+            if (isAttacking)
+            {
+                weightLerp += 0.1f * Time.deltaTime;
+            }
+            else
+            {
+                weightLerp -= 0.1f * Time.deltaTime;
+            }
+            weightLerp = Mathf.Clamp(weightLerp, 0f, 1f);
 
-        if (anim)
-        {
-            anim.SetBool("IsAttacking", isAttacking);
-            anim.SetBool("Dead", isDead);
-            anim.SetFloat("Speed", speed);
-            anim.SetLayerWeight(1, weightLerp);
+            if (anim)
+            {
+                anim.SetBool("IsAttacking", isAttacking);
+                anim.SetFloat("Speed", speed);
+                anim.SetLayerWeight(1, weightLerp);
+            }
         }
     }
 }

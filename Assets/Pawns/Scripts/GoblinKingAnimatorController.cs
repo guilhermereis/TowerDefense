@@ -7,6 +7,7 @@ public class GoblinKingAnimatorController : MonoBehaviour {
     //private WarriorController controller;
 
     public bool isAttacking = false;
+    public bool isDead = false;
     public float speed = 0f;
 
     // Use this for initialization
@@ -17,10 +18,21 @@ public class GoblinKingAnimatorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (anim)
+        if (isDead)
         {
-            anim.SetBool("IsAttacking", isAttacking);
-            anim.SetFloat("Speed", speed);
+            if (anim)
+            {
+                anim.SetLayerWeight(1, 0);
+                anim.SetBool("Dead", isDead);
+                anim.SetBool("IsAttacking", false);
+            }
+        }
+        else {
+            if (anim)
+            {
+                anim.SetBool("IsAttacking", isAttacking);
+                anim.SetFloat("Speed", speed);
+            }
         }
     }
 
