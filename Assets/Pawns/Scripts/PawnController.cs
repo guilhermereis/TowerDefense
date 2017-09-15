@@ -101,7 +101,7 @@ public class PawnController : MonoBehaviour {
 
         if (currentState == PawnState.Idle)
         {
-
+            nav.isStopped = true;
         }else if (currentState == PawnState.Walking)
         {
 			nav.isStopped = false;
