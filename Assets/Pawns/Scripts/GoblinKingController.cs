@@ -15,6 +15,7 @@ public class GoblinKingController : EnemyController {
     private Transform handSocketTransform;
 
     private bool throwFinished = true;
+    public bool isDead = false;
 
     // Use this for initialization
     void Start() {
@@ -29,28 +30,38 @@ public class GoblinKingController : EnemyController {
     // Update is called once per frame
     protected override void Update() {
         base.Update();
-        anim.speed = nav.velocity.magnitude;
+        if (!isDead)
+        {
+            anim.speed = nav.velocity.magnitude;
 
-        if (throwFinished) {
-            float value = attackCountdown - Time.deltaTime;
-            attackCountdown = Mathf.Max(0, value);
-            ChangeState(PawnState.Walking);
-        }
-
-        if (throwFinished && attackCountdown <= 0) {
-            target = GetNewTarget();
-
-            if (target != null)
+            if (throwFinished)
             {
-                attackCountdown = 1f / character.attackRate;
-                throwFinished = false;
-                anim.isAttacking = true;
-                ChangeState(PawnState.Battle);
-            }
-            else {
-                anim.isAttacking = false;
+                float value = attackCountdown - Time.deltaTime;
+                attackCountdown = Mathf.Max(0, value);
                 ChangeState(PawnState.Walking);
             }
+
+            if (throwFinished && attackCountdown <= 0)
+            {
+                target = GetNewTarget();
+
+                if (target != null)
+                {
+                    attackCountdown = 1f / character.attackRate;
+                    throwFinished = false;
+                    anim.isAttacking = true;
+                    ChangeState(PawnState.Battle);
+                }
+                else
+                {
+                    anim.isAttacking = false;
+                    ChangeState(PawnState.Walking);
+                }
+            }
+        }
+        else {
+            if(nav)
+                nav.isStopped = true;
         }
     }
 
@@ -98,6 +109,7 @@ public class GoblinKingController : EnemyController {
         }
     }
 
+
     public void Grab(string str) {
         switch (str) {
             case "Pick":
@@ -129,5 +141,16 @@ public class GoblinKingController : EnemyController {
 
     public void Step() {
         cameraManager.shakeCamera(0.5f, 10f, 0.05f);
+    }
+
+    public void Death(string deathEvent) {
+        switch (deathEvent) {
+            case "Butt":
+                cameraManager.shakeCamera(0.5f, 10f, 0.2f);
+                break;
+            case "Back":
+                cameraManager.shakeCamera(0.5f, 10f, 0.5f);
+                break;
+        }
     }
 }
