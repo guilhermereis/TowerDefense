@@ -5,7 +5,6 @@ public class Options : MonoBehaviour {
     BuildManager buildManager;
     GridMouse gridMouse;
     Shop shop;
-    private int TowerLVL2Price = 1600;
 
     // Use this for initialization
     void Start () {
@@ -83,9 +82,9 @@ public class Options : MonoBehaviour {
         if (buildManager.getSelectedUnit() != null) {
             if (buildManager.getSelectedUnit().name == "Tower")
             {
-                if (PlayerStats.Money - TowerLVL2Price >= 0)
+                if (PlayerStats.Money - Shop.instance.standardUnit.upgrade_cost >= 0)
                 {
-                    PlayerStats.AddMoney(-1 * TowerLVL2Price);
+                    PlayerStats.AddMoney(-1 * Shop.instance.standardUnit.upgrade_cost);
                     buildManager.SelectUnitToBuild(shop.towerLevel2);
                     BuildTheNextLevelStructure();
                     buildManager.DeselectUnitToBuild();
