@@ -22,7 +22,7 @@ public class PawnDeathAnimation : MonoBehaviour{
     {
         if (dead) {
             float targetHeight = Mathf.Lerp(transform.position.y, finalPosition.y, deathFallSpeed * Time.deltaTime);
-            Debug.Log(targetHeight);
+            //Debug.Log(targetHeight);
             transform.position = new Vector3(transform.position.x, targetHeight, transform.position.z);
 
             if (transform.position.y <= -deathTargetDepth)

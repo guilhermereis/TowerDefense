@@ -43,7 +43,7 @@ public class CastleHealth : MonoBehaviour {
     void UpdateHealthBarGfx(float value)
     {
         healthBar.fillAmount = value/maxHealth;
-        Debug.Log(value);
+        //Debug.Log(value);
     }
 
     public void ApplyDamage(float damage)

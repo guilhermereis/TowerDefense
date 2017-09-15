@@ -73,7 +73,7 @@ public class DebugOptions : MonoBehaviour
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL,listOfStates[i].attackPowerLVL);
-
+                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL+", "+listOfStates[i].attackPowerLVL);
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == "PrefabCamp(Clone)")
