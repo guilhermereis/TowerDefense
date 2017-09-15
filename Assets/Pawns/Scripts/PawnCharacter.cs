@@ -45,6 +45,12 @@ public class PawnCharacter : MonoBehaviour {
         {
             gameObject.GetComponent<PawnController>().deadPawn(gameObject);
         }
+        else
+        {
+            gameObject.GetComponent<SimpleSoldierController>().enabled = false;
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        }
+        
         gameObject.GetComponent<PawnController>().ChangeState(PawnController.PawnState.Dead);
         //Destroy(gameObject);
     }

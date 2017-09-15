@@ -88,12 +88,9 @@ public class SoldierCampController : BuildableController {
     //when an enemy get in range;
     public override void OnTriggerEnter(Collider other)
     {
-		if (other.GetType() == typeof(BoxCollider))
+		if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.CompareTag("Enemy"))
 		{
-			if(other.gameObject.tag == "Enemy")
-			{
-				enemies.Add(other.gameObject);
-			}
+			enemies.Add(other.gameObject);
 		}
 
     }
@@ -112,9 +109,9 @@ public class SoldierCampController : BuildableController {
     {
 		//todo delegate to who has this target stop to attack
 
-		if (other.GetType() == typeof(BoxCollider))
+		if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Enemy")
 		{
-			if (other.gameObject.tag == "Enemy" && !other.gameObject.GetComponent<PawnCharacter>().isDying)
+			if (!other.gameObject.GetComponent<PawnCharacter>().isDying)
 			{
 				
 				enemies.Remove(other.gameObject);
@@ -135,14 +132,7 @@ public class SoldierCampController : BuildableController {
 				else
 					EnemyOutOfReach(other.gameObject);
 			}
-			else if(other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<PawnCharacter>().isDying)
-			{
-				Debug.Log("i am dying");
-			}
-			else if(other.gameObject.tag == "Enemy")
-			{
-				Debug.Log("nothing is happening");
-			}
+			
 		}
 
 
