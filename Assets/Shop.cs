@@ -6,6 +6,7 @@ public class Shop : MonoBehaviour {
     public UnitBlueprint standardUnit;
     public UnitBlueprint missileLauncher;
     public UnitBlueprint towerLevel2;
+    public UnitBlueprint towerLevel3;
     BuildManager buildManager;
 
     void Awake()
