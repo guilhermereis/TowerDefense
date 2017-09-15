@@ -13,6 +13,17 @@ public class TowerController : BuildableController {
     private float fireRate = 0.7f;
     public int attackPowerLVL = 0;
     public int fireRateLVL = 0;
+
+    //-----------SETTING BASE AP AND FR-----------------
+    private int Tower1BaseAP = 100;
+    private int Tower2BaseAP = 200;
+    private int Tower3BaseAP = 300;
+
+    private float Tower1BaseFR = 0.7f;
+    private float Tower2BaseFR = 1.4f;
+    private float Tower3BaseFR = 2.1f;
+    //--------------------------------------------------
+
     #endregion
 
     [Header("Arrow")]
@@ -92,38 +103,60 @@ public class TowerController : BuildableController {
 	}
     public void SetFireRateAndAttackPower()
     {
-
+        Debug.Log("Just upgraded " + gameObject.name);
+        string tower1name = "PrefabArcherTower1(Clone)";
+        string tower2name = "PrefabArcherTower2(Clone)";
+        string tower3name = "PrefabArcherTower3(Clone)";
+        int base_ap = 0;
+        float base_fr = 0;
+        //-----------SET BASE AP AND FR FOR TOWER TYPE-------------
+        if (gameObject.name == tower1name)
+        {
+            base_ap = Tower1BaseAP;
+            base_fr = Tower1BaseFR;
+        }
+        else if (gameObject.name == tower2name)
+        {
+            base_ap = Tower2BaseAP;
+            base_fr = Tower2BaseFR;
+        }
+        else if (gameObject.name == tower3name)
+        {
+            base_ap = Tower3BaseAP;
+            base_fr = Tower3BaseFR;
+        }
+        //-------------------------------------------------------
         if (attackPowerLVL == 0)
         {
-            attackPower = 100;
+            attackPower = base_ap;
         }
-        else if (attackPower == 1)
+        else if (attackPowerLVL == 1)
         {
-            attackPower = 150;
+            attackPower = base_ap*1.5f;
         }
-        else if (attackPower == 2)
+        else if (attackPowerLVL == 2)
         {
-            attackPower = 200;
+            attackPower = base_ap*2.0f;
         }
-        else if (attackPower == 3)
+        else if (attackPowerLVL == 3)
         {
-            attackPower = 250;
+            attackPower = base_ap*2.5f;
         }
         if (fireRateLVL == 0)
         {
-            fireRate = 0.7f;
+            fireRate = base_fr;
         }
         else if (fireRateLVL == 1)
         {
-            fireRate = 1.1f;
+            fireRate = base_fr*1.5f;
         }
         else if (fireRateLVL == 2)
         {
-            fireRate = 1.5f;
+            fireRate = base_fr*2.0f;
         }
         else if (fireRateLVL == 3)
         {
-            fireRate = 1.9f;
+            fireRate = base_fr*2.5f;
         }
     }
 
