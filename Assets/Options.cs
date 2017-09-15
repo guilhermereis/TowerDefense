@@ -97,6 +97,23 @@ public class Options : MonoBehaviour {
                     Debug.Log("You don't have enough money to upgrade this unit.");
                 }
             }
+            else if (buildManager.getSelectedUnit().name == "Tower2")
+            {
+                if (PlayerStats.Money - Shop.instance.towerLevel2.upgrade_cost >= 0)
+                {
+                    PlayerStats.AddMoney(-1 * Shop.instance.towerLevel2.upgrade_cost);
+                    buildManager.SelectUnitToBuild(shop.towerLevel3);
+                    BuildTheNextLevelStructure();
+                    buildManager.DeselectUnitToBuild();
+                    buildManager.DeselectSelectedUnit();
+                    buildManager.HideOptions();
+                    Debug.Log("Upgraded unit: " + "Tower2");
+                }
+                else
+                {
+                    Debug.Log("You don't have enough money to upgrade this unit.");
+                }
+            }
             else
             {
                 Debug.Log("Unit can't be upgraded any further !");
