@@ -7,6 +7,7 @@ public class GoblinKingAnimatorController : MonoBehaviour {
     //private WarriorController controller;
 
     public bool isAttacking = false;
+    public bool isAttackingCastle = false;
     public bool isDead = false;
     public float speed = 0f;
 
@@ -25,12 +26,14 @@ public class GoblinKingAnimatorController : MonoBehaviour {
                 anim.SetLayerWeight(1, 0);
                 anim.SetBool("Dead", isDead);
                 anim.SetBool("IsAttacking", false);
+                anim.SetBool("IsAttackingCastle", false);
             }
         }
         else {
             if (anim)
             {
                 anim.SetBool("IsAttacking", isAttacking);
+                anim.SetBool("IsAttackingCastle", isAttackingCastle);
                 anim.SetFloat("Speed", speed);
             }
         }

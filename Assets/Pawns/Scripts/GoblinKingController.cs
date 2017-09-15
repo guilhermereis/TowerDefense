@@ -33,29 +33,37 @@ public class GoblinKingController : EnemyController {
         if (!isDead)
         {
             anim.speed = nav.velocity.magnitude;
-
-            if (throwFinished)
+            if (target.gameObject.tag == "Castle")
             {
-                float value = attackCountdown - Time.deltaTime;
-                attackCountdown = Mathf.Max(0, value);
-                ChangeState(PawnState.Walking);
+                throwFinished = false;
+                anim.isAttacking = false;
+                anim.isAttackingCastle = true;
+                ChangeState(PawnState.Battle);
             }
-
-            if (throwFinished && attackCountdown <= 0)
-            {
-                target = GetNewTarget();
-
-                if (target != null)
+            else {
+                if (throwFinished)
                 {
-                    attackCountdown = 1f / character.attackRate;
-                    throwFinished = false;
-                    anim.isAttacking = true;
-                    ChangeState(PawnState.Battle);
-                }
-                else
-                {
-                    anim.isAttacking = false;
+                    float value = attackCountdown - Time.deltaTime;
+                    attackCountdown = Mathf.Max(0, value);
                     ChangeState(PawnState.Walking);
+                }
+
+                if (throwFinished && attackCountdown <= 0)
+                {
+                    target = GetNewTarget();
+
+                    if (target != null)
+                    {
+                        attackCountdown = 1f / character.attackRate;
+                        throwFinished = false;
+                        anim.isAttacking = true;
+                        ChangeState(PawnState.Battle);
+                    }
+                    else
+                    {
+                        anim.isAttacking = false;
+                        ChangeState(PawnState.Walking);
+                    }
                 }
             }
         }
@@ -109,6 +117,12 @@ public class GoblinKingController : EnemyController {
         }
     }
 
+    public void Punch() {
+        if (target.tag == "Castle") {
+            target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
+            attackCountdown = 1 / character.attackRate;
+        }
+    }
 
     public void Grab(string str) {
         switch (str) {
