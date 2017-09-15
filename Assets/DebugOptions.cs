@@ -49,7 +49,7 @@ public class DebugOptions : MonoBehaviour
             PropertyScript.StructureState state =
                 new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
                                                   gridMouse.ListOfGameObjects[i].transform,
-                                                    bc.Health);
+                                                    bc.Health,tc.fireRateLVL,tc.attackPowerLVL);
             listOfStates.Add(state);
             Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
@@ -68,6 +68,11 @@ public class DebugOptions : MonoBehaviour
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
 
                 gridMouse.propertiesMatrix[x,z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+
+                //Set Fire Rate and Attack Power from saved state
+                gridMouse.ListOfGameObjects[added_index]
+                    .GetComponent<TowerController>()
+                        .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL,listOfStates[i].attackPowerLVL);
 
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }

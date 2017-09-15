@@ -128,6 +128,6 @@ public class GoblinKingController : EnemyController {
     }
 
     public void Step() {
-        cameraManager.shakeCamera(0.5f, 5f, 1f);
+        cameraManager.shakeCamera(0.5f, 10f, 0.05f);
     }
 }

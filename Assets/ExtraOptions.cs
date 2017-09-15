@@ -15,57 +15,57 @@ public class ExtraOptions : MonoBehaviour {
 
     public void upgradeAP1()
     {
-        if (!enabledAP[0] && !enabledAP[1] && !enabledAP[2])
+        TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
+        if (tower.getAttackPowerLVL() < 1)
         {
-            TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
-            tower.setAttackPower(150);
-            enabledAP[0] = true;
+            tower.setAttackPowerLVL(1);
+            tower.SetFireRateAndAttackPower();
         }
     }
     public void upgradeAP2()
     {
-        if (!enabledAP[1] && !enabledAP[2])
+        TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();        
+        if (tower.getAttackPowerLVL() < 2)
         {
-            TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
-            tower.setAttackPower(200);
-            enabledAP[1] = true;
+            tower.setAttackPowerLVL(2);
+            tower.SetFireRateAndAttackPower();
         }
     }
     public void upgradeAP3()
     {
-        if (!enabledAP[2])
+        TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();        
+        if (tower.getAttackPowerLVL() < 3)
         {
-            TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
-            tower.setAttackPower(250);
-            enabledAP[2] = true;
+            tower.setAttackPowerLVL(3);
+            tower.SetFireRateAndAttackPower();
         }
     }
     //----------------------------------------------------------
     public void upgradeFR1()
     {
-        if (!enabledFR[0] && !enabledFR[1] && !enabledFR[2])
+        TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
+        if (tower.getFireRateLVL() < 1)
         {
-            TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
-            tower.setFireRate(1.1f);
-            enabledFR[0] = true;
+            tower.setFireRateLVL(1);
+            tower.SetFireRateAndAttackPower();
         }
     }
     public void upgradeFR2()
     {
-        if (!enabledFR[1] && !enabledFR[2])
+        TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
+        if (tower.getFireRateLVL() < 2)
         {
-            TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
-            tower.setFireRate(1.5f);
-            enabledFR[1] = true;
+            tower.setFireRateLVL(2);
+            tower.SetFireRateAndAttackPower();
         }
     }
     public void upgradeFR3()
     {
-        if (!enabledFR[2])
+        TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
+        if (tower.getFireRateLVL() < 3)
         {
-            TowerController tower = buildManager.getSelectedGameObject().GetComponent<TowerController>();
-            tower.setFireRate(1.9f);
-            enabledFR[2] = true;
+            tower.setFireRateLVL(3);
+            tower.SetFireRateAndAttackPower();
         }
     }
 }

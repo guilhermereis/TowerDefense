@@ -52,7 +52,6 @@ public class CameraShake : MonoBehaviour {
             yield return null;
         }
 
-        Vector3 deltaShake = originalPosition - elapsedShake;
-        transform.localPosition += deltaShake;
+        transform.localPosition -= elapsedShake;
     }
 }
