@@ -267,6 +267,13 @@ MonoBehaviour:
     sell_cost: 75
     upgrade_cost: 0
     position: {x: 0, y: 0}
+  towerLevel3:
+    name: Tower3
+    prefab: {fileID: 1452188681296356, guid: f8363005245ff3c48a06ad9be671353f, type: 2}
+    cost: 300
+    sell_cost: 200
+    upgrade_cost: 0
+    position: {x: 0, y: 0}
 --- !u!114 &114735968319195274
 MonoBehaviour:
   m_ObjectHideFlags: 1
