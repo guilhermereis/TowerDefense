@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 114369030417113696}
   - component: {fileID: 114135005722417592}
   - component: {fileID: 136909876273813518}
+  - component: {fileID: 114207508980387538}
   m_Layer: 10
   m_Name: PrefabGoblinKing
   m_TagString: Enemy
@@ -946,6 +947,20 @@ MonoBehaviour:
   soldierThrowPrefab: {fileID: 1813425191251776, guid: 379a4b6340e82fb43920b42d6f7d3ba4,
     type: 2}
   attackCountdown: 0
+  isDead: 0
+--- !u!114 &114207508980387538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613466630584316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4a845bbb7ad0b448ab75156853b812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTargetDepth: 2.5
+  deathFallSpeed: 0.1
 --- !u!114 &114369030417113696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -997,6 +1012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+  isDead: 0
   speed: 0
 --- !u!135 &135588369043511902
 SphereCollider:
