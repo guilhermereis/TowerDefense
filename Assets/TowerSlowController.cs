@@ -36,7 +36,7 @@ public class TowerSlowController : TowerController {
 
                 Fire();
                 //lightningLine.enabled = false;
-                attackCooldown = 1 / fireRate;
+                attackCooldown = 1 / getFireRate();
 
             }
            
