@@ -60,7 +60,7 @@ public class BomberController : EnemyController {
             //Camera.main.GetComponent<CameraShake>().PlayShake();
             if (character.Damage(character.health))
             {
-                character.OnDying();
+                character.Die();
                 Instantiate(gameObject.GetComponent<BomberCharacter>().prefabExplosionSound, transform);
             }
 

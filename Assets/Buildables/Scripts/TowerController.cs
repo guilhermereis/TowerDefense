@@ -81,7 +81,7 @@ public class TowerController : BuildableController {
         if (attackCooldown <= 0)
 		{
           
-			if( target != null && !target.gameObject.GetComponent<PawnCharacter>().isDying)
+			if( target != null && !target.gameObject.GetComponent<PawnCharacter>().isDead)
 			{
 
 				Fire();

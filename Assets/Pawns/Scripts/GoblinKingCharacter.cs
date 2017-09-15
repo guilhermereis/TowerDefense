@@ -9,9 +9,9 @@ public class GoblinKingCharacter : PawnCharacter {
 		attack = 7000;
 	}
 
-    public override void OnDying()
+    public override void Die()
     {
-        base.OnDying();
+        base.Die();
         GoblinKingAnimatorController anim = (GoblinKingAnimatorController)GetComponent<GoblinKingAnimatorController>();
         GoblinKingController controller = (GoblinKingController)GetComponent<GoblinKingController>();
         controller.isDead = true;

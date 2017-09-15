@@ -58,7 +58,7 @@ public class SimpleSoldierController : PawnController {
 		anim.speed = nav.velocity.magnitude;
 		attackCountdown -= Time.deltaTime;
 
-		//if (target != null && enemiesInRange.Contains(target) && !gameObject.GetComponent<PawnCharacter>().isDying){
+		//if (target != null && enemiesInRange.Contains(target) && !gameObject.GetComponent<PawnCharacter>().isDead){
 		//	ChangeState(PawnState.Battle);
 		//}
     }
@@ -97,7 +97,6 @@ public class SimpleSoldierController : PawnController {
                 swordHit.Play();
                 if (target.GetComponent<PawnCharacter>().Damage(character.attack))
 				{
-                    target.GetComponent<PawnCharacter>().OnDying();
 					camp.UpdateEnemies(target);
 					target = null;
                 }
