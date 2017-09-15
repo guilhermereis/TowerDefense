@@ -8,6 +8,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(TileMap))]
 public class GridMouse : MonoBehaviour {
 
+    //ignore layer 10 (monsters)
+    private int layerMask = ~(1 << 10);
 
     public static GridMouse instance;
     public GameObject Track;
@@ -209,7 +211,7 @@ public class GridMouse : MonoBehaviour {
     void OnMouseDown()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
         int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
         int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
         PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
@@ -477,7 +479,7 @@ public class GridMouse : MonoBehaviour {
 
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity);
+        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
 
         if (didHit)
         {
