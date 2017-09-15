@@ -41,7 +41,7 @@ public class TowerController : BuildableController {
 
     // Use this for initialization
     public void Start () {
-        attackPower = 100;
+        attackPower = 700;
         Health = 100f;
 		Defense = 5f;
 		IsUpgradable = true;
@@ -60,6 +60,7 @@ public class TowerController : BuildableController {
 	
     public void BuildEffect()
     {
+        buildSmokeEffectPrefab = GetComponentInChildren<ParticleSystem>();
         buildSmokeEffectPrefab.Play();
     }
 
