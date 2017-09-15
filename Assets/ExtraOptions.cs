@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class ExtraOptions : MonoBehaviour {
     BuildManager buildManager;
-    bool[] enabledAP;
-    bool[] enabledFR;
     void Start()
     {
         buildManager = BuildManager.instance;
-        enabledAP = new bool[3];
-        enabledFR = new bool[3];
     }
 
     public void upgradeAP1()
