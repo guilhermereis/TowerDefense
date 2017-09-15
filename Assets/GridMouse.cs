@@ -272,28 +272,30 @@ public class GridMouse : MonoBehaviour {
     }
     void RotateAccordingly(int x, int z)
     {
-            if (z > instance_z + 1)
+            bool inside_width = x <= instance_x + 1 && x >= instance_x;
+            bool inside_height = z<=instance_z+1 && z>=instance_z;
+            if (z > instance_z + 1 && inside_width)
             {
                 Debug.Log("Rotate up from " + rotation);
                 rotation = new Vector3(-90, 180, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
-            else if (x > instance_x + 1)
+            else if (x > instance_x + 1 && inside_height)
             {
                 Debug.Log("Rotate right from " + rotation);
                 rotation = new Vector3(-90, -90, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
-            else if (x < instance_x)
+            else if (x < instance_x && inside_height)
             {
                 Debug.Log("Rotate left from " + rotation);
                 rotation = new Vector3(-90,90, 0);
                 Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
-            else if (z < instance_z)
+            else if (z < instance_z && inside_width)
             {
                 Debug.Log("Rotate down from " + rotation);
                 rotation = new Vector3(-90, 0, 0);
