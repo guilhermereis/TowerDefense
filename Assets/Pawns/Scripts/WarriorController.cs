@@ -55,7 +55,7 @@ public class WarriorController : EnemyController {
 		base.OnTriggerEnter(other);
         //Debug.Log(other.gameObject.tag);
         //Debug.Assert(other.isTrigger);
-        if(other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Ally")
+        if(other.gameObject.tag == "Ally")
         {
             if (!other.gameObject.GetComponent<PawnCharacter>().isDying)
             {
@@ -103,7 +103,6 @@ public class WarriorController : EnemyController {
             if (target.GetComponent<PawnCharacter>().Damage(character.attack))
             {
                 enemiesInRange.Remove(target);
-                target.GetComponent<PawnCharacter>().OnDying();
                 target = null;
             }
         }

@@ -97,7 +97,6 @@ public class SimpleSoldierController : PawnController {
                 swordHit.Play();
                 if (target.GetComponent<PawnCharacter>().Damage(character.attack))
 				{
-                    target.GetComponent<PawnCharacter>().OnDying();
 					camp.UpdateEnemies(target);
 					target = null;
                 }

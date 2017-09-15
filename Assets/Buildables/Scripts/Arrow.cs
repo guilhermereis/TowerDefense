@@ -83,7 +83,7 @@ public class Arrow : Projectile {
             if (other.gameObject.GetComponent<PawnCharacter>().Damage(towerAttack))
             {
                 GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
-                other.gameObject.GetComponent<PawnCharacter>().OnDying();
+                
             }
 
             Destroy(gameObject);

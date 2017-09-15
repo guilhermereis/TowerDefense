@@ -35,46 +35,62 @@ public class PawnCharacter : MonoBehaviour {
 	public virtual void OnDying()
 	{
 		isDying = true;
-        PlayerStats.AddMoney(10);
-     
-        Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
+
+        
 
         //Instantiate(coinEffectPrefab, transform.position, Quaternion.identity);
 
         if (gameObject.tag.Equals("Enemy"))
         {
-            gameObject.GetComponent<PawnController>().deadPawn(gameObject);
+            PlayerStats.AddMoney(10);
+
+            Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
+
+            gameObject.GetComponent<PawnController>().ChangeState(PawnController.PawnState.Dead);
+
+
+            if (gameObject.GetComponent<PawnController>().deadPawn != null)
+            {
+                gameObject.GetComponent<PawnController>().deadPawn(gameObject);
+            }
         }
         else
         {
-            gameObject.GetComponent<SimpleSoldierController>().enabled = false;
-            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            gameObject.GetComponent<PawnController>().ChangeState(PawnController.PawnState.Dead);
+            //gameObject.GetComponent<SimpleSoldierController>().enabled = false;
+            //gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            Destroy(gameObject);
+            return;
         }
         
-        gameObject.GetComponent<PawnController>().ChangeState(PawnController.PawnState.Dead);
+        
         //Destroy(gameObject);
     }
 
     public virtual bool Damage(float _damage)
     {
-
-        float realDamage = _damage - defense;
-		if (realDamage < 0)
-			realDamage = 0;
-
-        health -= realDamage;
-
-        if (healthBar != null)
+        if (!isDying)
         {
-            healthBar.UpdateHealthBar(health, maxHealth);
+            float realDamage = _damage - defense;
+		    if (realDamage < 0)
+			    realDamage = 0;
+
+            health -= realDamage;
+
+            if (healthBar != null)
+            {
+                healthBar.UpdateHealthBar(health, maxHealth);
            
-        }
-		//Debug.Log(health);
-		if (health <= 0)
-        {
-			return true;
-            //Destroy(gameObject);
-            //return;
+            }
+		    //Debug.Log(health);
+		    if (health <= 0)
+            {
+                OnDying();
+			    return true;
+                //Destroy(gameObject);
+                //return;
+            }
+
         }
 
 		return false;
