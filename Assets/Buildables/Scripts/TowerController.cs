@@ -52,7 +52,7 @@ public class TowerController : BuildableController {
 
     // Use this for initialization
     public void Start () {
-        attackPower = 700;
+        SetFireRateAndAttackPower();
         Health = 100f;
 		Defense = 5f;
 		IsUpgradable = true;
