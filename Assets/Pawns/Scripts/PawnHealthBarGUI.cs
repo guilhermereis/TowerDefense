@@ -32,7 +32,7 @@ public class PawnHealthBarGUI : MonoBehaviour {
         Canvas[] canvasArray = FindObjectsOfType<Canvas>();
         for (int i = 0; i < canvasArray.Length; i++)
         {
-            if (canvasArray[i].tag.Equals("canvas"))
+            if (canvasArray[i].tag.Equals("HUD"))
             {
                
                 canvas = canvasArray[i];
@@ -57,8 +57,8 @@ public class PawnHealthBarGUI : MonoBehaviour {
 		
         if(Healthbar != null)
         {
-		    Healthbar.transform.position = heightOffset + transform.position;// Camera.main.WorldToScreenPoint((Vector3.up * 3) + transform.position);
-            Healthbar.transform.rotation = Camera.main.transform.rotation;
+		    Healthbar.transform.position = Camera.main.WorldToScreenPoint( heightOffset + transform.position);// Camera.main.WorldToScreenPoint((Vector3.up * 3) + transform.position);
+            //Healthbar.transform.rotation = Camera.main.transform.rotation;
         }
 	}
 
