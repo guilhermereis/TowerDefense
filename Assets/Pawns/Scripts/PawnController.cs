@@ -57,13 +57,14 @@ public class PawnController : MonoBehaviour {
 
         while(waitSeconds >= 0.0f)
         {
-            nav.speed = 0.1f;
+            //nav.speed = 0.1f;
+            nav.isStopped = true;
             waitSeconds -= Time.deltaTime;
 
             yield return null;
         }
-
-        nav.speed = speed;
+        nav.isStopped = false;
+        //nav.speed = speed;
     }
    
 

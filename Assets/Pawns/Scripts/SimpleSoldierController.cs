@@ -58,6 +58,7 @@ public class SimpleSoldierController : PawnController {
 		anim.speed = nav.velocity.magnitude;
 		attackCountdown -= Time.deltaTime;
 
+       
 		//if (target != null && enemiesInRange.Contains(target) && !gameObject.GetComponent<PawnCharacter>().isDead){
 		//	ChangeState(PawnState.Battle);
 		//}
@@ -84,7 +85,7 @@ public class SimpleSoldierController : PawnController {
 
         base.OnBattle();
 
-        if (target != null)
+        if (target != null || !target.GetComponent<PawnCharacter>().isDead)
         {
 			if (attackCountdown <= 0)
 			{
@@ -96,17 +97,17 @@ public class SimpleSoldierController : PawnController {
                 //tell the camp and so the camp can gives another target or we're going back home.
                 swordHit.Play();
                 if (target.GetComponent<PawnCharacter>().Damage(character.attack))
-				{
-					camp.UpdateEnemies(target);
-					target = null;
-                }
+				
 					
 				attackCountdown = 1 / character.attackRate;
 			}
-				//anim.setIsAttacking(false);
+				
 		}
-		else
+        else
+        {
+            anim.setIsAttacking(false);
             ChangeState(PawnState.Homing);
+        }
 		
     }
 
