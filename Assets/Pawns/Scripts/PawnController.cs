@@ -50,6 +50,21 @@ public class PawnController : MonoBehaviour {
 
     public PawnState CurrentState {  get { return currentState; }
     }
+
+    IEnumerator HitStop()
+    {
+        float waitSeconds = 0.3f;
+
+        while(waitSeconds >= 0.0f)
+        {
+            nav.speed = 0.1f;
+            waitSeconds -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        nav.speed = speed;
+    }
    
 
     private void OnChangingState()

@@ -77,6 +77,9 @@ public class PawnCharacter : MonoBehaviour {
 
             health -= realDamage;
 
+            gameObject.GetComponent<PawnController>().StopCoroutine("HitStop");
+            gameObject.GetComponent<PawnController>().StartCoroutine("HitStop");
+
             if (healthBar != null)
             {
                 healthBar.UpdateHealthBar(health, maxHealth);
