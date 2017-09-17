@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +8,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(TileMap))]
 public class GridMouse : MonoBehaviour {
 
-    //ignore layer 10 (monsters)
-    private int layerMask = ~(1 << 10);
+    //ignore layers 8,9,10 and 2 (IgnoreRaycast Layer)
+    //(lowest order bit is 0-indexed)
+    private int layerMask = Convert.ToInt32("11111111111111111111101111111011", 2);
+    //private int layerMask = ~(1 << 10);
 
     public static GridMouse instance;
     public GameObject Track;
