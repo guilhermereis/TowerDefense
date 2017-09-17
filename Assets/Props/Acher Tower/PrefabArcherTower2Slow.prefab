@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1712867522992376}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.4825366, y: -1.0000021, z: -17.627258}
+  m_LocalPosition: {x: -2.4551208, y: -1.0000018, z: -14.571642}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4409896886620558}
@@ -227,12 +227,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealthState: 0
   target: {fileID: 0}
-  fireRate: 0.7
   enemies: []
+  attackPowerLVL: 0
+  fireRateLVL: 0
   attackPoint: {fileID: 1412965963542364}
   arrowPrefab: {fileID: 1513856314003724, guid: 22cf1d925333eb1488968f357beb0d45,
     type: 2}
-  arrowSoundPrefab: {fileID: 0}
+  arrowSoundPrefab: {fileID: 1372849123093944, guid: 3e63fb5ebfb2736428ab93128296cbc7,
+    type: 2}
   cannonPoint: {fileID: 0}
   cannonballPrefab: {fileID: 0}
   lightningPrefab: {fileID: 0}

@@ -352,12 +352,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b074752b74c8a1642bdd6498d7deb4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
-  health: 1000
-  defense: 500
+  maxHealth: 500
+  health: 500
+  defense: 50
   attack: 700
   attackRate: 0.5
-  isDying: 0
+  isDead: 0
   isSlow: 0
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,

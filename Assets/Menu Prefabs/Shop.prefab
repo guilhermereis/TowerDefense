@@ -274,6 +274,20 @@ MonoBehaviour:
     sell_cost: 200
     upgrade_cost: 0
     position: {x: 0, y: 0}
+  towerSlow:
+    name: TowerSlow
+    prefab: {fileID: 1712867522992376, guid: 6cf96096660fd1a4b8c004769bc06724, type: 2}
+    cost: 0
+    sell_cost: 0
+    upgrade_cost: 0
+    position: {x: 0, y: 0}
+  towerTesla:
+    name: TowerTesla
+    prefab: {fileID: 1704192322932422, guid: 4367198b5a49be2428792ee0f0b223da, type: 2}
+    cost: 0
+    sell_cost: 0
+    upgrade_cost: 0
+    position: {x: 0, y: 0}
 --- !u!114 &114735968319195274
 MonoBehaviour:
   m_ObjectHideFlags: 1

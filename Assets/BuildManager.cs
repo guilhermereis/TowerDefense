@@ -6,6 +6,7 @@ public class BuildManager : MonoBehaviour {
 
     public static BuildManager instance;
     public GameObject optionsObject;
+    public GameObject optionsSlowObject;
     public GameObject extraOptionsObject;
     public GameObject shopObject;
     public GameObject sphere;
@@ -177,7 +178,14 @@ public class BuildManager : MonoBehaviour {
     public void ShowOptions()
     {
         extraOptionsObject.SetActive(true);
-        optionsObject.SetActive(true);
+        if (selectedGameObject.name == "PrefabArcherTower2(Clone)")
+        {
+            optionsSlowObject.SetActive(true);
+        }
+        else
+        {
+            optionsObject.SetActive(true);
+        }        
         GameObject.Find("ButtonUpgradeText").GetComponent<Text>().text = "Upgrade $" + selectedUnit.upgrade_cost;
         GameObject.Find("ButtonSellText").GetComponent<Text>().text = "Sell $" + selectedUnit.sell_cost;
     }
@@ -185,6 +193,7 @@ public class BuildManager : MonoBehaviour {
     {
         extraOptionsObject.SetActive(false);
         optionsObject.SetActive(false);
+        optionsSlowObject.SetActive(false);
         selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 

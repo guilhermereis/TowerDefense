@@ -79,7 +79,7 @@ public class CastleHealth : MonoBehaviour {
         }
 
     }
-
+    //here we play the castle destruction animatio, play the explosion effects and play the implosion sound
     void CastleDestructionEvent()
     {
         //castleDestructionAnimator.SetBool("destroyed", true);

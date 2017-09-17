@@ -2,9 +2,9 @@
 
 public class Options : MonoBehaviour {
 
-    BuildManager buildManager;
-    GridMouse gridMouse;
-    Shop shop;
+    protected BuildManager buildManager;
+    protected GridMouse gridMouse;
+    protected Shop shop;
 
     // Use this for initialization
     void Start () {
@@ -121,7 +121,7 @@ public class Options : MonoBehaviour {
 
         }
     }
-    void BuildTheNextLevelStructure() {
+    protected void BuildTheNextLevelStructure() {
         
         if (buildManager.getUnitToBuild() != null)
         {

@@ -8,7 +8,7 @@ public class SoldierCampController : BuildableController {
     public delegate void EnemyOutOfReachDelegate(GameObject target);
     delegate void SetEnemyDelegate(GameObject target);
 
-	[HideInInspector]
+	//[HideInInspector]
 	public List<GameObject> enemies;
 	[HideInInspector]
 	public List<SimpleSoldierController> soldiersController;
@@ -91,18 +91,35 @@ public class SoldierCampController : BuildableController {
 		if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.CompareTag("Enemy"))
 		{
 			enemies.Add(other.gameObject);
+            other.gameObject.GetComponent<PawnController>().deadPawn += RemoveDeadEnemy;
+            UpdateEnemies();
 		}
 
     }
 
-	public void UpdateEnemies(GameObject _target)
+
+    public void RemoveDeadEnemy(GameObject _enemy)
+    {
+        enemies.Remove(_enemy);
+        UpdateEnemies();
+    }
+
+	public void UpdateEnemies()
 	{
-		if (enemies.Remove(_target))
-		{
-			_target.GetComponent<PawnCharacter>().Die();
-			if (enemies.Count > 0)
-				SetSoldierTarget(enemies[0]);
-		}
+        if (enemies.Count > 0)
+        {
+		    foreach(SimpleSoldierController ssc in soldiersController)
+            {
+                if (ssc.target == null || ssc.target.GetComponent<PawnCharacter>().isDead)
+                {
+                    ssc.target = enemies[0];
+                    ssc.ChangeState(PawnController.PawnState.FindTarget);
+
+                }
+
+            }
+
+        }
 	}
 
     public override void OnTriggerExit(Collider other)
@@ -111,45 +128,17 @@ public class SoldierCampController : BuildableController {
 
 		if (other.GetType() == typeof(CapsuleCollider) && other.gameObject.tag == "Enemy")
 		{
-			if (!other.gameObject.GetComponent<PawnCharacter>().isDead)
-			{
-				
-				enemies.Remove(other.gameObject);
-				if (enemies.Count > 0)
-				{
-					for (int i = 0; i < soldiersCount; i++)
-					{
-						if(soldiersController[i].target == other.gameObject)
-						{
-							soldiersController[i].target = null;
-							Debug.Log(other.gameObject.name);
-							//nextEnemy++;
-							//break;
-						}
-					}
-					SetSoldierTarget(enemies[0]);
-				}
-				else
-					EnemyOutOfReach(other.gameObject);
-			}
+			enemies.Remove(other.gameObject);
+			EnemyOutOfReach(other.gameObject);
+            UpdateEnemies();
+			
 			
 		}
 
 
     }
 
-    private void SetSoldierTarget(GameObject _target)
-    {
-        for (int i = 0; i < soldiersController.Count; i++)
-        {
-            if(soldiersController[i].target == null)
-            {
-                soldiersController[i].SetTarget(_target);
-                //Debug.Log(_target.name);
-               
-            }
-        }
-    }
+    
 }
 /*
  * entra o primeiro, pega todos e setam para o primeiro
