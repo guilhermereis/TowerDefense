@@ -106,7 +106,7 @@ public class SimpleSoldierController : PawnController {
         else
         {
             anim.setIsAttacking(false);
-            ChangeState(PawnState.Homing);
+            //ChangeState(PawnState.Homing);
         }
 		
     }

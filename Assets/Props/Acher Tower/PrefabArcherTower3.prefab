@@ -85,7 +85,6 @@ GameObject:
   - component: {fileID: 4907706804159248}
   - component: {fileID: 33068343371737690}
   - component: {fileID: 23364060208704450}
-  - component: {fileID: 135813119357199324}
   - component: {fileID: 114559342132569136}
   m_Layer: 0
   m_Name: PrefabArcherTower3
@@ -158,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1452188681296356}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 4.43, y: -1.0000018, z: -14.55}
+  m_LocalPosition: {x: 1.4704576, y: -1.0000007, z: -5.5493436}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4942233263495848}
@@ -311,7 +310,7 @@ MonoBehaviour:
     type: 2}
   lightningPrefab: {fileID: 0}
   lightningLine: {fileID: 0}
-  currentAmmo: 2
+  currentAmmo: 0
 --- !u!114 &114945334043482168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,18 +334,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135813119357199324
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1452188681296356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.78
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198346488928861858
 ParticleSystem:
