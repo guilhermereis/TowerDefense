@@ -44,7 +44,7 @@ public class CastleHealth : MonoBehaviour {
             }
 
         }
-        healthBar = HUD.transform.Find("CastleFeedBack").transform.Find("HpBg").transform.Find("FillBar").GetComponent<Image>();
+        healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
     }
 	
     //Change this later to actually the monsters hit with theirs fire rate
