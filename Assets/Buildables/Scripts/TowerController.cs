@@ -235,7 +235,11 @@ public class TowerController : BuildableController {
                 newArrow.Target = target;
                 newArrow.TowerAttack = attackPower;
 
-                Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+                Vector3 dir = (target.transform.position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(dir);
+                Vector3 rotation = lookRotation.eulerAngles;
+
+                Instantiate(arrowSoundPrefab, transform.position, Quaternion.Euler(0f, rotation.y, 0f));
             }
         }
         else if( currentAmmo == TowerAmmo.ArrowFire)
