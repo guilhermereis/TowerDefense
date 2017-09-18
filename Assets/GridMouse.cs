@@ -132,7 +132,7 @@ public class GridMouse : MonoBehaviour {
     }
     private void HandleBuildingSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
-        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        if (true || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
 
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);            
@@ -176,10 +176,11 @@ public class GridMouse : MonoBehaviour {
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private void HandleBuildingTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
-        //Debug.Log("Mouse Down");
-        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        
+        if (true || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
 
         {
+            Debug.Log("HANDLE BUILDING TOWER");
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
 
             
@@ -213,7 +214,11 @@ public class GridMouse : MonoBehaviour {
     void OnMouseDown()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
+        bool didHit = GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity);
+        if (didHit)
+        {
+            Debug.Log("Just hit: " + hitInfo.transform.gameObject.name);
+        }
         int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
         int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
         PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
@@ -245,7 +250,7 @@ public class GridMouse : MonoBehaviour {
             }
             else //if there's nothing to build, then hide the options
             {
-                if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                if (true || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
                     buildManager.HideOptions();
                     Debug.Log("Hide Options");
@@ -483,7 +488,7 @@ public class GridMouse : MonoBehaviour {
 
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
+        bool didHit = GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity);
 
         if (didHit)
         {

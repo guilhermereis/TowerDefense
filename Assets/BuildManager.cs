@@ -90,6 +90,11 @@ public class BuildManager : MonoBehaviour {
                 Destroy(list[i]);
             }
             temporaryInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
+            //temporaryInstance.transform.Find("Sphere").gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            foreach (Transform child in temporaryInstance.transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast"); 
+            }
             temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
         }
         return temporaryInstance;
