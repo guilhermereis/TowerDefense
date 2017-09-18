@@ -25,16 +25,19 @@ public class CameraController : MonoBehaviour {
     private bool isMovingRight = false;
 
     private void Start(){
+        SetInitialValues();
+    }
+    public void SetInitialValues()
+    {
         forwardVector = transform.forward;
         forwardVector.y = 0;
         forwardVector = Vector3.Normalize(forwardVector);
         rightVector = Quaternion.Euler(new Vector3(0, 90, 0)) * forwardVector;
         cameraStartPosition = transform.position;
     }
-
     // Update is called once per frame
     void Update () {
-
+        
         //Camera Zoom
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
@@ -124,6 +127,7 @@ public class CameraController : MonoBehaviour {
             else transform.position += upMovement * 2f; //Boost when moving in only 1 axes
         }
 
+        
         //Camera Pressure/Relief when out of bounds to return to rest position
         cameraDistanceFromStart = Vector3.Magnitude(transform.position - cameraStartPosition);
         float distanceFromBorderMultiplier = cameraDistanceFromStart - panLimit;
@@ -134,6 +138,8 @@ public class CameraController : MonoBehaviour {
             float influence = Time.deltaTime * 0.005f * distanceFromBorderMultiplier * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f); //- panMultiplier/100f;
             transform.position = Vector3.Lerp(transform.position, cameraStartPosition, 0.001f + influence);
         }
-
+        
+        
     }
+    
 }
