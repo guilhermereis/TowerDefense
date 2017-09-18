@@ -2,6 +2,7 @@
 
 public class CameraController : MonoBehaviour {
 
+    private float customDeltaTime = 0f;
 
     public float panSpeed = 40f;
     public float panBorderThickness = 10f;
@@ -12,6 +13,7 @@ public class CameraController : MonoBehaviour {
     public Vector2 zoomBounds = new Vector2(2f, 11f);
     public float panLimit = 15f;
     public float cameraMaxDistance = 100f;
+    public float panAcceleration = 1f;
 
     private Vector3 forwardVector, rightVector;
     private Vector3 cameraStartPosition;
@@ -19,6 +21,8 @@ public class CameraController : MonoBehaviour {
     private float accumulatedZoomAcceleration = 0f;
     private float panMultiplier = 0f;
     private float cameraDistanceFromStart = 0f;
+    private float panHorizontalAcceleration = 0f;
+    private float panVerticalAcceleration = 0f;
 
     private int currentRotation = 0;
 
@@ -26,6 +30,7 @@ public class CameraController : MonoBehaviour {
     private bool isMovingDown = false;
     private bool isMovingLeft = false;
     private bool isMovingRight = false;
+
 
     private void Start(){
         SetInitialValues();
@@ -57,11 +62,62 @@ public class CameraController : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        
+
+        //Setting custom deltaTime according to its timescale
+        if (Time.timeScale == 0f)
+        {
+            customDeltaTime = 0.016f; //fixed value like 60fps
+        }
+        else if (Time.timeScale == 2f)
+        {
+            customDeltaTime = Time.deltaTime/2f;
+        }
+        else if (Time.timeScale == 3f) {
+            customDeltaTime = Time.deltaTime/3f;
+        }
+        else
+        {
+            customDeltaTime = Time.deltaTime;
+        }
+
+        isMovingDown = false;
+        isMovingLeft = false;
+        isMovingRight = false;
+        isMovingUp = false;
+
+        //Using directional keys and calculating acceleration
+        if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            panHorizontalAcceleration = Mathf.Clamp((panHorizontalAcceleration + Input.GetAxisRaw("Horizontal") * panAcceleration * customDeltaTime), -1f, 1f);
+            isMovingRight = true;
+        }
+        else if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            panHorizontalAcceleration = Mathf.Clamp((panHorizontalAcceleration -Input.GetAxisRaw("Horizontal") * panAcceleration * customDeltaTime), -1f, 1f);
+            isMovingLeft = true;
+        }
+        else {
+            panHorizontalAcceleration = Mathf.Lerp(panHorizontalAcceleration, 0f, 0.2f);
+        }
+
+        if (Input.GetAxisRaw("Vertical") > 0)
+        {
+            panVerticalAcceleration = Mathf.Clamp((panVerticalAcceleration + Input.GetAxisRaw("Vertical") * panAcceleration * customDeltaTime), -1f, 1f);
+            isMovingUp = true;
+        }
+        else if (Input.GetAxisRaw("Vertical") < 0)
+        {
+            panVerticalAcceleration = Mathf.Clamp((panVerticalAcceleration - Input.GetAxisRaw("Vertical") * panAcceleration * customDeltaTime), -1f, 1f);
+            isMovingDown = true;
+        }
+        else {
+            panVerticalAcceleration = Mathf.Lerp(panVerticalAcceleration, 0f, 0.2f);
+        }
+
         //Camera Zoom
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            accumulatedZoomAcceleration += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * Time.deltaTime;
+            accumulatedZoomAcceleration += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * customDeltaTime;
             accumulatedZoomAcceleration = Mathf.Clamp(accumulatedZoomAcceleration, -100f, 100f);
         }
         else {
@@ -77,56 +133,33 @@ public class CameraController : MonoBehaviour {
 
         //Camera PAN
         panMultiplier = 1 - Camera.main.orthographicSize / zoomBounds.y;
-        Vector3 rightMovement = rightVector * panSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
-        Vector3 upMovement = forwardVector * perspectiveRatio * panSpeed * Time.deltaTime * Input.GetAxis("Vertical");
+        Vector3 rightMovement = rightVector * panSpeed * customDeltaTime * Input.GetAxisRaw("Horizontal") * panHorizontalAcceleration;
+        Vector3 upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * Input.GetAxisRaw("Vertical") * panVerticalAcceleration;
         Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
 
-        isMovingDown = false;
-        isMovingLeft = false;
-        isMovingRight = false;
-        isMovingUp = false;
-
-        //Using directional keys
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            isMovingRight = true;
-        }
-        else if (Input.GetAxis("Horizontal") < 0)
-        {
-            isMovingLeft = true;
-        }
-
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            isMovingUp = true;
-        }
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            isMovingDown = true;
-        }
 
         //Using screen borders
         if (Input.mousePosition.y >= Screen.height - panBorderThickness)
         {
-            upMovement = forwardVector * perspectiveRatio * panSpeed * Time.deltaTime * 1f;
+            upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * 1f;
             isMovingUp = true;
         }
 
         if (Input.mousePosition.y <= panBorderThickness)
         {
-            upMovement = forwardVector * perspectiveRatio * panSpeed * Time.deltaTime * -1f;
+            upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * -1f;
             isMovingDown = true;
         }
 
         if (Input.mousePosition.x >= Screen.width - panBorderThickness)
         {
-            rightMovement = rightVector * panSpeed * Time.deltaTime * 1f;
+            rightMovement = rightVector * panSpeed * customDeltaTime * 1f;
             isMovingRight = true;
         }
 
         if (Input.mousePosition.x <= panBorderThickness)
         {
-            rightMovement = rightVector * panSpeed * Time.deltaTime * -1f;
+            rightMovement = rightVector * panSpeed * customDeltaTime * -1f;
             isMovingLeft = true;
         }
 
@@ -155,7 +188,7 @@ public class CameraController : MonoBehaviour {
 
 
         if (cameraDistanceFromStart > panLimit + 10* panMultiplier) {
-            float influence = Time.deltaTime * 0.005f * distanceFromBorderMultiplier * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f); //- panMultiplier/100f;
+            float influence = customDeltaTime * 0.005f * distanceFromBorderMultiplier * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f); //- panMultiplier/100f;
             transform.position = Vector3.Lerp(transform.position, cameraStartPosition, 0.001f + influence);
         }
 
