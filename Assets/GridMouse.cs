@@ -214,7 +214,7 @@ public class GridMouse : MonoBehaviour {
     void OnMouseDown()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity);
+        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
         if (didHit)
         {
             Debug.Log("Just hit: " + hitInfo.transform.gameObject.name);
@@ -488,7 +488,7 @@ public class GridMouse : MonoBehaviour {
 
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity);
+        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
 
         if (didHit)
         {
@@ -500,7 +500,7 @@ public class GridMouse : MonoBehaviour {
             
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
