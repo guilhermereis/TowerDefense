@@ -6,7 +6,6 @@ public class CameraManager : MonoBehaviour {
     private GameObject freeCamera;
     private GameObject topCamera;
     private int cameraState = 0;
-    private int CurrentRotation = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -36,31 +35,6 @@ public class CameraManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown("r"))
-        {
-            freeCamera.transform.RotateAround(Vector3.zero, Vector3.up, 90);
-            if (CurrentRotation == 0)
-            {
-                freeCamera.transform.position.Set(51.81f, 28.54f, -24.34f);
-                CurrentRotation++;
-            }
-            else if (CurrentRotation == 1)
-            {
-                freeCamera.transform.position.Set(-24.34f,28.54f,51.81f);
-                CurrentRotation++;
-            }
-            else if (CurrentRotation == 2)
-            {
-                freeCamera.transform.position.Set(51.81f,28.54f,24.34f);
-                CurrentRotation++;
-            }
-            else if (CurrentRotation == 3)
-            {
-                freeCamera.transform.position.Set(51.81f, 28.54f, -24.34f);
-                CurrentRotation = 0;
-            }
-            freeCamera.GetComponent<CameraController>().SetInitialValues();
-        }
             
     }
 }

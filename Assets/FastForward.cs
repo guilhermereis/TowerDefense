@@ -10,6 +10,10 @@ public class FastForward : MonoBehaviour {
     public Button tripleSpeed;
 
 
+    public void PauseSpeedOnClick() {
+        Debug.Log("pausing speed");
+        Time.timeScale = 0;
+    }
 
     public void NormalSpeedOnClick()
     {

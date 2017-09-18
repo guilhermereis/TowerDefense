@@ -15,9 +15,12 @@ public class CameraController : MonoBehaviour {
 
     private Vector3 forwardVector, rightVector;
     private Vector3 cameraStartPosition;
+    private Vector3 rotationResetPosition;
     private float accumulatedZoomAcceleration = 0f;
     private float panMultiplier = 0f;
     private float cameraDistanceFromStart = 0f;
+
+    private int currentRotation = 0;
 
     private bool isMovingUp = false;
     private bool isMovingDown = false;
@@ -26,14 +29,31 @@ public class CameraController : MonoBehaviour {
 
     private void Start(){
         SetInitialValues();
+        cameraStartPosition = transform.position;
+        rotationResetPosition = transform.position;
     }
+
     public void SetInitialValues()
     {
         forwardVector = transform.forward;
         forwardVector.y = 0;
         forwardVector = Vector3.Normalize(forwardVector);
         rightVector = Quaternion.Euler(new Vector3(0, 90, 0)) * forwardVector;
-        cameraStartPosition = transform.position;
+
+        switch (currentRotation) {
+            case 0:
+                cameraStartPosition = rotationResetPosition;
+                break;
+            case 1:
+                cameraStartPosition = new Vector3(-cameraStartPosition.x, cameraStartPosition.y, cameraStartPosition.z);
+                break;
+            case 2:
+                cameraStartPosition = new Vector3(cameraStartPosition.x, cameraStartPosition.y, -cameraStartPosition.z);
+                break;
+            case 3:
+                cameraStartPosition = new Vector3(-cameraStartPosition.x, cameraStartPosition.y, cameraStartPosition.z);
+                break;
+        }
     }
     // Update is called once per frame
     void Update () {
@@ -138,8 +158,31 @@ public class CameraController : MonoBehaviour {
             float influence = Time.deltaTime * 0.005f * distanceFromBorderMultiplier * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f); //- panMultiplier/100f;
             transform.position = Vector3.Lerp(transform.position, cameraStartPosition, 0.001f + influence);
         }
-        
-        
+
+        //Camera Rotation logic
+        if (Input.GetKeyDown("r"))
+        {
+            transform.RotateAround(Vector3.zero, Vector3.up, 90);
+            switch (currentRotation) {
+                case 0:
+                    transform.position.Set(51.81f, 28.54f, -24.34f);
+                    currentRotation = (currentRotation + 1) % 4;
+                    break;
+                case 1:
+                    transform.position.Set(-24.34f, 28.54f, 51.81f);
+                    currentRotation = (currentRotation + 1) % 4;
+                    break;
+                case 2:
+                    transform.position.Set(51.81f, 28.54f, 24.34f);
+                    currentRotation = (currentRotation + 1) % 4;
+                    break;
+                case 3:
+                    transform.position.Set(51.81f, 28.54f, -24.34f);
+                    currentRotation = (currentRotation + 1) % 4;
+                    break;
+            }
+            GetComponent<CameraController>().SetInitialValues();
+        }
     }
     
 }
