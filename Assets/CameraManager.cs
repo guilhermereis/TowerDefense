@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
-    public GameObject freeCamera;
-    public GameObject topCamera;
+    private GameObject freeCamera;
+    private GameObject topCamera;
     private int cameraState = 0;
+    private int CurrentRotation = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -30,10 +31,36 @@ public class CameraManager : MonoBehaviour {
         cameraState = (cameraState + 1) % 2;
         //0 = free camera, 1 = topCamera
         //TODO: Camera transition animation and Enable/Disable camera afterwards
+        
     }
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (Input.GetKeyDown("r"))
+        {
+            //freeCamera.transform.Rotate(0, 90, 0);
+            freeCamera.transform.RotateAround(Vector3.zero, Vector3.up, 90);
+            if (CurrentRotation == 0)
+            {
+                freeCamera.transform.position.Set(51.81f, 28.54f, -24.34f);
+                CurrentRotation++;
+            }
+            else if (CurrentRotation == 1)
+            {
+                freeCamera.transform.position.Set(-24.34f,28.54f,51.81f);
+                CurrentRotation++;
+            }
+            else if (CurrentRotation == 2)
+            {
+                freeCamera.transform.position.Set(51.81f,28.54f,24.34f);
+                CurrentRotation++;
+            }
+            else if (CurrentRotation == 3)
+            {
+                freeCamera.transform.position.Set(51.81f, 28.54f, -24.34f);
+                CurrentRotation = 0;
+            }
+        }
+            
+    }
 }

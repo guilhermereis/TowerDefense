@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
+        
         //Camera Zoom
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
@@ -134,6 +134,7 @@ public class CameraController : MonoBehaviour {
             float influence = Time.deltaTime * 0.005f * distanceFromBorderMultiplier * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f); //- panMultiplier/100f;
             transform.position = Vector3.Lerp(transform.position, cameraStartPosition, 0.001f + influence);
         }
-
+        
     }
+    
 }
