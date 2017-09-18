@@ -38,7 +38,6 @@ public class CameraManager : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown("r"))
         {
-            //freeCamera.transform.Rotate(0, 90, 0);
             freeCamera.transform.RotateAround(Vector3.zero, Vector3.up, 90);
             if (CurrentRotation == 0)
             {
@@ -60,6 +59,7 @@ public class CameraManager : MonoBehaviour {
                 freeCamera.transform.position.Set(51.81f, 28.54f, -24.34f);
                 CurrentRotation = 0;
             }
+            freeCamera.GetComponent<CameraController>().SetInitialValues();
         }
             
     }
