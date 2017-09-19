@@ -6,9 +6,12 @@ public class TeslaCoilController : TowerController {
 
 
     public GameObject prefabLightningParticle;
-	
-    
-  
+
+
+    void Start()
+    {
+        SetFireRateAndAttackPower();
+    }
 
     // Update is called once per frame
     public override void Update () {
