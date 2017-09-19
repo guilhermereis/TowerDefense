@@ -6,11 +6,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(TileMap))]
-public class GridMouse : MonoBehaviour {
+public class GridMouse : MonoBehaviour
+{
+
+    //    Layers:
+    //        0: Default
+    //        1: TransparentFX
+    //        2: Ignore Raycast
+    //        3: 
+    //        4: Water
+    //        5: UI
+    //        6:
+    //        7:
+    //        8:Coins
+    //        9:Projectiles
+    //        10:Monsters
 
     //ignore layers 8,9,10 and 2 (IgnoreRaycast Layer)
     //(lowest order bit is 0-indexed)
-    private int layerMask = Convert.ToInt32("11111111111111111111100011001001", 2);
+    private int layerMask = Convert.ToInt32("11111111111111111111100011101001", 2);
     //private int layerMask = ~(1 << 10);
 
     public static GridMouse instance;
@@ -135,6 +149,8 @@ public class GridMouse : MonoBehaviour {
     }
     private void HandleBuildingSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
+        //this if doesn't make sense, because if we already decided to build we don't care
+        //if mouse is over any UI's
         if (true || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
 
         {
@@ -179,7 +195,8 @@ public class GridMouse : MonoBehaviour {
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private void HandleBuildingTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
-        
+        //this if doesn't make sense, because if we already decided to build we don't care
+        //if mouse is over any UI's
         if (true || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
 
         {
@@ -210,7 +227,7 @@ public class GridMouse : MonoBehaviour {
                             }
                         }
                     }
-            }
+                }
             }
         }
     }
@@ -241,6 +258,7 @@ public class GridMouse : MonoBehaviour {
         }
         else // Build something
         {
+            Debug.Log("ENTERED HERE");
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
                 HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
@@ -248,12 +266,15 @@ public class GridMouse : MonoBehaviour {
             }
             else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
             {
+                Debug.Log("NOW HERE");
                 HandleBuildingTower(ray, hitInfo, didHit, x, z);
                 buildManager.DeselectUnitToBuild();
             }
             else //if there's nothing to build, then hide the options
             {
-                if (true || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                //this if here makes sense, because when clicking over menus we dont want to
+                //hide the options.
+                if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
                     buildManager.HideOptions();
                     Debug.Log("Hide Options");
@@ -503,7 +524,7 @@ public class GridMouse : MonoBehaviour {
             
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
