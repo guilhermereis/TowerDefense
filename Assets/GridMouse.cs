@@ -29,6 +29,7 @@ public class GridMouse : MonoBehaviour
 
     public static GridMouse instance;
     public GameObject Track;
+    public GameObject Trees;
     public float ZOffset;
     private TileMap _tileMap;
     public Transform selectionCube;
@@ -130,6 +131,20 @@ public class GridMouse : MonoBehaviour
         foreach (Transform child in Track.transform)
         {
             //tower
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            if (x == 45 && z == 13)
+            {
+                Debug.Log(x + "," + z + " = Track");
+            }
+            propertiesMatrix[x, z] = new PropertyScript.Property("Track");
+        }
+
+
+        foreach (Transform child in Trees.transform)
+        {
+         
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             //Vector3 position = CoordToPosition(x, z);
@@ -524,7 +539,7 @@ public class GridMouse : MonoBehaviour
             
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
