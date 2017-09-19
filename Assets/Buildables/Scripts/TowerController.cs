@@ -107,6 +107,8 @@ public class TowerController : BuildableController {
         string tower1name = "PrefabArcherTower1(Clone)";
         string tower2name = "PrefabArcherTower2(Clone)";
         string tower3name = "PrefabArcherTower3(Clone)";
+        string towerSlowName = "PrefabArcherTower2Slow(Clone)";
+        string towerTeslaName = "PrefabArcherTower2Tesla(Clone)";
         int base_ap = 0;
         float base_fr = 0;
         //-----------SET BASE AP AND FR FOR TOWER TYPE-------------
@@ -115,7 +117,9 @@ public class TowerController : BuildableController {
             base_ap = Tower1BaseAP;
             base_fr = Tower1BaseFR;
         }
-        else if (gameObject.name == tower2name)
+        else if (gameObject.name == tower2name
+                 ||gameObject.name == towerSlowName
+                 ||gameObject.name == towerTeslaName)
         {
             base_ap = Tower2BaseAP;
             base_fr = Tower2BaseFR;

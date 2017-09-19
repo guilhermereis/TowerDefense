@@ -23,6 +23,7 @@ public class TowerSlowController : TowerController {
     // Use this for initialization
     void Start()
     {
+        SetFireRateAndAttackPower();
         SlowAmount = 5.0f;
     }
 
@@ -35,6 +36,7 @@ public class TowerSlowController : TowerController {
             {
 
                 Fire();
+                Debug.Log("THIS TOWERS FIRE RATE IS: " + getFireRate());
                 //lightningLine.enabled = false;
                 attackCooldown = 1 / getFireRate();
 
