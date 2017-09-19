@@ -33,7 +33,7 @@ public class GoblinKingController : EnemyController {
         if (!isDead)
         {
             anim.speed = nav.velocity.magnitude;
-            if (target.gameObject.tag == "Castle")
+            if (target ? target.gameObject.tag == "Castle" : false)
             {
                 throwFinished = false;
                 anim.isAttacking = false;
