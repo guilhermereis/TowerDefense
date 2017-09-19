@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 111554}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 42, y: 42, z: 1}
+  m_LocalScale: {x: 68, y: 68, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -116,4 +116,4 @@ MonoBehaviour:
   ListOfGameObjects: []
   _transform: {fileID: 411554}
   _material: {fileID: 2100000, guid: ad755755bc7b5d34e9d0bb3440aa6e7a, type: 2}
-  _gridSize: {x: 42, y: 42}
+  _gridSize: {x: 68, y: 68}
