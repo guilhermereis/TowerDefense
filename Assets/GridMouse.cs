@@ -572,23 +572,27 @@ public class GridMouse : MonoBehaviour
 
         if (didHit)
         {
-            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
-            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
-            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
-            position = CoordToPosition(x, z);
+            //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
+            if (hitInfo.transform.gameObject.name == "Grid")
+            { 
+                Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
+                int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
+                int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
+                position = CoordToPosition(x, z);
 
-            
-            Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
-            selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
-            if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
-            {
-                HandlePreviewSoldierCamp(ray, hitInfo, didHit, x, z);
-            }
-            else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
-            {
-                HandlePreviewTower(ray, hitInfo, didHit, x, z);
+                Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
+                selectionCube.transform.position = positionCube;
+                //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+
+                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                {
+                    HandlePreviewSoldierCamp(ray, hitInfo, didHit, x, z);
+                }
+                else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+                {
+                    HandlePreviewTower(ray, hitInfo, didHit, x, z);
+                }
             }
         }    
 	}
