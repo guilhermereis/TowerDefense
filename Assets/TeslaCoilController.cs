@@ -23,7 +23,7 @@ public class TeslaCoilController : TowerController {
             {
                 lightningLine.enabled = true;
                 Fire();
-                
+               
                 attackCooldown = 1 / getFireRate();
 
             }else
