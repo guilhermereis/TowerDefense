@@ -154,10 +154,10 @@ public class PawnController : MonoBehaviour {
                     if (nav != null)
                     {
 
-                        if (!IsAtLocation())
-                            nav.SetDestination(target.transform.position);
-                        else
-                            ChangeState(PawnState.Battle);
+                        nav.SetDestination(target.transform.position);
+                        //if (!IsAtLocation())
+                        //else
+                        //    ChangeState(PawnState.Battle);
 
                         //nav.isStopped = false;
                         //if(nav.hasPath)
