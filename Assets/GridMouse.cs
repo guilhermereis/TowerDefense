@@ -119,7 +119,10 @@ public class GridMouse : MonoBehaviour {
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             //Vector3 position = CoordToPosition(x, z);
-            //Debug.Log(x + "," + z + " = Track");
+            if (x == 45 && z == 13)
+            {
+                Debug.Log(x + "," + z + " = Track");
+            }
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
     }
