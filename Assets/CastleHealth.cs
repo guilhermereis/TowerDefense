@@ -53,7 +53,7 @@ public class CastleHealth : MonoBehaviour {
 
         if (castleDestructionAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !castleDestructionAnimator.IsInTransition(0))
         {
-            Destroy(gameObject,3);
+            //Destroy(gameObject,3);
         }
 
     }
