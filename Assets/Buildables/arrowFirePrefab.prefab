@@ -72,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1448633757277920}
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 2.407412, y: -0, z: -17.26}
+  m_LocalPosition: {x: 6.826, y: -0.007, z: -16.35387}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4507350549878096}
@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 0
+  target: {fileID: 0}
   speed: 4
   damagePrefabParticle: {fileID: 1074846246918774, guid: 834a4738c2cab8f489ef212477bf3c21,
     type: 2}
@@ -902,19 +903,19 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.4230652
+          value: 0.9855652
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.4998754
-          value: 0.9871788
-          inSlope: 0.0000044727094
-          outSlope: 0.0000044727094
+          time: 0.49499258
+          value: 0.4871788
+          inSlope: -1.0909276
+          outSlope: -1.0909276
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.99328613
-          value: 0.43077278
+          time: 0.99816895
+          value: 0
           inSlope: -0.8672448
           outSlope: -0.8672448
           tangentMode: 0
@@ -3517,7 +3518,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 553582029
+  randomSeed: -1604021053
   InitialModule:
     serializedVersion: 3
     enabled: 1
