@@ -9,12 +9,12 @@ public class PlayerStats : MonoBehaviour {
     void Start()
     {
         AddMoney(StartMoney);
-        Debug.Log("Set money to " + StartMoney);
     }
     public static void AddMoney(int amount)
     {
         Money += amount;
-        GameObject.Find("MoneyText").GetComponent<Text>().text = "Money: "+ Money;
+        GameObject.Find("MoneyText").GetComponent<Text>().text = ""+Money;
+        GameObject.Find("MoneyTextShadow").GetComponent<Text>().text = "" + Money;
     }
 
 }
