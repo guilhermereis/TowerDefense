@@ -30,6 +30,7 @@ public class GridMouse : MonoBehaviour
     public static GridMouse instance;
     public GameObject Track;
     public GameObject Trees;
+    public GameObject Edges;
     public float ZOffset;
     private TileMap _tileMap;
     public Transform selectionCube;
@@ -145,6 +146,19 @@ public class GridMouse : MonoBehaviour
         foreach (Transform child in Trees.transform)
         {
          
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            if (x == 45 && z == 13)
+            {
+                Debug.Log(x + "," + z + " = Track");
+            }
+            propertiesMatrix[x, z] = new PropertyScript.Property("Track");
+        }
+
+        foreach (Transform child in Edges.transform)
+        {
+
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             //Vector3 position = CoordToPosition(x, z);
