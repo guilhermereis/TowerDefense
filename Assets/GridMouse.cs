@@ -149,11 +149,7 @@ public class GridMouse : MonoBehaviour
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             //Vector3 position = CoordToPosition(x, z);
-            if (x == 45 && z == 13)
-            {
-                Debug.Log(x + "," + z + " = Track");
-            }
-            propertiesMatrix[x, z] = new PropertyScript.Property("Track");
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
 
         foreach (Transform child in Edges.transform)
@@ -162,11 +158,7 @@ public class GridMouse : MonoBehaviour
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             //Vector3 position = CoordToPosition(x, z);
-            if (x == 45 && z == 13)
-            {
-                Debug.Log(x + "," + z + " = Track");
-            }
-            propertiesMatrix[x, z] = new PropertyScript.Property("Track");
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
@@ -271,6 +263,7 @@ public class GridMouse : MonoBehaviour
         int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
         int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
         PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
+        Debug.Log("PROPERTY IN QUESTION = " + propertyInQuestion.type);
 
         if (propertyInQuestion.unit != null) // If the tile contains a Structure
         {
@@ -285,13 +278,22 @@ public class GridMouse : MonoBehaviour
             buildManager.SelectBuilding(buildable.getArrayListPosition());
             buildManager.ShowOptions();
         }
-        else // Build something
+        else if (propertyInQuestion.type == "Tree") // If I hit a Tree
+        {
+            //IGNORE THE CLICK
+        }
+        else // Decide to Build something
         {
             Debug.Log("ENTERED HERE");
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
-                HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
-                buildManager.DeselectUnitToBuild();
+                if (propertyInQuestion.type == "Track")
+                {
+                    //FOR SOLDIER CAMP,
+                    //I ONLY BUILD SOMETHING IF I CLICKED ON A TRACK TILE.
+                    HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
+                    buildManager.DeselectUnitToBuild();
+                }
             }
             else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
             {
@@ -411,6 +413,15 @@ public class GridMouse : MonoBehaviour
                         rotated = true;
                     }
                 }
+                //stepped over a TREE tile
+                else if (propertiesMatrix[x, z].type == "Tree"
+                    || propertiesMatrix[x + 1, z + 1].type == "Tree"
+                    || propertiesMatrix[x, z + 1].type == "Tree"
+                    || propertiesMatrix[x + 1, z].type == "Tree")
+                {
+                    //DON'T build and DON'T rotate.
+                    SetPreviewColor(Color.red);
+                }
                 else
                 {//if the logic doens't involve going over track tiles
                     if (previewMatrix[x, z] == false
@@ -455,6 +466,14 @@ public class GridMouse : MonoBehaviour
                             SetPreviewColor(Color.red);
                         }
                     }
+                    else if (propertiesMatrix[x, z].type == "Tree"
+                    || propertiesMatrix[x + 1, z + 1].type == "Tree"
+                    || propertiesMatrix[x, z + 1].type == "Tree"
+                    || propertiesMatrix[x + 1, z].type == "Tree")
+                    {
+                        //DON'T build and DON't rotate.
+                        SetPreviewColor(Color.red);
+                    }
                     else
                     {
                         //if the logic doens't involve going over track tiles
@@ -494,6 +513,10 @@ public class GridMouse : MonoBehaviour
                 {
                     //don't build
                 }
+                else if (propertiesMatrix[x, z].type == "Tree")
+                {
+                    //don't build
+                }
                 else
                 {//if the logic doens't involve going over track tiles
                     if (previewMatrix[x, z] == false)
@@ -514,6 +537,10 @@ public class GridMouse : MonoBehaviour
                     if (propertiesMatrix[x, z].type == "Track")
                     {
 
+                    }
+                    else if (propertiesMatrix[x, z].type == "Tree")
+                    {
+                        //don't build
                     }
                     else
                     {
@@ -553,7 +580,7 @@ public class GridMouse : MonoBehaviour
             
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
             {
