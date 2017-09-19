@@ -12,6 +12,9 @@ public class PawnCharacter : MonoBehaviour {
     public float attackRate;
     public bool isDead;
     public bool isSlow;
+
+    public bool exploded;
+
 	public PawnHealthBarGUI healthBar;
     public AudioSource painSoundPrefab;
 
@@ -42,7 +45,8 @@ public class PawnCharacter : MonoBehaviour {
 
         if (gameObject.tag.Equals("Enemy"))
         {
-            PlayerStats.AddMoney(10);
+            if(!exploded)
+                PlayerStats.AddMoney(10);
 
             Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
 

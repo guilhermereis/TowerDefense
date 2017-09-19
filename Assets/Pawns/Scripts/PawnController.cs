@@ -149,10 +149,11 @@ public class PawnController : MonoBehaviour {
             else if (currentState == PawnState.FindTarget)
             {
                 nav.isStopped = false;
-                if (target != null)
+                if (target != null || target.GetComponent<PawnCharacter>().isDead)
                 {
                     if (nav != null)
                     {
+                        //nav.isStopped = false;
                         nav.SetDestination(target.transform.position);
                         //if(nav.hasPath)
                         //else

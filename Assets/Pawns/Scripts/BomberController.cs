@@ -54,15 +54,16 @@ public class BomberController : EnemyController {
     {
 
         if (other.gameObject.tag == "Castle")
-        {
+        { 
             other.gameObject.GetComponent<CastleHealth>().ApplyDamage(character.attack);
             Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
             //Camera.main.GetComponent<CameraShake>().PlayShake();
-            if (character.Damage(character.health))
-            {
-                character.Die();
-                Instantiate(gameObject.GetComponent<BomberCharacter>().prefabExplosionSound, transform);
-            }
+            gameObject.GetComponent<PawnCharacter>().exploded = true;
+            Instantiate(gameObject.GetComponent<BomberCharacter>().prefabExplosionSound, transform);
+            //apply damage to itself with total health amount.
+            character.Damage(character.health);
+            
+            
 
         }
     }
