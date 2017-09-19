@@ -296,10 +296,10 @@ InputManager:
   - serializedVersion: 3
     m_Name: Camera Rotate
     descriptiveName: Rotate Camera Clockwise
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
+    descriptiveNegativeName: Rotate Camera Counterclockwise
+    negativeButton: q
+    positiveButton: e
+    altNegativeButton: joystick button 2
     altPositiveButton: joystick button 1
     gravity: 1000
     dead: 0.001

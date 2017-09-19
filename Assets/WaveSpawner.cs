@@ -4,8 +4,6 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour {
-
-    
     public List<GameObject> monsterBatch;
     public GameObject[] monstersPrefab;
 
@@ -38,7 +36,6 @@ public class WaveSpawner : MonoBehaviour {
                 hud = canvas[i];
                 break;
             }
-
         }
 
     }
@@ -64,10 +61,6 @@ public class WaveSpawner : MonoBehaviour {
             if(transform.childCount == 0)
                 GameController.ChangeGameState(GameState.EndWave);
         }
-
-        
-        
-
     }
 
     public void FillMonstersType()
@@ -86,17 +79,15 @@ public class WaveSpawner : MonoBehaviour {
         currentWave = new Wave(waveNumber * 2, waveNumber);
         combination = currentWave.GetCombinaton();
         waveNumber++;
+        hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterText").GetComponent<Text>().text = "" + waveNumber;
+        hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterTextShadow").GetComponent<Text>().text = "" + waveNumber;
         FillMonstersType();
         monsterBatch.Clear();
         isWaving = true;
-       
     }
-    
-   
 
 	void SpawnMonsters()
 	{
-        
         if(timer <= 0)
         {
             int monsterIndex = combination[spawningMonster] - 1;
@@ -110,9 +101,8 @@ public class WaveSpawner : MonoBehaviour {
             //wave progression
             waveProgression = (float)spawningMonster / (float)combination.Length;
             hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
-
-
         }
+
         if (spawningMonster >= combination.Length)
         {
             isWaving = false;
@@ -120,6 +110,5 @@ public class WaveSpawner : MonoBehaviour {
         }
 
         timer -= Time.deltaTime;
-
     }
 }
