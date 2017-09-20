@@ -24,6 +24,7 @@ public class Shop : MonoBehaviour {
 
     private bool canBuildPrimary = true;
     private bool canBuildSecondary = true;
+    private bool updateGui = true;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class Shop : MonoBehaviour {
     void Start()
     {
         buildManager = BuildManager.instance;
+        initializeUIValues();
     }
 
     private void Update()
@@ -48,7 +50,7 @@ public class Shop : MonoBehaviour {
             standardUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinDisabledColor;
             standardUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextDisabledColor;
             canBuildPrimary = false;
-        }else {
+        } else {
             standardUnitButton.interactable = true;
             standardUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinEnabledColor;
             standardUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextEnabledColor;
@@ -61,7 +63,7 @@ public class Shop : MonoBehaviour {
             secondaryUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinDisabledColor;
             secondaryUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextDisabledColor;
             canBuildSecondary = false;
-        }else {
+        } else {
             secondaryUnitButton.interactable = true;
             secondaryUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinEnabledColor;
             secondaryUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextEnabledColor;
@@ -69,8 +71,8 @@ public class Shop : MonoBehaviour {
         }
     }
 
-    public void SelectStandardUnit(){
-        if (canBuildPrimary){
+    public void SelectStandardUnit() {
+        if (canBuildPrimary) {
             Debug.Log("Standard Turret Selected");
             buildManager.SelectUnitToBuild(standardUnit);
         }
@@ -81,5 +83,12 @@ public class Shop : MonoBehaviour {
             Debug.Log("Secondary Turret Selected");
             buildManager.SelectUnitToBuild(missileLauncher);
         }
+    }
+
+    public void initializeUIValues() {
+        standardUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().text = "" + standardUnit.cost;
+        standardUnitButton.transform.Find("Coin").transform.Find("PriceShadow").GetComponent<Text>().text = "" + standardUnit.cost;
+        secondaryUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().text = "" + missileLauncher.cost;
+        secondaryUnitButton.transform.Find("Coin").transform.Find("PriceShadow").GetComponent<Text>().text = "" + missileLauncher.cost;
     }
 }
