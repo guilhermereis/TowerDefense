@@ -44,6 +44,8 @@ public class GridMouse : MonoBehaviour
     private int prevZ;
     private int instance_x;
     private int instance_z;
+    private int cursor_x;
+    private int cursor_z;
     private GameObject temporaryInstance;
     private Vector3 position;
     private Vector3 rotation = new Vector3(-90, 0, 0);
@@ -212,6 +214,22 @@ public class GridMouse : MonoBehaviour
                 }
             }
         }
+    }
+    private Vector2 ReturnFirstFreeTileAround()
+    {
+        //center is (cursor_x, cursor_z)
+        int x = cursor_x;
+        int z = cursor_z;
+        Vector2 answer = Vector2.zero;
+        //look for space on the right
+        if (propertiesMatrix[x+1, z+1].type != "Track"
+                    || propertiesMatrix[x + 2, z + 1].type != "Track"
+                    || propertiesMatrix[x+1, z].type != "Track"
+                    || propertiesMatrix[x + 2, z].type != "Track")
+        {
+            answer = new Vector2(x, z);
+        }
+        return answer;
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private void HandleBuildingTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
@@ -396,6 +414,20 @@ public class GridMouse : MonoBehaviour
                     || propertiesMatrix[x, z + 1].type == "Track"
                     || propertiesMatrix[x + 1, z].type == "Track")
                 {
+
+                    if (temporaryInstance == null)
+                    {
+                        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
+                        SetPreviewColor(Color.red);
+                        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
+                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
+
+                        previewMatrix[instance_x, instance_z] = true;
+                        previewMatrix[instance_x + 1, instance_z + 1] = true;
+                        previewMatrix[instance_x + 1, instance_z] = true;
+                        previewMatrix[instance_x, instance_z + 1] = true;
+                    }
+
                     //don't build
                     //ROTATE !
                     if (!rotated)
@@ -576,6 +608,8 @@ public class GridMouse : MonoBehaviour
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
+            cursor_x = x;
+            cursor_z = z;
             position = CoordToPosition(x, z);
 
 
