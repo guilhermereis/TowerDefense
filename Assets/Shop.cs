@@ -16,6 +16,12 @@ public class Shop : MonoBehaviour {
     public UnitBlueprint towerTesla;
     BuildManager buildManager;
 
+    public Color CoinEnabledColor;
+    public Color CoinTextEnabledColor;
+
+    public Color CoinDisabledColor;
+    public Color CoinTextDisabledColor;
+
     private bool canBuildPrimary = true;
     private bool canBuildSecondary = true;
 
@@ -39,18 +45,26 @@ public class Shop : MonoBehaviour {
         if (PlayerStats.Money < standardUnit.cost)
         {
             standardUnitButton.interactable = false;
+            standardUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinDisabledColor;
+            standardUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextDisabledColor;
             canBuildPrimary = false;
         }else {
             standardUnitButton.interactable = true;
+            standardUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinEnabledColor;
+            standardUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextEnabledColor;
             canBuildPrimary = true;
         }
 
         if (PlayerStats.Money < missileLauncher.cost)
         {
             secondaryUnitButton.interactable = false;
+            secondaryUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinDisabledColor;
+            secondaryUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextDisabledColor;
             canBuildSecondary = false;
         }else {
             secondaryUnitButton.interactable = true;
+            secondaryUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinEnabledColor;
+            secondaryUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextEnabledColor;
             canBuildSecondary = true;
         }
     }
