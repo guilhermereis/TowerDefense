@@ -21,6 +21,7 @@ public class GridMouse : MonoBehaviour
     //        8:Coins
     //        9:Projectiles
     //        10:Monsters
+    //        11:EdgeTiles
 
     //ignore layers 8,9,10 and 2 (IgnoreRaycast Layer)
     //(lowest order bit is 0-indexed)
@@ -223,11 +224,11 @@ public class GridMouse : MonoBehaviour
         Vector2 answer = Vector2.zero;
         //look for space on the right
         if (propertiesMatrix[x+1, z+1].type != "Track"
-                    || propertiesMatrix[x + 2, z + 1].type != "Track"
-                    || propertiesMatrix[x+1, z].type != "Track"
-                    || propertiesMatrix[x + 2, z].type != "Track")
+                    && propertiesMatrix[x + 2, z + 1].type != "Track"
+                    && propertiesMatrix[x+1, z].type != "Track"
+                    && propertiesMatrix[x + 2, z].type != "Track")
         {
-            answer = new Vector2(x, z);
+            answer = new Vector2(x+1, z);
         }
         return answer;
     }
@@ -397,17 +398,13 @@ public class GridMouse : MonoBehaviour
     {
         foreach (Material matt in temporaryInstance.GetComponent<MeshRenderer>().materials)
         {
-            Debug.Log("SETTING matt: " + matt.name);
+            //Debug.Log("SETTING matt: " + matt.name);
             matt.SetColor("_Color", color);
         }
     }
-    private void Instantiate()
+    private void Instantiate(Vector3 pos)
     {
-        Debug.Log("GONNA INSTANTIATE !!!!!");
-        Vector2 tempPosition = ReturnFirstFreeTileAround();
-        Vector3 foundPosition = CoordToPosition(Mathf.FloorToInt(tempPosition.x), Mathf.FloorToInt(tempPosition.y));
-
-        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), foundPosition);
+        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), pos);
         SetPreviewColor(Color.red);
         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
@@ -432,10 +429,21 @@ public class GridMouse : MonoBehaviour
                 {
 
                     if (temporaryInstance == null)
-                    {
-                        Instantiate();
-                    }
+                    {                      
+                        Vector2 tempPosition = ReturnFirstFreeTileAround();
+                        Vector3 foundPosition = CoordToPosition(Mathf.FloorToInt(tempPosition.x), Mathf.FloorToInt(tempPosition.y));
+                        if (foundPosition != CoordToPosition(0, 0))
+                        {
+                            Instantiate(foundPosition);
 
+                            Debug.Log("GOING TO INSTANTIATE ON "+foundPosition.x+", "+foundPosition.z);
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.Log("IT'S NOT NULL, IT'S: " + temporaryInstance.name);
+                    }
                     //don't build
                     //ROTATE !
                     if (!rotated)
@@ -623,7 +631,7 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
