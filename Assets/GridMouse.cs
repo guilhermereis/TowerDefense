@@ -238,6 +238,22 @@ public class GridMouse : MonoBehaviour
         {
             answer = new Vector2(x - 2, z);
         }
+        //look for space on the up
+        else if (propertiesMatrix[x, z + 1].type != "Track"
+                    && propertiesMatrix[x + 1, z + 1].type != "Track"
+                    && propertiesMatrix[x, z + 2].type != "Track"
+                    && propertiesMatrix[x + 1, z + 2].type != "Track")
+        {
+            answer = new Vector2(x, z + 1);
+        }
+        //look for space on the down
+        else if (propertiesMatrix[x, z - 1].type != "Track"
+                    && propertiesMatrix[x - 1, z - 1].type != "Track"
+                    && propertiesMatrix[x, z - 2].type != "Track"
+                    && propertiesMatrix[x - 1, z - 2].type != "Track")
+        {
+            answer = new Vector2(x - 1, z - 2);
+        }
         return answer;
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
