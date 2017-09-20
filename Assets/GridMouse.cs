@@ -401,6 +401,22 @@ public class GridMouse : MonoBehaviour
             matt.SetColor("_Color", color);
         }
     }
+    private void Instantiate()
+    {
+        Debug.Log("GONNA INSTANTIATE !!!!!");
+        Vector2 tempPosition = ReturnFirstFreeTileAround();
+        Vector3 foundPosition = CoordToPosition(Mathf.FloorToInt(tempPosition.x), Mathf.FloorToInt(tempPosition.y));
+
+        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), foundPosition);
+        SetPreviewColor(Color.red);
+        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
+        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
+
+        previewMatrix[instance_x, instance_z] = true;
+        previewMatrix[instance_x + 1, instance_z + 1] = true;
+        previewMatrix[instance_x + 1, instance_z] = true;
+        previewMatrix[instance_x, instance_z + 1] = true;
+    }
 
     private void HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit,int x, int z)
     {
@@ -417,15 +433,7 @@ public class GridMouse : MonoBehaviour
 
                     if (temporaryInstance == null)
                     {
-                        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
-                        SetPreviewColor(Color.red);
-                        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
-                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
-
-                        previewMatrix[instance_x, instance_z] = true;
-                        previewMatrix[instance_x + 1, instance_z + 1] = true;
-                        previewMatrix[instance_x + 1, instance_z] = true;
-                        previewMatrix[instance_x, instance_z + 1] = true;
+                        Instantiate();
                     }
 
                     //don't build
@@ -615,7 +623,7 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
