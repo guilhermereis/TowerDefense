@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { Preparation, BeginWave, Action, EndWave, GameOver }
+public enum GameState { Preparation, BeginWave, Waving ,Action, EndWave, GameOver }
 
 public class GameController : MonoBehaviour {
     [HideInInspector]

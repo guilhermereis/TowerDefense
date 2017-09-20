@@ -20,7 +20,7 @@ public class WandererController : EnemyController
 	protected override void Awake()
     {
         base.Awake();
-        speed = 2;
+        speed = 1;
         
     }
 

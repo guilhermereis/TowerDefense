@@ -10,11 +10,11 @@ public class PawnController : MonoBehaviour {
 
     //controller variables
     [HideInInspector]
-    public enum PawnState { Idle, Battle, Walking,FindTarget,Homing, Destroying, Dead};
+    public enum PawnState { None ,Idle, Battle, Walking,FindTarget,Homing, Destroying, Dead};
     [HideInInspector]
     public enum PawnType {Wanderer, Hunter, Boss}
 
-    public PawnState currentState = PawnState.Walking;
+    public PawnState currentState = PawnState.None;
     protected PawnType type = PawnType.Wanderer;
 
     public Transform finalDestination;
@@ -28,24 +28,70 @@ public class PawnController : MonoBehaviour {
     //used for allied troopers
     public Vector3 homePosition;
     public List<Transform> waypoints;
-    int nextWaypoint = 1; 
+    int nextWaypoint = 1;
+
+    GameObject waypointLane1;
+    GameObject waypointLane2;
+    GameObject waypointLane3;
+    GameObject waypointLane4;
+
+    public int myLane;
 
     protected virtual void Awake()
     {
+        waypoints = new List<Transform>();
         nav = GetComponent<NavMeshAgent>();
         nav.speed = speed;
-        waypoints = new List<Transform>();
-        GameObject waypoint = GameObject.FindGameObjectWithTag("Waypoint");
-        //Debug.Log(waypoint.name);
-        for (int i = 0; i < waypoint.transform.childCount; i++)
+
+        waypointLane1 = GameObject.FindGameObjectWithTag("WaypointsLane1");
+        waypointLane2 = GameObject.FindGameObjectWithTag("WaypointsLane2");
+        waypointLane3 = GameObject.FindGameObjectWithTag("WaypointsLane3");
+        waypointLane4 = GameObject.FindGameObjectWithTag("WaypointsLane4");
+    }
+
+    public void SetupWaypoints(int lane_)
+    {
+        myLane = lane_;
+       
+
+        if (myLane == 1)
         {
-            waypoints.Add(waypoint.transform.GetChild(i));
+            for (int i = 0; i < waypointLane1.transform.childCount; i++)
+            {
+                waypoints.Add(waypointLane1.transform.GetChild(i));
+            }
+
         }
+        else if (myLane == 2)
+        {
+            for (int i = 0; i < waypointLane2.transform.childCount; i++)
+            {
+                waypoints.Add(waypointLane2.transform.GetChild(i));
+            }
+        }
+        else if (myLane == 3)
+        {
+            for (int i = 0; i < waypointLane3.transform.childCount; i++)
+            {
+                waypoints.Add(waypointLane3.transform.GetChild(i));
+            }
+        }
+        else if (myLane == 4)
+        {
+            for (int i = 0; i < waypointLane4.transform.childCount; i++)
+            {
+                waypoints.Add(waypointLane4.transform.GetChild(i));
+            }
+        }
+        //Debug.Log(waypoint.name);
+        ChangeState(PawnState.Walking);
     }
 
     private void Start()
     {
-        
+       
+       
+       
     }
 
     public PawnState CurrentState {  get { return currentState; }
@@ -112,11 +158,14 @@ public class PawnController : MonoBehaviour {
     protected virtual void Update () {
         //Debug.DrawLine(transform.position, finalDestination.position);
         //Debug.Log(finalDestination.transform);
+        if(nav != null)
+        {
+            if (gameObject.GetComponent<PawnCharacter>().isSlow)
+                nav.speed = 0.5f;
+            else
+                nav.speed = speed;
 
-        if (gameObject.GetComponent<PawnCharacter>().isSlow)
-            nav.speed = 0.5f;
-        else
-            nav.speed = speed;
+        }
 
 
         if (currentState != PawnState.Dead) {

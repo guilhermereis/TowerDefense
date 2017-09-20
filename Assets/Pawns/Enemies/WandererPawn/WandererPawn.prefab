@@ -154,8 +154,9 @@ MonoBehaviour:
   defense: 1
   attack: 50
   attackRate: 1
-  isDying: 0
+  isDead: 0
   isSlow: 0
+  exploded: 0
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
@@ -191,7 +192,7 @@ MonoBehaviour:
   currentState: 2
   finalDestination: {fileID: 0}
   nav: {fileID: 0}
-  speed: 1.3
+  speed: 0
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
@@ -277,7 +278,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.21
-  m_Speed: 3
+  m_Speed: 0.1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
