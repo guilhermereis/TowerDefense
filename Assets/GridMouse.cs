@@ -224,11 +224,11 @@ public class GridMouse : MonoBehaviour
         Vector2 answer = Vector2.zero;
         //look for space on the right
         if (propertiesMatrix[x+1, z+1].type != "Track"
-                    || propertiesMatrix[x + 2, z + 1].type != "Track"
-                    || propertiesMatrix[x+1, z].type != "Track"
-                    || propertiesMatrix[x + 2, z].type != "Track")
+                    && propertiesMatrix[x + 2, z + 1].type != "Track"
+                    && propertiesMatrix[x+1, z].type != "Track"
+                    && propertiesMatrix[x + 2, z].type != "Track")
         {
-            answer = new Vector2(x+2, z);
+            answer = new Vector2(x+1, z);
         }
         return answer;
     }
