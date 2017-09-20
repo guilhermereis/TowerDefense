@@ -65,7 +65,7 @@ public class WaveSpawner : MonoBehaviour {
 
   
     int finishedSpawns = 0;
-    int maxLanes = 1;
+    public int maxLanes = 1;
 
     private void Start()
     {
@@ -236,7 +236,7 @@ public class WaveSpawner : MonoBehaviour {
             if (timer <= 0)
             {
                 int monsterIndex = combination_[spawningMonsterLane4] - 1;
-                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.identity);
+                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.identity);
                 monster.GetComponent<PawnController>().SetupWaypoints(4);
                 monsterBatch.Add(monster);
 
@@ -381,7 +381,7 @@ public class WaveSpawner : MonoBehaviour {
             waveNumberLane2++;
             waveNumberLane3++;
         }
-        else
+        else if( maxLanes == 4)
         {
             waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
             waveLane2 = new Wave(waveNumberLane2 * 2, waveNumberLane2);
