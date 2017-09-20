@@ -51,9 +51,8 @@ public class GridMouse : MonoBehaviour
     private Vector3 position;
     private Vector3 rotation = new Vector3(-90, 0, 0);
     private bool rotated = false;
+    private 
     GameObject temp;
-
-    private int selectionState = 0; //0 = Deselected, 1 = Has selection;
 
     [SerializeField]
     public PropertyScript.Property[,] propertiesMatrix;
@@ -341,14 +340,12 @@ public class GridMouse : MonoBehaviour
         int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
         PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
         Debug.Log("PROPERTY IN QUESTION = " + propertyInQuestion.type);
-        selectionState = 0;
 
         if (propertyInQuestion.unit != null) // If the tile contains a Structure
         {
             buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
             buildManager.ShowOptions();
             Debug.Log("Selecionou a posição: " + x + ", " + z);
-            selectionState = 1;
             //Destroy(hitInfo.transform.gameObject);
         }
         else if (CheckIfHitStructure()) // If I hit a Structure
@@ -356,7 +353,6 @@ public class GridMouse : MonoBehaviour
             BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
             buildManager.SelectBuilding(buildable.getArrayListPosition());
             buildManager.ShowOptions();
-            selectionState = 1;
         }
         else if (propertyInQuestion.type == "Tree") // If I hit a Tree
         {
@@ -714,7 +710,7 @@ public class GridMouse : MonoBehaviour
                     HandlePreviewTower(ray, hitInfo, didHit, x, z);
                 }
             }
-        }    
+        }
 	}
     public Vector3 CoordToPosition(int x, int y)
     {
