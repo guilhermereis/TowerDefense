@@ -15,6 +15,10 @@ public class SimpleSoldierController : PawnController {
 
 	private AudioSource swordHit;
 
+
+    public GameObject damagePrefabParticle;
+    public GameObject bloodPrefabParticle;
+
     public void SetTarget(GameObject _target)
     {
         target = _target;
@@ -95,6 +99,8 @@ public class SimpleSoldierController : PawnController {
 				Debug.DrawLine(transform.position, target.transform.position);
                 //we are goint to apply damage to target and if the target is dead, we are going to
                 //tell the camp and so the camp can gives another target or we're going back home.
+                Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
+                Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
                 swordHit.Play();
                 if (target.GetComponent<PawnCharacter>().Damage(character.attack))
 				

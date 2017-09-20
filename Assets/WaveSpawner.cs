@@ -13,8 +13,8 @@ public class WaveSpawner : MonoBehaviour {
 
     int waveMonsters = 0;
 
-    int lanes = 4;
-
+    public GameObject King1;
+    
 #region Waves
     private Wave waveLane1;
     private Wave waveLane2;
@@ -57,7 +57,8 @@ public class WaveSpawner : MonoBehaviour {
 
     public Transform spawnLocation;
     bool isWaving = false;
-   
+
+
     float spawnTimer = 2f;
 
     public Canvas hud;
@@ -91,6 +92,14 @@ public class WaveSpawner : MonoBehaviour {
     IEnumerator SpawnLane1(int[] combination_)
     {
         float timer = 0;
+
+        //spawns king
+        if( waveNumberLane1 % 10 == 0)
+        {
+            GameObject monster = Instantiate(King1, spawnLocationLane1.position, Quaternion.identity);
+            monster.GetComponent<PawnController>().SetupWaypoints(1);
+            monsterBatch.Add(monster);
+        }
 
         while (spawningMonsterLane1 < combination_.Length)
         {
@@ -127,7 +136,13 @@ public class WaveSpawner : MonoBehaviour {
     IEnumerator SpawnLane2(int[] combination_)
     {
         float timer = 0;
-
+        //spawns king
+        if (waveNumberLane2 % 10 == 0)
+        {
+            GameObject monster = Instantiate(King1, spawnLocationLane2.position, Quaternion.identity);
+            monster.GetComponent<PawnController>().SetupWaypoints(2);
+            monsterBatch.Add(monster);
+        }
         while (spawningMonsterLane2 < combination_.Length)
         {
 
@@ -164,7 +179,13 @@ public class WaveSpawner : MonoBehaviour {
     IEnumerator SpawnLane3(int[] combination_)
     {
         float timer = 0;
-
+        //spawns king
+        if (waveNumberLane3 % 10 == 0)
+        {
+            GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.identity);
+            monster.GetComponent<PawnController>().SetupWaypoints(3);
+            monsterBatch.Add(monster);
+        }
         while (spawningMonsterLane3 < combination_.Length)
         {
 
@@ -197,10 +218,17 @@ public class WaveSpawner : MonoBehaviour {
         }
     }
 
-
     IEnumerator SpawnLane4(int[] combination_)
     {
         float timer = 0;
+
+        //spawns king
+        if (waveNumberLane4 % 10 == 0)
+        {
+            GameObject monster = Instantiate(King1, spawnLocationLane4.position, Quaternion.identity);
+            monster.GetComponent<PawnController>().SetupWaypoints(4);
+            monsterBatch.Add(monster);
+        }
 
         while (spawningMonsterLane4 < combination_.Length)
         {
