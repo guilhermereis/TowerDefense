@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(GridMouse))]
-public class GridEditor : Editor {
+[CustomEditor(typeof(Minimap))]
+public class MinimapEditor : Editor {
 
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        GridMouse grid = target as GridMouse;
+        Minimap mmap = target as Minimap;
 
-        grid.UpdateGrid();
+        mmap.UpdateMap();
+
+
         
     }
 
