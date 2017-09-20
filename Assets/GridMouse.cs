@@ -114,9 +114,9 @@ public class GridMouse : MonoBehaviour
             for (int l = 0; l < previewMatrix.GetLength(1); l++)
             {
                 previewMatrix[k, l] = false;
+                propertiesMatrix[k, l] = new PropertyScript.Property("Normal");
             }
         }
-            
 
 
     }
@@ -223,34 +223,34 @@ public class GridMouse : MonoBehaviour
         int z = cursor_z;
         Vector2 answer = Vector2.zero;
         //look for space on the right
-        if (propertiesMatrix[x+1, z+1].type != "Track"
-                    && propertiesMatrix[x + 2, z + 1].type != "Track"
-                    && propertiesMatrix[x+1, z].type != "Track"
-                    && propertiesMatrix[x + 2, z].type != "Track")
+        if (propertiesMatrix[x+1, z+1].type == "Normal"
+                    && propertiesMatrix[x + 2, z + 1].type == "Normal"
+                    && propertiesMatrix[x+1, z].type == "Normal"
+                    && propertiesMatrix[x + 2, z].type == "Normal")
         {
             answer = new Vector2(x+1, z);
         }
         //look for space on the left
-        else if (propertiesMatrix[x - 1, z].type != "Track"
-                    && propertiesMatrix[x - 2, z].type != "Track"
-                    && propertiesMatrix[x - 1, z + 1].type != "Track"
-                    && propertiesMatrix[x - 2, z + 1].type != "Track")
+        else if (propertiesMatrix[x - 1, z].type == "Normal"
+                    && propertiesMatrix[x - 2, z].type == "Normal"
+                    && propertiesMatrix[x - 1, z + 1].type == "Normal"
+                    && propertiesMatrix[x - 2, z + 1].type == "Normal")
         {
             answer = new Vector2(x - 2, z);
         }
         //look for space on the up
-        else if (propertiesMatrix[x, z + 1].type != "Track"
-                    && propertiesMatrix[x + 1, z + 1].type != "Track"
-                    && propertiesMatrix[x, z + 2].type != "Track"
-                    && propertiesMatrix[x + 1, z + 2].type != "Track")
+        else if (propertiesMatrix[x, z + 1].type == "Normal"
+                    && propertiesMatrix[x + 1, z + 1].type == "Normal"
+                    && propertiesMatrix[x, z + 2].type == "Normal"
+                    && propertiesMatrix[x + 1, z + 2].type == "Normal")
         {
             answer = new Vector2(x, z + 1);
         }
         //look for space on the down
-        else if (propertiesMatrix[x, z - 1].type != "Track"
-                    && propertiesMatrix[x - 1, z - 1].type != "Track"
-                    && propertiesMatrix[x, z - 2].type != "Track"
-                    && propertiesMatrix[x - 1, z - 2].type != "Track")
+        else if (propertiesMatrix[x, z - 1].type == "Normal"
+                    && propertiesMatrix[x - 1, z - 1].type == "Normal"
+                    && propertiesMatrix[x, z - 2].type == "Normal"
+                    && propertiesMatrix[x - 1, z - 2].type == "Normal")
         {
             answer = new Vector2(x - 1, z - 2);
         }
