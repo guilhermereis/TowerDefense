@@ -67,11 +67,12 @@ MonoBehaviour:
   spawningMonsterLane2: 0
   spawningMonsterLane3: 0
   spawningMonsterLane4: 0
-  waveNumber: 1
-  waveNumberLane1: 1
-  waveNumberLane2: 1
-  waveNumberLane3: 1
-  waveNumberLane4: 1
-  waveProgression: 0
+  waveNumber: 100
+  waveNumberLane1: 100
+  waveNumberLane2: 100
+  waveNumberLane3: 100
+  waveNumberLane4: 100
+  waveProgression: 100
   spawnLocation: {fileID: 0}
   hud: {fileID: 0}
+  maxLanes: 4

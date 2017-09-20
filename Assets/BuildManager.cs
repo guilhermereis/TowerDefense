@@ -16,6 +16,8 @@ public class BuildManager : MonoBehaviour {
     private GameObject selectedGameObject;
     private GameObject LastSelectedGameObject;
     private GridMouse gridMouse;
+    public GameObject bottomBar;
+    private BottomInfoBarBehaviour bottomBarBehaviour;
 
     void Awake()
     {
@@ -29,7 +31,8 @@ public class BuildManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gridMouse = GridMouse.instance;
-	}
+        bottomBarBehaviour = (BottomInfoBarBehaviour)bottomBar.GetComponentInChildren<BottomInfoBarBehaviour>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -190,7 +193,7 @@ public class BuildManager : MonoBehaviour {
         else
         {
             optionsObject.SetActive(true);
-        }        
+        } 
         GameObject.Find("ButtonUpgradeText").GetComponent<Text>().text = "Upgrade $" + selectedUnit.upgrade_cost;
         GameObject.Find("ButtonSellText").GetComponent<Text>().text = "Sell $" + selectedUnit.sell_cost;
     }
@@ -200,6 +203,16 @@ public class BuildManager : MonoBehaviour {
         optionsObject.SetActive(false);
         optionsSlowObject.SetActive(false);
         selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        
+    }
+
+    public void hideBottomBar() {
+        bottomBarBehaviour.setSelectionState(0);
+        Debug.Log("wtf");
+    }
+
+    public void showBottomBar() {
+        bottomBarBehaviour.setSelectionState(1);
     }
 
     public void SelectStructure(Structure structure)

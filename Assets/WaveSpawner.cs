@@ -139,7 +139,7 @@ public class WaveSpawner : MonoBehaviour {
         //spawns king
         if (waveNumberLane2 % 10 == 0)
         {
-            GameObject monster = Instantiate(King1, spawnLocationLane2.position, Quaternion.identity);
+            GameObject monster = Instantiate(King1, spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(2);
             monsterBatch.Add(monster);
         }
@@ -149,7 +149,7 @@ public class WaveSpawner : MonoBehaviour {
             if (timer <= 0)
             {
                 int monsterIndex = combination_[spawningMonsterLane2] - 1;
-                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.identity);
+                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 180, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(2);
                 monsterBatch.Add(monster);
 
@@ -182,7 +182,7 @@ public class WaveSpawner : MonoBehaviour {
         //spawns king
         if (waveNumberLane3 % 10 == 0)
         {
-            GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.identity);
+            GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(3);
             monsterBatch.Add(monster);
         }
@@ -192,7 +192,7 @@ public class WaveSpawner : MonoBehaviour {
             if (timer <= 0)
             {
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
-                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.identity);
+                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(3);
                 monsterBatch.Add(monster);
 
@@ -225,7 +225,7 @@ public class WaveSpawner : MonoBehaviour {
         //spawns king
         if (waveNumberLane4 % 10 == 0)
         {
-            GameObject monster = Instantiate(King1, spawnLocationLane4.position, Quaternion.identity);
+            GameObject monster = Instantiate(King1, spawnLocationLane4.position, Quaternion.Euler(new Vector3(0, 180, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(4);
             monsterBatch.Add(monster);
         }
@@ -236,12 +236,12 @@ public class WaveSpawner : MonoBehaviour {
             if (timer <= 0)
             {
                 int monsterIndex = combination_[spawningMonsterLane4] - 1;
-                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.identity);
+                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.Euler(new Vector3(0,180,0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(4);
                 monsterBatch.Add(monster);
 
                 monster.transform.parent = transform;
-                spawningMonsterLane2++;
+                spawningMonsterLane4++;
                 timer = spawnTimer;
 
                 //wave progression
@@ -319,6 +319,10 @@ public class WaveSpawner : MonoBehaviour {
             //hud.transform.Find("Wave").transform.Find("Progress").GetComponent<Text>().text = "100%";
             if(transform.childCount == 0)
                 GameController.ChangeGameState(GameState.EndWave);
+        }
+        else if(GameController.gameState == GameState.GameOver)
+        {
+            StopAllCoroutines();
         }
     }
 
@@ -402,14 +406,6 @@ public class WaveSpawner : MonoBehaviour {
         }
         
         waveNumber++;
-        
-        
-
-       
-       
-     
-
-
         
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterText").GetComponent<Text>().text = "" + waveNumber;
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterTextShadow").GetComponent<Text>().text = "" + waveNumber;
