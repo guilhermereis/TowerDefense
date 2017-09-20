@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Wave  {
 
+    //wanderer 1
+    //warrior 2
+    //bomber 3
 
 	public int totalScore;
 	public int numberOfMonsters;
@@ -15,6 +18,16 @@ public class Wave  {
         numberOfMonsters = _numberOfMonsters;
     }
 
+    public int[] BomberWave(int monstersWave)
+    {
+        int[] bombers = new int[monstersWave];
+        for (int i = 0; i < bombers.Length; i++)
+        {
+            bombers[i] = 3;
+        }
+
+        return bombers;
+    }
 
     public int[] GetCombinaton()
     {
