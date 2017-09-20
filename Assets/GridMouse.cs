@@ -438,6 +438,34 @@ public class GridMouse : MonoBehaviour
         previewMatrix[instance_x + 1, instance_z] = true;
         previewMatrix[instance_x, instance_z + 1] = true;
     }
+    private void BuildSoldierCampPreview()
+    {
+        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
+        rotated = false;
+        SetPreviewColor(Color.red);
+        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
+        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
+
+        previewMatrix[instance_x, instance_z] = true;
+        previewMatrix[instance_x + 1, instance_z + 1] = true;
+        previewMatrix[instance_x + 1, instance_z] = true;
+        previewMatrix[instance_x, instance_z + 1] = true;
+        //Debug.Log("construiu preview !");
+    }
+    private void DestroySoldierCampPreview()
+    {
+        //if the logic doens't involve going over track tiles
+        SetPreviewColor(Color.red);
+        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
+        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
+        Destroy(temporaryInstance);
+
+        previewMatrix[instance_x, instance_z] = false;
+        previewMatrix[instance_x + 1, instance_z + 1] = false;
+        previewMatrix[instance_x + 1, instance_z] = false;
+        previewMatrix[instance_x, instance_z + 1] = false;
+        //previewMatrix[prevX, prevZ] = false;
+    }
 
     private void HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit,int x, int z)
     {
@@ -451,7 +479,7 @@ public class GridMouse : MonoBehaviour
                     || propertiesMatrix[x, z + 1].type == "Track"
                     || propertiesMatrix[x + 1, z].type == "Track")
                 {
-
+                    //if there's no preview anywhere, build one.
                     if (temporaryInstance == null)
                     {                      
                         Vector2 tempPosition = ReturnFirstFreeTileAround();
@@ -463,10 +491,6 @@ public class GridMouse : MonoBehaviour
                             Debug.Log("GOING TO INSTANTIATE ON "+foundPosition.x+", "+foundPosition.z);
                         }
 
-                    }
-                    else
-                    {
-                        Debug.Log("IT'S NOT NULL, IT'S: " + temporaryInstance.name);
                     }
                     //don't build
                     //ROTATE !
@@ -492,7 +516,8 @@ public class GridMouse : MonoBehaviour
                     || propertiesMatrix[x + 1, z].type == "Tree")
                 {
                     //DON'T build and DON'T rotate.
-                    SetPreviewColor(Color.red);
+                    //SetPreviewColor(Color.red);
+                    DestroySoldierCampPreview();
                 }
                 else
                 {//if the logic doens't involve going over track tiles
@@ -501,19 +526,7 @@ public class GridMouse : MonoBehaviour
                         && previewMatrix[x + 1, z] == false
                         && previewMatrix[x, z + 1] == false)
                     {
-
-
-                        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
-                        rotated = false;
-                        SetPreviewColor(Color.red);
-                        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
-                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
-
-                        previewMatrix[instance_x, instance_z] = true;
-                        previewMatrix[instance_x + 1, instance_z + 1] = true;
-                        previewMatrix[instance_x + 1, instance_z] = true;
-                        previewMatrix[instance_x, instance_z + 1] = true;
-                        //Debug.Log("construiu preview !");
+                        BuildSoldierCampPreview();
                     }
                 }
             }
@@ -548,17 +561,7 @@ public class GridMouse : MonoBehaviour
                     }
                     else
                     {
-                        //if the logic doens't involve going over track tiles
-                        SetPreviewColor(Color.red);
-                        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
-                        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
-                        Destroy(temporaryInstance);
-
-                        previewMatrix[instance_x, instance_z] = false;
-                        previewMatrix[instance_x + 1, instance_z + 1] = false;
-                        previewMatrix[instance_x + 1, instance_z] = false;
-                        previewMatrix[instance_x, instance_z + 1] = false;
-                        //previewMatrix[prevX, prevZ] = false;
+                        DestroySoldierCampPreview();
                     }
 
                     //Debug.Log("destruiu preview !");
