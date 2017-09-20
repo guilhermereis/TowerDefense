@@ -196,8 +196,6 @@ public class BuildManager : MonoBehaviour {
         } 
         GameObject.Find("ButtonUpgradeText").GetComponent<Text>().text = "Upgrade $" + selectedUnit.upgrade_cost;
         GameObject.Find("ButtonSellText").GetComponent<Text>().text = "Sell $" + selectedUnit.sell_cost;
-
-        bottomBarBehaviour.setSelectionState(1);
     }
     public void HideOptions()
     {
@@ -205,7 +203,16 @@ public class BuildManager : MonoBehaviour {
         optionsObject.SetActive(false);
         optionsSlowObject.SetActive(false);
         selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        
+    }
+
+    public void hideBottomBar() {
         bottomBarBehaviour.setSelectionState(0);
+        Debug.Log("wtf");
+    }
+
+    public void showBottomBar() {
+        bottomBarBehaviour.setSelectionState(1);
     }
 
     public void SelectStructure(Structure structure)

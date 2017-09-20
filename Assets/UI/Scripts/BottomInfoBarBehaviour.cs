@@ -30,20 +30,20 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             
             case 0:
                 newPos = new Vector3(pos.x,
-                    Mathf.Lerp(pos.y, closedPosition, slideSpeed),
+                    Mathf.Lerp(pos.y, closedPosition, slideSpeed * Time.deltaTime) ,
                     pos.z);
                 transform.position = newPos;
                 break;
             case 1:
                 
                 newPos = new Vector3(pos.x,
-                    Mathf.Lerp(pos.y, openPosition, slideSpeed),
+                    Mathf.Lerp(pos.y, openPosition, slideSpeed * Time.deltaTime),
                     pos.z);
                 transform.position = newPos;
                 break;
             default:
                  newPos = new Vector3(pos.x,
-                    Mathf.Lerp(pos.y, openPosition, slideSpeed),
+                    Mathf.Lerp(pos.y, openPosition, slideSpeed * Time.deltaTime),
                     pos.z);
                 transform.position = newPos;
                 break;

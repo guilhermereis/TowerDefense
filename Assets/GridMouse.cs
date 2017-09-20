@@ -328,6 +328,7 @@ public class GridMouse : MonoBehaviour
             }
         }
     }
+    
     void OnMouseDown()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -345,6 +346,7 @@ public class GridMouse : MonoBehaviour
         {
             buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
             buildManager.ShowOptions();
+            buildManager.showBottomBar();
             Debug.Log("Selecionou a posição: " + x + ", " + z);
             //Destroy(hitInfo.transform.gameObject);
         }
@@ -353,9 +355,11 @@ public class GridMouse : MonoBehaviour
             BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
             buildManager.SelectBuilding(buildable.getArrayListPosition());
             buildManager.ShowOptions();
+            buildManager.showBottomBar();
         }
         else if (propertyInQuestion.type == "Tree") // If I hit a Tree
         {
+            buildManager.hideBottomBar();
             //IGNORE THE CLICK
         }
         else // Decide to Build something
@@ -384,6 +388,7 @@ public class GridMouse : MonoBehaviour
                 if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
                     buildManager.HideOptions();
+                    buildManager.hideBottomBar();
                     Debug.Log("Hide Options");
                 }
             }
