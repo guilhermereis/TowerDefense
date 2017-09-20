@@ -496,10 +496,10 @@ public class GridMouse : MonoBehaviour
                     //ROTATE !
                     if (!rotated)
                     {
-                        RotateAccordingly(x, z);
                         if (propertiesMatrix[x, z].type == "Track")
                         {
                             SetPreviewColor(Color.green);
+                            RotateAccordingly(x, z);
                         }
                         else
                         {
@@ -516,8 +516,8 @@ public class GridMouse : MonoBehaviour
                     || propertiesMatrix[x + 1, z].type == "Tree")
                 {
                     //DON'T build and DON'T rotate.
-                    //SetPreviewColor(Color.red);
-                    DestroySoldierCampPreview();
+                    SetPreviewColor(Color.red);
+                    //DestroySoldierCampPreview();
                 }
                 else
                 {//if the logic doens't involve going over track tiles
@@ -541,14 +541,15 @@ public class GridMouse : MonoBehaviour
                         || propertiesMatrix[x + 1, z].type == "Track"
                         || propertiesMatrix[x, z + 1].type == "Track")
                     {
-                        RotateAccordingly(x, z);
                         if (propertiesMatrix[x, z].type == "Track")
                         {
                             SetPreviewColor(Color.green);
+                            RotateAccordingly(x, z);
                         }
                         else
                         {
                             SetPreviewColor(Color.red);
+                            //DestroySoldierCampPreview();
                         }
                     }
                     else if (propertiesMatrix[x, z].type == "Tree"
@@ -556,8 +557,7 @@ public class GridMouse : MonoBehaviour
                     || propertiesMatrix[x, z + 1].type == "Tree"
                     || propertiesMatrix[x + 1, z].type == "Tree")
                     {
-                        //DON'T build and DON't rotate.
-                        SetPreviewColor(Color.red);
+                        DestroySoldierCampPreview();
                     }
                     else
                     {
