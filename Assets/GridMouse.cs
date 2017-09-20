@@ -114,9 +114,9 @@ public class GridMouse : MonoBehaviour
             for (int l = 0; l < previewMatrix.GetLength(1); l++)
             {
                 previewMatrix[k, l] = false;
+                propertiesMatrix[k, l] = new PropertyScript.Property("Normal");
             }
         }
-            
 
 
     }
@@ -222,37 +222,69 @@ public class GridMouse : MonoBehaviour
         int x = cursor_x;
         int z = cursor_z;
         Vector2 answer = Vector2.zero;
-        //look for space on the right
-        if (propertiesMatrix[x+1, z+1].type != "Track"
-                    && propertiesMatrix[x + 2, z + 1].type != "Track"
-                    && propertiesMatrix[x+1, z].type != "Track"
-                    && propertiesMatrix[x + 2, z].type != "Track")
+        //look for space on the right up
+        if (propertiesMatrix[x+1, z+1].type == "Normal"
+                    && propertiesMatrix[x + 2, z + 1].type == "Normal"
+                    && propertiesMatrix[x+1, z].type == "Normal"
+                    && propertiesMatrix[x + 2, z].type == "Normal")
         {
             answer = new Vector2(x+1, z);
         }
-        //look for space on the left
-        else if (propertiesMatrix[x - 1, z].type != "Track"
-                    && propertiesMatrix[x - 2, z].type != "Track"
-                    && propertiesMatrix[x - 1, z + 1].type != "Track"
-                    && propertiesMatrix[x - 2, z + 1].type != "Track")
+        //look for space on the right down
+        if (propertiesMatrix[x + 1, z - 1].type == "Normal"
+                    && propertiesMatrix[x + 2, z - 1].type == "Normal"
+                    && propertiesMatrix[x + 1, z].type == "Normal"
+                    && propertiesMatrix[x + 2, z].type == "Normal")
+        {
+            answer = new Vector2(x + 1, z - 1);
+        }
+        //look for space on the left up
+        else if (propertiesMatrix[x - 1, z].type == "Normal"
+                    && propertiesMatrix[x - 2, z].type == "Normal"
+                    && propertiesMatrix[x - 1, z + 1].type == "Normal"
+                    && propertiesMatrix[x - 2, z + 1].type == "Normal")
         {
             answer = new Vector2(x - 2, z);
         }
-        //look for space on the up
-        else if (propertiesMatrix[x, z + 1].type != "Track"
-                    && propertiesMatrix[x + 1, z + 1].type != "Track"
-                    && propertiesMatrix[x, z + 2].type != "Track"
-                    && propertiesMatrix[x + 1, z + 2].type != "Track")
+        //look for space on the left down
+        else if (propertiesMatrix[x - 1, z].type == "Normal"
+                    && propertiesMatrix[x - 2, z].type == "Normal"
+                    && propertiesMatrix[x - 1, z - 1].type == "Normal"
+                    && propertiesMatrix[x - 2, z - 1].type == "Normal")
+        {
+            answer = new Vector2(x - 2, z - 1);
+        }
+        //look for space on the top-left
+        else if (propertiesMatrix[x - 1, z + 1].type == "Normal"
+                    && propertiesMatrix[x - 1, z + 2].type == "Normal"
+                    && propertiesMatrix[x, z + 1].type == "Normal"
+                    && propertiesMatrix[x, z + 2].type == "Normal")
+        {
+            answer = new Vector2(x - 1, z + 1);
+        }
+        //look for space on the top-right
+        else if (propertiesMatrix[x, z + 1].type == "Normal"
+                    && propertiesMatrix[x + 1, z + 1].type == "Normal"
+                    && propertiesMatrix[x, z + 2].type == "Normal"
+                    && propertiesMatrix[x + 1, z + 2].type == "Normal")
         {
             answer = new Vector2(x, z + 1);
         }
-        //look for space on the down
-        else if (propertiesMatrix[x, z - 1].type != "Track"
-                    && propertiesMatrix[x - 1, z - 1].type != "Track"
-                    && propertiesMatrix[x, z - 2].type != "Track"
-                    && propertiesMatrix[x - 1, z - 2].type != "Track")
+        //look for space on the bottom-left
+        else if (propertiesMatrix[x, z - 1].type == "Normal"
+                    && propertiesMatrix[x - 1, z - 1].type == "Normal"
+                    && propertiesMatrix[x, z - 2].type == "Normal"
+                    && propertiesMatrix[x - 1, z - 2].type == "Normal")
         {
             answer = new Vector2(x - 1, z - 2);
+        }
+        //look for space on the bottom-right
+        else if (propertiesMatrix[x, z - 1].type == "Normal"
+                    && propertiesMatrix[x, z - 2].type == "Normal"
+                    && propertiesMatrix[x+1, z - 1].type == "Normal"
+                    && propertiesMatrix[x+1, z - 2].type == "Normal")
+        {
+            answer = new Vector2(x, z - 2);
         }
         return answer;
     }
@@ -429,6 +461,7 @@ public class GridMouse : MonoBehaviour
     private void Instantiate(Vector3 pos)
     {
         temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), pos);
+        rotated = false;
         SetPreviewColor(Color.red);
         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
@@ -479,18 +512,22 @@ public class GridMouse : MonoBehaviour
                     || propertiesMatrix[x, z + 1].type == "Track"
                     || propertiesMatrix[x + 1, z].type == "Track")
                 {
-                    //if there's no preview anywhere, build one.
-                    if (temporaryInstance == null)
-                    {                      
-                        Vector2 tempPosition = ReturnFirstFreeTileAround();
-                        Vector3 foundPosition = CoordToPosition(Mathf.FloorToInt(tempPosition.x), Mathf.FloorToInt(tempPosition.y));
-                        if (foundPosition != CoordToPosition(0, 0))
+                    //if cursor is on the track tile
+                    //and there's no preview anywhere, build one.
+                    if (propertiesMatrix[x, z].type == "Track")
+                    {
+                        if (temporaryInstance == null)
                         {
-                            Instantiate(foundPosition);
+                            Vector2 tempPosition = ReturnFirstFreeTileAround();
+                            Vector3 foundPosition = CoordToPosition(Mathf.FloorToInt(tempPosition.x), Mathf.FloorToInt(tempPosition.y));
+                            if (foundPosition != CoordToPosition(0, 0))
+                            {
+                                Instantiate(foundPosition);
 
-                            Debug.Log("GOING TO INSTANTIATE ON "+foundPosition.x+", "+foundPosition.z);
+                                Debug.Log("GOING TO INSTANTIATE ON " + foundPosition.x + ", " + foundPosition.z);
+                            }
+
                         }
-
                     }
                     //don't build
                     //ROTATE !
@@ -549,7 +586,7 @@ public class GridMouse : MonoBehaviour
                         else
                         {
                             SetPreviewColor(Color.red);
-                            //DestroySoldierCampPreview();
+                            DestroySoldierCampPreview();
                         }
                     }
                     else if (propertiesMatrix[x, z].type == "Tree"
