@@ -222,7 +222,7 @@ public class GridMouse : MonoBehaviour
         int x = cursor_x;
         int z = cursor_z;
         Vector2 answer = Vector2.zero;
-        //look for space on the right
+        //look for space on the right up
         if (propertiesMatrix[x+1, z+1].type == "Normal"
                     && propertiesMatrix[x + 2, z + 1].type == "Normal"
                     && propertiesMatrix[x+1, z].type == "Normal"
@@ -230,7 +230,15 @@ public class GridMouse : MonoBehaviour
         {
             answer = new Vector2(x+1, z);
         }
-        //look for space on the left
+        //look for space on the right down
+        if (propertiesMatrix[x + 1, z - 1].type == "Normal"
+                    && propertiesMatrix[x + 2, z - 1].type == "Normal"
+                    && propertiesMatrix[x + 1, z].type == "Normal"
+                    && propertiesMatrix[x + 2, z].type == "Normal")
+        {
+            answer = new Vector2(x + 1, z - 1);
+        }
+        //look for space on the left up
         else if (propertiesMatrix[x - 1, z].type == "Normal"
                     && propertiesMatrix[x - 2, z].type == "Normal"
                     && propertiesMatrix[x - 1, z + 1].type == "Normal"
@@ -238,7 +246,23 @@ public class GridMouse : MonoBehaviour
         {
             answer = new Vector2(x - 2, z);
         }
-        //look for space on the up
+        //look for space on the left down
+        else if (propertiesMatrix[x - 1, z].type == "Normal"
+                    && propertiesMatrix[x - 2, z].type == "Normal"
+                    && propertiesMatrix[x - 1, z - 1].type == "Normal"
+                    && propertiesMatrix[x - 2, z - 1].type == "Normal")
+        {
+            answer = new Vector2(x - 2, z - 1);
+        }
+        //look for space on the top-left
+        else if (propertiesMatrix[x - 1, z + 1].type == "Normal"
+                    && propertiesMatrix[x - 1, z + 2].type == "Normal"
+                    && propertiesMatrix[x, z + 1].type == "Normal"
+                    && propertiesMatrix[x, z + 2].type == "Normal")
+        {
+            answer = new Vector2(x - 1, z + 1);
+        }
+        //look for space on the top-right
         else if (propertiesMatrix[x, z + 1].type == "Normal"
                     && propertiesMatrix[x + 1, z + 1].type == "Normal"
                     && propertiesMatrix[x, z + 2].type == "Normal"
@@ -246,13 +270,21 @@ public class GridMouse : MonoBehaviour
         {
             answer = new Vector2(x, z + 1);
         }
-        //look for space on the down
+        //look for space on the bottom-left
         else if (propertiesMatrix[x, z - 1].type == "Normal"
                     && propertiesMatrix[x - 1, z - 1].type == "Normal"
                     && propertiesMatrix[x, z - 2].type == "Normal"
                     && propertiesMatrix[x - 1, z - 2].type == "Normal")
         {
             answer = new Vector2(x - 1, z - 2);
+        }
+        //look for space on the bottom-right
+        else if (propertiesMatrix[x, z - 1].type == "Normal"
+                    && propertiesMatrix[x, z - 2].type == "Normal"
+                    && propertiesMatrix[x+1, z - 1].type == "Normal"
+                    && propertiesMatrix[x+1, z - 2].type == "Normal")
+        {
+            answer = new Vector2(x, z - 2);
         }
         return answer;
     }
