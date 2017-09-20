@@ -1844,8 +1844,13 @@ MonoBehaviour:
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
   waypoints: []
+  myLane: 0
   camp: {fileID: 0}
   attackCountdown: 0
+  damagePrefabParticle: {fileID: 1074846246918774, guid: 834a4738c2cab8f489ef212477bf3c21,
+    type: 2}
+  bloodPrefabParticle: {fileID: 1207112873092018, guid: 7654f29edee977141a921116fe25e761,
+    type: 2}
 --- !u!114 &114123685337657396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1876,8 +1881,9 @@ MonoBehaviour:
   defense: 500
   attack: 1000
   attackRate: 0.5
-  isDying: 0
+  isDead: 0
   isSlow: 0
+  exploded: 0
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
