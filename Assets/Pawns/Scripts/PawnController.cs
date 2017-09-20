@@ -43,10 +43,10 @@ public class PawnController : MonoBehaviour {
         nav = GetComponent<NavMeshAgent>();
         nav.speed = speed;
 
-        waypointLane1 = GameObject.FindGameObjectWithTag("WaypointsLane1");
-        waypointLane2 = GameObject.FindGameObjectWithTag("WaypointsLane2");
-        waypointLane3 = GameObject.FindGameObjectWithTag("WaypointsLane3");
-        waypointLane4 = GameObject.FindGameObjectWithTag("WaypointsLane4");
+       
+       
+        
+       
     }
 
     public void SetupWaypoints(int lane_)
@@ -56,6 +56,7 @@ public class PawnController : MonoBehaviour {
 
         if (myLane == 1)
         {
+            waypointLane1 = GameObject.FindGameObjectWithTag("WaypointsLane1");
             for (int i = 0; i < waypointLane1.transform.childCount; i++)
             {
                 waypoints.Add(waypointLane1.transform.GetChild(i));
@@ -64,6 +65,7 @@ public class PawnController : MonoBehaviour {
         }
         else if (myLane == 2)
         {
+            waypointLane2 = GameObject.FindGameObjectWithTag("WaypointsLane2");
             for (int i = 0; i < waypointLane2.transform.childCount; i++)
             {
                 waypoints.Add(waypointLane2.transform.GetChild(i));
@@ -71,6 +73,7 @@ public class PawnController : MonoBehaviour {
         }
         else if (myLane == 3)
         {
+            waypointLane3 = GameObject.FindGameObjectWithTag("WaypointsLane3");
             for (int i = 0; i < waypointLane3.transform.childCount; i++)
             {
                 waypoints.Add(waypointLane3.transform.GetChild(i));
@@ -78,6 +81,7 @@ public class PawnController : MonoBehaviour {
         }
         else if (myLane == 4)
         {
+            waypointLane4 = GameObject.FindGameObjectWithTag("WaypointsLane4");
             for (int i = 0; i < waypointLane4.transform.childCount; i++)
             {
                 waypoints.Add(waypointLane4.transform.GetChild(i));
