@@ -11,6 +11,8 @@ public class WaveSpawner : MonoBehaviour {
 
     public int totalMonsters = 3;
 
+    int waveMonsters = 0;
+
     int lanes = 4;
 
 #region Waves
@@ -42,6 +44,15 @@ public class WaveSpawner : MonoBehaviour {
     #endregion
 
     public int waveNumber = 1;
+#region WaveNumber
+    public int waveNumberLane1 = 1;
+    public int waveNumberLane2 = 1;
+    public int waveNumberLane3 = 1;
+    public int waveNumberLane4 = 1;
+#endregion
+
+
+
     public float waveProgression = 0;
 
     public Transform spawnLocation;
@@ -51,6 +62,7 @@ public class WaveSpawner : MonoBehaviour {
 
     public Canvas hud;
 
+  
     int finishedSpawns = 0;
     int maxLanes = 1;
 
@@ -67,6 +79,13 @@ public class WaveSpawner : MonoBehaviour {
             }
         }
 
+    }
+
+
+    //return total monsters spawned at moment
+    public float GetTotalSpawningMonsters()
+    {
+        return (float) (spawningMonsterLane1 + spawningMonsterLane2 + spawningMonsterLane3 + spawningMonsterLane4);
     }
 
     IEnumerator SpawnLane1(int[] combination_)
@@ -88,7 +107,7 @@ public class WaveSpawner : MonoBehaviour {
                 timer = spawnTimer;
 
                 //wave progression
-                waveProgression = (float)spawningMonsterLane1 / (float)combination_.Length;
+                waveProgression = GetTotalSpawningMonsters() / (float)waveMonsters;
                 hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
 
             }
@@ -124,7 +143,7 @@ public class WaveSpawner : MonoBehaviour {
                 timer = spawnTimer;
 
                 //wave progression
-                waveProgression = (float)spawningMonsterLane2 / (float)combination_.Length;
+                waveProgression = GetTotalSpawningMonsters() / (float)waveMonsters;
                 hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
 
             }
@@ -161,7 +180,7 @@ public class WaveSpawner : MonoBehaviour {
                 timer = spawnTimer;
 
                 //wave progression
-                waveProgression = (float)spawningMonsterLane3 / (float)combination_.Length;
+                waveProgression = GetTotalSpawningMonsters() / (float)waveMonsters;
                 hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
 
             }
@@ -198,7 +217,7 @@ public class WaveSpawner : MonoBehaviour {
                 timer = spawnTimer;
 
                 //wave progression
-                waveProgression = (float)spawningMonsterLane2 / (float)combination_.Length;
+                waveProgression = GetTotalSpawningMonsters() / (float)waveMonsters;
                 hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
 
             }
@@ -233,20 +252,20 @@ public class WaveSpawner : MonoBehaviour {
 
                 //setting when lanes a free to spawn monsters
 
-                if(waveNumber < 10)
+                if(waveNumber -1 < 10)
                 {
                     maxLanes = 1;
                     StartCoroutine("SpawnLane1", combinationLane1);
 
                 }
-                else if( waveNumber >= 10 && waveNumber < 20)
+                else if( waveNumber -1  >= 10 && waveNumber -1 < 20)
                 {
                     maxLanes = 2;
                     StartCoroutine("SpawnLane1", combinationLane1);
                     StartCoroutine("SpawnLane2", combinationLane2);
 
                 }
-                else if( waveNumber >= 20 && waveNumber < 30)
+                else if( waveNumber -1  >= 20 && waveNumber -1 < 30)
                 {
                     maxLanes = 3;
                     StartCoroutine("SpawnLane1", combinationLane1);
@@ -296,18 +315,72 @@ public class WaveSpawner : MonoBehaviour {
         spawningMonsterLane3 = 0;
         spawningMonsterLane4 = 0;
 
+        waveMonsters = 0;
 
-        waveLane1 = new Wave(waveNumber * 2, waveNumber);
-        waveLane2 = new Wave(waveNumber * 2, waveNumber);
-        waveLane3 = new Wave(waveNumber * 2, waveNumber);
-        waveLane4 = new Wave(waveNumber * 2, waveNumber);
+        if(maxLanes == 1)
+        {
+            waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
+            combinationLane1 = waveLane1.GetCombinaton();
+            waveNumberLane1++;
+            waveMonsters += combinationLane1.Length;
+        }
+        else if(maxLanes == 2)
+        {
+            waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
+            waveLane2 = new Wave(waveNumberLane2 * 2, waveNumberLane2);
 
-        combinationLane1 = waveLane1.GetCombinaton();
-        combinationLane2 = waveLane2.GetCombinaton();
-        combinationLane3 = waveLane3.GetCombinaton();
-        combinationLane4 = waveLane4.GetCombinaton();
+            combinationLane1 = waveLane1.GetCombinaton();
+            combinationLane2 = waveLane2.GetCombinaton();
 
+            waveMonsters += combinationLane1.Length + combinationLane2.Length;
+
+            waveNumberLane1++;
+            waveNumberLane2++;
+        }
+        else if(maxLanes == 3)
+        {
+            waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
+            waveLane2 = new Wave(waveNumberLane2 * 2, waveNumberLane2);
+            waveLane3 = new Wave(waveNumberLane3 * 2, waveNumberLane3);
+
+            combinationLane1 = waveLane1.GetCombinaton();
+            combinationLane2 = waveLane2.GetCombinaton();
+            combinationLane3 = waveLane3.GetCombinaton();
+
+            waveMonsters += combinationLane1.Length + combinationLane2.Length + combinationLane3.Length;
+
+            waveNumberLane1++;
+            waveNumberLane2++;
+            waveNumberLane3++;
+        }
+        else
+        {
+            waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
+            waveLane2 = new Wave(waveNumberLane2 * 2, waveNumberLane2);
+            waveLane3 = new Wave(waveNumberLane3 * 2, waveNumberLane3);
+            waveLane4 = new Wave(waveNumberLane4 * 2, waveNumberLane4);
+
+            combinationLane1 = waveLane1.GetCombinaton();
+            combinationLane2 = waveLane2.GetCombinaton();
+            combinationLane3 = waveLane3.GetCombinaton();
+            combinationLane4 = waveLane4.GetCombinaton();
+
+            waveMonsters += combinationLane1.Length + combinationLane2.Length + combinationLane3.Length + combinationLane4.Length;
+
+            waveNumberLane1++;
+            waveNumberLane2++;
+            waveNumberLane3++;
+            waveNumberLane4++;
+        }
+        
         waveNumber++;
+        
+        
+
+       
+       
+     
+
 
         
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterText").GetComponent<Text>().text = "" + waveNumber;
