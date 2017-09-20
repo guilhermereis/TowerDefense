@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour {
 
     public static Shop instance;
+
+    public Button standardUnitButton;
+    public Button secondaryUnitButton;
+
     public UnitBlueprint standardUnit;
     public UnitBlueprint missileLauncher;
     public UnitBlueprint towerLevel2;
@@ -10,6 +15,9 @@ public class Shop : MonoBehaviour {
     public UnitBlueprint towerSlow;
     public UnitBlueprint towerTesla;
     BuildManager buildManager;
+
+    private bool canBuildPrimary = true;
+    private bool canBuildSecondary = true;
 
     void Awake()
     {
@@ -26,16 +34,38 @@ public class Shop : MonoBehaviour {
         buildManager = BuildManager.instance;
     }
 
-    public void SelectStandardUnit()
+    private void Update()
     {
-        Debug.Log("Standard Turret Selected");
-        buildManager.SelectUnitToBuild(standardUnit);
+        if (PlayerStats.Money < standardUnit.cost)
+        {
+            standardUnitButton.interactable = false;
+            canBuildPrimary = false;
+        }else {
+            standardUnitButton.interactable = true;
+            canBuildPrimary = true;
+        }
+
+        if (PlayerStats.Money < missileLauncher.cost)
+        {
+            secondaryUnitButton.interactable = false;
+            canBuildSecondary = false;
+        }else {
+            secondaryUnitButton.interactable = true;
+            canBuildSecondary = true;
+        }
     }
 
-    public void SelectSecondaryUnit()
-    {
-        Debug.Log("Secondary Turret Selected");
-        buildManager.SelectUnitToBuild(missileLauncher);
+    public void SelectStandardUnit(){
+        if (canBuildPrimary){
+            Debug.Log("Standard Turret Selected");
+            buildManager.SelectUnitToBuild(standardUnit);
+        }
     }
 
+    public void SelectSecondaryUnit() {
+        if (canBuildSecondary) {
+            Debug.Log("Secondary Turret Selected");
+            buildManager.SelectUnitToBuild(missileLauncher);
+        }
+    }
 }
