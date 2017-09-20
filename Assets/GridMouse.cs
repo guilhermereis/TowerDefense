@@ -429,6 +429,7 @@ public class GridMouse : MonoBehaviour
     private void Instantiate(Vector3 pos)
     {
         temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), pos);
+        rotated = false;
         SetPreviewColor(Color.red);
         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
