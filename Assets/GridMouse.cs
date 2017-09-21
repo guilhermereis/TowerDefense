@@ -198,7 +198,7 @@ public class GridMouse : MonoBehaviour
                             {
                                 Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
 
-                                int added_index = buildUnitAndAddItToTheList(newPosition);
+                                int added_index = buildUnitAndAddItToTheList(newPosition,false);
                                 Destroy(temporaryInstance);
                                 //int added_index = buildUnitAndAddItToTheList(position);
                                 propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
@@ -316,7 +316,7 @@ public class GridMouse : MonoBehaviour
                         {
                             if (CheckIfGameObjectIsOfColor(Color.green))
                             {
-                                int added_index = buildUnitAndAddItToTheList(position);
+                                int added_index = buildUnitAndAddItToTheList(position,false);
                                 Destroy(temporaryInstance);
                                 propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
                                 Debug.Log("Construiu na posição " + x + ", " + z);
@@ -399,19 +399,19 @@ public class GridMouse : MonoBehaviour
     {
         return this.rotation;
     }
-    public int buildUnitAndAddItToTheList(Vector3 myPosition) {
+    public int buildUnitAndAddItToTheList(Vector3 myPosition, bool upgraded) {
         ListOfGameObjects.Add(new GameObject());
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
-        buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition);
+        buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition, upgraded);
         return AddedElmtIndex;
     }
-    public int buildUnitAndAddItToTheList(Vector3 myPosition, Quaternion rotation)
+    public int buildUnitAndAddItToTheList(Vector3 myPosition, Quaternion rotation, bool upgraded = false)
     {
         ListOfGameObjects.Add(new GameObject());
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
-        buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition,rotation);
+        buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition,rotation, upgraded);
         return AddedElmtIndex;
     }
     void RotateAccordingly(int x, int z)

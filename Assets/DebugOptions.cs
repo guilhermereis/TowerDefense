@@ -63,7 +63,7 @@ public class DebugOptions : MonoBehaviour
             if (listOfStates[i].structureName == "PrefabArcherTower1(Clone)")
             {
                 shop.SelectStandardUnit();
-                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position,false);
                 Vector2 gridSize = gridMouse.getGridSize();
                 int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);

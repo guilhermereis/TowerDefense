@@ -135,7 +135,7 @@ public class Options : MonoBehaviour {
             Vector3 position = gridMouse.CoordToPosition(x, z);
             //destroys the current object
             Destroy(gridMouse.propertiesMatrix[x, z].builtGameObject);
-            int added_index = gridMouse.buildUnitAndAddItToTheList(position);
+            int added_index = gridMouse.buildUnitAndAddItToTheList(position, true);
             gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
         }
         
