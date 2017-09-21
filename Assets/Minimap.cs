@@ -18,7 +18,8 @@ public class Minimap : MonoBehaviour {
         Vector2 centerOfMinimap = new Vector2(790 / 2 + 320, 369 / 2 + 60);
         square.GetComponent<RectTransform>().position = centerOfMinimap;
         float diagonal_minimap = this.GetComponent<RectTransform>().rect.width;
-        float scale = diagonal_grid.GetComponent<Renderer>().bounds.size.x / diagonal_minimap;
+        float scale = diagonal_grid.GetComponent<Collider>().bounds.size.x / diagonal_minimap;
+        //scale += 0.45f;
         Debug.Log("Scale = " + scale);
 
 
