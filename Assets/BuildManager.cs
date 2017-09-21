@@ -41,6 +41,10 @@ public class BuildManager : MonoBehaviour {
             //toggle UI
             shopObject.SetActive(!shopObject.activeSelf);
         }
+        else if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            PlayerStats.AddMoney(100);
+        }
     }
 
     public UnitBlueprint getSelectedUnit()
@@ -103,14 +107,17 @@ public class BuildManager : MonoBehaviour {
         return temporaryInstance;
     }
 
-    public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position)
+    public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position, bool upgraded)
     {
-        if (PlayerStats.Money < unitToBuild.cost)
+        if (upgraded == false)
         {
-            Debug.Log("Not enough money to build that!");
-            return;
+            if (PlayerStats.Money < unitToBuild.cost)
+            {
+                Debug.Log("Not enough money to build that!");
+                return;
+            }
+            PlayerStats.AddMoney(-1 * unitToBuild.cost);
         }
-        PlayerStats.AddMoney(-1* unitToBuild.cost);
 
         Vector3 newPosition;
         if (unitToBuild == Shop.instance.missileLauncher)
@@ -128,15 +135,17 @@ public class BuildManager : MonoBehaviour {
         }
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
-    public void BuildUnitOn(ref List<GameObject> tempList, int index, Vector3 position, Quaternion rotation)
+    public void BuildUnitOn(ref List<GameObject> tempList, int index, Vector3 position, Quaternion rotation, bool upgraded = false)
     {
-        if (PlayerStats.Money < unitToBuild.cost)
+        if (upgraded == false)
         {
-            Debug.Log("Not enough money to build that!");
-            return;
+            if (PlayerStats.Money < unitToBuild.cost)
+            {
+                Debug.Log("Not enough money to build that!");
+                return;
+            }
+            PlayerStats.AddMoney(-1 * unitToBuild.cost);
         }
-        PlayerStats.AddMoney(-1 * unitToBuild.cost);
-
         Vector3 newPosition;
         if (unitToBuild == Shop.instance.missileLauncher)
             newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
@@ -147,7 +156,7 @@ public class BuildManager : MonoBehaviour {
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
         tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
-        //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
+        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
     public void OnUnitUpgrade() {
