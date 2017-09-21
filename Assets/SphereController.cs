@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class SphereController : MonoBehaviour {
     public GameObject parent;
+    private BuildableController bc;
     private void OnTriggerEnter(Collider other)
     {
-        parent.GetComponent<BuildableController>().OnTriggerEnter(other);
+        if (parent != null && other != null)
+        {
+            bc = parent.GetComponent<BuildableController>();
+            if (bc != null)
+                bc.OnTriggerEnter(other);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        parent.GetComponent<BuildableController>().OnTriggerExit(other);
+        if (parent != null && other != null)
+        {
+            bc = parent.GetComponent<BuildableController>();
+            if (bc != null)
+                bc.OnTriggerEnter(other);
+        }    
+
     }
 }
