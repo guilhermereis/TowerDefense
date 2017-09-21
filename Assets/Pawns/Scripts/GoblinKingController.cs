@@ -10,7 +10,7 @@ public class GoblinKingController : EnemyController {
     public float attackCountdown = 0f;
 
     private GoblinKingCharacter character;
-    private List<GameObject> enemiesInRange;
+   
     private GoblinKingAnimatorController anim;
     private Transform handSocketTransform;
 

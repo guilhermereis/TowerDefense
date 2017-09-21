@@ -7,7 +7,7 @@ public class PawnController : MonoBehaviour {
 
     public delegate void DeadPawnDelegate(GameObject enemy);
     public DeadPawnDelegate deadPawn;
-
+    protected List<GameObject> enemiesInRange;
     //controller variables
     [HideInInspector]
     public enum PawnState { None ,Idle, Battle, Walking,FindTarget,Homing, Destroying, Dead};
@@ -202,28 +202,43 @@ public class PawnController : MonoBehaviour {
             else if (currentState == PawnState.FindTarget)
             {
                 nav.isStopped = false;
-                if (target != null || target.GetComponent<PawnCharacter>().isDead)
+                if (target != null)
                 {
-                    if (nav != null)
+                    if (!target.GetComponent<PawnCharacter>().isDead)
                     {
 
-                        nav.SetDestination(target.transform.position);
-                        //if (!IsAtLocation())
-                        //else
-                        //    ChangeState(PawnState.Battle);
+                        if (nav != null)
+                        {
+                            if (enemiesInRange.Contains(target))
+                            {
+                                LookToTarget();
+                                ChangeState(PawnState.Battle);
+                            }else
+                                nav.SetDestination(target.transform.position);
+                            //if (!IsAtLocation())
+                            //else
+                            //    ChangeState(PawnState.Battle);
 
-                        //nav.isStopped = false;
-                        //if(nav.hasPath)
-                        //else
-                        //{
-                        //    if (gameObject.tag == "Ally")
-                        //        //ChangeState(PawnState.Homing);
-                        //        Debug.Log("");
-                        //    else
-                        //        ChangeState(PawnState.Walking);
+                            //nav.isStopped = false;
+                            //if(nav.hasPath)
+                            //else
+                            //{
+                            //    if (gameObject.tag == "Ally")
+                            //        //ChangeState(PawnState.Homing);
+                            //        Debug.Log("");
+                            //    else
+                            //        ChangeState(PawnState.Walking);
 
-                        //}
+                            //}
 
+                        }
+                    }
+                    else
+                    {
+                        if (gameObject.tag == "Ally")
+                            ChangeState(PawnState.Homing);
+                        else
+                            ChangeState(PawnState.Walking);
                     }
 
                 }

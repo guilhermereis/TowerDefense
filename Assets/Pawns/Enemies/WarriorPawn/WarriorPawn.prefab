@@ -359,6 +359,7 @@ MonoBehaviour:
   attackRate: 0.5
   isDead: 0
   isSlow: 0
+  exploded: 0
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
@@ -391,8 +392,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  myLane: 0
   weight: 0
   attackCountdown: 0
+  spearAttackSound: {fileID: 82411278434841874, guid: 7563fecc9c8033448b539cf0d6de54b4,
+    type: 2}
 --- !u!114 &114791258418497676
 MonoBehaviour:
   m_ObjectHideFlags: 1
