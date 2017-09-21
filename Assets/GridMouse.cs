@@ -328,7 +328,14 @@ public class GridMouse : MonoBehaviour
             }
         }
     }
-    
+    public void SelectPosition(UnitBlueprint unit, GameObject gameObject)
+    {
+        buildManager.SelectBuilding(unit, gameObject);
+        buildManager.ShowOptions();
+        buildManager.showBottomBar();
+        //Destroy(hitInfo.transform.gameObject);
+    }
+
     void OnMouseDown()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -344,11 +351,8 @@ public class GridMouse : MonoBehaviour
 
         if (propertyInQuestion.unit != null) // If the tile contains a Structure
         {
-            buildManager.SelectBuilding(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-            buildManager.ShowOptions();
-            buildManager.showBottomBar();
+            SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
             Debug.Log("Selecionou a posição: " + x + ", " + z);
-            //Destroy(hitInfo.transform.gameObject);
         }
         else if (CheckIfHitStructure()) // If I hit a Structure
         {

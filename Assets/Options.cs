@@ -87,9 +87,9 @@ public class Options : MonoBehaviour {
                     PlayerStats.AddMoney(-1 * Shop.instance.standardUnit.upgrade_cost);
                     buildManager.SelectUnitToBuild(shop.towerLevel2);
                     BuildTheNextLevelStructure();
-                    buildManager.DeselectUnitToBuild();
-                    buildManager.DeselectSelectedUnit();                
-                    buildManager.HideOptions();
+                    //buildManager.DeselectUnitToBuild();
+                    //buildManager.DeselectSelectedUnit();                
+                    //buildManager.HideOptions();
                     buildManager.OnUnitUpgrade();
                     Debug.Log("Upgraded unit: " + "Tower");
                 }
@@ -105,9 +105,9 @@ public class Options : MonoBehaviour {
                     PlayerStats.AddMoney(-1 * Shop.instance.towerLevel2.upgrade_cost);
                     buildManager.SelectUnitToBuild(shop.towerLevel3);
                     BuildTheNextLevelStructure();
-                    buildManager.DeselectUnitToBuild();
-                    buildManager.DeselectSelectedUnit();
-                    buildManager.HideOptions();
+                    //buildManager.DeselectUnitToBuild();
+                    //buildManager.DeselectSelectedUnit();
+                    //buildManager.HideOptions();
                     buildManager.OnUnitUpgrade();
                     Debug.Log("Upgraded unit: " + "Tower2");
                 }
@@ -137,6 +137,11 @@ public class Options : MonoBehaviour {
             Destroy(gridMouse.propertiesMatrix[x, z].builtGameObject);
             int added_index = gridMouse.buildUnitAndAddItToTheList(position, true);
             gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+
+            //select upgraded unit
+            PropertyScript.Property propertyInQuestion = gridMouse.propertiesMatrix[x, z];
+            gridMouse.SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
+            Debug.Log("Selecionou a posição: " + x + ", " + z);
         }
         
     }
