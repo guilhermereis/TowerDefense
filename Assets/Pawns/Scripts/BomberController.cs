@@ -61,7 +61,8 @@ public class BomberController : EnemyController {
             gameObject.GetComponent<PawnCharacter>().exploded = true;
             Instantiate(gameObject.GetComponent<BomberCharacter>().prefabExplosionSound, transform);
             //apply damage to itself with total health amount.
-            character.Damage(character.health);
+            bool hitted;
+            character.Damage(character.health,out hitted);
             
             
 

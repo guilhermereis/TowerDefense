@@ -61,7 +61,7 @@ public class WarriorController : EnemyController {
 		base.OnTriggerEnter(other);
         //Debug.Log(other.gameObject.tag);
         //Debug.Assert(other.isTrigger);
-        if(other.gameObject.tag == "Ally")
+        if(other.gameObject.tag == "Ally" && other.GetType()== typeof(CapsuleCollider))
         {
             if (!other.gameObject.GetComponent<PawnCharacter>().isDead)
             {
@@ -106,8 +106,9 @@ public class WarriorController : EnemyController {
         Instantiate(spearAttackSound, transform.position, Quaternion.identity);
         if (target.tag == "Ally")
         {
+            bool hitted;
             
-            if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+            if (target.GetComponent<PawnCharacter>().Damage(character.attack,out hitted))
             {
                 enemiesInRange.Remove(target);
                 target = null;

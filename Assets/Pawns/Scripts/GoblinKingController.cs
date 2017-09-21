@@ -129,7 +129,8 @@ public class GoblinKingController : EnemyController {
             case "Pick":
                 if (target.tag == "Ally")
                 {
-                    if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+                    bool hitted; 
+                    if (target.GetComponent<PawnCharacter>().Damage(character.attack, out hitted))
                     {
                         enemiesInRange.Remove(target);
                         target.GetComponent<PawnCharacter>().Die();

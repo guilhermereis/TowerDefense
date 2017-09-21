@@ -71,13 +71,22 @@ public class PawnCharacter : MonoBehaviour {
         //Destroy(gameObject);
     }
 
-    public virtual bool Damage(float _damage)
+    public virtual bool Damage(float _damage, out bool hit)
     {
+        hit = false;
         if (!isDead)
         {
             float realDamage = _damage - defense;
-		    if (realDamage < 0)
-			    realDamage = 0;
+            if (realDamage <= 0)
+            {
+                realDamage = 0;
+                hit = false;
+
+            }
+            else
+                hit = true;
+
+            
 
             health -= realDamage;
 

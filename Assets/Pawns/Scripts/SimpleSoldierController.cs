@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 
 public class SimpleSoldierController : PawnController {
-	[HideInInspector]
+
+    public delegate void DeadSoldierDelegate(SimpleSoldierController deadSoldier);
+    public DeadSoldierDelegate deadSoldier;
+
+
+    [HideInInspector]
 	public SoldierCampController camp;
 
 	private SwordsmanAnimatorController anim;
@@ -15,10 +20,11 @@ public class SimpleSoldierController : PawnController {
 
 	private AudioSource swordHit;
 
-
+#region vfx
     public GameObject damagePrefabParticle;
     public GameObject bloodPrefabParticle;
-
+    public GameObject missPrefabParticle;
+#endregion
     public void SetTarget(GameObject _target)
     {
         target = _target;
@@ -93,22 +99,40 @@ public class SimpleSoldierController : PawnController {
         {
             if (!target.GetComponent<PawnCharacter>().isDead)
             {
-			    if (attackCountdown <= 0)
-			    {
-				    anim.setIsAttacking(true);
-                    //swordHit.Play();
-                    LookToTarget();
-				    Debug.DrawLine(transform.position, target.transform.position);
-                    //we are goint to apply damage to target and if the target is dead, we are going to
-                    //tell the camp and so the camp can gives another target or we're going back home.
-                    Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
-                    Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-                    swordHit.Play();
-                    if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+                if (enemiesInRange.Contains(target))
+                {
+			        if (attackCountdown <= 0)
+			        {
+				        anim.setIsAttacking(true);
+                        //swordHit.Play();
+                        LookToTarget();
+				        Debug.DrawLine(transform.position, target.transform.position);
+                        
+                        //we are goint to apply damage to target and if the target is dead, we are going to
+                        //tell the camp and so the camp can gives another target or we're going back home.
+                        
+                        swordHit.Play();
+                        bool hitted;
+                        target.GetComponent<PawnCharacter>().Damage(character.attack, out hitted);
+
+                        if (hitted)
+                        {
+                            Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
+                            Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+                        }
+                        else
+                        {
+                            Instantiate(missPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+                            //TODO Miss Effect;
+                        }
+                        
+                           
 				
 					
-				    attackCountdown = 1 / character.attackRate;
-			    }
+				        attackCountdown = 1 / character.attackRate;
+			        }
+
+                }
 
             }else
                 anim.setIsAttacking(false);

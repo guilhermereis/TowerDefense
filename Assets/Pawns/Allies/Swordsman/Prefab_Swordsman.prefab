@@ -1414,7 +1414,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1116111874419370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.422215, y: -1.0000023, z: -18.574791}
+  m_LocalPosition: {x: 7.5339136, y: -1.0000019, z: -15.866094}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4218859135301054}
@@ -1839,7 +1839,7 @@ MonoBehaviour:
   currentState: 0
   finalDestination: {fileID: 0}
   nav: {fileID: 0}
-  speed: 5
+  speed: 2
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
@@ -1879,7 +1879,7 @@ MonoBehaviour:
   maxHealth: 1000
   health: 1000
   defense: 500
-  attack: 1000
+  attack: 500
   attackRate: 0.5
   isDead: 0
   isSlow: 0
@@ -1915,8 +1915,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
-  m_Center: {x: 0, y: 1.31, z: 0.45}
+  m_Radius: 1.64
+  m_Center: {x: 0, y: 1.31, z: 0}
 --- !u!136 &136018193701499332
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2020,7 +2020,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 160
+  m_AngularSpeed: 180
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1

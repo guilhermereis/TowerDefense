@@ -30,11 +30,12 @@ public class PawnController : MonoBehaviour {
     public List<Transform> waypoints;
     int nextWaypoint = 1;
 
+#region Waypoint
     GameObject waypointLane1;
     GameObject waypointLane2;
     GameObject waypointLane3;
     GameObject waypointLane4;
-
+#endregion
     public int myLane;
 
     protected virtual void Awake()
@@ -174,6 +175,7 @@ public class PawnController : MonoBehaviour {
 
         if (currentState != PawnState.Dead) {
 
+
             if (currentState == PawnState.Idle)
             {
                 nav.isStopped = true;
@@ -182,11 +184,14 @@ public class PawnController : MonoBehaviour {
             {
                 nav.isStopped = false;
 
-                //to fix
+                
                 if (nextWaypoint < waypoints.Count)
                 {
-                    currentDestination = waypoints[nextWaypoint].position;
-                    nav.SetDestination(currentDestination);
+                    if(waypoints[nextWaypoint].position != currentDestination)
+                    {
+                        currentDestination = waypoints[nextWaypoint].position;
+                        nav.SetDestination(currentDestination);
+                    }
                 }
 
 
@@ -202,60 +207,47 @@ public class PawnController : MonoBehaviour {
             else if (currentState == PawnState.FindTarget)
             {
                 nav.isStopped = false;
-                if (target != null)
+                
+
+                if (target != null || !target.GetComponent<PawnCharacter>().isDead)
                 {
-                    if (!target.GetComponent<PawnCharacter>().isDead)
+
+                    nav.SetDestination(target.transform.position);
+                    if (IsAtLocation() || enemiesInRange.Contains(target))
                     {
-
-                        if (nav != null)
-                        {
-                            if (enemiesInRange.Contains(target))
-                            {
-                                LookToTarget();
-                                ChangeState(PawnState.Battle);
-                            }else
-                                nav.SetDestination(target.transform.position);
-                            //if (!IsAtLocation())
-                            //else
-                            //    ChangeState(PawnState.Battle);
-
-                            //nav.isStopped = false;
-                            //if(nav.hasPath)
-                            //else
-                            //{
-                            //    if (gameObject.tag == "Ally")
-                            //        //ChangeState(PawnState.Homing);
-                            //        Debug.Log("");
-                            //    else
-                            //        ChangeState(PawnState.Walking);
-
-                            //}
-
-                        }
+                        LookToTarget();
+                        ChangeState(PawnState.Battle);
                     }
-                    else
-                    {
-                        if (gameObject.tag == "Ally")
-                            ChangeState(PawnState.Homing);
-                        else
-                            ChangeState(PawnState.Walking);
-                    }
-
+                    
+                   
                 }
                 else
                 {
                     if (gameObject.tag == "Ally")
-                        ChangeState(PawnState.Homing);
+                    {
+                        if( enemiesInRange.Count > 0)
+                        {
+                            target = enemiesInRange[0];
+                            LookToTarget();
+                            ChangeState(PawnState.Battle);
+                        }
+                        else
+                            ChangeState(PawnState.Homing);
+
+                    }
                     else
                         ChangeState(PawnState.Walking);
                 }
+
+
             }
             else if (currentState == PawnState.Homing)
             {
-                Vector3 tolerance = homePosition - transform.position;
+                nav.isStopped = false;
                 nav.SetDestination(homePosition);
                 if (IsAtLocation())
                 {
+                    
                     ChangeState(PawnState.Idle);
 
                 }

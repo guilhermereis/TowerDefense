@@ -32,7 +32,9 @@ public class BeamArrow : Arrow {
     {
         if (other.gameObject == target)
         {
-            if (other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower))
+            bool hitted;
+
+            if (other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower,out hitted))
             {
                 GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
                 

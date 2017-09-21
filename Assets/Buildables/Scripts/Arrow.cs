@@ -7,8 +7,11 @@ public class Arrow : Projectile {
 	public GameObject target;
 	public float speed = 1f;
 	private float towerAttack;
+
     public GameObject damagePrefabParticle;
     public GameObject bloodPrefabParticle;
+    public GameObject missPrefabParticle;
+
     Rigidbody rig;
 
 	public GameObject Target
@@ -77,14 +80,27 @@ public class Arrow : Projectile {
         {
             //spawn vfx for damage
             //Instantiate(damagePrefabParticle, target.transform.position + Vector3.up *0.5f, Quaternion.Euler(new Vector3(-90,0,0)));
-            Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
-            Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            
 
-            if (other.gameObject.GetComponent<PawnCharacter>().Damage(towerAttack))
+            bool hitted;
+            bool killed;
+
+            killed = other.gameObject.GetComponent<PawnCharacter>().Damage(towerAttack, out hitted);
+            if (hitted)
             {
-                GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
-                
+                Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
+                Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+
+                if (killed)
+                    GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
             }
+            else
+            {
+                //TODO miss Effect
+                Instantiate(missPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            }
+
+           
 
             Destroy(gameObject);
             return;
