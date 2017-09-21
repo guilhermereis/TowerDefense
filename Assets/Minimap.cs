@@ -7,10 +7,20 @@ public class Minimap : MonoBehaviour {
     public GameObject square;
     public GameObject diagonal_grid;
     public GameObject monster;
+    private int index = 0;
+    public static GameObject[] allSquares;
+    Vector2 new_vector;
 	// Use this for initialization
 	void Start () {
         UpdateMap();
+        allSquares = new GameObject[100];
     }
+    public static void addNewSquare()
+    {
+        //Transform newSelectionCube = 
+        allSquares[index++] = Instantiate(square, position + Vector3.up * .5f, Quaternion.identity);
+    }
+
     public void UpdateMap()
     {
         //Camera.main.WorldToScreenPoint()
@@ -24,7 +34,7 @@ public class Minimap : MonoBehaviour {
 
 
         Vector3 vector = monster.transform.position * scale;
-        Vector2 new_vector = new Vector2(vector.x, vector.z);
+        new_vector = new Vector2(vector.x, vector.z);
         square.transform.position = centerOfMinimap + new_vector;
 
 
