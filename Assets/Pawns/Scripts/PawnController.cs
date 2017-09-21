@@ -236,7 +236,7 @@ public class PawnController : MonoBehaviour {
                     else
                     {
                         if (gameObject.tag == "Ally")
-                            ChangeState(PawnState.Idle);
+                            ChangeState(PawnState.Homing);
                         else
                             ChangeState(PawnState.Walking);
                     }
@@ -245,7 +245,7 @@ public class PawnController : MonoBehaviour {
                 else
                 {
                     if (gameObject.tag == "Ally")
-                        ChangeState(PawnState.Idle);
+                        ChangeState(PawnState.Homing);
                     else
                         ChangeState(PawnState.Walking);
                 }
