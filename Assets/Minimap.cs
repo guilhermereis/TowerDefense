@@ -12,6 +12,7 @@ public class Minimap : MonoBehaviour {
     static Vector2 centerOfMinimap;
     static Vector3 vector;
     static Vector2 new_vector;
+    Rect miniMapRect;
     static float scale;
     public static List<GameObject> monsterBatch;
     // Use this for initialization
@@ -27,12 +28,18 @@ public class Minimap : MonoBehaviour {
         allSquares[index].transform.parent = transform;
         index++;
     }
-
+    public static Rect RectTransformToScreenSpace(RectTransform transform)
+    {
+        Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
+        return new Rect((Vector2)transform.position - (size * 0.5f), size);
+    }
     public void UpdateMap()
     {
         //Camera.main.WorldToScreenPoint()
         Debug.Log("GOING TO MOVE " + square);
-        centerOfMinimap = new Vector2(790 / 2 + 320, 369 / 2 + 60);
+        //centerOfMinimap = new Vector2(790 / 2 + 320, 369 / 2 + 60);
+        miniMapRect = RectTransformToScreenSpace(GetComponent<RectTransform>());
+        centerOfMinimap = miniMapRect.center;
         square.GetComponent<RectTransform>().position = centerOfMinimap;
         float diagonal_minimap = this.GetComponent<RectTransform>().rect.width;
         scale = diagonal_grid.GetComponent<Collider>().bounds.size.x / diagonal_minimap;
@@ -55,6 +62,8 @@ public class Minimap : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        miniMapRect = RectTransformToScreenSpace(GetComponent<RectTransform>());
+        centerOfMinimap = miniMapRect.center;
         Debug.Log("MonsterBatch.SIZE = " + monsterBatch.Count);
         for (int i = 0; i < monsterBatch.Count; i++)
         {
