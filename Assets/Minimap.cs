@@ -18,7 +18,7 @@ public class Minimap : MonoBehaviour {
     public static void addNewSquare()
     {
         //Transform newSelectionCube = 
-        allSquares[index++] = Instantiate(square, position + Vector3.up * .5f, Quaternion.identity);
+        //allSquares[index++] = Instantiate(square, position + Vector3.up * .5f, Quaternion.identity);
     }
 
     public void UpdateMap()
