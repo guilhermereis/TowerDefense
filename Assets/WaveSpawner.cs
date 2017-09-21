@@ -6,6 +6,7 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour {
     public List<GameObject> monsterBatch;
     public GameObject[] monstersPrefab;
+    private Minimap minimap;
 
     public int[] monstersType;
 
@@ -69,6 +70,7 @@ public class WaveSpawner : MonoBehaviour {
 
     private void Start()
     {
+        minimap = GameObject.Find("Minimap").GetComponent<Minimap>();
         monstersType = new int[totalMonsters];
         Canvas[] canvas = FindObjectsOfType<Canvas>();
         for (int i = 0; i < canvas.Length; i++)
@@ -99,6 +101,7 @@ public class WaveSpawner : MonoBehaviour {
             GameObject monster = Instantiate(King1, spawnLocationLane1.position, Quaternion.identity);
             monster.GetComponent<PawnController>().SetupWaypoints(1);
             monsterBatch.Add(monster);
+            minimap.UpdateMonsterBatch();
         }
 
         while (spawningMonsterLane1 < combination_.Length)
@@ -110,6 +113,7 @@ public class WaveSpawner : MonoBehaviour {
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane1.position, Quaternion.identity);
                 monster.GetComponent<PawnController>().SetupWaypoints(1);
                 monsterBatch.Add(monster);
+                minimap.UpdateMonsterBatch();
 
                 monster.transform.parent = transform;
                 spawningMonsterLane1++;
@@ -142,6 +146,7 @@ public class WaveSpawner : MonoBehaviour {
             GameObject monster = Instantiate(King1, spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(2);
             monsterBatch.Add(monster);
+            minimap.UpdateMonsterBatch();
         }
         while (spawningMonsterLane2 < combination_.Length)
         {
@@ -152,6 +157,7 @@ public class WaveSpawner : MonoBehaviour {
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 180, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(2);
                 monsterBatch.Add(monster);
+                minimap.UpdateMonsterBatch();
 
                 monster.transform.parent = transform;
                 spawningMonsterLane2++;
@@ -185,6 +191,7 @@ public class WaveSpawner : MonoBehaviour {
             GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(3);
             monsterBatch.Add(monster);
+            minimap.UpdateMonsterBatch();
         }
         while (spawningMonsterLane3 < combination_.Length)
         {
@@ -195,6 +202,7 @@ public class WaveSpawner : MonoBehaviour {
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(3);
                 monsterBatch.Add(monster);
+                minimap.UpdateMonsterBatch();
 
                 monster.transform.parent = transform;
                 spawningMonsterLane3++;
@@ -228,6 +236,7 @@ public class WaveSpawner : MonoBehaviour {
             GameObject monster = Instantiate(King1, spawnLocationLane4.position, Quaternion.Euler(new Vector3(0, 180, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(4);
             monsterBatch.Add(monster);
+            minimap.UpdateMonsterBatch();
         }
 
         while (spawningMonsterLane4 < combination_.Length)
@@ -239,6 +248,7 @@ public class WaveSpawner : MonoBehaviour {
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.Euler(new Vector3(0,180,0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(4);
                 monsterBatch.Add(monster);
+                minimap.UpdateMonsterBatch();
 
                 monster.transform.parent = transform;
                 spawningMonsterLane4++;
@@ -414,29 +424,30 @@ public class WaveSpawner : MonoBehaviour {
         isWaving = true;
     }
 
-	//void SpawnMonsters()
-	//{
- //       if(timer <= 0)
- //       {
- //           int monsterIndex = combination[spawningMonster] - 1;
- //           GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocation.position, Quaternion.identity);
- //           monsterBatch.Add(monster);
+    //void SpawnMonsters()
+    //{
+    //       if(timer <= 0)
+    //       {
+    //           int monsterIndex = combination[spawningMonster] - 1;
+    //           GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocation.position, Quaternion.identity);
+    //           monsterBatch.Add(monster);
+    //           Minimap.UpdateMonsterBatch();
 
- //           monster.transform.parent = transform;
- //           spawningMonster++;
- //           timer = spawnTimer;
+    //           monster.transform.parent = transform;
+    //           spawningMonster++;
+    //           timer = spawnTimer;
 
- //           //wave progression
- //           waveProgression = (float)spawningMonster / (float)combination.Length;
- //           hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
- //       }
+    //           //wave progression
+    //           waveProgression = (float)spawningMonster / (float)combination.Length;
+    //           hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
+    //       }
 
- //       if (spawningMonster >= combination.Length)
- //       {
- //           isWaving = false;
- //           GameController.ChangeGameState(GameState.Action);
- //       }
+    //       if (spawningMonster >= combination.Length)
+    //       {
+    //           isWaving = false;
+    //           GameController.ChangeGameState(GameState.Action);
+    //       }
 
- //       timer -= Time.deltaTime;
- //   }
+    //       timer -= Time.deltaTime;
+    //   }
 }
