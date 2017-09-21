@@ -150,6 +150,10 @@ public class BuildManager : MonoBehaviour {
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
+    public void OnUnitUpgrade() {
+        bottomBarBehaviour.setSelectedUnit(selectedGameObject);
+    }
+
     //public void SelectBuilding(UnitBlueprint unit, Vector2 position)
     public void SelectBuilding(UnitBlueprint unit, GameObject gameObject)
     {
@@ -193,16 +197,25 @@ public class BuildManager : MonoBehaviour {
         else
         {
             optionsObject.SetActive(true);
-        } 
-        GameObject.Find("ButtonUpgradeText").GetComponent<Text>().text = "Upgrade $" + selectedUnit.upgrade_cost;
-        GameObject.Find("ButtonSellText").GetComponent<Text>().text = "Sell $" + selectedUnit.sell_cost;
+        }
+        GameObject upgradeText = GameObject.Find("ButtonUpgradeText");
+        if(upgradeText)
+            upgradeText.GetComponent<Text>().text = "Upgrade $" + selectedUnit.upgrade_cost;
+        GameObject sellText = GameObject.Find("ButtonSellText");
+        if(sellText)
+            sellText.GetComponent<Text>().text = "Sell $" + selectedUnit.sell_cost;
     }
     public void HideOptions()
     {
         extraOptionsObject.SetActive(false);
         optionsObject.SetActive(false);
         optionsSlowObject.SetActive(false);
-        selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        hideBottomBar();
+        if (selectedGameObject){
+            MeshRenderer renderer = selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>();
+            if (renderer)
+                renderer.enabled = false;
+        }
         
     }
 
@@ -211,6 +224,7 @@ public class BuildManager : MonoBehaviour {
     }
 
     public void showBottomBar() {
+        bottomBarBehaviour.setSelectedUnit(selectedGameObject);
         bottomBarBehaviour.setSelectionState(1);
     }
 
