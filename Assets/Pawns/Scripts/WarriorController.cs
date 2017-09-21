@@ -6,8 +6,10 @@ public class WarriorController : EnemyController {
 
 	private WarriorCharacter character;
 	public float attackCountdown = 0f;
-	private List<GameObject> enemiesInRange;
+	
     private WarriorGoblingAnimatorController anim;
+
+    public AudioSource spearAttackSound;
 
     // Use this for initialization
     void Start () {
@@ -101,9 +103,10 @@ public class WarriorController : EnemyController {
     }
 
     public void processHit() {
+        Instantiate(spearAttackSound, transform.position, Quaternion.identity);
         if (target.tag == "Ally")
-        {  
-
+        {
+            
             if (target.GetComponent<PawnCharacter>().Damage(character.attack))
             {
                 enemiesInRange.Remove(target);

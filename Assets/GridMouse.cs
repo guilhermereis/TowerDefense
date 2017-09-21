@@ -359,6 +359,7 @@ public class GridMouse : MonoBehaviour
         }
         else if (propertyInQuestion.type == "Tree") // If I hit a Tree
         {
+            buildManager.HideOptions();
             buildManager.hideBottomBar();
             //IGNORE THE CLICK
         }

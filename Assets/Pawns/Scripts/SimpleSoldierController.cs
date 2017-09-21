@@ -9,7 +9,7 @@ public class SimpleSoldierController : PawnController {
 	
 	private SimpleSoldierCharacter character;
 
-	private List<GameObject> enemiesInRange;
+	
 
 	public float attackCountdown = 0f;
 
@@ -89,26 +89,31 @@ public class SimpleSoldierController : PawnController {
 
         base.OnBattle();
 
-        if (target != null || !target.GetComponent<PawnCharacter>().isDead)
+        if (target != null)
         {
-			if (attackCountdown <= 0)
-			{
-				anim.setIsAttacking(true);
-                //swordHit.Play();
-                LookToTarget();
-				Debug.DrawLine(transform.position, target.transform.position);
-                //we are goint to apply damage to target and if the target is dead, we are going to
-                //tell the camp and so the camp can gives another target or we're going back home.
-                Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
-                Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-                swordHit.Play();
-                if (target.GetComponent<PawnCharacter>().Damage(character.attack))
+            if (!target.GetComponent<PawnCharacter>().isDead)
+            {
+			    if (attackCountdown <= 0)
+			    {
+				    anim.setIsAttacking(true);
+                    //swordHit.Play();
+                    LookToTarget();
+				    Debug.DrawLine(transform.position, target.transform.position);
+                    //we are goint to apply damage to target and if the target is dead, we are going to
+                    //tell the camp and so the camp can gives another target or we're going back home.
+                    Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
+                    Instantiate(bloodPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+                    swordHit.Play();
+                    if (target.GetComponent<PawnCharacter>().Damage(character.attack))
 				
 					
-				attackCountdown = 1 / character.attackRate;
-			}
-				
-		}
+				    attackCountdown = 1 / character.attackRate;
+			    }
+
+            }else
+                anim.setIsAttacking(false);
+
+        }
         else
         {
             anim.setIsAttacking(false);

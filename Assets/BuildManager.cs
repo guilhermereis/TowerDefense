@@ -208,7 +208,6 @@ public class BuildManager : MonoBehaviour {
 
     public void hideBottomBar() {
         bottomBarBehaviour.setSelectionState(0);
-        Debug.Log("wtf");
     }
 
     public void showBottomBar() {
