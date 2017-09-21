@@ -64,10 +64,11 @@ public class Minimap : MonoBehaviour {
 	void Update () {
         miniMapRect = RectTransformToScreenSpace(GetComponent<RectTransform>());
         centerOfMinimap = miniMapRect.center;
-        Debug.Log("MonsterBatch.SIZE = " + monsterBatch.Count);
+        //Debug.Log("MonsterBatch.SIZE = " + monsterBatch.Count);
         for (int i = 0; i < monsterBatch.Count; i++)
         {
-            vector = monsterBatch[i].transform.position * scale;
+            //vector = monsterBatch[i].transform.position * scale;
+            vector = Vector3.Scale(monsterBatch[i].transform.position, transform.localScale);
             new_vector = new Vector2(vector.x, vector.z);
             allSquares[i].transform.position = centerOfMinimap + new_vector;
         }
