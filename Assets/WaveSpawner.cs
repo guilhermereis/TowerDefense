@@ -154,7 +154,7 @@ public class WaveSpawner : MonoBehaviour {
             if (timer <= 0)
             {
                 int monsterIndex = combination_[spawningMonsterLane2] - 1;
-                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 180, 0)));
+                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(2);
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
