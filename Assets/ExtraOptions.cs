@@ -63,6 +63,7 @@ public class ExtraOptions : MonoBehaviour {
                 PlayerStats.AddMoney(-1 * upgradeAP1price);
                 tower.setAttackPowerLVL(1);
                 tower.SetFireRateAndAttackPower();
+                buildManager.OnUnitUpgrade();
             }
             else
             {
@@ -81,6 +82,7 @@ public class ExtraOptions : MonoBehaviour {
                 PlayerStats.AddMoney(-1 * upgradeAP2price);
                 tower.setAttackPowerLVL(2);
                 tower.SetFireRateAndAttackPower();
+                buildManager.OnUnitUpgrade();
             }
             else
             {
@@ -99,6 +101,7 @@ public class ExtraOptions : MonoBehaviour {
                 PlayerStats.AddMoney(-1 * upgradeAP3price);
                 tower.setAttackPowerLVL(3);
                 tower.SetFireRateAndAttackPower();
+                buildManager.OnUnitUpgrade();
             }
             else
             {
@@ -119,6 +122,7 @@ public class ExtraOptions : MonoBehaviour {
                 PlayerStats.AddMoney(-1 * upgradeFR1price);
                 tower.setFireRateLVL(1);
                 tower.SetFireRateAndAttackPower();
+                buildManager.OnUnitUpgrade();
             }
             else
             {
@@ -137,6 +141,7 @@ public class ExtraOptions : MonoBehaviour {
                 PlayerStats.AddMoney(-1 * upgradeFR2price);
                 tower.setFireRateLVL(2);
                 tower.SetFireRateAndAttackPower();
+                buildManager.OnUnitUpgrade();
             }
             else
             {
@@ -155,6 +160,7 @@ public class ExtraOptions : MonoBehaviour {
                 PlayerStats.AddMoney(-1 * upgradeFR3price);
                 tower.setFireRateLVL(3);
                 tower.SetFireRateAndAttackPower();
+                buildManager.OnUnitUpgrade();
             }
             else
             {
