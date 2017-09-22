@@ -93,7 +93,7 @@ public class PawnCharacter : MonoBehaviour {
             //start coroutine that makes pawn stop for a moment
             //gameObject.GetComponent<PawnController>().StopCoroutine("HitStop");
             //gameObject.GetComponent<PawnController>().StartCoroutine("HitStop");
-
+            //s
             if (healthBar != null)
             {
                 healthBar.UpdateHealthBar(health, maxHealth);
