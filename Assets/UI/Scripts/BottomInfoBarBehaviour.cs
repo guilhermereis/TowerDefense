@@ -64,6 +64,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
                 case "PrefabArcherTower2Tesla(Clone)":
                     SelectionName.GetComponent<Text>().text = "Tesla Tower: ";
                     SelectionNameShadow.GetComponent<Text>().text = "Tesla Tower: ";
+                    DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
+                    DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
                     break;
             }
         }
