@@ -168,9 +168,15 @@ public class GridMouse : MonoBehaviour
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private bool CheckIfHitStructure()
     {
+        BuildableController bc = hitInfo.transform.gameObject.GetComponent<BuildableController>();
+        UnitBlueprint unit = bc.getUnitBlueprint();
         return
-            hitInfo.transform.gameObject.name == "PrefabArcherTower1(Clone)"
-            || hitInfo.transform.gameObject.name == "PrefabCamp(Clone)";
+            (unit.name == Shop.instance.standardUnit.name
+            || unit.name == Shop.instance.missileLauncher.name
+            || unit.name == Shop.instance.towerLevel2.name
+            || unit.name == Shop.instance.towerLevel3.name
+            || unit.name == Shop.instance.towerSlow.name
+            || unit.name == Shop.instance.towerTesla.name);
     }
     private void HandleBuildingSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
