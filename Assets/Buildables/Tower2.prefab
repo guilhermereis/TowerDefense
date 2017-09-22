@@ -123,10 +123,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealthState: 0
+  buildSoundPrefab: {fileID: 1368383354638678, guid: 87381885d9b53d446bca41f441848bb5,
+    type: 2}
   target: {fileID: 0}
+  enemies: []
+  attackPowerLVL: 0
+  fireRateLVL: 0
   attackPoint: {fileID: 1125857013274990}
   arrowPrefab: {fileID: 1192964714958434, guid: 2f664fc017f8e8d4499096c7415348f9,
     type: 2}
+  arrowSoundPrefab: {fileID: 0}
+  cannonPoint: {fileID: 0}
+  cannonballPrefab: {fileID: 0}
+  lightningPrefab: {fileID: 0}
+  lightningLine: {fileID: 0}
+  currentAmmo: 0
 --- !u!135 &135441379371986066
 SphereCollider:
   m_ObjectHideFlags: 1

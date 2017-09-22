@@ -339,9 +339,7 @@ public class GridMouse : MonoBehaviour
     public void SelectPosition(UnitBlueprint unit, GameObject gameObject)
     {
         buildManager.SelectBuilding(unit, gameObject);
-        buildManager.ShowOptions();
-        buildManager.showBottomBar();
-        //Destroy(hitInfo.transform.gameObject);
+        BuildManager.instance.ShowOptions();
     }
 
     void OnMouseDown()
@@ -361,7 +359,8 @@ public class GridMouse : MonoBehaviour
         {
             buildManager.DeselectUnitToBuild();
             buildManager.DeselectSelectedUnit();
-            buildManager.HideOptions();
+            //buildManager.HideOptions();
+            //BuildManager.instance.HideOptions();
             SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
             Debug.Log("Selecionou a posição: " + x + ", " + z);
         }
@@ -369,13 +368,11 @@ public class GridMouse : MonoBehaviour
         {
             BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
             buildManager.SelectBuilding(buildable.getArrayListPosition());
-            buildManager.ShowOptions();
-            buildManager.showBottomBar();
+            BuildManager.instance.ShowOptions();
         }
         else if (propertyInQuestion.type == "Tree") // If I hit a Tree
         {
-            buildManager.HideOptions();
-            buildManager.hideBottomBar();
+            BuildManager.instance.HideOptions();
             //IGNORE THE CLICK
         }
         else // Decide to Build something
@@ -393,7 +390,6 @@ public class GridMouse : MonoBehaviour
             }
             else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
             {
-                Debug.Log("NOW HERE");
                 HandleBuildingTower(ray, hitInfo, didHit, x, z);
                 buildManager.DeselectUnitToBuild();
             }
@@ -403,9 +399,8 @@ public class GridMouse : MonoBehaviour
                 //hide the options.
                 if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
-                    buildManager.HideOptions();
-                    buildManager.hideBottomBar();
-                    Debug.Log("Hide Options");
+                    BuildManager.instance.HideOptions();
+                    
                 }
             }
         }

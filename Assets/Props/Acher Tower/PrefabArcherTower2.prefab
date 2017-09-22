@@ -238,9 +238,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealthState: 0
+  buildSoundPrefab: {fileID: 1368383354638678, guid: 87381885d9b53d446bca41f441848bb5,
+    type: 2}
   target: {fileID: 0}
-  fireRate: 0.7
   enemies: []
+  attackPowerLVL: 0
+  fireRateLVL: 0
   attackPoint: {fileID: 1010011089800080}
   arrowPrefab: {fileID: 1701221001243858, guid: 5d2007d58e37719429671996f895010e,
     type: 2}

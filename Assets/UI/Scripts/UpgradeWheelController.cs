@@ -13,6 +13,14 @@ public class UpgradeWheelController : MonoBehaviour {
     private int towerLvl = 0;
     private int specialization = 0;
 
+    public Color NotEnoughGoldTextColor;
+    public Color NotEnoughGoldCoinColor;
+    public Color NotEnoughGoldButtonColor;
+
+    private Color DefaultCoinColor;
+    private Color DefaultTextColor;
+    private Color DefaultButtonColor;
+
     //Sprites
     public Sprite as1Sprite;
     public Sprite as2Sprite;
@@ -21,6 +29,9 @@ public class UpgradeWheelController : MonoBehaviour {
     public Sprite ad1Sprite;
     public Sprite ad2Sprite;
     public Sprite ad3Sprite;
+
+    public bool isActive = true;
+    public bool upgradeButtonsEnabled = true;
 
     public void clearButtons() {
         upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
@@ -33,6 +44,7 @@ public class UpgradeWheelController : MonoBehaviour {
 
     public void setTowerLvl(int newLvl) {
         clearButtons();
+        this.towerLvl = newLvl;
         switch (newLvl)
         {
             case 0:
@@ -62,9 +74,9 @@ public class UpgradeWheelController : MonoBehaviour {
                 upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(true);
                 break;
         }
+
         upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + tower.sell_cost;
         upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + tower.sell_cost;
-        this.towerLvl = newLvl;
     }
 
     public void setSpecialization(int newSpec) {
@@ -115,9 +127,11 @@ public class UpgradeWheelController : MonoBehaviour {
 
         this.attackSpeedLvl = newLvl;
 
-        switch (towerLvl) {
+        switch (towerLvl)
+        {
             case 0:
-                switch (attackSpeedLvl) {
+                switch (attackSpeedLvl)
+                {
                     case 0:
                         setASUpgradeCostText(Shop.instance.upgradeT1As1price);
                         break;
@@ -240,70 +254,85 @@ public class UpgradeWheelController : MonoBehaviour {
         upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("CostShadow").GetComponent<Text>().text = "" + price;
     }
 
-    // Use this for initialization
-    void Start () {
-        anim = upgradeWheel.GetComponent<Animator>();
-        gameObject.SetActive(false);
-        clearButtons();
-	}
-
     public void SellBuildingOnClick() {
-        BuildManager.instance.SellSelectedBuilding();
+        if (upgradeButtonsEnabled)
+        {
+            isActive = false;
+            BuildManager.instance.SellSelectedBuilding();
+        }
     }
 
     public void UpgradeLvlOnClick() {
-        BuildManager.instance.UpgradeSelectedBuild();
+        if(upgradeButtonsEnabled)
+            BuildManager.instance.UpgradeSelectedBuild();
     }
 
     public void UpgradeAttributeOnClick(int att) {
-        switch (att) {
-            case 0:
-                switch (attackSpeedLvl) {
-                    case 0:
-                        BuildManager.instance.upgradeFR1();
-                        break;
-                    case 1:
-                        BuildManager.instance.upgradeFR2();
-                        break;
-                    case 2:
-                        BuildManager.instance.upgradeFR3();
-                        break;
-                }
-                break;
-            case 1:
-                switch (attackDmgLvl)
-                {
-                    case 0:
-                        BuildManager.instance.upgradeAP1();
-                        break;
-                    case 1:
-                        BuildManager.instance.upgradeAP2();
-                        break;
-                    case 2:
-                        BuildManager.instance.upgradeAP3();
-                        break;
-                }
-                break;
+        if (upgradeButtonsEnabled) {
+            switch (att)
+            {
+                case 0:
+                    switch (attackSpeedLvl)
+                    {
+                        case 0:
+                            BuildManager.instance.upgradeFR1();
+                            break;
+                        case 1:
+                            BuildManager.instance.upgradeFR2();
+                            break;
+                        case 2:
+                            BuildManager.instance.upgradeFR3();
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (attackDmgLvl)
+                    {
+                        case 0:
+                            BuildManager.instance.upgradeAP1();
+                            break;
+                        case 1:
+                            BuildManager.instance.upgradeAP2();
+                            break;
+                        case 2:
+                            BuildManager.instance.upgradeAP3();
+                            break;
+                    }
+                    break;
+            }
         }
     }
 
     public void SetSpecializationOnClick(int spec) {
-        switch (spec)
-        {
-            case 0:
-                BuildManager.instance.UpgradeSlow();
-                break;
-            case 1:
-                BuildManager.instance.UpgradeSelectedBuild();
-                break;
-            case 2:
-                BuildManager.instance.UpgradeTesla();
-                break;
+        if (upgradeButtonsEnabled) {
+            switch (spec)
+            {
+                case 0:
+                    BuildManager.instance.UpgradeSlow();
+                    break;
+                case 1:
+                    BuildManager.instance.UpgradeSelectedBuild();
+                    break;
+                case 2:
+                    BuildManager.instance.UpgradeTesla();
+                    break;
+            }
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+        anim = upgradeWheel.GetComponent<Animator>();
+        gameObject.SetActive(false);
+        isActive = false;
+        clearButtons();
+        DefaultCoinColor = upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Coin").GetComponent<Image>().color;
+        DefaultTextColor = upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Cost").GetComponent<Text>().color;
+        DefaultButtonColor = upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Image>().color;
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (anim)
         {
             anim.SetInteger("AttackSpeedLvl", attackSpeedLvl);
@@ -311,5 +340,75 @@ public class UpgradeWheelController : MonoBehaviour {
             anim.SetInteger("TowerLvl", towerLvl);
             anim.SetInteger("Specialization", specialization);
         }
+        if (BuildManager.instance.getSelectedGameObject()) {
+            transform.position = Camera.main.WorldToScreenPoint(new Vector3(0f,0.5f,0f) + BuildManager.instance.getSelectedGameObject().transform.position);
+        }
+
+        gameObject.SetActive(isActive);
+
+        //Check if have enough money for updates
+
+        GameObject upgradeTesla = upgradeWheel.transform.Find("UpgradeTowerTesla").gameObject;
+        GameObject upgradeArcher = upgradeWheel.transform.Find("UpgradeTowerArcher").gameObject;
+        GameObject upgradeIcer = upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject;
+        GameObject upgradeTower = upgradeWheel.transform.Find("UpgradeTowerLevel").gameObject;
+        GameObject upgradeAS = upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject;
+        GameObject upgradeAD = upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject;
+
+        CheckForEnoughMoney(upgradeTesla);
+        CheckForEnoughMoney(upgradeArcher);
+        CheckForEnoughMoney(upgradeIcer);
+        CheckForEnoughMoney(upgradeTower);
+        CheckForEnoughMoney(upgradeAS);
+        CheckForEnoughMoney(upgradeAD);
+
+        if (anim.GetBool("DoneClosing")) {
+            onWheelClosed();
+            anim.SetBool("DoneClosing", false);
+        }
+    }
+
+    public void CheckForEnoughMoney(GameObject upgradeButton) {
+        int money = PlayerStats.Money;
+        if (money < int.Parse(upgradeButton.transform.Find("Cost").GetComponent<Text>().text))
+        {
+            upgradeButton.transform.Find("Cost").GetComponent<Text>().color = NotEnoughGoldTextColor;
+            upgradeButton.transform.Find("Coin").GetComponent<Image>().color = NotEnoughGoldCoinColor;
+            upgradeButton.GetComponent<Image>().color = NotEnoughGoldButtonColor;
+            upgradeButton.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            upgradeButton.transform.Find("Cost").GetComponent<Text>().color = DefaultTextColor;
+            upgradeButton.transform.Find("Coin").GetComponent<Image>().color = DefaultCoinColor;
+            upgradeButton.GetComponent<Image>().color = DefaultButtonColor;
+            upgradeButton.GetComponent<Button>().interactable = true;
+        }
+    }
+
+    public void openWheel() {
+        anim.SetBool("Open", true);
+        isActive = true;
+    }
+
+    public void onWheelOpened() {
+        enableButtons();
+    }
+
+    public void closeWheel() {
+        anim.SetBool("Open", false);
+    }
+
+    public void onWheelClosed() {
+        isActive = false;
+        disableButtons();
+    }
+
+    public void enableButtons() {
+        upgradeButtonsEnabled = true;
+    }
+    public void disableButtons()
+    {
+        upgradeButtonsEnabled = false;
     }
 }
