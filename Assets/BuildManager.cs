@@ -616,7 +616,7 @@ public class BuildManager : MonoBehaviour {
     }
     public void upgradeFR2()
     {
-        TowerController tower = getSelectedGameObject().GetComponent<TowerController>();
+            TowerController tower = getSelectedGameObject().GetComponent<TowerController>();
         if (tower.getFireRateLVL() < 2)
         {
             int price = 0;

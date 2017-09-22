@@ -374,7 +374,10 @@ public class GridMouse : MonoBehaviour
         }
         else if (propertyInQuestion.type == "Tree") // If I hit a Tree
         {
-            BuildManager.instance.HideOptions();
+            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                BuildManager.instance.HideOptions();
+            }
             //IGNORE THE CLICK
         }
         else // Decide to Build something
