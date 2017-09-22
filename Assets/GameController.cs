@@ -10,8 +10,8 @@ public class GameController : MonoBehaviour {
 
     public static GameState gameState;
     bool game_over = false;
-    
-    
+
+    public GameObject endWaveSound;
 
     public float preparationTime = 30.0f;
     float countDown;
@@ -53,6 +53,7 @@ public class GameController : MonoBehaviour {
         else if(gameState == GameState.EndWave)
         {
             Time.timeScale = 1;
+            Instantiate(endWaveSound);
             ChangeGameState(GameState.Preparation);
         }
 
