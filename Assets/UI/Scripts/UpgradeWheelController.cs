@@ -25,10 +25,12 @@ public class UpgradeWheelController : MonoBehaviour {
     public Sprite as1Sprite;
     public Sprite as2Sprite;
     public Sprite as3Sprite;
+    public Sprite asMaxSprite;
 
     public Sprite ad1Sprite;
     public Sprite ad2Sprite;
     public Sprite ad3Sprite;
+    public Sprite adMaxSprite;
 
     public bool isActive = true;
     public bool upgradeButtonsEnabled = true;
@@ -114,14 +116,30 @@ public class UpgradeWheelController : MonoBehaviour {
             case 0:
                 upgradeWheel.transform.Find("UpgradeAttackSpeed").GetComponent<Image>().overrideSprite = as1Sprite;
                 upgradeWheel.transform.Find("UpgradeAttackSpeed").GetComponent<Button>().interactable = true;
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("CostShadow").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("Cost").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("Coin").gameObject.SetActive(true);
                 break;
             case 1:
                 upgradeWheel.transform.Find("UpgradeAttackSpeed").GetComponent<Image>().overrideSprite = as2Sprite;
                 upgradeWheel.transform.Find("UpgradeAttackSpeed").GetComponent<Button>().interactable = true;
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("CostShadow").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("Cost").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("Coin").gameObject.SetActive(true);
                 break;
             case 2:
                 upgradeWheel.transform.Find("UpgradeAttackSpeed").GetComponent<Image>().overrideSprite = as3Sprite;
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").GetComponent<Button>().interactable = true;
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("CostShadow").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("Cost").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("Coin").gameObject.SetActive(true);
+                break;
+            case 3:
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").GetComponent<Image>().overrideSprite = asMaxSprite;
                 upgradeWheel.transform.Find("UpgradeAttackSpeed").GetComponent<Button>().interactable = false;
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("CostShadow").gameObject.SetActive(false);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("Cost").gameObject.SetActive(false);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").transform.Find("Coin").gameObject.SetActive(false);
                 break;
         }
 
@@ -183,14 +201,30 @@ public class UpgradeWheelController : MonoBehaviour {
             case 0:
                 upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Image>().overrideSprite = ad1Sprite;
                 upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Button>().interactable = true;
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("CostShadow").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Cost").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Coin").gameObject.SetActive(true);
                 break;
             case 1:
                 upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Image>().overrideSprite = ad2Sprite;
                 upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Button>().interactable = true;
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("CostShadow").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Cost").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Coin").gameObject.SetActive(true);
                 break;
             case 2:
                 upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Image>().overrideSprite = ad3Sprite;
+                upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Button>().interactable = true;
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("CostShadow").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Cost").gameObject.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Coin").gameObject.SetActive(true);
+                break;
+            case 3:
+                upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Image>().overrideSprite = adMaxSprite;
                 upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Button>().interactable = false;
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("CostShadow").gameObject.SetActive(false);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Cost").gameObject.SetActive(false);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Coin").gameObject.SetActive(false);
                 break;
         }
 
