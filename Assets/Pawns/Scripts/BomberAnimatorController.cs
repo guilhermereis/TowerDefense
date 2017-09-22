@@ -7,6 +7,8 @@ public class BomberAnimatorController : MonoBehaviour {
 
     public bool isAttacking = false;
     public float speed = 0f;
+    public bool isDead = false;
+    private BomberCharacter character;
 
     public void setIsAttacking(bool newIsAttacking)
     {
@@ -23,25 +25,41 @@ public class BomberAnimatorController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         anim = (Animator)GetComponent<Animator>();
+        character = (BomberCharacter)GetComponentInParent<BomberCharacter>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (isAttacking)
+        if (isDead)
         {
-            weightLerp += 0.1f * Time.deltaTime;
+            if (anim)
+            {
+                anim.SetLayerWeight(1, 0);
+                anim.SetBool("Dead", isDead);
+            }
         }
-        else
-        {
-            weightLerp -= 0.1f * Time.deltaTime;
-        }
-        weightLerp = Mathf.Clamp(weightLerp, 0f, 1f);
+        else {
+            if (isAttacking)
+            {
+                weightLerp += 0.1f * Time.deltaTime;
+            }
+            else
+            {
+                weightLerp -= 0.1f * Time.deltaTime;
+            }
+            weightLerp = Mathf.Clamp(weightLerp, 0f, 1f);
 
-        if (anim)
-        {
-            anim.SetBool("IsAttacking", isAttacking);
-            anim.SetFloat("Speed", speed);
-            anim.SetLayerWeight(1, weightLerp);
+            if (anim)
+            {
+                anim.SetBool("IsAttacking", isAttacking);
+                anim.SetFloat("Speed", speed);
+                anim.SetLayerWeight(1, weightLerp);
+            }
         }
+    }
+
+    public void DeathEnd()
+    {
+        character.DeathEnd();
     }
 }

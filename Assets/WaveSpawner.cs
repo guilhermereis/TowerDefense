@@ -21,6 +21,8 @@ public class WaveSpawner : MonoBehaviour {
     private Wave waveLane2;
     private Wave waveLane3;
     private Wave waveLane4;
+
+    private GameObject waveCounterUI;
 #endregion
 
 #region SpawnLocations
@@ -82,6 +84,7 @@ public class WaveSpawner : MonoBehaviour {
             }
         }
 
+        waveCounterUI = hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveProgress").gameObject;
     }
 
 
@@ -121,7 +124,7 @@ public class WaveSpawner : MonoBehaviour {
 
                 //wave progression
                 waveProgression = GetTotalSpawningMonsters() / (float)waveMonsters;
-                hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
+                waveCounterUI.GetComponent<Image>().fillAmount = waveProgression;
 
             }
             timer -= Time.deltaTime;
@@ -165,7 +168,7 @@ public class WaveSpawner : MonoBehaviour {
 
                 //wave progression
                 waveProgression = GetTotalSpawningMonsters() / (float)waveMonsters;
-                hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
+                waveCounterUI.GetComponent<Image>().fillAmount = waveProgression;
 
             }
             timer -= Time.deltaTime;
@@ -210,7 +213,7 @@ public class WaveSpawner : MonoBehaviour {
 
                 //wave progression
                 waveProgression = GetTotalSpawningMonsters() / (float)waveMonsters;
-                hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
+                waveCounterUI.GetComponent<Image>().fillAmount = waveProgression;
 
             }
             timer -= Time.deltaTime;
@@ -256,7 +259,8 @@ public class WaveSpawner : MonoBehaviour {
 
                 //wave progression
                 waveProgression = GetTotalSpawningMonsters() / (float)waveMonsters;
-                hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
+                waveCounterUI.GetComponent<Image>().fillAmount = waveProgression;
+                //hud.transform.Find("WaveUI").transform.Find("Progress").GetComponent<Text>().text = (waveProgression * 100.0f).ToString() + "%";// waveProgression.ToString();
 
             }
             timer -= Time.deltaTime;

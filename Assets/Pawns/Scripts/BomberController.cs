@@ -63,8 +63,6 @@ public class BomberController : EnemyController {
             //apply damage to itself with total health amount.
             bool hitted;
             character.Damage(character.health,out hitted);
-            
-            
 
         }
     }

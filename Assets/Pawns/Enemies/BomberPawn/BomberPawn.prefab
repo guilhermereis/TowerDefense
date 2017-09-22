@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 114223207288151504}
   - component: {fileID: 114244301670892682}
   - component: {fileID: 136695953901081674}
+  - component: {fileID: 114580478557678326}
   m_Layer: 10
   m_Name: BomberPawn
   m_TagString: Enemy
@@ -103,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4518809112333162}
   - component: {fileID: 95530724222240126}
-  - component: {fileID: 114313989603613870}
+  - component: {fileID: 114870459045645264}
   m_Layer: 10
   m_Name: PrefabBomberGoblin
   m_TagString: Untagged
@@ -417,7 +418,9 @@ MonoBehaviour:
   defense: 0
   attack: 1000
   attackRate: 1
-  isDying: 0
+  isDead: 0
+  isSlow: 0
+  exploded: 0
   healthBar: {fileID: 0}
   painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
@@ -444,23 +447,11 @@ MonoBehaviour:
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}
   waypoints: []
+  myLane: 0
   weight: 0
   attackCountdown: 0
   explosionParticlePrefab: {fileID: 1097344307565240, guid: 1de16174ccd6fca4082fc229a242a7db,
     type: 2}
---- !u!114 &114313989603613870
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559621340333782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cebd68df58a75041a8176dba9a7a8c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAttacking: 0
-  speed: 0
 --- !u!114 &114368387715813238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -477,6 +468,33 @@ MonoBehaviour:
     type: 2}
   canvas: {fileID: 0}
   heightOffset: {x: 0, y: 1.4, z: 0}
+--- !u!114 &114580478557678326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1525383979681094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4a845bbb7ad0b448ab75156853b812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTargetDepth: 1.5
+  deathFallSpeed: 0.5
+--- !u!114 &114870459045645264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1559621340333782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cebd68df58a75041a8176dba9a7a8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttacking: 0
+  speed: 0
+  isDead: 0
 --- !u!136 &136695953901081674
 CapsuleCollider:
   m_ObjectHideFlags: 1

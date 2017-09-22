@@ -15,4 +15,24 @@ public class BomberCharacter : PawnCharacter {
     void Update () {
 		
 	}
+
+    public override void Die()
+    {
+        base.Die();
+        BomberAnimatorController anim = (BomberAnimatorController)GetComponentInChildren<BomberAnimatorController>();
+        anim.isDead = true;
+    }
+
+    public void DeathEnd()
+    {
+        PawnDeathAnimation deathScript = (PawnDeathAnimation)GetComponent<PawnDeathAnimation>();
+        if (deathScript)
+            deathScript.Die(this);
+    }
+
+    public override void OnDeathAnimationEnd()
+    {
+        base.OnDeathAnimationEnd();
+        Destroy(gameObject);
+    }
 }
