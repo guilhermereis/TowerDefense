@@ -169,6 +169,8 @@ public class GridMouse : MonoBehaviour
     private bool CheckIfHitStructure()
     {
         BuildableController bc = hitInfo.transform.gameObject.GetComponent<BuildableController>();
+        if (bc == null)
+            return false;
         UnitBlueprint unit = bc.getUnitBlueprint();
         return
             (unit.name == Shop.instance.standardUnit.name
