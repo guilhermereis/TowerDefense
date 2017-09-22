@@ -53,7 +53,10 @@ public class GameController : MonoBehaviour {
         else if(gameState == GameState.EndWave)
         {
             Time.timeScale = 1;
-            Instantiate(endWaveSound);
+            if (endWaveSound != null)
+            {
+                Instantiate(endWaveSound);
+            }
             ChangeGameState(GameState.Preparation);
         }
 
