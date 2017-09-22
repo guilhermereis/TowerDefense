@@ -14,6 +14,28 @@ public class Shop : MonoBehaviour {
     public UnitBlueprint towerLevel3;
     public UnitBlueprint towerSlow;
     public UnitBlueprint towerTesla;
+
+    public int upgradeT1As1price = 100;
+    public int upgradeT1As2price = 200;
+    public int upgradeT1As3price = 300;
+    public int upgradeT1Ad1price = 200;
+    public int upgradeT1Ad2price = 300;
+    public int upgradeT1Ad3price = 400;
+
+    public int upgradeT2As1price = 200;
+    public int upgradeT2As2price = 400;
+    public int upgradeT2As3price = 600;
+    public int upgradeT2Ad1price = 300;
+    public int upgradeT2Ad2price = 600;
+    public int upgradeT2Ad3price = 900;
+
+    public int upgradeT3As1price = 500;
+    public int upgradeT3As2price = 1000;
+    public int upgradeT3As3price = 1500;
+    public int upgradeT3Ad1price = 600;
+    public int upgradeT3Ad2price = 1200;
+    public int upgradeT3Ad3price = 1800;
+
     BuildManager buildManager;
 
     public Color CoinEnabledColor;

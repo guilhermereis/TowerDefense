@@ -179,7 +179,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 43fe128bfeebb1143a7f58849ffdb144, type: 2}
+  - {fileID: 2100000, guid: f0c0fa5a759b28441bb9fbb3b83f24f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -281,8 +281,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealthState: 0
   target: {fileID: 0}
-  fireRate: 0.7
   enemies: []
+  attackPowerLVL: 0
+  fireRateLVL: 0
   attackPoint: {fileID: 1455187634693346}
   arrowPrefab: {fileID: 1025715475374052, guid: 8904503f35256584eb0717a1c90a6fb5,
     type: 2}
