@@ -20,7 +20,7 @@ public class SphereController : MonoBehaviour {
         {
             bc = parent.GetComponent<BuildableController>();
             if (bc != null)
-                bc.OnTriggerEnter(other);
+                bc.OnTriggerExit(other);
         }    
 
     }

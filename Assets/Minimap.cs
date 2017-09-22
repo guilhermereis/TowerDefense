@@ -8,7 +8,7 @@ public class Minimap : MonoBehaviour {
     public GameObject diagonal_grid;
     public GameObject monster;
     private static int index = 0;
-    public static GameObject[] allSquares;
+    public static List<GameObject> allSquares;
     static Vector2 centerOfMinimap;
     static Vector3 vector;
     static Vector2 new_vector;
@@ -18,15 +18,14 @@ public class Minimap : MonoBehaviour {
     // Use this for initialization
     void Start () {
         UpdateMap();
-        allSquares = new GameObject[100];
+        allSquares = new List<GameObject>();
         
     }
     public void addNewSquare()
     {
         //Transform newSelectionCube = 
-        allSquares[index] = Instantiate(square, centerOfMinimap + new_vector, Quaternion.identity);
-        allSquares[index].transform.parent = transform;
-        index++;
+        allSquares.Add(Instantiate(square, centerOfMinimap + new_vector, Quaternion.identity));
+        allSquares[allSquares.Count-1].transform.parent = transform;
     }
     public static Rect RectTransformToScreenSpace(RectTransform transform)
     {
@@ -66,7 +65,7 @@ public class Minimap : MonoBehaviour {
         {
             miniMapRect = RectTransformToScreenSpace(GetComponent<RectTransform>());
             centerOfMinimap = miniMapRect.center;
-            //Debug.Log("MonsterBatch.SIZE = " + monsterBatch.Count);
+            Debug.Log("MonsterBatch.SIZE = " + monsterBatch.Count);
             for (int i = 0; i < monsterBatch.Count; i++)
             {
                 //vector = monsterBatch[i].transform.position * scale;
