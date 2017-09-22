@@ -1851,6 +1851,8 @@ MonoBehaviour:
     type: 2}
   bloodPrefabParticle: {fileID: 1207112873092018, guid: 7654f29edee977141a921116fe25e761,
     type: 2}
+  missPrefabParticle: {fileID: 1152122776283976, guid: d05bf0a406d4969469eee8958cd672f4,
+    type: 2}
 --- !u!114 &114123685337657396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1879,7 +1881,7 @@ MonoBehaviour:
   maxHealth: 1000
   health: 1000
   defense: 500
-  attack: 500
+  attack: 50
   attackRate: 0.5
   isDead: 0
   isSlow: 0
