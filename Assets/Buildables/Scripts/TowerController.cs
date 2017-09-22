@@ -104,7 +104,6 @@ public class TowerController : BuildableController {
 	}
     public void SetFireRateAndAttackPower()
     {
-        Debug.Log("Just upgraded " + gameObject.name);
         string tower1name = "PrefabArcherTower1(Clone)";
         string tower2name = "PrefabArcherTower2(Clone)";
         string tower3name = "PrefabArcherTower3(Clone)";
@@ -164,12 +163,12 @@ public class TowerController : BuildableController {
             fireRate = base_fr*2.5f;
         }
     }
+
     public void SetFireRateAndAttackPowerByLVL(int _fireRateLVL, int _attackPowerLVL)
     {
         fireRateLVL = _fireRateLVL;
         attackPowerLVL = _attackPowerLVL;
 
-        Debug.Log("Just upgraded " + gameObject.name);
         string tower1name = "PrefabArcherTower1(Clone)";
         string tower2name = "PrefabArcherTower2(Clone)";
         string tower3name = "PrefabArcherTower3(Clone)";

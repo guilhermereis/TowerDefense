@@ -161,7 +161,6 @@ public class BuildManager : MonoBehaviour {
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
         tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
-        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
     public void OnUnitUpgrade() {
@@ -315,7 +314,6 @@ public class BuildManager : MonoBehaviour {
         if (SelectedUnit != null)
         {
             PlayerStats.AddMoney(SelectedUnit.sell_cost);
-            Debug.Log("Sold for " + SelectedUnit.sell_cost + ". Current Money: " + PlayerStats.Money);
             string name = getSelectedGameObject().name;
             BuildableController buildable =
                 getSelectedGameObject().GetComponent<BuildableController>();
@@ -362,7 +360,6 @@ public class BuildManager : MonoBehaviour {
             Destroy(getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
             HideOptions();
-            Debug.Log("Vendeu " + name + " na posição " + x + ", " + z);
         }
     }
 
@@ -377,7 +374,6 @@ public class BuildManager : MonoBehaviour {
 
     public void UpgradeSelectedBuild()
     {
-        Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
         if (getSelectedUnit() != null)
         {
             if (getSelectedUnit().name == "Tower")
@@ -391,7 +387,6 @@ public class BuildManager : MonoBehaviour {
                     //buildManager.DeselectSelectedUnit();                
                     //buildManager.HideOptions();
                     OnUnitUpgrade();
-                    Debug.Log("Upgraded unit: " + "Tower");
                 }
                 else
                 {
@@ -409,7 +404,6 @@ public class BuildManager : MonoBehaviour {
                     //buildManager.DeselectSelectedUnit();
                     //buildManager.HideOptions();
                     OnUnitUpgrade();
-                    Debug.Log("Upgraded unit: " + "Tower2");
                 }
                 else
                 {
@@ -426,7 +420,6 @@ public class BuildManager : MonoBehaviour {
 
     protected void BuildTheNextLevelStructure()
     {
-
         if (getUnitToBuild() != null)
         {
 
@@ -443,14 +436,15 @@ public class BuildManager : MonoBehaviour {
             //select upgraded unit
             PropertyScript.Property propertyInQuestion = gridMouse.propertiesMatrix[x, z];
             gridMouse.SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-            Debug.Log("Selecionou a posição: " + x + ", " + z);
-        }
+            selectedGameObject = propertyInQuestion.builtGameObject;
 
+            Debug.Log("" + selectedGameObject.GetComponent<TowerController>().getFireRate());
+            Debug.Log("" + selectedGameObject.GetComponent<TowerController>().getAttackPower());
+        }
     }
 
     public void UpgradeSlow()
     {
-        Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
         if (getSelectedUnit() != null)
         {
             if (PlayerStats.Money - Shop.instance.towerSlow.upgrade_cost >= 0)
@@ -463,7 +457,6 @@ public class BuildManager : MonoBehaviour {
                 //DeselectSelectedUnit();
                 //HideOptions();
                 OnUnitUpgrade();
-                Debug.Log("Upgraded unit: " + "Tower");
             }
             else
             {
@@ -474,7 +467,6 @@ public class BuildManager : MonoBehaviour {
     }
     public void UpgradeTesla()
     {
-        Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
         if (getSelectedUnit() != null)
         {
             if (PlayerStats.Money - Shop.instance.towerTesla.upgrade_cost >= 0)
@@ -486,7 +478,6 @@ public class BuildManager : MonoBehaviour {
                 //DeselectSelectedUnit();
                 //HideOptions();
                 OnUnitUpgrade();
-                Debug.Log("Upgraded unit: " + "Tower");
             }
             else
             {
@@ -614,6 +605,7 @@ public class BuildManager : MonoBehaviour {
                     price = Shop.instance.upgradeT3As2price;
                     break;
             }
+
             PlayerStats.AddMoney(-1 * price);
             tower.setFireRateLVL(2);
             tower.SetFireRateAndAttackPower();
