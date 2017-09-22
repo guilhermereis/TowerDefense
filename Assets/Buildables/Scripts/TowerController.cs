@@ -9,19 +9,20 @@ public class TowerController : BuildableController {
 	public GameObject target;
     public float attackCooldown { get; set; }
 	public List<GameObject> enemies;
-	private float attackPower;
-    private float fireRate = 0.7f;
+	protected float attackPower;
+    protected float fireRate = 0.7f;
     public int attackPowerLVL = 0;
     public int fireRateLVL = 0;
+    public bool DONE = false;
 
     //-----------SETTING BASE AP AND FR-----------------
-    private int Tower1BaseAP = 100;
-    private int Tower2BaseAP = 200;
-    private int Tower3BaseAP = 300;
+    protected int Tower1BaseAP = 100;
+    protected int Tower2BaseAP = 200;
+    protected int Tower3BaseAP = 300;
 
-    private float Tower1BaseFR = 0.7f;
-    private float Tower2BaseFR = 1.4f;
-    private float Tower3BaseFR = 2.1f;
+    protected float Tower1BaseFR = 0.7f;
+    protected float Tower2BaseFR = 1.4f;
+    protected float Tower3BaseFR = 2.1f;
     //--------------------------------------------------
 
     #endregion
@@ -53,19 +54,20 @@ public class TowerController : BuildableController {
     // Use this for initialization
     public void Start () {
         SetFireRateAndAttackPower();
+        //Debug.Log("THIS UNIT'S FIRERATE AND ATTACKPOWER: " + fireRate+ ", " + attackPower);
         Health = 100f;
 		Defense = 5f;
 		IsUpgradable = true;
 		enemies = new List<GameObject>();
         //currentAmmo = TowerAmmo.Arrow;
-        
 
-        
-       
-      
+
+
+
+
         //Instantiate(buildSmokeEffectPrefab, transform.position, Quaternion.identity);
 
-
+        DONE = true;
 
 	}
 	

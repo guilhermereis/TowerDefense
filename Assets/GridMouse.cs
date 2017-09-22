@@ -340,6 +340,8 @@ public class GridMouse : MonoBehaviour
     {
         buildManager.SelectBuilding(unit, gameObject);
         BuildManager.instance.ShowOptions();
+        Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getFireRate());
+        Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getAttackPower());
     }
 
     void OnMouseDown()

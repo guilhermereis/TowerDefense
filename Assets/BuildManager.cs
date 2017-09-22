@@ -442,8 +442,26 @@ public class BuildManager : MonoBehaviour {
 
             //select upgraded unit
             PropertyScript.Property propertyInQuestion = gridMouse.propertiesMatrix[x, z];
+                       
             gridMouse.SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
             Debug.Log("Selecionou a posição: " + x + ", " + z);
+
+            GameObject obj = getSelectedGameObject();
+            
+
+            TowerSlowController tSlowc = obj.GetComponent<TowerSlowController>();
+            if (tSlowc != null)
+            {
+                tSlowc.SetFireRateAndAttackPower();
+                Debug.Log("THIS UNIT'S SLOW AMOUNT: " + tSlowc.slowAmount);
+            }
+            TowerController tc = obj.GetComponent<TowerController>();
+            if (tc != null)
+            {
+                tc.SetFireRateAndAttackPower();
+                Debug.Log("THIS UNIT'S FIRERATE AND ATTACKPOWER: " + tc.getFireRate() + ", " + tc.getAttackPower());
+            }
+            
         }
 
     }
