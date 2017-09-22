@@ -195,6 +195,7 @@ public class UpgradeWheelController : MonoBehaviour {
         }
 
         this.attackDmgLvl = newLvl;
+
         switch (towerLvl)
         {
             case 0:
@@ -226,7 +227,7 @@ public class UpgradeWheelController : MonoBehaviour {
                 }
                 break;
             case 2:
-                switch (attackSpeedLvl)
+                switch (attackDmgLvl)
                 {
                     case 0:
                         setADUpgradeCostText(Shop.instance.upgradeT3Ad1price);
@@ -240,6 +241,7 @@ public class UpgradeWheelController : MonoBehaviour {
                 }
                 break;
         }
+
         upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + tower.sell_cost;
         upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + tower.sell_cost;
     }
