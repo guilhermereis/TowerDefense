@@ -437,9 +437,7 @@ public class BuildManager : MonoBehaviour {
             PropertyScript.Property propertyInQuestion = gridMouse.propertiesMatrix[x, z];
             gridMouse.SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
             selectedGameObject = propertyInQuestion.builtGameObject;
-
-            Debug.Log("" + selectedGameObject.GetComponent<TowerController>().getFireRate());
-            Debug.Log("" + selectedGameObject.GetComponent<TowerController>().getAttackPower());
+			selectedGameObject.GetComponent<TowerController>().SetFireRateAndAttackPower();
         }
     }
 
