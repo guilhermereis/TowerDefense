@@ -204,29 +204,11 @@ public class BuildManager : MonoBehaviour {
     }
     public void ShowOptions()
     {
+        showBottomBar();
         showUpgradeWheel();
-
-        //extraOptionsObject.SetActive(true);
-        //if (selectedGameObject.name == "PrefabArcherTower2(Clone)")
-        //{
-        //    optionsSlowObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    optionsObject.SetActive(true);
-        //}
-        //GameObject upgradeText = GameObject.Find("ButtonUpgradeText");
-        //if(upgradeText)
-        //    upgradeText.GetComponent<Text>().text = "Upgrade $" + selectedUnit.upgrade_cost;
-        //GameObject sellText = GameObject.Find("ButtonSellText");
-        //if(sellText)
-        //    sellText.GetComponent<Text>().text = "Sell $" + selectedUnit.sell_cost;
     }
     public void HideOptions()
     {
-        extraOptionsObject.SetActive(false);
-        optionsObject.SetActive(false);
-        optionsSlowObject.SetActive(false);
         hideUpgradeWheel();
         hideBottomBar();
         if (selectedGameObject){
@@ -276,12 +258,21 @@ public class BuildManager : MonoBehaviour {
                 }
                 upgradeWheelController.setAttackDamage((int)towerController.getAttackPowerLVL());
                 upgradeWheelController.setAttackSpeedLvl((int)towerController.getFireRateLVL());
+                upgradeWheelController.isActive = true;
+                upgradeWheel.SetActive(true);
+                upgradeWheelController.openWheel();
             }
         }
-        upgradeWheel.SetActive(true);
     }
 
     public void hideUpgradeWheel() {
+        if (upgradeWheelController)
+        {
+            upgradeWheelController.closeWheel();
+        }
+    }
+
+    public void OnUpgradeWheelClosed() {
         upgradeWheel.SetActive(false);
     }
 
@@ -491,9 +482,9 @@ public class BuildManager : MonoBehaviour {
                 PlayerStats.AddMoney(-1 * Shop.instance.towerTesla.upgrade_cost);
                 SelectUnitToBuild(Shop.instance.towerTesla);
                 BuildTheNextLevelStructure();
-                DeselectUnitToBuild();
-                DeselectSelectedUnit();
-                HideOptions();
+                //DeselectUnitToBuild();
+                //DeselectSelectedUnit();
+                //HideOptions();
                 OnUnitUpgrade();
                 Debug.Log("Upgraded unit: " + "Tower");
             }

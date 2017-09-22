@@ -35,7 +35,7 @@ public class Minimap : MonoBehaviour {
     public void UpdateMap()
     {
         //Camera.main.WorldToScreenPoint()
-        Debug.Log("GOING TO MOVE " + square);
+        //Debug.Log("GOING TO MOVE " + square);
         //centerOfMinimap = new Vector2(790 / 2 + 320, 369 / 2 + 60);
         miniMapRect = RectTransformToScreenSpace(GetComponent<RectTransform>());
         centerOfMinimap = miniMapRect.center;
@@ -43,7 +43,7 @@ public class Minimap : MonoBehaviour {
         float diagonal_minimap = this.GetComponent<RectTransform>().rect.width;
         scale = diagonal_grid.GetComponent<Collider>().bounds.size.x / diagonal_minimap;
         //scale += 0.45f;
-        Debug.Log("Scale = " + scale);
+        //Debug.Log("Scale = " + scale);
 
 
         vector = monster.transform.position * scale;
@@ -55,7 +55,7 @@ public class Minimap : MonoBehaviour {
     public void UpdateMonsterBatch()
     {
         monsterBatch = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().monsterBatch;
-        Debug.Log("ADDING NEW SQUARE");
+        //Debug.Log("ADDING NEW SQUARE");
         addNewSquare();
     }
 
