@@ -14,13 +14,19 @@ public class BuildableController : MonoBehaviour {
     private int arrayListPosition;
     private UnitBlueprint unitBlueprint;
 	public HealthState currentHealthState = HealthState.good;
-
+    public GameObject buildSoundPrefab;
 
 
 	protected virtual void Awake()
 	{
 		health = maxHealth;
         arrayListPosition = -1;
+       
+    }
+
+    private void Start()
+    {
+       
     }
 
     public void setArrayListPosition(int position) {

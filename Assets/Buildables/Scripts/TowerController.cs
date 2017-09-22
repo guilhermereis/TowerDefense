@@ -71,6 +71,7 @@ public class TowerController : BuildableController {
 	
     public void BuildEffect()
     {
+        Instantiate(buildSoundPrefab);
         buildSmokeEffectPrefab = GetComponentInChildren<ParticleSystem>();
         buildSmokeEffectPrefab.Play();
     }
