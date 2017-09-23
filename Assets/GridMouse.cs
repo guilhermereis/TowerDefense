@@ -178,7 +178,6 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
-
         foreach (Transform child in Edges.transform)
         {
 
@@ -187,6 +186,12 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
+
+        Destroy(CubeTrack);
+        Destroy(CubeTrack2);
+        Destroy(CubeTrack3);
+        Destroy(Edges);
+        Destroy(Trees);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private bool CheckIfHitStructure()
