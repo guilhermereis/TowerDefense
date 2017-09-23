@@ -142,7 +142,11 @@ public class TowerController : BuildableController {
 
             Debug.Log("ALGUEM ESTA CHAMANDO ISSO ! INTEREST = " + interest);
 
-        return unitBlueprint.getRegularSellCost() + Mathf.FloorToInt(interest);
+        float temp = unitBlueprint.getRegularSellCost() + Mathf.FloorToInt(interest);
+        if (interest == 0)
+            return unitBlueprint.getRegularSellCost();
+        else
+            return Mathf.FloorToInt(percent * temp + unitBlueprint.getRegularSellCost());
     }
 
     public void BuildEffect()

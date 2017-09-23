@@ -33,7 +33,7 @@ public class BuildManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gridMouse = GridMouse.instance;
-        if(bottomBar)
+        if (bottomBar)
             bottomBarBehaviour = (BottomInfoBarBehaviour)bottomBar.GetComponentInChildren<BottomInfoBarBehaviour>();
         if (upgradeWheel)
             upgradeWheelController = upgradeWheel.GetComponent<UpgradeWheelController>();

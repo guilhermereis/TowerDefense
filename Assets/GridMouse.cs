@@ -31,6 +31,7 @@ public class GridMouse : MonoBehaviour
     public static GridMouse instance;
     public GameObject CubeTrack;
     public GameObject CubeTrack2;
+    public GameObject CubeTrack3;
     public GameObject Trees;
     public GameObject Edges;
     public float ZOffset;
@@ -120,14 +121,13 @@ public class GridMouse : MonoBehaviour
             }
         }
 
+        ReadSpecialTiles();
 
     }
 
     void Start()
     {
         UpdateGrid();
-        ReadSpecialTiles();
-
     }
     void ReadSpecialTiles()
     {
@@ -158,7 +158,18 @@ public class GridMouse : MonoBehaviour
             }
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
-
+        foreach (Transform child in CubeTrack3.transform)
+        {
+            //tower
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            if (x == 45 && z == 13)
+            {
+                Debug.Log(x + "," + z + " = Track");
+            }
+            propertiesMatrix[x, z] = new PropertyScript.Property("Track");
+        }
         foreach (Transform child in Trees.transform)
         {
          
@@ -729,7 +740,7 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
