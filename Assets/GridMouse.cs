@@ -191,7 +191,7 @@ public class GridMouse : MonoBehaviour
         Destroy(CubeTrack2);
         Destroy(CubeTrack3);
         Destroy(Edges);
-        Destroy(Trees);
+        //Destroy(Trees);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private bool CheckIfHitStructure()
