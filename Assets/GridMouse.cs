@@ -29,7 +29,8 @@ public class GridMouse : MonoBehaviour
     //private int layerMask = ~(1 << 10);
 
     public static GridMouse instance;
-    public GameObject Track;
+    public GameObject CubeTrack;
+    public GameObject CubeTrack2;
     public GameObject Trees;
     public GameObject Edges;
     public float ZOffset;
@@ -132,8 +133,8 @@ public class GridMouse : MonoBehaviour
     {
         int x;
         int z;
-        Debug.Log("Child Count = " + Track.transform.childCount);
-        foreach (Transform child in Track.transform)
+        Debug.Log("Child Count = " + CubeTrack.transform.childCount);
+        foreach (Transform child in CubeTrack.transform)
         {
             //tower
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
@@ -145,7 +146,18 @@ public class GridMouse : MonoBehaviour
             }
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
-
+        foreach (Transform child in CubeTrack2.transform)
+        {
+            //tower
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            if (x == 45 && z == 13)
+            {
+                Debug.Log(x + "," + z + " = Track");
+            }
+            propertiesMatrix[x, z] = new PropertyScript.Property("Track");
+        }
 
         foreach (Transform child in Trees.transform)
         {
