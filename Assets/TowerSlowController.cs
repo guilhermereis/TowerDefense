@@ -193,8 +193,12 @@ public class TowerSlowController : TowerController {
             target = enemies[i];
             if (!target.GetComponent<PawnCharacter>().isSlow && !(target.GetComponent<PawnController>().currentState == PawnController.PawnState.Dead))
             {
+                Vector3 dir = (target.transform.position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(dir);
+                Vector3 rotation = lookRotation.eulerAngles;
+
                 Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
-                GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
+                GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, Quaternion.Euler(0f, rotation.y, 0f));
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
