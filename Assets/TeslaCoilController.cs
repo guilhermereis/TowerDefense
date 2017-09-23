@@ -12,7 +12,10 @@ public class TeslaCoilController : TowerController {
     {
         SetFireRateAndAttackPower();
     }
-
+    public override int GetSellCostWithInterest()
+    {
+        return unitBlueprint.getRegularSellCost() + 7;
+    }
     // Update is called once per frame
     public override void Update () {
 

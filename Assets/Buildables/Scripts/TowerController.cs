@@ -70,7 +70,35 @@ public class TowerController : BuildableController {
         DONE = true;
 
 	}
-	
+    public override int GetSellCostWithInterest()
+    {
+        float percent = ((float) unitBlueprint.sell_cost / (float) unitBlueprint.cost);
+
+        getAttackPowerLVL();
+        getFireRateLVL();
+        float interest = 0;
+        Debug.Log("PERCENT = " + percent);
+        Debug.Log("ATTACK POWER LVL = " + getAttackPowerLVL());
+        Debug.Log("FIRE RATE LVL = " + getFireRateLVL());
+        switch (getAttackPowerLVL())
+        {
+            case 0: break;
+            case 1: { interest += Shop.instance.upgradeT1Ad1price * percent; break; }
+            case 2: { interest += Shop.instance.upgradeT1Ad2price * percent; break; }
+            case 3: { interest += Shop.instance.upgradeT1Ad3price * percent; break; }
+        }
+        switch (getFireRateLVL())
+        {
+            case 0: break;
+            case 1: { interest += Shop.instance.upgradeT1As1price * percent; break; }
+            case 2: { interest += Shop.instance.upgradeT1As2price * percent; break; }
+            case 3: { interest += Shop.instance.upgradeT1As3price * percent; break; }
+        }
+        Debug.Log("ALGUEM ESTA CHAMANDO ISSO ! INTEREST = " + interest);
+
+        return unitBlueprint.getRegularSellCost() + Mathf.FloorToInt(interest);
+    }
+
     public void BuildEffect()
     {
         Instantiate(buildSoundPrefab);
@@ -355,11 +383,11 @@ public class TowerController : BuildableController {
     {
         attackPowerLVL = _attackPowerLVL;
     }
-    public float getFireRateLVL()
+    public int getFireRateLVL()
     {
         return fireRateLVL;
     }
-    public float getAttackPowerLVL()
+    public int getAttackPowerLVL()
     {
         return attackPowerLVL;
     }
