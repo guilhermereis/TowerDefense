@@ -16,7 +16,7 @@ public class MapController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         
        //transform.rotation *= Quaternion.Euler(Vector3.forward * 20*Time.deltaTime);
     }
