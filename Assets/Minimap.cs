@@ -17,9 +17,9 @@ public class Minimap : MonoBehaviour {
     }
     public void addNewSquare()
     {
-
         allSquares.Add(Instantiate(square, transform));
         allSquares[allSquares.Count-1].transform.parent = transform;
+        allSquares[allSquares.Count - 1].SetActive(false);
     }
     public static Rect RectTransformToScreenSpace(RectTransform transform)
     {
@@ -33,11 +33,14 @@ public class Minimap : MonoBehaviour {
         addNewSquare();
     }
 
+    public void ClearMonsterBatch() {
+        allSquares.Clear();
+    }
+
 	// Update is called once per frame
 	void Update () {
         if (monsterBatch != null)
         {
-
             for (int i = 0; i < monsterBatch.Count; i++)
             {
 
@@ -49,6 +52,7 @@ public class Minimap : MonoBehaviour {
                     }
                     else
                     {
+                        allSquares[i].SetActive(true);
                         Vector2 monsterWorldPosition = new Vector2(monsterBatch[i].transform.position.x, monsterBatch[i].transform.position.z);
                         Vector2 monsterPosition = monsterWorldPosition * scale;
                         allSquares[i].GetComponent<RectTransform>().localPosition = monsterPosition;

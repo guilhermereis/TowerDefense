@@ -421,10 +421,11 @@ public class WaveSpawner : MonoBehaviour {
         
         waveNumber++;
         
-        hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterText").GetComponent<Text>().text = "" + waveNumber;
-        hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterTextShadow").GetComponent<Text>().text = "" + waveNumber;
+        hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterText").GetComponent<Text>().text = "" + (waveNumber-1);
+        hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterTextShadow").GetComponent<Text>().text = "" + (waveNumber-1);
         //FillMonstersType();
         monsterBatch.Clear();
+        minimap.ClearMonsterBatch();
         isWaving = true;
     }
 

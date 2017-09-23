@@ -74,7 +74,7 @@ public class PawnHealthBarGUI : MonoBehaviour {
                 Healthbar.transform.GetChild(0).GetComponentInChildren<Image>().fillAmount = updatedHealth;
             else
             {
-                Healthbar.SetActive(false);
+                Destroy(Healthbar);
                 this.enabled = false;
             }
             //Debug.Log(Healthbar.transform.GetChild(0).GetComponentInChildren<Image>().name);

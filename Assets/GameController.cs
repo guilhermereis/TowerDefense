@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState { Preparation, BeginWave, Waving ,Action, EndWave, GameOver }
 
@@ -12,6 +13,8 @@ public class GameController : MonoBehaviour {
     bool game_over = false;
 
     public GameObject endWaveSound;
+    public GameObject gameStateUI;
+    private Button startWaveButton;
 
     public float preparationTime = 30.0f;
     float countDown;
@@ -20,8 +23,8 @@ public class GameController : MonoBehaviour {
     void Start () {
         gameState = GameState.Preparation;
         countDown = preparationTime;
-       
-	}
+        startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
+    }
 
     public static void ChangeGameState(GameState newState)
     {
@@ -32,36 +35,64 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(gameState == GameState.Preparation)
+        if (gameState == GameState.Preparation)
         {
-            if(countDown <= 0)
+
+            if (countDown > 0f && countDown <= 10f) {
+                startWaveButton.transform.Find("Countdown").gameObject.SetActive(true);
+                startWaveButton.transform.Find("CountdownShadow").gameObject.SetActive(true);
+                startWaveButton.transform.Find("Countdown").GetComponent<Text>().text = "" + Mathf.CeilToInt(countDown);
+                startWaveButton.transform.Find("CountdownShadow").GetComponent<Text>().text = "" + Mathf.CeilToInt(countDown);
+            }
+            else {
+                startWaveButton.transform.Find("Countdown").gameObject.SetActive(false);
+                startWaveButton.transform.Find("CountdownShadow").gameObject.SetActive(false);
+            }
+
+            if (countDown <= 0)
             {
                 countDown = preparationTime;
                 ChangeGameState(GameState.BeginWave);
+                startWaveButton.GetComponent<Image>().fillAmount = 1;
             }
+            else
+            {
+                startWaveButton.GetComponent<Image>().fillAmount = 1 - countDown / preparationTime;
+            }
+
             countDown -= Time.deltaTime;
         }
-        else if(gameState == GameState.GameOver)
+        else if (gameState == GameState.BeginWave) {
+            gameStateUI.GetComponent<Animator>().SetTrigger("ShowMap");
+        }
+        else if (gameState == GameState.GameOver)
         {
-            Time.timeScale = 1;
+            GetComponent<FastForward>().NormalSpeedOnClick();
 
-            if (!game_over) {
+            if (!game_over)
+            {
                 Debug.Log("Game Over Man");
                 game_over = true;
             }
         }
-        else if(gameState == GameState.EndWave)
+        else if (gameState == GameState.EndWave)
         {
-            Time.timeScale = 1;
+            GetComponent<FastForward>().NormalSpeedOnClick();
             if (endWaveSound != null)
             {
                 Instantiate(endWaveSound);
             }
+            gameStateUI.GetComponent<Animator>().SetTrigger("ShowPreparation");
             ChangeGameState(GameState.Preparation);
         }
-
-
 	}
+
+    public void ForceWaveStart() {
+        if (gameState == GameState.Preparation) {
+            ChangeGameState(GameState.BeginWave);
+            countDown = preparationTime;
+        }
+    }
 
 
 }
