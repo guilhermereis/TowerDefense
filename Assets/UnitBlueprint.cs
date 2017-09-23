@@ -19,4 +19,8 @@ public class UnitBlueprint{
 	void Update () {
 		
 	}
+    public int getRegularSellCost()
+    {
+        return sell_cost;
+    }
 }

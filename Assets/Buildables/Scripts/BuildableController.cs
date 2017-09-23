@@ -16,6 +16,10 @@ public class BuildableController : MonoBehaviour {
 	public HealthState currentHealthState = HealthState.good;
     public GameObject buildSoundPrefab;
 
+    public int GetSellCostWithInterest()
+    {
+        return unitBlueprint.getRegularSellCost() + 7;
+    }
 
 	protected virtual void Awake()
 	{
