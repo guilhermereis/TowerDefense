@@ -5,57 +5,31 @@ using UnityEngine;
 public class Minimap : MonoBehaviour {
 
     public GameObject square;
-    public GameObject diagonal_grid;
-    public GameObject monster;
-    private static int index = 0;
     public static List<GameObject> allSquares;
-    static Vector2 centerOfMinimap;
-    static Vector3 vector;
-    static Vector2 new_vector;
-    Rect miniMapRect;
-    static float scale;
+    public float scale;
     public static List<GameObject> monsterBatch;
+
     // Use this for initialization
     void Start () {
-        UpdateMap();
+       // UpdateMap();
         allSquares = new List<GameObject>();
-        
+        scale = GetComponent<RectTransform>().rect.width / 2 / 33f;
     }
     public void addNewSquare()
     {
-        //Transform newSelectionCube = 
-        allSquares.Add(Instantiate(square, centerOfMinimap + new_vector, Quaternion.identity));
+
+        allSquares.Add(Instantiate(square, transform));
         allSquares[allSquares.Count-1].transform.parent = transform;
     }
     public static Rect RectTransformToScreenSpace(RectTransform transform)
     {
-        Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
+       Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
         return new Rect((Vector2)transform.position - (size * 0.5f), size);
     }
-    public void UpdateMap()
-    {
-        //Camera.main.WorldToScreenPoint()
-        //Debug.Log("GOING TO MOVE " + square);
-        //centerOfMinimap = new Vector2(790 / 2 + 320, 369 / 2 + 60);
-        miniMapRect = RectTransformToScreenSpace(GetComponent<RectTransform>());
-        centerOfMinimap = miniMapRect.center;
-        square.GetComponent<RectTransform>().position = centerOfMinimap;
-        float diagonal_minimap = this.GetComponent<RectTransform>().rect.width;
-        scale = diagonal_grid.GetComponent<Collider>().bounds.size.x / diagonal_minimap;
-        //scale += 0.45f;
-        //Debug.Log("Scale = " + scale);
 
-
-        vector = monster.transform.position * scale;
-        new_vector = new Vector2(vector.x, vector.z);
-        square.transform.position = centerOfMinimap + new_vector;
-
-
-    }
     public void UpdateMonsterBatch()
     {
         monsterBatch = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().monsterBatch;
-        //Debug.Log("ADDING NEW SQUARE");
         addNewSquare();
     }
 
@@ -63,12 +37,10 @@ public class Minimap : MonoBehaviour {
 	void Update () {
         if (monsterBatch != null)
         {
-            miniMapRect = RectTransformToScreenSpace(GetComponent<RectTransform>());
-            centerOfMinimap = miniMapRect.center;
-            //Debug.Log("MonsterBatch.SIZE = " + monsterBatch.Count);
+
             for (int i = 0; i < monsterBatch.Count; i++)
             {
-                //vector = monsterBatch[i].transform.position * scale;
+
                 if (monsterBatch != null && monsterBatch[i] != null)
                 {
                     if (monsterBatch[i].GetComponent<PawnCharacter>().isDead)
@@ -77,12 +49,12 @@ public class Minimap : MonoBehaviour {
                     }
                     else
                     {
-                        vector = Vector3.Scale(monsterBatch[i].transform.position, transform.localScale);
-                        new_vector = new Vector2(vector.x, vector.z);
-                        allSquares[i].transform.position = centerOfMinimap + new_vector;
+                        Vector2 monsterWorldPosition = new Vector2(monsterBatch[i].transform.position.x, monsterBatch[i].transform.position.z);
+                        Vector2 monsterPosition = monsterWorldPosition * scale;
+                        allSquares[i].GetComponent<RectTransform>().localPosition = monsterPosition;
                     }
                 }
             }
         }
-	}
+    }
 }
