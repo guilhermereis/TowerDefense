@@ -6,10 +6,11 @@ using UnityEngine;
 public class TreeRandomizer : MonoBehaviour {
     public Material[] MVariation;
     public Material[] SnowMVariation;
+    public Material[] DesertMVariation;
     public Vector3 initialScale;
     public Theme theme;
 
-    public enum Theme {Grassland, Snow};
+    public enum Theme {Grassland, Snow, Desert};
 
 #if UNITY_EDITOR
     // Use this for initialization
@@ -27,6 +28,10 @@ public class TreeRandomizer : MonoBehaviour {
                 case Theme.Snow:
                     if (SnowMVariation.Length > 0)
                         GetComponent<Renderer>().material = SnowMVariation[(int)Random.Range(0, SnowMVariation.Length)];
+                    break;
+                case Theme.Desert:
+                    if (DesertMVariation.Length > 0)
+                        GetComponent<Renderer>().material = DesertMVariation[(int)Random.Range(0, DesertMVariation.Length)];
                     break;
             }
             
