@@ -26,6 +26,10 @@ public class TowerSlowController : TowerController {
         SetFireRateAndAttackPower();
         SlowAmount = 5.0f;
     }
+    public override int GetSellCostWithInterest()
+    {
+        return unitBlueprint.getRegularSellCost() + 7;
+    }
     public void SetFireRateAndAttackPower()
     {
         Debug.Log("Just upgraded " + gameObject.name);

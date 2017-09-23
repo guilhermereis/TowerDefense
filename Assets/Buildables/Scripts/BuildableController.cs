@@ -12,10 +12,14 @@ public class BuildableController : MonoBehaviour {
 	private float maxHealth = 100;
 	private bool isUpgradable;
     private int arrayListPosition;
-    private UnitBlueprint unitBlueprint;
+    protected UnitBlueprint unitBlueprint;
 	public HealthState currentHealthState = HealthState.good;
     public GameObject buildSoundPrefab;
 
+    public virtual int GetSellCostWithInterest()
+    {
+        return -1;
+    }
 
 	protected virtual void Awake()
 	{

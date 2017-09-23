@@ -231,7 +231,7 @@ public class BuildManager : MonoBehaviour {
     public void showUpgradeWheel() {
         if (upgradeWheelController)
         {
-            upgradeWheelController.tower = selectedUnit;
+            upgradeWheelController.tower = selectedGameObject;
             TowerController towerController = selectedGameObject.GetComponent<TowerController>();
             if (towerController)
             {
@@ -311,11 +311,13 @@ public class BuildManager : MonoBehaviour {
 
 
     public void SellSelectedBuilding() {
-        UnitBlueprint SelectedUnit = getSelectedUnit();
-        if (SelectedUnit != null)
+        //UnitBlueprint SelectedUnit = getSelectedUnit();
+        BuildableController bc = getSelectedGameObject().GetComponent<BuildableController>();
+
+        if (bc.getUnitBlueprint() != null)
         {
-            PlayerStats.AddMoney(SelectedUnit.sell_cost);
-            Debug.Log("Sold for " + SelectedUnit.sell_cost + ". Current Money: " + PlayerStats.Money);
+            PlayerStats.AddMoney(bc.GetSellCostWithInterest());
+            Debug.Log("Sold for " + bc.GetSellCostWithInterest() + ". Current Money: " + PlayerStats.Money);
             string name = getSelectedGameObject().name;
             BuildableController buildable =
                 getSelectedGameObject().GetComponent<BuildableController>();
@@ -327,7 +329,7 @@ public class BuildManager : MonoBehaviour {
             Vector3 SelectedPosition = getSelectedGameObject().transform.position;
             int x;
             int z;
-            if (SelectedUnit == Shop.instance.standardUnit)
+            if (bc.getUnitBlueprint() == Shop.instance.standardUnit)
             {
                 //tower
                 x = Mathf.FloorToInt(SelectedPosition.x + gridSize.x / 2);
@@ -347,7 +349,7 @@ public class BuildManager : MonoBehaviour {
             Vector3 position = gridMouse.CoordToPosition(x, z);
             gridMouse.propertiesMatrix[x, z].unit = null;
             gridMouse.previewMatrix[x, z] = false;
-            if (SelectedUnit == Shop.instance.missileLauncher)
+            if (bc.getUnitBlueprint() == Shop.instance.missileLauncher)
             {
                 gridMouse.propertiesMatrix[x + 1, z + 1].unit = null;
                 gridMouse.propertiesMatrix[x, z + 1].unit = null;

@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class UpgradeWheelController : MonoBehaviour {
 
-    public UnitBlueprint tower;
+    public GameObject tower;
+    private BuildableController buildable;
     public GameObject upgradeWheel;
     private Animator anim;
     private int attackSpeedLvl = 0;
@@ -76,9 +77,9 @@ public class UpgradeWheelController : MonoBehaviour {
                 upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(true);
                 break;
         }
-
-        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + tower.sell_cost;
-        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + tower.sell_cost;
+        buildable = tower.GetComponent<BuildableController>();
+        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
     }
 
     public void setSpecialization(int newSpec) {
@@ -106,8 +107,10 @@ public class UpgradeWheelController : MonoBehaviour {
         upgradeWheel.transform.Find("UpgradeTowerTesla").gameObject.SetActive(false);
         upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject.SetActive(false);
         upgradeWheel.transform.Find("UpgradeTowerArcher").gameObject.SetActive(false);
-        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + tower.sell_cost;
-        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + tower.sell_cost;
+
+        buildable = tower.GetComponent<BuildableController>();
+        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
     }
 
     public void setAttackSpeedLvl(int newLvl) {
@@ -190,8 +193,9 @@ public class UpgradeWheelController : MonoBehaviour {
                 }
                 break;
         }
-        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + tower.sell_cost;
-        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + tower.sell_cost;
+        buildable = tower.GetComponent<BuildableController>();
+        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
     }
 
     public void setAttackDamage(int newLvl)
@@ -275,9 +279,9 @@ public class UpgradeWheelController : MonoBehaviour {
                 }
                 break;
         }
-
-        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + tower.sell_cost;
-        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + tower.sell_cost;
+        buildable = tower.GetComponent<BuildableController>();
+        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
     }
 
     public void setASUpgradeCostText(int price) {
