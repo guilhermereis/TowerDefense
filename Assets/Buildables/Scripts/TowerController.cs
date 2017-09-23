@@ -72,7 +72,7 @@ public class TowerController : BuildableController {
 	}
     public override int GetSellCostWithInterest()
     {
-        float percent = ((float) unitBlueprint.sell_cost / (float) unitBlueprint.cost);
+        float percent = ((float) unitBlueprint.getRegularSellCost() / (float) unitBlueprint.cost);
 
         getAttackPowerLVL();
         getFireRateLVL();
@@ -140,13 +140,9 @@ public class TowerController : BuildableController {
             }
         }
 
-            Debug.Log("ALGUEM ESTA CHAMANDO ISSO ! INTEREST = " + interest);
+            //Debug.Log("ALGUEM ESTA CHAMANDO ISSO ! INTEREST = " + interest+", PERCENT = "+percent);
 
-        float temp = unitBlueprint.getRegularSellCost() + Mathf.FloorToInt(interest);
-        if (interest == 0)
-            return unitBlueprint.getRegularSellCost();
-        else
-            return Mathf.FloorToInt(percent * temp + unitBlueprint.getRegularSellCost());
+        return unitBlueprint.getRegularSellCost() + Mathf.FloorToInt(interest);
     }
 
     public void BuildEffect()
