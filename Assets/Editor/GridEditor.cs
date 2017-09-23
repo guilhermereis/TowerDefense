@@ -12,7 +12,7 @@ public class GridEditor : Editor {
 
         GridMouse grid = target as GridMouse;
 
-        grid.UpdateGrid();
+        //grid.UpdateGrid();
         
     }
 
