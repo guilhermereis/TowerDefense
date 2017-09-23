@@ -114,7 +114,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039271061935134}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.44886073, y: -1.0000021, z: -17.622917}
+  m_LocalPosition: {x: -12.045149, y: -1.0000006, z: -4.5126476}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.02}
   m_Children:
   - {fileID: 4236559488629922}
@@ -244,6 +244,7 @@ MonoBehaviour:
   enemies: []
   attackPowerLVL: 0
   fireRateLVL: 0
+  DONE: 0
   attackPoint: {fileID: 1311651594420930}
   arrowPrefab: {fileID: 1701221001243858, guid: 5d2007d58e37719429671996f895010e,
     type: 2}

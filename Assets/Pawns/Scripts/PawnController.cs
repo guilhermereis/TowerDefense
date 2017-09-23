@@ -50,7 +50,7 @@ public class PawnController : MonoBehaviour {
        
     }
 
-    public void SetupWaypoints(int lane_)
+    public void SetupWaypoints(int lane_, int waypoint_)
     {
         myLane = lane_;
        
@@ -67,10 +67,31 @@ public class PawnController : MonoBehaviour {
         else if (myLane == 2)
         {
             waypointLane2 = GameObject.FindGameObjectWithTag("WaypointsLane2");
-            for (int i = 0; i < waypointLane2.transform.childCount; i++)
+
+            //here we decide which waypoint the monster will follow.
+           
+
+            if (waypoint_ == 0 )
             {
-                waypoints.Add(waypointLane2.transform.GetChild(i));
+                Transform waypointA = waypointLane2.transform.Find("waypointA");
+                
+                for (int i = 0; i < waypointA.childCount; i++)
+                {
+                    waypoints.Add(waypointA.GetChild(i));
+                }
+
             }
+            else
+            {
+                Transform waypointB = waypointLane2.transform.Find("waypointB");
+
+                for (int i = 0; i < waypointB.childCount; i++)
+                {
+                    waypoints.Add(waypointB.GetChild(i));
+                }
+            }
+
+            
         }
         else if (myLane == 3)
         {
