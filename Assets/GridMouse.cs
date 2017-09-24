@@ -33,6 +33,8 @@ public class GridMouse : MonoBehaviour
     public GameObject CubeTrack2;
     public GameObject CubeTrack3;
     public GameObject Trees;
+    public GameObject DesertProps;
+    public GameObject SnowTrees;
     public GameObject Edges;
     public float ZOffset;
     private TileMap _tileMap;
@@ -173,6 +175,22 @@ public class GridMouse : MonoBehaviour
         foreach (Transform child in Trees.transform)
         {
          
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+        foreach (Transform child in DesertProps.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+        foreach (Transform child in SnowTrees.transform)
+        {
+
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             //Vector3 position = CoordToPosition(x, z);
