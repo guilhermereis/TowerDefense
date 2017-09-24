@@ -110,6 +110,8 @@ public class TowerController : BuildableController {
         attackCooldown -= Time.deltaTime;
 
 	}
+
+
     public void SetFireRateAndAttackPower()
     {
         float percent = ((float)unitBlueprint.getRegularSellCost() / (float)unitBlueprint.cost);
@@ -118,6 +120,7 @@ public class TowerController : BuildableController {
         string tower3name = "PrefabArcherTower3(Clone)";
         string towerSlowName = "PrefabArcherTower2Slow(Clone)";
         string towerTeslaName = "PrefabArcherTower2Tesla(Clone)";
+        int tower_level = 0;
         int base_ap = 0;
         float base_fr = 0;
         //-----------SET BASE AP AND FR FOR TOWER TYPE-------------
@@ -125,6 +128,7 @@ public class TowerController : BuildableController {
         {
             base_ap = Tower1BaseAP;
             base_fr = Tower1BaseFR;
+            tower_level = 1;
         }
         else if (gameObject.name == tower2name
                  ||gameObject.name == towerSlowName
@@ -132,11 +136,13 @@ public class TowerController : BuildableController {
         {
             base_ap = Tower2BaseAP;
             base_fr = Tower2BaseFR;
+            tower_level = 2;
         }
         else if (gameObject.name == tower3name)
         {
             base_ap = Tower3BaseAP;
             base_fr = Tower3BaseFR;
+            tower_level = 3;
         }
         //-------------------------------------------------------
         if (attackPowerLVL == 0 && fireRateLVL == 0)
@@ -154,7 +160,7 @@ public class TowerController : BuildableController {
             if (apLVLreached < 1)
             {
                 attackPower = base_ap * 1.5f;
-                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.upgradeT1Ad1price);
+                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.GetUpgradePrice(tower_level, Shop.UpgradeType.AttackPower, 1) );
                 apLVLreached = 1;
             }
         }
@@ -163,7 +169,7 @@ public class TowerController : BuildableController {
             if (apLVLreached < 2)
             {
                 attackPower = base_ap * 2.0f;
-                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.upgradeT1Ad2price);
+                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.GetUpgradePrice(tower_level, Shop.UpgradeType.AttackPower, 2));
                 apLVLreached = 2;
             }
         }
@@ -172,7 +178,7 @@ public class TowerController : BuildableController {
             if (apLVLreached < 3)
             {
                 attackPower = base_ap * 2.5f;
-                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.upgradeT1Ad3price);
+                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.GetUpgradePrice(tower_level, Shop.UpgradeType.AttackPower, 3));
                 apLVLreached = 3;
             }
         }
@@ -185,7 +191,7 @@ public class TowerController : BuildableController {
             if (frLVLreached < 1)
             {
                 fireRate = base_fr * 1.5f;
-                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.upgradeT1As1price);
+                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.GetUpgradePrice(tower_level, Shop.UpgradeType.FireRate, 1));
                 frLVLreached = 1;
             }
         }
@@ -194,7 +200,7 @@ public class TowerController : BuildableController {
             if (frLVLreached < 2)
             {
                 fireRate = base_fr * 2.0f;
-                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.upgradeT1As2price);
+                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.GetUpgradePrice(tower_level, Shop.UpgradeType.FireRate, 2));
                 frLVLreached = 2;
             }
         }
@@ -203,7 +209,7 @@ public class TowerController : BuildableController {
             if (frLVLreached < 3)
             {
                 fireRate = base_fr * 2.5f;
-                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.upgradeT1As3price);
+                unitBlueprint.withInterest_sellcost += Mathf.FloorToInt(percent * Shop.instance.GetUpgradePrice(tower_level, Shop.UpgradeType.FireRate, 3));
                 frLVLreached = 3;
             }
         }
