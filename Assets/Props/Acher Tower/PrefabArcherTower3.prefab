@@ -157,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1452188681296356}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.4704576, y: -1.0000007, z: -5.5493436}
+  m_LocalPosition: {x: -16.486774, y: -1.0000007, z: -6.4551034}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4942233263495848}
@@ -174,13 +174,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1286179894221388}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.039, z: 0.823}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4907706804159248}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4960487955987158
 Transform:
   m_ObjectHideFlags: 1
@@ -302,6 +302,7 @@ MonoBehaviour:
   enemies: []
   attackPowerLVL: 0
   fireRateLVL: 0
+  DONE: 0
   attackPoint: {fileID: 1286179894221388}
   arrowPrefab: {fileID: 1701221001243858, guid: 5d2007d58e37719429671996f895010e,
     type: 2}

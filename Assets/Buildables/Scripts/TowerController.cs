@@ -277,7 +277,11 @@ public class TowerController : BuildableController {
         //Debug.DrawLine(attackPoint.transform.position, target.transform.position, Color.blue,2f);
         if(currentAmmo == TowerAmmo.Arrow)
         {
-            GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
+            Vector3 dir = (target.transform.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            Vector3 rotation = lookRotation.eulerAngles;
+
+            GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, Quaternion.Euler(0f, rotation.y, 0f));
             if(arrow != null)
             {
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
@@ -285,9 +289,7 @@ public class TowerController : BuildableController {
                 newArrow.Target = target;
                 newArrow.TowerAttack = attackPower;
 
-                Vector3 dir = (target.transform.position - transform.position).normalized;
-                Quaternion lookRotation = Quaternion.LookRotation(dir);
-                Vector3 rotation = lookRotation.eulerAngles;
+               
 
                 Instantiate(arrowSoundPrefab, transform.position, Quaternion.Euler(0f, rotation.y, 0f));
             }

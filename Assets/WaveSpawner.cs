@@ -27,10 +27,12 @@ public class WaveSpawner : MonoBehaviour {
 
 #region SpawnLocations
     public Transform spawnLocationLane1;
+    public Transform spawnLocationLane2A;
+    public Transform spawnLocationLane2B;
     public Transform spawnLocationLane2;
     public Transform spawnLocationLane3;
     public Transform spawnLocationLane4;
-    #endregion
+#endregion
 
 #region SpawningMonstersNumber
     public int spawningMonsterLane1 = 0;
@@ -102,7 +104,7 @@ public class WaveSpawner : MonoBehaviour {
         if( waveNumberLane1 % 10 == 0)
         {
             GameObject monster = Instantiate(King1, spawnLocationLane1.position, Quaternion.identity);
-            monster.GetComponent<PawnController>().SetupWaypoints(1);
+            monster.GetComponent<PawnController>().SetupWaypoints(1,0);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
         }
@@ -114,7 +116,7 @@ public class WaveSpawner : MonoBehaviour {
             {
                 int monsterIndex = combination_[spawningMonsterLane1] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane1.position, Quaternion.identity);
-                monster.GetComponent<PawnController>().SetupWaypoints(1);
+                monster.GetComponent<PawnController>().SetupWaypoints(1,0);
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 
@@ -146,8 +148,8 @@ public class WaveSpawner : MonoBehaviour {
         //spawns king
         if (waveNumberLane2 % 10 == 0)
         {
-            GameObject monster = Instantiate(King1, spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
-            monster.GetComponent<PawnController>().SetupWaypoints(2);
+            GameObject monster = Instantiate(King1, spawnLocationLane2A.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+            monster.GetComponent<PawnController>().SetupWaypoints(2,0);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
         }
@@ -156,9 +158,12 @@ public class WaveSpawner : MonoBehaviour {
 
             if (timer <= 0)
             {
+                spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
+                int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
+
                 int monsterIndex = combination_[spawningMonsterLane2] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
-                monster.GetComponent<PawnController>().SetupWaypoints(2);
+                monster.GetComponent<PawnController>().SetupWaypoints(2,waypoint);
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 
@@ -192,7 +197,7 @@ public class WaveSpawner : MonoBehaviour {
         if (waveNumberLane3 % 10 == 0)
         {
             GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
-            monster.GetComponent<PawnController>().SetupWaypoints(3);
+            monster.GetComponent<PawnController>().SetupWaypoints(3,0);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
         }
@@ -203,7 +208,7 @@ public class WaveSpawner : MonoBehaviour {
             {
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
-                monster.GetComponent<PawnController>().SetupWaypoints(3);
+                monster.GetComponent<PawnController>().SetupWaypoints(3,0);
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 
@@ -237,7 +242,7 @@ public class WaveSpawner : MonoBehaviour {
         if (waveNumberLane4 % 10 == 0)
         {
             GameObject monster = Instantiate(King1, spawnLocationLane4.position, Quaternion.Euler(new Vector3(0, 180, 0)));
-            monster.GetComponent<PawnController>().SetupWaypoints(4);
+            monster.GetComponent<PawnController>().SetupWaypoints(4,0);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
         }
@@ -249,7 +254,7 @@ public class WaveSpawner : MonoBehaviour {
             {
                 int monsterIndex = combination_[spawningMonsterLane4] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.Euler(new Vector3(0,180,0)));
-                monster.GetComponent<PawnController>().SetupWaypoints(4);
+                monster.GetComponent<PawnController>().SetupWaypoints(4,0);
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 

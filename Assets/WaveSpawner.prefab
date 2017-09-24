@@ -60,6 +60,8 @@ MonoBehaviour:
   totalMonsters: 3
   King1: {fileID: 1613466630584316, guid: b0d0c9e5926a8f948972dafa878169a4, type: 2}
   spawnLocationLane1: {fileID: 0}
+  spawnLocationLane2A: {fileID: 0}
+  spawnLocationLane2B: {fileID: 0}
   spawnLocationLane2: {fileID: 0}
   spawnLocationLane3: {fileID: 0}
   spawnLocationLane4: {fileID: 0}
@@ -67,12 +69,12 @@ MonoBehaviour:
   spawningMonsterLane2: 0
   spawningMonsterLane3: 0
   spawningMonsterLane4: 0
-  waveNumber: 100
-  waveNumberLane1: 100
-  waveNumberLane2: 100
-  waveNumberLane3: 100
-  waveNumberLane4: 100
+  waveNumber: 10
+  waveNumberLane1: 1
+  waveNumberLane2: 1
+  waveNumberLane3: 1
+  waveNumberLane4: 1
   waveProgression: 100
   spawnLocation: {fileID: 0}
   hud: {fileID: 0}
-  maxLanes: 4
+  maxLanes: 2
