@@ -36,6 +36,7 @@ public class GridMouse : MonoBehaviour
     public GameObject DesertProps;
     public GameObject SnowTrees;
     public GameObject Edges;
+    public GameObject EdgesSnow;
     public float ZOffset;
     private TileMap _tileMap;
     public Transform selectionCube;
@@ -204,11 +205,20 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
+        foreach (Transform child in EdgesSnow.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
 
         Destroy(CubeTrack);
         Destroy(CubeTrack2);
         Destroy(CubeTrack3);
         Destroy(Edges);
+        Destroy(EdgesSnow);
         //Destroy(Trees);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
@@ -763,7 +773,7 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
