@@ -191,11 +191,13 @@ public class GridMouse : MonoBehaviour
         }
         foreach (Transform child in SnowTrees.transform)
         {
-
+            //Debug.Log(child.name + " IS GONNA CRASH !!!");
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Debug.Log("TILE: " + x + "," + z + " IS GONNA CRASH !!!");
             //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+            
         }
         foreach (Transform child in Edges.transform)
         {
@@ -203,6 +205,11 @@ public class GridMouse : MonoBehaviour
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             //Vector3 position = CoordToPosition(x, z);
+            if (x == 31 && z == 29)
+            {
+                Debug.Log("31, 29 = Edges");
+            }
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
         foreach (Transform child in EdgesSnow.transform)
@@ -773,7 +780,7 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
