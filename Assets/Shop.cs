@@ -48,6 +48,82 @@ public class Shop : MonoBehaviour {
     private bool canBuildSecondary = true;
     private bool updateGui = true;
 
+    public enum UpgradeType { AttackPower, FireRate };
+    public int GetUpgradePrice(int towerLVL, UpgradeType upgradeType, int upgradeLVL)
+    {
+        int return_value = 0;
+        if (towerLVL == 1)
+        {
+            if (upgradeType == UpgradeType.AttackPower)
+            {
+                switch (upgradeLVL)
+                {
+                    case 1: { return_value = upgradeT1Ad1price; break; }
+                    case 2: { return_value = upgradeT1Ad2price; break; }
+                    case 3: { return_value = upgradeT1Ad3price; break; }
+
+                }
+            }
+            else if (upgradeType == UpgradeType.FireRate)
+            {
+                switch (upgradeLVL)
+                {
+                    case 1: { return_value = upgradeT1As1price; break; }
+                    case 2: { return_value = upgradeT1As2price; break; }
+                    case 3: { return_value = upgradeT1As3price; break; }
+
+                }
+            }
+        }
+        else if (towerLVL == 2)
+        {
+            if (upgradeType == UpgradeType.AttackPower)
+            {
+                switch (upgradeLVL)
+                {
+                    case 1: { return_value = upgradeT2Ad1price; break; }
+                    case 2: { return_value = upgradeT2Ad2price; break; }
+                    case 3: { return_value = upgradeT2Ad3price; break; }
+
+                }
+            }
+            else if (upgradeType == UpgradeType.FireRate)
+            {
+                switch (upgradeLVL)
+                {
+                    case 1: { return_value = upgradeT2As1price; break; }
+                    case 2: { return_value = upgradeT2As2price; break; }
+                    case 3: { return_value = upgradeT2As3price; break; }
+
+                }
+            }
+        }
+        else if (towerLVL == 3)
+        {
+            if (upgradeType == UpgradeType.AttackPower)
+            {
+                switch (upgradeLVL)
+                {
+                    case 1: { return_value = upgradeT3Ad1price; break; }
+                    case 2: { return_value = upgradeT3Ad2price; break; }
+                    case 3: { return_value = upgradeT3Ad3price; break; }
+
+                }
+            }
+            else if (upgradeType == UpgradeType.FireRate)
+            {
+                switch (upgradeLVL)
+                {
+                    case 1: { return_value = upgradeT3As1price; break; }
+                    case 2: { return_value = upgradeT3As2price; break; }
+                    case 3: { return_value = upgradeT3As3price; break; }
+
+                }
+            }
+        }
+        return return_value;
+    }
+
     void Awake()
     {
         if (instance != null) //if instance has been set before 
