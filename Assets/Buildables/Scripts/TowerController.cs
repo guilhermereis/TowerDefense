@@ -13,8 +13,8 @@ public class TowerController : BuildableController {
     protected float fireRate = 0.7f;
     public int attackPowerLVL = 0;
     public int fireRateLVL = 0;
-    private int apLVLreached = 0;
-    private int frLVLreached = 0;
+    protected int apLVLreached = 0;
+    protected int frLVLreached = 0;
     public bool DONE = false;
 
     //-----------SETTING BASE AP AND FR-----------------
