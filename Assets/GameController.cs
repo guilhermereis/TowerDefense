@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour {
                 GameObject du_object = GameObject.Find("DebugOptions");
                 if (du_object != null)
                 {
-                    du_object.SetActive(true);
+                    du_object.GetComponent<DebugOptions>().Show();
                     Debug.Log("Want to try Again ?");
                 }
             }
