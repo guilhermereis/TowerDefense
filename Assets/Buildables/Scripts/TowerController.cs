@@ -345,7 +345,7 @@ public class TowerController : BuildableController {
 
     public override void OnTriggerEnter(Collider other)
 	{
-        Debug.Log(other.GetType());
+        //Debug.Log(other.GetType());
 
         if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(CapsuleCollider))
 		{

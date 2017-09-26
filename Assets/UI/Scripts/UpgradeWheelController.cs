@@ -303,8 +303,11 @@ public class UpgradeWheelController : MonoBehaviour {
     }
 
     public void UpgradeLvlOnClick() {
-        if(upgradeButtonsEnabled)
+        if (upgradeButtonsEnabled)
+        {
             BuildManager.instance.UpgradeSelectedBuild();
+            Debug.Log("CLICKED ONE TIME");
+        }
     }
 
     public void UpgradeAttributeOnClick(int att) {

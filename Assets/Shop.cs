@@ -182,7 +182,13 @@ public class Shop : MonoBehaviour {
             buildManager.SelectUnitToBuild(missileLauncher);
         }
     }
-
+    public void SelectTower2Unit() {
+        buildManager.SelectUnitToBuild(towerLevel2);
+    }
+    public void SelectTower3Unit()
+    {
+        buildManager.SelectUnitToBuild(towerLevel3);
+    }
     public void initializeUIValues() {
         standardUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().text = "" + standardUnit.cost;
         standardUnitButton.transform.Find("Coin").transform.Find("PriceShadow").GetComponent<Text>().text = "" + standardUnit.cost;

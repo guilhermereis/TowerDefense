@@ -46,7 +46,12 @@ public class CastleHealth : MonoBehaviour {
         }
         healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
     }
-	
+    public void Repair()
+    {
+        health += 500;
+    }
+
+
     //Change this later to actually the monsters hit with theirs fire rate
 	// Update is called once per frame
 	void Update () {

@@ -114,6 +114,7 @@ public class BuildManager : MonoBehaviour {
 
     public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position, bool upgraded)
     {
+        Debug.Log("Gonna build !!!");
         if (upgraded == false)
         {
             if (PlayerStats.Money < unitToBuild.cost)
@@ -138,6 +139,12 @@ public class BuildManager : MonoBehaviour {
         {
             tempList[index].GetComponent<TowerController>().BuildEffect();
         }
+        for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
+        {
+            Debug.Log("EIS A LISTA");
+            Debug.Log(i+": "+gridMouse.ListOfGameObjects[i].name);
+        }
+
         //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
     public void BuildUnitOn(ref List<GameObject> tempList, int index, Vector3 position, Quaternion rotation, bool upgraded = false)
@@ -161,6 +168,11 @@ public class BuildManager : MonoBehaviour {
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
         tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
+        {
+            Debug.Log("EIS A LISTA");
+            Debug.Log(i + ": " + gridMouse.ListOfGameObjects[i].name);
+        }
         Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
 
@@ -437,6 +449,11 @@ public class BuildManager : MonoBehaviour {
             int x = Mathf.FloorToInt(SelectedPosition.x + gridSize.x / 2);
             int z = Mathf.FloorToInt(SelectedPosition.z + gridSize.y / 2);
             Vector3 position = gridMouse.CoordToPosition(x, z);
+
+            //remove the previous version of the unit from the list
+            BuildableController bc = gridMouse.propertiesMatrix[x, z].builtGameObject.GetComponent<BuildableController>();
+            coolRemoveAt(bc.getArrayListPosition());
+
             //destroys the current object
             Destroy(gridMouse.propertiesMatrix[x, z].builtGameObject);
             int added_index = gridMouse.buildUnitAndAddItToTheList(position, true);
