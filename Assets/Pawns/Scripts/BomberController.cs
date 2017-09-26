@@ -21,7 +21,28 @@ public class BomberController : EnemyController {
         base.Awake();
         speed = 2;
 
+        mats = transform.Find("PrefabBomberGoblin").Find("polySurface1").GetComponent<Renderer>().materials;
+        mats[0] = frozenMaterial;
+
+        originalMaterial = transform.Find("PrefabBomberGoblin").Find("polySurface1").GetComponent<Renderer>().materials;
     }
+
+    public override void EnterFrozenTime()
+    {
+        base.EnterFrozenTime();
+        if (originalMaterial != null)
+            transform.Find("PrefabBomberGoblin").Find("polySurface1").GetComponent<Renderer>().materials = mats;
+    }
+
+    public override void LeaveFrozenTime()
+    {
+        base.LeaveFrozenTime();
+        if (originalMaterial != null)
+            transform.Find("PrefabBomberGoblin").Find("polySurface1").GetComponent<Renderer>().materials = originalMaterial;
+    }
+
+
+
 
     public override void OnMoving()
     {

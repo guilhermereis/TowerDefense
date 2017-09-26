@@ -7,6 +7,9 @@ public class Wave  {
     //wanderer 1
     //warrior 2
     //bomber 3
+    //4 great wanderer
+    //5 great warrior
+    //6 great bomber
 
 	public int totalScore;
 	public int numberOfMonsters;
@@ -38,7 +41,7 @@ public class Wave  {
 
         while (i < numberOfMonsters)
         {
-            int m = Mathf.RoundToInt(Random.Range(1f, 3f));
+            int m = Mathf.RoundToInt(Random.Range(1f, 6f));
 
             if (sum + m <= totalScore)
             {

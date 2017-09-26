@@ -21,7 +21,26 @@ public class WandererController : EnemyController
     {
         base.Awake();
         speed = 1;
+        mats = gameObject.GetComponent<Renderer>().materials;
+        mats[0] = frozenMaterial;
+        originalMaterial = gameObject.GetComponent<Renderer>().materials;
+
+    }
+
+    public override void EnterFrozenTime()
+    {
+        base.EnterFrozenTime();
+        if(originalMaterial != null)
+            gameObject.GetComponent<Renderer>().materials = mats;
+
         
+    }
+
+    public override void LeaveFrozenTime()
+    {
+        base.LeaveFrozenTime();
+        if(originalMaterial!= null)
+            gameObject.GetComponent<Renderer>().materials= originalMaterial;
     }
 
     public override void OnMoving()

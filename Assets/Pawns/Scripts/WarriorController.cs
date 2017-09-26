@@ -11,6 +11,8 @@ public class WarriorController : EnemyController {
 
     public AudioSource spearAttackSound;
 
+    
+
     // Use this for initialization
     void Start () {
 		weight = 2;
@@ -18,9 +20,33 @@ public class WarriorController : EnemyController {
 		character = (WarriorCharacter)GetComponent<WarriorCharacter>();
         anim = (WarriorGoblingAnimatorController)GetComponentInChildren<WarriorGoblingAnimatorController>();
     }
-	
-	// Update is called once per frame
-	protected override void Update () {
+
+    protected override void Awake()
+    {
+        base.Awake();
+        mats = transform.Find("PrefabWarriorGobling").Find("polySurface1").GetComponent<Renderer>().materials;
+        mats[0] = frozenMaterial;
+        
+        originalMaterial = transform.Find("PrefabWarriorGobling").Find("polySurface1").GetComponent<Renderer>().materials;
+
+    }
+
+    public override void EnterFrozenTime()
+    {
+        base.EnterFrozenTime();
+        if (originalMaterial != null)
+            transform.Find("PrefabWarriorGobling").Find("polySurface1").GetComponent<Renderer>().materials = mats;
+    }
+
+    public override void LeaveFrozenTime()
+    {
+        base.LeaveFrozenTime();
+        if (originalMaterial != null)
+            transform.Find("PrefabWarriorGobling").Find("polySurface1").GetComponent<Renderer>().materials = originalMaterial;
+    }
+
+    // Update is called once per frame
+    protected override void Update () {
 		base.Update();
         
         anim.speed = nav.velocity.magnitude;
