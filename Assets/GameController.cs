@@ -73,6 +73,12 @@ public class GameController : MonoBehaviour {
             {
                 Debug.Log("Game Over Man");
                 game_over = true;
+                GameObject du_object = GameObject.Find("DebugOptions");
+                if (du_object != null)
+                {
+                    du_object.SetActive(true);
+                    Debug.Log("Want to try Again ?");
+                }
             }
         }
         else if (gameState == GameState.EndWave)

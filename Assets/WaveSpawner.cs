@@ -361,6 +361,14 @@ public class WaveSpawner : MonoBehaviour {
     //waves set up
     void CreateWave()
     {
+        GameObject du_object = GameObject.Find("DebugOptions");
+        if (du_object != null) {
+            DebugOptions du = du_object.GetComponent<DebugOptions>();
+            du.doSaveAll();
+            Debug.Log("INITIATING WAVE... SAVED ALL OBJECTS");
+        }
+
+
         finishedSpawns = 0;
         //reseting monsters indexes;
         spawningMonsterLane1 = 0;

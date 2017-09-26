@@ -10,13 +10,14 @@ public class DebugOptions : MonoBehaviour
     BuildManager buildManager;
     List<PropertyScript.StructureState> listOfStates;
     Shop shop;
-    
+
     void Start()
     {
         gridMouse = GridMouse.instance;
         buildManager = BuildManager.instance;
         shop = Shop.instance;
         listOfStates = new List<PropertyScript.StructureState>();
+        Hide();
     }
 
     public void doDestroyAll()
@@ -50,7 +51,7 @@ public class DebugOptions : MonoBehaviour
             if (gridMouse.ListOfGameObjects[i] == null) {
                 Debug.Log("IIIIIIIIITS NULL !!!!");
             }
-            Debug.Log("LALALALA COUNT = "+ gridMouse.ListOfGameObjects.Count);
+            Debug.Log("LALALALA COUNT = " + gridMouse.ListOfGameObjects.Count);
 
 
             //Get information from the Buildable
@@ -62,7 +63,7 @@ public class DebugOptions : MonoBehaviour
             PropertyScript.StructureState state =
                 new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
                                                   gridMouse.ListOfGameObjects[i].transform,
-                                                    bc.Health,tc.fireRateLVL,tc.attackPowerLVL);
+                                                    bc.Health, tc.fireRateLVL, tc.attackPowerLVL);
             Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
             listOfStates.Add(state);
             Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
@@ -76,18 +77,18 @@ public class DebugOptions : MonoBehaviour
             if (listOfStates[i].structureName == "PrefabArcherTower1(Clone)")
             {
                 shop.SelectStandardUnit();
-                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position,false);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
                 Vector2 gridSize = gridMouse.getGridSize();
                 int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
 
-                gridMouse.propertiesMatrix[x,z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
 
                 //Set Fire Rate and Attack Power from saved state
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerController>()
-                        .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL,listOfStates[i].attackPowerLVL);
-                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL+", "+listOfStates[i].attackPowerLVL);
+                        .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
+                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == "PrefabArcherTower2(Clone)")
@@ -150,5 +151,17 @@ public class DebugOptions : MonoBehaviour
             }
 
         }
+    }
+    public void Hide()
+    {
+        CanvasGroup cg = GetComponent<CanvasGroup>();
+        cg.alpha = 0f; //this makes everything transparent
+        cg.blocksRaycasts = false; //this prevents the UI element to receive input events
+    }
+    public void Show()
+    {
+        CanvasGroup cg = GetComponent<CanvasGroup>();
+        cg.alpha = 1f;
+        cg.blocksRaycasts = true;
     }
 }
