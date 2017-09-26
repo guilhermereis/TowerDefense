@@ -50,6 +50,15 @@ public class BuildManager : MonoBehaviour {
         {
             PlayerStats.AddMoney(100);
         }
+        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        {
+            GameObject castleObject = GameObject.Find("Prefab_Castle");
+            if (castleObject != null)
+            {
+                Debug.Log("GONNA LOSE 500 HEALTH");
+                castleObject.GetComponent<CastleHealth>().health -= 500;
+            }
+        }
     }
 
     public UnitBlueprint getSelectedUnit()
