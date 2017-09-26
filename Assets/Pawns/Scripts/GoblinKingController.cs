@@ -27,6 +27,31 @@ public class GoblinKingController : EnemyController {
         cameraManager = GameObject.Find("/GameMode/CameraManager").GetComponent<CameraManager>();
     }
 
+
+    protected override void Awake()
+    {
+        base.Awake();
+        mats = transform.Find("polySurface2").GetComponent<Renderer>().materials;
+        mats[0] = frozenMaterial;
+        originalMaterial = transform.Find("polySurface2").GetComponent<Renderer>().materials;
+    }
+
+    public override void EnterFrozenTime()
+    {
+        base.EnterFrozenTime();
+        if (originalMaterial != null)
+            transform.Find("polySurface2").GetComponent<Renderer>().materials = mats;
+    }
+
+    public override void LeaveFrozenTime()
+    {
+        base.LeaveFrozenTime();
+        if (originalMaterial != null)
+            transform.Find("polySurface2").GetComponent<Renderer>().materials = originalMaterial;
+    }
+
+
+
     // Update is called once per frame
     protected override void Update() {
         base.Update();

@@ -10,7 +10,7 @@ public class WaveSpawner : MonoBehaviour {
 
     public int[] monstersType;
 
-    public int totalMonsters = 3;
+    public int totalMonsters = 6;
 
     int waveMonsters = 0;
 

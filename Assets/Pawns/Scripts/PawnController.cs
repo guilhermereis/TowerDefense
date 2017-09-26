@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 public class PawnController : MonoBehaviour {
 
+    public Material frozenMaterial;
+    protected Material[] originalMaterial;
+    protected Material[] mats;
+
     public delegate void DeadPawnDelegate(GameObject enemy);
     public DeadPawnDelegate deadPawn;
     protected List<GameObject> enemiesInRange;
@@ -30,6 +34,8 @@ public class PawnController : MonoBehaviour {
     public List<Transform> waypoints;
     int nextWaypoint = 1;
 
+
+
 #region Waypoint
     GameObject waypointLane1;
     GameObject waypointLane2;
@@ -44,10 +50,14 @@ public class PawnController : MonoBehaviour {
         nav = GetComponent<NavMeshAgent>();
         nav.speed = speed;
 
-       
-       
         
+
+ 
+
        
+
+
+
     }
 
     public void SetupWaypoints(int lane_, int waypoint_)
@@ -115,9 +125,7 @@ public class PawnController : MonoBehaviour {
 
     private void Start()
     {
-       
-       
-       
+      
     }
 
     public PawnState CurrentState {  get { return currentState; }
@@ -180,6 +188,17 @@ public class PawnController : MonoBehaviour {
 		return false;
 	}
 
+
+    public virtual void EnterFrozenTime()
+    {
+        nav.speed = 0.5f;
+    }
+
+    public virtual void LeaveFrozenTime()
+    {
+        nav.speed = speed;
+    }
+
     // Update is called once per frame
     protected virtual void Update () {
         //Debug.DrawLine(transform.position, finalDestination.position);
@@ -187,9 +206,9 @@ public class PawnController : MonoBehaviour {
         if(nav != null)
         {
             if (gameObject.GetComponent<PawnCharacter>().isSlow)
-                nav.speed = 0.5f;
+                EnterFrozenTime();
             else
-                nav.speed = speed;
+                LeaveFrozenTime();
 
         }
 

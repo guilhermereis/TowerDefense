@@ -170,7 +170,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -199,8 +199,12 @@ MonoBehaviour:
   defense: 100
   attack: 200
   attackRate: 0.7
-  isDying: 0
+  isDead: 0
+  isSlow: 0
+  exploded: 0
   healthBar: {fileID: 0}
+  painSoundPrefab: {fileID: 0}
+  coinEffectPrefab: {fileID: 0}
 --- !u!114 &114365679344871748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,8 +216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0b251081ccff34db1da118f6bfe45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frozenMaterial: {fileID: 0}
   currentState: 2
   finalDestination: {fileID: 0}
+  nav: {fileID: 0}
   speed: 1
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
@@ -227,6 +233,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  myLane: 0
   weight: 0
 --- !u!114 &114646612156130444
 MonoBehaviour:
@@ -243,6 +250,7 @@ MonoBehaviour:
   hpBarPrefab: {fileID: 1419856877115170, guid: 851d77b0ff520d442af9944588f5321e,
     type: 2}
   canvas: {fileID: 0}
+  heightOffset: {x: 0, y: 0, z: 0}
 --- !u!135 &135277013311560694
 SphereCollider:
   m_ObjectHideFlags: 1
