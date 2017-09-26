@@ -21,7 +21,11 @@ public class DebugOptions : MonoBehaviour
 
     public void doDestroyAll()
     {
-
+        UpgradeWheelController uwc = 
+            GameObject.Find("UpgradeWheel").GetComponent<UpgradeWheelController>();
+        uwc.gameObject.SetActive(false);
+        uwc.isActive = false;
+        uwc.clearButtons();
         Debug.Log("Gonna destroy all !");
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
