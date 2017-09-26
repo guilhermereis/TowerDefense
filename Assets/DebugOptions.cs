@@ -21,11 +21,14 @@ public class DebugOptions : MonoBehaviour
 
     public void doDestroyAll()
     {
-        UpgradeWheelController uwc = 
-            GameObject.Find("UpgradeWheel").GetComponent<UpgradeWheelController>();
-        uwc.gameObject.SetActive(false);
-        uwc.isActive = false;
-        uwc.clearButtons();
+        GameObject upgrade_wheel = GameObject.Find("UpgradeWheel");
+        if (upgrade_wheel != null)
+        {
+            UpgradeWheelController uwc = upgrade_wheel.GetComponent<UpgradeWheelController>();
+            uwc.gameObject.SetActive(false);
+            uwc.isActive = false;
+            uwc.clearButtons();
+        }
         Debug.Log("Gonna destroy all !");
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
@@ -44,6 +47,12 @@ public class DebugOptions : MonoBehaviour
         TowerController tc;
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
+            if (gridMouse.ListOfGameObjects[i] == null) {
+                Debug.Log("IIIIIIIIITS NULL !!!!");
+            }
+            Debug.Log("LALALALA COUNT = "+ gridMouse.ListOfGameObjects.Count);
+
+
             //Get information from the Buildable
             bc = gridMouse.ListOfGameObjects[i].GetComponent<BuildableController>();
             //--------------------------------------------------------------------------
@@ -79,6 +88,40 @@ public class DebugOptions : MonoBehaviour
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL,listOfStates[i].attackPowerLVL);
                 Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL+", "+listOfStates[i].attackPowerLVL);
+                Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
+            }
+            else if (listOfStates[i].structureName == "PrefabArcherTower2(Clone)")
+            {
+                shop.SelectTower2Unit();
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                Vector2 gridSize = gridMouse.getGridSize();
+                int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
+                int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
+
+                gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+
+                //Set Fire Rate and Attack Power from saved state
+                gridMouse.ListOfGameObjects[added_index]
+                    .GetComponent<TowerController>()
+                        .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
+                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+                Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
+            }
+            else if (listOfStates[i].structureName == "PrefabArcherTower3(Clone)")
+            {
+                shop.SelectTower3Unit();
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                Vector2 gridSize = gridMouse.getGridSize();
+                int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
+                int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
+
+                gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+
+                //Set Fire Rate and Attack Power from saved state
+                gridMouse.ListOfGameObjects[added_index]
+                    .GetComponent<TowerController>()
+                        .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
+                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == "PrefabCamp(Clone)")
