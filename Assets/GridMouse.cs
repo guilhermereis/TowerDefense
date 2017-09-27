@@ -25,7 +25,7 @@ public class GridMouse : MonoBehaviour
 
     //ignore layers 8,9,10 and 2 (IgnoreRaycast Layer)
     //(lowest order bit is 0-indexed)
-    private int layerMask = Convert.ToInt32("11111111111111111111000011101001", 2);
+    private int layerMask = Convert.ToInt32("11111111111111111111100011101001", 2);
     //private int layerMask = ~(1 << 10);
 
     public static GridMouse instance;
@@ -720,20 +720,13 @@ public class GridMouse : MonoBehaviour
     }
     private void HandlePreviewTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
+        Debug.Log("HANDLING PREVIEW TOWER");
         if (didHit)
         {
             if (previousPosition == position)
             {
                 //stepped over a track tile
-                if (propertiesMatrix[x, z].type == "Track")
-                {
-                    //don't build
-                }
-                else if (propertiesMatrix[x, z].type == "Tree")
-                {
-                    //don't build
-                }
-                else
+                if(propertiesMatrix[x, z].type == "Normal")
                 {//if the logic doens't involve going over track tiles
                     if (previewMatrix[x, z] == false)
                     {
@@ -750,15 +743,7 @@ public class GridMouse : MonoBehaviour
                 if (temporaryInstance != null)
                 {
                     //stepped over a track tile
-                    if (propertiesMatrix[x, z].type == "Track")
-                    {
-
-                    }
-                    else if (propertiesMatrix[x, z].type == "Tree")
-                    {
-                        //don't build
-                    }
-                    else
+                    if (propertiesMatrix[x, z].type == "Normal")
                     {
                         //if the logic doens't involve going over track tiles
                         Destroy(temporaryInstance);
@@ -799,11 +784,11 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
-            { 
+            {
                 if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
                 {
                     HandlePreviewSoldierCamp(ray, hitInfo, didHit, x, z);
@@ -812,6 +797,10 @@ public class GridMouse : MonoBehaviour
                 {
                     HandlePreviewTower(ray, hitInfo, didHit, x, z);
                 }
+            }
+            else
+            {
+                Debug.Log("JUST HIT: " + hitInfo.transform.gameObject.name);
             }
         }
 	}
