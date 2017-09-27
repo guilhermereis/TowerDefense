@@ -441,12 +441,13 @@ public class GridMouse : MonoBehaviour
 
         if (propertyInQuestion.unit != null) // If the tile contains a Structure
         {
-            buildManager.DeselectUnitToBuild();
-            buildManager.DeselectSelectedUnit();
-            //buildManager.HideOptions();
-            //BuildManager.instance.HideOptions();
-            SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-            Debug.Log("Selecionou a posição: " + x + ", " + z);
+            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                buildManager.DeselectUnitToBuild();
+                buildManager.DeselectSelectedUnit();
+                SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
+                Debug.Log("Selecionou a posição: " + x + ", " + z);
+            }
         }
         else if (CheckIfHitStructure()) // If I hit a Structure
         {
