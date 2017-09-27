@@ -658,10 +658,10 @@ public class WaveSpawner : MonoBehaviour {
         //load previously saved money
         PlayerStats.Money = saved_money;
 
-        //Change game state
+        //Restart wave
         GameController gc = GameObject.Find("GameMode").GetComponent<GameController>();
         gc.game_over = false;
-        GameController.ChangeGameState(GameState.BeginWave);
+        RetryWave();
 
         //Hide Try Again Window
         DebugOptions debugOptions = GameObject.Find("DebugOptions").GetComponent<DebugOptions>();
