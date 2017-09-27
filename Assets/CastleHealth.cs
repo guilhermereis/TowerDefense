@@ -7,7 +7,7 @@ public class CastleHealth : MonoBehaviour {
 
     public float health;
     public float maxHealth;
-    Animator castleDestructionAnimator;
+    public static Animator castleDestructionAnimator;
     private List<PawnCharacter> enemies;
     public float damageRate = 0.2f;
     public float countdown;
@@ -64,7 +64,7 @@ public class CastleHealth : MonoBehaviour {
     }
 
 
-    void UpdateHealthBarGfx(float value)
+    public void UpdateHealthBarGfx(float value)
     {
         healthBar.fillAmount = value/maxHealth;
         

@@ -6,6 +6,7 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour {
     public List<GameObject> monsterBatch;
     public GameObject[] monstersPrefab;
+    public GameObject castlePrefab;
     private Minimap minimap;
 
     public int[] monstersType;
@@ -633,5 +634,45 @@ public class WaveSpawner : MonoBehaviour {
             }
 
         }
+
+
+        GameController.ChangeGameState(GameState.BeginWave);
+        CastleHealth.castleDestructionAnimator.enabled = false;
+
+        GameObject castleObject = GameObject.Find("Prefab_Castle");
+        Destroy(castleObject);
+
+        GameObject gameMap = GameObject.Find("Game Map");
+        //GameObject newCastle = Instantiate(castlePrefab, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0f, 0f, -180f)));
+        GameObject newCastle = Instantiate(castlePrefab, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0f, 0f, -180f)));
+        //newCastle.transform.localScale = castleObject.transform.localScale;
+        newCastle.transform.parent = gameMap.transform;
+        newCastle.transform.localScale = new Vector3(1f, 1f, 1f);
+        newCastle.transform.RotateAround(Vector3.zero, Vector3.right, -90f);
+        
+        newCastle.GetComponent<CastleHealth>().health = 5000;
+        newCastle.GetComponent<CastleHealth>().UpdateHealthBarGfx(5000);
+
+        GameController.game_over = false;
+
+
+
+
+        //DESTROY HEALTH BARS
+        GameObject healthBarsObject = GameObject.Find("HealthBars");
+        foreach (Transform child in healthBarsObject.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+
+
     }
+
+
+
+
+
+
 }
+
