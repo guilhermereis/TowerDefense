@@ -18,7 +18,22 @@ public class CastleHealth : MonoBehaviour {
     AudioSource implosionSound;
 
     ParticleSystem demolitionEffect;
-	// Use this for initialization
+    // Use this for initialization
+
+    void Awake()
+    {
+        Canvas[] allCanvas = GameObject.FindObjectsOfType<Canvas>();
+        foreach (Canvas c in allCanvas)
+        {
+            if (c.CompareTag("HUD"))
+            {
+                HUD = c;
+                break;
+            }
+
+        }
+        healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
+    }
 	void Start () {
         countdown = 0;
 
@@ -34,17 +49,7 @@ public class CastleHealth : MonoBehaviour {
 
         implosionSound = GetComponent<AudioSource>();
 
-        Canvas[] allCanvas = GameObject.FindObjectsOfType<Canvas>();
-        foreach(Canvas c in allCanvas)
-        {
-            if (c.CompareTag("HUD"))
-            {
-                HUD = c;
-                break;
-            }
-
-        }
-        healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
+        
     }
     public void Repair()
     {

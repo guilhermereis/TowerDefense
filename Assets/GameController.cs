@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
     
 
     public static GameState gameState;
-    public static bool game_over = false;
+    public bool game_over = false;
 
     public GameObject endWaveSound;
     public GameObject gameStateUI;

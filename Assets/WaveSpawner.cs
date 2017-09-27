@@ -636,7 +636,15 @@ public class WaveSpawner : MonoBehaviour {
         }
 
 
+        //Change game state
+        GameController gc = GameObject.Find("GameMode").GetComponent<GameController>();
+        gc.game_over = false;
         GameController.ChangeGameState(GameState.BeginWave);
+
+        //Hide Try Again Window
+        DebugOptions debugOptions = GameObject.Find("DebugOptions").GetComponent<DebugOptions>();
+        debugOptions.Hide();
+
         CastleHealth.castleDestructionAnimator.enabled = false;
 
         GameObject castleObject = GameObject.Find("Prefab_Castle");
@@ -649,11 +657,17 @@ public class WaveSpawner : MonoBehaviour {
         newCastle.transform.parent = gameMap.transform;
         newCastle.transform.localScale = new Vector3(1f, 1f, 1f);
         newCastle.transform.RotateAround(Vector3.zero, Vector3.right, -90f);
-        
-        newCastle.GetComponent<CastleHealth>().health = 5000;
-        newCastle.GetComponent<CastleHealth>().UpdateHealthBarGfx(5000);
 
-        GameController.game_over = false;
+
+        CastleHealth castleHealth = newCastle.GetComponent<CastleHealth>();
+        castleHealth.enabled = true;
+
+        
+
+        castleHealth.health = 5000;
+        castleHealth.UpdateHealthBarGfx(5000);
+
+        
 
 
 
@@ -665,6 +679,8 @@ public class WaveSpawner : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
+
+        
 
 
     }

@@ -31,7 +31,6 @@ public class DebugOptions : MonoBehaviour
     public void doLoadAll()
     {
         waveSpawner.doLoadAll();
-        Hide();
     }
     public void Hide()
     {
