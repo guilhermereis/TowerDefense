@@ -667,9 +667,9 @@ public class WaveSpawner : MonoBehaviour {
         castleHealth.health = 5000;
         castleHealth.UpdateHealthBarGfx(5000);
 
-        
-
-
+        //clear minimap
+        Minimap minimap = GameObject.Find("Minimap").GetComponent<Minimap>();
+        minimap.ClearMonsterBatch();
 
 
         //DESTROY HEALTH BARS

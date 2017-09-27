@@ -34,6 +34,10 @@ public class Minimap : MonoBehaviour {
     }
 
     public void ClearMonsterBatch() {
+        for (int i = 0; i < allSquares.Count; i++)
+        {
+            Destroy(allSquares[i]);
+        }
         allSquares.Clear();
     }
 
