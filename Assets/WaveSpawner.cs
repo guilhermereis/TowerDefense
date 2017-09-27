@@ -8,7 +8,7 @@ public class WaveSpawner : MonoBehaviour {
     public GameObject[] monstersPrefab;
     public GameObject castlePrefab;
     private Minimap minimap;
-
+    private int saved_money = 0;
     public int[] monstersType;
 
     public int totalMonsters = 6;
@@ -522,6 +522,8 @@ public class WaveSpawner : MonoBehaviour {
     public void doSaveAll()
     {
         Debug.Log("Gonna save all !");
+        saved_money = PlayerStats.Money;
+
         listOfStates = new List<PropertyScript.StructureState>();
         BuildableController bc;
         TowerController tc;
@@ -635,6 +637,8 @@ public class WaveSpawner : MonoBehaviour {
 
         }
 
+        //load previously saved money
+        PlayerStats.Money = saved_money;
 
         //Change game state
         GameController gc = GameObject.Find("GameMode").GetComponent<GameController>();
