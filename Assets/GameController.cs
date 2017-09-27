@@ -73,10 +73,10 @@ public class GameController : MonoBehaviour {
             {
                 Debug.Log("Game Over Man");
                 game_over = true;
-                GameObject du_object = GameObject.Find("DebugOptions");
-                if (du_object != null)
+                GameObject sc_object = GameObject.Find("SecondChanceDialog");
+                if (sc_object != null)
                 {
-                    du_object.GetComponent<DebugOptions>().Show();
+                    sc_object.GetComponent<SecondChance>().Show();
                     Debug.Log("Want to try Again ?");
                 }
             }
