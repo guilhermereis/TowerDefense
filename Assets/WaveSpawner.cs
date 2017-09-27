@@ -378,6 +378,11 @@ public class WaveSpawner : MonoBehaviour {
     public void RetryWave()
     {
         startedSpawn = false;
+        finishedSpawns = 0;
+        spawningMonsterLane1 = 0;
+        spawningMonsterLane2 = 0;
+        spawningMonsterLane3 = 0;
+        spawningMonsterLane4 = 0;
         GameController.ChangeGameState(GameState.Waving);
     }
 
@@ -388,9 +393,9 @@ public class WaveSpawner : MonoBehaviour {
         Debug.Log("INITIATING WAVE... SAVED ALL OBJECTS");
 
 
+        //reseting monsters indexes;
         startedSpawn = false;
         finishedSpawns = 0;
-        //reseting monsters indexes;
         spawningMonsterLane1 = 0;
         spawningMonsterLane2 = 0;
         spawningMonsterLane3 = 0;
