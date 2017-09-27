@@ -647,7 +647,7 @@ public class WaveSpawner : MonoBehaviour {
 
         CastleHealth.castleDestructionAnimator.enabled = false;
 
-        GameObject castleObject = GameObject.Find("Prefab_Castle");
+        GameObject castleObject = GameObject.FindWithTag("Castle");
         Destroy(castleObject);
 
         GameObject gameMap = GameObject.Find("Game Map");

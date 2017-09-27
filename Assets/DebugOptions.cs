@@ -34,13 +34,13 @@ public class DebugOptions : MonoBehaviour
     }
     public void Hide()
     {
-        CanvasGroup cg = GetComponent<CanvasGroup>();
+        CanvasGroup cg = GameObject.Find("TryAgainCanvas").GetComponent<CanvasGroup>();
         cg.alpha = 0f; //this makes everything transparent
         cg.blocksRaycasts = false; //this prevents the UI element to receive input events
     }
     public void Show()
     {
-        CanvasGroup cg = GetComponent<CanvasGroup>();
+        CanvasGroup cg = GameObject.Find("TryAgainCanvas").GetComponent<CanvasGroup>();
         cg.alpha = 1f;
         cg.blocksRaycasts = true;
     }
