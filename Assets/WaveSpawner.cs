@@ -69,6 +69,7 @@ public class WaveSpawner : MonoBehaviour {
 
     public Canvas hud;
 
+    bool startedSpawn = false;
   
     int finishedSpawns = 0;
     public int maxLanes = 1;
@@ -116,6 +117,7 @@ public class WaveSpawner : MonoBehaviour {
             GameObject monster = Instantiate(King1, spawnLocationLane1.position, Quaternion.identity);
             monster.GetComponent<PawnController>().SetupWaypoints(1,0);
             monsterBatch.Add(monster);
+            monster.transform.parent = transform;
             minimap.UpdateMonsterBatch();
         }
 
@@ -162,6 +164,7 @@ public class WaveSpawner : MonoBehaviour {
             monster.GetComponent<PawnController>().SetupWaypoints(2,0);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
+            monster.transform.parent = transform;
         }
         while (spawningMonsterLane2 < combination_.Length)
         {
@@ -210,6 +213,7 @@ public class WaveSpawner : MonoBehaviour {
             monster.GetComponent<PawnController>().SetupWaypoints(3,0);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
+            monster.transform.parent = transform;
         }
         while (spawningMonsterLane3 < combination_.Length)
         {
@@ -255,6 +259,7 @@ public class WaveSpawner : MonoBehaviour {
             monster.GetComponent<PawnController>().SetupWaypoints(4,0);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
+            monster.transform.parent = transform;
         }
 
         while (spawningMonsterLane4 < combination_.Length)
@@ -304,27 +309,33 @@ public class WaveSpawner : MonoBehaviour {
             else
             {
                 //Debug.Log(waveProgression);
-                GameController.ChangeGameState(GameState.Waving);
                 StopAllCoroutines();
+                GameController.ChangeGameState(GameState.Waving);
+                
+            }
 
-                //setting when lanes a free to spawn monsters
 
-                if(maxLanes == 1)
+        }
+        else if(GameController.gameState == GameState.Waving)
+        {
+
+            if (!startedSpawn) {
+                if (maxLanes == 1)
                 {
                     StartCoroutine("SpawnLane1", combinationLane1);
 
                 }
-                else if( maxLanes == 2)
+                else if (maxLanes == 2)
                 {
                     StartCoroutine("SpawnLane1", combinationLane1);
-                    
+
                     StartCoroutine("SpawnLane2", combinationLane2);
 
                 }
-                else if( maxLanes == 3)
+                else if (maxLanes == 3)
                 {
                     StartCoroutine("SpawnLane1", combinationLane1);
-                    
+
                     StartCoroutine("SpawnLane2", combinationLane2);
 
                     StartCoroutine("SpawnLane3", combinationLane3);
@@ -332,18 +343,15 @@ public class WaveSpawner : MonoBehaviour {
                 else
                 {
                     StartCoroutine("SpawnLane1", combinationLane1);
-                    
+
                     StartCoroutine("SpawnLane2", combinationLane2);
 
                     StartCoroutine("SpawnLane3", combinationLane3);
 
                     StartCoroutine("SpawnLane4", combinationLane4);
                 }
-
-                
             }
-
-
+            startedSpawn = true;
         }
         else if(GameController.gameState == GameState.Action)
         {
@@ -367,15 +375,20 @@ public class WaveSpawner : MonoBehaviour {
         }
     }
 
+    public void RetryWave()
+    {
+        startedSpawn = false;
+        GameController.ChangeGameState(GameState.Waving);
+    }
 
     //waves set up
     void CreateWave()
     {
         doSaveAll();
         Debug.Log("INITIATING WAVE... SAVED ALL OBJECTS");
-     
 
 
+        startedSpawn = false;
         finishedSpawns = 0;
         //reseting monsters indexes;
         spawningMonsterLane1 = 0;
