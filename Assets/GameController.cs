@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour {
 
             if (!game_over)
             {
-                if (WaveSpawner.gainSecondChanceCounter >= 10)
+                if (WaveSpawner.gainSecondChanceCounter >= 0)
                 {
                     Debug.Log("Game Over Man");
                     game_over = true;
