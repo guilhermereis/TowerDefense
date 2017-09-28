@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugOptions : MonoBehaviour
-{
+public class SecondChance : MonoBehaviour {
 
     WaveSpawner waveSpawner;
-   
+
 
     void Start()
     {
@@ -15,7 +14,7 @@ public class DebugOptions : MonoBehaviour
         {
             waveSpawner = wsObject.GetComponent<WaveSpawner>();
         }
-        
+
         Hide();
     }
 

@@ -9,6 +9,7 @@ public class WaveSpawner : MonoBehaviour {
     public GameObject castlePrefab;
     private Minimap minimap;
     private int saved_money = 0;
+    public static int gainSecondChanceCounter = 0;
     public int[] monstersType;
 
     public int totalMonsters = 6;
@@ -305,6 +306,7 @@ public class WaveSpawner : MonoBehaviour {
             if (!isWaving)
             {
                 CreateWave();
+                gainSecondChanceCounter++;
             }
             else
             {
@@ -658,14 +660,15 @@ public class WaveSpawner : MonoBehaviour {
         //load previously saved money
         PlayerStats.Money = saved_money;
 
-        //Change game state
+        //Restart wave
         GameController gc = GameObject.Find("GameMode").GetComponent<GameController>();
         gc.game_over = false;
-        GameController.ChangeGameState(GameState.BeginWave);
+        RetryWave();
+        gainSecondChanceCounter = 0;
 
         //Hide Try Again Window
-        DebugOptions debugOptions = GameObject.Find("DebugOptions").GetComponent<DebugOptions>();
-        debugOptions.Hide();
+        SecondChance secondChance = GameObject.Find("SecondChanceDialog").GetComponent<SecondChance>();
+        secondChance.Hide();
 
         CastleHealth.castleDestructionAnimator.enabled = false;
 

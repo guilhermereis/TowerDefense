@@ -71,13 +71,16 @@ public class GameController : MonoBehaviour {
 
             if (!game_over)
             {
-                Debug.Log("Game Over Man");
-                game_over = true;
-                GameObject du_object = GameObject.Find("DebugOptions");
-                if (du_object != null)
+                if (WaveSpawner.gainSecondChanceCounter >= 10)
                 {
-                    du_object.GetComponent<DebugOptions>().Show();
-                    Debug.Log("Want to try Again ?");
+                    Debug.Log("Game Over Man");
+                    game_over = true;
+                    GameObject sc_object = GameObject.Find("SecondChanceDialog");
+                    if (sc_object != null)
+                    {
+                        sc_object.GetComponent<SecondChance>().Show();
+                        Debug.Log("Want to try Again ?");
+                    }
                 }
             }
         }
