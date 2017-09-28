@@ -53,8 +53,14 @@ public class Wave  {
             {
                 if (i < numberOfMonsters)
                 {
-                    sum = 0;
-                    i = 0;
+                    //sum = 0;
+                    //i = 0;
+                    for (int j = i; j < numberOfMonsters; j++)
+                    {
+                        monstersWave[i] = 1;
+                        i++;
+                    }
+                    
 
                 }
             }

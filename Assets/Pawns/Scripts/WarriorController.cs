@@ -91,16 +91,19 @@ public class WarriorController : EnemyController {
         {
             if (!other.gameObject.GetComponent<PawnCharacter>().isDead)
             {
-                enemiesInRange.Add(other.gameObject);
+                if (other.gameObject.GetComponent<PawnController>().target != null && other.gameObject.GetComponent<PawnController>().target == gameObject)
+                {
+                    enemiesInRange.Add(other.gameObject);
 
-                if (target == null || target.GetComponent<PawnCharacter>().isDead)
-		        {
-			        target = other.gameObject;
-			        ChangeState(PawnState.Battle);
-		        }else if(other.gameObject == target)
-		        {
-			        ChangeState(PawnState.Battle);
-		        }
+                    if (target == null || target.GetComponent<PawnCharacter>().isDead)
+		            {
+			            target = other.gameObject;
+			            ChangeState(PawnState.Battle);
+		            }else if(other.gameObject == target)
+		            {
+			            ChangeState(PawnState.Battle);
+		            }
+                }
 
             }
 		    
