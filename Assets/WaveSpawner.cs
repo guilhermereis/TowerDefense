@@ -562,11 +562,22 @@ public class WaveSpawner : MonoBehaviour {
             //Get information from the TowerController
             tc = gridMouse.ListOfGameObjects[i].GetComponent<TowerController>();
             //--------------------------------------------------------------------------
-            PropertyScript.StructureState state =
-                new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
-                                                  gridMouse.ListOfGameObjects[i].transform,
-                                                    bc.Health, tc.fireRateLVL, tc.attackPowerLVL);
-            Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
+            PropertyScript.StructureState state;
+            if (tc != null) // If it has a TowerController (AKA: is a tower).
+            {
+                state =
+                    new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
+                                                      gridMouse.ListOfGameObjects[i].transform,
+                                                        bc.Health, tc.fireRateLVL, tc.attackPowerLVL);
+
+                Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
+            }
+            else // Soldier Camp
+            {
+                state =
+                    new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
+                                                      gridMouse.ListOfGameObjects[i].transform);
+            }
             listOfStates.Add(state);
             Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
