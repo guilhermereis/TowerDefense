@@ -106,10 +106,30 @@ public class PawnController : MonoBehaviour {
         else if (myLane == 3)
         {
             waypointLane3 = GameObject.FindGameObjectWithTag("WaypointsLane3");
-            for (int i = 0; i < waypointLane3.transform.childCount; i++)
+
+
+
+            if (waypoint_ == 0)
             {
-                waypoints.Add(waypointLane3.transform.GetChild(i));
+                Transform waypointA = waypointLane2.transform.Find("waypointA");
+
+                for (int i = 0; i < waypointA.childCount; i++)
+                {
+                    waypoints.Add(waypointA.GetChild(i));
+                }
+
             }
+            else
+            {
+                Transform waypointB = waypointLane2.transform.Find("waypointB");
+
+                for (int i = 0; i < waypointB.childCount; i++)
+                {
+                    waypoints.Add(waypointB.GetChild(i));
+                }
+            }
+
+
         }
         else if (myLane == 4)
         {

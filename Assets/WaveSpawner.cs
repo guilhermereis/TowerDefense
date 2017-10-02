@@ -161,8 +161,10 @@ public class WaveSpawner : MonoBehaviour {
         //spawns king
         if (waveNumberLane2 % 10 == 0)
         {
+            spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
+            int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
             GameObject monster = Instantiate(King1, spawnLocationLane2A.position, Quaternion.Euler(new Vector3(0, 90, 0)));
-            monster.GetComponent<PawnController>().SetupWaypoints(2,0);
+            monster.GetComponent<PawnController>().SetupWaypoints(2,waypoint);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
@@ -210,8 +212,10 @@ public class WaveSpawner : MonoBehaviour {
         //spawns king
         if (waveNumberLane3 % 10 == 0)
         {
+            spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
+            int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
             GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
-            monster.GetComponent<PawnController>().SetupWaypoints(3,0);
+            monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
@@ -221,9 +225,11 @@ public class WaveSpawner : MonoBehaviour {
 
             if (timer <= 0)
             {
+                spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
+                int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
-                monster.GetComponent<PawnController>().SetupWaypoints(3,0);
+                monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 
