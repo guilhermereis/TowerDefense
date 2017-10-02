@@ -43,7 +43,8 @@ public class GameController : MonoBehaviour {
         if (gameState != newState)
         {
             gameState = newState;
-            gamechangedDelegate();
+            if(gamechangedDelegate != null)
+                gamechangedDelegate();
         }
     }
 	
