@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameState {GameActivate ,Preparation,BeginWave, Waving,Action, EndWave, GameOver }
+public enum GameState {GameActivate,GamePaused ,Preparation,BeginWave, Waving,Action, EndWave, GameOver }
 
 public class GameController : MonoBehaviour {
 
