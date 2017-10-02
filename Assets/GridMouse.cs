@@ -265,6 +265,15 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
+        Transform FireTiles = GameObject.Find("FireTiles").transform;
+        foreach (Transform child in FireTiles.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
         Destroy(CubeTrack);
         Destroy(CubeTrack2);
         Destroy(CubeTrack3);
@@ -275,6 +284,7 @@ public class GridMouse : MonoBehaviour
         Destroy(EdgesVolcanic);
         Destroy(RockBlockers.gameObject);
         Destroy(RockBlockersLava.gameObject);
+        Destroy(FireTiles.gameObject);
         //Destroy(Trees);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
