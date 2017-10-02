@@ -229,6 +229,15 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
+        Transform EdgesVolcanic = GameObject.Find("EdgesVolcanic").transform;
+        foreach (Transform child in EdgesVolcanic.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
         Transform RockBlockers = GameObject.Find("RockBlockers").transform;
         foreach (Transform child in RockBlockers.transform)
         {
@@ -254,6 +263,7 @@ public class GridMouse : MonoBehaviour
         Destroy(Edges);
         Destroy(EdgesSnow);
         Destroy(EdgesDesert);
+        Destroy(EdgesVolcanic);
         Destroy(RockBlockers.gameObject);
         //Destroy(Trees);
     }
