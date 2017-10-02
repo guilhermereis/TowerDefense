@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour {
 
     private void OnGUI()
     {
-        stats.Render();
+        //stats.Render();
     }
 
     public static void ChangeGameState(GameState newState)
