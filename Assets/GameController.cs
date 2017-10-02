@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameState { Preparation,BeginWave, Waving,Action, EndWave, GameOver }
+public enum GameState {GameActivate ,Preparation,BeginWave, Waving,Action, EndWave, GameOver }
 
 public class GameController : MonoBehaviour {
-    [HideInInspector]
-    
 
+    public delegate void GameStateChangedDelegate();
+    public static GameStateChangedDelegate gamechangedDelegate;
+
+    [HideInInspector]
     public static GameState gameState;
     public bool game_over = false;
 
@@ -18,19 +20,31 @@ public class GameController : MonoBehaviour {
 
     public float preparationTime = 30.0f;
     float countDown;
+    public SteamStatsAndAchievements stats;
+
 
     // Use this for initialization
     void Start () {
         gameState = GameState.Preparation;
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
+        stats = GameObject.FindObjectOfType<SteamStatsAndAchievements>();
+
+    }
+
+    private void OnGUI()
+    {
+        stats.Render();
     }
 
     public static void ChangeGameState(GameState newState)
     {
         Debug.Log(newState);
         if (gameState != newState)
+        {
             gameState = newState;
+            gamechangedDelegate();
+        }
     }
 	
 	// Update is called once per frame
