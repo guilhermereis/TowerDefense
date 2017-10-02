@@ -229,6 +229,15 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
+        Transform EdgesVolcanic = GameObject.Find("EdgesVolcanic").transform;
+        foreach (Transform child in EdgesVolcanic.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
         Transform RockBlockers = GameObject.Find("RockBlockers").transform;
         foreach (Transform child in RockBlockers.transform)
         {
@@ -238,13 +247,34 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
+        Transform RockBlockersLava = GameObject.Find("RockBlockersLava").transform;
+        foreach (Transform child in RockBlockersLava.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+        Transform CubeTrack4 = GameObject.Find("CubeTrack4").transform;
+        foreach (Transform child in CubeTrack4.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            //Vector3 position = CoordToPosition(x, z);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Track");
+        }
         Destroy(CubeTrack);
         Destroy(CubeTrack2);
         Destroy(CubeTrack3);
+        Destroy(CubeTrack4);
         Destroy(Edges);
         Destroy(EdgesSnow);
         Destroy(EdgesDesert);
+        Destroy(EdgesVolcanic);
         Destroy(RockBlockers.gameObject);
+        Destroy(RockBlockersLava.gameObject);
         //Destroy(Trees);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
