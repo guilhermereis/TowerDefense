@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MiningCampController : BuildableController {
     /* defining variables*/
+    public delegate void FullDelegate();
+    public FullDelegate full;
+    //default values
     public int currentGold = 0;
     public int maxCapacity = 500;
     public bool isFull;
@@ -12,7 +15,6 @@ public class MiningCampController : BuildableController {
     protected override void Awake()
     {
         base.Awake();
-        
     }
     // Use this for initialization
     void Start () {
@@ -48,8 +50,11 @@ public class MiningCampController : BuildableController {
 
         if(GameController.gameState == GameState.EndWave && !isFull)
         {
-            if(AddGold() == maxCapacity)
+            if (AddGold() == maxCapacity)
+            {
                 isFull = true;
+                full();
+            }
         }
 	}
 }
