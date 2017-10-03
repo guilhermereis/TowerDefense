@@ -8,6 +8,9 @@ public class AudioOptions : MonoBehaviour {
     public Toggle[] ResolutionToggles;
     public Slider[] volumeSliders;
     public Toggle fullscreenToggle;
+    private float sfx_volume;
+    private float music_volume;
+    private float master_volume;
     int activeScreenResIndex;
     
 
@@ -21,6 +24,14 @@ public class AudioOptions : MonoBehaviour {
         //audio
         audio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
 
+        sfx_volume = PlayerPrefs.GetFloat("sfx volume");
+        music_volume = PlayerPrefs.GetFloat("music volume");
+        master_volume = PlayerPrefs.GetFloat("master volume");
+
+        volumeSliders[0].GetComponent<Slider>().value = sfx_volume;
+        volumeSliders[1].GetComponent<Slider>().value = music_volume;
+        volumeSliders[2].GetComponent<Slider>().value = master_volume;
+
         //resolutions
         activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
         bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
@@ -31,6 +42,7 @@ public class AudioOptions : MonoBehaviour {
 
         fullscreenToggle.isOn = isFullscreen;
 
+
     }
     public void OnValueChanged(float newValue)
     {
@@ -38,6 +50,10 @@ public class AudioOptions : MonoBehaviour {
     }
     public void Play()
     {
+        PlayerPrefs.SetFloat("sfx volume", volumeSliders[0].value);
+        PlayerPrefs.SetFloat("music volume", volumeSliders[1].value);
+        PlayerPrefs.SetFloat("master volume", volumeSliders[2].value);
+        PlayerPrefs.Save();
         SceneManager.LoadScene("MainScene");
     }
 
