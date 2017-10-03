@@ -57,8 +57,8 @@ public class GridMouse : MonoBehaviour
     private Vector3 position;
     private Vector3 rotation = new Vector3(-90, 0, 0);
     private bool rotated = false;
-    private 
-    GameObject temp;
+    private GameObject temp;
+    public bool canClickGrid = true;
 
     [SerializeField]
     public PropertyScript.Property[,] propertiesMatrix;
@@ -468,67 +468,70 @@ public class GridMouse : MonoBehaviour
 
     void OnMouseDown()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
-        if (didHit)
+        if (canClickGrid)
         {
-            Debug.Log("Just hit: " + hitInfo.transform.gameObject.name);
-        }
-        int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
-        int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
-        PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
-        Debug.Log("PROPERTY IN QUESTION = " + propertyInQuestion.type);
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
+            if (didHit)
+            {
+                Debug.Log("Just hit: " + hitInfo.transform.gameObject.name);
+            }
+            int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
+            PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
+            Debug.Log("PROPERTY IN QUESTION = " + propertyInQuestion.type);
 
-        if (propertyInQuestion.unit != null) // If the tile contains a Structure
-        {
-            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            if (propertyInQuestion.unit != null) // If the tile contains a Structure
             {
-                buildManager.DeselectUnitToBuild();
-                buildManager.DeselectSelectedUnit();
-                SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-                Debug.Log("Selecionou a posição: " + x + ", " + z);
-            }
-        }
-        else if (CheckIfHitStructure()) // If I hit a Structure
-        {
-            BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
-            buildManager.SelectBuilding(buildable.getArrayListPosition());
-            BuildManager.instance.ShowOptions();
-        }
-        else if (propertyInQuestion.type == "Tree") // If I hit a Tree
-        {
-            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-            {
-                BuildManager.instance.HideOptions();
-            }
-            //IGNORE THE CLICK
-        }
-        else // Decide to Build something
-        {
-            Debug.Log("ENTERED HERE");
-            if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
-            {
-                if (propertyInQuestion.type == "Track")
+                if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
-                    //FOR SOLDIER CAMP,
-                    //I ONLY BUILD SOMETHING IF I CLICKED ON A TRACK TILE.
-                    HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
                     buildManager.DeselectUnitToBuild();
+                    buildManager.DeselectSelectedUnit();
+                    SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
+                    Debug.Log("Selecionou a posição: " + x + ", " + z);
                 }
             }
-            else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+            else if (CheckIfHitStructure()) // If I hit a Structure
             {
-                HandleBuildingTower(ray, hitInfo, didHit, x, z);
-                buildManager.DeselectUnitToBuild();
+                BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
+                buildManager.SelectBuilding(buildable.getArrayListPosition());
+                BuildManager.instance.ShowOptions();
             }
-            else //if there's nothing to build, then hide the options
+            else if (propertyInQuestion.type == "Tree") // If I hit a Tree
             {
-                //this if here makes sense, because when clicking over menus we dont want to
-                //hide the options.
                 if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
                     BuildManager.instance.HideOptions();
-                    
+                }
+                //IGNORE THE CLICK
+            }
+            else // Decide to Build something
+            {
+                Debug.Log("ENTERED HERE");
+                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                {
+                    if (propertyInQuestion.type == "Track")
+                    {
+                        //FOR SOLDIER CAMP,
+                        //I ONLY BUILD SOMETHING IF I CLICKED ON A TRACK TILE.
+                        HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
+                        buildManager.DeselectUnitToBuild();
+                    }
+                }
+                else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+                {
+                    HandleBuildingTower(ray, hitInfo, didHit, x, z);
+                    buildManager.DeselectUnitToBuild();
+                }
+                else //if there's nothing to build, then hide the options
+                {
+                    //this if here makes sense, because when clicking over menus we dont want to
+                    //hide the options.
+                    if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                    {
+                        BuildManager.instance.HideOptions();
+
+                    }
                 }
             }
         }

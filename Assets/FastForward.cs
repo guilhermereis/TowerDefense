@@ -38,14 +38,19 @@ public class FastForward : MonoBehaviour {
     }
 
     public void PauseSpeedOnClick() {
+        GridMouse.instance.canClickGrid = false;
+        BuildManager.instance.HideOptions();
+        BuildManager.instance.forceHideUpgradeWheel();
         clearButtons();
         pauseSpeed.image.overrideSprite = pauseSelected;
         pauseSpeed.interactable = false;
         Time.timeScale = 0;
+        
     }
 
     public void NormalSpeedOnClick()
     {
+        GridMouse.instance.canClickGrid = true;
         clearButtons();
         normalSpeed.image.overrideSprite = playSelected;
         normalSpeed.interactable = false;
@@ -53,6 +58,7 @@ public class FastForward : MonoBehaviour {
     }
 
     public void DoubleSpeedOnClick() {
+        GridMouse.instance.canClickGrid = true;
         clearButtons();
         doubleSpeed.image.overrideSprite = doubleSelected;
         doubleSpeed.interactable = false;
@@ -62,6 +68,7 @@ public class FastForward : MonoBehaviour {
 
     public void TripleSpeedOnClick()
     {
+        GridMouse.instance.canClickGrid = true;
         clearButtons();
         tripleSpeed.image.overrideSprite = tripleSelected;
         tripleSpeed.interactable = false;

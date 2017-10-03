@@ -275,6 +275,13 @@ public class BuildManager : MonoBehaviour {
             upgradeWheelController.closeWheel();
         }
     }
+    public void forceHideUpgradeWheel()
+    {
+        if (upgradeWheelController)
+        {
+            upgradeWheelController.onWheelClosed();
+        }
+    }
 
     public void OnUpgradeWheelClosed() {
         upgradeWheel.SetActive(false);
