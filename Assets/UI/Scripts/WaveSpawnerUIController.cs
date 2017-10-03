@@ -7,6 +7,7 @@ public class WaveSpawnerUIController : MonoBehaviour {
     private Canvas hudCanvas;
     private Animator anim;
     private GameObject arrow;
+    private GameObject image;
 
     private Vector3 screenPos;
     private Vector2 arrowOnScreenPos;
@@ -16,6 +17,7 @@ public class WaveSpawnerUIController : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         arrow = transform.Find("Arrow").gameObject;
+        //gameObject.SetActive(false);
         arrow.transform.parent = transform.parent.gameObject.transform;
         //arrow.SetActive(false);
     }

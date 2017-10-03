@@ -108,31 +108,31 @@ public class WaveSpawner : MonoBehaviour {
             spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane1.position;
         }
 
-        //if (spawnLocationLane2)
-        //{
-        //    GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-        //    spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2.position;
-        //}
-        //if (spawnLocationLane2A)
-        //{
-        //    GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-        //    spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2A.position;
-        //}
-        //if (spawnLocationLane2B)
-        //{
-        //    GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-        //    spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2B.position;
-        //}
-        //if (spawnLocationLane3)
-        //{
-        //    GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-        //    spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane3.position;
-        //}
-        //if (spawnLocationLane4)
-        //{
-        //    GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-        //    spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane4.position;
-        //}
+        if (spawnLocationLane2)
+        {
+            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
+            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2.position;
+        }
+        if (spawnLocationLane2A)
+        {
+            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
+            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2A.position;
+        }
+        if (spawnLocationLane2B)
+        {
+            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
+            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2B.position;
+        }
+        if (spawnLocationLane3)
+        {
+            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
+            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane3.position;
+        }
+        if (spawnLocationLane4)
+        {
+            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
+            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane4.position;
+        }
     }
 
 
@@ -513,7 +513,6 @@ public class WaveSpawner : MonoBehaviour {
             combinationLane4 = waveLane4.GetCombinaton();
 
             waveMonsters += combinationLane1.Length + combinationLane2.Length + combinationLane3.Length + combinationLane4.Length;
-
         }
         
         
