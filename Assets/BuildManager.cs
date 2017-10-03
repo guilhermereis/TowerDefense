@@ -44,8 +44,7 @@ public class BuildManager : MonoBehaviour {
             Debug.Log("VOLUME: "+slider.GetComponent<Slider>().value);
         GameObject audioOpt = GameObject.FindWithTag("AudioOptions");
         Destroy(audioOpt);
-    }
-	
+    }	
 	// Update is called once per frame
 	void Update () {
         /*
