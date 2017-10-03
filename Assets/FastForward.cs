@@ -36,11 +36,23 @@ public class FastForward : MonoBehaviour {
         tripleSpeed.image.overrideSprite = tripleUnselected;
         tripleSpeed.interactable = true;
     }
-
-    public void PauseSpeedOnClick() {
-        GridMouse.instance.canClickGrid = false;
+    public void DisableUI()
+    {
+        GameObject.Find("RepairButton").GetComponent<Button>().enabled = false;
+        GameObject.Find("CampBuild").GetComponent<Button>().enabled = false;
+        GameObject.Find("TowerBuild").GetComponent<Button>().enabled = false;
         BuildManager.instance.HideOptions();
         BuildManager.instance.forceHideUpgradeWheel();
+    }
+    public void EnableUI()
+    {
+        GameObject.Find("RepairButton").GetComponent<Button>().enabled = true;
+        GameObject.Find("CampBuild").GetComponent<Button>().enabled = true;
+        GameObject.Find("TowerBuild").GetComponent<Button>().enabled = true;
+    }
+    public void PauseSpeedOnClick() {
+        GridMouse.instance.canClickGrid = false;
+        DisableUI();
         clearButtons();
         pauseSpeed.image.overrideSprite = pauseSelected;
         pauseSpeed.interactable = false;
@@ -51,6 +63,7 @@ public class FastForward : MonoBehaviour {
     public void NormalSpeedOnClick()
     {
         GridMouse.instance.canClickGrid = true;
+        EnableUI();
         clearButtons();
         normalSpeed.image.overrideSprite = playSelected;
         normalSpeed.interactable = false;
@@ -59,6 +72,7 @@ public class FastForward : MonoBehaviour {
 
     public void DoubleSpeedOnClick() {
         GridMouse.instance.canClickGrid = true;
+        EnableUI();
         clearButtons();
         doubleSpeed.image.overrideSprite = doubleSelected;
         doubleSpeed.interactable = false;
@@ -69,6 +83,7 @@ public class FastForward : MonoBehaviour {
     public void TripleSpeedOnClick()
     {
         GridMouse.instance.canClickGrid = true;
+        EnableUI();
         clearButtons();
         tripleSpeed.image.overrideSprite = tripleSelected;
         tripleSpeed.interactable = false;
