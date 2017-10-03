@@ -13,6 +13,7 @@ public class WaveSpawner : MonoBehaviour {
     public static int gainSecondChanceCounter = 0;
     public int[] monstersType;
     public GameObject WaveSpawnerUIPrefab;
+    private Dictionary<string, GameObject> waveSpawnerUIs;
 
     public int totalMonsters = 6;
 
@@ -85,6 +86,7 @@ public class WaveSpawner : MonoBehaviour {
     private void Start()
     {
         minimap = GameObject.Find("Minimap").GetComponent<Minimap>();
+        waveSpawnerUIs = new Dictionary<string, GameObject>();
         monstersType = new int[totalMonsters];
         Canvas[] canvas = FindObjectsOfType<Canvas>();
         for (int i = 0; i < canvas.Length; i++)
@@ -103,38 +105,19 @@ public class WaveSpawner : MonoBehaviour {
         listOfStates = new List<PropertyScript.StructureState>();
         waveSpawnerUIHolder = hud.transform.Find("WaveSpawnerUI").gameObject;
 
-        if (spawnLocationLane1) {
-            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane1.position;
-        }
-
-        if (spawnLocationLane2)
-        {
-            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2.position;
-        }
-        if (spawnLocationLane2A)
-        {
-            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2A.position;
-        }
-        if (spawnLocationLane2B)
-        {
-            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane2B.position;
-        }
-        if (spawnLocationLane3)
-        {
-            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane3.position;
-        }
-        if (spawnLocationLane4)
-        {
-            GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
-            spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnLocationLane4.position;
-        }
+        instantiateWaveSpawnerUI("Lane1", spawnLocationLane1);
+        instantiateWaveSpawnerUI("Lane2", spawnLocationLane2);
+        instantiateWaveSpawnerUI("Lane2A", spawnLocationLane2A);
+        instantiateWaveSpawnerUI("Lane2B", spawnLocationLane2B);
+        instantiateWaveSpawnerUI("Lane3", spawnLocationLane3);
+        instantiateWaveSpawnerUI("Lane4", spawnLocationLane4);
     }
 
+    public void instantiateWaveSpawnerUI(string spawnUILaneKey, Transform spawnTransform) {
+        GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
+        spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnTransform.position;
+        waveSpawnerUIs.Add(spawnUILaneKey, spawner);
+    }
 
     //return total monsters spawned at moment
     public float GetTotalSpawningMonsters()
@@ -463,6 +446,7 @@ public class WaveSpawner : MonoBehaviour {
             waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
             combinationLane1 = waveLane1.GetCombinaton();
             waveMonsters += combinationLane1.Length;
+            waveSpawnerUIs["Lane1"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
         }
         else if(maxLanes == 2)
         {
@@ -476,7 +460,9 @@ public class WaveSpawner : MonoBehaviour {
             combinationLane2 = waveLane2.GetCombinaton();
 
             waveMonsters += combinationLane1.Length + combinationLane2.Length;
-
+            waveSpawnerUIs["Lane2"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
+            waveSpawnerUIs["Lane2A"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
+            waveSpawnerUIs["Lane2B"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
         }
         else if(maxLanes == 3)
         {
@@ -493,6 +479,7 @@ public class WaveSpawner : MonoBehaviour {
             combinationLane3 = waveLane3.GetCombinaton();
 
             waveMonsters += combinationLane1.Length + combinationLane2.Length + combinationLane3.Length;
+            waveSpawnerUIs["Lane3"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
 
         }
         else if( maxLanes == 4)
@@ -513,6 +500,7 @@ public class WaveSpawner : MonoBehaviour {
             combinationLane4 = waveLane4.GetCombinaton();
 
             waveMonsters += combinationLane1.Length + combinationLane2.Length + combinationLane3.Length + combinationLane4.Length;
+            waveSpawnerUIs["Lane4"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
         }
         
         
