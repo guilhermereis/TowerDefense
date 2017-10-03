@@ -20,6 +20,7 @@ public class AudioOptions : MonoBehaviour {
     {
         //audio
         audio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+
         //resolutions
         activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
         bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
@@ -80,6 +81,7 @@ public class AudioOptions : MonoBehaviour {
             SceneManager.LoadScene("MainScene");
         }
     }
+    
     public void Quit()
     {
 #if UNITY_EDITOR
