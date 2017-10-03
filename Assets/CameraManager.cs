@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour {
     private GameObject freeCamera;
     private GameObject topCamera;
+    private CameraController freeCameraController;
     private int cameraState = 0;
 
 	// Use this for initialization
@@ -13,6 +14,9 @@ public class CameraManager : MonoBehaviour {
             freeCamera = GameObject.FindWithTag("MainCamera");
         if (!topCamera)
             topCamera = GameObject.FindWithTag("TopCamera");
+
+        if (freeCamera)
+            freeCameraController = freeCamera.GetComponent<CameraController>();
     }
 
     public void shakeCamera(float duration, float speed, float magnitude) {
@@ -31,6 +35,19 @@ public class CameraManager : MonoBehaviour {
         //0 = free camera, 1 = topCamera
         //TODO: Camera transition animation and Enable/Disable camera afterwards
         
+    }
+
+    public void rotateCamera(bool clockwise) {
+        if (freeCameraController)
+        {
+            if (clockwise)
+            {
+                freeCameraController.rotateClockwise();
+            }
+            else {
+                freeCameraController.rotateCounterClockwise();
+            }
+        }
     }
 
 	// Update is called once per frame

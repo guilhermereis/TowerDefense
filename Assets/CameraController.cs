@@ -219,54 +219,62 @@ public class CameraController : MonoBehaviour {
             
             if (Input.GetAxisRaw("Camera Rotate") < 0f)
             {
-                transform.RotateAround(Vector3.zero, Vector3.up, 90);
-                switch (currentRotation)
-                {
-                    case 0:
-                        transform.position.Set(51.81f, 28.54f, -24.34f);
-                        currentRotation = (currentRotation + 1) % 4;
-                        break;
-                    case 1:
-                        transform.position.Set(-24.34f, 28.54f, 51.81f);
-                        currentRotation = (currentRotation + 1) % 4;
-                        break;
-                    case 2:
-                        transform.position.Set(51.81f, 28.54f, 24.34f);
-                        currentRotation = (currentRotation + 1) % 4;
-                        break;
-                    case 3:
-                        transform.position.Set(51.81f, 28.54f, -24.34f);
-                        currentRotation = (currentRotation + 1) % 4;
-                        break;
-                }
-                GetComponent<CameraController>().SetInitialValues(true);
+                rotateCounterClockwise();
             }
             else {
-                transform.RotateAround(Vector3.zero, Vector3.up, -90);
-                switch (currentRotation)
-                {
-                    case 0:
-                        transform.position.Set(51.81f, 28.54f, -24.34f);
-                        currentRotation = 3;
-                        break;
-                    case 1:
-                        transform.position.Set(-24.34f, 28.54f, 51.81f);
-                        currentRotation = 0;
-                        break;
-                    case 2:
-                        transform.position.Set(51.81f, 28.54f, 24.34f);
-                        currentRotation = 1;
-                        break;
-                    case 3:
-                        transform.position.Set(51.81f, 28.54f, -24.34f);
-                        currentRotation = 2;
-                        break;
-                }
-                GetComponent<CameraController>().SetInitialValues(false);
+                rotateClockwise();
             }
             
         }
 
+
     }
-    
+
+    public void rotateCounterClockwise() {
+        transform.RotateAround(Vector3.zero, Vector3.up, 90);
+        switch (currentRotation)
+        {
+            case 0:
+                transform.position.Set(51.81f, 28.54f, -24.34f);
+                currentRotation = (currentRotation + 1) % 4;
+                break;
+            case 1:
+                transform.position.Set(-24.34f, 28.54f, 51.81f);
+                currentRotation = (currentRotation + 1) % 4;
+                break;
+            case 2:
+                transform.position.Set(51.81f, 28.54f, 24.34f);
+                currentRotation = (currentRotation + 1) % 4;
+                break;
+            case 3:
+                transform.position.Set(51.81f, 28.54f, -24.34f);
+                currentRotation = (currentRotation + 1) % 4;
+                break;
+        }
+        GetComponent<CameraController>().SetInitialValues(true);
+    }
+
+    public void rotateClockwise() {
+        transform.RotateAround(Vector3.zero, Vector3.up, -90);
+        switch (currentRotation)
+        {
+            case 0:
+                transform.position.Set(51.81f, 28.54f, -24.34f);
+                currentRotation = 3;
+                break;
+            case 1:
+                transform.position.Set(-24.34f, 28.54f, 51.81f);
+                currentRotation = 0;
+                break;
+            case 2:
+                transform.position.Set(51.81f, 28.54f, 24.34f);
+                currentRotation = 1;
+                break;
+            case 3:
+                transform.position.Set(51.81f, 28.54f, -24.34f);
+                currentRotation = 2;
+                break;
+        }
+        GetComponent<CameraController>().SetInitialValues(false);
+    }
 }

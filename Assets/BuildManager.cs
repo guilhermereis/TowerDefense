@@ -41,24 +41,7 @@ public class BuildManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //toggle UI
-            shopObject.SetActive(!shopObject.activeSelf);
-        }
-        else if (Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            PlayerStats.AddMoney(100);
-        }
-        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
-        {
-            GameObject castleObject = GameObject.Find("Prefab_Castle");
-            if (castleObject != null)
-            {
-                Debug.Log("GONNA LOSE 500 HEALTH");
-                castleObject.GetComponent<CastleHealth>().health -= 500;
-            }
-        }
+        
     }
 
     public UnitBlueprint getSelectedUnit()
