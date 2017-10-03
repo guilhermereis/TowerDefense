@@ -39,10 +39,12 @@ public class BuildManager : MonoBehaviour {
         if (upgradeWheel)
             upgradeWheelController = upgradeWheel.GetComponent<UpgradeWheelController>();
 
-        Debug.Log("VOLUME: "+GameObject.Find("Slider").GetComponent<Slider>().value);
-        Destroy(GameObject.FindWithTag("AudioOptions"));
-    }
-	
+        GameObject slider = GameObject.Find("Slider");
+        if (slider)
+            Debug.Log("VOLUME: "+slider.GetComponent<Slider>().value);
+        GameObject audioOpt = GameObject.FindWithTag("AudioOptions");
+        Destroy(audioOpt);
+    }	
 	// Update is called once per frame
 	void Update () {
         /*
