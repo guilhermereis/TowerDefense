@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 public class AudioOptions : MonoBehaviour {
 
     AudioSource audio;
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }    
     void Start()
     {
         audio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
@@ -12,6 +16,10 @@ public class AudioOptions : MonoBehaviour {
     public void OnValueChanged(float newValue)
     {
         audio.volume = newValue;
+    }
+    public void Play()
+    {
+        SceneManager.LoadScene("MainScene");
     }
     void Update()
     {

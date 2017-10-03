@@ -38,6 +38,9 @@ public class BuildManager : MonoBehaviour {
             bottomBarBehaviour = (BottomInfoBarBehaviour)bottomBar.GetComponentInChildren<BottomInfoBarBehaviour>();
         if (upgradeWheel)
             upgradeWheelController = upgradeWheel.GetComponent<UpgradeWheelController>();
+
+        Debug.Log("VOLUME: "+GameObject.Find("Slider").GetComponent<Slider>().value);
+        Destroy(GameObject.FindWithTag("AudioOptions"));
     }
 	
 	// Update is called once per frame
