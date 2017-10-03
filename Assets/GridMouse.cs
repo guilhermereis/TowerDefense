@@ -137,7 +137,7 @@ public class GridMouse : MonoBehaviour
     {
         int x;
         int z;
-        Debug.Log("Child Count = " + CubeTrack.transform.childCount);
+        //Debug.Log("Child Count = " + CubeTrack.transform.childCount);
         foreach (Transform child in CubeTrack.transform)
         {
             //tower
@@ -146,7 +146,7 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             if (x == 45 && z == 13)
             {
-                Debug.Log(x + "," + z + " = Track");
+                //Debug.Log(x + "," + z + " = Track");
             }
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
@@ -158,7 +158,7 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             if (x == 45 && z == 13)
             {
-                Debug.Log(x + "," + z + " = Track");
+               // Debug.Log(x + "," + z + " = Track");
             }
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
@@ -170,7 +170,7 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             if (x == 45 && z == 13)
             {
-                Debug.Log(x + "," + z + " = Track");
+                //Debug.Log(x + "," + z + " = Track");
             }
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
@@ -208,7 +208,7 @@ public class GridMouse : MonoBehaviour
             //Vector3 position = CoordToPosition(x, z);
             if (x == 31 && z == 29)
             {
-                Debug.Log("31, 29 = Edges");
+               // Debug.Log("31, 29 = Edges");
             }
             //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
@@ -338,8 +338,8 @@ public class GridMouse : MonoBehaviour
                                     propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
                                     propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
                                 }
-                                Debug.Log("Construiu na posição " + x + ", " + z);
-                                Debug.Log("Position = " + position);
+                                //Debug.Log("Construiu na posição " + x + ", " + z);
+                                //Debug.Log("Position = " + position);
                             }
                         }
                     }
@@ -427,7 +427,7 @@ public class GridMouse : MonoBehaviour
         if (true || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
 
         {
-            Debug.Log("HANDLE BUILDING TOWER");
+            //Debug.Log("HANDLE BUILDING TOWER");
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
 
             
@@ -449,8 +449,8 @@ public class GridMouse : MonoBehaviour
                                 int added_index = buildUnitAndAddItToTheList(position,false);
                                 Destroy(temporaryInstance);
                                 propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                                Debug.Log("Construiu na posição " + x + ", " + z);
-                                Debug.Log("Position = " + position);
+                                //Debug.Log("Construiu na posição " + x + ", " + z);
+                               // Debug.Log("Position = " + position);
                             }
                         }
                     }
@@ -462,8 +462,8 @@ public class GridMouse : MonoBehaviour
     {
         buildManager.SelectBuilding(unit, gameObject);
         BuildManager.instance.ShowOptions();
-        Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getFireRate());
-        Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getAttackPower());
+       // Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getFireRate());
+       // Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getAttackPower());
     }
 
     void OnMouseDown()
@@ -474,12 +474,12 @@ public class GridMouse : MonoBehaviour
             bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
             if (didHit)
             {
-                Debug.Log("Just hit: " + hitInfo.transform.gameObject.name);
+               // Debug.Log("Just hit: " + hitInfo.transform.gameObject.name);
             }
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
-            Debug.Log("PROPERTY IN QUESTION = " + propertyInQuestion.type);
+           // Debug.Log("PROPERTY IN QUESTION = " + propertyInQuestion.type);
 
             if (propertyInQuestion.unit != null) // If the tile contains a Structure
             {
@@ -488,7 +488,7 @@ public class GridMouse : MonoBehaviour
                     buildManager.DeselectUnitToBuild();
                     buildManager.DeselectSelectedUnit();
                     SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-                    Debug.Log("Selecionou a posição: " + x + ", " + z);
+                    //Debug.Log("Selecionou a posição: " + x + ", " + z);
                 }
             }
             else if (CheckIfHitStructure()) // If I hit a Structure
@@ -507,7 +507,7 @@ public class GridMouse : MonoBehaviour
             }
             else // Decide to Build something
             {
-                Debug.Log("ENTERED HERE");
+                //Debug.Log("ENTERED HERE");
                 if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
                 {
                     if (propertyInQuestion.type == "Track")
@@ -561,30 +561,30 @@ public class GridMouse : MonoBehaviour
             bool inside_height = z<=instance_z+1 && z>=instance_z;
             if (z > instance_z + 1 && inside_width)
             {
-                Debug.Log("Rotate up from " + rotation);
+               // Debug.Log("Rotate up from " + rotation);
                 rotation = new Vector3(-90, 180, 0);
-                Debug.Log("New rotation = " + rotation);
+               // Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
             else if (x > instance_x + 1 && inside_height)
             {
-                Debug.Log("Rotate right from " + rotation);
+                //Debug.Log("Rotate right from " + rotation);
                 rotation = new Vector3(-90, -90, 0);
-                Debug.Log("New rotation = " + rotation);
+               // Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
             else if (x < instance_x && inside_height)
             {
-                Debug.Log("Rotate left from " + rotation);
+               // Debug.Log("Rotate left from " + rotation);
                 rotation = new Vector3(-90,90, 0);
-                Debug.Log("New rotation = " + rotation);
+               // Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
             else if (z < instance_z && inside_width)
             {
-                Debug.Log("Rotate down from " + rotation);
+                //Debug.Log("Rotate down from " + rotation);
                 rotation = new Vector3(-90, 0, 0);
-                Debug.Log("New rotation = " + rotation);
+               // Debug.Log("New rotation = " + rotation);
                 temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
             }
     }
@@ -764,7 +764,7 @@ public class GridMouse : MonoBehaviour
     }
     private void HandlePreviewTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
-        Debug.Log("HANDLING PREVIEW TOWER");
+        //Debug.Log("HANDLING PREVIEW TOWER");
         if (didHit)
         {
             if (previousPosition == position)
@@ -828,7 +828,7 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
@@ -844,7 +844,7 @@ public class GridMouse : MonoBehaviour
             }
             else
             {
-                Debug.Log("JUST HIT: " + hitInfo.transform.gameObject.name);
+                //Debug.Log("JUST HIT: " + hitInfo.transform.gameObject.name);
             }
         }
 	}
