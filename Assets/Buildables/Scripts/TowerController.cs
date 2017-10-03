@@ -79,6 +79,13 @@ public class TowerController : BuildableController {
 
     public void BuildEffect()
     {
+        float sfx_volume = PlayerPrefs.GetFloat("sfx volume");
+        float music_volume = PlayerPrefs.GetFloat("music volume");
+        float master_volume = PlayerPrefs.GetFloat("master volume");
+        AudioSource src = buildSoundPrefab.GetComponent<AudioSource>();
+        Debug.Log("SET VOLUME TO " + sfx_volume);
+        src.volume = sfx_volume;
+
         Instantiate(buildSoundPrefab);
         buildSmokeEffectPrefab = GetComponentInChildren<ParticleSystem>();
         buildSmokeEffectPrefab.Play();
