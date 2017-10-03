@@ -277,11 +277,11 @@ public class GridMouse : MonoBehaviour
         Destroy(CubeTrack);
         Destroy(CubeTrack2);
         Destroy(CubeTrack3);
-        Destroy(CubeTrack4);
+        Destroy(CubeTrack4.gameObject);
         Destroy(Edges);
         Destroy(EdgesSnow);
         Destroy(EdgesDesert);
-        Destroy(EdgesVolcanic);
+        Destroy(EdgesVolcanic.gameObject);
         Destroy(RockBlockers.gameObject);
         Destroy(RockBlockersLava.gameObject);
         Destroy(FireTiles.gameObject);

@@ -61,9 +61,12 @@ public class CastleHealth : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (castleDestructionAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !castleDestructionAnimator.IsInTransition(0))
+        if (castleDestructionAnimator != null)
         {
-            //Destroy(gameObject,3);
+            if (castleDestructionAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !castleDestructionAnimator.IsInTransition(0))
+            {
+                //Destroy(gameObject,3);
+            }
         }
 
     }
