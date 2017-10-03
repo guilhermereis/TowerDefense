@@ -18,6 +18,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
     };
 
+    
+
     private Achievement_t[] achievements = new Achievement_t[] {
         new Achievement_t(Achievement.ACH_WIN_10_WAVES,"Defeated 10 waves",""),
         new Achievement_t(Achievement.ACH_WIN_50_WAVES,"Defeated 50 waves",""),
@@ -48,23 +50,54 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int totalWaves;
     private int totalDefeats;
 
+    protected string leaderboardName = "TotalWaves";
+
     //callbacks
     protected Callback<UserAchievementStored_t> userAchievementsStored;
     protected Callback<UserStatsReceived_t> userStatsReceived;
     protected Callback<UserStatsStored_t> userStatsStored;
-
-
+    //callresults
+    protected CallResult<LeaderboardScoreUploaded_t> leaderboardScoreUploaded;
+    protected CallResult<LeaderboardFindResult_t> findLeaderBoard;
+    
     private void OnEnable()
     {
         if (!SteamManager.Initialized)
             return;
-
+        
         gameID = new CGameID(SteamUtils.GetAppID());
 
         userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
         userStatsReceived = Callback<UserStatsReceived_t>.Create(OnUserStatsReceived);
         userStatsStored = Callback<UserStatsStored_t>.Create(OnUserStatsStored);
 
+        findLeaderBoard = CallResult<LeaderboardFindResult_t>.Create(OnLeaderboardFound);
+        leaderboardScoreUploaded = CallResult<LeaderboardScoreUploaded_t>.Create(OnLeaderboardScoreUpdated);
+    }
+
+    private void OnLeaderboardScoreUpdated(LeaderboardScoreUploaded_t pCallback, bool bIOFailure)
+    {
+        if (pCallback.m_bSuccess == 1 && !bIOFailure)
+        {
+            if(pCallback.m_bScoreChanged == 1)
+            {
+                Debug.Log("NEW RECORD");
+            }
+        }
+    }
+
+    private void OnLeaderboardFound(LeaderboardFindResult_t pCallback, bool bIOFailure)
+    {
+        int[] scoreDetails;
+        if(pCallback.m_bLeaderboardFound == 1 && !bIOFailure)
+        {
+           
+            scoreDetails = new int[1];
+            scoreDetails[0] = 1;
+            SteamAPICall_t uHandle = SteamUserStats.UploadLeaderboardScore(pCallback.m_hSteamLeaderboard, ELeaderboardUploadScoreMethod.k_ELeaderboardUploadScoreMethodKeepBest, totalWaves, scoreDetails, 1);
+            leaderboardScoreUploaded.Set(uHandle);
+
+        }
     }
 
     private void OnUserStatsStored(UserStatsStored_t pCallback)
@@ -199,6 +232,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         {
             totalDefeats++;
             isStoreStats = true;
+            //getting leaderboard;
+            SteamAPICall_t fHandle =  SteamUserStats.FindLeaderboard(leaderboardName);
+            findLeaderBoard.Set(fHandle);
+
         }
     }
 
@@ -241,6 +278,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             }
         }
 
+        //store stats in the steam database if necessary.
+        SteamUserStats.SetStat("NumWaves", totalWaves);
+        SteamUserStats.SetStat("NumDefeats", totalDefeats);
+        //SteamUserStats.UploadLeaderboardScore()
     }
 
     private void UnlockAchievement(Achievement_t achievement)
@@ -248,6 +289,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         achievement.isAchieved = true;
 
         SteamUserStats.SetAchievement(achievement.achievementID.ToString());
+        
 
         isStoreStats = true;
         
