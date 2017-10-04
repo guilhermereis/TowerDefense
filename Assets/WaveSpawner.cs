@@ -86,6 +86,38 @@ public class WaveSpawner : MonoBehaviour {
     List<PropertyScript.StructureState> listOfStates;
     Shop shop;
 
+    int kingWaveLane1 = -1;
+    int kingWaveLane2 = -1;
+    int kingWaveLane3 = -1;
+    int kingWaveLane4 = -1;
+    int bomberWave = -1;
+
+    int numberOfWavesToKing = 10;
+
+    public void StartKing(int lane)
+    {
+        switch (lane)
+        {
+            case 1:
+                kingWaveLane1 = numberOfWavesToKing + waveNumberLane1;
+                break;
+            case 2:
+                kingWaveLane2 = numberOfWavesToKing + waveNumberLane2;
+                break;
+            case 3:
+                kingWaveLane3 = numberOfWavesToKing + waveNumberLane3;
+                break;
+            case 4:
+                kingWaveLane4 = numberOfWavesToKing + waveNumberLane4;
+                break;
+        }
+    }
+
+    public void StartBomberWave(int lane)
+    {
+
+    }
+
     private void Start()
     {
         minimap = GameObject.Find("Minimap").GetComponent<Minimap>();
@@ -422,7 +454,7 @@ public class WaveSpawner : MonoBehaviour {
     void CreateWave()
     {
         doSaveAll();
-        Debug.Log("INITIATING WAVE... SAVED ALL OBJECTS");
+       
 
 
         //reseting monsters indexes;
