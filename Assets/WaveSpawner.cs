@@ -425,7 +425,6 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (isWaving)
             {
-                //Debug.Log(waveProgression);
                 StopAllCoroutines();
                 GameController.ChangeGameState(GameState.Waving);
             }
@@ -520,15 +519,15 @@ public class WaveSpawner : MonoBehaviour {
 
         waveNumber++;
 
-        if (waveNumber < 2)
+        if (waveNumber < 10)
             maxLanes = 1;
-        else if (waveNumber >= 2 && waveNumber < 4)
+        else if (waveNumber >= 10 && waveNumber < 20)
         {
             openWave(1);
             maxLanes = 2;
         }
 
-        else if (waveNumber >= 4 && waveNumber < 5)
+        else if (waveNumber >= 20 && waveNumber < 30)
         {
             openWave(2);
             maxLanes = 3;

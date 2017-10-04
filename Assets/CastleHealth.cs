@@ -9,6 +9,7 @@ public class CastleHealth : MonoBehaviour {
     public float maxHealth;
     public static Animator castleDestructionAnimator;
     private List<PawnCharacter> enemies;
+    private Animator castleUIFeedbackAnimator;
     public float damageRate = 0.2f;
     public float countdown;
     private bool canBeDamaged;
@@ -33,6 +34,7 @@ public class CastleHealth : MonoBehaviour {
 
         }
         healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
+        castleUIFeedbackAnimator = HUD.transform.Find("Castle Info").GetComponent<Animator>();
     }
 	void Start () {
         countdown = 0;
@@ -75,7 +77,7 @@ public class CastleHealth : MonoBehaviour {
     public void UpdateHealthBarGfx(float value)
     {
         healthBar.fillAmount = value/maxHealth;
-        
+        castleUIFeedbackAnimator.SetTrigger("UnderAttack");
     }
 
     public void ApplyDamage(float damage)
