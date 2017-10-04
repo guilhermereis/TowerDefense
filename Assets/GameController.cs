@@ -8,22 +8,32 @@ public enum GameState {GameActivate,GamePaused ,Preparation,BeginWave, Waving,Ac
 public class SoundToPlay {
 
     GameObject soundObject;
+    AudioSource audioSource;
     public SoundToPlay(GameObject _soundObject)
     {
         soundObject = _soundObject;
         AudioSource src = soundObject.GetComponent<AudioSource>();
         src.volume = GameController.sfx_volume;
     }
-
+    public SoundToPlay(AudioSource _audioSource)
+    {
+        audioSource = _audioSource;
+        audioSource.volume = GameController.sfx_volume;
+    }
     public void Play()
     {
-        MonoBehaviour.Instantiate(soundObject);
+        if (audioSource == null)
+            MonoBehaviour.Instantiate(soundObject);
+        else
+            audioSource.Play();
     }
     public void PlayAtLocation(Vector3 position, Quaternion rotation )
     {
-        MonoBehaviour.Instantiate(soundObject, position, rotation );
+        if (audioSource == null)
+            MonoBehaviour.Instantiate(soundObject, position, rotation );
+        else
+            audioSource.Play();
     }
-
 }
 
 public class GameController : MonoBehaviour {
