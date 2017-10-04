@@ -111,7 +111,7 @@ public class PawnController : MonoBehaviour {
 
             if (waypoint_ == 0)
             {
-                Transform waypointA = waypointLane2.transform.Find("waypointA");
+                Transform waypointA = waypointLane3.transform.Find("waypointA");
 
                 for (int i = 0; i < waypointA.childCount; i++)
                 {
@@ -121,7 +121,7 @@ public class PawnController : MonoBehaviour {
             }
             else
             {
-                Transform waypointB = waypointLane2.transform.Find("waypointB");
+                Transform waypointB = waypointLane3.transform.Find("waypointB");
 
                 for (int i = 0; i < waypointB.childCount; i++)
                 {
