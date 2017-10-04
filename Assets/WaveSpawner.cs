@@ -341,7 +341,6 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (isWaving)
             {
-                //Debug.Log(waveProgression);
                 StopAllCoroutines();
                 GameController.ChangeGameState(GameState.Waving);
             }

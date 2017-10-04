@@ -45,6 +45,10 @@ public class WaveSpawnerUIController : MonoBehaviour {
             arrow.transform.position = new Vector3(arrowOnScreenPos.x * Screen.width, arrowOnScreenPos.y * Screen.height, arrow.transform.position.z);
         }
 
+        if (GameController.gameState == GameState.Waving || GameController.gameState == GameState.Action) {
+            disableArrow();
+        }
+
     }
 
     public void showUI() {
