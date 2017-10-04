@@ -90,4 +90,23 @@ public class FastForward : MonoBehaviour {
         Time.timeScale = 3;
     }
 
+    void Update()
+    {
+        if (Input.GetButtonDown("Pause")) {
+            PauseSpeedOnClick();
+        }
+        if (Input.GetButtonDown("Speedx1"))
+        {
+            NormalSpeedOnClick();
+        }
+        if (Input.GetButtonDown("Speedx2"))
+        {
+            DoubleSpeedOnClick();
+        }
+        if (Input.GetButtonDown("Speedx3"))
+        {
+            TripleSpeedOnClick();
+        }
+    }
+
 }

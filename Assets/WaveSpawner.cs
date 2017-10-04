@@ -8,12 +8,15 @@ public class WaveSpawner : MonoBehaviour {
     public GameObject[] monstersPrefab;
     public GameObject castlePrefab;
     private GameObject waveSpawnerUIHolder;
+    public WarningBoardController waveWarningBoardController;
+
     private Minimap minimap;
     private int saved_money = 0;
     public static int gainSecondChanceCounter = 0;
     public int[] monstersType;
     public GameObject WaveSpawnerUIPrefab;
     private Dictionary<string, GameObject> waveSpawnerUIs;
+    private bool[] openLanes = new bool[4];
 
     public int totalMonsters = 6;
 
@@ -432,16 +435,23 @@ public class WaveSpawner : MonoBehaviour {
 
         waveNumber++;
 
-        if(waveNumber < 10)
+        if (waveNumber < 2)
             maxLanes = 1;
-        else if (waveNumber >= 10 && waveNumber < 20)
+        else if (waveNumber >= 2 && waveNumber < 4)
+        {
+            openWave(1);
             maxLanes = 2;
-        else if (waveNumber >= 20 && waveNumber < 30)
+        }
+
+        else if (waveNumber >= 4 && waveNumber < 5)
+        {
+            openWave(2);
             maxLanes = 3;
-        else
+        }
+        else {
+            openWave(3);
             maxLanes = 4;
-
-
+        }
 
         waveMonsters = 0;
 
@@ -485,7 +495,6 @@ public class WaveSpawner : MonoBehaviour {
 
             waveMonsters += combinationLane1.Length + combinationLane2.Length + combinationLane3.Length;
             waveSpawnerUIs["Lane3"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
-
         }
         else if( maxLanes == 4)
         {
@@ -506,9 +515,8 @@ public class WaveSpawner : MonoBehaviour {
 
             waveMonsters += combinationLane1.Length + combinationLane2.Length + combinationLane3.Length + combinationLane4.Length;
             waveSpawnerUIs["Lane4"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
+            
         }
-        
-        
         
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterText").GetComponent<Text>().text = "" + (waveNumber);
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterTextShadow").GetComponent<Text>().text = "" + (waveNumber);
@@ -516,6 +524,33 @@ public class WaveSpawner : MonoBehaviour {
         monsterBatch.Clear();
         minimap.ClearMonsterBatch();
         isWaving = true;
+    }
+
+    public void openWave(int waveNumber) {
+        if (!openLanes[waveNumber])
+        {
+            openLanes[waveNumber] = true;
+
+            if (waveWarningBoardController){
+                switch (waveNumber)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        waveWarningBoardController.setWarningText("Monsters are coming \n through the Snowlands!");
+                        waveWarningBoardController.openWarningBoard();
+                        break;
+                    case 2:
+                        waveWarningBoardController.setWarningText("Monsters are coming \n through the Desert!");
+                        waveWarningBoardController.openWarningBoard();
+                break;
+                case 3:
+                        waveWarningBoardController.setWarningText("Monsters are coming \n through the Volcanoes!");
+                        waveWarningBoardController.openWarningBoard();
+                        break;
+                }
+            }
+        }
     }
 
     //void SpawnMonsters()

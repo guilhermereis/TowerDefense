@@ -31,22 +31,20 @@ public class WaveSpawnerUIController : MonoBehaviour {
         float angle = (Vector2.SignedAngle(arrowOnScreenPos, new Vector2(0f, 1f)) +40f) *-1;
         arrow.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        if (arrow.activeInHierarchy) {
-            if (screenPos.x > 0 && screenPos.x < 1 && screenPos.y > 0 && screenPos.y < 1)
-            {
-                // On Screen
-                arrow.SetActive(false);
-                return;
-            }
-            else
-            {
-                arrow.SetActive(true);
-                max = Mathf.Max(Mathf.Abs(arrowOnScreenPos.x), Mathf.Abs(arrowOnScreenPos.y)) * 1.1f;
-                arrowOnScreenPos = (arrowOnScreenPos / (max * 2)) + new Vector2(0.5f, 0.5f);
-                arrow.transform.position = new Vector3(arrowOnScreenPos.x * Screen.width, arrowOnScreenPos.y * Screen.height, arrow.transform.position.z);
-            }
+        if (screenPos.x > 0 && screenPos.x < 1 && screenPos.y > 0 && screenPos.y < 1)
+        {
+            // On Screen
+            disableArrow();
+            return;
         }
-        
+        else
+        {
+            enableArrow();
+            max = Mathf.Max(Mathf.Abs(arrowOnScreenPos.x), Mathf.Abs(arrowOnScreenPos.y)) * 1.1f;
+            arrowOnScreenPos = (arrowOnScreenPos / (max * 2)) + new Vector2(0.5f, 0.5f);
+            arrow.transform.position = new Vector3(arrowOnScreenPos.x * Screen.width, arrowOnScreenPos.y * Screen.height, arrow.transform.position.z);
+        }
+
     }
 
     public void showUI() {
@@ -64,6 +62,6 @@ public class WaveSpawnerUIController : MonoBehaviour {
     }
 
     public void disableArrow() {
-        arrow.SetActive(true);
+        arrow.SetActive(false);
     }
 }
