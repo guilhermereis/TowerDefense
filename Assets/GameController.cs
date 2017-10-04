@@ -58,6 +58,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        gamechangedDelegate+= evaluateGameStateChanged;
         gameState = GameState.Preparation;
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
@@ -84,20 +85,29 @@ public class GameController : MonoBehaviour {
 
     public static void ChangeGameState(GameState newState)
     {
-        Debug.Log(newState);
         if (gameState != newState)
         {
             gameState = newState;
-            if(gamechangedDelegate != null)
+            if (gamechangedDelegate != null)
                 gamechangedDelegate();
         }
     }
-	
+
+    public void evaluateGameStateChanged() {
+        switch (gameState) {
+            case GameState.Preparation:
+                gameStateUI.GetComponent<Animator>().SetTrigger("ShowPreparation");
+                break;
+            case GameState.BeginWave:
+                gameStateUI.GetComponent<Animator>().SetTrigger("ShowMap");
+                break;
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
         if (gameState == GameState.Preparation)
         {
-
             if (countDown > 0f && countDown <= 10f) {
                 startWaveButton.transform.Find("Countdown").gameObject.SetActive(true);
                 startWaveButton.transform.Find("CountdownShadow").gameObject.SetActive(true);
@@ -123,7 +133,14 @@ public class GameController : MonoBehaviour {
             countDown -= Time.deltaTime;
         }
         else if (gameState == GameState.BeginWave) {
-            gameStateUI.GetComponent<Animator>().SetTrigger("ShowMap");
+            
+        }
+        else if (gameState == GameState.Waving)
+        {
+
+        }
+        else if (gameState == GameState.Action)
+        {
         }
         else if (gameState == GameState.GameOver)
         {
@@ -151,7 +168,6 @@ public class GameController : MonoBehaviour {
             {
                 Instantiate(endWaveSound);
             }
-            gameStateUI.GetComponent<Animator>().SetTrigger("ShowPreparation");
             ChangeGameState(GameState.Preparation);
         }
 	}

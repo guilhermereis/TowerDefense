@@ -324,22 +324,27 @@ public class WaveSpawner : MonoBehaviour {
 
     private void Update()
     {
-        if(GameController.gameState == GameState.BeginWave)
+        if (GameController.gameState == GameState.Preparation)
         {
             if (!isWaving)
             {
                 CreateWave();
                 gainSecondChanceCounter++;
             }
-            else
+
+
+        }
+        else if (GameController.gameState == GameState.BeginWave)
+        {
+            if (isWaving)
             {
                 //Debug.Log(waveProgression);
                 StopAllCoroutines();
                 GameController.ChangeGameState(GameState.Waving);
             }
-
-
         }
+
+
         else if(GameController.gameState == GameState.Waving)
         {
 
