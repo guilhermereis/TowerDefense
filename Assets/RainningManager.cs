@@ -24,9 +24,12 @@ public class RainningManager : MonoBehaviour {
         int start = 0;
         int end = lightningStrikeEffects.Count - 1;
         int striker = Random.Range(start, end);
-        lightningStrikeEffects[striker].SetActive(true);
-        lightningStrikeEffects[striker].GetComponent<ParticleSystem>().Play();
-        lightningStrikeEffects[striker].GetComponent<AudioSource>().Play();
+        //lightningStrikeEffects[striker].SetActive(true);
+        if (lightningStrikeEffects[striker].GetComponent<ParticleSystem>() != null)
+        {
+            lightningStrikeEffects[striker].GetComponent<ParticleSystem>().Play();
+            lightningStrikeEffects[striker].GetComponent<AudioSource>().Play();
+        }
     }
 
 	// Update is called once per frame
