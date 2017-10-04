@@ -5,6 +5,27 @@ using UnityEngine.UI;
 
 public enum GameState {GameActivate,GamePaused ,Preparation,BeginWave, Waving,Action, EndWave, GameOver }
 
+public class SoundToPlay {
+
+    GameObject soundObject;
+    public SoundToPlay(GameObject _soundObject)
+    {
+        soundObject = _soundObject;
+        AudioSource src = soundObject.GetComponent<AudioSource>();
+        src.volume = GameController.sfx_volume;
+    }
+
+    public void Play()
+    {
+        MonoBehaviour.Instantiate(soundObject);
+    }
+    public void PlayAtLocation(Vector3 position, Quaternion rotation )
+    {
+        MonoBehaviour.Instantiate(soundObject, position, rotation );
+    }
+
+}
+
 public class GameController : MonoBehaviour {
 
     public delegate void GameStateChangedDelegate();
@@ -21,7 +42,9 @@ public class GameController : MonoBehaviour {
     public float preparationTime = 30.0f;
     float countDown;
     public SteamStatsAndAchievements stats;
-
+    public static float sfx_volume;
+    public static float music_volume;
+    public static float master_volume;
 
     // Use this for initialization
     void Start () {
@@ -29,6 +52,18 @@ public class GameController : MonoBehaviour {
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
         stats = GameObject.FindObjectOfType<SteamStatsAndAchievements>();
+
+        sfx_volume = PlayerPrefs.GetFloat("sfx volume");
+        music_volume = PlayerPrefs.GetFloat("music volume");
+        master_volume = PlayerPrefs.GetFloat("master volume");
+
+
+        AudioSource[] mySources = FindObjectsOfType<AudioSource>();
+        for (int i = 0; i < mySources.Length; i++)
+        {
+            mySources[i].volume = sfx_volume;
+            Debug.Log("Found:  " + mySources[i].gameObject, mySources[i].gameObject);
+        }
 
     }
 

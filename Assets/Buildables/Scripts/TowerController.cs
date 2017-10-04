@@ -79,14 +79,8 @@ public class TowerController : BuildableController {
 
     public void BuildEffect()
     {
-        float sfx_volume = PlayerPrefs.GetFloat("sfx volume");
-        float music_volume = PlayerPrefs.GetFloat("music volume");
-        float master_volume = PlayerPrefs.GetFloat("master volume");
-        AudioSource src = buildSoundPrefab.GetComponent<AudioSource>();
-        Debug.Log("SET VOLUME TO " + sfx_volume);
-        src.volume = sfx_volume;
-
-        Instantiate(buildSoundPrefab);
+        new SoundToPlay(buildSoundPrefab).Play();
+        //Instantiate(buildSoundPrefab);
         buildSmokeEffectPrefab = GetComponentInChildren<ParticleSystem>();
         buildSmokeEffectPrefab.Play();
     }
@@ -301,10 +295,7 @@ public class TowerController : BuildableController {
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
                 newArrow.TowerAttack = attackPower;
-
-               
-
-                Instantiate(arrowSoundPrefab, transform.position, Quaternion.Euler(0f, rotation.y, 0f));
+                new SoundToPlay(arrowSoundPrefab).PlayAtLocation(transform.position, Quaternion.Euler(0f, rotation.y, 0f));
             }
         }
         else if( currentAmmo == TowerAmmo.ArrowFire)
@@ -316,8 +307,7 @@ public class TowerController : BuildableController {
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
                 newArrow.attackPower = attackPower;
-
-                Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+                new SoundToPlay(arrowSoundPrefab).PlayAtLocation(transform.position, Quaternion.identity);
             }
         }else if( currentAmmo == TowerAmmo.CannonBall)
         {
