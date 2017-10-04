@@ -7,6 +7,7 @@ public class WaveSpawnerUIController : MonoBehaviour {
     private Canvas hudCanvas;
     private Animator anim;
     private GameObject arrow;
+    private GameObject image;
 
     private Vector3 screenPos;
     private Vector2 arrowOnScreenPos;
@@ -16,8 +17,9 @@ public class WaveSpawnerUIController : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         arrow = transform.Find("Arrow").gameObject;
+        gameObject.SetActive(false);
         arrow.transform.parent = transform.parent.gameObject.transform;
-        //arrow.SetActive(false);
+        arrow.SetActive(false);
     }
 
     // Update is called once per frame
@@ -29,17 +31,39 @@ public class WaveSpawnerUIController : MonoBehaviour {
         float angle = (Vector2.SignedAngle(arrowOnScreenPos, new Vector2(0f, 1f)) +40f) *-1;
         arrow.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        if (screenPos.x > 0 && screenPos.x < 1 && screenPos.y > 0 && screenPos.y < 1)
-        {
-            // On Screen
-            arrow.SetActive(false);
-            return; 
+        if (arrow.activeInHierarchy) {
+            if (screenPos.x > 0 && screenPos.x < 1 && screenPos.y > 0 && screenPos.y < 1)
+            {
+                // On Screen
+                arrow.SetActive(false);
+                return;
+            }
+            else
+            {
+                arrow.SetActive(true);
+                max = Mathf.Max(Mathf.Abs(arrowOnScreenPos.x), Mathf.Abs(arrowOnScreenPos.y)) * 1.1f;
+                arrowOnScreenPos = (arrowOnScreenPos / (max * 2)) + new Vector2(0.5f, 0.5f);
+                arrow.transform.position = new Vector3(arrowOnScreenPos.x * Screen.width, arrowOnScreenPos.y * Screen.height, arrow.transform.position.z);
+            }
         }
-        else {
-            arrow.SetActive(true);
-            max = Mathf.Max(Mathf.Abs(arrowOnScreenPos.x), Mathf.Abs(arrowOnScreenPos.y)) * 1.1f;
-            arrowOnScreenPos = (arrowOnScreenPos / (max * 2)) + new Vector2(0.5f, 0.5f);
-            arrow.transform.position = new Vector3(arrowOnScreenPos.x * Screen.width, arrowOnScreenPos.y * Screen.height , arrow.transform.position.z);
-        }
+        
+    }
+
+    public void showUI() {
+        gameObject.SetActive(true);
+        arrow.SetActive(true);
+    }
+
+    public void hideUI() {
+        gameObject.SetActive(false);
+        arrow.SetActive(false);
+    }
+
+    public void enableArrow() {
+        arrow.SetActive(true);
+    }
+
+    public void disableArrow() {
+        arrow.SetActive(true);
     }
 }

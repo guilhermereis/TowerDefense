@@ -18,8 +18,8 @@ public class ParticleLife : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (GameController.gameState == GameState.GameOver)
-            Destroy(gameObject);
+        //if (GameController.gameState == GameState.GameOver)
+        //    Destroy(gameObject);
 	}
 
 	
