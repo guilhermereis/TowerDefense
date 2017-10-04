@@ -541,11 +541,11 @@ public class WaveSpawner : MonoBehaviour {
                         waveWarningBoardController.openWarningBoard();
                         break;
                     case 2:
-                        waveWarningBoardController.setWarningText("Monsters are coming \n through the Desert!");
+                        waveWarningBoardController.setWarningText("Monsters are coming \n through the Volcanoes!");
                         waveWarningBoardController.openWarningBoard();
                 break;
                 case 3:
-                        waveWarningBoardController.setWarningText("Monsters are coming \n through the Volcanoes!");
+                        waveWarningBoardController.setWarningText("Monsters are coming \n through the Desert!");
                         waveWarningBoardController.openWarningBoard();
                         break;
                 }
