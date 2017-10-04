@@ -90,9 +90,22 @@ public class WaveSpawner : MonoBehaviour {
     int kingWaveLane2 = -1;
     int kingWaveLane3 = -1;
     int kingWaveLane4 = -1;
-    int bomberWave = -1;
+    bool isStartingKing = false;
 
+    int bomberWaveLane1 = -1;
+    int bomberWaveLane2 = -1;
+    int bomberWaveLane3 = -1;
+    int bomberWaveLane4 = -1;
+    bool isStartingBomber = false;
+
+    int numberofWavesToBombers = 3;
     int numberOfWavesToKing = 10;
+
+    int[] bomberCombinationLane1;
+    int[] bomberCombinationLane2;
+    int[] bomberCombinationLane3;
+    int[] bomberCombinationLane4;
+
 
     public void StartKing(int lane)
     {
@@ -115,7 +128,21 @@ public class WaveSpawner : MonoBehaviour {
 
     public void StartBomberWave(int lane)
     {
-
+        switch (lane)
+        {
+            case 1:
+                bomberWaveLane1 = numberofWavesToBombers + waveNumberLane1;
+                break;
+            case 2:
+                bomberWaveLane2 = numberofWavesToBombers + waveNumberLane2;
+                break;
+            case 3:
+                bomberWaveLane3 = numberofWavesToBombers + waveNumberLane3;
+                break;
+            case 4:
+                bomberWaveLane4 = numberofWavesToBombers + waveNumberLane4;
+                break;
+        }
     }
 
     private void Start()
@@ -165,7 +192,7 @@ public class WaveSpawner : MonoBehaviour {
         float timer = 0;
 
         //spawns king
-        if( waveNumberLane1 % 10 == 0)
+        if( waveNumberLane1 == kingWaveLane1)
         {
             GameObject monster = Instantiate(King1, spawnLocationLane1.position, Quaternion.identity);
             monster.GetComponent<PawnController>().SetupWaypoints(1,0);
@@ -173,6 +200,7 @@ public class WaveSpawner : MonoBehaviour {
             monster.transform.parent = transform;
             minimap.UpdateMonsterBatch();
         }
+        kingWaveLane1 = -1;
 
         while (spawningMonsterLane1 < combination_.Length)
         {
@@ -211,7 +239,7 @@ public class WaveSpawner : MonoBehaviour {
     {
         float timer = 0;
         //spawns king
-        if (waveNumberLane2 % 10 == 0)
+        if (waveNumberLane2  == kingWaveLane2)
         {
             spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
             int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
@@ -221,6 +249,9 @@ public class WaveSpawner : MonoBehaviour {
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
         }
+
+        kingWaveLane2 = -1;
+
         while (spawningMonsterLane2 < combination_.Length)
         {
 
@@ -262,7 +293,7 @@ public class WaveSpawner : MonoBehaviour {
     {
         float timer = 0;
         //spawns king
-        if (waveNumberLane3 % 10 == 0)
+        if (waveNumberLane3  == kingWaveLane3)
         {
             spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
             int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
@@ -272,6 +303,9 @@ public class WaveSpawner : MonoBehaviour {
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
         }
+
+        kingWaveLane3 = -1;
+
         while (spawningMonsterLane3 < combination_.Length)
         {
 
@@ -312,7 +346,7 @@ public class WaveSpawner : MonoBehaviour {
         float timer = 0;
 
         //spawns king
-        if (waveNumberLane4 % 10 == 0)
+        if (waveNumberLane4 == kingWaveLane4)
         {
             GameObject monster = Instantiate(King1, spawnLocationLane4.position, Quaternion.Euler(new Vector3(0, 180, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(4,0);
@@ -320,6 +354,8 @@ public class WaveSpawner : MonoBehaviour {
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
         }
+
+        kingWaveLane4 = -1;
 
         while (spawningMonsterLane4 < combination_.Length)
         {
@@ -363,6 +399,22 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (!isWaving)
             {
+                int kingWave = Random.Range(0, 1);
+                if(kingWave > 0)
+                {
+                    int kinglane = Random.Range(1, 4);
+                    isStartingKing = true;
+
+                }
+
+                int bomberWave = Random.Range(0, 1);
+                if(bomberWave >0)
+                {
+                    int bomberLane = Random.Range(0, 1);
+                    isStartingBomber = true;
+                }
+
+
                 CreateWave();
                 gainSecondChanceCounter++;
             }
@@ -384,6 +436,7 @@ public class WaveSpawner : MonoBehaviour {
         {
 
             if (!startedSpawn) {
+                
                 if (maxLanes == 1)
                 {
                     StartCoroutine("SpawnLane1", combinationLane1);
@@ -490,8 +543,32 @@ public class WaveSpawner : MonoBehaviour {
         if(maxLanes == 1)
         {
             waveNumberLane1++;
+            
+            
             waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
-            combinationLane1 = waveLane1.GetCombinaton();
+            if (isStartingBomber && bomberWaveLane1!= -1)
+            {
+                combinationLane1 = new int[waveNumberLane1 * 2];
+                int[] wC = waveLane1.GetCombinaton();
+                int[] wB = waveLane1.BomberWave(waveNumberLane1);
+                for (int i = 0; i < wC.Length; i++)
+                {
+                    combinationLane1[i] = wC[i];
+                }
+
+                for (int i = 0; i < wB.Length; i++)
+                {
+                    combinationLane1[i] = wB[i];
+                }
+
+                bomberWaveLane1 = -1;
+
+            }
+            else
+            {
+                combinationLane1 = waveLane1.GetCombinaton();
+            }
+            
             waveMonsters += combinationLane1.Length;
             waveSpawnerUIs["Lane1"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
         }
