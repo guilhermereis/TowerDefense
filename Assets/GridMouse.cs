@@ -18,14 +18,15 @@ public class GridMouse : MonoBehaviour
     //        5: UI
     //        6:
     //        7:
-    //        8:Coins
-    //        9:Projectiles
+    //        8: Coins
+    //        9: Projectiles
     //        10:Monsters
     //        11:EdgeTiles
+    //        12:RiverColliders
 
     //ignore layers 8,9,10 and 2 (IgnoreRaycast Layer)
     //(lowest order bit is 0-indexed)
-    private int layerMask = Convert.ToInt32("11111111111111111111100011101001", 2);
+    private int layerMask = Convert.ToInt32("11111111111111111111000011101001", 2);
     //private int layerMask = ~(1 << 10);
 
     public static GridMouse instance;
@@ -493,9 +494,12 @@ public class GridMouse : MonoBehaviour
             }
             else if (CheckIfHitStructure()) // If I hit a Structure
             {
-                BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
-                buildManager.SelectBuilding(buildable.getArrayListPosition());
-                BuildManager.instance.ShowOptions();
+                if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                {
+                    BuildableController buildable = hitInfo.transform.gameObject.GetComponent<BuildableController>();
+                    buildManager.SelectBuilding(buildable.getArrayListPosition());
+                    BuildManager.instance.ShowOptions();
+                }
             }
             else if (propertyInQuestion.type == "Tree") // If I hit a Tree
             {
@@ -510,18 +514,24 @@ public class GridMouse : MonoBehaviour
                 //Debug.Log("ENTERED HERE");
                 if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
                 {
-                    if (propertyInQuestion.type == "Track")
+                    if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     {
-                        //FOR SOLDIER CAMP,
-                        //I ONLY BUILD SOMETHING IF I CLICKED ON A TRACK TILE.
-                        HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
-                        buildManager.DeselectUnitToBuild();
+                        if (propertyInQuestion.type == "Track")
+                        {
+                            //FOR SOLDIER CAMP,
+                            //I ONLY BUILD SOMETHING IF I CLICKED ON A TRACK TILE.
+                            HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
+                            buildManager.DeselectUnitToBuild();
+                        }
                     }
                 }
                 else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
                 {
-                    HandleBuildingTower(ray, hitInfo, didHit, x, z);
-                    buildManager.DeselectUnitToBuild();
+                    if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                    {
+                        HandleBuildingTower(ray, hitInfo, didHit, x, z);
+                        buildManager.DeselectUnitToBuild();
+                    }
                 }
                 else //if there's nothing to build, then hide the options
                 {
