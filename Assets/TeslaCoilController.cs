@@ -59,8 +59,9 @@ public class TeslaCoilController : TowerController {
                 //if (Physics.Raycast(attackPoint.transform.position, dir.normalized, out hit))
                 //{
                 //    Debug.Log(hit.collider);
+                //    //lightningLine.startWidth =Vector3.Distance(target.transform.position ,attackPoint.transform.position);
                 //    lightningLine.SetPosition(0, attackPoint.transform.position);
-                //    lightningLine.SetPosition(1, hit.point);
+                //    lightningLine.SetPosition(1, target.transform.position);
                 //}
 
 

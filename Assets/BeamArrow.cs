@@ -6,13 +6,14 @@ public class BeamArrow : Arrow {
 
 	// Use this for initialization
 	void Start () {
-		
+	
 	}
 	
 	// Update is called once per frame
 	public override void Update () {
         if (target != null)
         {
+            speed = target.GetComponent<PawnController>().speed + 0.5f;
             Vector3 dir = target.GetComponent<CapsuleCollider>().center + target.transform.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = lookRotation.eulerAngles;
@@ -33,11 +34,15 @@ public class BeamArrow : Arrow {
         if (other.gameObject == target)
         {
             bool hitted;
-
-            if (other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower,out hitted))
+            bool killed;
+            killed = other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower, out hitted);
+            if (hitted)
             {
+                Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
                 GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
-                
+
+                if ( killed)
+                    GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
             }
 
             Destroy(gameObject);
