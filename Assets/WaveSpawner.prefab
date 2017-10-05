@@ -61,21 +61,26 @@ MonoBehaviour:
   - {fileID: 1280014374057934, guid: b086cd4f772d40e429e02aeae3244777, type: 2}
   castlePrefab: {fileID: 1706210362392198, guid: 23f4d1635cade79429475be9bfa85860,
     type: 2}
+  waveWarningBoardController: {fileID: 0}
   monstersType: 
+  WaveSpawnerUIPrefab: {fileID: 1030379676286910, guid: cabedcb7c4ce572489ed7b27519747dc,
+    type: 2}
   totalMonsters: 3
   King1: {fileID: 1613466630584316, guid: b0d0c9e5926a8f948972dafa878169a4, type: 2}
   spawnLocationLane1: {fileID: 0}
   spawnLocationLane2A: {fileID: 0}
   spawnLocationLane2B: {fileID: 0}
   spawnLocationLane2: {fileID: 0}
+  spawnLocationLane3A: {fileID: 0}
+  spawnLocationLane3B: {fileID: 0}
   spawnLocationLane3: {fileID: 0}
   spawnLocationLane4: {fileID: 0}
   spawningMonsterLane1: 0
   spawningMonsterLane2: 0
   spawningMonsterLane3: 0
   spawningMonsterLane4: 0
-  waveNumber: 9
-  waveNumberLane1: 9
+  waveNumber: 0
+  waveNumberLane1: 0
   waveNumberLane2: 0
   waveNumberLane3: 0
   waveNumberLane4: 0

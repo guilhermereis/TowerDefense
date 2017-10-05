@@ -38,6 +38,8 @@ public class WaveSpawner : MonoBehaviour {
     public Transform spawnLocationLane2A;
     public Transform spawnLocationLane2B;
     public Transform spawnLocationLane2;
+    public Transform spawnLocationLane3A;
+    public Transform spawnLocationLane3B;
     public Transform spawnLocationLane3;
     public Transform spawnLocationLane4;
 #endregion
@@ -171,7 +173,8 @@ public class WaveSpawner : MonoBehaviour {
         instantiateWaveSpawnerUI("Lane2", spawnLocationLane2);
         instantiateWaveSpawnerUI("Lane2A", spawnLocationLane2A);
         instantiateWaveSpawnerUI("Lane2B", spawnLocationLane2B);
-        instantiateWaveSpawnerUI("Lane3", spawnLocationLane3);
+        instantiateWaveSpawnerUI("Lane3A", spawnLocationLane3A);
+        instantiateWaveSpawnerUI("Lane3B", spawnLocationLane3B);
         instantiateWaveSpawnerUI("Lane4", spawnLocationLane4);
     }
 
@@ -295,8 +298,8 @@ public class WaveSpawner : MonoBehaviour {
         //spawns king
         if (waveNumberLane3  == kingWaveLane3)
         {
-            spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
-            int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
+            spawnLocationLane3 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane3A : spawnLocationLane3B;
+            int waypoint = spawnLocationLane3 == spawnLocationLane3A ? 0 : 1;
             GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
             monsterBatch.Add(monster);
@@ -311,8 +314,8 @@ public class WaveSpawner : MonoBehaviour {
 
             if (timer <= 0)
             {
-                spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
-                int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
+                spawnLocationLane3 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane3A : spawnLocationLane3B;
+                int waypoint = spawnLocationLane3 == spawnLocationLane3A ? 0 : 1;
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);

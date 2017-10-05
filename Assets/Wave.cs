@@ -45,7 +45,7 @@ public class Wave  {
 
             if (sum + m <= totalScore)
             {
-                monstersWave[i] = mForce[m];
+                monstersWave[i] = m;
                 sum += m;
                 i++;
             }
