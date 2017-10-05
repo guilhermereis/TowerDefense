@@ -46,7 +46,7 @@ public class PawnCharacter : MonoBehaviour {
         if (gameObject.tag.Equals("Enemy"))
         {
             if(!exploded)
-                PlayerStats.AddMoney(30);
+                PlayerStats.AddMoney(50);
 
             Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
 
