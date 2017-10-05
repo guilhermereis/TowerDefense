@@ -18,10 +18,11 @@ public class GridMouse : MonoBehaviour
     //        5: UI
     //        6:
     //        7:
-    //        8:Coins
-    //        9:Projectiles
+    //        8: Coins
+    //        9: Projectiles
     //        10:Monsters
     //        11:EdgeTiles
+    //        12:RiverColliders
 
     //ignore layers 8,9,10 and 2 (IgnoreRaycast Layer)
     //(lowest order bit is 0-indexed)
