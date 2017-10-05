@@ -54,7 +54,7 @@ public class TeslaCoilController : TowerController {
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
-                Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+                //Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
                 //Vector3 dir = (target.transform.position + target.GetComponent<CapsuleCollider>().center) - attackPoint.transform.position;
                 //if (Physics.Raycast(attackPoint.transform.position, dir.normalized, out hit))
                 //{

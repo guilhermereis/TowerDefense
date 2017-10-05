@@ -10,7 +10,7 @@ public class Wave  {
     //4 great wanderer
     //5 great warrior
     //6 great bomber
-
+    public int[] mForce = { 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6 };
 	public int totalScore;
 	public int numberOfMonsters;
 	public int[] combination;
@@ -45,7 +45,7 @@ public class Wave  {
 
             if (sum + m <= totalScore)
             {
-                monstersWave[i] = m;
+                monstersWave[i] = mForce[m];
                 sum += m;
                 i++;
             }
