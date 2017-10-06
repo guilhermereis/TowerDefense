@@ -79,20 +79,21 @@ public class BuildManager : MonoBehaviour {
 
     public GameObject BuildPreviewOn(GameObject temporaryInstance,Vector3 position)
     {
-        if (temporaryInstance.name == "New Game Object")
+        if (temporaryInstance.name == "PreviewGameObject")
         {
             Vector2 gridSize = gridMouse.getGridSize();
             Vector3 newPosition;
             if (unitToBuild == Shop.instance.missileLauncher)
             {
                 newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+                temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
             }
             else
             {
                 newPosition = position;
+                temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
+                temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
             }
-            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
-            temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
 
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
             for (int i = 0; i < list.Length; i++)
@@ -129,6 +130,7 @@ public class BuildManager : MonoBehaviour {
 
     public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position, bool upgraded)
     {
+        Destroy(GameObject.Find("PreviewGameObject"));
         Debug.Log("Gonna build !!!");
         if (upgraded == false)
         {
@@ -159,11 +161,13 @@ public class BuildManager : MonoBehaviour {
             Debug.Log("EIS A LISTA");
             Debug.Log(i+": "+gridMouse.ListOfGameObjects[i].name);
         }
+        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
+        Destroy(GameObject.Find("UnitGameObject"));
 
-        //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
     public void BuildUnitOn(ref List<GameObject> tempList, int index, Vector3 position, Quaternion rotation, bool upgraded = false)
     {
+        Destroy(GameObject.Find("PreviewGameObject"));
         if (upgraded == false)
         {
             if (PlayerStats.Money < unitToBuild.cost)
@@ -189,6 +193,7 @@ public class BuildManager : MonoBehaviour {
             Debug.Log(i + ": " + gridMouse.ListOfGameObjects[i].name);
         }
         Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
+        Destroy(GameObject.Find("UnitGameObject"));
     }
 
     public void OnUnitUpgrade() {

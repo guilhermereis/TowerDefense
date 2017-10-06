@@ -516,13 +516,8 @@ public class GridMouse : MonoBehaviour
                 {
                     if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     {
-                        if (propertyInQuestion.type == "Track")
-                        {
-                            //FOR SOLDIER CAMP,
-                            //I ONLY BUILD SOMETHING IF I CLICKED ON A TRACK TILE.
-                            HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
-                            buildManager.DeselectUnitToBuild();
-                        }
+                         HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
+                         buildManager.DeselectUnitToBuild();
                     }
                 }
                 else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
@@ -551,7 +546,7 @@ public class GridMouse : MonoBehaviour
         return this.rotation;
     }
     public int buildUnitAndAddItToTheList(Vector3 myPosition, bool upgraded) {
-        ListOfGameObjects.Add(new GameObject());
+        ListOfGameObjects.Add(new GameObject("UnitGameObject"));
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition, upgraded);
@@ -559,45 +554,13 @@ public class GridMouse : MonoBehaviour
     }
     public int buildUnitAndAddItToTheList(Vector3 myPosition, Quaternion rotation, bool upgraded = false)
     {
-        ListOfGameObjects.Add(new GameObject());
+        ListOfGameObjects.Add(new GameObject("UnitGameObject"));
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition,rotation, upgraded);
         return AddedElmtIndex;
     }
-    void RotateAccordingly(int x, int z)
-    {
-            bool inside_width = x <= instance_x + 1 && x >= instance_x;
-            bool inside_height = z<=instance_z+1 && z>=instance_z;
-            if (z > instance_z + 1 && inside_width)
-            {
-               // Debug.Log("Rotate up from " + rotation);
-                rotation = new Vector3(-90, 180, 0);
-               // Debug.Log("New rotation = " + rotation);
-                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-            }
-            else if (x > instance_x + 1 && inside_height)
-            {
-                //Debug.Log("Rotate right from " + rotation);
-                rotation = new Vector3(-90, -90, 0);
-               // Debug.Log("New rotation = " + rotation);
-                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-            }
-            else if (x < instance_x && inside_height)
-            {
-               // Debug.Log("Rotate left from " + rotation);
-                rotation = new Vector3(-90,90, 0);
-               // Debug.Log("New rotation = " + rotation);
-                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-            }
-            else if (z < instance_z && inside_width)
-            {
-                //Debug.Log("Rotate down from " + rotation);
-                rotation = new Vector3(-90, 0, 0);
-               // Debug.Log("New rotation = " + rotation);
-                temporaryInstance.transform.rotation = Quaternion.Euler(rotation);
-            }
-    }
+    
     private bool CheckIfGameObjectIsOfColor(Color color)
     {
         bool result = false;
@@ -618,9 +581,9 @@ public class GridMouse : MonoBehaviour
     }
     private void Instantiate(Vector3 pos)
     {
-        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), pos);
+        temporaryInstance = buildManager.BuildPreviewOn(new GameObject("PreviewGameObject"), pos);
         rotated = false;
-        SetPreviewColor(Color.red);
+        SetPreviewColor(Color.green);
         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
 
@@ -631,9 +594,9 @@ public class GridMouse : MonoBehaviour
     }
     private void BuildSoldierCampPreview()
     {
-        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
+        temporaryInstance = buildManager.BuildPreviewOn(new GameObject("PreviewGameObject"), position);
         rotated = false;
-        SetPreviewColor(Color.red);
+        SetPreviewColor(Color.green);
         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
 
@@ -688,21 +651,6 @@ public class GridMouse : MonoBehaviour
                         }
                     }
                     //don't build
-                    //ROTATE !
-                    if (!rotated)
-                    {
-                        if (propertiesMatrix[x, z].type == "Track")
-                        {
-                            SetPreviewColor(Color.green);
-                            RotateAccordingly(x, z);
-                        }
-                        else
-                        {
-                            SetPreviewColor(Color.red);
-                        }
-                        
-                        rotated = true;
-                    }
                 }
                 //stepped over a TREE tile
                 else if (propertiesMatrix[x, z].type == "Tree"
@@ -711,7 +659,6 @@ public class GridMouse : MonoBehaviour
                     || propertiesMatrix[x + 1, z].type == "Tree")
                 {
                     //DON'T build and DON'T rotate.
-                    SetPreviewColor(Color.red);
                     //DestroySoldierCampPreview();
                 }
                 else
@@ -736,16 +683,7 @@ public class GridMouse : MonoBehaviour
                         || propertiesMatrix[x + 1, z].type == "Track"
                         || propertiesMatrix[x, z + 1].type == "Track")
                     {
-                        if (propertiesMatrix[x, z].type == "Track")
-                        {
-                            SetPreviewColor(Color.green);
-                            RotateAccordingly(x, z);
-                        }
-                        else
-                        {
-                            SetPreviewColor(Color.red);
-                            DestroySoldierCampPreview();
-                        }
+                        //do nothing
                     }
                     else if (propertiesMatrix[x, z].type == "Tree"
                     || propertiesMatrix[x + 1, z + 1].type == "Tree"
@@ -785,7 +723,7 @@ public class GridMouse : MonoBehaviour
                     if (previewMatrix[x, z] == false)
                     {
 
-                        temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance==null)? new GameObject() :temporaryInstance, position);
+                        temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance==null)? new GameObject("PreviewGameObject") :temporaryInstance, position);
                         previewMatrix[x, z] = true;
                         //Debug.Log("construiu preview !");
                     }
