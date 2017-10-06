@@ -785,7 +785,7 @@ public class GridMouse : MonoBehaviour
                     if (previewMatrix[x, z] == false)
                     {
 
-                        temporaryInstance = buildManager.BuildPreviewOn(new GameObject(), position);
+                        temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance==null)? new GameObject() :temporaryInstance, position);
                         previewMatrix[x, z] = true;
                         //Debug.Log("construiu preview !");
                     }
@@ -800,7 +800,7 @@ public class GridMouse : MonoBehaviour
                     if (propertiesMatrix[x, z].type == "Normal")
                     {
                         //if the logic doens't involve going over track tiles
-                        Destroy(temporaryInstance);
+                        //Destroy(temporaryInstance);
                         int instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
                         int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
 
@@ -815,9 +815,6 @@ public class GridMouse : MonoBehaviour
             previousPosition = position;
             prevX = x;
             prevZ = z;
-            //previewMatrix[x, z] = true;
-            //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
-            //Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
         }
     }
 

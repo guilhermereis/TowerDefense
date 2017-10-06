@@ -79,7 +79,8 @@ public class BuildManager : MonoBehaviour {
 
     public GameObject BuildPreviewOn(GameObject temporaryInstance,Vector3 position)
     {
-        if (temporaryInstance != null && unitToBuild != null)
+
+        if (temporaryInstance.name == new GameObject().name)
         {
             Vector2 gridSize = gridMouse.getGridSize();
             Vector3 newPosition;
@@ -92,13 +93,9 @@ public class BuildManager : MonoBehaviour {
                 newPosition = position;
             }
             temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
-            //temporaryInstance.transform.Find("Sphere").gameObject.SetActive(true);
+            Debug.Log("Instanciou !");
             temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
 
-            //sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            //temporaryInstance.transform.parent = sphere.transform;
-
-            //temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
             for (int i = 0; i < list.Length; i++)
             {
@@ -108,10 +105,28 @@ public class BuildManager : MonoBehaviour {
             //temporaryInstance.transform.Find("Sphere").gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
             foreach (Transform child in temporaryInstance.transform)
             {
-                child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast"); 
+                child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
             }
-            temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
         }
+        else if (temporaryInstance != null && unitToBuild != null)
+        {
+            Vector2 gridSize = gridMouse.getGridSize();
+            Vector3 newPosition;
+            if (unitToBuild == Shop.instance.missileLauncher)
+            {
+                newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+            }
+            else
+            {
+                newPosition = position;
+            }
+            temporaryInstance.transform.position = newPosition;
+            
+            temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
+            
+            Debug.Log("TEMPORARY INSTANCE IS " + temporaryInstance.name);
+        }
+        
         return temporaryInstance;
     }
 
