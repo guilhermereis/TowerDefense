@@ -161,8 +161,9 @@ public class BuildManager : MonoBehaviour {
             Debug.Log("EIS A LISTA");
             Debug.Log(i+": "+gridMouse.ListOfGameObjects[i].name);
         }
+        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
+        Destroy(GameObject.Find("UnitGameObject"));
 
-        //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
     }
     public void BuildUnitOn(ref List<GameObject> tempList, int index, Vector3 position, Quaternion rotation, bool upgraded = false)
     {
@@ -192,6 +193,7 @@ public class BuildManager : MonoBehaviour {
             Debug.Log(i + ": " + gridMouse.ListOfGameObjects[i].name);
         }
         Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
+        Destroy(GameObject.Find("UnitGameObject"));
     }
 
     public void OnUnitUpgrade() {
