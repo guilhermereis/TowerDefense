@@ -79,7 +79,7 @@ public class BuildManager : MonoBehaviour {
 
     public GameObject BuildPreviewOn(GameObject temporaryInstance,Vector3 position)
     {
-        if (temporaryInstance.name == "New Game Object")
+        if (temporaryInstance.name == "PreviewGameObject")
         {
             Vector2 gridSize = gridMouse.getGridSize();
             Vector3 newPosition;
@@ -129,6 +129,7 @@ public class BuildManager : MonoBehaviour {
 
     public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position, bool upgraded)
     {
+        Destroy(GameObject.Find("PreviewGameObject"));
         Debug.Log("Gonna build !!!");
         if (upgraded == false)
         {
@@ -164,6 +165,7 @@ public class BuildManager : MonoBehaviour {
     }
     public void BuildUnitOn(ref List<GameObject> tempList, int index, Vector3 position, Quaternion rotation, bool upgraded = false)
     {
+        Destroy(GameObject.Find("PreviewGameObject"));
         if (upgraded == false)
         {
             if (PlayerStats.Money < unitToBuild.cost)

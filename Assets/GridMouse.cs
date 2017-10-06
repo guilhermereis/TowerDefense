@@ -551,7 +551,7 @@ public class GridMouse : MonoBehaviour
         return this.rotation;
     }
     public int buildUnitAndAddItToTheList(Vector3 myPosition, bool upgraded) {
-        ListOfGameObjects.Add(new GameObject());
+        ListOfGameObjects.Add(new GameObject("UnitGameObject"));
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition, upgraded);
@@ -559,7 +559,7 @@ public class GridMouse : MonoBehaviour
     }
     public int buildUnitAndAddItToTheList(Vector3 myPosition, Quaternion rotation, bool upgraded = false)
     {
-        ListOfGameObjects.Add(new GameObject());
+        ListOfGameObjects.Add(new GameObject("UnitGameObject"));
         int AddedElmtIndex = ListOfGameObjects.Count - 1;
 
         buildManager.BuildUnitOn(ref ListOfGameObjects, AddedElmtIndex, myPosition,rotation, upgraded);
@@ -785,7 +785,7 @@ public class GridMouse : MonoBehaviour
                     if (previewMatrix[x, z] == false)
                     {
 
-                        temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance==null)? new GameObject() :temporaryInstance, position);
+                        temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance==null)? new GameObject("PreviewGameObject") :temporaryInstance, position);
                         previewMatrix[x, z] = true;
                         //Debug.Log("construiu preview !");
                     }
