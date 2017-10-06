@@ -33,8 +33,10 @@ public class IceArrow : Arrow {
     {
         if (other.gameObject == target)
         {
-            Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            GameObject damageEffect = Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
             target.GetComponent<PawnCharacter>().StartCoroutine("SlowTime", transform.parent.gameObject.GetComponent<TowerSlowController>().SlowAmount);
+            damageEffect.GetComponent<CrystalIce>().target = target;
+            damageEffect.transform.parent = target.transform;
 
             Destroy(gameObject);
             return;
