@@ -92,6 +92,7 @@ public class BuildManager : MonoBehaviour {
                 newPosition = position;
             }
             temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
+            Debug.Log("INSTANCIOU !!!");
             temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
 
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
