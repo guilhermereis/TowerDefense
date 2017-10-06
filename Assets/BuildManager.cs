@@ -86,14 +86,14 @@ public class BuildManager : MonoBehaviour {
             if (unitToBuild == Shop.instance.missileLauncher)
             {
                 newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+                temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
             }
             else
             {
                 newPosition = position;
+                temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
+                temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
             }
-            temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
-            Debug.Log("INSTANCIOU !!!");
-            temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
 
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
             for (int i = 0; i < list.Length; i++)
