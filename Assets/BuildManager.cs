@@ -79,8 +79,7 @@ public class BuildManager : MonoBehaviour {
 
     public GameObject BuildPreviewOn(GameObject temporaryInstance,Vector3 position)
     {
-
-        if (temporaryInstance.name == new GameObject().name)
+        if (temporaryInstance.name == "New Game Object")
         {
             Vector2 gridSize = gridMouse.getGridSize();
             Vector3 newPosition;
@@ -93,7 +92,6 @@ public class BuildManager : MonoBehaviour {
                 newPosition = position;
             }
             temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
-            Debug.Log("Instanciou !");
             temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
 
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
@@ -124,7 +122,6 @@ public class BuildManager : MonoBehaviour {
             
             temporaryInstance.GetComponent<Renderer>().material.color = Color.green;
             
-            Debug.Log("TEMPORARY INSTANCE IS " + temporaryInstance.name);
         }
         
         return temporaryInstance;
