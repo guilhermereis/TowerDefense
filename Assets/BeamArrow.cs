@@ -35,7 +35,7 @@ public class BeamArrow : Arrow {
         {
             bool hitted;
             bool killed;
-            killed = other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower, out hitted);
+            killed = other.gameObject.GetComponent  <PawnCharacter>().Damage(attackPower, out hitted);
             if (hitted)
             {
                 Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));

@@ -202,8 +202,8 @@ public class WaveSpawner : MonoBehaviour {
             monsterBatch.Add(monster);
             monster.transform.parent = transform;
             minimap.UpdateMonsterBatch();
+            kingWaveLane1 = -1;
         }
-        kingWaveLane1 = -1;
 
         while (spawningMonsterLane1 < combination_.Length)
         {
@@ -251,9 +251,9 @@ public class WaveSpawner : MonoBehaviour {
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
+            kingWaveLane2 = -1;
         }
 
-        kingWaveLane2 = -1;
 
         while (spawningMonsterLane2 < combination_.Length)
         {
@@ -305,9 +305,9 @@ public class WaveSpawner : MonoBehaviour {
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
+            kingWaveLane3 = -1;
         }
 
-        kingWaveLane3 = -1;
 
         while (spawningMonsterLane3 < combination_.Length)
         {
@@ -356,9 +356,9 @@ public class WaveSpawner : MonoBehaviour {
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
+            kingWaveLane4 = -1;
         }
 
-        kingWaveLane4 = -1;
 
         while (spawningMonsterLane4 < combination_.Length)
         {
@@ -407,7 +407,7 @@ public class WaveSpawner : MonoBehaviour {
                 {
                     int kinglane = Random.Range(1, 4);
                     isStartingKing = true;
-
+                        
                 }
 
                 int bomberWave = Random.Range(0, 1);
