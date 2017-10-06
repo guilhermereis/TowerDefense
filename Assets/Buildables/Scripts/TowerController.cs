@@ -115,6 +115,10 @@ public class TowerController : BuildableController {
 
     public void SetFireRateAndAttackPower()
     {
+        //if (unitBlueprint == null)
+        //{
+        //    Debug.Log("UNIT BLUEPRINT IS NULL !!!!");
+        //}
         float percent = ((float)unitBlueprint.getRegularSellCost() / (float)unitBlueprint.cost);
         string tower1name = "PrefabArcherTower1(Clone)";
         string tower2name = "PrefabArcherTower2(Clone)";
