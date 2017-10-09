@@ -18,13 +18,14 @@ public class MiningCampController : BuildableController {
     }
     // Use this for initialization
     void Start () {
-		
-	}
+       GameController.endWaveDelegate += AddGold;
+    }
 	//add gold until reach maxcapacity
-    public int AddGold()
+    public void AddGold()
     {
-        currentGold = Mathf.Clamp(goldByWave, 0, maxCapacity);
-        return currentGold;
+     
+        currentGold = Mathf.Clamp(currentGold + goldByWave, 0, maxCapacity);
+      
     }
     //reset isfull state and remove all the money inside
     public int Withdrawl()
@@ -45,16 +46,5 @@ public class MiningCampController : BuildableController {
         goldByWave += 50;
     }
 
-	// Update is called once per frame
-	void Update () {
-
-        if(GameController.gameState == GameState.EndWave && !isFull)
-        {
-            if (AddGold() == maxCapacity)
-            {
-                isFull = true;
-                full();
-            }
-        }
-	}
+	
 }

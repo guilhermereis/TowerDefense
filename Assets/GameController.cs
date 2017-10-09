@@ -41,6 +41,9 @@ public class GameController : MonoBehaviour {
     public delegate void GameStateChangedDelegate();
     public static GameStateChangedDelegate gamechangedDelegate;
 
+    public delegate void EndWaveDelegate();
+    public static EndWaveDelegate endWaveDelegate;
+
     [HideInInspector]
     public static GameState gameState;
     public bool game_over = false;
@@ -165,6 +168,7 @@ public class GameController : MonoBehaviour {
         }
         else if (gameState == GameState.EndWave)
         {
+            endWaveDelegate();
             GetComponent<FastForward>().NormalSpeedOnClick();
             if (endWaveSound != null)
             {
