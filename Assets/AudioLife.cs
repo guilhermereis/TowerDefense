@@ -6,15 +6,15 @@ public class AudioLife : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
         if (GetComponent<AudioSource>().playOnAwake)
         {
             Destroy(gameObject, GetComponent<AudioSource>().clip.length);
         }
+    }
+	
+	// Update is called once per frame
+	void Update () {
+        
         
 	}
 }

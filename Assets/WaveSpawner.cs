@@ -402,19 +402,26 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (!isWaving)
             {
-                int kingWave = Random.Range(0, 1);
-                if(kingWave > 0)
+                //here we randomly start the next king wave.
+                if (!isStartingKing)
                 {
-                    int kinglane = Random.Range(1, 4);
-                    isStartingKing = true;
+                    int kingWave = Random.Range(0, 1);
+                    if(kingWave > 0)
+                    {
+                        int kinglane = Random.Range(1, 4);
+                        isStartingKing = true;
                         
+                    }
                 }
-
-                int bomberWave = Random.Range(0, 1);
-                if(bomberWave >0)
+                if (!isStartingBomber)
                 {
-                    int bomberLane = Random.Range(0, 1);
-                    isStartingBomber = true;
+                    int bomberWave = Random.Range(0, 1);
+
+                    if (bomberWave >0)
+                    {
+                        int bomberLane = Random.Range(0, 1);
+                        isStartingBomber = true;
+                    }
                 }
 
 
