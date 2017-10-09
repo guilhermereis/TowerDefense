@@ -25,6 +25,8 @@ public class MiningCampController : BuildableController {
     {
      
         currentGold = Mathf.Clamp(currentGold + goldByWave, 0, maxCapacity);
+        if (currentGold == maxCapacity && !isFull)
+            isFull = true;
       
     }
     //reset isfull state and remove all the money inside
