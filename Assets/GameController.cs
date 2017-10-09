@@ -46,6 +46,8 @@ public class GameController : MonoBehaviour {
     public bool game_over = false;
 
     public GameObject endWaveSound;
+    GameObject victorySound;
+
     public GameObject gameStateUI;
     private Button startWaveButton;
 
@@ -73,7 +75,7 @@ public class GameController : MonoBehaviour {
         for (int i = 0; i < mySources.Length; i++)
         {
             mySources[i].volume = sfx_volume;
-            Debug.Log("Found:  " + mySources[i].gameObject, mySources[i].gameObject);
+            //Debug.Log("Found:  " + mySources[i].gameObject, mySources[i].gameObject);
         }
 
     }
@@ -166,7 +168,10 @@ public class GameController : MonoBehaviour {
             GetComponent<FastForward>().NormalSpeedOnClick();
             if (endWaveSound != null)
             {
-                Instantiate(endWaveSound);
+                if (victorySound == null)
+                    victorySound = Instantiate(endWaveSound);
+                else
+                    victorySound.GetComponent<AudioSource>().Play();
             }
             ChangeGameState(GameState.Preparation);
         }
