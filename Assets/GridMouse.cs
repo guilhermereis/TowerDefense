@@ -329,7 +329,7 @@ public class GridMouse : MonoBehaviour
                             {
                                 Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
 
-                                int added_index = buildUnitAndAddItToTheList(newPosition,false);
+                                int added_index = buildUnitAndAddItToTheList(newPosition, false);
                                 Destroy(temporaryInstance);
                                 //int added_index = buildUnitAndAddItToTheList(position);
                                 propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
@@ -341,6 +341,10 @@ public class GridMouse : MonoBehaviour
                                 }
                                 //Debug.Log("Construiu na posição " + x + ", " + z);
                                 //Debug.Log("Position = " + position);
+                            }
+                            else
+                            {
+                                Destroy(temporaryInstance);
                             }
                         }
                     }
@@ -447,11 +451,15 @@ public class GridMouse : MonoBehaviour
                         {
                             if (CheckIfGameObjectIsOfColor(Color.green))
                             {
-                                int added_index = buildUnitAndAddItToTheList(position,false);
+                                int added_index = buildUnitAndAddItToTheList(position, false);
                                 Destroy(temporaryInstance);
                                 propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
                                 //Debug.Log("Construiu na posição " + x + ", " + z);
-                               // Debug.Log("Position = " + position);
+                                // Debug.Log("Position = " + position);
+                            }
+                            else
+                            {
+                                Destroy(temporaryInstance);
                             }
                         }
                     }
@@ -480,16 +488,15 @@ public class GridMouse : MonoBehaviour
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
-           // Debug.Log("PROPERTY IN QUESTION = " + propertyInQuestion.type);
 
             if (propertyInQuestion.unit != null) // If the tile contains a Structure
             {
                 if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
+                    Debug.Log("DESELECT 1");
                     buildManager.DeselectUnitToBuild();
                     buildManager.DeselectSelectedUnit();
                     SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-                    //Debug.Log("Selecionou a posição: " + x + ", " + z);
                 }
             }
             else if (CheckIfHitStructure()) // If I hit a Structure
@@ -511,7 +518,6 @@ public class GridMouse : MonoBehaviour
             }
             else // Decide to Build something
             {
-                //Debug.Log("ENTERED HERE");
                 if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
                 {
                     if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
@@ -524,6 +530,7 @@ public class GridMouse : MonoBehaviour
                 {
                     if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     {
+                        Debug.Log("DESELECT 2");
                         HandleBuildingTower(ray, hitInfo, didHit, x, z);
                         buildManager.DeselectUnitToBuild();
                     }
