@@ -155,7 +155,7 @@ public class GameController : MonoBehaviour {
             {
                 if (WaveSpawner.gainSecondChanceCounter >= 0)
                 {
-                    Debug.Log("Game Over Man");
+                   
                     game_over = true;
                     GameObject sc_object = GameObject.Find("SecondChanceDialog");
                     if (sc_object != null)
@@ -168,7 +168,9 @@ public class GameController : MonoBehaviour {
         }
         else if (gameState == GameState.EndWave)
         {
-            endWaveDelegate();
+            if(endWaveDelegate != null)
+                endWaveDelegate();
+
             GetComponent<FastForward>().NormalSpeedOnClick();
             if (endWaveSound != null)
             {
