@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class FastForward : MonoBehaviour {
+public class TopRightMenu : MonoBehaviour {
 
     public Button pauseSpeed;
     public Sprite pauseSelected;

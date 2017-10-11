@@ -175,7 +175,7 @@ public class GameController : MonoBehaviour {
         }
         else if (gameState == GameState.GameOver)
         {
-            GetComponent<FastForward>().NormalSpeedOnClick();
+            GetComponent<TopRightMenu>().NormalSpeedOnClick();
 
             if (!game_over)
             {
@@ -197,7 +197,7 @@ public class GameController : MonoBehaviour {
             if(endWaveDelegate != null)
                 endWaveDelegate();
 
-            GetComponent<FastForward>().NormalSpeedOnClick();
+            GetComponent<TopRightMenu>().NormalSpeedOnClick();
             if (endWaveSound != null)
             {
                 if (victorySound == null)
