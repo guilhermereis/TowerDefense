@@ -12,27 +12,53 @@ public class SoundToPlay {
     public SoundToPlay(GameObject _soundObject)
     {
         soundObject = _soundObject;
-        AudioSource src = soundObject.GetComponent<AudioSource>();
-        src.volume = GameController.sfx_volume;
+        float master_volume = PlayerPrefs.GetFloat("master volume");
+        SetMasterVolume(master_volume);
     }
     public SoundToPlay(AudioSource _audioSource)
     {
         audioSource = _audioSource;
-        audioSource.volume = GameController.sfx_volume;
+        float master_volume = PlayerPrefs.GetFloat("master volume");
+        SetMasterVolume(master_volume);
     }
-    public void Play()
+    public void SetMasterVolume(float newVolume)
     {
-        if (audioSource == null)
-            MonoBehaviour.Instantiate(soundObject);
-        else
+        AudioListener.volume = newVolume;
+    }
+    public void PlayMusic()
+    {
+        if (audioSource)
+        {
+            audioSource.volume = GameController.music_volume;
             audioSource.Play();
+        }
+        else if (soundObject)
+        {
+            AudioSource src = soundObject.GetComponent<AudioSource>();
+            src.volume = GameController.music_volume;
+            MonoBehaviour.Instantiate(soundObject);
+        } 
+    }
+    public void PlaySfx()
+    {
+        if (audioSource)
+        {
+            audioSource.volume = GameController.music_volume;
+            audioSource.Play();
+        }
+        else if (soundObject)
+        {
+            AudioSource src = soundObject.GetComponent<AudioSource>();
+            src.volume = GameController.sfx_volume;
+            MonoBehaviour.Instantiate(soundObject);
+        }
     }
     public void PlayAtLocation(Vector3 position, Quaternion rotation )
     {
-        if (audioSource == null)
-            MonoBehaviour.Instantiate(soundObject, position, rotation );
-        else
+        if (audioSource)
             audioSource.Play();
+        else if (soundObject)
+            MonoBehaviour.Instantiate(soundObject, position, rotation);
     }
 }
 
