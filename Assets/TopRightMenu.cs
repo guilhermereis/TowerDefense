@@ -59,10 +59,10 @@ public class TopRightMenu : MonoBehaviour {
         Time.timeScale = 0;
         
     }
-    public void ShowIngameMenu()
+    public void ToggleIngameMenu()
     {
         IngameMenu igm = GameObject.Find("IngameMenu").GetComponent<IngameMenu>();
-        igm.Show();
+        igm.Toggle();
     }
 
     public void NormalSpeedOnClick()

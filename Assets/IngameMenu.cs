@@ -20,4 +20,18 @@ public class IngameMenu : MonoBehaviour {
         cg.alpha = 1f;
         cg.blocksRaycasts = true;
     }
+    public void Toggle()
+    {
+        CanvasGroup cg = GameObject.Find("IngameMenu").GetComponent<CanvasGroup>();
+        if (cg.alpha == 1f)
+        {
+            cg.alpha = 0f;
+            cg.blocksRaycasts = false;
+        }
+        else if (cg.alpha == 0f)
+        {
+            cg.alpha = 1f;
+            cg.blocksRaycasts = true;
+        }
+    }
 }
