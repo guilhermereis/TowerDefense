@@ -18,6 +18,15 @@ public class AudioOptions : MonoBehaviour {
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+    }
+    public void Continue()
+    {
+        PlayerPrefs.SetFloat("sfx volume", volumeSliders[0].value);
+        PlayerPrefs.SetFloat("music volume", volumeSliders[1].value);
+        PlayerPrefs.SetFloat("master volume", volumeSliders[2].value);
+        PlayerPrefs.Save();
+        IngameMenu igm = GameObject.Find("IngameMenu").GetComponent<IngameMenu>();
+        igm.Hide();
     }    
     void Start()
     {

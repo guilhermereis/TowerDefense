@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class FastForward : MonoBehaviour {
+public class TopRightMenu : MonoBehaviour {
 
     public Button pauseSpeed;
     public Sprite pauseSelected;
@@ -58,6 +58,11 @@ public class FastForward : MonoBehaviour {
         pauseSpeed.interactable = false;
         Time.timeScale = 0;
         
+    }
+    public void ToggleIngameMenu()
+    {
+        IngameMenu igm = GameObject.Find("IngameMenu").GetComponent<IngameMenu>();
+        igm.Toggle();
     }
 
     public void NormalSpeedOnClick()
