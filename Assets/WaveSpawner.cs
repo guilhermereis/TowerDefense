@@ -914,7 +914,7 @@ public class WaveSpawner : MonoBehaviour {
                 Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
-            else if (listOfStates[i].structureName == "PrefabCamp(Clone)")
+            else if (listOfStates[i].structureName == "PrefabMiningCamp(Clone)")
             {
                 shop.SelectSecondaryUnit();
                 Vector3 newPosition = new Vector3(listOfStates[i].position.x - 0.5f, listOfStates[i].position.y, listOfStates[i].position.z - 0.5f);

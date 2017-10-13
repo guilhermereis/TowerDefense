@@ -622,42 +622,13 @@ public class GridMouse : MonoBehaviour
         {
             if (previousPosition == position)
             {
-                //stepped over a track tile
-                if (propertiesMatrix[x, z].type == "Track"
-                    || propertiesMatrix[x + 1, z + 1].type == "Track"
-                    || propertiesMatrix[x, z + 1].type == "Track"
-                    || propertiesMatrix[x + 1, z].type == "Track")
-                {
-                    //if cursor is on the track tile
-                    //and there's no preview anywhere, build one.
-                    if (propertiesMatrix[x, z].type == "Track")
-                    {
-                        if (temporaryInstance == null)
-                        {
-                            Vector2 tempPosition = ReturnFirstFreeTileAround();
-                            Vector3 foundPosition = CoordToPosition(Mathf.FloorToInt(tempPosition.x), Mathf.FloorToInt(tempPosition.y));
-                            if (foundPosition != CoordToPosition(0, 0))
-                            {
-                                Instantiate(foundPosition);
 
-                                Debug.Log("GOING TO INSTANTIATE ON " + foundPosition.x + ", " + foundPosition.z);
-                            }
-
-                        }
-                    }
-                    //don't build
-                }
-                //stepped over a TREE tile
-                else if (propertiesMatrix[x, z].type == "Tree"
-                    || propertiesMatrix[x + 1, z + 1].type == "Tree"
-                    || propertiesMatrix[x, z + 1].type == "Tree"
-                    || propertiesMatrix[x + 1, z].type == "Tree")
+                //stepped over a NORMAL tile
+                if (propertiesMatrix[x, z].type == "Normal"
+                    && propertiesMatrix[x + 1, z + 1].type == "Normal"
+                    && propertiesMatrix[x, z + 1].type == "Normal"
+                    && propertiesMatrix[x + 1, z].type == "Normal")
                 {
-                    //DON'T build and DON'T rotate.
-                    //DestroySoldierCampPreview();
-                }
-                else
-                {//if the logic doens't involve going over track tiles
                     if (previewMatrix[x, z] == false
                         && previewMatrix[x + 1, z + 1] == false
                         && previewMatrix[x + 1, z] == false
@@ -672,37 +643,13 @@ public class GridMouse : MonoBehaviour
                 //Debug.Log("moveu !");
                 if (temporaryInstance != null)
                 {
-                    //stepped over a track tile
-                    if (propertiesMatrix[x, z].type == "Track"
-                        || propertiesMatrix[x + 1, z + 1].type == "Track"
-                        || propertiesMatrix[x + 1, z].type == "Track"
-                        || propertiesMatrix[x, z + 1].type == "Track")
-                    {
-                        //do nothing
-                    }
-                    else if (propertiesMatrix[x, z].type == "Tree"
-                    || propertiesMatrix[x + 1, z + 1].type == "Tree"
-                    || propertiesMatrix[x, z + 1].type == "Tree"
-                    || propertiesMatrix[x + 1, z].type == "Tree")
-                    {
-                        DestroySoldierCampPreview();
-                    }
-                    else
-                    {
-                        DestroySoldierCampPreview();
-                    }
-
-                    //Debug.Log("destruiu preview !");
+                    DestroySoldierCampPreview();
                 }
 
             }
             previousPosition = position;
             prevX = x;
             prevZ = z;
-            //previewMatrix[x, z] = true;
-            //Transform newSelectionCube = Instantiate(obstaclePrefab, position + Vector3.up * .5f, Quaternion.identity) as Transform;
-            
-            //Debug.Log("Property of this tile: " + propertiesMatrix[x, z].type);
         }
     }
     private void HandlePreviewTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
