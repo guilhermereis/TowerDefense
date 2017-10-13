@@ -424,48 +424,36 @@ public class GridMouse : MonoBehaviour
         }
         return answer;
     }
-    //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
+    
     private void HandleBuildingTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
-        //this if doesn't make sense, because if we already decided to build we don't care
-        //if mouse is over any UI's
-        if (true || !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-
-        {
-            //Debug.Log("HANDLE BUILDING TOWER");
-            Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
+        
+        Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.blue);
 
             
-            //If I hit the Grid
-            if (hitInfo.transform.gameObject.name == "Grid")
-            {
-                if (temporaryInstance != null) { 
+        //If I hit the Grid
+        if (hitInfo.transform.gameObject.name == "Grid")
+        {
+            if (temporaryInstance != null) { 
 
-                    position = temporaryInstance.transform.position;
-                    x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
-                    z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
+                position = temporaryInstance.transform.position;
+                x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
+                z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
 
 
+                {
+                    if (buildManager.getUnitToBuild() != null)
                     {
-                        if (buildManager.getUnitToBuild() != null)
-                        {
-                            if (CheckIfGameObjectIsOfColor(Color.green))
-                            {
-                                int added_index = buildUnitAndAddItToTheList(position, false);
-                                Destroy(temporaryInstance);
-                                propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                                //Debug.Log("Construiu na posição " + x + ", " + z);
-                                // Debug.Log("Position = " + position);
-                            }
-                            else
-                            {
-                                Destroy(temporaryInstance);
-                            }
-                        }
+                        int added_index = buildUnitAndAddItToTheList(position, false);
+                        Destroy(temporaryInstance);
+                        propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
+                        //Debug.Log("Construiu na posição " + x + ", " + z);
+                        // Debug.Log("Position = " + position);
                     }
                 }
             }
         }
+        
     }
     public void SelectPosition(UnitBlueprint unit, GameObject gameObject)
     {
@@ -719,18 +707,17 @@ public class GridMouse : MonoBehaviour
     }
     private void HandlePreviewTower(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     {
-        //Debug.Log("HANDLING PREVIEW TOWER");
         if (didHit)
         {
             if (previousPosition == position)
             {
                 //stepped over a track tile
-                if(propertiesMatrix[x, z].type == "Normal")
+                if (propertiesMatrix[x, z].type == "Normal")
                 {//if the logic doens't involve going over track tiles
                     if (previewMatrix[x, z] == false)
                     {
 
-                        temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance==null)? new GameObject("PreviewGameObject") :temporaryInstance, position);
+                        temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance == null) ? new GameObject("PreviewGameObject") : temporaryInstance, position);
                         previewMatrix[x, z] = true;
                         //Debug.Log("construiu preview !");
                     }
@@ -741,17 +728,11 @@ public class GridMouse : MonoBehaviour
                 //Debug.Log("moveu !");
                 if (temporaryInstance != null)
                 {
-                    //stepped over a track tile
-                    if (propertiesMatrix[x, z].type == "Normal")
-                    {
-                        //if the logic doens't involve going over track tiles
-                        //Destroy(temporaryInstance);
-                        int instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
-                        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
 
-                        previewMatrix[instance_x, instance_z] = false;
-                        //previewMatrix[prevX, prevZ] = false;
-                    }
+                    int instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
+                    int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
+                    previewMatrix[instance_x, instance_z] = false;
+                    Destroy(temporaryInstance);
 
                     //Debug.Log("destruiu preview !");
                 }

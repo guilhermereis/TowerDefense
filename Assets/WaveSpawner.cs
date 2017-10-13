@@ -490,6 +490,7 @@ public class WaveSpawner : MonoBehaviour {
             {
                 StopAllCoroutines();
                 GameController.ChangeGameState(GameState.Waving);
+                doSaveAll();
             }
         }
 
@@ -568,7 +569,7 @@ public class WaveSpawner : MonoBehaviour {
     //waves set up
     void CreateWave()
     {
-        doSaveAll();
+        
        
 
 
