@@ -13,7 +13,7 @@ public class ExplodeIceEffect : MonoBehaviour {
 
 
        
-        //Destroy(gameObject, 1f);
+        Destroy(gameObject, 1f);
 	}
 	
     public void ExplodeIce()
