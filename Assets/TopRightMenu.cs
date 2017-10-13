@@ -51,7 +51,8 @@ public class TopRightMenu : MonoBehaviour {
         GameObject.Find("TowerBuild").GetComponent<Button>().enabled = true;
     }
     public void PauseSpeedOnClick() {
-        GridMouse.instance.canClickGrid = false;
+        GameObject.Find("Grid").GetComponent<GridMouse>().canClickGrid = true;
+        //GridMouse.instance.canClickGrid = false;
         DisableUI();
         clearButtons();
         pauseSpeed.image.overrideSprite = pauseSelected;
@@ -67,7 +68,8 @@ public class TopRightMenu : MonoBehaviour {
 
     public void NormalSpeedOnClick()
     {
-        GridMouse.instance.canClickGrid = true;
+        GameObject.Find("Grid").GetComponent<GridMouse>().canClickGrid = true;
+        //GridMouse.instance.canClickGrid = true;
         EnableUI();
         clearButtons();
         normalSpeed.image.overrideSprite = playSelected;
@@ -76,7 +78,8 @@ public class TopRightMenu : MonoBehaviour {
     }
 
     public void DoubleSpeedOnClick() {
-        GridMouse.instance.canClickGrid = true;
+        GameObject.Find("Grid").GetComponent<GridMouse>().canClickGrid = true;
+        //GridMouse.instance.canClickGrid = true;
         EnableUI();
         clearButtons();
         doubleSpeed.image.overrideSprite = doubleSelected;
@@ -87,7 +90,8 @@ public class TopRightMenu : MonoBehaviour {
 
     public void TripleSpeedOnClick()
     {
-        GridMouse.instance.canClickGrid = true;
+        GameObject.Find("Grid").GetComponent<GridMouse>().canClickGrid = true;
+        //GridMouse.instance.canClickGrid = true;
         EnableUI();
         clearButtons();
         tripleSpeed.image.overrideSprite = tripleSelected;
