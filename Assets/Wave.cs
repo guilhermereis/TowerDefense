@@ -61,16 +61,31 @@ public class Wave  {
         int[] monstersWave;
         float percentageOfMonstersNextMilestone = EvaluateCurveFunction(alpha) /2;
         int totalMonstersNextMilestone = Mathf.RoundToInt( percentageOfMonstersNextMilestone);
-        //if the % is equal to 0, it means that we are using full current milestone pool
+        
 
         float c = 1 - percentageOfMonstersNextMilestone;
         int monstersCurrentMS = Mathf.RoundToInt(c * numberOfMonsters);
 
-        if(monstersCurrentMS == numberOfMonsters)
+        if(monstersCurrentMS == 0)
         {
             lenght = WaveSpawner.combinations[currentMilestone ].combination.Length;
-            monstersWave = new int[lenght];
-            monstersWave = WaveSpawner.combinations[currentMilestone].combination;
+            if(WaveSpawner.combinations[currentMilestone].special!= null)
+            {
+                int j = 0;
+                monstersWave = new int[lenght + WaveSpawner.combinations[currentMilestone].special.Length];
+                for (int i = 0; i < WaveSpawner.combinations[currentMilestone].combination.Length; i++)
+                {
+                    monstersWave[i] = WaveSpawner.combinations[currentMilestone].combination[i];
+                    j = i;
+                }
+
+                for (int i = j+1 , x =0 ; i < monstersWave.Length; i++,x++)
+                {
+                    monstersWave[i] = WaveSpawner.combinations[currentMilestone].special[x];
+                }
+
+            }else
+                monstersWave = WaveSpawner.combinations[currentMilestone].combination;
         }
         else
         {

@@ -124,7 +124,7 @@ public class WaveSpawner : MonoBehaviour {
     int[] bomberCombinationLane3;
     int[] bomberCombinationLane4;
 
-    float interval = 5;
+    public float interval = 10;
     public static int repetition = 0;
 
     public void StartKing(int lane)
@@ -177,25 +177,34 @@ public class WaveSpawner : MonoBehaviour {
         //creating basics milestones combinations
         combinations[0] = new Milestone();
         combinations[0].combination = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        combinations[1].special = new int[] { 7 };
         combinations[1] = new Milestone();
         combinations[1].combination = new int[] { 1, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        combinations[1].special = new int[] { 7 };
         combinations[2] = new Milestone();
         combinations[2].combination = new int[] { 3, 3, 2, 2, 2, 2, 2, 2, 2, 2 };
+        combinations[2].special = new int[] { 7 ,3,3,3,3};
         combinations[3] = new Milestone();
         combinations[3].combination = new int[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+        combinations[3].special = new int[] { 7, 3, 3, 3, 3,4 };
         combinations[4] = new Milestone();
         combinations[4].combination = new int[] { 3, 3, 3, 3, 3, 4, 4, 4, 4, 4 };
+        combinations[4].special = new int[] { 7, 3, 3, 3, 3, 4 };
         combinations[5] = new Milestone();
         combinations[5].combination = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+        combinations[5].special = new int[] { 7, 3, 3, 3, 3, 4 };
         combinations[6] = new Milestone();
         combinations[6].combination = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 6 };
+        combinations[6].special = new int[] { 7, 3, 3, 3, 3, 4 };
         combinations[7] = new Milestone();
         combinations[7].combination = new int[] { 5, 5, 5, 6, 6, 6, 6, 6, 6, 6 };
+        combinations[7].special = new int[] { 7, 3, 3, 3, 3, 4 };
         combinations[8] = new Milestone();
         combinations[8].combination = new int[] { 5, 4, 4, 6, 6, 6, 6, 6, 6, 6 };
+        combinations[8].special = new int[] { 7, 3, 3, 3, 3, 4 };
         combinations[9] = new Milestone();
         combinations[9].combination = new int[] { 5, 5, 6, 6, 6, 6, 6, 6, 6, 6 };
-
+        combinations[9].special = new int[] { 7, 3, 3, 3, 3, 4 };
     }
 
 
