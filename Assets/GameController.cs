@@ -9,24 +9,30 @@ public class SoundToPlay {
 
     GameObject soundObject;
     AudioSource audioSource;
+    float sfx_volume = PlayerPrefs.GetFloat("sfx volume");
+    float music_volume = PlayerPrefs.GetFloat("music volume");
+    float master_volume = PlayerPrefs.GetFloat("master volume");
     public SoundToPlay(GameObject _soundObject)
     {
         soundObject = _soundObject;
-        float master_volume = PlayerPrefs.GetFloat("master volume");
-        SetMasterVolume(master_volume);
-        GameObject.Find("GameMode").GetComponent<GameController>(). SetAllVolumesOnGameController();
-
-
-
+        float master_volume = PlayerPrefs.GetFloat("master volume");                
+        SetAllVolumes();
+        SetGlobalVolume(master_volume);
     }
     public SoundToPlay(AudioSource _audioSource)
     {
         audioSource = _audioSource;
-        float master_volume = PlayerPrefs.GetFloat("master volume");
-        SetMasterVolume(master_volume);
-        GameObject.Find("GameMode").GetComponent<GameController>().SetAllVolumesOnGameController();
+        float master_volume = PlayerPrefs.GetFloat("master volume");        
+        SetAllVolumes();
+        SetGlobalVolume(master_volume);
     }
-    public void SetMasterVolume(float newVolume)
+    public void SetAllVolumes()
+    {
+        sfx_volume = PlayerPrefs.GetFloat("sfx volume");
+        music_volume = PlayerPrefs.GetFloat("music volume");
+        master_volume = PlayerPrefs.GetFloat("master volume");
+    }
+    public void SetGlobalVolume(float newVolume)
     {
         AudioListener.volume = newVolume;
     }
@@ -34,13 +40,13 @@ public class SoundToPlay {
     {
         if (audioSource)
         {
-            audioSource.volume = GameController.music_volume;
+            audioSource.volume = music_volume;
             audioSource.Play();
         }
         else if (soundObject)
         {
             AudioSource src = soundObject.GetComponent<AudioSource>();
-            src.volume = GameController.music_volume;
+            src.volume = music_volume;
             MonoBehaviour.Instantiate(soundObject);
         } 
     }
@@ -48,13 +54,13 @@ public class SoundToPlay {
     {
         if (audioSource)
         {
-            audioSource.volume = GameController.sfx_volume;
+            audioSource.volume = sfx_volume;
             audioSource.Play();
         }
         else if (soundObject)
         {
             AudioSource src = soundObject.GetComponent<AudioSource>();
-            src.volume = GameController.sfx_volume;
+            src.volume = sfx_volume;
             MonoBehaviour.Instantiate(soundObject);
         }
     }
@@ -88,16 +94,7 @@ public class GameController : MonoBehaviour {
     public float preparationTime = 30.0f;
     float countDown;
     public SteamStatsAndAchievements stats;
-    public static float sfx_volume;
-    public static float music_volume;
-    public static float master_volume;
-
-    public void SetAllVolumesOnGameController()
-    {
-        sfx_volume = PlayerPrefs.GetFloat("sfx volume");
-        music_volume = PlayerPrefs.GetFloat("music volume");
-        master_volume = PlayerPrefs.GetFloat("master volume");
-    }
+    
     // Use this for initialization
     void Start () {
         gamechangedDelegate+= evaluateGameStateChanged;
@@ -105,17 +102,6 @@ public class GameController : MonoBehaviour {
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
         stats = GameObject.FindObjectOfType<SteamStatsAndAchievements>();
-
-
-        SetAllVolumesOnGameController();
-
-        AudioSource[] mySources = FindObjectsOfType<AudioSource>();
-        for (int i = 0; i < mySources.Length; i++)
-        {
-            mySources[i].volume = sfx_volume;
-            //Debug.Log("Found:  " + mySources[i].gameObject, mySources[i].gameObject);
-        }
-
     }
 
     private void OnGUI()
