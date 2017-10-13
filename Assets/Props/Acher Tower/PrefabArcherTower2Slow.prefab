@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 33300898720700974}
   - component: {fileID: 23244702522099796}
   - component: {fileID: 114056962343531326}
+  - component: {fileID: 95861187937370878}
   m_Layer: 0
   m_Name: PrefabArcherTower2Slow
   m_TagString: Untagged
@@ -127,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1712867522992376}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -10.628833, y: -1.0000005, z: -4.4204183}
+  m_LocalPosition: {x: 1.1054668, y: -0.94, z: -9.391569}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4409896886620558}
@@ -149,7 +150,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 55b38fc7de856fc4ab9ec848eb2fb2b0, type: 2}
+  - {fileID: 2100000, guid: 9f77b5e5cd6955844869818415793412, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -206,7 +207,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1712867522992376}
-  m_Mesh: {fileID: 4300000, guid: 8426bec3067869144baff520416d8d58, type: 3}
+  m_Mesh: {fileID: 4300000, guid: d378e9ad0c4d90147aa42e34941bbcd9, type: 3}
 --- !u!33 &33833053481659358
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -214,6 +215,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1429571516190428}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &95861187937370878
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1712867522992376}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27609d144a623f8498440dc83b39343d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114056962343531326
 MonoBehaviour:
   m_ObjectHideFlags: 1

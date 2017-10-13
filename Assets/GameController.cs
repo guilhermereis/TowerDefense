@@ -163,16 +163,6 @@ public class GameController : MonoBehaviour {
 
             countDown -= Time.deltaTime;
         }
-        else if (gameState == GameState.BeginWave) {
-            
-        }
-        else if (gameState == GameState.Waving)
-        {
-
-        }
-        else if (gameState == GameState.Action)
-        {
-        }
         else if (gameState == GameState.GameOver)
         {
             GetComponent<TopRightMenu>().NormalSpeedOnClick();
