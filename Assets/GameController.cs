@@ -14,12 +14,17 @@ public class SoundToPlay {
         soundObject = _soundObject;
         float master_volume = PlayerPrefs.GetFloat("master volume");
         SetMasterVolume(master_volume);
+        GameObject.Find("GameMode").GetComponent<GameController>(). SetAllVolumesOnGameController();
+
+
+
     }
     public SoundToPlay(AudioSource _audioSource)
     {
         audioSource = _audioSource;
         float master_volume = PlayerPrefs.GetFloat("master volume");
         SetMasterVolume(master_volume);
+        GameObject.Find("GameMode").GetComponent<GameController>().SetAllVolumesOnGameController();
     }
     public void SetMasterVolume(float newVolume)
     {
@@ -43,7 +48,7 @@ public class SoundToPlay {
     {
         if (audioSource)
         {
-            audioSource.volume = GameController.music_volume;
+            audioSource.volume = GameController.sfx_volume;
             audioSource.Play();
         }
         else if (soundObject)
@@ -87,6 +92,12 @@ public class GameController : MonoBehaviour {
     public static float music_volume;
     public static float master_volume;
 
+    public void SetAllVolumesOnGameController()
+    {
+        sfx_volume = PlayerPrefs.GetFloat("sfx volume");
+        music_volume = PlayerPrefs.GetFloat("music volume");
+        master_volume = PlayerPrefs.GetFloat("master volume");
+    }
     // Use this for initialization
     void Start () {
         gamechangedDelegate+= evaluateGameStateChanged;
@@ -95,10 +106,8 @@ public class GameController : MonoBehaviour {
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
         stats = GameObject.FindObjectOfType<SteamStatsAndAchievements>();
 
-        sfx_volume = PlayerPrefs.GetFloat("sfx volume");
-        music_volume = PlayerPrefs.GetFloat("music volume");
-        master_volume = PlayerPrefs.GetFloat("master volume");
 
+        SetAllVolumesOnGameController();
 
         AudioSource[] mySources = FindObjectsOfType<AudioSource>();
         for (int i = 0; i < mySources.Length; i++)
