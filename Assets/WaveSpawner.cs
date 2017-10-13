@@ -488,6 +488,8 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (isWaving)
             {
+                saved_money = PlayerStats.Money;
+                Debug.Log("SAVED " + saved_money + " MONEY !");
                 StopAllCoroutines();
                 GameController.ChangeGameState(GameState.Waving);
                 doSaveAll();
@@ -814,7 +816,6 @@ public class WaveSpawner : MonoBehaviour {
     public void doSaveAll()
     {
         Debug.Log("Gonna save all !");
-        saved_money = PlayerStats.Money;
 
         listOfStates = new List<PropertyScript.StructureState>();
         BuildableController bc;
@@ -939,9 +940,9 @@ public class WaveSpawner : MonoBehaviour {
             }
 
         }
-
+        
         //load previously saved money
-        PlayerStats.Money = saved_money;
+        PlayerStats.SetMoney(saved_money);
 
         //Restart wave
         GameController gc = GameObject.Find("GameMode").GetComponent<GameController>();

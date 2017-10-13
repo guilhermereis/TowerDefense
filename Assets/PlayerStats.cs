@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
+    [SerializeField]
     public static int Money;
     public int StartMoney;
 
@@ -16,5 +17,10 @@ public class PlayerStats : MonoBehaviour {
         GameObject.Find("MoneyText").GetComponent<Text>().text = ""+Money;
         GameObject.Find("MoneyTextShadow").GetComponent<Text>().text = "" + Money;
     }
-
+    public static void SetMoney(int amount)
+    {
+        Money = amount;
+        GameObject.Find("MoneyText").GetComponent<Text>().text = "" + Money;
+        GameObject.Find("MoneyTextShadow").GetComponent<Text>().text = "" + Money;
+    }
 }
