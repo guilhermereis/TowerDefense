@@ -166,7 +166,7 @@ public class GameController : MonoBehaviour {
         else if (gameState == GameState.GameOver)
         {
             GetComponent<TopRightMenu>().NormalSpeedOnClick();
-
+            //
             if (!game_over)
             {
                 if (WaveSpawner.gainSecondChanceCounter >= 0)
