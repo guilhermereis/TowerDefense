@@ -573,6 +573,8 @@ MonoBehaviour:
   lightningPrefab: {fileID: 0}
   lightningLine: {fileID: 120865888216823362}
   currentAmmo: 3
+  gizmoPrefab: {fileID: 1033459423995990, guid: abf574bbe378e6447a939913071fbfc1,
+    type: 2}
   prefabLightningParticle: {fileID: 0}
 --- !u!120 &120865888216823362
 LineRenderer:

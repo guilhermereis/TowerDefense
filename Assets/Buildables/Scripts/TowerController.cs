@@ -45,16 +45,22 @@ public class TowerController : BuildableController {
     [Header("Weapon")]
     public TowerAmmo currentAmmo;
 
-
     [Header("Build Effect")]
     ParticleSystem buildSmokeEffectPrefab;
 
-   
-
-   
+    [Header("UI")]
+    private TowerGizmoController myGizmoController;
+    private GameObject gizmoObject;
+    public GameObject gizmoPrefab;
+    private GameObject HUD;
 
     // Use this for initialization
     public void Start () {
+        HUD = GameObject.FindGameObjectWithTag("HUD");
+        gizmoObject = Instantiate(gizmoPrefab, HUD.transform);
+        myGizmoController = gizmoObject.GetComponent<TowerGizmoController>();
+        myGizmoController.forceStart();
+
         SetFireRateAndAttackPower();
         //Debug.Log("THIS UNIT'S FIRERATE AND ATTACKPOWER: " + fireRate+ ", " + attackPower);
         Health = 100f;
@@ -63,15 +69,17 @@ public class TowerController : BuildableController {
 		enemies = new List<GameObject>();
         //currentAmmo = TowerAmmo.Arrow;
 
-
-
-
-
         //Instantiate(buildSmokeEffectPrefab, transform.position, Quaternion.identity);
 
         DONE = true;
 
 	}
+
+    private void OnDestroy()
+    {
+        //Kill my UI element
+        GameObject.Destroy(gizmoObject);
+    }
     public override int GetSellCostWithInterest()
     {
         return unitBlueprint.withInterest_sellcost;
@@ -107,7 +115,10 @@ public class TowerController : BuildableController {
                     
             }
 		}
-        
+
+        float cameraZoom = (1f - Camera.main.orthographicSize / 11) + 0.3f;//Magic Numbers to get a good scale from the camera zoom
+        gizmoObject.transform.position = Camera.main.WorldToScreenPoint(new Vector3(0f, 0.5f, 0f) + transform.position);
+        gizmoObject.transform.localScale = new Vector3(cameraZoom, cameraZoom, cameraZoom);
         attackCooldown -= Time.deltaTime;
 
 	}
@@ -218,6 +229,9 @@ public class TowerController : BuildableController {
                 frLVLreached = 3;
             }
         }
+
+        myGizmoController.setAttackDamageLvl(attackPowerLVL);
+        myGizmoController.setAttackSpeedLvl(fireRateLVL);
     }
 
     public void SetFireRateAndAttackPowerByLVL(int _fireRateLVL, int _attackPowerLVL)
@@ -332,10 +346,6 @@ public class TowerController : BuildableController {
             GameObject lCannonBall = Instantiate(cannonballPrefab, cannonPoint.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)));
             lCannonBall.transform.parent = transform;
         }
-        
-
-		
-
 	}
 
     //removes dead enemy from current enemies list;

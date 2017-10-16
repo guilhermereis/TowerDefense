@@ -1,10 +1,21 @@
 fileFormatVersion: 2
 guid: 6959eca83e358d6478d75f4afa56ce18
-timeCreated: 1502752726
+timeCreated: 1508107362
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buildSoundPrefab: {instanceID: 0}
+  - target: {instanceID: 0}
+  - attackPoint: {instanceID: 0}
+  - arrowPrefab: {instanceID: 0}
+  - arrowSoundPrefab: {instanceID: 0}
+  - cannonPoint: {instanceID: 0}
+  - cannonballPrefab: {instanceID: 0}
+  - lightningPrefab: {instanceID: 0}
+  - lightningLine: {instanceID: 0}
+  - gizmoPrefab: {fileID: 1033459423995990, guid: abf574bbe378e6447a939913071fbfc1,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
