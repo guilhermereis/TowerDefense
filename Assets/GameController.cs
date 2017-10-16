@@ -81,6 +81,9 @@ public class GameController : MonoBehaviour {
     public delegate void EndWaveDelegate();
     public static EndWaveDelegate endWaveDelegate;
 
+    public delegate void ToggleGizmoDelegate();
+    public static ToggleGizmoDelegate toggleGizmoDelegate;
+
     [HideInInspector]
     public static GameState gameState;
     public bool game_over = false;
@@ -91,6 +94,13 @@ public class GameController : MonoBehaviour {
     public GameObject gameStateUI;
     private Button startWaveButton;
 
+    [Header("UI")]
+    public Sprite towerGizmosOnButtonSprite;
+    public Sprite towerGizmosOffButtonSprite;
+    public static bool towerGizmosOn = true;
+    public GameObject toggleGizmoButton;
+
+    [Header("Game State")]
     public float preparationTime = 30.0f;
     float countDown;
     public SteamStatsAndAchievements stats;
@@ -98,6 +108,7 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gamechangedDelegate+= evaluateGameStateChanged;
+        toggleGizmoDelegate += evaluateGizmoToggle;
         gameState = GameState.Preparation;
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
@@ -128,6 +139,25 @@ public class GameController : MonoBehaviour {
                 gameStateUI.GetComponent<Animator>().SetTrigger("ShowMap");
                 break;
         }
+    }
+
+    public void evaluateGizmoToggle() {
+
+    }
+
+    public void toggleGizmo() {
+        towerGizmosOn = !towerGizmosOn;
+        if (towerGizmosOn)
+        {
+            toggleGizmoButton.GetComponent<Image>().overrideSprite = towerGizmosOnButtonSprite;
+            toggleGizmoButton.GetComponent<Image>().color = new Color(1f, 1f, 1f);
+        }
+        else
+        {
+            toggleGizmoButton.GetComponent<Image>().overrideSprite = towerGizmosOffButtonSprite;
+            toggleGizmoButton.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+        }
+        toggleGizmoDelegate();
     }
 
 	// Update is called once per frame

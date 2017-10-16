@@ -58,8 +58,10 @@ public class TowerController : BuildableController {
     public void Start () {
         HUD = GameObject.FindGameObjectWithTag("HUD");
         gizmoObject = Instantiate(gizmoPrefab, HUD.transform);
+        //Debug.Log("Object is: " + gizmoObject);
         myGizmoController = gizmoObject.GetComponent<TowerGizmoController>();
         myGizmoController.forceStart();
+        myGizmoController.setVisibility(GameController.towerGizmosOn);
 
         SetFireRateAndAttackPower();
         //Debug.Log("THIS UNIT'S FIRERATE AND ATTACKPOWER: " + fireRate+ ", " + attackPower);
@@ -70,7 +72,6 @@ public class TowerController : BuildableController {
         //currentAmmo = TowerAmmo.Arrow;
 
         //Instantiate(buildSmokeEffectPrefab, transform.position, Quaternion.identity);
-
         DONE = true;
 
 	}
@@ -230,8 +231,10 @@ public class TowerController : BuildableController {
             }
         }
 
-        myGizmoController.setAttackDamageLvl(attackPowerLVL);
-        myGizmoController.setAttackSpeedLvl(fireRateLVL);
+        if (myGizmoController) {
+            myGizmoController.setAttackDamageLvl(attackPowerLVL);
+            myGizmoController.setAttackSpeedLvl(fireRateLVL);
+        }
     }
 
     public void SetFireRateAndAttackPowerByLVL(int _fireRateLVL, int _attackPowerLVL)

@@ -19,15 +19,26 @@ public class TowerGizmoController : MonoBehaviour {
     void Start() {
         attackSpeedImage = transform.Find("AS").gameObject;
         attackDamageImage = transform.Find("AD").gameObject;
+        //GameController.toggleGizmoDelegate += toggleVisibility;
+    }
+
+    private void OnDestroy()
+    {
+        GameController.toggleGizmoDelegate -= toggleVisibility;
     }
 
     public void forceStart() {
         attackSpeedImage = transform.Find("AS").gameObject;
         attackDamageImage = transform.Find("AD").gameObject;
+        GameController.toggleGizmoDelegate += toggleVisibility;
     }
 
     public void setVisibility(bool isVisible) {
         gameObject.SetActive(isVisible);
+    }
+
+    public void toggleVisibility() {
+        gameObject.SetActive(!gameObject.activeInHierarchy);
     }
 
     public void setAttackSpeedLvl(int asLvl){
