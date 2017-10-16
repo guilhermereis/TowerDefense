@@ -117,7 +117,7 @@ public class TowerController : BuildableController {
             }
 		}
 
-        float cameraZoom = (1f - Camera.main.orthographicSize / 11) + 0.3f;//Magic Numbers to get a good scale from the camera zoom
+        float cameraZoom = Mathf.Clamp((1f - Camera.main.orthographicSize / 11) + 0.3f,0f,0.8f);//Magic Numbers to get a good scale from the camera zoom
         gizmoObject.transform.position = Camera.main.WorldToScreenPoint(new Vector3(0f, 0.5f, 0f) + transform.position);
         gizmoObject.transform.localScale = new Vector3(cameraZoom, cameraZoom, cameraZoom);
         attackCooldown -= Time.deltaTime;
