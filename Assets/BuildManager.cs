@@ -211,12 +211,18 @@ public class BuildManager : MonoBehaviour {
     {
         unitToBuild = null;
         if (LastSelectedGameObject != null)
-            LastSelectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        {
+            Transform LastSphere = LastSelectedGameObject.transform.Find("Sphere");
+            if (LastSphere)
+                LastSphere.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
         //if (selectedUnit == unit)
         selectedUnit = unit;
         selectedGameObject = gameObject;
         selectedPosition = gameObject.transform.position;
-        selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
+        Transform Sphere = selectedGameObject.transform.Find("Sphere");
+        if (Sphere)
+            Sphere.gameObject.GetComponent<MeshRenderer>().enabled = true;
         LastSelectedGameObject = selectedGameObject;
     }
     public void SelectBuilding(int indexOfSelectedObject)
@@ -249,9 +255,13 @@ public class BuildManager : MonoBehaviour {
         hideUpgradeWheel();
         hideBottomBar();
         if (selectedGameObject){
-            MeshRenderer renderer = selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>();
-            if (renderer)
-                renderer.enabled = false;
+            Transform Sphere = selectedGameObject.transform.Find("Sphere");
+            if (Sphere)
+            {
+                MeshRenderer renderer = Sphere.gameObject.GetComponent<MeshRenderer>();
+                if (renderer)
+                    renderer.enabled = false;
+            }
         }
         
     }
