@@ -11,7 +11,8 @@ public class ParticleLife : MonoBehaviour {
         {
             if (!thisParticleSystem.main.loop)
             {
-                Destroy(gameObject, 3);
+                
+                Destroy(gameObject, thisParticleSystem.main.duration);
             }
         }
 	}

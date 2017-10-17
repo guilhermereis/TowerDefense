@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4621789853784768}
   - component: {fileID: 198350348221367460}
   - component: {fileID: 199180949927614984}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: icetrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 65966757403278092}
   - component: {fileID: 114805760083035178}
   - component: {fileID: 82743289588495518}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: icearrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1513856314003724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4183285, y: -0.99999905, z: 7.980669}
+  m_LocalPosition: {x: -11.609223, y: -0.99999917, z: 6.803602}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4621789853784768}
@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1126345736874228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0536}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0061}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4348186013492256}
@@ -301,7 +301,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -503474437
+  randomSeed: 202693186
   InitialModule:
     serializedVersion: 3
     enabled: 1

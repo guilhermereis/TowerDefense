@@ -40,7 +40,11 @@ public class IceArrow : Arrow {
             ice.GetComponent<CrystalIce>().target = target;
             ice.transform.parent = target.transform;
 
-            Destroy(gameObject);
+            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponentInChildren<ParticleSystem>().Stop();
+
+            Destroy(gameObject,2);
             return;
 
         }

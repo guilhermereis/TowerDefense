@@ -100,8 +100,8 @@ public class Arrow : Projectile {
                 Instantiate(missPrefabParticle, target.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
             }
 
-           
 
+            //gameObject.SetActive(false);
             Destroy(gameObject);
             return;
 
