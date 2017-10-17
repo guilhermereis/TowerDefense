@@ -151,17 +151,18 @@ public class BuildManager : MonoBehaviour {
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
-        tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        Transform sphere = tempList[index].transform.Find("Sphere");
+        if (sphere){
+            sphere.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
         if(tempList[index].GetComponent<TowerController>() != null)
         {
             tempList[index].GetComponent<TowerController>().BuildEffect();
         }
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
-            Debug.Log("EIS A LISTA");
             Debug.Log(i+": "+gridMouse.ListOfGameObjects[i].name);
         }
-        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
         Destroy(GameObject.Find("UnitGameObject"));
 
     }

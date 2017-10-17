@@ -34,26 +34,26 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
 
             switch (controller.name) {
                 case "PrefabArcherTower1(Clone)":
-                    SelectionName.GetComponent<Text>().text = "Tower Lvl1: ";
-                    SelectionNameShadow.GetComponent<Text>().text = "Tower Lvl1: ";
+                    SelectionName.GetComponent<Text>().text = " Tower Lvl1: ";
+                    SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl1: ";
                     DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                     DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
                     break;
                 case "PrefabArcherTower2(Clone)":
-                    SelectionName.GetComponent<Text>().text = "Tower Lvl2: ";
-                    SelectionNameShadow.GetComponent<Text>().text = "Tower Lvl2: ";
+                    SelectionName.GetComponent<Text>().text = " Tower Lvl2: ";
+                    SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl2: ";
                     DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                     DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
                     break;
                 case "PrefabArcherTower3(Clone)":
-                    SelectionName.GetComponent<Text>().text = "Tower Lvl3: ";
-                    SelectionNameShadow.GetComponent<Text>().text = "Tower Lvl3: ";
+                    SelectionName.GetComponent<Text>().text = " Tower Lvl3: ";
+                    SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl3: ";
                     DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                     DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
                     break;
                 case "PrefabArcherTower2Slow(Clone)":
-                    SelectionName.GetComponent<Text>().text = "Icer Tower: ";
-                    SelectionNameShadow.GetComponent<Text>().text = "Icer Tower: ";
+                    SelectionName.GetComponent<Text>().text = " Icy Tower: ";
+                    SelectionNameShadow.GetComponent<Text>().text = " Icy Tower: ";
                     TowerSlowController slowController = selectedObject.GetComponent<TowerSlowController>();
                     DamageText.GetComponent<Text>().text = "" + slowController.SlowAmount + " s";
                     DamageTextShadow.GetComponent<Text>().text = "" + slowController.SlowAmount + " s";
@@ -62,8 +62,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
 
                     break;
                 case "PrefabArcherTower2Tesla(Clone)":
-                    SelectionName.GetComponent<Text>().text = "Tesla Tower: ";
-                    SelectionNameShadow.GetComponent<Text>().text = "Tesla Tower: ";
+                    SelectionName.GetComponent<Text>().text = " Fire Tower: ";
+                    SelectionNameShadow.GetComponent<Text>().text = " Fire Tower: ";
                     DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                     DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
                     break;
@@ -72,7 +72,6 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
         else {
             //Get Camp Controller
         }
-
     }
 
     public GameObject getSelectedUnit() {
