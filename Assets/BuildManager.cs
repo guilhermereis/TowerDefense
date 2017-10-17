@@ -83,7 +83,7 @@ public class BuildManager : MonoBehaviour {
         {
             Vector2 gridSize = gridMouse.getGridSize();
             Vector3 newPosition;
-            if (unitToBuild == Shop.instance.missileLauncher)
+            if (unitToBuild == Shop.instance.miningCamp)
             {
                 newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
                 temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
@@ -111,7 +111,7 @@ public class BuildManager : MonoBehaviour {
         {
             Vector2 gridSize = gridMouse.getGridSize();
             Vector3 newPosition;
-            if (unitToBuild == Shop.instance.missileLauncher)
+            if (unitToBuild == Shop.instance.miningCamp)
             {
                 newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
             }
@@ -143,7 +143,7 @@ public class BuildManager : MonoBehaviour {
         }
 
         Vector3 newPosition;
-        if (unitToBuild == Shop.instance.missileLauncher)
+        if (unitToBuild == Shop.instance.miningCamp)
             newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
         else
             newPosition = position;
@@ -179,7 +179,7 @@ public class BuildManager : MonoBehaviour {
             PlayerStats.AddMoney(-1 * unitToBuild.cost);
         }
         Vector3 newPosition;
-        if (unitToBuild == Shop.instance.missileLauncher)
+        if (unitToBuild == Shop.instance.miningCamp)
             newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
         else
             newPosition = position;
@@ -189,7 +189,7 @@ public class BuildManager : MonoBehaviour {
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
         
         //if its not a mining camp
-        if (unitToBuild != Shop.instance.missileLauncher)
+        if (unitToBuild != Shop.instance.miningCamp)
             tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
@@ -383,7 +383,11 @@ public class BuildManager : MonoBehaviour {
             Vector3 SelectedPosition = getSelectedGameObject().transform.position;
             int x;
             int z;
-            if (bc.getUnitBlueprint() == Shop.instance.standardUnit)
+            if (bc.getUnitBlueprint() == Shop.instance.towerLevel1
+             || bc.getUnitBlueprint() == Shop.instance.towerLevel2
+             || bc.getUnitBlueprint() == Shop.instance.towerLevel3
+             || bc.getUnitBlueprint() == Shop.instance.towerTesla
+             || bc.getUnitBlueprint() == Shop.instance.towerSlow)
             {
                 //tower
                 x = Mathf.FloorToInt(SelectedPosition.x + gridSize.x / 2);
@@ -402,12 +406,18 @@ public class BuildManager : MonoBehaviour {
 
             Vector3 position = gridMouse.CoordToPosition(x, z);
             gridMouse.propertiesMatrix[x, z].unit = null;
+            gridMouse.propertiesMatrix[x, z].type = "Normal";
             gridMouse.previewMatrix[x, z] = false;
-            if (bc.getUnitBlueprint() == Shop.instance.missileLauncher)
+            if (bc.getUnitBlueprint() == Shop.instance.miningCamp)
             {
                 gridMouse.propertiesMatrix[x + 1, z + 1].unit = null;
                 gridMouse.propertiesMatrix[x, z + 1].unit = null;
                 gridMouse.propertiesMatrix[x + 1, z].unit = null;
+
+                gridMouse.propertiesMatrix[x + 1, z + 1].type = "Normal";
+                gridMouse.propertiesMatrix[x, z + 1].type = "Normal";
+                gridMouse.propertiesMatrix[x + 1, z].type = "Normal";
+
 
                 gridMouse.previewMatrix[x + 1, z + 1] = false;
                 gridMouse.previewMatrix[x, z + 1] = false;
@@ -438,9 +448,9 @@ public class BuildManager : MonoBehaviour {
         {
             if (getSelectedUnit().name == "Tower")
             {
-                if (PlayerStats.Money - Shop.instance.standardUnit.upgrade_cost >= 0)
+                if (PlayerStats.Money - Shop.instance.towerLevel1.upgrade_cost >= 0)
                 {
-                    PlayerStats.AddMoney(-1 * Shop.instance.standardUnit.upgrade_cost);
+                    PlayerStats.AddMoney(-1 * Shop.instance.towerLevel1.upgrade_cost);
                     SelectUnitToBuild(Shop.instance.towerLevel2);
                     BuildTheNextLevelStructure();
                     //buildManager.DeselectUnitToBuild();
