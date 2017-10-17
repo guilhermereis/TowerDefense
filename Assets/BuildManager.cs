@@ -187,7 +187,11 @@ public class BuildManager : MonoBehaviour {
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
-        tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        
+        //if its not a mining camp
+        if (unitToBuild != Shop.instance.missileLauncher)
+            tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
             Debug.Log("EIS A LISTA");

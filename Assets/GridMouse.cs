@@ -328,8 +328,8 @@ public class GridMouse : MonoBehaviour
                             if (CheckIfGameObjectIsOfColor(Color.green))
                             {
                                 Vector3 newPosition = new Vector3(position.x - 0.5f, position.y, position.z - 0.5f);
-
-                                int added_index = buildUnitAndAddItToTheList(newPosition, false);
+                                Quaternion rotation = temporaryInstance.transform.rotation;
+                                int added_index = buildUnitAndAddItToTheList(newPosition,rotation, false);
                                 Destroy(temporaryInstance);
                                 //int added_index = buildUnitAndAddItToTheList(position);
                                 propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
