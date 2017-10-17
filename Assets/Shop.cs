@@ -8,8 +8,8 @@ public class Shop : MonoBehaviour {
     public Button standardUnitButton;
     public Button secondaryUnitButton;
 
-    public UnitBlueprint standardUnit;
-    public UnitBlueprint missileLauncher;
+    public UnitBlueprint towerLevel1;
+    public UnitBlueprint miningCamp;
     public UnitBlueprint towerLevel2;
     public UnitBlueprint towerLevel3;
     public UnitBlueprint towerSlow;
@@ -142,7 +142,7 @@ public class Shop : MonoBehaviour {
 
     private void Update()
     {
-        if (PlayerStats.Money < standardUnit.cost)
+        if (PlayerStats.Money < towerLevel1.cost)
         {
             standardUnitButton.interactable = false;
             standardUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinDisabledColor;
@@ -155,7 +155,7 @@ public class Shop : MonoBehaviour {
             canBuildPrimary = true;
         }
 
-        if (PlayerStats.Money < missileLauncher.cost)
+        if (PlayerStats.Money < miningCamp.cost)
         {
             secondaryUnitButton.interactable = false;
             secondaryUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinDisabledColor;
@@ -172,14 +172,14 @@ public class Shop : MonoBehaviour {
     public void SelectStandardUnit() {
         if (canBuildPrimary) {
             Debug.Log("Standard Turret Selected");
-            buildManager.SelectUnitToBuild(standardUnit);
+            buildManager.SelectUnitToBuild(towerLevel1);
         }
     }
 
     public void SelectSecondaryUnit() {
         if (canBuildSecondary) {
             Debug.Log("Secondary Turret Selected");
-            buildManager.SelectUnitToBuild(missileLauncher);
+            buildManager.SelectUnitToBuild(miningCamp);
         }
     }
     public void SelectTower2Unit() {
@@ -190,9 +190,9 @@ public class Shop : MonoBehaviour {
         buildManager.SelectUnitToBuild(towerLevel3);
     }
     public void initializeUIValues() {
-        standardUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().text = "" + standardUnit.cost;
-        standardUnitButton.transform.Find("Coin").transform.Find("PriceShadow").GetComponent<Text>().text = "" + standardUnit.cost;
-        secondaryUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().text = "" + missileLauncher.cost;
-        secondaryUnitButton.transform.Find("Coin").transform.Find("PriceShadow").GetComponent<Text>().text = "" + missileLauncher.cost;
+        standardUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().text = "" + towerLevel1.cost;
+        standardUnitButton.transform.Find("Coin").transform.Find("PriceShadow").GetComponent<Text>().text = "" + towerLevel1.cost;
+        secondaryUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().text = "" + miningCamp.cost;
+        secondaryUnitButton.transform.Find("Coin").transform.Find("PriceShadow").GetComponent<Text>().text = "" + miningCamp.cost;
     }
 }

@@ -54,8 +54,8 @@ public class UpgradeWheelController : MonoBehaviour {
                 upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(true);
                 upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(true);
                 upgradeWheel.transform.Find("UpgradeTowerLevel").gameObject.SetActive(true);
-                upgradeWheel.transform.Find("UpgradeTowerLevel").transform.Find("Cost").GetComponent<Text>().text = "" + Shop.instance.standardUnit.upgrade_cost;
-                upgradeWheel.transform.Find("UpgradeTowerLevel").transform.Find("CostShadow").GetComponent<Text>().text = "" + Shop.instance.standardUnit.upgrade_cost;
+                upgradeWheel.transform.Find("UpgradeTowerLevel").transform.Find("Cost").GetComponent<Text>().text = "" + Shop.instance.towerLevel1.upgrade_cost;
+                upgradeWheel.transform.Find("UpgradeTowerLevel").transform.Find("CostShadow").GetComponent<Text>().text = "" + Shop.instance.towerLevel1.upgrade_cost;
                 break;
             case 1:
                 upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(true);

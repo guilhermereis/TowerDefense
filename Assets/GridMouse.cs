@@ -296,8 +296,8 @@ public class GridMouse : MonoBehaviour
             return false;
         UnitBlueprint unit = bc.getUnitBlueprint();
         return
-            (unit.name == Shop.instance.standardUnit.name
-            || unit.name == Shop.instance.missileLauncher.name
+            (unit.name == Shop.instance.towerLevel1.name
+            || unit.name == Shop.instance.miningCamp.name
             || unit.name == Shop.instance.towerLevel2.name
             || unit.name == Shop.instance.towerLevel3.name
             || unit.name == Shop.instance.towerSlow.name
@@ -333,7 +333,7 @@ public class GridMouse : MonoBehaviour
                                 Destroy(temporaryInstance);
                                 //int added_index = buildUnitAndAddItToTheList(position);
                                 propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
-                                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                                if (buildManager.getUnitToBuild() == Shop.instance.miningCamp)
                                 {
                                     propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
                                     propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref ListOfGameObjects, added_index, "Obstacle");
@@ -506,7 +506,7 @@ public class GridMouse : MonoBehaviour
             }
             else // Decide to Build something
             {
-                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                if (buildManager.getUnitToBuild() == Shop.instance.miningCamp)
                 {
                     if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     {
@@ -514,7 +514,7 @@ public class GridMouse : MonoBehaviour
                          buildManager.DeselectUnitToBuild();
                     }
                 }
-                else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+                else if (buildManager.getUnitToBuild() == Shop.instance.towerLevel1)
                 {
                     if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     {
@@ -713,11 +713,11 @@ public class GridMouse : MonoBehaviour
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
             {
-                if (buildManager.getUnitToBuild() == Shop.instance.missileLauncher)
+                if (buildManager.getUnitToBuild() == Shop.instance.miningCamp)
                 {
                     HandlePreviewSoldierCamp(ray, hitInfo, didHit, x, z);
                 }
-                else if (buildManager.getUnitToBuild() == Shop.instance.standardUnit)
+                else if (buildManager.getUnitToBuild() == Shop.instance.towerLevel1)
                 {
                     HandlePreviewTower(ray, hitInfo, didHit, x, z);
                 }
