@@ -61,14 +61,18 @@ public class CastleHealth : MonoBehaviour {
     public void Repair()
     {
         WaveSpawner ws = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
-        int cost = Mathf.RoundToInt(CalculateCost(ws.waveNumber));
+        int cost = Mathf.RoundToInt(100* CalculateCost(ws.waveNumber));
         if (PlayerStats.Money >= cost)
         {
-            PlayerStats.AddMoney(-1 * cost);
             if (health < maxHealth)
             {
+                PlayerStats.AddMoney(-1 * cost);
                 health += 500;
                 UpdateHealthBarGfx(health);
+            }
+            else
+            {
+                Debug.Log("Castle is at full health !");
             }
         }
         else {
