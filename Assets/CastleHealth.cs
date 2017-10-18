@@ -53,9 +53,27 @@ public class CastleHealth : MonoBehaviour {
 
         
     }
+    public float CalculateCost(float waveNumber)
+    {
+        float y = Mathf.Log(5 * waveNumber + 1, 10) * 2.55f;
+        return y;
+    }
     public void Repair()
     {
-        health += 500;
+        WaveSpawner ws = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
+        int cost = Mathf.RoundToInt(CalculateCost(ws.waveNumber));
+        if (PlayerStats.Money >= cost)
+        {
+            PlayerStats.AddMoney(-1 * cost);
+            if (health < maxHealth)
+            {
+                health += 500;
+                UpdateHealthBarGfx(health);
+            }
+        }
+        else {
+            Debug.Log("You don't have enough money to upgrade the Castle !");
+        }
     }
 
 
