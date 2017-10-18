@@ -10,6 +10,7 @@ public class TooltipController : MonoBehaviour{
     public string tooltipText;
     public GameObject tooltipObject;
     public GameObject tooltipWaypoint;
+    public float showTooltipTime = 0.3f;
     private float hoveringTime;
     private EventTrigger trigger;
     private EventTrigger.Entry mouseEnterEntry;
@@ -44,7 +45,7 @@ public class TooltipController : MonoBehaviour{
             hoveringTime += Time.unscaledDeltaTime;
         }
 
-        if (hoveringTime >= 0.3f) {
+        if (hoveringTime >= showTooltipTime) {
             if (tooltipWaypoint && tooltipObject)
             {
                 if (alternativeVerticalPivot) {
