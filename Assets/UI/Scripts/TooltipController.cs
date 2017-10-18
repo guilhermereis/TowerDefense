@@ -47,7 +47,6 @@ public class TooltipController : MonoBehaviour{
     void Update () {
         if (isHovering) {
             hoveringTime += Time.unscaledDeltaTime;
-            Debug.Log("Tooltipiiing!");
         }
 
         if (hoveringTime >= showTooltipTime) {
