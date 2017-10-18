@@ -22,15 +22,14 @@ public class TeslaCoilController : TowerController {
         if (attackCooldown <= 0)
         {
 
-            if (enemies.Count >0)
+            if (enemies.Count > 0)
             {
-                lightningLine.enabled = true;
-                Fire();
-               
-                attackCooldown = 1 / getFireRate();
 
-            }else
-                lightningLine.enabled = false;
+                Fire();
+
+                attackCooldown = 1 / getFireRate();
+            }
+           
 
         }
 
@@ -48,21 +47,13 @@ public class TeslaCoilController : TowerController {
         {
             if (enemies[i] != null)
             {
-                //lightningLine.material.mainTextureOffset = new Vector2(0, Time.time);
+                
                 target = enemies[i];
                 GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
-                //Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
-                //Vector3 dir = (target.transform.position + target.GetComponent<CapsuleCollider>().center) - attackPoint.transform.position;
-                //if (Physics.Raycast(attackPoint.transform.position, dir.normalized, out hit))
-                //{
-                //    Debug.Log(hit.collider);
-                //    //lightningLine.startWidth =Vector3.Distance(target.transform.position ,attackPoint.transform.position);
-                //    lightningLine.SetPosition(0, attackPoint.transform.position);
-                //    lightningLine.SetPosition(1, target.transform.position);
-                //}
+               
 
 
 
