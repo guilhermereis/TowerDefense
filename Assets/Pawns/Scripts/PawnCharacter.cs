@@ -127,7 +127,10 @@ public class PawnCharacter : MonoBehaviour {
         //Debug.Log("material lenght " + gameObject.GetComponentsInChildren<Renderer>().Length);
 
         while (slowAmount >= 0)
-        { 
+        {
+            if (isDead)
+                break;
+
             slowAmount -= Time.deltaTime;
 
             yield return null;
