@@ -48,8 +48,18 @@ public class WarriorController : EnemyController {
     // Update is called once per frame
     protected override void Update () {
 		base.Update();
-        
-        anim.speed = nav.velocity.magnitude;
+
+        if (character.isSlow)
+        {
+            anim.speed = nav.velocity.magnitude * 2f;
+            anim.speedMultiplier = 0.3f;
+
+        }
+        else
+        {
+            anim.speed = nav.velocity.magnitude;
+            anim.speedMultiplier = 1f;
+        }
   //      if (target!= null && enemiesInRange.Contains(target))
 		//{
 		//	ChangeState(PawnState.Battle);

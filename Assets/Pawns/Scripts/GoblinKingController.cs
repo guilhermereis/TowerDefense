@@ -57,7 +57,18 @@ public class GoblinKingController : EnemyController {
         base.Update();
         if (!isDead)
         {
-            anim.speed = nav.velocity.magnitude;
+            if (character.isSlow)
+            {
+                anim.speed = nav.velocity.magnitude * 2f;
+                anim.speedMultiplier = 0.3f;
+
+            }
+            else
+            {
+                anim.speed = nav.velocity.magnitude;
+                anim.speedMultiplier = 1f;
+            }
+
             if (target ? target.gameObject.tag == "Castle" : false)
             {
                 throwFinished = false;

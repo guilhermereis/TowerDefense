@@ -211,7 +211,7 @@ public class PawnController : MonoBehaviour {
 
     public virtual void EnterFrozenTime()
     {
-        nav.speed = 0.5f;
+        nav.speed = speed*0.5f;
     }
 
     public virtual void LeaveFrozenTime()
