@@ -21,6 +21,7 @@ public class WaveSpawner : MonoBehaviour {
     private Minimap minimap;
     private int saved_money = 0;
     public static int gainSecondChanceCounter = 0;
+    public static int secondChanceWaveCountTarget = 3;
     public int[] monstersType;
     public GameObject WaveSpawnerUIPrefab;
     private Dictionary<string, GameObject> waveSpawnerUIs;

@@ -194,7 +194,7 @@ public class GameController : MonoBehaviour {
             //
             if (!game_over)
             {
-                if (WaveSpawner.gainSecondChanceCounter >= 0)
+                if (WaveSpawner.gainSecondChanceCounter >= WaveSpawner.secondChanceWaveCountTarget)
                 {
                    
                     game_over = true;
