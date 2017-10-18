@@ -67,7 +67,7 @@ public class CastleHealth : MonoBehaviour {
             if (health < maxHealth)
             {
                 PlayerStats.AddMoney(-1 * cost);
-                health += 500;
+                health += 0.20f* maxHealth;
                 UpdateHealthBarGfx(health);
             }
             else
