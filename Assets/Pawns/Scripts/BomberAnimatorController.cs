@@ -7,6 +7,7 @@ public class BomberAnimatorController : MonoBehaviour {
 
     public bool isAttacking = false;
     public float speed = 0f;
+    public float speedMultiplier = 1f;
     public bool isDead = false;
     private BomberCharacter character;
 
@@ -52,10 +53,12 @@ public class BomberAnimatorController : MonoBehaviour {
             if (anim)
             {
                 anim.SetBool("IsAttacking", isAttacking);
+                anim.SetFloat("SpeedMultiplier", speedMultiplier);
                 anim.SetFloat("Speed", speed);
                 anim.SetLayerWeight(1, weightLerp);
             }
         }
+
     }
 
     public void DeathEnd()

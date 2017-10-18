@@ -9,6 +9,7 @@ public class GoblinKingAnimatorController : MonoBehaviour {
     public bool isAttacking = false;
     public bool isAttackingCastle = false;
     public bool isDead = false;
+    public float speedMultiplier = 1f;
     public float speed = 0f;
 
     // Use this for initialization
@@ -35,6 +36,7 @@ public class GoblinKingAnimatorController : MonoBehaviour {
                 anim.SetBool("IsAttacking", isAttacking);
                 anim.SetBool("IsAttackingCastle", isAttackingCastle);
                 anim.SetFloat("Speed", speed);
+                anim.SetFloat("SpeedMultiplier", speedMultiplier);
             }
         }
     }

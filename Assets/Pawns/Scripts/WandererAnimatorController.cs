@@ -8,6 +8,7 @@ public class WandererAnimatorController : MonoBehaviour {
     public bool isAttacking = false;
     public bool isDead = false;
     public float speed = 0f;
+    public float speedMultiplier = 1f;
 
     public void setIsAttacking(bool newIsAttacking)
     {
@@ -51,6 +52,7 @@ public class WandererAnimatorController : MonoBehaviour {
             {
                 anim.SetBool("IsAttacking", isAttacking);
                 anim.SetFloat("Speed", speed);
+                anim.SetFloat("SpeedMultiplier", speedMultiplier);
                 anim.SetLayerWeight(1, weightLerp);
             }
         }

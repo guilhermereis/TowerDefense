@@ -21,6 +21,7 @@ public class WaveSpawner : MonoBehaviour {
     private Minimap minimap;
     private int saved_money = 0;
     public static int gainSecondChanceCounter = 0;
+    public static int secondChanceWaveCountTarget = 30;
     public int[] monstersType;
     public GameObject WaveSpawnerUIPrefab;
     private Dictionary<string, GameObject> waveSpawnerUIs;
@@ -462,6 +463,7 @@ public class WaveSpawner : MonoBehaviour {
     {
         if (GameController.gameState == GameState.Preparation)
         {
+            waveCounterUI.GetComponent<Image>().fillAmount = Mathf.Lerp(waveCounterUI.GetComponent<Image>().fillAmount, 0f, 0.2f);
             if (!isWaving)
             {
                 //here we randomly start the next king wave.

@@ -24,7 +24,7 @@ public class WaveSpawnerUIController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        transform.position = Camera.main.WorldToScreenPoint(new Vector3(-1.5f, 0.5f, 0f) + mapLocation);
+        transform.position = Vector3.Scale(Camera.main.WorldToScreenPoint(new Vector3(-1.5f, 0.5f, 0f) + mapLocation), new Vector3(1f,1f,0f));
         screenPos = Camera.main.ScreenToViewportPoint(transform.position);
         arrowOnScreenPos = new Vector2(screenPos.x - 0.5f, screenPos.y - 0.5f) * 2;
 

@@ -9,6 +9,7 @@ public class WarriorGoblingAnimatorController : MonoBehaviour {
 
     public bool isAttacking = false;
     public float speed = 0f;
+    public float speedMultiplier = 1f;
     public bool isDead = false;
 
     public void setIsAttacking(bool newIsAttacking)
@@ -48,6 +49,7 @@ public class WarriorGoblingAnimatorController : MonoBehaviour {
             {
                 anim.SetBool("IsAttacking", isAttacking);
                 anim.SetFloat("Speed", speed);
+                anim.SetFloat("SpeedMultiplier", speedMultiplier);
                 anim.SetLayerWeight(1, weightLerp);
             }
         }

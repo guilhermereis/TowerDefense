@@ -38,6 +38,10 @@ public class TooltipController : MonoBehaviour{
             mouseExitEntry.callback.AddListener((data) => { hideTooltip((PointerEventData)data); });
             trigger.triggers.Add(mouseExitEntry);
         }
+
+        if (!tooltipObject) {
+            tooltipObject = GameObject.FindGameObjectWithTag("HUD").transform.Find("Tooltip").gameObject;
+        }
     }
     // Update is called once per frame
     void Update () {
