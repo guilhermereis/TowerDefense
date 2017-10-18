@@ -15,6 +15,9 @@ public class TooltipController : MonoBehaviour{
     private EventTrigger.Entry mouseEnterEntry;
     private EventTrigger.Entry mouseExitEntry;
 
+    public bool alternativeVerticalPivot = false;
+    public bool alternativeHorizontalPivot = false;
+
     private bool isHovering = false;
 
     private void Awake()
@@ -44,6 +47,34 @@ public class TooltipController : MonoBehaviour{
         if (hoveringTime >= 0.3f) {
             if (tooltipWaypoint && tooltipObject)
             {
+                if (alternativeVerticalPivot) {
+                    RectTransform transform = tooltipObject.GetComponent<RectTransform>();
+                    transform.anchorMin = new Vector2(transform.anchorMin.x, 0);
+                    transform.anchorMax = new Vector2(transform.anchorMin.x, 0);
+                    transform.pivot = new Vector2(transform.pivot.x, 0);
+                }
+                else {
+                    RectTransform transform = tooltipObject.GetComponent<RectTransform>();
+                    transform.anchorMin = new Vector2(transform.anchorMin.x, 1);
+                    transform.anchorMax = new Vector2(transform.anchorMin.x, 1);
+                    transform.pivot = new Vector2(transform.pivot.x, 1);
+                }
+
+                if (alternativeHorizontalPivot)
+                {
+                    RectTransform transform = tooltipObject.GetComponent<RectTransform>();
+                    transform.anchorMin = new Vector2(1, transform.anchorMin.y);
+                    transform.anchorMax = new Vector2(1,transform.anchorMin.y);
+                    transform.pivot = new Vector2(1, transform.pivot.y);
+                }
+                else
+                {
+                    RectTransform transform = tooltipObject.GetComponent<RectTransform>();
+                    transform.anchorMin = new Vector2(0, transform.anchorMin.y);
+                    transform.anchorMax = new Vector2(0, transform.anchorMin.y);
+                    transform.pivot = new Vector2(0, transform.pivot.y);
+                }
+
                 tooltipObject.SetActive(true);
                 tooltipObject.transform.position = tooltipWaypoint.transform.position;
             }

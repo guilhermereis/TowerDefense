@@ -39,7 +39,7 @@ public class TopRightMenu : MonoBehaviour {
     public void DisableUI()
     {
         GameObject.Find("RepairButton").GetComponent<Button>().enabled = false;
-        GameObject.Find("CampBuild").GetComponent<Button>().enabled = false;
+        GameObject.Find("MineBuild").GetComponent<Button>().enabled = false;
         GameObject.Find("TowerBuild").GetComponent<Button>().enabled = false;
         BuildManager.instance.HideOptions();
         BuildManager.instance.forceHideUpgradeWheel();
@@ -47,7 +47,7 @@ public class TopRightMenu : MonoBehaviour {
     public void EnableUI()
     {
         GameObject.Find("RepairButton").GetComponent<Button>().enabled = true;
-        GameObject.Find("CampBuild").GetComponent<Button>().enabled = true;
+        GameObject.Find("MineBuild").GetComponent<Button>().enabled = true;
         GameObject.Find("TowerBuild").GetComponent<Button>().enabled = true;
     }
     public void PauseSpeedOnClick() {
