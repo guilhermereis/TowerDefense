@@ -10,9 +10,15 @@ public class CastleHealth : MonoBehaviour {
     public static Animator castleDestructionAnimator;
     private List<PawnCharacter> enemies;
     private Animator castleUIFeedbackAnimator;
+    private TooltipController tooltipController;
+
     public float damageRate = 0.2f;
     public float countdown;
     private bool canBeDamaged;
+    private WaveSpawner ws;
+    public GameObject repairButton;
+    private int repairCostMultiplier = 30;
+
     Canvas HUD;
     Image healthBar;
 
@@ -33,9 +39,12 @@ public class CastleHealth : MonoBehaviour {
             }
 
         }
+
         healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
         castleUIFeedbackAnimator = HUD.transform.Find("Castle Info").GetComponent<Animator>();
+        tooltipController = repairButton.GetComponent<TooltipController>();
     }
+
 	void Start () {
         countdown = 0;
 
@@ -51,17 +60,18 @@ public class CastleHealth : MonoBehaviour {
 
         implosionSound = GetComponent<AudioSource>();
 
-        
+        ws = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
     }
+
     public float CalculateCost(float waveNumber)
     {
         float y = Mathf.Log(5 * waveNumber + 1, 10) * 2.55f;
         return y;
     }
+
     public void Repair()
     {
-        WaveSpawner ws = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
-        int cost = Mathf.RoundToInt(100* CalculateCost(ws.waveNumber));
+        int cost = Mathf.RoundToInt(repairCostMultiplier * CalculateCost(ws.waveNumber));
         if (PlayerStats.Money >= cost)
         {
             if (health < maxHealth)
@@ -80,6 +90,11 @@ public class CastleHealth : MonoBehaviour {
         }
     }
 
+    void setRepairCostText(WaveSpawner ws) {
+        string baseString = "PAY TO REPAIR 20% OF YOUR CASTLE'S HEALTH\nTHE PRICE INCREASES WITH THE PROGRESSION OF THE GAME\nCURRENT COST: ";
+        tooltipController.tooltipText = baseString + Mathf.RoundToInt(repairCostMultiplier * CalculateCost(ws.waveNumber));
+    }
+
 
     //Change this later to actually the monsters hit with theirs fire rate
 	// Update is called once per frame
@@ -93,6 +108,17 @@ public class CastleHealth : MonoBehaviour {
             }
         }
 
+        if (repairButton) {
+            if (health == maxHealth)
+            {
+                repairButton.GetComponent<Button>().interactable = false;
+            }
+            else {
+                repairButton.GetComponent<Button>().interactable = true;
+            }
+        }
+
+        setRepairCostText(ws);
     }
 
 
