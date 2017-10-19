@@ -27,8 +27,8 @@ public class RainningManager : MonoBehaviour {
         //lightningStrikeEffects[striker].SetActive(true);
         if (lightningStrikeEffects[striker].GetComponent<ParticleSystem>() != null)
         {
-            //lightningStrikeEffects[striker].GetComponent<ParticleSystem>().Play();
-            new SoundToPlay(lightningStrikeEffects[striker].GetComponent<AudioSource>()).PlaySfx();
+            lightningStrikeEffects[striker].GetComponent<ParticleSystem>().Play();
+            //new SoundToPlay(lightningStrikeEffects[striker].GetComponent<AudioSource>()).PlaySfx();
         }
     }
 
