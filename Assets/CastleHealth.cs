@@ -22,6 +22,7 @@ public class CastleHealth : MonoBehaviour {
     public float repairAmmountPercentual = 0.2f;
 
     public Color buttonDisabledColor;
+    public Color buttonNoMoneyColor;
     public Color buttonEnabledColor;
 
     Canvas HUD;
@@ -114,24 +115,25 @@ public class CastleHealth : MonoBehaviour {
         }
 
         if (repairButton) {
-            if (health == maxHealth)
-            {
-                repairButton.GetComponent<Button>().interactable = false;
-            }
-            else {
-                repairButton.GetComponent<Button>().interactable = true;
-            }
 
             int cost = Mathf.RoundToInt(repairCostMultiplier * CalculateCost(ws.waveNumber));
             if (PlayerStats.Money < cost)
             {
                 repairButton.GetComponent<Button>().interactable = false;
-                repairButton.GetComponent<Image>().color = buttonDisabledColor;
+                repairButton.GetComponent<Image>().color = buttonNoMoneyColor;
             }
             else
             {
-                repairButton.GetComponent<Button>().interactable = true;
-                repairButton.GetComponent<Image>().color = buttonEnabledColor;
+                if (health == maxHealth)
+                {
+                    repairButton.GetComponent<Button>().interactable = false;
+                    repairButton.GetComponent<Image>().color = buttonDisabledColor;
+                }
+                else
+                {
+                    repairButton.GetComponent<Button>().interactable = true;
+                    repairButton.GetComponent<Image>().color = buttonEnabledColor;
+                }
             }
 
         }
