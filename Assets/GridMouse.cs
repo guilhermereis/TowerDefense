@@ -512,6 +512,8 @@ public class GridMouse : MonoBehaviour
                     {
                          HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
                          buildManager.DeselectUnitToBuild();
+                        //after building the soldier camp, revert to normal scale
+                        selectionCube.transform.localScale = new Vector3(1f, 0.01f, 1f);
                     }
                 }
                 else if (buildManager.getUnitToBuild() == Shop.instance.towerLevel1)
