@@ -24,7 +24,7 @@ public class BeamArrow : Arrow {
         }
         if (target == null || target.GetComponent<PawnController>().currentState == PawnController.PawnState.Dead)
         {
-            Destroy(gameObject);
+            Destroy(gameObject,2);
             return;
         }
     }
@@ -40,12 +40,20 @@ public class BeamArrow : Arrow {
             {
                 Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
                 GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
+                foreach(ParticleSystem ps in GetComponentsInChildren<ParticleSystem>())
+                {
+                    if (ps.name == "fireball")
+                        Destroy(ps);
+                    ps.Stop(true,ParticleSystemStopBehavior.StopEmitting);
+
+                }
+                GetComponentInChildren<SphereCollider>().enabled = false;
 
                 if ( killed)
                     GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
             }
 
-            Destroy(gameObject);
+            Destroy(gameObject,2);
             return;
         }
     }
