@@ -246,18 +246,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002e1ba8b4c5a654f9a63d83b1956b12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardUnit:
-    name: Tower
-    prefab: {fileID: 1039271061935134, guid: cd8f79502b8715148a3b30f0f71c870c, type: 2}
-    cost: 100
-    sell_cost: 50
-    upgrade_cost: 1600
+  standardUnitButton: {fileID: 0}
+  secondaryUnitButton: {fileID: 0}
+  towerLevel1:
+    name: 
+    prefab: {fileID: 0}
+    cost: 0
+    sell_cost: 0
+    withInterest_sellcost: 0
+    upgrade_cost: 0
     position: {x: 0, y: 0}
-  missileLauncher:
-    name: Camp
-    prefab: {fileID: 1087465474647552, guid: 6b3dd51b79fd5684baf4b24886a9390d, type: 2}
-    cost: 200
-    sell_cost: 100
+  miningCamp:
+    name: 
+    prefab: {fileID: 0}
+    cost: 0
+    sell_cost: 0
+    withInterest_sellcost: 0
     upgrade_cost: 0
     position: {x: 0, y: 0}
   towerLevel2:
@@ -265,6 +269,7 @@ MonoBehaviour:
     prefab: {fileID: 1201677733800902, guid: ac75a40b1780c8d46af9d5e3fd656262, type: 2}
     cost: 150
     sell_cost: 75
+    withInterest_sellcost: 0
     upgrade_cost: 0
     position: {x: 0, y: 0}
   towerLevel3:
@@ -272,6 +277,7 @@ MonoBehaviour:
     prefab: {fileID: 1452188681296356, guid: f8363005245ff3c48a06ad9be671353f, type: 2}
     cost: 300
     sell_cost: 200
+    withInterest_sellcost: 0
     upgrade_cost: 0
     position: {x: 0, y: 0}
   towerSlow:
@@ -279,6 +285,7 @@ MonoBehaviour:
     prefab: {fileID: 1712867522992376, guid: 6cf96096660fd1a4b8c004769bc06724, type: 2}
     cost: 0
     sell_cost: 0
+    withInterest_sellcost: 0
     upgrade_cost: 0
     position: {x: 0, y: 0}
   towerTesla:
@@ -286,8 +293,31 @@ MonoBehaviour:
     prefab: {fileID: 1704192322932422, guid: 4367198b5a49be2428792ee0f0b223da, type: 2}
     cost: 0
     sell_cost: 0
+    withInterest_sellcost: 0
     upgrade_cost: 0
     position: {x: 0, y: 0}
+  upgradeT1As1price: 100
+  upgradeT1As2price: 200
+  upgradeT1As3price: 300
+  upgradeT1Ad1price: 200
+  upgradeT1Ad2price: 300
+  upgradeT1Ad3price: 400
+  upgradeT2As1price: 200
+  upgradeT2As2price: 400
+  upgradeT2As3price: 600
+  upgradeT2Ad1price: 300
+  upgradeT2Ad2price: 600
+  upgradeT2Ad3price: 900
+  upgradeT3As1price: 500
+  upgradeT3As2price: 1000
+  upgradeT3As3price: 1500
+  upgradeT3Ad1price: 600
+  upgradeT3Ad2price: 1200
+  upgradeT3Ad3price: 1800
+  CoinEnabledColor: {r: 0, g: 0, b: 0, a: 0}
+  CoinTextEnabledColor: {r: 0, g: 0, b: 0, a: 0}
+  CoinDisabledColor: {r: 0, g: 0, b: 0, a: 0}
+  CoinTextDisabledColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114735968319195274
 MonoBehaviour:
   m_ObjectHideFlags: 1

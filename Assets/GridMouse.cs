@@ -512,6 +512,8 @@ public class GridMouse : MonoBehaviour
                     {
                          HandleBuildingSoldierCamp(ray, hitInfo, didHit, x, z);
                          buildManager.DeselectUnitToBuild();
+                        //after building the soldier camp, revert to normal scale
+                        selectionCube.transform.localScale = new Vector3(1f, 0.01f, 1f);
                     }
                 }
                 else if (buildManager.getUnitToBuild() == Shop.instance.towerLevel1)
@@ -601,19 +603,25 @@ public class GridMouse : MonoBehaviour
         previewMatrix[instance_x, instance_z + 1] = true;
         //Debug.Log("construiu preview !");
     }
+    private void DestroyTowerPreview()
+    {
+        int instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
+        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
+        previewMatrix[instance_x, instance_z] = false;
+        Destroy(temporaryInstance);
+    }
     private void DestroySoldierCampPreview()
     {
+        Debug.Log("DESTROYING SOLDIER CAMP PREVIEW");
         //if the logic doens't involve going over track tiles
         SetPreviewColor(Color.red);
         instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
         instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
-        Destroy(temporaryInstance);
-
         previewMatrix[instance_x, instance_z] = false;
         previewMatrix[instance_x + 1, instance_z + 1] = false;
         previewMatrix[instance_x + 1, instance_z] = false;
         previewMatrix[instance_x, instance_z + 1] = false;
-        //previewMatrix[prevX, prevZ] = false;
+        Destroy(temporaryInstance);
     }
 
     private void HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit,int x, int z)
@@ -675,11 +683,7 @@ public class GridMouse : MonoBehaviour
                 //Debug.Log("moveu !");
                 if (temporaryInstance != null)
                 {
-
-                    int instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
-                    int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
-                    previewMatrix[instance_x, instance_z] = false;
-                    Destroy(temporaryInstance);
+                    DestroyTowerPreview();
 
                     //Debug.Log("destruiu preview !");
                 }
@@ -694,8 +698,23 @@ public class GridMouse : MonoBehaviour
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Deselect via ESC");
 
-        if (didHit)
+            if (temporaryInstance.name == Shop.instance.miningCamp.name)
+            {
+                DestroySoldierCampPreview();
+            }
+            else
+            {
+                DestroyTowerPreview();
+            }
+            buildManager.DeselectUnitToBuild();
+            //after building the soldier camp, revert to normal scale
+            selectionCube.transform.localScale = new Vector3(1f, 0.01f, 1f);
+        }
+        else if (didHit)
         {
 
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.red);
@@ -706,7 +725,7 @@ public class GridMouse : MonoBehaviour
             position = CoordToPosition(x, z);
 
 
-            Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
+            Vector3 positionCube = new Vector3(position.x+0.1f, position.y + 0.1f, position.z - 0.1f);
             selectionCube.transform.position = positionCube;
             //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
@@ -715,10 +734,16 @@ public class GridMouse : MonoBehaviour
             {
                 if (buildManager.getUnitToBuild() == Shop.instance.miningCamp)
                 {
+                    Vector3 newPositionCube = new Vector3(position.x+0.5f, position.y, position.z+0.5f);
+                    selectionCube.transform.position = newPositionCube;
+                    selectionCube.transform.localScale = new Vector3(2f, 0.01f, 2f);
                     HandlePreviewSoldierCamp(ray, hitInfo, didHit, x, z);
                 }
                 else if (buildManager.getUnitToBuild() == Shop.instance.towerLevel1)
                 {
+                    Vector3 newPositionCube = new Vector3(position.x, position.y + 0.1f, position.z);
+                    selectionCube.transform.position = newPositionCube;
+                    selectionCube.transform.localScale = new Vector3(1f, 0.01f, 1f);
                     HandlePreviewTower(ray, hitInfo, didHit, x, z);
                 }
             }

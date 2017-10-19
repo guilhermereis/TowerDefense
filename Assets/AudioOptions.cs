@@ -103,7 +103,7 @@ public class AudioOptions : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MainScene");
+            //SceneManager.LoadScene("MainScene");
         }
     }
     

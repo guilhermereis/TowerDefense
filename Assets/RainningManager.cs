@@ -8,7 +8,7 @@ public class RainningManager : MonoBehaviour {
     private ParticleSystem raining;
     public List<GameObject> lightningStrikeEffects;
     float spawnRadius;
-    float timeToStrike = 10f;
+    float timeToStrike = 2;
     float countdown = 0;
     
 
@@ -27,8 +27,8 @@ public class RainningManager : MonoBehaviour {
         //lightningStrikeEffects[striker].SetActive(true);
         if (lightningStrikeEffects[striker].GetComponent<ParticleSystem>() != null)
         {
-            //lightningStrikeEffects[striker].GetComponent<ParticleSystem>().Play();
-            new SoundToPlay(lightningStrikeEffects[striker].GetComponent<AudioSource>()).PlaySfx();
+            lightningStrikeEffects[striker].GetComponent<ParticleSystem>().Play(true);
+            //SoundToPlay.PlaySfx(lightningStrikeEffects[striker].GetComponent<AudioSource>());
         }
     }
 
