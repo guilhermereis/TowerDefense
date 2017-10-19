@@ -7,69 +7,71 @@ public enum GameState {GameActivate,GamePaused ,Preparation,BeginWave, Waving,Ac
 
 public class SoundToPlay {
 
-    GameObject soundObject;
-    AudioSource audioSource;
-    float sfx_volume = PlayerPrefs.GetFloat("sfx volume");
-    float music_volume = PlayerPrefs.GetFloat("music volume");
-    float master_volume = PlayerPrefs.GetFloat("master volume");
-    public SoundToPlay(GameObject _soundObject)
+    static GameObject soundObject;
+    static AudioSource audioSource;
+    static float sfx_volume = PlayerPrefs.GetFloat("sfx volume");
+    static float music_volume = PlayerPrefs.GetFloat("music volume");
+    static float master_volume = PlayerPrefs.GetFloat("master volume");
+    public static void SetSoundToPlay(GameObject _soundObject)
     {
         soundObject = _soundObject;
         float master_volume = PlayerPrefs.GetFloat("master volume");                
         SetAllVolumes();
         SetGlobalVolume(master_volume);
     }
-    public SoundToPlay(AudioSource _audioSource)
+    public static void SetSoundToPlay(AudioSource _audioSource)
     {
         audioSource = _audioSource;
         float master_volume = PlayerPrefs.GetFloat("master volume");        
         SetAllVolumes();
         SetGlobalVolume(master_volume);
     }
-    public void SetAllVolumes()
+    public static void SetAllVolumes()
     {
         sfx_volume = PlayerPrefs.GetFloat("sfx volume");
         music_volume = PlayerPrefs.GetFloat("music volume");
         master_volume = PlayerPrefs.GetFloat("master volume");
     }
-    public void SetGlobalVolume(float newVolume)
+    public static void SetGlobalVolume(float newVolume)
     {
         AudioListener.volume = newVolume;
     }
-    public void PlayMusic()
+    public static void PlayMusic(GameObject _soundObject)
     {
-        if (audioSource)
-        {
-            audioSource.volume = music_volume;
-            audioSource.Play();
-        }
-        else if (soundObject)
-        {
-            AudioSource src = soundObject.GetComponent<AudioSource>();
-            src.volume = music_volume;
-            MonoBehaviour.Instantiate(soundObject);
-        } 
+        SetSoundToPlay(_soundObject);
+        AudioSource src = soundObject.GetComponent<AudioSource>();
+        src.volume = music_volume;
+        MonoBehaviour.Instantiate(soundObject);
     }
-    public void PlaySfx()
+    public static void PlayMusic(AudioSource _audioSource)
     {
-        if (audioSource)
-        {
-            audioSource.volume = sfx_volume;
-            audioSource.Play();
-        }
-        else if (soundObject)
-        {
-            AudioSource src = soundObject.GetComponent<AudioSource>();
-            src.volume = sfx_volume;
-            MonoBehaviour.Instantiate(soundObject);
-        }
+        
+        SetSoundToPlay(_audioSource);
+        audioSource.volume = music_volume;
+        audioSource.Play();
+        
     }
-    public void PlayAtLocation(Vector3 position, Quaternion rotation )
+    public static void PlaySfx(GameObject _soundObject)
     {
-        if (audioSource)
-            audioSource.Play();
-        else if (soundObject)
-            MonoBehaviour.Instantiate(soundObject, position, rotation);
+        SetSoundToPlay(_soundObject);
+        AudioSource src = soundObject.GetComponent<AudioSource>();
+        src.volume = sfx_volume;
+        MonoBehaviour.Instantiate(soundObject);
+    }
+    public static void PlaySfx(AudioSource _audioSource)
+    {
+        SetSoundToPlay(_audioSource);
+        audioSource.volume = sfx_volume;
+        audioSource.Play();
+        
+    }
+    public static void PlayAtLocation(GameObject soundObject, Vector3 position, Quaternion rotation)
+    {
+        MonoBehaviour.Instantiate(soundObject, position, rotation);
+    }
+    public static void PlayAtLocation(AudioSource audioSource, Vector3 position, Quaternion rotation )
+    {
+        audioSource.Play();
     }
 }
 
