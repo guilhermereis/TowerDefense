@@ -706,8 +706,8 @@ public class GridMouse : MonoBehaviour
             position = CoordToPosition(x, z);
 
 
-            Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
-            //selectionCube.transform.position = positionCube;
+            Vector3 positionCube = new Vector3(position.x, position.y + 0.1f, position.z);
+            selectionCube.transform.position = positionCube;
             //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
@@ -715,10 +715,16 @@ public class GridMouse : MonoBehaviour
             {
                 if (buildManager.getUnitToBuild() == Shop.instance.miningCamp)
                 {
+                    Vector3 newPositionCube = new Vector3(position.x+0.5f, position.y, position.z+0.5f);
+                    selectionCube.transform.position = newPositionCube;
+                    selectionCube.transform.localScale = new Vector3(2f, 0.01f, 2f);
                     HandlePreviewSoldierCamp(ray, hitInfo, didHit, x, z);
                 }
                 else if (buildManager.getUnitToBuild() == Shop.instance.towerLevel1)
                 {
+                    Vector3 newPositionCube = new Vector3(position.x, position.y + 0.1f, position.z);
+                    selectionCube.transform.position = newPositionCube;
+                    selectionCube.transform.localScale = new Vector3(1f, 0.01f, 1f);
                     HandlePreviewTower(ray, hitInfo, didHit, x, z);
                 }
             }
