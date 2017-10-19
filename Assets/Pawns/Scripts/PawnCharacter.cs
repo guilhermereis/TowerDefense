@@ -48,7 +48,8 @@ public class PawnCharacter : MonoBehaviour {
             if(!exploded)
                 PlayerStats.AddMoney(50);
 
-            Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
+            SoundToPlay.PlayAtLocation(painSoundPrefab, transform.position, Quaternion.identity);
+            //Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
 
             gameObject.GetComponent<PawnController>().ChangeState(PawnController.PawnState.Dead);
 
