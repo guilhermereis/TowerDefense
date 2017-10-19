@@ -707,7 +707,7 @@ public class GridMouse : MonoBehaviour
 
 
             Vector3 positionCube = new Vector3(position.x, position.y + 0.5f, position.z);
-            selectionCube.transform.position = positionCube;
+            //selectionCube.transform.position = positionCube;
             //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
