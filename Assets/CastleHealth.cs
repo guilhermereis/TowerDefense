@@ -17,7 +17,12 @@ public class CastleHealth : MonoBehaviour {
     private bool canBeDamaged;
     private WaveSpawner ws;
     public GameObject repairButton;
-    private int repairCostMultiplier = 30;
+
+    public int repairCostMultiplier = 30;
+    public float repairAmmountPercentual = 0.2f;
+
+    public Color buttonDisabledColor;
+    public Color buttonEnabledColor;
 
     Canvas HUD;
     Image healthBar;
@@ -77,7 +82,7 @@ public class CastleHealth : MonoBehaviour {
             if (health < maxHealth)
             {
                 PlayerStats.AddMoney(-1 * cost);
-                health += 0.20f* maxHealth;
+                health += repairAmmountPercentual * maxHealth;
                 UpdateHealthBarGfx(health);
             }
             else
@@ -91,7 +96,7 @@ public class CastleHealth : MonoBehaviour {
     }
 
     void setRepairCostText(WaveSpawner ws) {
-        string baseString = "PAY TO REPAIR 20% OF YOUR CASTLE'S HEALTH\nTHE PRICE INCREASES WITH THE PROGRESSION OF THE GAME\nCURRENT COST: ";
+        string baseString = "PAY TO REPAIR "+ repairAmmountPercentual *100 + "% OF YOUR CASTLE'S HEALTH\nTHE PRICE INCREASES WITH THE PROGRESSION OF THE GAME\nCURRENT COST: ";
         tooltipController.tooltipText = baseString + Mathf.RoundToInt(repairCostMultiplier * CalculateCost(ws.waveNumber));
     }
 
@@ -116,8 +121,20 @@ public class CastleHealth : MonoBehaviour {
             else {
                 repairButton.GetComponent<Button>().interactable = true;
             }
-        }
 
+            int cost = Mathf.RoundToInt(repairCostMultiplier * CalculateCost(ws.waveNumber));
+            if (PlayerStats.Money < cost)
+            {
+                repairButton.GetComponent<Button>().interactable = false;
+                repairButton.GetComponent<Image>().color = buttonDisabledColor;
+            }
+            else
+            {
+                repairButton.GetComponent<Button>().interactable = true;
+                repairButton.GetComponent<Image>().color = buttonEnabledColor;
+            }
+
+        }
         setRepairCostText(ws);
     }
 
