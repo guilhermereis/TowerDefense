@@ -708,7 +708,7 @@ public class GridMouse : MonoBehaviour
             position = CoordToPosition(x, z);
 
 
-            Vector3 positionCube = new Vector3(position.x, position.y + 0.1f, position.z);
+            Vector3 positionCube = new Vector3(position.x+0.1f, position.y + 0.1f, position.z - 0.1f);
             selectionCube.transform.position = positionCube;
             //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
