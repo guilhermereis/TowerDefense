@@ -93,6 +93,7 @@ public class BuildManager : MonoBehaviour {
                 newPosition = position;
                 temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
                 temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
+                temporaryInstance.transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = true;
             }
 
             MonoBehaviour[] list = temporaryInstance.GetComponents<MonoBehaviour>();
@@ -152,9 +153,16 @@ public class BuildManager : MonoBehaviour {
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
         Transform sphere = tempList[index].transform.Find("Sphere");
+        Transform groundLine = tempList[index].transform.Find("GroundLine");
+        
         if (sphere){
             sphere.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
+
+        if (groundLine) {
+            groundLine.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+
         if(tempList[index].GetComponent<TowerController>() != null)
         {
             tempList[index].GetComponent<TowerController>().BuildEffect();
@@ -187,10 +195,12 @@ public class BuildManager : MonoBehaviour {
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
         tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
-        
+
         //if its not a mining camp
-        if (unitToBuild != Shop.instance.miningCamp)
+        if (unitToBuild != Shop.instance.miningCamp) {
             tempList[index].transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+            tempList[index].transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
 
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
@@ -213,23 +223,35 @@ public class BuildManager : MonoBehaviour {
         if (LastSelectedGameObject != null)
         {
             Transform LastSphere = LastSelectedGameObject.transform.Find("Sphere");
+            Transform LastGroundLine = LastSelectedGameObject.transform.Find("GroundLine");
+
             if (LastSphere)
                 LastSphere.gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+            if (LastGroundLine)
+                LastGroundLine.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
         //if (selectedUnit == unit)
         selectedUnit = unit;
         selectedGameObject = gameObject;
         selectedPosition = gameObject.transform.position;
+
         Transform Sphere = selectedGameObject.transform.Find("Sphere");
+        Transform GroundLine = selectedGameObject.transform.Find("GroundLine");
         if (Sphere)
             Sphere.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        if (GroundLine)
+            GroundLine.gameObject.GetComponent<MeshRenderer>().enabled = true;
+
         LastSelectedGameObject = selectedGameObject;
     }
     public void SelectBuilding(int indexOfSelectedObject)
     {
         unitToBuild = null;
-        if (LastSelectedGameObject != null)
+        if (LastSelectedGameObject != null) {
             LastSelectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+            LastSelectedGameObject.transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
 
         GridMouse gridMouse = GridMouse.instance;
         BuildableController buildable =
@@ -239,6 +261,8 @@ public class BuildManager : MonoBehaviour {
         selectedUnit = buildable.getUnitBlueprint();
         selectedGameObject = gridMouse.ListOfGameObjects[indexOfSelectedObject];
         selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
+        selectedGameObject.transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = true;
+        
         //selectedPosition = position;
         LastSelectedGameObject = selectedGameObject;
     }
@@ -256,9 +280,17 @@ public class BuildManager : MonoBehaviour {
         hideBottomBar();
         if (selectedGameObject){
             Transform Sphere = selectedGameObject.transform.Find("Sphere");
+            Transform GroundLine = selectedGameObject.transform.Find("GroundLine");
+
             if (Sphere)
             {
                 MeshRenderer renderer = Sphere.gameObject.GetComponent<MeshRenderer>();
+                if (renderer)
+                    renderer.enabled = false;
+            }
+            if (GroundLine)
+            {
+                MeshRenderer renderer = GroundLine.gameObject.GetComponent<MeshRenderer>();
                 if (renderer)
                     renderer.enabled = false;
             }
