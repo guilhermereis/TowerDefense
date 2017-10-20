@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using Steamworks;
 using UnityEngine;
 
@@ -33,7 +34,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     //our gameID
     private CGameID gameID;
 
-
+    bool onPlayScene;
     //storestats this frame
     private bool isStoreStats;
 
@@ -50,7 +51,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int totalWaves;
     private int totalDefeats;
 
-    protected string leaderboardName = "TotalWaves";
+    protected string leaderboardName = "Defeated Waves";
 
     //callbacks
     protected Callback<UserAchievementStored_t> userAchievementsStored;
@@ -59,12 +60,35 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     //callresults
     protected CallResult<LeaderboardScoreUploaded_t> leaderboardScoreUploaded;
     protected CallResult<LeaderboardFindResult_t> findLeaderBoard;
-    
+
     private void OnEnable()
     {
+        SceneManager.sceneLoaded += OnChangedLevel;
+
+        
+    }
+
+    public void OnChangedLevel(Scene scene, LoadSceneMode mode)
+    {
+       
+        if (scene.name == "MainScene")
+        {
+            Debug.Log(scene.name);
+            onPlayScene = true;
+           
+        }
+    }
+
+    void Start()
+    {
+        
         if (!SteamManager.Initialized)
             return;
-        
+
+       
+
+
+        //GameController.gamechangedDelegate += OnGameChanged;
         gameID = new CGameID(SteamUtils.GetAppID());
 
         userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
@@ -74,7 +98,6 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         findLeaderBoard = CallResult<LeaderboardFindResult_t>.Create(OnLeaderboardFound);
         leaderboardScoreUploaded = CallResult<LeaderboardScoreUploaded_t>.Create(OnLeaderboardScoreUpdated);
     }
-
     private void OnLeaderboardScoreUpdated(LeaderboardScoreUploaded_t pCallback, bool bIOFailure)
     {
         if (pCallback.m_bSuccess == 1 && !bIOFailure)
@@ -212,14 +235,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         GUILayout.EndArea();
     }
 
-    // Use this for initialization
-    void Start () {
-        GameController.gamechangedDelegate += OnGameChanged;
-	}
-	
+    	
     public void OnGameChanged()
     {
-        if(GameController.gameState == GameState.GameActivate)
+        Debug.Log("GameChanged");
+        if (GameController.gameState == GameState.GameActivate)
         {
             numberOfTowers = 0;
             numberOfWave = 0;
@@ -243,6 +263,17 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 	void Update () {
         if (!SteamManager.Initialized)
             return;
+
+        if (onPlayScene)
+        {
+            if (GameController.gamechangedDelegate != null)
+            {
+                GameController.gamechangedDelegate += OnGameChanged;
+                Debug.Log("got delegate");
+            }
+            onPlayScene = false;
+
+        }
 
         if (!isRequestedStats)
         {
