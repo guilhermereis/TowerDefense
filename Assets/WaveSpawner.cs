@@ -187,10 +187,10 @@ public class WaveSpawner : MonoBehaviour {
         combinations[2].special = new int[] { 7 ,3,3,3,3};
         combinations[3] = new Milestone();
         combinations[3].combination = new int[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-        combinations[3].special = new int[] { 7, 3, 3, 3, 3,4 };
+        combinations[3].special = new int[] { 7, 7, 3, 3, 3,4 };
         combinations[4] = new Milestone();
         combinations[4].combination = new int[] { 3, 3, 3, 3, 3, 4, 4, 4, 4, 4 };
-        combinations[4].special = new int[] { 7, 3, 3, 3, 3, 4 };
+        combinations[4].special = new int[] { 7, 7, 7, 3, 3, 3 };
         combinations[5] = new Milestone();
         combinations[5].combination = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
         combinations[5].special = new int[] { 7, 3, 3, 3, 3, 4 };
