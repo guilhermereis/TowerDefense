@@ -21,11 +21,17 @@ public class MiningCampController : BuildableController {
     protected override void Awake()
     {
         base.Awake();
-       
     }
     // Use this for initialization
-    void Start ()
+    public override int GetSellCostWithInterest()
     {
+        return unitBlueprint.withInterest_sellcost;
+    }
+
+    void Start () {
+
+        Debug.Log("SETTING SELL COST TO " + getUnitBlueprint().sell_cost);
+        unitBlueprint.withInterest_sellcost = getUnitBlueprint().sell_cost;
 
         storageLevel = 1;
         miningRateLevel = 1;

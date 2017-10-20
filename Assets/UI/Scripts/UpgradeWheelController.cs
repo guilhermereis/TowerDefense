@@ -48,7 +48,13 @@ public class UpgradeWheelController : MonoBehaviour {
         upgradeWheel.transform.Find("UpgradeCampLevel").gameObject.SetActive(false);
         
     }
-
+    public void setMineSellPrice()
+    {
+        buildable = tower.GetComponent<BuildableController>();
+        upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        Debug.Log("5 SET SELL COST TO " + buildable.GetSellCostWithInterest());
+        upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+    }
     public void setTowerLvl(int newLvl) {
         clearButtons();
         this.towerLvl = newLvl;
@@ -83,6 +89,7 @@ public class UpgradeWheelController : MonoBehaviour {
         }
         buildable = tower.GetComponent<BuildableController>();
         upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        Debug.Log("1 SET SELL COST TO " + buildable.GetSellCostWithInterest());
         upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
     }
 
@@ -114,6 +121,7 @@ public class UpgradeWheelController : MonoBehaviour {
 
         buildable = tower.GetComponent<BuildableController>();
         upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        Debug.Log("2 SET SELL COST TO " + buildable.GetSellCostWithInterest());
         upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
     }
 
@@ -199,6 +207,7 @@ public class UpgradeWheelController : MonoBehaviour {
         }
         buildable = tower.GetComponent<BuildableController>();
         upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        Debug.Log("3 SET SELL COST TO " + buildable.GetSellCostWithInterest());
         upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
     }
 
@@ -285,6 +294,7 @@ public class UpgradeWheelController : MonoBehaviour {
         }
         buildable = tower.GetComponent<BuildableController>();
         upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
+        Debug.Log("4 SET SELL COST TO " + buildable.GetSellCostWithInterest());
         upgradeWheel.transform.Find("SellTower").transform.Find("CostShadow").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
     }
 
