@@ -61,6 +61,12 @@ public class GridMouse : MonoBehaviour
     private GameObject temp;
     public bool canClickGrid = true;
 
+    [Header("Cursor")]
+    public Texture2D cursorTexture;
+    private CursorMode cursorMode = CursorMode.Auto;
+    private Vector2 hotSpot;
+    private Vector2 defaultHotSpot = Vector2.zero;
+
     [SerializeField]
     public PropertyScript.Property[,] propertiesMatrix;
 
@@ -97,6 +103,14 @@ public class GridMouse : MonoBehaviour
             return;
         }
         instance = this;
+
+        if (cursorTexture)
+        {
+            hotSpot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+        }
+        else {
+            hotSpot = new Vector2(256f, 256f);
+        }
     }
     public Vector2 getGridSize()
     {
@@ -723,10 +737,21 @@ public class GridMouse : MonoBehaviour
             cursor_z = z;
             position = CoordToPosition(x, z);
 
-
             Vector3 positionCube = new Vector3(position.x+0.1f, position.y + 0.1f, position.z - 0.1f);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+
+            if (cursorTexture)
+            {
+                if (propertiesMatrix[x, z].type == "Obstacle")
+                {
+                    Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+                }
+                else
+                {
+                    Cursor.SetCursor(null, defaultHotSpot, cursorMode);
+                }
+            }
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")

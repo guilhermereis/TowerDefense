@@ -15,6 +15,8 @@ public class MiningCampController : BuildableController {
     public Canvas canvas;
     public GameObject isFullButtonUI;
     public GameObject fullButton;
+    public int storageLevel;
+    public int miningRateLevel;
 
     protected override void Awake()
     {
@@ -23,6 +25,10 @@ public class MiningCampController : BuildableController {
     }
     // Use this for initialization
     void Start () {
+
+        storageLevel = 1;
+        miningRateLevel = 1;
+
        GameController.endWaveDelegate += AddGold;
        foreach(Canvas c in GameObject.FindObjectsOfType<Canvas>())
        {
@@ -65,11 +71,13 @@ public class MiningCampController : BuildableController {
    
     public void UpgradeMaxGold()
     {
+        storageLevel++;
         maxCapacity += 50;
     }
 
     public void UpgradeGoldByWave()
     {
+        miningRateLevel++;
         goldByWave += 50;
     }
     
