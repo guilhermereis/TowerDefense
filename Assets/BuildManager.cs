@@ -343,10 +343,10 @@ public class BuildManager : MonoBehaviour {
         if (upgradeWheelController)
         {
             upgradeWheelController.tower = selectedGameObject;
-            TowerController towerController = selectedGameObject.GetComponent<TowerController>();
-            if (towerController)
+            BuildableController buildingController = selectedGameObject.GetComponent<BuildableController>();
+            if (buildingController)
             {
-                switch (towerController.name)
+                switch (buildingController.name)
                 {
                     case "PrefabArcherTower1(Clone)":
                         upgradeWheelController.setTowerLvl(0);
@@ -367,8 +367,16 @@ public class BuildManager : MonoBehaviour {
                         upgradeWheelController.setSpecialization(2);
                         break;
                 }
-                upgradeWheelController.setAttackDamage((int)towerController.getAttackPowerLVL());
-                upgradeWheelController.setAttackSpeedLvl((int)towerController.getFireRateLVL());
+                if (buildingController.name == "MinePrefab(Clone)")
+                {
+                    upgradeWheelController.setMineSellPrice();
+                }
+                else
+                {
+                    upgradeWheelController.setAttackDamage((int)((TowerController)buildingController).getAttackPowerLVL());
+                    upgradeWheelController.setAttackSpeedLvl((int)((TowerController)buildingController).getFireRateLVL());
+                }
+                                
                 upgradeWheelController.isActive = true;
                 upgradeWheel.SetActive(true);
                 upgradeWheelController.openWheel();
