@@ -30,7 +30,7 @@ public class MiningCampController : BuildableController {
 
     void Start () {
 
-        Debug.Log("SETTING SELL COST TO " + getUnitBlueprint().sell_cost);
+       
         unitBlueprint.withInterest_sellcost = getUnitBlueprint().sell_cost;
 
         storageLevel = 1;
