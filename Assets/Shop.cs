@@ -173,6 +173,8 @@ public class Shop : MonoBehaviour {
         if (canBuildPrimary) {
             Debug.Log("Standard Turret Selected");
             buildManager.SelectUnitToBuild(towerLevel1);
+            buildManager.HideOptions();
+            
         }
     }
 
@@ -180,6 +182,7 @@ public class Shop : MonoBehaviour {
         if (canBuildSecondary) {
             Debug.Log("Secondary Turret Selected");
             buildManager.SelectUnitToBuild(miningCamp);
+            buildManager.HideOptions();
         }
     }
     public void SelectTower2Unit() {
