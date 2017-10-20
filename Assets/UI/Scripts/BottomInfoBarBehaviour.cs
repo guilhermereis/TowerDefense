@@ -77,6 +77,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             MiningCampController mcontroller = selectedObject.GetComponent<MiningCampController>();
             SelectionName.GetComponent<Text>().text = " Mining Camp: ";
             SelectionNameShadow.GetComponent<Text>().text = " Mining Camp: ";
+            SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "Mine's max gold capacity";
+            SelectionName.transform.Find("AttackDamage").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "Mine's current gold";
             AttadkDmgIcon.GetComponent<Image>().overrideSprite = CurrentGoldVariation;
 
             AttackSpeedText.GetComponent<Text>().text = "" + mcontroller.maxCapacity;
