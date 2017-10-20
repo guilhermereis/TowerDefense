@@ -48,7 +48,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private bool isLevel3Built;
 
     //persistentStats
-    private int totalWaves;
+    private int totalWaves = 1;
     private int totalDefeats;
 
     protected string leaderboardName = "Defeated Waves";
@@ -246,6 +246,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         }else if (GameController.gameState == GameState.EndWave)
         {
             totalWaves++;
+            Debug.Log("total waves " +totalWaves);
             isStoreStats = true;
             
         }else if(GameController.gameState == GameState.GameOver)

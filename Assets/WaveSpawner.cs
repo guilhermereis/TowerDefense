@@ -70,12 +70,12 @@ public class WaveSpawner : MonoBehaviour {
     int[] combinationLane4;
     #endregion
 
-    public int waveNumber = 1;
+    public int waveNumber = 0;
 #region WaveNumber
-    public int waveNumberLane1 = 1;
-    public int waveNumberLane2 = 1;
-    public int waveNumberLane3 = 1;
-    public int waveNumberLane4 = 1;
+    public int waveNumberLane1 = 0;
+    public int waveNumberLane2 = 0;
+    public int waveNumberLane3 = 0;
+    public int waveNumberLane4 = 0;
     #endregion
 
     public int currentMS1 = 0;
