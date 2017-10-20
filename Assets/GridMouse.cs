@@ -66,6 +66,7 @@ public class GridMouse : MonoBehaviour
     private CursorMode cursorMode = CursorMode.Auto;
     private Vector2 hotSpot;
     private Vector2 defaultHotSpot = Vector2.zero;
+    private bool isCursorDefault = true;
 
     [SerializeField]
     public PropertyScript.Property[,] propertiesMatrix;
@@ -745,11 +746,19 @@ public class GridMouse : MonoBehaviour
             {
                 if (propertiesMatrix[x, z].type == "Obstacle")
                 {
-                    Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+                    if (isCursorDefault) {
+                        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+                        isCursorDefault = !isCursorDefault;
+                    }
+                    
                 }
                 else
                 {
-                    Cursor.SetCursor(null, defaultHotSpot, cursorMode);
+                    if (!isCursorDefault) {
+                        Cursor.SetCursor(null, defaultHotSpot, cursorMode);
+                        isCursorDefault = !isCursorDefault;
+                    }
+                    
                 }
             }
 
