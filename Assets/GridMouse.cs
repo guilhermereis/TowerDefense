@@ -620,23 +620,29 @@ public class GridMouse : MonoBehaviour
     }
     private void DestroyTowerPreview()
     {
-        int instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
-        int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
-        previewMatrix[instance_x, instance_z] = false;
-        Destroy(temporaryInstance);
+        if (temporaryInstance)
+        {
+            int instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x + _gridSize.x / 2);
+            int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
+            previewMatrix[instance_x, instance_z] = false;
+            Destroy(temporaryInstance);
+        }
     }
     private void DestroySoldierCampPreview()
     {
-        Debug.Log("DESTROYING SOLDIER CAMP PREVIEW");
-        //if the logic doens't involve going over track tiles
-        SetPreviewColor(Color.red);
-        instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
-        instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
-        previewMatrix[instance_x, instance_z] = false;
-        previewMatrix[instance_x + 1, instance_z + 1] = false;
-        previewMatrix[instance_x + 1, instance_z] = false;
-        previewMatrix[instance_x, instance_z + 1] = false;
-        Destroy(temporaryInstance);
+        if (temporaryInstance)
+        {
+            Debug.Log("DESTROYING SOLDIER CAMP PREVIEW");
+            //if the logic doens't involve going over track tiles
+            SetPreviewColor(Color.red);
+            instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
+            instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z - 0.5f + _gridSize.y / 2);
+            previewMatrix[instance_x, instance_z] = false;
+            previewMatrix[instance_x + 1, instance_z + 1] = false;
+            previewMatrix[instance_x + 1, instance_z] = false;
+            previewMatrix[instance_x, instance_z + 1] = false;
+            Destroy(temporaryInstance);
+        }
     }
 
     private void HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit,int x, int z)
@@ -716,7 +722,7 @@ public class GridMouse : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Deselect via ESC");
-            if (temporaryInstance.name == "MinePrefab(Clone)")
+            if (temporaryInstance && temporaryInstance.name == "MinePrefab(Clone)")
             {
                 DestroySoldierCampPreview();
             }
