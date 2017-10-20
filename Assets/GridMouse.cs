@@ -64,7 +64,8 @@ public class GridMouse : MonoBehaviour
     [Header("Cursor")]
     public Texture2D cursorTexture;
     private CursorMode cursorMode = CursorMode.Auto;
-    private Vector2 hotSpot = Vector2.zero;
+    private Vector2 hotSpot;
+    private Vector2 defaultHotSpot = Vector2.zero;
 
     [SerializeField]
     public PropertyScript.Property[,] propertiesMatrix;
@@ -102,6 +103,14 @@ public class GridMouse : MonoBehaviour
             return;
         }
         instance = this;
+
+        if (cursorTexture)
+        {
+            hotSpot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+        }
+        else {
+            hotSpot = new Vector2(256f, 256f);
+        }
     }
     public Vector2 getGridSize()
     {
@@ -740,7 +749,7 @@ public class GridMouse : MonoBehaviour
                 }
                 else
                 {
-                    Cursor.SetCursor(null, hotSpot, cursorMode);
+                    Cursor.SetCursor(null, defaultHotSpot, cursorMode);
                 }
             }
 
