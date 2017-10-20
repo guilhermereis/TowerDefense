@@ -701,8 +701,7 @@ public class GridMouse : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Deselect via ESC");
-
-            if (temporaryInstance.name == Shop.instance.miningCamp.name)
+            if (temporaryInstance.name == "MinePrefab(Clone)")
             {
                 DestroySoldierCampPreview();
             }
@@ -727,7 +726,7 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x+0.1f, position.y + 0.1f, position.z - 0.1f);
             selectionCube.transform.position = positionCube;
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             //ONLY BUILD PREVIEWS IF YOU HIT THE GRID
             if (hitInfo.transform.gameObject.name == "Grid")
