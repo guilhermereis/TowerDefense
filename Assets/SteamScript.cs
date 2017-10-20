@@ -14,11 +14,8 @@ public class SteamScript : MonoBehaviour {
         }else
             Debug.Log("steamManager not initialized");
 
-        Debug.Break();
+       // Debug.Break();
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	
 }
