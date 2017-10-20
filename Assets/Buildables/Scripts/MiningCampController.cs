@@ -24,7 +24,8 @@ public class MiningCampController : BuildableController {
        
     }
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 
         storageLevel = 1;
         miningRateLevel = 1;
