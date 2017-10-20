@@ -18,6 +18,7 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
     public GameObject SelectionNameShadow;
     public GameObject AttadkDmgIcon;
     public Sprite IceIconVariation;
+    public Sprite CurrentGoldVariation;
     public Color iceTextColorVariation;
 
     private Sprite defaultAttackDmgIcon;
@@ -66,11 +67,23 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
                     SelectionNameShadow.GetComponent<Text>().text = " Fire Tower: ";
                     DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                     DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+                    
+                    
                     break;
             }
         }
         else {
             //Get Camp Controller
+            MiningCampController mcontroller = selectedObject.GetComponent<MiningCampController>();
+            SelectionName.GetComponent<Text>().text = " Mining Camp: ";
+            SelectionNameShadow.GetComponent<Text>().text = " Mining Camp: ";
+            AttadkDmgIcon.GetComponent<Image>().overrideSprite = CurrentGoldVariation;
+
+            AttackSpeedText.GetComponent<Text>().text = "" + mcontroller.maxCapacity;
+            AttackSpeedTextShadow.GetComponent<Text>().text = "" + mcontroller.maxCapacity;
+            
+            DamageText.GetComponent<Text>().text = "" + mcontroller.currentGold;
+            DamageTextShadow.GetComponent<Text>().text = "" + mcontroller.currentGold;
         }
     }
 

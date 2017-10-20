@@ -109,8 +109,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealthState: 0
-  buildSoundPrefab: {fileID: 0}
+  buildSoundPrefab: {fileID: 1368383354638678, guid: 87381885d9b53d446bca41f441848bb5,
+    type: 2}
   currentGold: 0
-  maxCapacity: 500
+  maxCapacity: 50
   isFull: 0
   goldByWave: 50
+  canvas: {fileID: 0}
+  isFullButtonUI: {fileID: 1128133831923616, guid: fad5633b0643404439a2de3c7d3ec4a9,
+    type: 2}
+  fullButton: {fileID: 0}

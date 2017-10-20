@@ -8,6 +8,7 @@ public class UpgradeWheelController : MonoBehaviour {
     public GameObject tower;
     private BuildableController buildable;
     public GameObject upgradeWheel;
+    
     private Animator anim;
     private int attackSpeedLvl = 0;
     private int attackDmgLvl = 0;
@@ -43,6 +44,9 @@ public class UpgradeWheelController : MonoBehaviour {
         upgradeWheel.transform.Find("UpgradeTowerTesla").gameObject.SetActive(false);
         upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject.SetActive(false);
         upgradeWheel.transform.Find("UpgradeTowerArcher").gameObject.SetActive(false);
+
+        upgradeWheel.transform.Find("UpgradeCampLevel").gameObject.SetActive(false);
+        
     }
 
     public void setTowerLvl(int newLvl) {
@@ -299,6 +303,15 @@ public class UpgradeWheelController : MonoBehaviour {
         {
             isActive = false;
             BuildManager.instance.SellSelectedBuilding();
+        }
+    }
+
+    public void GetMoneyOnClick()
+    {
+        if (upgradeButtonsEnabled)
+        {
+            isActive = false;
+
         }
     }
 

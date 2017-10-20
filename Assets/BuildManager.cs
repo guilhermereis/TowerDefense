@@ -307,6 +307,14 @@ public class BuildManager : MonoBehaviour {
         bottomBarBehaviour.setSelectionState(1);
     }
 
+    public void SetCampFull()
+    {
+        if (upgradeWheelController)
+        {
+
+        }
+    }
+
     public void showUpgradeWheel() {
         if (upgradeWheelController)
         {
@@ -339,6 +347,17 @@ public class BuildManager : MonoBehaviour {
                 upgradeWheelController.setAttackSpeedLvl((int)towerController.getFireRateLVL());
                 upgradeWheelController.isActive = true;
                 upgradeWheel.SetActive(true);
+                upgradeWheelController.openWheel();
+            }
+            else
+            {
+                
+                upgradeWheel.SetActive(true);
+                upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
+                upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(false);
+                upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject.SetActive(false);
+
+                upgradeWheelController.isActive = true;
                 upgradeWheelController.openWheel();
             }
         }
@@ -432,8 +451,14 @@ public class BuildManager : MonoBehaviour {
                 //because we want the center of the bottom-right tile
                 //not the center of the four tiles
                 //(which the game object's transform points to)
+                MiningCampController mc =  getSelectedGameObject().GetComponent<MiningCampController>();
+                if(mc)
+                    Destroy(mc.fullButton);
+
+
                 x = Mathf.FloorToInt(SelectedPosition.x - 0.5f + gridSize.x / 2);
                 z = Mathf.FloorToInt(SelectedPosition.z - 0.5f + gridSize.y / 2);
+
             }
 
             Vector3 position = gridMouse.CoordToPosition(x, z);
@@ -521,6 +546,8 @@ public class BuildManager : MonoBehaviour {
 
         }
     }
+
+   
 
     protected void BuildTheNextLevelStructure()
     {
