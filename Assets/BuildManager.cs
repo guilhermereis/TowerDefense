@@ -151,7 +151,19 @@ public class BuildManager : MonoBehaviour {
         tempList[index] = Instantiate(unitToBuild.prefab, newPosition, Quaternion.Euler(gridMouse.getPreviewRotation()));
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
-        tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
+
+        UnitBlueprint newUnitBlueprint = new UnitBlueprint();
+        newUnitBlueprint.name = getUnitToBuild().name;
+        newUnitBlueprint.prefab = getUnitToBuild().prefab;
+        newUnitBlueprint.cost = getUnitToBuild().cost;
+        newUnitBlueprint.sell_cost = getUnitToBuild().sell_cost;
+        newUnitBlueprint.withInterest_sellcost = getUnitToBuild().withInterest_sellcost;
+        newUnitBlueprint.upgrade_cost = getUnitToBuild().upgrade_cost;
+        newUnitBlueprint.position = getUnitToBuild().position;
+
+        tempList[index].GetComponent<BuildableController>().setUnitBlueprint(newUnitBlueprint);
+
+
         Transform sphere = tempList[index].transform.Find("Sphere");
         Transform groundLine = tempList[index].transform.Find("GroundLine");
         
@@ -194,7 +206,19 @@ public class BuildManager : MonoBehaviour {
         tempList[index] = Instantiate(unitToBuild.prefab, newPosition, rotation);
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
-        tempList[index].GetComponent<BuildableController>().setUnitBlueprint(getUnitToBuild());
+
+
+        UnitBlueprint newUnitBlueprint = new UnitBlueprint();
+        newUnitBlueprint.name = getUnitToBuild().name;
+        newUnitBlueprint.prefab = getUnitToBuild().prefab;
+        newUnitBlueprint.cost = getUnitToBuild().cost;
+        newUnitBlueprint.sell_cost = getUnitToBuild().sell_cost;
+        newUnitBlueprint.withInterest_sellcost = getUnitToBuild().withInterest_sellcost;
+        newUnitBlueprint.upgrade_cost = getUnitToBuild().upgrade_cost;
+        newUnitBlueprint.position = getUnitToBuild().position;
+
+        tempList[index].GetComponent<BuildableController>().setUnitBlueprint(newUnitBlueprint);
+
 
         //if its not a mining camp
         if (unitToBuild != Shop.instance.miningCamp) {
