@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648f5bf18816c87409f202b99ae4bc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartMoney: 30000
+  StartMoney: 90000
+  secondChanceAnimator: {fileID: 0}
 --- !u!114 &114682633433545104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,6 +132,11 @@ MonoBehaviour:
   endWaveSound: {fileID: 1913324748725288, guid: 9f071918a39b0fb409cef2916522bfdd,
     type: 2}
   gameStateUI: {fileID: 0}
+  towerGizmosOnButtonSprite: {fileID: 21300000, guid: a2d8441ebcf8f9149809f5e188307c61,
+    type: 3}
+  towerGizmosOffButtonSprite: {fileID: 21300000, guid: 3b70600bc51f4dc42b74a84433e02534,
+    type: 3}
+  toggleGizmoButton: {fileID: 0}
   preparationTime: 30
   stats: {fileID: 0}
 --- !u!114 &114830956946701644
@@ -193,6 +199,7 @@ MonoBehaviour:
   - {fileID: 1090183303817486, guid: 4701f1e9b2335cc4aa2eaab83fe67452, type: 2}
   - {fileID: 1280014374057934, guid: b086cd4f772d40e429e02aeae3244777, type: 2}
   - {fileID: 1613466630584316, guid: b0d0c9e5926a8f948972dafa878169a4, type: 2}
+  - {fileID: 1036261459261460, guid: b314fbfa43678bb43b6f5bafd0d10bfd, type: 2}
   castlePrefab: {fileID: 1706210362392198, guid: 23f4d1635cade79429475be9bfa85860,
     type: 2}
   waveWarningBoardController: {fileID: 0}
@@ -213,11 +220,11 @@ MonoBehaviour:
   spawningMonsterLane2: 0
   spawningMonsterLane3: 0
   spawningMonsterLane4: 0
-  waveNumber: 0
-  waveNumberLane1: 0
-  waveNumberLane2: 0
-  waveNumberLane3: 0
-  waveNumberLane4: 0
+  waveNumber: 30
+  waveNumberLane1: 30
+  waveNumberLane2: 20
+  waveNumberLane3: 10
+  waveNumberLane4: 1
   currentMS1: 0
   currentMS2: 0
   currentMS3: 0
@@ -225,8 +232,8 @@ MonoBehaviour:
   waveProgression: 100
   spawnLocation: {fileID: 0}
   hud: {fileID: 0}
-  maxLanes: 1
-  interval: 2
+  maxLanes: 4
+  interval: 10
 --- !u!114 &114979860251173350
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -80,8 +80,8 @@ public class PawnCharacter : MonoBehaviour {
             float realDamage = _damage - defense;
             if (realDamage <= 0)
             {
-                realDamage = 0;
-                hit = false;
+                realDamage = (int) 0.10f * _damage;
+                hit = true;
 
             }
             else

@@ -178,28 +178,28 @@ public class WaveSpawner : MonoBehaviour {
         //creating basics milestones combinations
         combinations[0] = new Milestone();
         combinations[0].combination = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-        combinations[1].special = new int[] { 7 };
+        combinations[1].special = new int[] { 7, 2,2,2 };
         combinations[1] = new Milestone();
         combinations[1].combination = new int[] { 1, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
-        combinations[1].special = new int[] { 7,7,6,6,6,6,6,6 };
+        combinations[1].special = new int[] { 8,6,6,6,6,6,6,6 };
         combinations[2] = new Milestone();
         combinations[2].combination = new int[] { 3, 3, 2, 2, 2, 2, 2, 2, 2, 2 };
-        combinations[2].special = new int[] { 7 ,3,3,3,3};
+        combinations[2].special = new int[] { 8,7,3,3,3};
         combinations[3] = new Milestone();
         combinations[3].combination = new int[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-        combinations[3].special = new int[] { 7, 7, 7, 3, 3,4 };
+        combinations[3].special = new int[] { 8, 7, 7, 3, 3,4 };
         combinations[4] = new Milestone();
         combinations[4].combination = new int[] { 3, 3, 3, 3, 3, 4, 4, 4, 4, 4 };
-        combinations[4].special = new int[] { 7, 7, 7, 3, 3, 3 };
+        combinations[4].special = new int[] { 8, 8, 7, 3, 3, 3 };
         combinations[5] = new Milestone();
         combinations[5].combination = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
-        combinations[5].special = new int[] { 7, 3, 3, 3, 3, 4 };
+        combinations[5].special = new int[] { 8, 3, 3, 3, 3, 4 };
         combinations[6] = new Milestone();
         combinations[6].combination = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 6 };
-        combinations[6].special = new int[] { 7, 3, 3, 3, 3, 4 };
+        combinations[6].special = new int[] { 8, 3, 3, 3, 3, 4 };
         combinations[7] = new Milestone();
         combinations[7].combination = new int[] { 5, 5, 5, 6, 6, 6, 6, 6, 6, 6 };
-        combinations[7].special = new int[] { 7, 3, 3, 3, 3, 4 };
+        combinations[7].special = new int[] { 8, 3, 3, 3, 3, 4 };
         combinations[8] = new Milestone();
         combinations[8].combination = new int[] { 5, 4, 4, 6, 6, 6, 6, 6, 6, 6 };
         combinations[8].special = new int[] { 7, 3, 3, 3, 3, 4 };
@@ -323,7 +323,9 @@ public class WaveSpawner : MonoBehaviour {
 
             if (timer <= 0)
             {
-                spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
+                //int randomLane = Random.Range(0, 2);
+                //if(randomLane > 0)
+                spawnLocationLane2 = Random.Range(0, 2) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
                 int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
 
                 int monsterIndex = combination_[spawningMonsterLane2] - 1;
@@ -377,7 +379,7 @@ public class WaveSpawner : MonoBehaviour {
 
             if (timer <= 0)
             {
-                spawnLocationLane3 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane3A : spawnLocationLane3B;
+                spawnLocationLane3 = Random.Range(0, 2) > 0 ? spawnLocationLane3A : spawnLocationLane3B;
                 int waypoint = spawnLocationLane3 == spawnLocationLane3A ? 0 : 1;
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
