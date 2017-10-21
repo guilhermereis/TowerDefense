@@ -346,7 +346,6 @@ public class BuildManager : MonoBehaviour {
             BuildableController buildingController = selectedGameObject.GetComponent<BuildableController>();
             TowerController towerController = selectedGameObject.GetComponent<TowerController>();
             string name = buildingController.getUnitBlueprint().name;
-            //Debug.Log("CHECK " + name + ", "+Shop.instance.towerLevel1.name);// + ", " + towerController.getUnitBlueprint().name);
 
             if (buildingController)
             {
@@ -837,25 +836,31 @@ public class BuildManager : MonoBehaviour {
 
     public int getTowerLvlByName() {
         TowerController towerController = selectedGameObject.GetComponent<TowerController>();
+        string name = towerController.getUnitBlueprint().name;
+        //Debug.Log("CHECK " + name + ", " + Shop.instance.towerLevel1.name);// + ", " + towerController.getUnitBlueprint().name);
         int returnInt = 0;
-        switch (towerController.name)
+
+        if (name == Shop.instance.towerLevel1.name)
         {
-            case "PrefabArcherTower1(Clone)":
-                returnInt = 0;
-                break;
-            case "PrefabArcherTower2(Clone)":
-                returnInt = 1;
-                break;
-            case "PrefabArcherTower3(Clone)":
-                returnInt = 2;
-                break;
-            case "PrefabArcherTower2Slow(Clone)":
-                returnInt = 3;
-                break;
-            case "PrefabArcherTower2Tesla(Clone)":
-                returnInt = 4;
-                break;
+            returnInt = 0;
         }
+        else if (name == Shop.instance.towerLevel2.name)
+        {
+            returnInt = 1;
+        }
+        else if (name == Shop.instance.towerLevel3.name)
+        {
+            returnInt = 2;
+        }
+        else if (name == Shop.instance.towerSlow.name)
+        {
+            returnInt = 3;
+        }
+        else if (name == Shop.instance.towerTesla.name)
+        {
+            returnInt = 4;
+        }
+        
 
         return returnInt;
     }
