@@ -344,30 +344,38 @@ public class BuildManager : MonoBehaviour {
         {
             upgradeWheelController.tower = selectedGameObject;
             BuildableController buildingController = selectedGameObject.GetComponent<BuildableController>();
+            TowerController towerController = selectedGameObject.GetComponent<TowerController>();
+            string name = buildingController.getUnitBlueprint().name;
+
             if (buildingController)
             {
-                switch (buildingController.name)
+
+
+                if (name == Shop.instance.towerLevel1.name)
                 {
-                    case "PrefabArcherTower1(Clone)":
-                        upgradeWheelController.setTowerLvl(0);
-                        break;
-                    case "PrefabArcherTower2(Clone)":
-                        upgradeWheelController.setTowerLvl(1);
-                        break;
-                    case "PrefabArcherTower3(Clone)":
-                        upgradeWheelController.setTowerLvl(2);
-                        upgradeWheelController.setSpecialization(1);
-                        break;
-                    case "PrefabArcherTower2Slow(Clone)":
-                        upgradeWheelController.setTowerLvl(1);
-                        upgradeWheelController.setSpecialization(0);
-                        break;
-                    case "PrefabArcherTower2Tesla(Clone)":
-                        upgradeWheelController.setTowerLvl(1);
-                        upgradeWheelController.setSpecialization(2);
-                        break;
+                    upgradeWheelController.setTowerLvl(0);
                 }
-                if (buildingController.name == "MinePrefab(Clone)")
+                else if (name == Shop.instance.towerLevel2.name)
+                {
+                    upgradeWheelController.setTowerLvl(1);
+                }
+                else if (name == Shop.instance.towerLevel3.name)
+                {
+                    upgradeWheelController.setTowerLvl(2);
+                    upgradeWheelController.setSpecialization(1);
+                }
+                else if (name == Shop.instance.towerSlow.name)
+                {
+                    upgradeWheelController.setTowerLvl(1);
+                    upgradeWheelController.setSpecialization(0);
+                }
+                else if (name == Shop.instance.towerTesla.name)
+                {
+                    upgradeWheelController.setTowerLvl(1);
+                    upgradeWheelController.setSpecialization(2);
+                }
+                
+                if (name == Shop.instance.miningCamp.name)
                 {
                     upgradeWheelController.setMineSellPrice();
                 }
@@ -828,25 +836,31 @@ public class BuildManager : MonoBehaviour {
 
     public int getTowerLvlByName() {
         TowerController towerController = selectedGameObject.GetComponent<TowerController>();
+        string name = towerController.getUnitBlueprint().name;
+        //Debug.Log("CHECK " + name + ", " + Shop.instance.towerLevel1.name);// + ", " + towerController.getUnitBlueprint().name);
         int returnInt = 0;
-        switch (towerController.name)
+
+        if (name == Shop.instance.towerLevel1.name)
         {
-            case "PrefabArcherTower1(Clone)":
-                returnInt = 0;
-                break;
-            case "PrefabArcherTower2(Clone)":
-                returnInt = 1;
-                break;
-            case "PrefabArcherTower3(Clone)":
-                returnInt = 2;
-                break;
-            case "PrefabArcherTower2Slow(Clone)":
-                returnInt = 3;
-                break;
-            case "PrefabArcherTower2Tesla(Clone)":
-                returnInt = 4;
-                break;
+            returnInt = 0;
         }
+        else if (name == Shop.instance.towerLevel2.name)
+        {
+            returnInt = 1;
+        }
+        else if (name == Shop.instance.towerLevel3.name)
+        {
+            returnInt = 2;
+        }
+        else if (name == Shop.instance.towerSlow.name)
+        {
+            returnInt = 3;
+        }
+        else if (name == Shop.instance.towerTesla.name)
+        {
+            returnInt = 4;
+        }
+        
 
         return returnInt;
     }
