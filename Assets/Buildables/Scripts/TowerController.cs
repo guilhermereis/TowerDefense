@@ -136,7 +136,7 @@ public class TowerController : BuildableController {
         int base_ap = 0;
         float base_fr = 0;
 
-        Debug.Log("CHECK ! " + getUnitBlueprint().name + ", " + Shop.instance.towerLevel1.name);
+        //Debug.Log("CHECK ! " + getUnitBlueprint().name + ", " + Shop.instance.towerLevel1.name);
 
         //-----------SET BASE AP AND FR FOR TOWER TYPE-------------
         if (getUnitBlueprint().name == Shop.instance.towerLevel1.name)

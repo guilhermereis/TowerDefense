@@ -26,6 +26,7 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
 
     public void setSelectedUnit(GameObject selectedObject) {
         TowerController controller = selectedObject.GetComponent<TowerController>();
+
         if (controller)
         {
             AttackSpeedText.GetComponent<Text>().text = "" + controller.getFireRate();
@@ -33,44 +34,48 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             AttadkDmgIcon.GetComponent<Image>().overrideSprite = defaultAttackDmgIcon;
             DamageText.GetComponent<Text>().color = defaultAttackDmgColor;
 
-            switch (controller.name) {
-                case "PrefabArcherTower1(Clone)":
-                    SelectionName.GetComponent<Text>().text = " Tower Lvl1: ";
-                    SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl1: ";
-                    DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
-                    DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
-                    break;
-                case "PrefabArcherTower2(Clone)":
-                    SelectionName.GetComponent<Text>().text = " Tower Lvl2: ";
-                    SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl2: ";
-                    DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
-                    DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
-                    break;
-                case "PrefabArcherTower3(Clone)":
-                    SelectionName.GetComponent<Text>().text = " Tower Lvl3: ";
-                    SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl3: ";
-                    DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
-                    DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
-                    break;
-                case "PrefabArcherTower2Slow(Clone)":
-                    SelectionName.GetComponent<Text>().text = " Icy Tower: ";
-                    SelectionNameShadow.GetComponent<Text>().text = " Icy Tower: ";
-                    TowerSlowController slowController = selectedObject.GetComponent<TowerSlowController>();
-                    DamageText.GetComponent<Text>().text = "" + slowController.SlowAmount + " s";
-                    DamageTextShadow.GetComponent<Text>().text = "" + slowController.SlowAmount + " s";
-                    AttadkDmgIcon.GetComponent<Image>().overrideSprite = IceIconVariation;
-                    DamageText.GetComponent<Text>().color = iceTextColorVariation;
+            string unitName = controller.getUnitBlueprint().name;
 
-                    break;
-                case "PrefabArcherTower2Tesla(Clone)":
-                    SelectionName.GetComponent<Text>().text = " Fire Tower: ";
-                    SelectionNameShadow.GetComponent<Text>().text = " Fire Tower: ";
-                    DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
-                    DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
-                    
-                    
-                    break;
+
+            if (unitName == Shop.instance.towerLevel1.name) {
+                SelectionName.GetComponent<Text>().text = " Tower Lvl1: ";
+                SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl1: ";
+                DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
+                DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
             }
+            if (unitName == Shop.instance.towerLevel2.name)
+            {
+                SelectionName.GetComponent<Text>().text = " Tower Lvl2: ";
+                SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl2: ";
+                DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
+                DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+            }
+            if (unitName == Shop.instance.towerLevel3.name)
+            {
+                SelectionName.GetComponent<Text>().text = " Tower Lvl3: ";
+                SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl3: ";
+                DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
+                DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+            }
+            if (unitName == Shop.instance.towerSlow.name)
+            {
+                SelectionName.GetComponent<Text>().text = " Icy Tower: ";
+                SelectionNameShadow.GetComponent<Text>().text = " Icy Tower: ";
+                TowerSlowController slowController = selectedObject.GetComponent<TowerSlowController>();
+                DamageText.GetComponent<Text>().text = "" + slowController.SlowAmount + " s";
+                DamageTextShadow.GetComponent<Text>().text = "" + slowController.SlowAmount + " s";
+                AttadkDmgIcon.GetComponent<Image>().overrideSprite = IceIconVariation;
+                DamageText.GetComponent<Text>().color = iceTextColorVariation;
+
+            }
+            if (unitName == Shop.instance.towerTesla.name)
+            {
+                SelectionName.GetComponent<Text>().text = " Fire Tower: ";
+                SelectionNameShadow.GetComponent<Text>().text = " Fire Tower: ";
+                DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
+                DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+            }
+            
         }
         else {
             //Get Camp Controller
