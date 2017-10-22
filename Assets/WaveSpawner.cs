@@ -852,7 +852,7 @@ public class WaveSpawner : MonoBehaviour {
             if (tc != null) // If it has a TowerController (AKA: is a tower).
             {
                 state =
-                    new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
+                    new PropertyScript.StructureState(state.structureName = tc.getUnitBlueprint().name,
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tc.fireRateLVL, tc.attackPowerLVL);
 
@@ -861,7 +861,7 @@ public class WaveSpawner : MonoBehaviour {
             else // Soldier Camp
             {
                 state =
-                    new PropertyScript.StructureState(state.structureName = gridMouse.ListOfGameObjects[i].name,
+                    new PropertyScript.StructureState(state.structureName = bc.getUnitBlueprint().name,
                                                       gridMouse.ListOfGameObjects[i].transform);
             }
             listOfStates.Add(state);
@@ -876,7 +876,7 @@ public class WaveSpawner : MonoBehaviour {
         Debug.Log("Gonna load all " + listOfStates.Count + " !");
         for (int i = 0; i < listOfStates.Count; i++)
         {
-            if (listOfStates[i].structureName == "PrefabArcherTower1(Clone)")
+            if (listOfStates[i].structureName == Shop.instance.towerLevel1.name)
             {
                 shop.SelectStandardUnit();
                 int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
@@ -893,7 +893,7 @@ public class WaveSpawner : MonoBehaviour {
                 Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
-            else if (listOfStates[i].structureName == "PrefabArcherTower2(Clone)")
+            else if (listOfStates[i].structureName == Shop.instance.towerLevel2.name)
             {
                 shop.SelectTower2Unit();
                 int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
@@ -910,7 +910,7 @@ public class WaveSpawner : MonoBehaviour {
                 Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
-            else if (listOfStates[i].structureName == "PrefabArcherTower3(Clone)")
+            else if (listOfStates[i].structureName == Shop.instance.towerLevel3.name)
             {
                 shop.SelectTower3Unit();
                 int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
@@ -927,7 +927,7 @@ public class WaveSpawner : MonoBehaviour {
                 Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
                 Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
             }
-            else if (listOfStates[i].structureName == "PrefabMiningCamp(Clone)")
+            else if (listOfStates[i].structureName == Shop.instance.miningCamp.name)
             {
                 shop.SelectSecondaryUnit();
                 Vector3 newPosition = new Vector3(listOfStates[i].position.x - 0.5f, listOfStates[i].position.y, listOfStates[i].position.z - 0.5f);

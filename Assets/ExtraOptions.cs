@@ -18,9 +18,8 @@ public class ExtraOptions : MonoBehaviour {
     }
     private void SetPrices()
     {
-        string SelectedGameObjectName = buildManager.getSelectedGameObject().name;
-        Debug.Log("SELECTED ++++++++ : " + SelectedGameObjectName);
-        if (SelectedGameObjectName == "PrefabArcherTower1(Clone)")
+        string SelectedGameObjectName = buildManager.getSelectedUnit().name;
+        if (SelectedGameObjectName == Shop.instance.towerLevel1.name)
         {
             upgradeFR1price = 100;
             upgradeFR2price = 200;
@@ -30,7 +29,7 @@ public class ExtraOptions : MonoBehaviour {
             upgradeAP2price = 300;
             upgradeAP3price = 400;            
         }
-        else if (SelectedGameObjectName == "PrefabArcherTower2(Clone)")
+        else if (SelectedGameObjectName == Shop.instance.towerLevel2.name)
         {
             upgradeFR1price = 200;
             upgradeFR2price = 400;
@@ -40,7 +39,7 @@ public class ExtraOptions : MonoBehaviour {
             upgradeAP2price = 600;
             upgradeAP3price = 900;
         }
-        else if (SelectedGameObjectName == "PrefabArcherTower3(Clone)")
+        else if (SelectedGameObjectName == Shop.instance.towerLevel3.name)
         {
             upgradeFR1price = 500;
             upgradeFR2price = 1000;
