@@ -132,30 +132,28 @@ public class TowerController : BuildableController {
         //    Debug.Log("UNIT BLUEPRINT IS NULL !!!!");
         //}
         float percent = ((float)unitBlueprint.getRegularSellCost() / (float)unitBlueprint.cost);
-        string tower1name = "PrefabArcherTower1(Clone)";
-        string tower2name = "PrefabArcherTower2(Clone)";
-        string tower3name = "PrefabArcherTower3(Clone)";
-        string towerSlowName = "PrefabArcherTower2Slow(Clone)";
-        string towerTeslaName = "PrefabArcherTower2Tesla(Clone)";
         int tower_level = 0;
         int base_ap = 0;
         float base_fr = 0;
+
+        Debug.Log("CHECK ! " + getUnitBlueprint().name + ", " + Shop.instance.towerLevel1.name);
+
         //-----------SET BASE AP AND FR FOR TOWER TYPE-------------
-        if (gameObject.name == tower1name)
+        if (getUnitBlueprint().name == Shop.instance.towerLevel1.name)
         {
             base_ap = Tower1BaseAP;
             base_fr = Tower1BaseFR;
             tower_level = 1;
         }
-        else if (gameObject.name == tower2name
-                 ||gameObject.name == towerSlowName
-                 ||gameObject.name == towerTeslaName)
+        else if (getUnitBlueprint().name == Shop.instance.towerLevel2.name
+                 || getUnitBlueprint().name == Shop.instance.towerSlow.name
+                 || getUnitBlueprint().name == Shop.instance.towerTesla.name)
         {
             base_ap = Tower2BaseAP;
             base_fr = Tower2BaseFR;
             tower_level = 2;
         }
-        else if (gameObject.name == tower3name)
+        else if (getUnitBlueprint().name == Shop.instance.towerLevel3.name)
         {
             base_ap = Tower3BaseAP;
             base_fr = Tower3BaseFR;
@@ -241,25 +239,21 @@ public class TowerController : BuildableController {
     {
         fireRateLVL = _fireRateLVL;
         attackPowerLVL = _attackPowerLVL;
-        
-
-        string tower1name = "PrefabArcherTower1(Clone)";
-        string tower2name = "PrefabArcherTower2(Clone)";
-        string tower3name = "PrefabArcherTower3(Clone)";
+                
         int base_ap = 0;
         float base_fr = 0;
         //-----------SET BASE AP AND FR FOR TOWER TYPE-------------
-        if (gameObject.name == tower1name)
+        if (getUnitBlueprint().name == Shop.instance.towerLevel1.name)
         {
             base_ap = Tower1BaseAP;
             base_fr = Tower1BaseFR;
         }
-        else if (gameObject.name == tower2name)
+        else if (getUnitBlueprint().name == Shop.instance.towerLevel2.name)
         {
             base_ap = Tower2BaseAP;
             base_fr = Tower2BaseFR;
         }
-        else if (gameObject.name == tower3name)
+        else if (getUnitBlueprint().name == Shop.instance.towerLevel3.name)
         {
             base_ap = Tower3BaseAP;
             base_fr = Tower3BaseFR;
