@@ -21,6 +21,9 @@ public class TopRightMenu : MonoBehaviour {
     public Sprite tripleSelected;
     public Sprite tripleUnselected;
 
+    public GameObject configMenu;
+    private bool isConfigOn = false;
+
     public void Start()
     {
         NormalSpeedOnClick();
@@ -50,6 +53,27 @@ public class TopRightMenu : MonoBehaviour {
         GameObject.Find("MineBuild").GetComponent<Button>().enabled = true;
         GameObject.Find("TowerBuild").GetComponent<Button>().enabled = true;
     }
+
+    public void ShowConfigurationMenu()
+    {
+        isConfigOn = true;
+        PauseSpeedOnClick();
+        if (configMenu)
+        {
+            configMenu.GetComponent<ConfigurationMenu>().Show();
+        }
+    }
+
+    public void HideConfigurationMenu()
+    {
+        isConfigOn = false;
+        NormalSpeedOnClick();
+        if (configMenu)
+        {
+            configMenu.GetComponent<ConfigurationMenu>().Hide();
+        }
+    }
+
     public void PauseSpeedOnClick() {
         GameObject.Find("Grid").GetComponent<GridMouse>().canClickGrid = true;
         //GridMouse.instance.canClickGrid = false;
@@ -59,11 +83,6 @@ public class TopRightMenu : MonoBehaviour {
         pauseSpeed.interactable = false;
         Time.timeScale = 0;
         
-    }
-    public void ToggleIngameMenu()
-    {
-        IngameMenu igm = GameObject.Find("IngameMenu").GetComponent<IngameMenu>();
-        igm.Toggle();
     }
 
     public void NormalSpeedOnClick()
@@ -101,21 +120,35 @@ public class TopRightMenu : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetButtonDown("Pause")) {
-            PauseSpeedOnClick();
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            if (isConfigOn)
+            {
+                HideConfigurationMenu();
+            }
+            else {
+                ShowConfigurationMenu();
+            }
         }
-        if (Input.GetButtonDown("Speedx1"))
-        {
-            NormalSpeedOnClick();
+
+        if (!isConfigOn){
+            if (Input.GetButtonDown("Pause"))
+            {
+                PauseSpeedOnClick();
+            }
+            if (Input.GetButtonDown("Speedx1"))
+            {
+                NormalSpeedOnClick();
+            }
+            if (Input.GetButtonDown("Speedx2"))
+            {
+                DoubleSpeedOnClick();
+            }
+            if (Input.GetButtonDown("Speedx3"))
+            {
+                TripleSpeedOnClick();
+            }
         }
-        if (Input.GetButtonDown("Speedx2"))
-        {
-            DoubleSpeedOnClick();
-        }
-        if (Input.GetButtonDown("Speedx3"))
-        {
-            TripleSpeedOnClick();
-        }
+        
     }
 
 }
