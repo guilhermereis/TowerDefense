@@ -59,7 +59,9 @@ public class ExtraOptions : MonoBehaviour {
         {
             if (PlayerStats.Money - upgradeAP1price >= 0)
             {
-                PlayerStats.AddMoney(-1 * upgradeAP1price);
+                int spent = PlayerStats.AddMoney(-1 * upgradeAP1price);
+                GameController.MoneySpent(spent);
+
                 tower.setAttackPowerLVL(1);
                 tower.SetFireRateAndAttackPower();
                 buildManager.OnUnitUpgrade();
@@ -78,7 +80,8 @@ public class ExtraOptions : MonoBehaviour {
         {
             if (PlayerStats.Money - upgradeAP2price >= 0)
             {
-                PlayerStats.AddMoney(-1 * upgradeAP2price);
+                int spent = PlayerStats.AddMoney(-1 * upgradeAP2price);
+                GameController.MoneySpent(spent);
                 tower.setAttackPowerLVL(2);
                 tower.SetFireRateAndAttackPower();
                 buildManager.OnUnitUpgrade();
@@ -97,7 +100,8 @@ public class ExtraOptions : MonoBehaviour {
         {
             if (PlayerStats.Money - upgradeAP3price >= 0)
             {
-                PlayerStats.AddMoney(-1 * upgradeAP3price);
+                int spent = PlayerStats.AddMoney(-1 * upgradeAP3price);
+                GameController.MoneySpent(spent);
                 tower.setAttackPowerLVL(3);
                 tower.SetFireRateAndAttackPower();
                 buildManager.OnUnitUpgrade();
@@ -118,7 +122,8 @@ public class ExtraOptions : MonoBehaviour {
         {
             if (PlayerStats.Money - upgradeFR1price >= 0)
             {
-                PlayerStats.AddMoney(-1 * upgradeFR1price);
+                int spent = PlayerStats.AddMoney(-1 * upgradeFR1price);
+                GameController.MoneySpent(spent);
                 tower.setFireRateLVL(1);
                 tower.SetFireRateAndAttackPower();
                 buildManager.OnUnitUpgrade();
@@ -137,7 +142,8 @@ public class ExtraOptions : MonoBehaviour {
         {
             if (PlayerStats.Money - upgradeFR2price >= 0)
             {
-                PlayerStats.AddMoney(-1 * upgradeFR2price);
+                int spent = PlayerStats.AddMoney(-1 * upgradeFR2price);
+                GameController.MoneySpent(spent);
                 tower.setFireRateLVL(2);
                 tower.SetFireRateAndAttackPower();
                 buildManager.OnUnitUpgrade();
@@ -156,7 +162,8 @@ public class ExtraOptions : MonoBehaviour {
         {
             if (PlayerStats.Money - upgradeFR3price >= 0)
             {
-                PlayerStats.AddMoney(-1 * upgradeFR3price);
+                int spent = PlayerStats.AddMoney(-1 * upgradeFR3price);
+                GameController.MoneySpent(spent);
                 tower.setFireRateLVL(3);
                 tower.SetFireRateAndAttackPower();
                 buildManager.OnUnitUpgrade();

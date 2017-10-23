@@ -14,7 +14,9 @@ public class PlayerStats : MonoBehaviour {
 
     void Start()
     {
-        AddMoney(StartMoney);
+        int added = AddMoney(StartMoney);
+        GameController.MoneyCollected(added,false);
+
         hudCanvas = GameObject.FindGameObjectWithTag("HUD");
         secondChanceMeter = hudCanvas.transform.Find("Player Info").Find("GoldBarUnfilled").Find("GoldBarFilled").gameObject;
         secondChanceAnimator = hudCanvas.transform.Find("Player Info").Find("GoldBarUnfilled").Find("GoldBarFilled").GetComponent<Animator>();
@@ -39,11 +41,12 @@ public class PlayerStats : MonoBehaviour {
         
     }
 
-    public static void AddMoney(int amount)
+    public static int AddMoney(int amount)
     {
         Money += amount;
         GameObject.Find("MoneyText").GetComponent<Text>().text = ""+Money;
         GameObject.Find("MoneyTextShadow").GetComponent<Text>().text = "" + Money;
+        return amount;
     }
     public static void SetMoney(int amount)
     {

@@ -73,7 +73,8 @@ public class MiningCampController : BuildableController {
         currentGold = 0;
         isFull = false;
         fullButton.SetActive(false);
-        PlayerStats.AddMoney(goldToReturn);
+        int added = PlayerStats.AddMoney(goldToReturn);
+        GameController.MoneyCollected(added, true);
     }
    
     public void UpgradeMaxGold()

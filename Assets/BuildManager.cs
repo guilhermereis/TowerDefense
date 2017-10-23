@@ -140,7 +140,8 @@ public class BuildManager : MonoBehaviour {
                 Debug.Log("Not enough money to build that!");
                 return;
             }
-            PlayerStats.AddMoney(-1 * unitToBuild.cost);
+            int spent = PlayerStats.AddMoney(-1 * unitToBuild.cost);
+            GameController.MoneySpent(spent);
         }
 
         Vector3 newPosition;
@@ -195,7 +196,8 @@ public class BuildManager : MonoBehaviour {
                 Debug.Log("Not enough money to build that!");
                 return;
             }
-            PlayerStats.AddMoney(-1 * unitToBuild.cost);
+            int spent = PlayerStats.AddMoney(-1 * unitToBuild.cost);
+            GameController.MoneySpent(spent);
         }
         Vector3 newPosition;
         if (unitToBuild == Shop.instance.miningCamp)
@@ -460,7 +462,9 @@ public class BuildManager : MonoBehaviour {
 
         if (bc.getUnitBlueprint() != null)
         {
-            PlayerStats.AddMoney(bc.GetSellCostWithInterest());
+            int added = PlayerStats.AddMoney(bc.GetSellCostWithInterest());
+            GameController.MoneyCollected(added,false);
+
             Debug.Log("Sold for " + bc.GetSellCostWithInterest() + ". Current Money: " + PlayerStats.Money);
             string name = getSelectedGameObject().name;
             BuildableController buildable =
@@ -546,7 +550,9 @@ public class BuildManager : MonoBehaviour {
             {
                 if (PlayerStats.Money - Shop.instance.towerLevel1.upgrade_cost >= 0)
                 {
-                    PlayerStats.AddMoney(-1 * Shop.instance.towerLevel1.upgrade_cost);
+                    int spent = PlayerStats.AddMoney(-1 * Shop.instance.towerLevel1.upgrade_cost);
+                    GameController.MoneySpent(spent);
+
                     SelectUnitToBuild(Shop.instance.towerLevel2);
                     BuildTheNextLevelStructure();
                     //buildManager.DeselectUnitToBuild();
@@ -564,7 +570,9 @@ public class BuildManager : MonoBehaviour {
             {
                 if (PlayerStats.Money - Shop.instance.towerLevel2.upgrade_cost >= 0)
                 {
-                    PlayerStats.AddMoney(-1 * Shop.instance.towerLevel2.upgrade_cost);
+                    int spent = PlayerStats.AddMoney(-1 * Shop.instance.towerLevel2.upgrade_cost);
+                    GameController.MoneySpent(spent);
+
                     SelectUnitToBuild(Shop.instance.towerLevel3);
                     BuildTheNextLevelStructure();
                     //buildManager.DeselectUnitToBuild();
@@ -642,7 +650,8 @@ public class BuildManager : MonoBehaviour {
         {
             if (PlayerStats.Money - Shop.instance.towerSlow.upgrade_cost >= 0)
             {
-                PlayerStats.AddMoney(-1 * Shop.instance.towerSlow.upgrade_cost);
+                int spent = PlayerStats.AddMoney(-1 * Shop.instance.towerSlow.upgrade_cost);
+                GameController.MoneySpent(spent);
                 
                 SelectUnitToBuild(Shop.instance.towerSlow);
                 BuildTheNextLevelStructure();
@@ -666,7 +675,9 @@ public class BuildManager : MonoBehaviour {
         {
             if (PlayerStats.Money - Shop.instance.towerTesla.upgrade_cost >= 0)
             {
-                PlayerStats.AddMoney(-1 * Shop.instance.towerTesla.upgrade_cost);
+                int spent = PlayerStats.AddMoney(-1 * Shop.instance.towerTesla.upgrade_cost);
+                GameController.MoneySpent(spent);
+
                 SelectUnitToBuild(Shop.instance.towerTesla);
                 BuildTheNextLevelStructure();
                 //DeselectUnitToBuild();
@@ -700,7 +711,9 @@ public class BuildManager : MonoBehaviour {
                     price = Shop.instance.upgradeT3Ad1price;
                     break;
             }
-            PlayerStats.AddMoney(-1 * price);
+            int spent = PlayerStats.AddMoney(-1 * price);
+            GameController.MoneySpent(spent);
+
             tower.setAttackPowerLVL(1);
             tower.SetFireRateAndAttackPower();
             OnUnitUpgrade();
@@ -726,7 +739,9 @@ public class BuildManager : MonoBehaviour {
                     break;
 
             }
-            PlayerStats.AddMoney(-1 * price);
+            int spent = PlayerStats.AddMoney(-1 * price);
+            GameController.MoneySpent(spent);
+
             tower.setAttackPowerLVL(2);
             tower.SetFireRateAndAttackPower();
             OnUnitUpgrade();
@@ -750,7 +765,8 @@ public class BuildManager : MonoBehaviour {
                     price = Shop.instance.upgradeT3Ad3price;
                     break;
             }
-            PlayerStats.AddMoney(-1 * price);
+            int spent = PlayerStats.AddMoney(-1 * price);
+            GameController.MoneySpent(spent);
             tower.setAttackPowerLVL(3);
             tower.SetFireRateAndAttackPower();
             OnUnitUpgrade();
@@ -777,7 +793,9 @@ public class BuildManager : MonoBehaviour {
                     price = Shop.instance.upgradeT3As1price;
                     break;
             }
-            PlayerStats.AddMoney(-1 * price);
+            int spent = PlayerStats.AddMoney(-1 * price);
+            GameController.MoneySpent(spent);
+
             tower.setFireRateLVL(1);
             tower.SetFireRateAndAttackPower();
             OnUnitUpgrade();
@@ -801,7 +819,9 @@ public class BuildManager : MonoBehaviour {
                     price = Shop.instance.upgradeT3As2price;
                     break;
             }
-            PlayerStats.AddMoney(-1 * price);
+            int spent = PlayerStats.AddMoney(-1 * price);
+            GameController.MoneySpent(spent);
+
             tower.setFireRateLVL(2);
             tower.SetFireRateAndAttackPower();
             OnUnitUpgrade();
@@ -826,7 +846,9 @@ public class BuildManager : MonoBehaviour {
                     price = Shop.instance.upgradeT3As3price;
                     break;
             }
-            PlayerStats.AddMoney(-1 * price);
+            int spent = PlayerStats.AddMoney(-1 * price);
+            GameController.MoneySpent(spent);
+
             tower.setFireRateLVL(3);
             tower.SetFireRateAndAttackPower();
             OnUnitUpgrade();
