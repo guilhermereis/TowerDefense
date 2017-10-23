@@ -12,23 +12,138 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         ACH_WIN_10_WAVES,
         ACH_WIN_50_WAVES,
         ACH_WIN_100_WAVES,
+
         ACH_BUILD_10_TOWERS,
-        ACH_BUILD_50_TOWERS,
         ACH_BUILD_100_TOWERS,
-        ACH_BUILD_TOWER_3,
+        ACH_BUILD_1000_TOWERS,
+
+        ACH_BUILD_10_TOWER_1,
+        ACH_BUILD_100_TOWER_1,
+        ACH_BUILD_1000_TOWER_1,
+
+        ACH_BUILD_10_TOWER_2,
+        ACH_BUILD_100_TOWER_2,
+        ACH_BUILD_1000_TOWER_2,
+
+        ACH_BUILD_10_TOWER_3,
+        ACH_BUILD_100_TOWER_3,
+        ACH_BUILD_1000_TOWER_3,
+
+        ACH_BUILD_10_MINE,
+        ACH_BUILD_100_MINE,
+        ACH_BUILD_1000_MINE,
+
+        ACH_KILL_10_MONSTERS,
+        ACH_KILL_100_MONSTERS,
+        ACH_KILL_1000_MONSTERS,
+
+        ACH_KILL_10_WANDERER,
+        ACH_KILL_100_WANDERER,
+        ACH_KILL_1000_WANDERER,
+
+        ACH_KILL_10_WARRIOR,
+        ACH_KILL_100_WARRIOR,
+        ACH_KILL_1000_WARRIOR,
+
+        ACH_KILL_10_BOMBER,
+        ACH_KILL_100_BOMBER,
+        ACH_KILL_1000_BOMBER,
+
+        ACH_KILL_10_KING,
+        ACH_KILL_100_KING,
+        ACH_KILL_1000_KING,
+
+        ACH_UNLOCK_LANE2,
+        ACH_UNLOCK_LANE3,
+        ACH_UNLOCK_LANE4,
+
+        ACH_FREEZE_10_ENEMY,
+        ACH_FREEZE_100_ENEMY,
+        ACH_FREEZE_1000_ENEMY,
+
+        ACH_BURN_10_ENEMY,
+        ACH_BURN_100_ENEMY,
+        ACH_BURN_1000_ENEMY,
+
+        ACH_SURVIVE_10_WAVES,
+        ACH_SURVIVE_50_WAVES,
+        ACH_SURVIVE_100_WAVES,
+
+        ACH_INVICIBILITY_10_WAVES,
+        ACH_INVICIBILITY_30_WAVES,
+        ACH_INVICIBILITY_50_WAVES,
+        ACH_INVICIBILITY_80_WAVES,
+
+        ACH_CHEAP,
+        ACH_MONEY_SAVER,
+        ACH_MONEY_SPENDER,
+        ACH_MONEY_COLLECTED_1000,
+        ACH_MONEY_COLLECTED_10000,
+
+        ACH_TRYAGAIN,
+
+
 
     };
 
     
 
-    private Achievement_t[] achievements = new Achievement_t[] {
-        new Achievement_t(Achievement.ACH_WIN_10_WAVES,"Defeated 10 waves",""),
-        new Achievement_t(Achievement.ACH_WIN_50_WAVES,"Defeated 50 waves",""),
-        new Achievement_t(Achievement.ACH_WIN_100_WAVES,"Defeated 100 waves",""),
-        new Achievement_t(Achievement.ACH_BUILD_10_TOWERS,"Build 10 towers",""),
-        new Achievement_t(Achievement.ACH_BUILD_50_TOWERS,"Build 50 towers",""),
-        new Achievement_t(Achievement.ACH_BUILD_100_TOWERS,"Build 100 towers",""),
-        new Achievement_t(Achievement.ACH_BUILD_TOWER_3,"Build tower level 3",""),
+    private List<Achievement_t> achievements = new List<Achievement_t> {
+        new Achievement_t(Achievement.ACH_WIN_10_WAVES,"Gettin' good !","Defeated 10 waves"),
+        new Achievement_t(Achievement.ACH_WIN_50_WAVES,"","Defeated 50 waves"),
+        new Achievement_t(Achievement.ACH_WIN_100_WAVES,"","Defeated 100 waves"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWERS,"Jack the Builder","Build 10 towers"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWERS,"","Build 50 towers"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWERS,"Empire","Build 100 towers"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWER_1,"","Build 10 towers level 1"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWER_1,"","Build 100 towers level 1"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWER_1,"Ancient Warfare","Build 1000 towers level 1"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWER_2,"Industrious","Build 10 towers level 2"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWER_2,"","Build 100 towers level 2"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWER_2,"","Build 1000 towers level 2"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWER_3,"Architect","Build 10 towers level 3"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWER_3,"","Build 100 towers level 3"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWER_3,"","Build 1000 towers level 3"),
+        new Achievement_t(Achievement.ACH_BUILD_10_MINE,"Gold Digger","Build 10 mines"),
+        new Achievement_t(Achievement.ACH_BUILD_100_MINE,"Entrepeneur","Build 100 mines"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_MINE,"","Build 1000 mines"),
+        new Achievement_t(Achievement.ACH_KILL_10_MONSTERS,"","kill 10 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_MONSTERS,"Massacre","kill 100 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_MONSTERS,"","kill 1000 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10_WARRIOR,"","kill 10 warrior goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_WARRIOR,"","kill 100 warrior goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_WARRIOR,"","kill 1000 warrior goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10_WANDERER,"","kill 10 wanderer goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_WANDERER,"","kill 100 wanderer goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_WANDERER,"","kill 1000 wanderer goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10_BOMBER,"Counter-Measures","kill 10 bomber goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_BOMBER,"Anti-Terrorist","kill 100 bomber goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_BOMBER,"","kill 1000 bomber goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10_KING,"Kingslayer","kill 10 king goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_KING,"Funeral of the Greats","kill 100 king goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_KING,"Ruler of the Seven Kingdoms","kill 1000 king goblins"),
+        new Achievement_t(Achievement.ACH_UNLOCK_LANE2,"Winter is coming","unlock snow field"),
+        new Achievement_t(Achievement.ACH_UNLOCK_LANE3,"Mad Max","unlock desert field"),
+        new Achievement_t(Achievement.ACH_UNLOCK_LANE2,"Rock 'n' Roll","unlock volcano field"),
+        new Achievement_t(Achievement.ACH_FREEZE_10_ENEMY,"Chilly","freeze 10 enemies"),
+        new Achievement_t(Achievement.ACH_FREEZE_100_ENEMY,"Mr. Freeze","freeze 100 enemies"),
+        new Achievement_t(Achievement.ACH_FREEZE_1000_ENEMY,"Ice Age","freeze 1000 enemies"),
+        new Achievement_t(Achievement.ACH_BURN_10_ENEMY,"Burn !","burn 10 enemies"),
+        new Achievement_t(Achievement.ACH_BURN_100_ENEMY,"Kill it with Fire !","burn 100 enemies"),
+        new Achievement_t(Achievement.ACH_BURN_1000_ENEMY,"Flamethrower","burn 1000 enemies"),
+        new Achievement_t(Achievement.ACH_SURVIVE_10_WAVES,"What doesn't kill you","defeat 10 waves in a row"),
+        new Achievement_t(Achievement.ACH_SURVIVE_50_WAVES,"","defeat 50 waves in a row"),
+        new Achievement_t(Achievement.ACH_SURVIVE_100_WAVES,"","defeat 100 waves in a row"),
+        new Achievement_t(Achievement.ACH_INVICIBILITY_10_WAVES,"Bulletproof","defeat 10 waves without taking a hit"),
+        new Achievement_t(Achievement.ACH_INVICIBILITY_30_WAVES,"Nothing to lose","defeat 30 waves without taking a hit"),
+        new Achievement_t(Achievement.ACH_INVICIBILITY_50_WAVES,"","defeat 50 waves without taking a hit"),
+        new Achievement_t(Achievement.ACH_INVICIBILITY_80_WAVES,"Eternal","defeat 80 waves without taking a hit"),
+        new Achievement_t(Achievement.ACH_CHEAP,"","Reach wave 10 using less than 500 gold"),
+        new Achievement_t(Achievement.ACH_MONEY_SAVER,"Put it in the bank !","Have 10000 golds"),
+        new Achievement_t(Achievement.ACH_MONEY_SPENDER,"","Spend 50.000 golds on building structures"),
+        new Achievement_t(Achievement.ACH_MONEY_COLLECTED_1000,"Scrooge McDuck","collected 1000 golds"),
+        new Achievement_t(Achievement.ACH_MONEY_COLLECTED_10000,"Rockefeller","collected 10000 golds"),
+        new Achievement_t(Achievement.ACH_TRYAGAIN,"Die Hard","Use try again mode"),
     };
 
     //our gameID
@@ -77,8 +192,19 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int p_totalWaves;
     private int p_totalDefeats;
     private int p_totalTowerBuilt;
-    private int p_totalKingKilled;
+    private int p_totalTowerlevel1Built;
+    private int p_totalTowerlevel2Built;
+    private int p_totalTowerlevel3Built;
+    private int p_totalTowerIceBuilt;
+    private int p_totalTowerFireBuilt;
     private int p_totalMineBuilt;
+    
+    private int p_totalKingKilled;
+ 
+
+    private int p_totalWandererKilled;
+    private int p_totalWarriorKilled;
+    private int p_totalBomberKilled;
     private int p_totalTryAgain;
     private int p_unlockedLane2;
     private int p_unlockedLane3;
@@ -86,7 +212,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int p_totalDamage;
     private int p_totalEnemyFrozen;
     private int p_totalEnemyBurnt;
-    private int p_moneyCollected;
+    private int p_totalmoneyCollected;
+    private int p_totalmoneySpent;
     private int p_totalMonsterKilled;
 
     protected string leaderboardName = "Defeated Waves";
@@ -111,6 +238,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             return;
         
         c_numberOfTowers ++;
+
+        //achievements.Find()
 
         switch (tower)
         {
@@ -218,6 +347,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     public void AddMoneyCollected(int gold, bool wasCollected)
     {
         c_moneyRaised += gold;
+
         if (wasCollected)
             c_moneyCollected += gold;
     }
@@ -347,8 +477,19 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 SteamUserStats.GetStat("totalNumWaves", out p_totalWaves);
                 SteamUserStats.GetStat("totalNumDefeats", out p_totalDefeats);
                 SteamUserStats.GetStat("totalNumTower", out p_totalTowerBuilt);
-                SteamUserStats.GetStat("totalNumKingKilled", out p_totalKingKilled);
+                SteamUserStats.GetStat("totalNumTower1", out p_totalTowerlevel1Built);
+                SteamUserStats.GetStat("totalNumTower2", out p_totalTowerlevel2Built);
+                SteamUserStats.GetStat("totalNumTower3", out p_totalTowerlevel3Built);
+                SteamUserStats.GetStat("totalNumTowerIce", out p_totalTowerIceBuilt);
+                SteamUserStats.GetStat("totalNumTowerFire", out p_totalTowerFireBuilt);
                 SteamUserStats.GetStat("totalNumMineBuilt", out p_totalMineBuilt);
+
+                SteamUserStats.GetStat("totalNumKingKilled", out p_totalKingKilled);
+                SteamUserStats.GetStat("totalNumWandererKilled", out p_totalWandererKilled);
+                SteamUserStats.GetStat("totalNumWarriorKilled", out p_totalWarriorKilled);
+                SteamUserStats.GetStat("totalNumBomberKilled", out p_totalBomberKilled);
+                SteamUserStats.GetStat("totalNumGoblinKilled", out p_totalMonsterKilled);
+
                 SteamUserStats.GetStat("totalNumTryAgain", out p_totalTryAgain);
                 SteamUserStats.GetStat("totalNumDamage", out p_totalDamage);
                 SteamUserStats.GetStat("totalNumEnemyFrozen", out p_totalEnemyFrozen);
@@ -357,7 +498,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 SteamUserStats.GetStat("unlockedLane2", out p_unlockedLane2 );
                 SteamUserStats.GetStat("unlockedLane3", out p_unlockedLane3);
                 SteamUserStats.GetStat("unlockedLane4", out p_unlockedLane4);
-                SteamUserStats.GetStat("totalNumMoneyCollected", out p_moneyCollected);
+                SteamUserStats.GetStat("totalNumMoneyCollected", out p_totalmoneyCollected);
+                SteamUserStats.GetStat("totalNumMoneySpent", out p_totalmoneySpent);
 
 
             }
