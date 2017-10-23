@@ -3,6 +3,9 @@ using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
 
+
+public enum PawnType { Wanderer, Warrior, Bomber, King }
+
 public class PawnController : MonoBehaviour {
 
     public Material frozenMaterial;
@@ -16,7 +19,7 @@ public class PawnController : MonoBehaviour {
     [HideInInspector]
     public enum PawnState { None ,Idle, Battle, Walking,FindTarget,Homing, Destroying, Dead};
     [HideInInspector]
-    public enum PawnType {Wanderer, Hunter, Boss}
+    
 
     public PawnState currentState = PawnState.None;
     protected PawnType type = PawnType.Wanderer;

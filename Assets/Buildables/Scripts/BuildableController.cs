@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BuildType { tower1, tower2, tower3, towerIce, towerFire, mine, none }
+
 public class BuildableController : MonoBehaviour {
 
-	public enum HealthState { good, damaged, destroyed}
+	
+
 
 	private float tileSize;
 	private float defense;
@@ -13,7 +16,7 @@ public class BuildableController : MonoBehaviour {
 	private bool isUpgradable;
     private int arrayListPosition;
     protected UnitBlueprint unitBlueprint;
-	public HealthState currentHealthState = HealthState.good;
+    public BuildType buildType = BuildType.none;
     public GameObject buildSoundPrefab;
 
     public virtual int GetSellCostWithInterest()
@@ -100,48 +103,7 @@ public class BuildableController : MonoBehaviour {
 		}
 	}
 
-	public bool ChangeState(HealthState newState)
-	{
-		if (currentHealthState != newState)
-		{
-			currentHealthState = newState;
-			OnChangeHealthState();
-			return true;
-		}
-		else
-			return false;
-	}
-
-	protected void OnChangeHealthState()
-	{
-		if(currentHealthState == HealthState.good)
-		{
-
-		}else if(currentHealthState == HealthState.damaged)
-		{
-			Debug.Log("Damaged");
-		}else if(currentHealthState == HealthState.destroyed)
-		{
-			Debug.Log("Destroyed");
-		}
-
-	}
-
-	public virtual bool Damage(float _damage)
-	{
-		health -= _damage;
-		float fillAmount = health / maxHealth;
-		if (fillAmount >= 0.2f && fillAmount <= 0.75f)
-		{
-			ChangeState(HealthState.damaged);
-		}else if(fillAmount <= 0)
-		{
-			ChangeState(HealthState.destroyed);
-			return true;
-		}
-		
-		return false;
-	}
+	
     public virtual void OnTriggerEnter(Collider other)
     {
 
