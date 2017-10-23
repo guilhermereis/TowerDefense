@@ -105,8 +105,42 @@ public class GameController : MonoBehaviour {
     [Header("Game State")]
     public float preparationTime = 30.0f;
     float countDown;
-    public SteamStatsAndAchievements stats;
-    
+    public static SteamStatsAndAchievements stats;
+
+    private void OnEnable()
+    {
+        stats = GameObject.FindObjectOfType<SteamStatsAndAchievements>();
+
+
+    }
+
+#region steamstats
+    //add built towers during game
+    public static void AddBuiltTower(BuildType towerType)
+    {
+        stats.AddBuiltTower(towerType);
+
+
+    }
+
+    public static void AddMonsterKilled(PawnType monsterType)
+    {
+        stats.AddMonstersKilled(monsterType);
+    }
+
+    public static void MoneyCollected(int gold, bool wasCollected)
+    {
+        stats.AddMoneyCollected(gold, wasCollected);
+    }
+
+    public static void MoneySpent(int gold)
+    {
+        stats.SpendMoney(gold);
+    }
+
+    //public static void Add
+
+#endregion
     // Use this for initialization
     void Start () {
         gamechangedDelegate+= evaluateGameStateChanged;
@@ -114,7 +148,7 @@ public class GameController : MonoBehaviour {
         gameState = GameState.Preparation;
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
-        stats = GameObject.FindObjectOfType<SteamStatsAndAchievements>();
+        
     }
 
     private void OnGUI()

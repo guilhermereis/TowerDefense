@@ -42,14 +42,52 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private bool isRequestedStats;
     private bool isStatsvalid;
 
-    //currentStats
-    private int numberOfWave;
-    private int numberOfTowers;
+    //-----------------------------------------------------------------------------
+    // Current Data
+    //-----------------------------------------------------------------------------
+    private int c_numberOfWave;
+    private int c_numberOfTowers;
+    private int c_numberOftower1;
+    private int c_numberOftower2;
+    private int c_numberOftower3;
+    private int c_numberOfIceTower;
+    private int c_numberOfFireTower;
+    private int c_numberOfMine;
+    private int c_numberOfMonstersKilled;
+    private int c_numberOfKingKilled;
+    private int c_numberOfWandererKilled;
+    private int c_numberOfWarriorKilled;
+    private int c_numberOfBomberKilled;
+    private int c_numberOfFrozen;
+    private int c_numberOfBurnt;
+    private int c_numberOfDamage;
+    private int c_moneyCollected;
+    private int c_moneyRaised;
+    private int c_moneySpent;
+    private int c_unlockedLane2;
+    private int c_unlockedLane3;
+    private int c_unlockedLane4;
+
+
     private bool isLevel3Built;
 
-    //persistentStats
-    private int totalWaves = 1;
-    private int totalDefeats;
+    //-----------------------------------------------------------------------------
+    // Persistent Data
+    //-----------------------------------------------------------------------------
+    private int p_totalWaves;
+    private int p_totalDefeats;
+    private int p_totalTowerBuilt;
+    private int p_totalKingKilled;
+    private int p_totalMineBuilt;
+    private int p_totalTryAgain;
+    private int p_unlockedLane2;
+    private int p_unlockedLane3;
+    private int p_unlockedLane4;
+    private int p_totalDamage;
+    private int p_totalEnemyFrozen;
+    private int p_totalEnemyBurnt;
+    private int p_moneyCollected;
+    private int p_totalMonsterKilled;
 
     protected string leaderboardName = "Defeated Waves";
 
@@ -61,11 +99,157 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     protected CallResult<LeaderboardScoreUploaded_t> leaderboardScoreUploaded;
     protected CallResult<LeaderboardFindResult_t> findLeaderBoard;
 
+
+    //-----------------------------------------------------------------------------
+    // Set total number of builds built
+    //-----------------------------------------------------------------------------
+
+    #region Builds
+    public void AddBuiltTower(BuildType tower)
+    {
+        if (!SteamManager.Initialized)
+            return;
+        
+        c_numberOfTowers ++;
+
+        switch (tower)
+        {
+            case BuildType.tower1:
+                AddTower();
+                break;
+            case BuildType.tower2:
+                AddTower2();
+                break;
+            case BuildType.tower3:
+                AddTower3();
+                break;
+            case BuildType.towerIce:
+                AddIceTowers();
+                break;
+            case BuildType.towerFire:
+                AddFireTowers();
+                break;
+            default:
+                break;
+        }
+
+
+    }
+
+    public void AddIceTowers()
+    {
+        c_numberOfIceTower++;
+    }
+
+    public void AddFireTowers()
+    {
+        c_numberOfFireTower++;
+    }
+
+    public void AddTower()
+    {
+        c_numberOftower1++;
+    }
+
+    public void AddTower2()
+    {
+        c_numberOftower2++;
+    }
+
+    public void AddTower3()
+    {
+        c_numberOftower3++;
+    }
+
+    public void AddMine()
+    {
+        c_numberOfMine++;
+    }
+    #endregion
+
+
+    #region Monsters
+    public void AddMonstersKilled(PawnType monster)
+    {
+        if (!SteamManager.Initialized)
+            return;
+
+        c_numberOfMonstersKilled++;
+        switch (monster)
+        {
+            case PawnType.Bomber:
+                AddBomber();
+                break;
+            case PawnType.King:
+                AddKing();
+                break;
+            case PawnType.Wanderer:
+                AddWanderer();
+                break;
+            case PawnType.Warrior:
+                AddWarrior();
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    private void AddBomber()
+    {
+        c_numberOfBomberKilled++;
+    }
+
+    private void AddWarrior()
+    {
+        c_numberOfWarriorKilled++;
+    }
+    private void AddKing()
+    {
+        c_numberOfKingKilled++;
+    }
+    private void AddWanderer()
+    {
+        c_numberOfWandererKilled++;
+    }
+
+    #endregion
+
+    public void AddMoneyCollected(int gold, bool wasCollected)
+    {
+        c_moneyRaised += gold;
+        if (wasCollected)
+            c_moneyCollected += gold;
+    }
+
+    public void SpendMoney(int gold)
+    {
+        c_moneySpent += gold;
+    }
+
+
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnChangedLevel;
 
-        
+        if (!SteamManager.Initialized)
+            return;
+
+        //GameController.gamechangedDelegate += OnGameChanged;
+        gameID = new CGameID(SteamUtils.GetAppID());
+
+        userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
+        userStatsReceived = Callback<UserStatsReceived_t>.Create(OnUserStatsReceived);
+        userStatsStored = Callback<UserStatsStored_t>.Create(OnUserStatsStored);
+
+        findLeaderBoard = CallResult<LeaderboardFindResult_t>.Create(OnLeaderboardFound);
+        leaderboardScoreUploaded = CallResult<LeaderboardScoreUploaded_t>.Create(OnLeaderboardScoreUpdated);
+
+        isRequestedStats = false;
+        isStatsvalid = false;
+
+
     }
 
     public void OnChangedLevel(Scene scene, LoadSceneMode mode)
@@ -79,25 +263,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         }
     }
 
-    void Start()
-    {
-        
-        if (!SteamManager.Initialized)
-            return;
-
-       
-
-
-        //GameController.gamechangedDelegate += OnGameChanged;
-        gameID = new CGameID(SteamUtils.GetAppID());
-
-        userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
-        userStatsReceived = Callback<UserStatsReceived_t>.Create(OnUserStatsReceived);
-        userStatsStored = Callback<UserStatsStored_t>.Create(OnUserStatsStored);
-
-        findLeaderBoard = CallResult<LeaderboardFindResult_t>.Create(OnLeaderboardFound);
-        leaderboardScoreUploaded = CallResult<LeaderboardScoreUploaded_t>.Create(OnLeaderboardScoreUpdated);
-    }
+   
     private void OnLeaderboardScoreUpdated(LeaderboardScoreUploaded_t pCallback, bool bIOFailure)
     {
         if (pCallback.m_bSuccess == 1 && !bIOFailure)
@@ -117,7 +283,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
            
             scoreDetails = new int[1];
             scoreDetails[0] = 1;
-            SteamAPICall_t uHandle = SteamUserStats.UploadLeaderboardScore(pCallback.m_hSteamLeaderboard, ELeaderboardUploadScoreMethod.k_ELeaderboardUploadScoreMethodKeepBest, totalWaves, scoreDetails, 1);
+            SteamAPICall_t uHandle = SteamUserStats.UploadLeaderboardScore(pCallback.m_hSteamLeaderboard, ELeaderboardUploadScoreMethod.k_ELeaderboardUploadScoreMethodKeepBest, p_totalWaves, scoreDetails, 1);
             leaderboardScoreUploaded.Set(uHandle);
 
         }
@@ -175,8 +341,24 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                     }
                 }
 
-                SteamUserStats.GetStat("NumWaves", out totalWaves);
-                SteamUserStats.GetStat("NumDefeats", out totalDefeats);
+                //-------------------------------
+                // Getting stats from steam
+                //-------------------------------
+                SteamUserStats.GetStat("totalNumWaves", out p_totalWaves);
+                SteamUserStats.GetStat("totalNumDefeats", out p_totalDefeats);
+                SteamUserStats.GetStat("totalNumTower", out p_totalTowerBuilt);
+                SteamUserStats.GetStat("totalNumKingKilled", out p_totalKingKilled);
+                SteamUserStats.GetStat("totalNumMineBuilt", out p_totalMineBuilt);
+                SteamUserStats.GetStat("totalNumTryAgain", out p_totalTryAgain);
+                SteamUserStats.GetStat("totalNumDamage", out p_totalDamage);
+                SteamUserStats.GetStat("totalNumEnemyFrozen", out p_totalEnemyFrozen);
+                SteamUserStats.GetStat("totalNumEnemyBurnt", out p_totalEnemyBurnt);
+                SteamUserStats.GetStat("totalNumMonsterKilled", out p_totalMonsterKilled);
+                SteamUserStats.GetStat("unlockedLane2", out p_unlockedLane2 );
+                SteamUserStats.GetStat("unlockedLane3", out p_unlockedLane3);
+                SteamUserStats.GetStat("unlockedLane4", out p_unlockedLane4);
+                SteamUserStats.GetStat("totalNumMoneyCollected", out p_moneyCollected);
+
 
             }
             else
@@ -212,8 +394,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         }
 
         
-        GUILayout.Label("NumWaves: " + totalWaves);
-        GUILayout.Label("NumDefeats: " + totalDefeats);
+        GUILayout.Label("NumWaves: " + p_totalWaves);
+        GUILayout.Label("NumDefeats: " + p_totalDefeats);
         
 
         GUILayout.BeginArea(new Rect(Screen.width - 300, 0, 300, 800));
@@ -241,17 +423,17 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         Debug.Log("GameChanged");
         if (GameController.gameState == GameState.GameActivate)
         {
-            numberOfTowers = 0;
-            numberOfWave = 0;
+            c_numberOfTowers = 0;
+            c_numberOfWave = 0;
         }else if (GameController.gameState == GameState.EndWave)
         {
-            totalWaves++;
-            Debug.Log("total waves " +totalWaves);
+            p_totalWaves++;
+            Debug.Log("total waves " +p_totalWaves);
             isStoreStats = true;
             
         }else if(GameController.gameState == GameState.GameOver)
         {
-            totalDefeats++;
+            p_totalDefeats++;
             isStoreStats = true;
             //getting leaderboard;
             SteamAPICall_t fHandle =  SteamUserStats.FindLeaderboard(leaderboardName);
@@ -302,7 +484,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             switch (achievement.achievementID)
             {
                 case Achievement.ACH_BUILD_10_TOWERS:
-                    if(numberOfTowers >= 10)
+                    
+                    if (c_numberOfTowers >= 10)
                     {
                         UnlockAchievement(achievement);
                     }
@@ -311,8 +494,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         }
 
         //store stats in the steam database if necessary.
-        SteamUserStats.SetStat("NumWaves", totalWaves);
-        SteamUserStats.SetStat("NumDefeats", totalDefeats);
+        SteamUserStats.SetStat("totalNumWaves", p_totalWaves);
+        SteamUserStats.SetStat("totalNumDefeats", p_totalDefeats);
         //SteamUserStats.UploadLeaderboardScore()
     }
 

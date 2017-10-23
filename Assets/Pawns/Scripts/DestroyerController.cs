@@ -55,10 +55,7 @@ public class DestroyerController : EnemyController {
                 //tell the camp and so the camp can gives another target or we're going back
                 if(target.tag == "Build")
                 {
-                    if (target.GetComponent<BuildableController>().Damage(character.attack))
-				    {
-					    target = null;
-				    }
+                   
 
                 }else if( target.tag == "Castle")
                 {
