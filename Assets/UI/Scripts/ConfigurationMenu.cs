@@ -16,9 +16,13 @@ public class ConfigurationMenu : MonoBehaviour {
     int activeScreenResIndex;
     CanvasGroup cg;
 
+    public delegate void SoundSliderChangedDelegate();
+    public static SoundSliderChangedDelegate soundSliderDelegate;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        soundSliderDelegate += processSliderChange;
     }
 
     void Start()
@@ -89,6 +93,10 @@ public class ConfigurationMenu : MonoBehaviour {
     {
         SaveAudioConf();
         AudioListener.volume = volumeSliders[0].value;
+        soundSliderDelegate();
+    }
+
+    public void processSliderChange() {
     }
 
     public void SetScreenResolution(int i)

@@ -11,8 +11,12 @@ public class SoundToPlay : MonoBehaviour
     static float master_volume;
     static List<AudioSource> BGs = new List<AudioSource>();
 
-    void Update()
+    private void Awake()
     {
+        ConfigurationMenu.soundSliderDelegate += volumesChangedDelegate;
+    }
+
+    void volumesChangedDelegate() {
         SetAllVolumes();
         foreach (AudioSource audio in BGs)
         {
@@ -59,6 +63,7 @@ public class SoundToPlay : MonoBehaviour
         BGs.Add(src);
         MonoBehaviour.Instantiate(soundObject);
     }
+
     public static void PlayMusic(AudioSource _audioSource)
     {
         SetSoundToPlay(_audioSource);
@@ -67,6 +72,7 @@ public class SoundToPlay : MonoBehaviour
         audioSource.Play();
 
     }
+
     public static void PlaySfx(GameObject _soundObject)
     {
         SetSoundToPlay(_soundObject);
@@ -74,6 +80,7 @@ public class SoundToPlay : MonoBehaviour
         src.volume = sfx_volume;
         MonoBehaviour.Instantiate(soundObject);
     }
+
     public static void PlaySfx(AudioSource _audioSource)
     {
         SetSoundToPlay(_audioSource);
