@@ -164,6 +164,11 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyDown("k")) {
+            TakeScreenshot();
+        }
+
         if (gameState == GameState.Preparation)
         {
             if (countDown > 0f && countDown <= 10f) {
@@ -233,5 +238,15 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public static string ScreenShotName(int width, int height)
+    {
+        return string.Format("screen_{0}x{1}_{2}.png",
+                             width, height,
+                             System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+    }
+
+    public static void TakeScreenshot() {
+        ScreenCapture.CaptureScreenshot(ScreenShotName(1920,1080), 2);
+    }
 
 }
