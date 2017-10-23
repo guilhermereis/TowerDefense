@@ -118,7 +118,8 @@ public class GameController : MonoBehaviour {
     //add built towers during game
     public static void AddBuiltTower(BuildType towerType)
     {
-        stats.AddBuiltTower(towerType);
+        if (stats)
+            stats.AddBuiltTower(towerType);
 
 
     }
@@ -130,12 +131,14 @@ public class GameController : MonoBehaviour {
 
     public static void MoneyCollected(int gold, bool wasCollected)
     {
-        stats.AddMoneyCollected(gold, wasCollected);
+        if (stats)
+            stats.AddMoneyCollected(gold, wasCollected);
     }
 
     public static void MoneySpent(int gold)
     {
-        stats.SpendMoney(gold);
+        if (stats)
+            stats.SpendMoney(gold);
     }
 
     //public static void Add

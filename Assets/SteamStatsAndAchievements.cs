@@ -62,8 +62,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int c_numberOfBurnt;
     private int c_numberOfDamage;
     private int c_moneyCollected;
-    private int c_moneyRaised;
-    private int c_moneySpent;
+    private int c_moneyRaised = 0;
+    private int c_moneySpent = 0;
     private int c_unlockedLane2;
     private int c_unlockedLane3;
     private int c_unlockedLane4;
