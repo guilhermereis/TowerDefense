@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 224802535441672110}
   - component: {fileID: 95702388060615904}
   - component: {fileID: 114086282382323152}
-  - component: {fileID: 225541909888120824}
   m_Layer: 5
   m_Name: WaveSpawnerImageHolderPrefab
   m_TagString: Untagged
@@ -387,14 +386,3 @@ RectTransform:
   m_AnchoredPosition: {x: 311, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &225541909888120824
-CanvasGroup:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1030379676286910}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
