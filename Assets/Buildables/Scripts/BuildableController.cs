@@ -43,6 +43,10 @@ public class BuildableController : MonoBehaviour {
     {
         return arrayListPosition;
     }
+    public void setUnitType()
+    {
+
+    }
     public void setUnitBlueprintAndType(UnitBlueprint _unitBlueprint)
     {
         unitBlueprint = _unitBlueprint;
@@ -73,7 +77,8 @@ public class BuildableController : MonoBehaviour {
         {
             buildType = BuildType.mine;
         }
-        }
+        GameController.AddBuiltTower(buildType);
+    }
     public UnitBlueprint getUnitBlueprint()
     {
         return unitBlueprint;
