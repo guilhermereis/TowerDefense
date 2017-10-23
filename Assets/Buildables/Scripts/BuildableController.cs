@@ -43,10 +43,37 @@ public class BuildableController : MonoBehaviour {
     {
         return arrayListPosition;
     }
-    public void setUnitBlueprint(UnitBlueprint _unitBlueprint)
+    public void setUnitBlueprintAndType(UnitBlueprint _unitBlueprint)
     {
         unitBlueprint = _unitBlueprint;
-    }
+
+        string unitName = unitBlueprint.name;
+
+        if (unitName == Shop.instance.towerLevel1.name)
+        {
+            buildType = BuildType.tower1;
+        }
+        else if (unitName == Shop.instance.towerLevel2.name)
+        {
+            buildType = BuildType.tower2;
+        }
+        else if (unitName == Shop.instance.towerLevel3.name)
+        {
+            buildType = BuildType.tower3;
+        }
+        else if (unitName == Shop.instance.towerSlow.name)
+        {
+            buildType = BuildType.towerIce;
+        }
+        else if (unitName == Shop.instance.towerTesla.name)
+        {
+            buildType = BuildType.towerFire;
+        }
+        else if (unitName == Shop.instance.miningCamp.name)
+        {
+            buildType = BuildType.mine;
+        }
+        }
     public UnitBlueprint getUnitBlueprint()
     {
         return unitBlueprint;

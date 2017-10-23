@@ -161,8 +161,7 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.upgrade_cost = getUnitToBuild().upgrade_cost;
         newUnitBlueprint.position = getUnitToBuild().position;
 
-        tempList[index].GetComponent<BuildableController>().setUnitBlueprint(newUnitBlueprint);
-
+        tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
 
         Transform sphere = tempList[index].transform.Find("Sphere");
         Transform groundLine = tempList[index].transform.Find("GroundLine");
@@ -217,7 +216,7 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.upgrade_cost = getUnitToBuild().upgrade_cost;
         newUnitBlueprint.position = getUnitToBuild().position;
 
-        tempList[index].GetComponent<BuildableController>().setUnitBlueprint(newUnitBlueprint);
+        tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
 
 
         //if its not a mining camp
