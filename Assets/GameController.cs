@@ -133,6 +133,11 @@ public class GameController : MonoBehaviour {
         stats.AddMoneyCollected(gold, wasCollected);
     }
 
+    public static void MoneySpent(int gold)
+    {
+        stats.SpendMoney(gold);
+    }
+
     //public static void Add
 
 #endregion
