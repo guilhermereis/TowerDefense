@@ -123,6 +123,16 @@ public class GameController : MonoBehaviour {
 
     }
 
+    public static void AddMonsterKilled(PawnType monsterType)
+    {
+        stats.AddMonstersKilled(monsterType);
+    }
+
+    public static void MoneyCollected(int gold, bool wasCollected)
+    {
+        stats.AddMoneyCollected(gold, wasCollected);
+    }
+
     //public static void Add
 
 #endregion
