@@ -35,7 +35,6 @@ public class ConfigurationMenu : MonoBehaviour {
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         soundSliderDelegate += processSliderChange;
         ResolutionConfirmationScreenController.countDownFinished += onScreenResolutionCountDownFinished;
     }
