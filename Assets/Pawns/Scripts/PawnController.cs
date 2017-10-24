@@ -52,15 +52,6 @@ public class PawnController : MonoBehaviour {
         waypoints = new List<Transform>();
         nav = GetComponent<NavMeshAgent>();
         nav.speed = speed;
-
-        
-
- 
-
-       
-
-
-
     }
 
     public void SetupWaypoints(int lane_, int waypoint_)
@@ -144,6 +135,40 @@ public class PawnController : MonoBehaviour {
         }
         //Debug.Log(waypoint.name);
         ChangeState(PawnState.Walking);
+    }
+
+    public void SetType(int _type) {
+        switch (_type)
+        {
+            case 0:
+                type = PawnType.Wanderer;
+                break;
+            case 1:
+                type = PawnType.Warrior;
+                break;
+            case 2:
+                type = PawnType.Bomber;
+                break;
+            case 3:
+                type = PawnType.Wanderer;
+                break;
+            case 4:
+                type = PawnType.Warrior;
+                break;
+            case 5:
+                type = PawnType.Bomber;
+                break;
+            case 6:
+                type = PawnType.King;
+                break;
+            case 7:
+                type = PawnType.King;
+                break;
+            default:
+                type = PawnType.King;
+                break;
+          
+        }
     }
 
     private void Start()
