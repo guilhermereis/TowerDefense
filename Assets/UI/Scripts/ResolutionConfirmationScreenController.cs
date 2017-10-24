@@ -43,7 +43,6 @@ public class ResolutionConfirmationScreenController : MonoBehaviour {
         if (isCountingDown) {
             
             counter -= Time.unscaledDeltaTime;
-
             int timeRemaining = (int)Mathf.Ceil(counter);
 
             if (shadow && label)
