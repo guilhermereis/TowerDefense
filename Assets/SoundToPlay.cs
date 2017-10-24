@@ -70,7 +70,6 @@ public class SoundToPlay : MonoBehaviour
         audioSource.volume = music_volume;
         BGs.Add(audioSource);
         audioSource.Play();
-
     }
 
     public static void PlaySfx(GameObject _soundObject)
@@ -86,7 +85,6 @@ public class SoundToPlay : MonoBehaviour
         SetSoundToPlay(_audioSource);
         audioSource.volume = sfx_volume;
         audioSource.Play();
-
     }
 
     public static void PlayAtLocation(GameObject soundObject, Vector3 position, Quaternion rotation)

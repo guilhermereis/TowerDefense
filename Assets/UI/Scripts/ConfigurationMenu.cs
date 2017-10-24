@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 public class ConfigurationMenu : MonoBehaviour {
 
-    public int[] ScreenWidths;
-    public Toggle[] ResolutionToggles;
     public Slider[] volumeSliders;
     public Toggle fullscreenToggle;
+    public Dropdown resolutionDropDown;
+
     private float sfx_volume;
     private float music_volume;
     private float master_volume;
     int activeScreenResIndex;
     CanvasGroup cg;
+
+    private Resolution[] resolutions; //new Resolution[4];
 
     public delegate void SoundSliderChangedDelegate();
     public static SoundSliderChangedDelegate soundSliderDelegate;
@@ -33,10 +36,13 @@ public class ConfigurationMenu : MonoBehaviour {
         master_volume = PlayerPrefs.GetFloat("master volume");
         sfx_volume = PlayerPrefs.GetFloat("sfx volume");
         music_volume = PlayerPrefs.GetFloat("music volume");
+        activeScreenResIndex = PlayerPrefs.GetInt("resolution index");
 
         volumeSliders[0].GetComponent<Slider>().value = master_volume; 
         volumeSliders[1].GetComponent<Slider>().value = sfx_volume; 
         volumeSliders[2].GetComponent<Slider>().value = music_volume;
+
+        getScreenResolutions();
 
         ////resolutions
         //activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
@@ -99,46 +105,35 @@ public class ConfigurationMenu : MonoBehaviour {
     public void processSliderChange() {
     }
 
-    public void SetScreenResolution(int i)
-    {
-        if (ResolutionToggles[i].isOn)
-        {
-            activeScreenResIndex = i;
-            float aspectRatio = 16 / 9f;
-            Screen.SetResolution(ScreenWidths[i], (int)(ScreenWidths[i] / aspectRatio), false);
-            PlayerPrefs.SetInt("screen res index", activeScreenResIndex);
-            PlayerPrefs.Save();
+    public void getScreenResolutions() {
+        resolutions = Screen.resolutions;
+        resolutionDropDown.options.Clear();
+        string pattern = @" \d+Hz";
+        string replacement = "";
+        Regex rgx = new Regex(pattern);
+
+        foreach (Resolution r in resolutions) {
+            resolutionDropDown.options.Add(new Dropdown.OptionData(r.width +"x"+ r.height));
         }
+        if (resolutions.Length > activeScreenResIndex) {
+            //string result = ;
+            resolutionDropDown.value = activeScreenResIndex;
+            resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = rgx.Replace(("" + resolutions[activeScreenResIndex]), replacement);
+        }
+    }
+
+    public void OnScreenResSet(int index) {
+        Screen.SetResolution(resolutions[index].width, resolutions[index].height, fullscreenToggle.isOn);
+        PlayerPrefs.SetInt("Screenmanager Resolution Width", resolutions[index].width);
+        PlayerPrefs.SetInt("Screenmanager Resolution Height", resolutions[index].height);
+        PlayerPrefs.SetInt("Screenmanager Is Fullscreen mode", (fullscreenToggle.isOn) ? 1 : 0);
+        PlayerPrefs.SetInt("resolution index", index);
+        PlayerPrefs.Save();
     }
 
     public void SetFullScreen(bool isFullscreen)
     {
-        for (int i = 0; i < ResolutionToggles.Length; i++)
-        {
-            //If FULLSCREEN, disable resolution toggles.
-            //If not fullscreen, enable resolution toggles.
-            ResolutionToggles[i].interactable = !isFullscreen;
-        }
-        if (isFullscreen)
-        {
-            Resolution[] allResolutions = Screen.resolutions;
-            Resolution maxResolution = allResolutions[allResolutions.Length - 1];
-            Screen.SetResolution(maxResolution.width, maxResolution.height, true);
-            Debug.Log("Set Fullscreen.");
-        }
-        else
-        {
-            SetScreenResolution(activeScreenResIndex);
-        }
-        PlayerPrefs.SetInt("fullscreen", ((isFullscreen) ? 1 : 0));
-        PlayerPrefs.Save();
-    }
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    //SceneManager.LoadScene("MainScene");
-        //}
+        OnScreenResSet(resolutionDropDown.value);
     }
 
     public void Quit()
