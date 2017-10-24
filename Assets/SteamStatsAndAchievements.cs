@@ -168,6 +168,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         new Achievement_t(Achievement.ACH_REPAIR_10,"Fixed !","Repaired Castle 10 times"),
         new Achievement_t(Achievement.ACH_REPAIR_100,"Brand New !","Repaired Castle 100 times"),
         new Achievement_t(Achievement.ACH_REPAIR_50,"Not A Single Scratch","Repaired Castle 50 times"),
+        new Achievement_t(Achievement.ACH_MONEY_RAISED_1000,"Master Raiser","Raise 1000 golds"),
+        new Achievement_t(Achievement.ACH_MONEY_RAISED_10000,"Money Founder","Raise 10.000 golds"),
     };
 
     //our gameID
@@ -586,7 +588,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             case BuildType.towerFire:
                 AddFireTowers();
                 break;
-            default:
+            case BuildType.mine:
+                AddMine();
                 break;
         }
 
@@ -1343,6 +1346,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         //GameController.gamechangedDelegate += OnGameChanged;
         gameID = new CGameID(SteamUtils.GetAppID());
 
+        //for debug
+        SteamUserStats.ResetAllStats(true);
+        SteamUserStats.RequestCurrentStats();
+
         userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
         userStatsReceived = Callback<UserStatsReceived_t>.Create(OnUserStatsReceived);
         userStatsStored = Callback<UserStatsStored_t>.Create(OnUserStatsStored);
@@ -1508,10 +1515,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                     {
                         achievement.name = SteamUserStats.GetAchievementDisplayAttribute(achievement.achievementID.ToString(), "name");
                         achievement.desc = SteamUserStats.GetAchievementDisplayAttribute(achievement.achievementID.ToString(), "desc");
+                        Debug.Log("Achievement Achieved " + achievement.achievementID + " " + achievement.isAchieved);
                     }
                     else
                     {
-                        Debug.Log("Achievement failed");
+                        Debug.Log("Achievement failed " + achievement.achievementID);
                     }
                 }
 

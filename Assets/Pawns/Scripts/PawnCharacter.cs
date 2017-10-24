@@ -47,8 +47,11 @@ public class PawnCharacter : MonoBehaviour {
 
         if (gameObject.tag.Equals("Enemy"))
         {
-            if(!exploded)
+            if (!exploded)
+            {
                 PlayerStats.AddMoney(50);
+                GameController.MoneyCollected(50, false);
+            }
 
             SoundToPlay.PlayAtLocation(painSoundPrefab, transform.position, Quaternion.identity);
             //Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
