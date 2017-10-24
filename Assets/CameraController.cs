@@ -106,128 +106,138 @@ public class CameraController : MonoBehaviour {
         isMovingRight = false;
         isMovingUp = false;
 
-        //Using directional keys and calculating acceleration
-        if (Input.GetAxisRaw("Horizontal") > 0)
-        {
-            panHorizontalAcceleration = Mathf.Clamp((panHorizontalAcceleration + Input.GetAxisRaw("Horizontal") * panAcceleration * customDeltaTime), -1f, 1f);
-            isMovingRight = true;
-        }
-        else if (Input.GetAxisRaw("Horizontal") < 0)
-        {
-            panHorizontalAcceleration = Mathf.Clamp((panHorizontalAcceleration -Input.GetAxisRaw("Horizontal") * panAcceleration * customDeltaTime), -1f, 1f);
-            isMovingLeft = true;
-        }
-        else {
-            panHorizontalAcceleration = Mathf.Lerp(panHorizontalAcceleration, 0f, 0.2f);
-        }
-
-        if (Input.GetAxisRaw("Vertical") > 0)
-        {
-            panVerticalAcceleration = Mathf.Clamp((panVerticalAcceleration + Input.GetAxisRaw("Vertical") * panAcceleration * customDeltaTime), -1f, 1f);
-            isMovingUp = true;
-        }
-        else if (Input.GetAxisRaw("Vertical") < 0)
-        {
-            panVerticalAcceleration = Mathf.Clamp((panVerticalAcceleration - Input.GetAxisRaw("Vertical") * panAcceleration * customDeltaTime), -1f, 1f);
-            isMovingDown = true;
-        }
-        else {
-            panVerticalAcceleration = Mathf.Lerp(panVerticalAcceleration, 0f, 0.2f);
-        }
-
-        //Camera Zoom
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        {
-            accumulatedZoomAcceleration += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * customDeltaTime;
-            accumulatedZoomAcceleration = Mathf.Clamp(accumulatedZoomAcceleration, -100f, 100f);
-        }
-        else {
-            accumulatedZoomAcceleration = Mathf.Lerp(accumulatedZoomAcceleration, 0f, zoomDeacceleration);
-        }
-
-        float totalCameraSize = Camera.main.orthographicSize - accumulatedZoomAcceleration;
-
-        Camera.main.orthographicSize = Mathf.Clamp(totalCameraSize, zoomBounds.x, zoomBounds.y);
-        if (Camera.main.orthographicSize == zoomBounds.x || Camera.main.orthographicSize == zoomBounds.y) {
-            accumulatedZoomAcceleration = 0f;
-        }
-
-        //Camera PAN
-        panMultiplier = 1 - Camera.main.orthographicSize / zoomBounds.y;
-        Vector3 rightMovement = rightVector * panSpeed * customDeltaTime * Input.GetAxisRaw("Horizontal") * panHorizontalAcceleration;
-        Vector3 upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * Input.GetAxisRaw("Vertical") * panVerticalAcceleration;
-        Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
-
-
-        //Using screen borders
-        if (Input.mousePosition.y >= Screen.height - panBorderThickness)
-        {
-            upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * 1f;
-            isMovingUp = true;
-        }
-
-        if (Input.mousePosition.y <= panBorderThickness)
-        {
-            upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * -1f;
-            isMovingDown = true;
-        }
-
-        if (Input.mousePosition.x >= Screen.width - panBorderThickness)
-        {
-            rightMovement = rightVector * panSpeed * customDeltaTime * 1f;
-            isMovingRight = true;
-        }
-
-        if (Input.mousePosition.x <= panBorderThickness)
-        {
-            rightMovement = rightVector * panSpeed * customDeltaTime * -1f;
-            isMovingLeft = true;
-        }
-
-        float horizontalDistance = Vector3.Magnitude(((transform.position + rightMovement) - cameraStartPosition));
-        float verticalDistance = Vector3.Magnitude(((transform.position + upMovement) - cameraStartPosition));
-
-        //Clamping movement on maximum radius from camera's start position
-        if (horizontalDistance < cameraMaxDistance) {
-            if(isMovingUp || isMovingDown){
-                transform.position += rightMovement * 1.5f;
-            }
-            else transform.position += rightMovement * 2f; //Boost when moving in only 1 axes
-        }
-        if (verticalDistance < cameraMaxDistance) {
-            if (isMovingRight || isMovingLeft){
-                transform.position += upMovement * 1.5f;
-            }
-            else transform.position += upMovement * 2f; //Boost when moving in only 1 axes
-        }
-
-        
-        //Camera Pressure/Relief when out of bounds to return to rest position
-        cameraDistanceFromStart = Vector3.Magnitude(transform.position - cameraStartPosition);
-        float distanceFromBorderMultiplier = cameraDistanceFromStart - panLimit;
-
-
-
-        if (cameraDistanceFromStart > panLimit + 10* panMultiplier) {
-            float influence = customDeltaTime * 0.005f * distanceFromBorderMultiplier * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f); //- panMultiplier/100f;
-            transform.position = Vector3.Lerp(transform.position, cameraStartPosition, 0.001f + influence);
-        }
-
-        //Camera Rotation logic
-        if (Input.GetButtonDown("Camera Rotate"))
-        {
-            
-            if (Input.GetAxisRaw("Camera Rotate") < 0f)
+        if (!TopRightMenu.isConfigOn) {
+            //Using directional keys and calculating acceleration
+            if (Input.GetAxisRaw("Horizontal") > 0)
             {
-                rotateCounterClockwise();
+                panHorizontalAcceleration = Mathf.Clamp((panHorizontalAcceleration + Input.GetAxisRaw("Horizontal") * panAcceleration * customDeltaTime), -1f, 1f);
+                isMovingRight = true;
             }
-            else {
-                rotateClockwise();
+            else if (Input.GetAxisRaw("Horizontal") < 0)
+            {
+                panHorizontalAcceleration = Mathf.Clamp((panHorizontalAcceleration - Input.GetAxisRaw("Horizontal") * panAcceleration * customDeltaTime), -1f, 1f);
+                isMovingLeft = true;
             }
-            
+            else
+            {
+                panHorizontalAcceleration = Mathf.Lerp(panHorizontalAcceleration, 0f, 0.2f);
+            }
+
+            if (Input.GetAxisRaw("Vertical") > 0)
+            {
+                panVerticalAcceleration = Mathf.Clamp((panVerticalAcceleration + Input.GetAxisRaw("Vertical") * panAcceleration * customDeltaTime), -1f, 1f);
+                isMovingUp = true;
+            }
+            else if (Input.GetAxisRaw("Vertical") < 0)
+            {
+                panVerticalAcceleration = Mathf.Clamp((panVerticalAcceleration - Input.GetAxisRaw("Vertical") * panAcceleration * customDeltaTime), -1f, 1f);
+                isMovingDown = true;
+            }
+            else
+            {
+                panVerticalAcceleration = Mathf.Lerp(panVerticalAcceleration, 0f, 0.2f);
+            }
+
+            //Camera Zoom
+            if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            {
+                accumulatedZoomAcceleration += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * customDeltaTime;
+                accumulatedZoomAcceleration = Mathf.Clamp(accumulatedZoomAcceleration, -100f, 100f);
+            }
+            else
+            {
+                accumulatedZoomAcceleration = Mathf.Lerp(accumulatedZoomAcceleration, 0f, zoomDeacceleration);
+            }
+
+            float totalCameraSize = Camera.main.orthographicSize - accumulatedZoomAcceleration;
+
+            Camera.main.orthographicSize = Mathf.Clamp(totalCameraSize, zoomBounds.x, zoomBounds.y);
+            if (Camera.main.orthographicSize == zoomBounds.x || Camera.main.orthographicSize == zoomBounds.y)
+            {
+                accumulatedZoomAcceleration = 0f;
+            }
+
+            //Camera PAN
+            panMultiplier = 1 - Camera.main.orthographicSize / zoomBounds.y;
+            Vector3 rightMovement = rightVector * panSpeed * customDeltaTime * Input.GetAxisRaw("Horizontal") * panHorizontalAcceleration;
+            Vector3 upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * Input.GetAxisRaw("Vertical") * panVerticalAcceleration;
+            Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
+
+
+            //Using screen borders
+            if (Input.mousePosition.y >= Screen.height - panBorderThickness)
+            {
+                upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * 1f;
+                isMovingUp = true;
+            }
+
+            if (Input.mousePosition.y <= panBorderThickness)
+            {
+                upMovement = forwardVector * perspectiveRatio * panSpeed * customDeltaTime * -1f;
+                isMovingDown = true;
+            }
+
+            if (Input.mousePosition.x >= Screen.width - panBorderThickness)
+            {
+                rightMovement = rightVector * panSpeed * customDeltaTime * 1f;
+                isMovingRight = true;
+            }
+
+            if (Input.mousePosition.x <= panBorderThickness)
+            {
+                rightMovement = rightVector * panSpeed * customDeltaTime * -1f;
+                isMovingLeft = true;
+            }
+
+            float horizontalDistance = Vector3.Magnitude(((transform.position + rightMovement) - cameraStartPosition));
+            float verticalDistance = Vector3.Magnitude(((transform.position + upMovement) - cameraStartPosition));
+
+            //Clamping movement on maximum radius from camera's start position
+            if (horizontalDistance < cameraMaxDistance)
+            {
+                if (isMovingUp || isMovingDown)
+                {
+                    transform.position += rightMovement * 1.5f;
+                }
+                else transform.position += rightMovement * 2f; //Boost when moving in only 1 axes
+            }
+            if (verticalDistance < cameraMaxDistance)
+            {
+                if (isMovingRight || isMovingLeft)
+                {
+                    transform.position += upMovement * 1.5f;
+                }
+                else transform.position += upMovement * 2f; //Boost when moving in only 1 axes
+            }
+
+
+            //Camera Pressure/Relief when out of bounds to return to rest position
+            cameraDistanceFromStart = Vector3.Magnitude(transform.position - cameraStartPosition);
+            float distanceFromBorderMultiplier = cameraDistanceFromStart - panLimit;
+
+
+
+            if (cameraDistanceFromStart > panLimit + 10 * panMultiplier)
+            {
+                float influence = customDeltaTime * 0.005f * distanceFromBorderMultiplier * ((isMovingDown || isMovingUp || isMovingRight || isMovingLeft) ? 2f : 10f); //- panMultiplier/100f;
+                transform.position = Vector3.Lerp(transform.position, cameraStartPosition, 0.001f + influence);
+            }
+
+            //Camera Rotation logic
+            if (Input.GetButtonDown("Camera Rotate"))
+            {
+
+                if (Input.GetAxisRaw("Camera Rotate") < 0f)
+                {
+                    rotateCounterClockwise();
+                }
+                else
+                {
+                    rotateClockwise();
+                }
+
+            }
         }
-
-
     }
 
     public void rotateCounterClockwise() {
