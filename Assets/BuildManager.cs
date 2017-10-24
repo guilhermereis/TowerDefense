@@ -175,9 +175,9 @@ public class BuildManager : MonoBehaviour {
             groundLine.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
 
-        if(tempList[index].GetComponent<TowerController>() != null)
+        if(tempList[index].GetComponent<BuildableController>() != null)
         {
-            tempList[index].GetComponent<TowerController>().BuildEffect();
+            tempList[index].GetComponent<BuildableController>().BuildEffect();
         }
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
@@ -219,7 +219,7 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.position = getUnitToBuild().position;
 
         tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
-
+        tempList[index].GetComponent<BuildableController>().BuildEffect();
 
         //if its not a mining camp
         if (unitToBuild != Shop.instance.miningCamp) {
@@ -260,6 +260,8 @@ public class BuildManager : MonoBehaviour {
         selectedUnit = unit;
         selectedGameObject = gameObject;
         selectedPosition = gameObject.transform.position;
+
+        
 
         Transform Sphere = selectedGameObject.transform.Find("Sphere");
         Transform GroundLine = selectedGameObject.transform.Find("GroundLine");

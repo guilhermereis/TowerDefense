@@ -41,9 +41,9 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         ACH_BUILD_100_MINE,
         ACH_BUILD_1000_MINE,
 
-        ACH_KILL_10_MONSTERS,
         ACH_KILL_100_MONSTERS,
         ACH_KILL_1000_MONSTERS,
+        ACH_KILL_10000_MONSTERS,
 
         ACH_KILL_10_WANDERER,
         ACH_KILL_100_WANDERER,
@@ -128,9 +128,9 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         new Achievement_t(Achievement.ACH_BUILD_10_MINE,"Gold Digger","Build 10 mines"),
         new Achievement_t(Achievement.ACH_BUILD_100_MINE,"Entrepeneur","Build 100 mines"),
         new Achievement_t(Achievement.ACH_BUILD_1000_MINE,"","Build 1000 mines"),
-        new Achievement_t(Achievement.ACH_KILL_10_MONSTERS,"","kill 10 goblins"),
-        new Achievement_t(Achievement.ACH_KILL_100_MONSTERS,"Massacre","kill 100 goblins"),
-        new Achievement_t(Achievement.ACH_KILL_1000_MONSTERS,"","kill 1000 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_MONSTERS,"","kill 100 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_MONSTERS,"Massacre","kill 1000 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10000_MONSTERS,"","kill 10000 goblins"),
         new Achievement_t(Achievement.ACH_KILL_10_WARRIOR,"","kill 10 warrior goblins"),
         new Achievement_t(Achievement.ACH_KILL_100_WARRIOR,"","kill 100 warrior goblins"),
         new Achievement_t(Achievement.ACH_KILL_1000_WARRIOR,"","kill 1000 warrior goblins"),
@@ -636,20 +636,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
     public void CheckForTotalGoblinsKilled()
     {
-        if (c_numberOfMonstersKilled + p_totalMonsterKilled == 10)
-        {
-            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_10_MONSTERS);
-            if (!achv.isAchieved)
-            {
-                //unlock achievement and store the stats value
-                UnlockAchievement(achv);
-                p_totalMonsterKilled += c_numberOfMonstersKilled;
-                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
-
-            }
-
-
-        }else if (c_numberOfMonstersKilled + p_totalMonsterKilled == 100)
+        if (c_numberOfMonstersKilled + p_totalMonsterKilled == 100)
         {
             Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_100_MONSTERS);
             if (!achv.isAchieved)
@@ -665,6 +652,19 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         }else if (c_numberOfMonstersKilled + p_totalMonsterKilled == 1000)
         {
             Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_1000_MONSTERS);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalMonsterKilled += c_numberOfMonstersKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
+
+            }
+
+
+        }else if (c_numberOfMonstersKilled + p_totalMonsterKilled == 10000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_10000_MONSTERS);
             if (!achv.isAchieved)
             {
                 //unlock achievement and store the stats value
@@ -1347,7 +1347,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         gameID = new CGameID(SteamUtils.GetAppID());
 
         //for debug
-        //SteamUserStats.ResetAllStats(true);
+        SteamUserStats.ResetAllStats(true);
         //SteamUserStats.RequestCurrentStats();
 
         userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
