@@ -688,7 +688,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
                 p_totalWandererKilled += c_numberOfWandererKilled;
-                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalWandererKilled);
+                SteamUserStats.SetStat("totalNumWandererKilled", p_totalWandererKilled);
 
             }
 
@@ -701,7 +701,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
                 p_totalWandererKilled += c_numberOfWandererKilled;
-                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalWandererKilled);
+                SteamUserStats.SetStat("totalNumWandererKilled", p_totalWandererKilled);
 
             }
 
@@ -714,7 +714,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
                 p_totalWandererKilled += c_numberOfWandererKilled;
-                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalWandererKilled);
+                SteamUserStats.SetStat("totalNumWandererKilled", p_totalWandererKilled);
 
             }
 
@@ -1347,8 +1347,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         gameID = new CGameID(SteamUtils.GetAppID());
 
         //for debug
-        SteamUserStats.ResetAllStats(true);
-        SteamUserStats.RequestCurrentStats();
+        //SteamUserStats.ResetAllStats(true);
+        //SteamUserStats.RequestCurrentStats();
 
         userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
         userStatsReceived = Callback<UserStatsReceived_t>.Create(OnUserStatsReceived);
@@ -1515,7 +1515,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                     {
                         achievement.name = SteamUserStats.GetAchievementDisplayAttribute(achievement.achievementID.ToString(), "name");
                         achievement.desc = SteamUserStats.GetAchievementDisplayAttribute(achievement.achievementID.ToString(), "desc");
-                        Debug.Log("Achievement Achieved " + achievement.achievementID + " " + achievement.isAchieved);
+                        Debug.Log("Achievement Achieved " + achievement.name  + " " + achievement.isAchieved + " " + achievement.achievementID);
                     }
                     else
                     {
