@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -73,7 +72,10 @@ public class TopRightMenu : MonoBehaviour {
             configMenu.GetComponent<ConfigurationMenu>().Hide();
         }
     }
-
+    public void QuitToMainMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
     public void PauseSpeedOnClick() {
         GameObject.Find("Grid").GetComponent<GridMouse>().canClickGrid = true;
         //GridMouse.instance.canClickGrid = false;
