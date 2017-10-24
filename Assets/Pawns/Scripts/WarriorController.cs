@@ -147,7 +147,7 @@ public class WarriorController : EnemyController {
         {
             bool hitted;
             
-            if (target.GetComponent<PawnCharacter>().Damage(character.attack,out hitted))
+            if (target.GetComponent<PawnCharacter>().Damage(character.attack,out hitted, DamageType.Blood))
             {
                 enemiesInRange.Remove(target);
                 target = null;

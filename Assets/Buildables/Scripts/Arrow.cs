@@ -85,7 +85,7 @@ public class Arrow : Projectile {
             bool hitted;
             bool killed;
 
-            killed = other.gameObject.GetComponent<PawnCharacter>().Damage(towerAttack, out hitted);
+            killed = other.gameObject.GetComponent<PawnCharacter>().Damage(towerAttack, out hitted,DamageType.Blood);
             if (hitted)
             {
                 Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));

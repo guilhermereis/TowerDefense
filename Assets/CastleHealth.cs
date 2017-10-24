@@ -7,6 +7,7 @@ public class CastleHealth : MonoBehaviour {
 
     public float health;
     public float maxHealth;
+    public bool wasDamaged;
     public static Animator castleDestructionAnimator;
     private List<PawnCharacter> enemies;
     private Animator castleUIFeedbackAnimator;
@@ -84,7 +85,7 @@ public class CastleHealth : MonoBehaviour {
             {
                 int spent = PlayerStats.AddMoney(-1 * cost);
                 GameController.MoneyCollected(spent,false);
-
+                GameController.Repair();
                 health += repairAmmountPercentual * maxHealth;
                 UpdateHealthBarGfx(health);
             }
@@ -151,6 +152,7 @@ public class CastleHealth : MonoBehaviour {
 
     public void ApplyDamage(float damage)
     {
+        wasDamaged = true;
         health -= damage;
         UpdateHealthBarGfx(health);
         if(health <=0)

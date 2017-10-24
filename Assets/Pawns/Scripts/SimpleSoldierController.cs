@@ -113,7 +113,7 @@ public class SimpleSoldierController : PawnController {
                         
                         swordHit.Play();
                         bool hitted;
-                        target.GetComponent<PawnCharacter>().Damage(character.attack, out hitted);
+                        target.GetComponent<PawnCharacter>().Damage(character.attack, out hitted, DamageType.Blood);
 
                         if (hitted)
                         {

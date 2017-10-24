@@ -54,9 +54,49 @@ public class GameController : MonoBehaviour {
 
     }
 
-    public static void AddMonsterKilled(PawnType monsterType)
+    public static void TryAgain()
     {
-        stats.AddMonstersKilled(monsterType);
+        if (stats)
+            stats.TryAgain();
+    }
+
+    public static void AddBuiltMine()
+    {
+        if (stats)
+            stats.AddMine();
+    }
+
+    public static void UnlockLane(int lane)
+    {
+        if (stats)
+        {
+            if (lane == 2)
+                stats.UnlockLane2();
+            else if(lane == 3)
+                stats.UnlockLane3();
+            else if(lane == 4)
+                stats.UnlockLane4();
+        }
+        
+    }
+
+    public static void Freeze()
+    {
+        if (stats)
+         stats.FreezeGoblin();
+        
+    }
+
+    public static void Repair()
+    {
+        if (stats)
+            stats.Repair();
+    }
+
+    public static void AddMonsterKilled(PawnType monsterType, DamageType _damage)
+    {
+        if (stats)
+            stats.AddMonstersKilled(monsterType,_damage);
     }
 
     public static void MoneyCollected(int gold, bool wasCollected)

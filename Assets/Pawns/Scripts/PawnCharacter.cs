@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+public enum DamageType { Blood, Fire, Ice, Explosion }
+
 public class PawnCharacter : MonoBehaviour {
 
 	public float maxHealth;
@@ -35,11 +37,11 @@ public class PawnCharacter : MonoBehaviour {
 		
 	}
 
-	public virtual void Die()
+	public virtual void Die(DamageType _damageType)
 	{
 		isDead = true;
-
-        
+        PawnType myType = GetComponent<PawnController>().type;
+        GameController.AddMonsterKilled(myType, _damageType);
 
         //Instantiate(coinEffectPrefab, transform.position, Quaternion.identity);
 
@@ -72,7 +74,7 @@ public class PawnCharacter : MonoBehaviour {
         //Destroy(gameObject);
     }
 
-    public virtual bool Damage(float _damage, out bool hit)
+    public virtual bool Damage(float _damage, out bool hit,DamageType _damageType)
     {
         hit = false;
         if (!isDead)
@@ -103,7 +105,7 @@ public class PawnCharacter : MonoBehaviour {
 		    //Debug.Log(health);
 		    if (health <= 0)
             {
-                Die();
+                Die(_damageType);
 			    return true;
                 //Destroy(gameObject);
                 //return;

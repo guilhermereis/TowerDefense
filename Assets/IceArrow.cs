@@ -39,6 +39,7 @@ public class IceArrow : Arrow {
             target.GetComponent<PawnCharacter>().StartCoroutine("SlowTime", transform.parent.gameObject.GetComponent<TowerSlowController>().SlowAmount);
             ice.GetComponent<CrystalIce>().target = target;
             ice.transform.parent = target.transform;
+            GameController.Freeze();
 
             GetComponent<BoxCollider>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;

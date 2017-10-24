@@ -77,6 +77,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         ACH_SURVIVE_50_WAVES,
         ACH_SURVIVE_100_WAVES,
 
+        ACH_REPAIR_10,
+        ACH_REPAIR_50,
+        ACH_REPAIR_100,
+
         ACH_INVICIBILITY_10_WAVES,
         ACH_INVICIBILITY_30_WAVES,
         ACH_INVICIBILITY_50_WAVES,
@@ -161,12 +165,17 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         new Achievement_t(Achievement.ACH_MONEY_COLLECTED_1000,"Scrooge McDuck","collected 1000 golds"),
         new Achievement_t(Achievement.ACH_MONEY_COLLECTED_10000,"Rockefeller","collected 10000 golds"),
         new Achievement_t(Achievement.ACH_TRYAGAIN,"Die Hard","Use try again mode"),
+        new Achievement_t(Achievement.ACH_REPAIR_10,"Fixed !","Repaired Castle 10 times"),
+        new Achievement_t(Achievement.ACH_REPAIR_100,"Brand New !","Repaired Castle 100 times"),
+        new Achievement_t(Achievement.ACH_REPAIR_50,"Not A Single Scratch","Repaired Castle 50 times"),
     };
 
     //our gameID
     private CGameID gameID;
 
     bool onPlayScene;
+    private CastleHealth castleHealth;
+
     //storestats this frame
     private bool isStoreStats;
 
@@ -177,7 +186,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     //-----------------------------------------------------------------------------
     // Current Data
     //-----------------------------------------------------------------------------
-    private int c_numberOfWave;
+    private int c_numberOfWave = 1;
     private int c_numberOfTowers;
     private int c_numberOftower1;
     private int c_numberOftower2;
@@ -200,6 +209,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int c_unlockedLane2;
     private int c_unlockedLane3;
     private int c_unlockedLane4;
+    private int c_repair;
 
 
     private bool isLevel3Built;
@@ -218,6 +228,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int p_totalMineBuilt;
     
     private int p_totalKingKilled;
+    private int p_totalRepair;
  
 
     private int p_totalWandererKilled;
@@ -844,7 +855,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         }
     }
 
-    public void AddMonstersKilled(PawnType monster)
+    public void AddMonstersKilled(PawnType monster,DamageType _damage)
     {
         if (!SteamManager.Initialized)
             return;
@@ -869,6 +880,9 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 break;
 
         }
+        if (_damage == DamageType.Fire)
+            BurnGoblin();
+       
     }
 
     private void AddBomber()
@@ -1115,9 +1129,9 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_UNLOCK_LANE2);
         if (!achv.isAchieved)
         {
-            UnlockAchievement(achv);
             p_unlockedLane2 = 1;
             SteamUserStats.SetStat("unlockedLane2", p_unlockedLane2);
+            UnlockAchievement(achv);
         }
     }
     public void UnlockLane3()
@@ -1133,9 +1147,9 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_UNLOCK_LANE3);
         if (!achv.isAchieved)
         {
-            UnlockAchievement(achv);
             p_unlockedLane3 = 1;
             SteamUserStats.SetStat("unlockedLane3", p_unlockedLane3);
+            UnlockAchievement(achv);
         }
     }
     public void UnlockLane4()
@@ -1151,12 +1165,173 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_UNLOCK_LANE4);
         if (!achv.isAchieved)
         {
-            UnlockAchievement(achv);
             p_unlockedLane4 = 1;
             SteamUserStats.SetStat("unlockedLane4", p_unlockedLane4);
+            UnlockAchievement(achv);
         }
     }
 
+    public void CheckForRepair()
+    {
+        if(c_repair + p_totalRepair == 10)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_REPAIR_10);
+
+            if (!achv.isAchieved)
+            {
+                p_totalRepair += c_repair;
+                SteamUserStats.SetStat("totalNumRepair", p_totalRepair);
+                UnlockAchievement(achv);
+            }
+
+        }else if (c_repair + p_totalRepair == 50)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_REPAIR_50);
+
+            if (!achv.isAchieved)
+            {
+                p_totalRepair += c_repair;
+                SteamUserStats.SetStat("totalNumRepair", p_totalRepair);
+                UnlockAchievement(achv);
+            }
+
+        }else if (c_repair + p_totalRepair == 100)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_REPAIR_100);
+
+            if (!achv.isAchieved)
+            {
+                p_totalRepair += c_repair;
+                SteamUserStats.SetStat("totalNumRepair", p_totalRepair);
+                UnlockAchievement(achv);
+            }
+
+        }
+    }
+
+    public void Repair()
+    {
+        if (!SteamManager.Initialized)
+            return;
+
+        c_repair++;
+        CheckForRepair();
+    }
+
+    public void CheckForWaves()
+    {
+        if (c_numberOfWave + p_totalWaves == 10)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_WIN_10_WAVES);
+            
+            if (!achv.isAchieved)
+            {
+                p_totalWaves += c_numberOfWave;
+                SteamUserStats.SetStat("totalNumWaves", p_totalWaves);
+                UnlockAchievement(achv);
+            }
+
+            
+
+        }
+
+        if(c_numberOfWave == 10)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_SURVIVE_10_WAVES);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+            }
+
+            if (!castleHealth.wasDamaged)
+            {
+                Achievement_t achv1 = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_INVICIBILITY_10_WAVES);
+                if (!achv1.isAchieved)
+                {
+                    UnlockAchievement(achv1);
+                }
+            }
+
+            if(c_moneySpent < 500)
+            {
+                Achievement_t achv2 = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_CHEAP);
+                if (!achv2.isAchieved)
+                {
+                    UnlockAchievement(achv2);
+                }
+            }
+        }
+        else if(c_numberOfWave == 30)
+        {
+            if (!castleHealth.wasDamaged)
+            {
+                Achievement_t achv1 = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_INVICIBILITY_30_WAVES);
+                if (!achv1.isAchieved)
+                {
+                    UnlockAchievement(achv1);
+                }
+            }
+        }
+        else if (c_numberOfWave == 50)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_SURVIVE_50_WAVES);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+            }
+
+            if (!castleHealth.wasDamaged)
+            {
+                Achievement_t achv1 = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_INVICIBILITY_50_WAVES);
+                if (!achv1.isAchieved)
+                {
+                    UnlockAchievement(achv1);
+                }
+            }
+        }else if(c_numberOfWave == 80)
+        {
+            if (!castleHealth.wasDamaged)
+            {
+                Achievement_t achv1 = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_INVICIBILITY_80_WAVES);
+                if (!achv1.isAchieved)
+                {
+                    UnlockAchievement(achv1);
+                }
+            }
+        }
+        else if (c_numberOfWave == 100)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_SURVIVE_100_WAVES);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+            }
+        }
+    }
+
+    public void AddWaves()
+    {
+        if (!SteamManager.Initialized)
+            return;
+
+        c_numberOfWave++;
+        CheckForWaves();
+    }
+
+    public void TryAgain()
+    {
+        if (!SteamManager.Initialized)
+            return;
+        
+        p_totalTryAgain++;
+
+        Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_TRYAGAIN);
+        if (!achv.isAchieved)
+        {
+            UnlockAchievement(achv);
+        }
+
+    }
 
     private void OnEnable()
     {
@@ -1179,6 +1354,76 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         isStatsvalid = false;
 
 
+    }
+
+    public void UpdateStats()
+    {
+        p_totalWaves+= c_numberOfWave;
+        p_totalTowerBuilt += c_numberOfTowers;
+        p_totalTowerlevel1Built += c_numberOftower1;
+        p_totalTowerlevel2Built += c_numberOftower2;
+        p_totalTowerlevel3Built += c_numberOftower3;
+        p_totalTowerIceBuilt += c_numberOfIceTower;
+        p_totalTowerFireBuilt += c_numberOfFireTower;
+        p_totalMineBuilt+= c_numberOfMine;
+        p_totalKingKilled += c_numberOfKingKilled;
+        p_totalRepair += c_repair;
+        p_totalWandererKilled+= c_numberOfWandererKilled;
+        p_totalWarriorKilled+= c_numberOfWarriorKilled;
+        p_totalBomberKilled+= c_numberOfBomberKilled;    
+        p_totalEnemyFrozen+= c_numberOfFrozen;
+        p_totalEnemyBurnt += c_numberOfBurnt;
+        p_totalmoneyCollected += c_moneyCollected;
+        p_totalmoneySpent += c_moneySpent;
+        p_totalmoneyRaised += c_moneyRaised;
+        p_totalMonsterKilled += c_numberOfMonstersKilled;
+
+
+        //store stats in the steam database if necessary.
+        SteamUserStats.SetStat("totalNumWaves", p_totalWaves);
+        SteamUserStats.SetStat("totalNumDefeats", p_totalDefeats);
+
+        SteamUserStats.SetStat("totalNumTower", p_totalTowerBuilt);
+        SteamUserStats.SetStat("totalNumTower1", p_totalTowerlevel1Built);
+        SteamUserStats.SetStat("totalNumTower2", p_totalTowerlevel2Built);
+        SteamUserStats.SetStat("totalNumTower3", p_totalTowerlevel3Built);
+        SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
+        SteamUserStats.SetStat("totalNumTowerFire", p_totalTowerFireBuilt);
+        SteamUserStats.SetStat("totalNumMineBuilt", p_totalMineBuilt);
+
+        SteamUserStats.SetStat("totalNumKingKilled", p_totalKingKilled);
+        SteamUserStats.SetStat("totalNumWandererKilled", p_totalWandererKilled);
+        SteamUserStats.SetStat("totalNumWarriorKilled", p_totalWarriorKilled);
+        SteamUserStats.SetStat("totalNumBomberKilled", p_totalBomberKilled);
+        SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
+
+        SteamUserStats.SetStat("totalNumTryAgain", p_totalTryAgain);
+        SteamUserStats.SetStat("totalNumDamage", p_totalDamage);
+        SteamUserStats.SetStat("totalNumEnemyFrozen", p_totalEnemyFrozen);
+        SteamUserStats.SetStat("totalNumEnemyBurnt", p_totalEnemyBurnt);
+        SteamUserStats.SetStat("totalNumMonsterKilled", p_totalMonsterKilled);
+        SteamUserStats.SetStat("unlockedLane2", p_unlockedLane2);
+        SteamUserStats.SetStat("unlockedLane3", p_unlockedLane3);
+        SteamUserStats.SetStat("unlockedLane4", p_unlockedLane4);
+        SteamUserStats.SetStat("totalNumMoneyCollected", p_totalmoneyCollected);
+        SteamUserStats.SetStat("totalNumMoneySpent", p_totalmoneySpent);
+        SteamUserStats.SetStat("totalNumMoneyRaised", p_totalmoneyRaised);
+        SteamUserStats.SetStat("totalNumRepair", p_totalRepair);
+
+
+        bool succes = SteamUserStats.StoreStats();
+
+        isStoreStats = !succes;
+    }
+
+    public void UpdateAchievements()
+    {
+        bool succes = SteamUserStats.StoreStats();
+        if (succes)
+        {
+            Debug.Log("Achieved Stored With Success");
+        }else
+            Debug.Log("Achieved not stored");
     }
 
     public void OnChangedLevel(Scene scene, LoadSceneMode mode)
@@ -1300,6 +1545,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 SteamUserStats.GetStat("totalNumMoneyCollected", out p_totalmoneyCollected);
                 SteamUserStats.GetStat("totalNumMoneySpent", out p_totalmoneySpent);
                 SteamUserStats.GetStat("totalNumMoneyRaised", out p_totalmoneyRaised);
+                SteamUserStats.GetStat("totalNumRepair", out p_totalRepair);
+
 
 
             }
@@ -1359,24 +1606,52 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         GUILayout.EndArea();
     }
 
+    public void ResetAllCurrentStats()
+    {
+        c_numberOfTowers = 0;
+        c_numberOfWave = 0;
+        c_numberOfTowers = 0;
+        c_numberOftower1 = 0;
+        c_numberOftower2 = 0;
+        c_numberOftower3 = 0;
+        c_numberOfIceTower = 0;
+        c_numberOfFireTower = 0;
+        c_numberOfMine = 0;
+        c_numberOfMonstersKilled = 0;
+        c_numberOfKingKilled = 0;
+        c_numberOfWandererKilled = 0;
+        c_numberOfWarriorKilled = 0;
+        c_numberOfBomberKilled = 0;
+        c_numberOfFrozen = 0;
+        c_numberOfBurnt = 0;
+        c_numberOfDamage = 0;
+        c_moneyCollected = 0;
+        c_moneyRaised = 0;
+        c_moneySaved = 0;
+        c_moneySpent = 0;
+        c_unlockedLane2 = 0;
+        c_unlockedLane3 = 0;
+        c_unlockedLane4 = 0;
+        c_repair = 0;
+
+}
     	
     public void OnGameChanged()
     {
         Debug.Log("GameChanged");
         if (GameController.gameState == GameState.GameActivate)
         {
-            c_numberOfTowers = 0;
-            c_numberOfWave = 0;
+            ResetAllCurrentStats();
         }else if (GameController.gameState == GameState.EndWave)
         {
-            p_totalWaves++;
+            AddWaves();
             Debug.Log("total waves " +p_totalWaves);
-            isStoreStats = true;
+            UpdateStats();
             
         }else if(GameController.gameState == GameState.GameOver)
         {
             p_totalDefeats++;
-            isStoreStats = true;
+            UpdateStats();
             //getting leaderboard;
             SteamAPICall_t fHandle =  SteamUserStats.FindLeaderboard(leaderboardName);
             findLeaderBoard.Set(fHandle);
@@ -1396,6 +1671,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 GameController.gamechangedDelegate += OnGameChanged;
                 Debug.Log("got delegate");
             }
+            castleHealth = GameObject.FindObjectOfType<CastleHealth>();
             onPlayScene = false;
 
         }
@@ -1419,39 +1695,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
         if (isStoreStats)
         {
-            //store stats in the steam database if necessary.
-            SteamUserStats.SetStat("totalNumWaves", p_totalWaves);
-            SteamUserStats.SetStat("totalNumDefeats", p_totalDefeats);
            
-            SteamUserStats.SetStat("totalNumTower",  p_totalTowerBuilt);
-            SteamUserStats.SetStat("totalNumTower1",  p_totalTowerlevel1Built);
-            SteamUserStats.SetStat("totalNumTower2",  p_totalTowerlevel2Built);
-            SteamUserStats.SetStat("totalNumTower3",  p_totalTowerlevel3Built);
-            SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
-            SteamUserStats.SetStat("totalNumTowerFire",  p_totalTowerFireBuilt);
-            SteamUserStats.SetStat("totalNumMineBuilt",  p_totalMineBuilt);
-
-            SteamUserStats.SetStat("totalNumKingKilled",  p_totalKingKilled);
-            SteamUserStats.SetStat("totalNumWandererKilled",  p_totalWandererKilled);
-            SteamUserStats.SetStat("totalNumWarriorKilled",  p_totalWarriorKilled);
-            SteamUserStats.SetStat("totalNumBomberKilled",  p_totalBomberKilled);
-            SteamUserStats.SetStat("totalNumGoblinKilled",  p_totalMonsterKilled);
-
-            SteamUserStats.SetStat("totalNumTryAgain",  p_totalTryAgain);
-            SteamUserStats.SetStat("totalNumDamage",  p_totalDamage);
-            SteamUserStats.SetStat("totalNumEnemyFrozen",  p_totalEnemyFrozen);
-            SteamUserStats.SetStat("totalNumEnemyBurnt",  p_totalEnemyBurnt);
-            SteamUserStats.SetStat("totalNumMonsterKilled",  p_totalMonsterKilled);
-            SteamUserStats.SetStat("unlockedLane2",  p_unlockedLane2);
-            SteamUserStats.SetStat("unlockedLane3",  p_unlockedLane3);
-            SteamUserStats.SetStat("unlockedLane4",  p_unlockedLane4);
-            SteamUserStats.SetStat("totalNumMoneyCollected",  p_totalmoneyCollected);
-            SteamUserStats.SetStat("totalNumMoneySpent",  p_totalmoneySpent);
-            SteamUserStats.SetStat("totalNumMoneyRaised",  p_totalmoneyRaised);
-
-            bool succes = SteamUserStats.StoreStats();
-
-            isStoreStats = !succes;
             //SteamUserStats.UploadLeaderboardScore()
 
         }
@@ -1464,8 +1708,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         achievement.isAchieved = true;
 
         SteamUserStats.SetAchievement(achievement.achievementID.ToString());
-        
 
+        UpdateAchievements();
         isStoreStats = true;
         
     }

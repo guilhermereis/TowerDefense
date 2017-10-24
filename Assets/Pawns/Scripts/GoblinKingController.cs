@@ -166,10 +166,10 @@ public class GoblinKingController : EnemyController {
                 if (target.tag == "Ally")
                 {
                     bool hitted; 
-                    if (target.GetComponent<PawnCharacter>().Damage(character.attack, out hitted))
+                    if (target.GetComponent<PawnCharacter>().Damage(character.attack, out hitted,DamageType.Blood))
                     {
                         enemiesInRange.Remove(target);
-                        target.GetComponent<PawnCharacter>().Die();
+                        target.GetComponent<PawnCharacter>().Die(DamageType.Blood);
                         GameObject holdingSoldier = Instantiate(soldierThrowPrefab);
                         Vector3 handPosition = new Vector3(handBone.transform.position.x + 0.103f, handBone.transform.position.y - 0.109f, handBone.transform.position.z - 0.19f);
                         Quaternion handRotation = handBone.transform.rotation * Quaternion.Euler(90f, 0f, 0f);

@@ -91,7 +91,7 @@ public class BomberController : EnemyController {
             Instantiate(gameObject.GetComponent<BomberCharacter>().prefabExplosionSound, transform);
             //apply damage to itself with total health amount.
             bool hitted;
-            character.Damage(character.health,out hitted);
+            character.Damage(character.health,out hitted,DamageType.Explosion);
 
         }
     }

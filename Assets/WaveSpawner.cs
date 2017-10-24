@@ -613,16 +613,19 @@ public class WaveSpawner : MonoBehaviour {
         {
             openWave(1);
             maxLanes = 2;
+            GameController.UnlockLane(2);
         }
 
         else if (waveNumber >= 20 && waveNumber < 30)
         {
             openWave(2);
             maxLanes = 3;
+            GameController.UnlockLane(3);
         }
         else {
             openWave(3);
             maxLanes = 4;
+            GameController.UnlockLane(4);
         }
 
         waveMonsters = 0;

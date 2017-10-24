@@ -16,9 +16,9 @@ public class BomberCharacter : PawnCharacter {
 		
 	}
 
-    public override void Die()
+    public override void Die(DamageType _damageType)
     {
-        base.Die();
+        base.Die(_damageType);
         BomberAnimatorController anim = (BomberAnimatorController)GetComponentInChildren<BomberAnimatorController>();
         anim.isDead = true;
     }

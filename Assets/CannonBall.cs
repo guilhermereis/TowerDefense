@@ -29,7 +29,7 @@ public class CannonBall : MonoBehaviour {
         if(other.GetType() == typeof(BoxCollider) && other.gameObject.CompareTag("Enemy"))
         {
             bool hitted;
-            other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower,out hitted);
+            other.gameObject.GetComponent<PawnCharacter>().Damage(attackPower,out hitted,DamageType.Blood);
             totalPierced++;
         }
     }

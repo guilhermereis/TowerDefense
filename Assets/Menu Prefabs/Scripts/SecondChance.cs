@@ -29,6 +29,7 @@ public class SecondChance : MonoBehaviour {
     }
     public void doLoadAll()
     {
+        GameController.TryAgain();
         waveSpawner.doLoadAll();
     }
     public void Hide()

@@ -22,7 +22,7 @@ public class PawnController : MonoBehaviour {
     
 
     public PawnState currentState = PawnState.None;
-    protected PawnType type = PawnType.Wanderer;
+    public PawnType type = PawnType.Wanderer;
 
     public Transform finalDestination;
     public NavMeshAgent nav;
