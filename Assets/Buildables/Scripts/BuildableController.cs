@@ -77,7 +77,10 @@ public class BuildableController : MonoBehaviour {
         {
             buildType = BuildType.mine;
         }
-        GameController.AddBuiltTower(buildType);
+        if (WaveSpawner.loadingAll)
+        {
+            GameController.AddBuiltTower(buildType);
+        }
     }
     public UnitBlueprint getUnitBlueprint()
     {

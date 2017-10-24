@@ -31,6 +31,7 @@ public class WaveSpawner : MonoBehaviour {
 
     int waveMonsters = 0;
     float waveForce;
+    public static bool loadingAll = false;
 
     AnimationCurve curve;
 
