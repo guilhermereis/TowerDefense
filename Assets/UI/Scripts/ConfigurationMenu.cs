@@ -10,6 +10,8 @@ public class ConfigurationMenu : MonoBehaviour {
     public Slider[] volumeSliders;
     public Toggle fullscreenToggle;
     public Dropdown resolutionDropDown;
+    public GameObject quitConfirmationScreen;
+    public GameObject resConfirmationScreen;
 
     private float sfx_volume;
     private float music_volume;
@@ -134,6 +136,20 @@ public class ConfigurationMenu : MonoBehaviour {
     public void SetFullScreen(bool isFullscreen)
     {
         OnScreenResSet(resolutionDropDown.value);
+    }
+
+    public void QuitButtonPressed() {
+        showQuitConfirmationScreen();
+    }
+
+    public void showQuitConfirmationScreen() {
+        quitConfirmationScreen.GetComponent<CanvasGroup>().alpha = 1;
+        quitConfirmationScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    public void hideQuitConfirmationScreen() {
+        quitConfirmationScreen.GetComponent<CanvasGroup>().alpha = 0;
+        quitConfirmationScreen.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void Quit()
