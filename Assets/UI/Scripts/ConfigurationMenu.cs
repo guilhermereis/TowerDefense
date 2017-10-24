@@ -16,7 +16,16 @@ public class ConfigurationMenu : MonoBehaviour {
     private float sfx_volume;
     private float music_volume;
     private float master_volume;
-    int activeScreenResIndex;
+
+    public static int previousResIndex;
+    public static int activeScreenResIndex;
+
+    /*Set the following to true everytime you want to force the resolution dropdown to not do
+    anything when setting its value, and change only the Text and selected text:
+    resForceValue = true;
+    dropdown.value = newValue;*/
+    private bool resForceValue = false;
+
     CanvasGroup cg;
 
     private Resolution[] resolutions; //new Resolution[4];
@@ -28,6 +37,7 @@ public class ConfigurationMenu : MonoBehaviour {
     {
         DontDestroyOnLoad(gameObject);
         soundSliderDelegate += processSliderChange;
+        ResolutionConfirmationScreenController.countDownFinished += onScreenResolutionCountDownFinished;
     }
 
     void Start()
@@ -45,16 +55,6 @@ public class ConfigurationMenu : MonoBehaviour {
         volumeSliders[2].GetComponent<Slider>().value = music_volume;
 
         getScreenResolutions();
-
-        ////resolutions
-        //activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
-        //bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
-        //for (int i = 0; i < ResolutionToggles.Length; i++)
-        //{
-        //    ResolutionToggles[i].isOn = i == activeScreenResIndex;
-        //}
-
-        //fullscreenToggle.isOn = isFullscreen;
     }
 
     public void Hide()
@@ -109,6 +109,12 @@ public class ConfigurationMenu : MonoBehaviour {
 
     public void getScreenResolutions() {
         resolutions = Screen.resolutions;
+        //resolutions = new Resolution[4];
+        //resolutions[0] = new Resolution(); resolutions[0].width = 1920; resolutions[0].height = 1080;
+        //resolutions[1] = new Resolution(); resolutions[1].width = 1600; resolutions[1].height = 900;
+        //resolutions[2] = new Resolution(); resolutions[2].width = 800; resolutions[2].height = 600;
+        //resolutions[3] = new Resolution(); resolutions[3].width = 640; resolutions[3].height = 420;
+
         resolutionDropDown.options.Clear();
         string pattern = @" \d+Hz";
         string replacement = "";
@@ -118,18 +124,37 @@ public class ConfigurationMenu : MonoBehaviour {
             resolutionDropDown.options.Add(new Dropdown.OptionData(r.width +"x"+ r.height));
         }
         if (resolutions.Length > activeScreenResIndex) {
-            //string result = ;
+            resForceValue = true;
             resolutionDropDown.value = activeScreenResIndex;
+
             resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = rgx.Replace(("" + resolutions[activeScreenResIndex]), replacement);
         }
     }
 
-    public void OnScreenResSet(int index) {
+    public void OnScreenResSet(int index) {        
+        previousResIndex = activeScreenResIndex;
+        activeScreenResIndex = index;
         Screen.SetResolution(resolutions[index].width, resolutions[index].height, fullscreenToggle.isOn);
-        PlayerPrefs.SetInt("Screenmanager Resolution Width", resolutions[index].width);
-        PlayerPrefs.SetInt("Screenmanager Resolution Height", resolutions[index].height);
+        if(!resForceValue)
+            resConfirmationScreen.GetComponent<ResolutionConfirmationScreenController>().showAndStartCountDown();
+        resForceValue = false;
+    }
+
+    public void onScreenResolutionCountDownFinished()
+    {
+        resConfirmationScreen.GetComponent<ResolutionConfirmationScreenController>().stopCountDown();
+        resForceValue = true;
+        Screen.SetResolution(resolutions[previousResIndex].width, resolutions[previousResIndex].height, fullscreenToggle.isOn);
+        Debug.Log("REVERTING: ");
+        resolutionDropDown.value = previousResIndex;
+    }
+
+    public void screenResolutionSetConfirmed() {
+        resConfirmationScreen.GetComponent<ResolutionConfirmationScreenController>().stopCountDown();
+        PlayerPrefs.SetInt("Screenmanager Resolution Width", resolutions[activeScreenResIndex].width);
+        PlayerPrefs.SetInt("Screenmanager Resolution Height", resolutions[activeScreenResIndex].height);
         PlayerPrefs.SetInt("Screenmanager Is Fullscreen mode", (fullscreenToggle.isOn) ? 1 : 0);
-        PlayerPrefs.SetInt("resolution index", index);
+        PlayerPrefs.SetInt("resolution index", activeScreenResIndex);
         PlayerPrefs.Save();
     }
 

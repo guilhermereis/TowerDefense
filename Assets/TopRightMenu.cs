@@ -21,7 +21,7 @@ public class TopRightMenu : MonoBehaviour {
     public Sprite tripleUnselected;
 
     public GameObject configMenu;
-    private bool isConfigOn = false;
+    public static bool isConfigOn = false;
 
     public void Start()
     {
