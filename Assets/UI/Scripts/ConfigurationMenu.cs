@@ -18,7 +18,9 @@ public class ConfigurationMenu : MonoBehaviour {
     private float master_volume;
 
     public static int previousResIndex;
+    public static bool previousFullScreen;
     public static int activeScreenResIndex;
+    public static bool activeFullScreen;
 
     /*Set the following to true everytime you want to force the resolution dropdown to not do
     anything when setting its value, and change only the Text and selected text:
@@ -130,9 +132,12 @@ public class ConfigurationMenu : MonoBehaviour {
         }
     }
 
-    public void OnScreenResSet(int index) {        
+    public void OnScreenResSet(int index) {
+        previousFullScreen = activeFullScreen;
         previousResIndex = activeScreenResIndex;
         activeScreenResIndex = index;
+        activeFullScreen = fullscreenToggle.isOn;
+
         Screen.SetResolution(resolutions[index].width, resolutions[index].height, fullscreenToggle.isOn);
         if(!resForceValue)
             resConfirmationScreen.GetComponent<ResolutionConfirmationScreenController>().showAndStartCountDown();
@@ -143,9 +148,9 @@ public class ConfigurationMenu : MonoBehaviour {
     {
         resConfirmationScreen.GetComponent<ResolutionConfirmationScreenController>().stopCountDown();
         resForceValue = true;
-        Screen.SetResolution(resolutions[previousResIndex].width, resolutions[previousResIndex].height, fullscreenToggle.isOn);
-        Debug.Log("REVERTING: ");
+        Screen.SetResolution(resolutions[previousResIndex].width, resolutions[previousResIndex].height, previousFullScreen);
         resolutionDropDown.value = previousResIndex;
+        fullscreenToggle.isOn = previousFullScreen;
     }
 
     public void screenResolutionSetConfirmed() {
