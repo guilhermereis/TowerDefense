@@ -6,10 +6,11 @@ public enum BuildType { tower1, tower2, tower3, towerIce, towerFire, mine, none 
 
 public class BuildableController : MonoBehaviour {
 
-	
 
 
-	private float tileSize;
+    [Header("Build Effect")]
+    public ParticleSystem buildSmokeEffectPrefab;
+    private float tileSize;
 	private float defense;
 	private float health { get; set; }
 	private float maxHealth = 100;
@@ -24,7 +25,15 @@ public class BuildableController : MonoBehaviour {
         return -1;
     }
 
-	protected virtual void Awake()
+    public void BuildEffect()
+    {
+        SoundToPlay.PlaySfx(buildSoundPrefab);
+        //Instantiate(buildSoundPrefab);
+        buildSmokeEffectPrefab = GetComponentInChildren<ParticleSystem>();
+        buildSmokeEffectPrefab.Play();
+    }
+
+    protected virtual void Awake()
 	{
 		health = maxHealth;
         arrayListPosition = -1;

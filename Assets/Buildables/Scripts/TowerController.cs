@@ -45,8 +45,7 @@ public class TowerController : BuildableController {
     [Header("Weapon")]
     public TowerAmmo currentAmmo;
 
-    [Header("Build Effect")]
-    ParticleSystem buildSmokeEffectPrefab;
+   
 
     [Header("UI")]
     private TowerGizmoController myGizmoController;
@@ -86,13 +85,7 @@ public class TowerController : BuildableController {
         return unitBlueprint.withInterest_sellcost;
     }
 
-    public void BuildEffect()
-    {
-        SoundToPlay.PlaySfx(buildSoundPrefab);
-        //Instantiate(buildSoundPrefab);
-        buildSmokeEffectPrefab = GetComponentInChildren<ParticleSystem>();
-        buildSmokeEffectPrefab.Play();
-    }
+   
 
 	// Update is called once per frame
 	public virtual void Update () {
