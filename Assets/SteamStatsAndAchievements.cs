@@ -12,23 +12,155 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         ACH_WIN_10_WAVES,
         ACH_WIN_50_WAVES,
         ACH_WIN_100_WAVES,
+
         ACH_BUILD_10_TOWERS,
-        ACH_BUILD_50_TOWERS,
         ACH_BUILD_100_TOWERS,
-        ACH_BUILD_TOWER_3,
+        ACH_BUILD_1000_TOWERS,
+
+        ACH_BUILD_10_TOWER_1,
+        ACH_BUILD_100_TOWER_1,
+        ACH_BUILD_1000_TOWER_1,
+
+        ACH_BUILD_10_TOWER_2,
+        ACH_BUILD_100_TOWER_2,
+        ACH_BUILD_1000_TOWER_2,
+
+        ACH_BUILD_10_TOWER_3,
+        ACH_BUILD_100_TOWER_3,
+        ACH_BUILD_1000_TOWER_3,
+
+        ACH_BUILD_10_TOWER_FIRE,
+        ACH_BUILD_100_TOWER_FIRE,
+        ACH_BUILD_1000_TOWER_FIRE,
+
+        ACH_BUILD_10_TOWER_ICE,
+        ACH_BUILD_100_TOWER_ICE,
+        ACH_BUILD_1000_TOWER_ICE,
+
+        ACH_BUILD_10_MINE,
+        ACH_BUILD_100_MINE,
+        ACH_BUILD_1000_MINE,
+
+        ACH_KILL_10_MONSTERS,
+        ACH_KILL_100_MONSTERS,
+        ACH_KILL_1000_MONSTERS,
+
+        ACH_KILL_10_WANDERER,
+        ACH_KILL_100_WANDERER,
+        ACH_KILL_1000_WANDERER,
+
+        ACH_KILL_10_WARRIOR,
+        ACH_KILL_100_WARRIOR,
+        ACH_KILL_1000_WARRIOR,
+
+        ACH_KILL_10_BOMBER,
+        ACH_KILL_100_BOMBER,
+        ACH_KILL_1000_BOMBER,
+
+        ACH_KILL_10_KING,
+        ACH_KILL_100_KING,
+        ACH_KILL_1000_KING,
+
+        ACH_UNLOCK_LANE2,
+        ACH_UNLOCK_LANE3,
+        ACH_UNLOCK_LANE4,
+
+        ACH_FREEZE_10_ENEMY,
+        ACH_FREEZE_100_ENEMY,
+        ACH_FREEZE_1000_ENEMY,
+
+        ACH_BURN_10_ENEMY,
+        ACH_BURN_100_ENEMY,
+        ACH_BURN_1000_ENEMY,
+
+        ACH_SURVIVE_10_WAVES,
+        ACH_SURVIVE_50_WAVES,
+        ACH_SURVIVE_100_WAVES,
+
+        ACH_INVICIBILITY_10_WAVES,
+        ACH_INVICIBILITY_30_WAVES,
+        ACH_INVICIBILITY_50_WAVES,
+        ACH_INVICIBILITY_80_WAVES,
+
+        ACH_CHEAP,
+        ACH_MONEY_SAVER,
+        ACH_MONEY_SPENDER,
+        ACH_MONEY_COLLECTED_1000,
+        ACH_MONEY_COLLECTED_10000,
+        ACH_MONEY_RAISED_1000,
+        ACH_MONEY_RAISED_10000,
+
+        ACH_TRYAGAIN,
+
+
 
     };
 
     
 
-    private Achievement_t[] achievements = new Achievement_t[] {
-        new Achievement_t(Achievement.ACH_WIN_10_WAVES,"Defeated 10 waves",""),
-        new Achievement_t(Achievement.ACH_WIN_50_WAVES,"Defeated 50 waves",""),
-        new Achievement_t(Achievement.ACH_WIN_100_WAVES,"Defeated 100 waves",""),
-        new Achievement_t(Achievement.ACH_BUILD_10_TOWERS,"Build 10 towers",""),
-        new Achievement_t(Achievement.ACH_BUILD_50_TOWERS,"Build 50 towers",""),
-        new Achievement_t(Achievement.ACH_BUILD_100_TOWERS,"Build 100 towers",""),
-        new Achievement_t(Achievement.ACH_BUILD_TOWER_3,"Build tower level 3",""),
+    private List<Achievement_t> achievements = new List<Achievement_t> {
+        new Achievement_t(Achievement.ACH_WIN_10_WAVES,"Gettin' good !","Defeated 10 waves"),
+        new Achievement_t(Achievement.ACH_WIN_50_WAVES,"","Defeated 50 waves"),
+        new Achievement_t(Achievement.ACH_WIN_100_WAVES,"","Defeated 100 waves"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWERS,"Jack the Builder","Build 10 towers"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWERS,"","Build 50 towers"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWERS,"Empire","Build 100 towers"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWER_1,"","Build 10 towers level 1"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWER_1,"","Build 100 towers level 1"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWER_1,"Ancient Warfare","Build 1000 towers level 1"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWER_2,"Industrious","Build 10 towers level 2"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWER_2,"","Build 100 towers level 2"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWER_2,"","Build 1000 towers level 2"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWER_3,"Architect","Build 10 towers level 3"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWER_3,"","Build 100 towers level 3"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWER_3,"","Build 1000 towers level 3"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWER_FIRE,"","Build 10 fire towers"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWER_FIRE,"","Build 100 fire towers"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWER_FIRE,"","Build 1000 fire towers"),
+        new Achievement_t(Achievement.ACH_BUILD_10_TOWER_ICE,"","Build 10 ice towers"),
+        new Achievement_t(Achievement.ACH_BUILD_100_TOWER_ICE,"","Build 100 ice towers"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_TOWER_ICE,"","Build 1000 ice towers"),
+
+        new Achievement_t(Achievement.ACH_BUILD_10_MINE,"Gold Digger","Build 10 mines"),
+        new Achievement_t(Achievement.ACH_BUILD_100_MINE,"Entrepeneur","Build 100 mines"),
+        new Achievement_t(Achievement.ACH_BUILD_1000_MINE,"","Build 1000 mines"),
+        new Achievement_t(Achievement.ACH_KILL_10_MONSTERS,"","kill 10 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_MONSTERS,"Massacre","kill 100 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_MONSTERS,"","kill 1000 goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10_WARRIOR,"","kill 10 warrior goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_WARRIOR,"","kill 100 warrior goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_WARRIOR,"","kill 1000 warrior goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10_WANDERER,"","kill 10 wanderer goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_WANDERER,"","kill 100 wanderer goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_WANDERER,"","kill 1000 wanderer goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10_BOMBER,"Counter-Measures","kill 10 bomber goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_BOMBER,"Anti-Terrorist","kill 100 bomber goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_BOMBER,"","kill 1000 bomber goblins"),
+        new Achievement_t(Achievement.ACH_KILL_10_KING,"Kingslayer","kill 10 king goblins"),
+        new Achievement_t(Achievement.ACH_KILL_100_KING,"Funeral of the Greats","kill 100 king goblins"),
+        new Achievement_t(Achievement.ACH_KILL_1000_KING,"Ruler of the Seven Kingdoms","kill 1000 king goblins"),
+        new Achievement_t(Achievement.ACH_UNLOCK_LANE2,"Winter is coming","unlock snow field"),
+        new Achievement_t(Achievement.ACH_UNLOCK_LANE3,"Mad Max","unlock desert field"),
+        new Achievement_t(Achievement.ACH_UNLOCK_LANE2,"Rock 'n' Roll","unlock volcano field"),
+        new Achievement_t(Achievement.ACH_FREEZE_10_ENEMY,"Chilly","freeze 10 enemies"),
+        new Achievement_t(Achievement.ACH_FREEZE_100_ENEMY,"Mr. Freeze","freeze 100 enemies"),
+        new Achievement_t(Achievement.ACH_FREEZE_1000_ENEMY,"Ice Age","freeze 1000 enemies"),
+        new Achievement_t(Achievement.ACH_BURN_10_ENEMY,"Burn !","burn 10 enemies"),
+        new Achievement_t(Achievement.ACH_BURN_100_ENEMY,"Kill it with Fire !","burn 100 enemies"),
+        new Achievement_t(Achievement.ACH_BURN_1000_ENEMY,"Flamethrower","burn 1000 enemies"),
+        new Achievement_t(Achievement.ACH_SURVIVE_10_WAVES,"What doesn't kill you","defeat 10 waves in a row"),
+        new Achievement_t(Achievement.ACH_SURVIVE_50_WAVES,"","defeat 50 waves in a row"),
+        new Achievement_t(Achievement.ACH_SURVIVE_100_WAVES,"","defeat 100 waves in a row"),
+        new Achievement_t(Achievement.ACH_INVICIBILITY_10_WAVES,"Bulletproof","defeat 10 waves without taking a hit"),
+        new Achievement_t(Achievement.ACH_INVICIBILITY_30_WAVES,"Nothing to lose","defeat 30 waves without taking a hit"),
+        new Achievement_t(Achievement.ACH_INVICIBILITY_50_WAVES,"","defeat 50 waves without taking a hit"),
+        new Achievement_t(Achievement.ACH_INVICIBILITY_80_WAVES,"Eternal","defeat 80 waves without taking a hit"),
+        new Achievement_t(Achievement.ACH_CHEAP,"","Reach wave 10 using less than 500 gold"),
+        new Achievement_t(Achievement.ACH_MONEY_SAVER,"Put it in the bank !","Have 10000 golds"),
+        new Achievement_t(Achievement.ACH_MONEY_SPENDER,"","Spend 50.000 golds on building structures"),
+        new Achievement_t(Achievement.ACH_MONEY_COLLECTED_1000,"Scrooge McDuck","collected 1000 golds"),
+        new Achievement_t(Achievement.ACH_MONEY_COLLECTED_10000,"Rockefeller","collected 10000 golds"),
+        new Achievement_t(Achievement.ACH_TRYAGAIN,"Die Hard","Use try again mode"),
     };
 
     //our gameID
@@ -63,6 +195,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int c_numberOfDamage;
     private int c_moneyCollected;
     private int c_moneyRaised = 0;
+    private int c_moneySaved;
     private int c_moneySpent = 0;
     private int c_unlockedLane2;
     private int c_unlockedLane3;
@@ -77,8 +210,19 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int p_totalWaves;
     private int p_totalDefeats;
     private int p_totalTowerBuilt;
-    private int p_totalKingKilled;
+    private int p_totalTowerlevel1Built;
+    private int p_totalTowerlevel2Built;
+    private int p_totalTowerlevel3Built;
+    private int p_totalTowerIceBuilt;
+    private int p_totalTowerFireBuilt;
     private int p_totalMineBuilt;
+    
+    private int p_totalKingKilled;
+ 
+
+    private int p_totalWandererKilled;
+    private int p_totalWarriorKilled;
+    private int p_totalBomberKilled;
     private int p_totalTryAgain;
     private int p_unlockedLane2;
     private int p_unlockedLane3;
@@ -86,7 +230,9 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private int p_totalDamage;
     private int p_totalEnemyFrozen;
     private int p_totalEnemyBurnt;
-    private int p_moneyCollected;
+    private int p_totalmoneyCollected;
+    private int p_totalmoneySpent;
+    private int p_totalmoneyRaised;
     private int p_totalMonsterKilled;
 
     protected string leaderboardName = "Defeated Waves";
@@ -105,12 +251,312 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     //-----------------------------------------------------------------------------
 
     #region Builds
+    public void CheckForTotalTowerBuilt()
+    {
+        if (c_numberOfTowers + p_totalTowerBuilt == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_TOWERS);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerBuilt += c_numberOfTowers;
+                SteamUserStats.SetStat("totalNumTower", p_totalTowerBuilt);
+
+            }
+
+
+        }
+        else if (c_numberOfTowers + p_totalTowerBuilt == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_100_TOWERS);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerBuilt += c_numberOfTowers;
+                SteamUserStats.SetStat("totalNumTower", p_totalTowerBuilt);
+
+            }
+        }else  if(c_numberOfTowers + p_totalTowerBuilt == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_1000_TOWERS);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerBuilt += c_numberOfTowers;
+                SteamUserStats.SetStat("totalNumTower", p_totalTowerBuilt);
+
+            }
+        }
+    }
+
+    public void CheckForTotalTower1Built()
+    {
+        if (c_numberOftower1 + p_totalTowerlevel1Built == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_TOWER_1);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel1Built += c_numberOftower1;
+                SteamUserStats.SetStat("totalNumTower1", p_totalTowerlevel1Built);
+
+            }
+
+
+        }
+        else if (c_numberOftower1 + p_totalTowerlevel1Built == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_100_TOWER_1);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel1Built += c_numberOftower1;
+                SteamUserStats.SetStat("totalNumTower1", p_totalTowerlevel1Built);
+
+            }
+        }
+        else if (c_numberOftower1 + p_totalTowerlevel1Built == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_1000_TOWER_1);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel1Built += c_numberOftower1;
+                SteamUserStats.SetStat("totalNumTower1", p_totalTowerlevel1Built);
+
+            }
+        }
+    }
+
+    public void CheckForTotalTower2Built()
+    {
+        if (c_numberOftower2 + p_totalTowerlevel2Built == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_TOWER_2);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel2Built += c_numberOftower2;
+                SteamUserStats.SetStat("totalNumTower2", p_totalTowerlevel2Built);
+
+            }
+
+
+        }
+        else if (c_numberOftower2 + p_totalTowerlevel2Built == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_100_TOWER_2);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel2Built += c_numberOftower2;
+                SteamUserStats.SetStat("totalNumTower2", p_totalTowerlevel2Built);
+
+            }
+        }
+        else if (c_numberOftower2 + p_totalTowerlevel2Built == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_1000_TOWER_2);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel2Built += c_numberOftower2;
+                SteamUserStats.SetStat("totalNumTower2", p_totalTowerlevel2Built);
+
+            }
+        }
+    }
+
+    public void CheckForTotalTower3Built()
+    {
+        if (c_numberOftower3 + p_totalTowerlevel3Built == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_TOWER_3);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel3Built += c_numberOftower3;
+                SteamUserStats.SetStat("totalNumTower3", p_totalTowerlevel3Built);
+
+            }
+
+
+        }
+        else if (c_numberOftower3 + p_totalTowerlevel3Built == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_100_TOWER_3);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel3Built += c_numberOftower3;
+                SteamUserStats.SetStat("totalNumTower3", p_totalTowerlevel3Built);
+
+            }
+        }
+        else if (c_numberOftower3 + p_totalTowerlevel3Built == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_1000_TOWER_3);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerlevel3Built += c_numberOftower3;
+                SteamUserStats.SetStat("totalNumTower3", p_totalTowerlevel3Built);
+
+            }
+        }
+    }
+
+    public void CheckForTotalTowerIceBuilt()
+    {
+        if (c_numberOfIceTower + p_totalTowerIceBuilt == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_TOWER_ICE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerIceBuilt += c_numberOfIceTower;
+                SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
+
+            }
+
+
+        }
+        else if (c_numberOfIceTower + p_totalTowerIceBuilt == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_100_TOWER_ICE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerIceBuilt += c_numberOfIceTower;
+                SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
+
+            }
+        }
+        else if (c_numberOfIceTower + p_totalTowerIceBuilt == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_1000_TOWER_ICE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerIceBuilt += c_numberOfIceTower;
+                SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
+
+            }
+        }
+    }
+
+    public void CheckForTotalTowerFireBuilt()
+    {
+        if (c_numberOfFireTower + p_totalTowerFireBuilt == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_TOWER_FIRE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerFireBuilt += c_numberOfFireTower;
+                SteamUserStats.SetStat("totalNumTowerFire", p_totalTowerFireBuilt);
+
+            }
+
+
+        }
+        else if (c_numberOfIceTower + p_totalTowerIceBuilt == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_100_TOWER_FIRE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerFireBuilt += c_numberOfFireTower;
+                SteamUserStats.SetStat("totalNumTowerFire", p_totalTowerFireBuilt);
+
+            }
+        }
+        else if (c_numberOfIceTower + p_totalTowerIceBuilt == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_1000_TOWER_FIRE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalTowerFireBuilt += c_numberOfFireTower;
+                SteamUserStats.SetStat("totalNumTowerFire", p_totalTowerFireBuilt);
+
+            }
+        }
+    }
+
+    public void CheckForTotalMineBuilt()
+    {
+        if (c_numberOfMine + p_totalMineBuilt == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_MINE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalMineBuilt += c_numberOfMine;
+                SteamUserStats.SetStat("totalNumMineBuilt", p_totalMineBuilt);
+
+            }
+
+
+        }else if (c_numberOfMine + p_totalMineBuilt == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_100_MINE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalMineBuilt += c_numberOfMine;
+                SteamUserStats.SetStat("totalNumMineBuilt", p_totalMineBuilt);
+
+            }
+
+
+        }else if (c_numberOfMine + p_totalMineBuilt == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_1000_MINE);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalMineBuilt += c_numberOfMine;
+                SteamUserStats.SetStat("totalNumMineBuilt", p_totalMineBuilt);
+
+            }
+
+
+        }
+    }
+
     public void AddBuiltTower(BuildType tower)
     {
         if (!SteamManager.Initialized)
             return;
         
         c_numberOfTowers ++;
+        CheckForTotalTowerBuilt();
+
+
+
+        //if(c_numberOfTowers + p_totalTowerBuilt > )
 
         switch (tower)
         {
@@ -149,32 +595,262 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     public void AddTower()
     {
         c_numberOftower1++;
+        CheckForTotalTower1Built();
     }
 
     public void AddTower2()
     {
         c_numberOftower2++;
+        CheckForTotalTower2Built();
     }
 
     public void AddTower3()
     {
         c_numberOftower3++;
+        CheckForTotalTower2Built();
     }
 
     public void AddMine()
     {
         c_numberOfMine++;
+        CheckForTotalMineBuilt();
     }
     #endregion
 
 
     #region Monsters
+
+    public void CheckForTotalGoblinsKilled()
+    {
+        if (c_numberOfMonstersKilled + p_totalMonsterKilled == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_10_MONSTERS);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalMonsterKilled += c_numberOfMonstersKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
+
+            }
+
+
+        }else if (c_numberOfMonstersKilled + p_totalMonsterKilled == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_100_MONSTERS);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalMonsterKilled += c_numberOfMonstersKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
+
+            }
+
+
+        }else if (c_numberOfMonstersKilled + p_totalMonsterKilled == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_1000_MONSTERS);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalMonsterKilled += c_numberOfMonstersKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
+
+            }
+
+
+        }
+    }
+
+    public void CheckForTotalWandererKilled()
+    {
+        if (c_numberOfWandererKilled + p_totalWandererKilled == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_10_WANDERER);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalWandererKilled += c_numberOfWandererKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalWandererKilled);
+
+            }
+
+
+        }else if (c_numberOfWandererKilled + p_totalWandererKilled == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_100_WANDERER);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalWandererKilled += c_numberOfWandererKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalWandererKilled);
+
+            }
+
+
+        }else if (c_numberOfWandererKilled + p_totalWandererKilled == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_1000_WANDERER);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalWandererKilled += c_numberOfWandererKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalWandererKilled);
+
+            }
+
+
+        }
+    }
+
+    public void CheckForTotalWarriorKilled()
+    {
+        if (c_numberOfWarriorKilled + p_totalWarriorKilled == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_10_WARRIOR);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalWarriorKilled += c_numberOfWarriorKilled;
+                SteamUserStats.SetStat("totalNumWarriorKilled", p_totalWarriorKilled);
+
+            }
+
+
+        }
+        else if (c_numberOfWarriorKilled + p_totalWarriorKilled == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_100_WARRIOR);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalWarriorKilled += c_numberOfWarriorKilled;
+                SteamUserStats.SetStat("totalNumWarriorKilled", p_totalWarriorKilled);
+
+            }
+
+
+        }
+        else if (c_numberOfWarriorKilled + p_totalWarriorKilled == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_1000_WARRIOR);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalWarriorKilled += c_numberOfWarriorKilled;
+                SteamUserStats.SetStat("totalNumWarriorKilled", p_totalWarriorKilled);
+
+            }
+
+
+        }
+    }
+
+    public void CheckForTotalBomberKilled()
+    {
+        if (c_numberOfBomberKilled + p_totalBomberKilled == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_100_BOMBER);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalBomberKilled += c_numberOfBomberKilled;
+                SteamUserStats.SetStat("totalNumBomberKilled", p_totalBomberKilled);
+
+            }
+
+
+        }else if (c_numberOfBomberKilled + p_totalBomberKilled == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_1000_BOMBER);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalBomberKilled += c_numberOfBomberKilled;
+                SteamUserStats.SetStat("totalNumBomberKilled", p_totalBomberKilled);
+
+            }
+
+
+        }else if (c_numberOfBomberKilled + p_totalBomberKilled == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_1000_BOMBER);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalBomberKilled += c_numberOfBomberKilled;
+                SteamUserStats.SetStat("totalNumBomberKilled", p_totalBomberKilled);
+
+            }
+
+
+        }
+    }
+
+    public void CheckForTotalKingKilled()
+    {
+        if (c_numberOfKingKilled + p_totalKingKilled == 10)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_10_KING);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalKingKilled += c_numberOfKingKilled;
+                SteamUserStats.SetStat("totalNumKingKilled", p_totalKingKilled);
+
+            }
+
+
+        }
+        else if (c_numberOfKingKilled + p_totalKingKilled == 100)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_100_KING);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalKingKilled += c_numberOfKingKilled;
+                SteamUserStats.SetStat("totalNumKingKilled", p_totalKingKilled);
+
+            }
+
+
+        }
+        else if (c_numberOfKingKilled + p_totalKingKilled == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_KILL_1000_KING);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalKingKilled += c_numberOfKingKilled;
+                SteamUserStats.SetStat("totalNumKingKilled", p_totalKingKilled);
+
+            }
+
+
+        }
+    }
+
     public void AddMonstersKilled(PawnType monster)
     {
         if (!SteamManager.Initialized)
             return;
 
         c_numberOfMonstersKilled++;
+        CheckForTotalGoblinsKilled();
         switch (monster)
         {
             case PawnType.Bomber:
@@ -198,35 +874,288 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     private void AddBomber()
     {
         c_numberOfBomberKilled++;
+        CheckForTotalBomberKilled();
     }
 
     private void AddWarrior()
     {
         c_numberOfWarriorKilled++;
+        CheckForTotalWarriorKilled();
     }
     private void AddKing()
     {
         c_numberOfKingKilled++;
+        CheckForTotalKingKilled();
     }
     private void AddWanderer()
     {
         c_numberOfWandererKilled++;
+        CheckForTotalWandererKilled();
     }
 
     #endregion
 
+    public void CheckForTotalMoneyCollected()
+    {
+        if (c_moneyCollected + p_totalmoneyCollected == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_MONEY_COLLECTED_1000);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalmoneyCollected += c_moneyCollected;
+                SteamUserStats.SetStat("totalNumMoneyCollected", p_totalmoneyCollected);
+
+            }
+
+
+        }
+        else if (c_moneyCollected + p_totalmoneyCollected == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_MONEY_COLLECTED_1000);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalmoneyCollected += c_moneyCollected;
+                SteamUserStats.SetStat("totalNumMoneyCollected", p_totalmoneyCollected);
+
+            }
+
+
+        }
+    }
+
+    public void CheckForTotalMoneyRaised()
+    {
+        if (c_moneyRaised + p_totalmoneyRaised == 1000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_MONEY_RAISED_1000);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalmoneyRaised += c_moneyRaised;
+                SteamUserStats.SetStat("totalNumMoneyRaised", p_totalmoneyRaised);
+
+            }
+
+
+        }
+        else if (c_moneyRaised + p_totalmoneyRaised == 10000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_MONEY_RAISED_10000);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                p_totalmoneyRaised += c_moneyRaised;
+                SteamUserStats.SetStat("totalNumMoneyRaised", p_totalmoneyRaised);
+
+            }
+
+
+        }
+    }
+
+    public void CheckForMoneySaved()
+    {
+        if (c_moneyRaised == 10000)
+        {
+            Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_MONEY_SAVER);
+            if (!achv.isAchieved)
+            {
+                //unlock achievement and store the stats value
+                UnlockAchievement(achv);
+                //p_totalmoneyRaised += c_moneyRaised;
+                //SteamUserStats.SetStat("totalNumMoneyRaised", p_totalmoneyRaised);
+
+            }
+
+
+        }
+    }
+
     public void AddMoneyCollected(int gold, bool wasCollected)
     {
+        if (!SteamManager.Initialized)
+            return;
+
         c_moneyRaised += gold;
+        CheckForTotalMoneyRaised();
+        CheckForMoneySaved();
+
         if (wasCollected)
+        {
             c_moneyCollected += gold;
+            CheckForTotalMoneyCollected();
+        }
+    }
+
+    public void CheckForTotalSpentMoney()
+    {
+        if(c_moneySpent + p_totalmoneySpent == 50000)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_MONEY_SPENDER);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+            }
+        }
     }
 
     public void SpendMoney(int gold)
     {
+        if (!SteamManager.Initialized)
+            return;
+
         c_moneySpent += gold;
+        CheckForTotalSpentMoney();
     }
 
+    public void CheckForBurnt()
+    {
+        if (c_numberOfBurnt + p_totalEnemyBurnt == 10)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_BURN_10_ENEMY);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+                p_totalEnemyBurnt += c_numberOfBurnt;
+                SteamUserStats.SetStat("totalNumEnemyBurnt", p_totalEnemyBurnt);
+            }
+        }else if (c_numberOfBurnt + p_totalEnemyBurnt == 100)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_BURN_10_ENEMY);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+                p_totalEnemyBurnt += c_numberOfBurnt;
+                SteamUserStats.SetStat("totalNumEnemyBurnt", p_totalEnemyBurnt);
+            }
+        }else if (c_numberOfBurnt + p_totalEnemyBurnt == 1000)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_BURN_1000_ENEMY);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+                p_totalEnemyBurnt += c_numberOfBurnt;
+                SteamUserStats.SetStat("totalNumEnemyBurnt", p_totalEnemyBurnt);
+            }
+        }
+    }
+
+    public void BurnGoblin()
+    {
+
+        if (!SteamManager.Initialized)
+            return;
+
+        c_numberOfBurnt++;
+        CheckForBurnt();
+    }
+
+    public void CheckForFrozen()
+    {
+        if (c_numberOfFrozen + p_totalEnemyFrozen == 10)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_FREEZE_10_ENEMY);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+                p_totalEnemyFrozen += c_numberOfFrozen;
+                SteamUserStats.SetStat("totalNumEnemyFrozen", p_totalEnemyFrozen);
+            }
+        }
+        else if (c_numberOfFrozen + p_totalEnemyFrozen == 100)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_FREEZE_10_ENEMY);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+                p_totalEnemyFrozen += c_numberOfFrozen;
+                SteamUserStats.SetStat("totalNumEnemyFrozen", p_totalEnemyFrozen);
+            }
+        }
+        else if (c_numberOfFrozen + p_totalEnemyFrozen == 1000)
+        {
+            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_FREEZE_1000_ENEMY);
+            if (!achv.isAchieved)
+            {
+                UnlockAchievement(achv);
+                p_totalEnemyFrozen += c_numberOfFrozen;
+                SteamUserStats.SetStat("totalNumEnemyFrozen", p_totalEnemyFrozen);
+            }
+        }
+    }
+
+    public void FreezeGoblin()
+    {
+        if (!SteamManager.Initialized)
+            return;
+
+        c_numberOfFrozen++;
+        CheckForFrozen();
+
+
+    }
+
+    public void UnlockLane2()
+    {
+        if (!SteamManager.Initialized)
+            return;
+
+        if (p_unlockedLane2 > 0)
+            return;
+
+        c_unlockedLane2 = 1;
+
+
+        Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_UNLOCK_LANE2);
+        if (!achv.isAchieved)
+        {
+            UnlockAchievement(achv);
+            p_unlockedLane2 = 1;
+            SteamUserStats.SetStat("unlockedLane2", p_unlockedLane2);
+        }
+    }
+    public void UnlockLane3()
+    {
+        if (!SteamManager.Initialized)
+            return;
+
+        if (p_unlockedLane3 > 0)
+            return;
+
+        c_unlockedLane3 = 1;
+
+        Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_UNLOCK_LANE3);
+        if (!achv.isAchieved)
+        {
+            UnlockAchievement(achv);
+            p_unlockedLane3 = 1;
+            SteamUserStats.SetStat("unlockedLane3", p_unlockedLane3);
+        }
+    }
+    public void UnlockLane4()
+    {
+        if (!SteamManager.Initialized)
+            return;
+
+        if (p_unlockedLane4 > 0)
+            return;
+
+        c_unlockedLane4 = 1;
+
+        Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_UNLOCK_LANE4);
+        if (!achv.isAchieved)
+        {
+            UnlockAchievement(achv);
+            p_unlockedLane4 = 1;
+            SteamUserStats.SetStat("unlockedLane4", p_unlockedLane4);
+        }
+    }
 
 
     private void OnEnable()
@@ -347,8 +1276,19 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 SteamUserStats.GetStat("totalNumWaves", out p_totalWaves);
                 SteamUserStats.GetStat("totalNumDefeats", out p_totalDefeats);
                 SteamUserStats.GetStat("totalNumTower", out p_totalTowerBuilt);
-                SteamUserStats.GetStat("totalNumKingKilled", out p_totalKingKilled);
+                SteamUserStats.GetStat("totalNumTower1", out p_totalTowerlevel1Built);
+                SteamUserStats.GetStat("totalNumTower2", out p_totalTowerlevel2Built);
+                SteamUserStats.GetStat("totalNumTower3", out p_totalTowerlevel3Built);
+                SteamUserStats.GetStat("totalNumTowerIce", out p_totalTowerIceBuilt);
+                SteamUserStats.GetStat("totalNumTowerFire", out p_totalTowerFireBuilt);
                 SteamUserStats.GetStat("totalNumMineBuilt", out p_totalMineBuilt);
+
+                SteamUserStats.GetStat("totalNumKingKilled", out p_totalKingKilled);
+                SteamUserStats.GetStat("totalNumWandererKilled", out p_totalWandererKilled);
+                SteamUserStats.GetStat("totalNumWarriorKilled", out p_totalWarriorKilled);
+                SteamUserStats.GetStat("totalNumBomberKilled", out p_totalBomberKilled);
+                SteamUserStats.GetStat("totalNumGoblinKilled", out p_totalMonsterKilled);
+
                 SteamUserStats.GetStat("totalNumTryAgain", out p_totalTryAgain);
                 SteamUserStats.GetStat("totalNumDamage", out p_totalDamage);
                 SteamUserStats.GetStat("totalNumEnemyFrozen", out p_totalEnemyFrozen);
@@ -357,7 +1297,9 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 SteamUserStats.GetStat("unlockedLane2", out p_unlockedLane2 );
                 SteamUserStats.GetStat("unlockedLane3", out p_unlockedLane3);
                 SteamUserStats.GetStat("unlockedLane4", out p_unlockedLane4);
-                SteamUserStats.GetStat("totalNumMoneyCollected", out p_moneyCollected);
+                SteamUserStats.GetStat("totalNumMoneyCollected", out p_totalmoneyCollected);
+                SteamUserStats.GetStat("totalNumMoneySpent", out p_totalmoneySpent);
+                SteamUserStats.GetStat("totalNumMoneyRaised", out p_totalmoneyRaised);
 
 
             }
@@ -475,28 +1417,46 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         if (!isStatsvalid)
             return;
 
-
-        foreach(Achievement_t achievement in achievements)
+        if (isStoreStats)
         {
-            if (achievement.isAchieved)
-                return;
+            //store stats in the steam database if necessary.
+            SteamUserStats.SetStat("totalNumWaves", p_totalWaves);
+            SteamUserStats.SetStat("totalNumDefeats", p_totalDefeats);
+           
+            SteamUserStats.SetStat("totalNumTower",  p_totalTowerBuilt);
+            SteamUserStats.SetStat("totalNumTower1",  p_totalTowerlevel1Built);
+            SteamUserStats.SetStat("totalNumTower2",  p_totalTowerlevel2Built);
+            SteamUserStats.SetStat("totalNumTower3",  p_totalTowerlevel3Built);
+            SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
+            SteamUserStats.SetStat("totalNumTowerFire",  p_totalTowerFireBuilt);
+            SteamUserStats.SetStat("totalNumMineBuilt",  p_totalMineBuilt);
 
-            switch (achievement.achievementID)
-            {
-                case Achievement.ACH_BUILD_10_TOWERS:
-                    
-                    if (c_numberOfTowers >= 10)
-                    {
-                        UnlockAchievement(achievement);
-                    }
-                    break;
-            }
+            SteamUserStats.SetStat("totalNumKingKilled",  p_totalKingKilled);
+            SteamUserStats.SetStat("totalNumWandererKilled",  p_totalWandererKilled);
+            SteamUserStats.SetStat("totalNumWarriorKilled",  p_totalWarriorKilled);
+            SteamUserStats.SetStat("totalNumBomberKilled",  p_totalBomberKilled);
+            SteamUserStats.SetStat("totalNumGoblinKilled",  p_totalMonsterKilled);
+
+            SteamUserStats.SetStat("totalNumTryAgain",  p_totalTryAgain);
+            SteamUserStats.SetStat("totalNumDamage",  p_totalDamage);
+            SteamUserStats.SetStat("totalNumEnemyFrozen",  p_totalEnemyFrozen);
+            SteamUserStats.SetStat("totalNumEnemyBurnt",  p_totalEnemyBurnt);
+            SteamUserStats.SetStat("totalNumMonsterKilled",  p_totalMonsterKilled);
+            SteamUserStats.SetStat("unlockedLane2",  p_unlockedLane2);
+            SteamUserStats.SetStat("unlockedLane3",  p_unlockedLane3);
+            SteamUserStats.SetStat("unlockedLane4",  p_unlockedLane4);
+            SteamUserStats.SetStat("totalNumMoneyCollected",  p_totalmoneyCollected);
+            SteamUserStats.SetStat("totalNumMoneySpent",  p_totalmoneySpent);
+            SteamUserStats.SetStat("totalNumMoneyRaised",  p_totalmoneyRaised);
+
+            bool succes = SteamUserStats.StoreStats();
+
+            isStoreStats = !succes;
+            //SteamUserStats.UploadLeaderboardScore()
+
         }
+        
 
-        //store stats in the steam database if necessary.
-        SteamUserStats.SetStat("totalNumWaves", p_totalWaves);
-        SteamUserStats.SetStat("totalNumDefeats", p_totalDefeats);
-        //SteamUserStats.UploadLeaderboardScore()
     }
 
     private void UnlockAchievement(Achievement_t achievement)
