@@ -8,6 +8,30 @@ public class MainMenuController : MonoBehaviour {
     public GameObject configMenu;
     public AudioSource mainMenuBG;
 
+    private void Awake()
+    {
+        PlayerPrefs.DeleteAll();
+        if (PlayerPrefs.GetInt("FirstAccess") != 1)
+        {
+            PlayerPrefs.SetFloat("master volume", 1f);
+            PlayerPrefs.SetFloat("sfx volume", 0.8f);
+            PlayerPrefs.SetFloat("music volume", 0.5f);
+            Resolution[] resolutions = Screen.resolutions;
+
+            Resolution currentRes = Screen.currentResolution;
+            for (int i = 0; i < resolutions.Length; i++)
+            {
+                Resolution res = resolutions[i];
+                if (res.width == currentRes.width && res.height == currentRes.height)
+                {
+                    PlayerPrefs.SetInt("resolution index", i);
+                }
+            }
+            PlayerPrefs.Save();
+        }
+        PlayerPrefs.SetInt("FirstAccess", 1);
+    }
+
     private void Start()
     {
         SoundToPlay.PlayMusic(mainMenuBG);
