@@ -145,7 +145,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         new Achievement_t(Achievement.ACH_KILL_1000_KING,"Ruler of the Seven Kingdoms","kill 1000 king goblins"),
         new Achievement_t(Achievement.ACH_UNLOCK_LANE2,"Winter is coming","unlock snow field"),
         new Achievement_t(Achievement.ACH_UNLOCK_LANE3,"Mad Max","unlock desert field"),
-        new Achievement_t(Achievement.ACH_UNLOCK_LANE2,"Rock 'n' Roll","unlock volcano field"),
+        new Achievement_t(Achievement.ACH_UNLOCK_LANE4,"Rock 'n' Roll","unlock volcano field"),
         new Achievement_t(Achievement.ACH_FREEZE_10_ENEMY,"Chilly","freeze 10 enemies"),
         new Achievement_t(Achievement.ACH_FREEZE_100_ENEMY,"Mr. Freeze","freeze 100 enemies"),
         new Achievement_t(Achievement.ACH_FREEZE_1000_ENEMY,"Ice Age","freeze 1000 enemies"),
