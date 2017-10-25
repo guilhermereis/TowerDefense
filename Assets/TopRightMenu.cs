@@ -22,6 +22,7 @@ public class TopRightMenu : MonoBehaviour {
 
     public GameObject configMenu;
     public static bool isConfigOn = false;
+    public static bool isGamePaused = false;
 
     public void Start()
     {
@@ -84,6 +85,7 @@ public class TopRightMenu : MonoBehaviour {
         pauseSpeed.image.overrideSprite = pauseSelected;
         pauseSpeed.interactable = false;
         Time.timeScale = 0;
+        isGamePaused = true;
         
     }
 
@@ -96,6 +98,7 @@ public class TopRightMenu : MonoBehaviour {
         normalSpeed.image.overrideSprite = playSelected;
         normalSpeed.interactable = false;
         Time.timeScale = 1;
+        isGamePaused = false;
     }
 
     public void DoubleSpeedOnClick() {
@@ -106,6 +109,7 @@ public class TopRightMenu : MonoBehaviour {
         doubleSpeed.image.overrideSprite = doubleSelected;
         doubleSpeed.interactable = false;
         Time.timeScale = 2;
+        isGamePaused = false;
 
     }
 
@@ -118,6 +122,7 @@ public class TopRightMenu : MonoBehaviour {
         tripleSpeed.image.overrideSprite = tripleSelected;
         tripleSpeed.interactable = false;
         Time.timeScale = 3;
+        isGamePaused = false;
     }
 
     void Update()
