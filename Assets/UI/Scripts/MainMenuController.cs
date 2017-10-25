@@ -36,7 +36,7 @@ public class MainMenuController : MonoBehaviour {
         SoundToPlay.PlayMusic(mainMenuBG);
     }
     public void StartGame() {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("LoadingScene");
     }
 
     public void QuitGame() {
