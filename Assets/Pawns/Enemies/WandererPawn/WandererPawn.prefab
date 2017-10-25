@@ -90,8 +90,8 @@ Rigidbody:
   m_Drag: Infinity
   m_AngularDrag: Infinity
   m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!95 &95421419676321358
@@ -138,6 +138,7 @@ MonoBehaviour:
   isAttacking: 0
   isDead: 0
   speed: 0
+  speedMultiplier: 1
 --- !u!114 &114171259623386668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,9 +192,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frozenMaterial: {fileID: 2100000, guid: 252514e5b26542346ab891ddd32213d8, type: 2}
   currentState: 2
+  type: 0
   finalDestination: {fileID: 0}
   nav: {fileID: 0}
   speed: 0
+  rig: {fileID: 0}
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   homePosition: {x: 0, y: 0, z: 0}

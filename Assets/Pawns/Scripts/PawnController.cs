@@ -27,7 +27,7 @@ public class PawnController : MonoBehaviour {
     public Transform finalDestination;
     public NavMeshAgent nav;
     public float speed;
-
+    public Rigidbody rig;
     public Vector3 currentDestination;
 
     public GameObject target;
@@ -52,6 +52,8 @@ public class PawnController : MonoBehaviour {
         waypoints = new List<Transform>();
         nav = GetComponent<NavMeshAgent>();
         nav.speed = speed;
+        speed = 3;
+        rig = GetComponent<Rigidbody>();
     }
 
     public void SetupWaypoints(int lane_, int waypoint_)
@@ -216,27 +218,26 @@ public class PawnController : MonoBehaviour {
 
 	protected bool IsAtLocation()
 	{
-		float dist = nav.remainingDistance;
+        float dist = nav.remainingDistance;
         //Debug.Log(dist);
 
-       
 
 
-		if (!nav.pathPending)
-		{
-			if(nav.remainingDistance <= nav.stoppingDistance)
-			{
+        if (!nav.pathPending)
+        {
+            if (nav.remainingDistance <= nav.stoppingDistance)
+            {
                 return true;
-				//if(!nav.hasPath || nav.velocity.magnitude == 0f)
-				//{
-				//	return true;
-				//}
-			}
-		}
-		return false;
+                //if(!nav.hasPath || nav.velocity.magnitude == 0f)
+                //{
+                //	return true;
+                //}
+            }
+        }
+        return false;
 	}
 
-
+    Vector3 dir;
     public virtual void EnterFrozenTime()
     {
         nav.speed = speed*0.5f;
@@ -278,10 +279,16 @@ public class PawnController : MonoBehaviour {
                     if(waypoints[nextWaypoint].position != currentDestination)
                     {
                         currentDestination = waypoints[nextWaypoint].position;
+                       
                         nav.SetDestination(currentDestination);
+                       
+                        
                     }
+                   
                 }
-
+                //dir = (currentDestination - transform.position).normalized;
+                //rig.MovePosition(transform.position+ dir  * speed * Time.deltaTime);
+                //transform.Translate(dir * speed * Time.deltaTime, Space.World);
 
                 if (IsAtLocation())
                     nextWaypoint++;
