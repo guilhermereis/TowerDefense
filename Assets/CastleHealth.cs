@@ -59,7 +59,7 @@ public class CastleHealth : MonoBehaviour {
 
         maxHealth = 5000.0f;
 
-        health = maxHealth;
+        health = 1;
 
         castleDestructionAnimator = GetComponent<Animator>();
 
@@ -91,6 +91,7 @@ public class CastleHealth : MonoBehaviour {
             }
             else
             {
+                GameController.Repair();
                 Debug.Log("Castle is at full health !");
             }
         }

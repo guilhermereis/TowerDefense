@@ -100,7 +100,7 @@ public class GridMouse : MonoBehaviour
     {
         if (instance != null) //if instance has been set before 
         {
-            Debug.LogError("More than one GridMouse in scene !");
+            //Debug.LogError("More than one GridMouse in scene !");
             return;
         }
         instance = this;
@@ -535,7 +535,7 @@ public class GridMouse : MonoBehaviour
                 {
                     if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     {
-                        Debug.Log("DESELECT 2");
+                       //Debug.Log("DESELECT 2");
                         HandleBuildingTower(ray, hitInfo, didHit, x, z);
                         buildManager.DeselectUnitToBuild();
                     }
@@ -632,7 +632,7 @@ public class GridMouse : MonoBehaviour
     {
         if (temporaryInstance)
         {
-            Debug.Log("DESTROYING SOLDIER CAMP PREVIEW");
+            //Debug.Log("DESTROYING SOLDIER CAMP PREVIEW");
             //if the logic doens't involve going over track tiles
             SetPreviewColor(Color.red);
             instance_x = Mathf.FloorToInt(temporaryInstance.transform.position.x - 0.5f + _gridSize.x / 2);
@@ -721,7 +721,7 @@ public class GridMouse : MonoBehaviour
         bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Deselect via ESC");
+            //Debug.Log("Deselect via ESC");
             if (temporaryInstance && temporaryInstance.name == "MinePrefab(Clone)")
             {
                 DestroySoldierCampPreview();
