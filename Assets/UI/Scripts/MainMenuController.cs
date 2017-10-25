@@ -10,7 +10,6 @@ public class MainMenuController : MonoBehaviour {
 
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
         if (PlayerPrefs.GetInt("FirstAccess") != 1)
         {
             PlayerPrefs.SetFloat("master volume", 1f);
