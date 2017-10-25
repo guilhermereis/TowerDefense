@@ -34,14 +34,17 @@ public class RainningManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-        if(countdown <=0)
+		if(GameController.gameState!= GameState.GameOver)
         {
-            Strike();
-            countdown = timeToStrike;
-        }
+            if(countdown <=0)
+            {
+                Strike();
+                countdown = timeToStrike;
+            }
 
-        countdown -= Time.deltaTime;
+            countdown -= Time.deltaTime;
+
+        }
 
 	}
 }
