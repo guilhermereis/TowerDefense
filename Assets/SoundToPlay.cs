@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SoundToPlay : MonoBehaviour
 {
@@ -18,11 +19,16 @@ public class SoundToPlay : MonoBehaviour
 
     void volumesChangedDelegate() {
         SetAllVolumes();
+        List<AudioSource> audiosToRemove = new List<AudioSource>();
+        BGs = BGs.Where(audio => audio != null).ToList();
+
         foreach (AudioSource audio in BGs)
         {
-            if (audio.isPlaying)
-            {
-                audio.volume = PlayerPrefs.GetFloat("music volume");
+            if(audio){
+                if (audio.isPlaying)
+                {
+                    audio.volume = PlayerPrefs.GetFloat("music volume");
+                }
             }
         }
     }

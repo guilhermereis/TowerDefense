@@ -110,13 +110,8 @@ public class ConfigurationMenu : MonoBehaviour {
 
     public void getScreenResolutions() {
         resolutions = Screen.resolutions;
-        //resolutions = new Resolution[4];
-        //resolutions[0] = new Resolution(); resolutions[0].width = 1920; resolutions[0].height = 1080;
-        //resolutions[1] = new Resolution(); resolutions[1].width = 1600; resolutions[1].height = 900;
-        //resolutions[2] = new Resolution(); resolutions[2].width = 800; resolutions[2].height = 600;
-        //resolutions[3] = new Resolution(); resolutions[3].width = 640; resolutions[3].height = 420;
-
         resolutionDropDown.options.Clear();
+
         string pattern = @" \d+Hz";
         string replacement = "";
         Regex rgx = new Regex(pattern);
@@ -124,9 +119,12 @@ public class ConfigurationMenu : MonoBehaviour {
         foreach (Resolution r in resolutions) {
             resolutionDropDown.options.Add(new Dropdown.OptionData(r.width +"x"+ r.height));
         }
+
+
         if (resolutions.Length > activeScreenResIndex) {
             resForceValue = true;
             resolutionDropDown.value = activeScreenResIndex;
+            fullscreenToggle.isOn = Screen.fullScreen;
 
             resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = rgx.Replace(("" + resolutions[activeScreenResIndex]), replacement);
         }
