@@ -52,7 +52,7 @@ public class PawnController : MonoBehaviour {
         waypoints = new List<Transform>();
         nav = GetComponent<NavMeshAgent>();
         nav.speed = speed;
-        speed = 3;
+        //speed = 3;
         rig = GetComponent<Rigidbody>();
     }
 

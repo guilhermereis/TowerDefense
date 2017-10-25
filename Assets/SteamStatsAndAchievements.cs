@@ -273,8 +273,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerBuilt += c_numberOfTowers;
-                SteamUserStats.SetStat("totalNumTower", p_totalTowerBuilt);
+                //p_totalTowerBuilt += c_numberOfTowers;
+                SteamUserStats.SetStat("totalNumTower", 10);
 
             }
 
@@ -287,8 +287,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerBuilt += c_numberOfTowers;
-                SteamUserStats.SetStat("totalNumTower", p_totalTowerBuilt);
+                //p_totalTowerBuilt += c_numberOfTowers;
+                SteamUserStats.SetStat("totalNumTower", 100);
 
             }
         }else  if(c_numberOfTowers + p_totalTowerBuilt == 1000)
@@ -298,8 +298,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerBuilt += c_numberOfTowers;
-                SteamUserStats.SetStat("totalNumTower", p_totalTowerBuilt);
+                //p_totalTowerBuilt += c_numberOfTowers;
+                SteamUserStats.SetStat("totalNumTower", 1000);
 
             }
         }
@@ -314,8 +314,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel1Built += c_numberOftower1;
-                SteamUserStats.SetStat("totalNumTower1", p_totalTowerlevel1Built);
+                //p_totalTowerlevel1Built += c_numberOftower1;
+                SteamUserStats.SetStat("totalNumTower1", 10);
 
             }
 
@@ -328,8 +328,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel1Built += c_numberOftower1;
-                SteamUserStats.SetStat("totalNumTower1", p_totalTowerlevel1Built);
+                //p_totalTowerlevel1Built += c_numberOftower1;
+                SteamUserStats.SetStat("totalNumTower1", 100);
 
             }
         }
@@ -340,8 +340,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel1Built += c_numberOftower1;
-                SteamUserStats.SetStat("totalNumTower1", p_totalTowerlevel1Built);
+                //p_totalTowerlevel1Built += c_numberOftower1;
+                SteamUserStats.SetStat("totalNumTower1", 1000);
 
             }
         }
@@ -356,8 +356,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel2Built += c_numberOftower2;
-                SteamUserStats.SetStat("totalNumTower2", p_totalTowerlevel2Built);
+                //p_totalTowerlevel2Built += c_numberOftower2;
+                SteamUserStats.SetStat("totalNumTower2", 10);
 
             }
 
@@ -370,8 +370,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel2Built += c_numberOftower2;
-                SteamUserStats.SetStat("totalNumTower2", p_totalTowerlevel2Built);
+                //p_totalTowerlevel2Built += c_numberOftower2;
+                SteamUserStats.SetStat("totalNumTower2", 100);
 
             }
         }
@@ -382,8 +382,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel2Built += c_numberOftower2;
-                SteamUserStats.SetStat("totalNumTower2", p_totalTowerlevel2Built);
+                //p_totalTowerlevel2Built += c_numberOftower2;
+                SteamUserStats.SetStat("totalNumTower2", 1000);
 
             }
         }
@@ -398,8 +398,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel3Built += c_numberOftower3;
-                SteamUserStats.SetStat("totalNumTower3", p_totalTowerlevel3Built);
+                //p_totalTowerlevel3Built += c_numberOftower3;
+                SteamUserStats.SetStat("totalNumTower3", 10);
 
             }
 
@@ -412,8 +412,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel3Built += c_numberOftower3;
-                SteamUserStats.SetStat("totalNumTower3", p_totalTowerlevel3Built);
+                //p_totalTowerlevel3Built += c_numberOftower3;
+                SteamUserStats.SetStat("totalNumTower3", 100);
 
             }
         }
@@ -424,8 +424,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerlevel3Built += c_numberOftower3;
-                SteamUserStats.SetStat("totalNumTower3", p_totalTowerlevel3Built);
+                //p_totalTowerlevel3Built += c_numberOftower3;
+                SteamUserStats.SetStat("totalNumTower3", 1000);
 
             }
         }
@@ -440,8 +440,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerIceBuilt += c_numberOfIceTower;
-                SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
+                //p_totalTowerIceBuilt += c_numberOfIceTower;
+                SteamUserStats.SetStat("totalNumTowerIce", 10);
 
             }
 
@@ -454,8 +454,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerIceBuilt += c_numberOfIceTower;
-                SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
+                //p_totalTowerIceBuilt += c_numberOfIceTower;
+                SteamUserStats.SetStat("totalNumTowerIce", 100);
 
             }
         }
@@ -466,8 +466,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerIceBuilt += c_numberOfIceTower;
-                SteamUserStats.SetStat("totalNumTowerIce", p_totalTowerIceBuilt);
+                //p_totalTowerIceBuilt += c_numberOfIceTower;
+                SteamUserStats.SetStat("totalNumTowerIce", 1000);
 
             }
         }
@@ -482,8 +482,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerFireBuilt += c_numberOfFireTower;
-                SteamUserStats.SetStat("totalNumTowerFire", p_totalTowerFireBuilt);
+                //p_totalTowerFireBuilt += c_numberOfFireTower;
+                SteamUserStats.SetStat("totalNumTowerFire", 10);
 
             }
 
@@ -496,8 +496,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerFireBuilt += c_numberOfFireTower;
-                SteamUserStats.SetStat("totalNumTowerFire", p_totalTowerFireBuilt);
+                //p_totalTowerFireBuilt += c_numberOfFireTower;
+                SteamUserStats.SetStat("totalNumTowerFire", 100);
 
             }
         }
@@ -508,8 +508,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalTowerFireBuilt += c_numberOfFireTower;
-                SteamUserStats.SetStat("totalNumTowerFire", p_totalTowerFireBuilt);
+                //p_totalTowerFireBuilt += c_numberOfFireTower;
+                SteamUserStats.SetStat("totalNumTowerFire", 1000    );
 
             }
         }
@@ -524,8 +524,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalMineBuilt += c_numberOfMine;
-                SteamUserStats.SetStat("totalNumMineBuilt", p_totalMineBuilt);
+                //p_totalMineBuilt += c_numberOfMine;
+                SteamUserStats.SetStat("totalNumMineBuilt", 10);
 
             }
 
@@ -537,8 +537,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalMineBuilt += c_numberOfMine;
-                SteamUserStats.SetStat("totalNumMineBuilt", p_totalMineBuilt);
+                //p_totalMineBuilt += c_numberOfMine;
+                SteamUserStats.SetStat("totalNumMineBuilt", 100);
 
             }
 
@@ -550,8 +550,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalMineBuilt += c_numberOfMine;
-                SteamUserStats.SetStat("totalNumMineBuilt", p_totalMineBuilt);
+                //p_totalMineBuilt += c_numberOfMine;
+                SteamUserStats.SetStat("totalNumMineBuilt", 1000);
 
             }
 
@@ -643,8 +643,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalMonsterKilled += c_numberOfMonstersKilled;
-                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
+                //p_totalMonsterKilled += c_numberOfMonstersKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", 100);
 
             }
 
@@ -656,8 +656,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalMonsterKilled += c_numberOfMonstersKilled;
-                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
+                //p_totalMonsterKilled += c_numberOfMonstersKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", 1000);
 
             }
 
@@ -669,8 +669,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalMonsterKilled += c_numberOfMonstersKilled;
-                SteamUserStats.SetStat("totalNumGoblinKilled", p_totalMonsterKilled);
+                //p_totalMonsterKilled += c_numberOfMonstersKilled;
+                SteamUserStats.SetStat("totalNumGoblinKilled", 10000);
 
             }
 
@@ -687,8 +687,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalWandererKilled += c_numberOfWandererKilled;
-                SteamUserStats.SetStat("totalNumWandererKilled", p_totalWandererKilled);
+                //p_totalWandererKilled += c_numberOfWandererKilled;
+                SteamUserStats.SetStat("totalNumWandererKilled", 10);
 
             }
 
@@ -700,8 +700,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalWandererKilled += c_numberOfWandererKilled;
-                SteamUserStats.SetStat("totalNumWandererKilled", p_totalWandererKilled);
+                //p_totalWandererKilled += c_numberOfWandererKilled;
+                SteamUserStats.SetStat("totalNumWandererKilled", 100);
 
             }
 
@@ -713,8 +713,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalWandererKilled += c_numberOfWandererKilled;
-                SteamUserStats.SetStat("totalNumWandererKilled", p_totalWandererKilled);
+                //p_totalWandererKilled += c_numberOfWandererKilled;
+                SteamUserStats.SetStat("totalNumWandererKilled", 1000);
 
             }
 
@@ -731,8 +731,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalWarriorKilled += c_numberOfWarriorKilled;
-                SteamUserStats.SetStat("totalNumWarriorKilled", p_totalWarriorKilled);
+                //p_totalWarriorKilled += c_numberOfWarriorKilled;
+                SteamUserStats.SetStat("totalNumWarriorKilled", 10);
 
             }
 
@@ -745,8 +745,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalWarriorKilled += c_numberOfWarriorKilled;
-                SteamUserStats.SetStat("totalNumWarriorKilled", p_totalWarriorKilled);
+                //p_totalWarriorKilled += c_numberOfWarriorKilled;
+                SteamUserStats.SetStat("totalNumWarriorKilled", 100);
 
             }
 
@@ -759,8 +759,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalWarriorKilled += c_numberOfWarriorKilled;
-                SteamUserStats.SetStat("totalNumWarriorKilled", p_totalWarriorKilled);
+                //p_totalWarriorKilled += c_numberOfWarriorKilled;
+                SteamUserStats.SetStat("totalNumWarriorKilled", 1000);
 
             }
 
@@ -777,8 +777,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalBomberKilled += c_numberOfBomberKilled;
-                SteamUserStats.SetStat("totalNumBomberKilled", p_totalBomberKilled);
+                //p_totalBomberKilled += c_numberOfBomberKilled;
+                SteamUserStats.SetStat("totalNumBomberKilled", 10);
 
             }
 
@@ -790,8 +790,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalBomberKilled += c_numberOfBomberKilled;
-                SteamUserStats.SetStat("totalNumBomberKilled", p_totalBomberKilled);
+                //p_totalBomberKilled += c_numberOfBomberKilled;
+                SteamUserStats.SetStat("totalNumBomberKilled", 100);
 
             }
 
@@ -803,8 +803,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalBomberKilled += c_numberOfBomberKilled;
-                SteamUserStats.SetStat("totalNumBomberKilled", p_totalBomberKilled);
+                //p_totalBomberKilled += c_numberOfBomberKilled;
+                SteamUserStats.SetStat("totalNumBomberKilled", 1000);
 
             }
 
@@ -821,8 +821,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalKingKilled += c_numberOfKingKilled;
-                SteamUserStats.SetStat("totalNumKingKilled", p_totalKingKilled);
+                //p_totalKingKilled += c_numberOfKingKilled;
+                SteamUserStats.SetStat("totalNumKingKilled", 10);
 
             }
 
@@ -835,8 +835,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalKingKilled += c_numberOfKingKilled;
-                SteamUserStats.SetStat("totalNumKingKilled", p_totalKingKilled);
+                //p_totalKingKilled += c_numberOfKingKilled;
+                SteamUserStats.SetStat("totalNumKingKilled", 100);
 
             }
 
@@ -849,8 +849,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalKingKilled += c_numberOfKingKilled;
-                SteamUserStats.SetStat("totalNumKingKilled", p_totalKingKilled);
+                //p_totalKingKilled += c_numberOfKingKilled;
+                SteamUserStats.SetStat("totalNumKingKilled", 1000);
 
             }
 
@@ -921,8 +921,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalmoneyCollected += c_moneyCollected;
-                SteamUserStats.SetStat("totalNumMoneyCollected", p_totalmoneyCollected);
+                //p_totalmoneyCollected += c_moneyCollected;
+                SteamUserStats.SetStat("totalNumMoneyCollected", 1000);
 
             }
 
@@ -935,8 +935,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalmoneyCollected += c_moneyCollected;
-                SteamUserStats.SetStat("totalNumMoneyCollected", p_totalmoneyCollected);
+                //p_totalmoneyCollected += c_moneyCollected;
+                SteamUserStats.SetStat("totalNumMoneyCollected", 1000);
 
             }
 
@@ -953,8 +953,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalmoneyRaised += c_moneyRaised;
-                SteamUserStats.SetStat("totalNumMoneyRaised", p_totalmoneyRaised);
+                //p_totalmoneyRaised += c_moneyRaised;
+                SteamUserStats.SetStat("totalNumMoneyRaised", 1000);
 
             }
 
@@ -967,8 +967,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             {
                 //unlock achievement and store the stats value
                 UnlockAchievement(achv);
-                p_totalmoneyRaised += c_moneyRaised;
-                SteamUserStats.SetStat("totalNumMoneyRaised", p_totalmoneyRaised);
+                //p_totalmoneyRaised += c_moneyRaised;
+                SteamUserStats.SetStat("totalNumMoneyRaised", 10000);
 
             }
 
@@ -1081,8 +1081,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             if (!achv.isAchieved)
             {
                 UnlockAchievement(achv);
-                p_totalEnemyFrozen += c_numberOfFrozen;
-                SteamUserStats.SetStat("totalNumEnemyFrozen", p_totalEnemyFrozen);
+                //p_totalEnemyFrozen += c_numberOfFrozen;
+                SteamUserStats.SetStat("totalNumEnemyFrozen", 10);
             }
         }
         else if (c_numberOfFrozen + p_totalEnemyFrozen == 100)
@@ -1091,8 +1091,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             if (!achv.isAchieved)
             {
                 UnlockAchievement(achv);
-                p_totalEnemyFrozen += c_numberOfFrozen;
-                SteamUserStats.SetStat("totalNumEnemyFrozen", p_totalEnemyFrozen);
+                //p_totalEnemyFrozen += c_numberOfFrozen;
+                SteamUserStats.SetStat("totalNumEnemyFrozen", 100);
             }
         }
         else if (c_numberOfFrozen + p_totalEnemyFrozen == 1000)
@@ -1101,8 +1101,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             if (!achv.isAchieved)
             {
                 UnlockAchievement(achv);
-                p_totalEnemyFrozen += c_numberOfFrozen;
-                SteamUserStats.SetStat("totalNumEnemyFrozen", p_totalEnemyFrozen);
+                //p_totalEnemyFrozen += c_numberOfFrozen;
+                SteamUserStats.SetStat("totalNumEnemyFrozen", 1000);
             }
         }
     }
@@ -1182,8 +1182,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
             if (!achv.isAchieved)
             {
-                p_totalRepair += c_repair;
-                SteamUserStats.SetStat("totalNumRepair", p_totalRepair);
+                //p_totalRepair += c_repair;
+                SteamUserStats.SetStat("totalNumRepair", 10);
                 UnlockAchievement(achv);
             }
 
@@ -1193,8 +1193,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
             if (!achv.isAchieved)
             {
-                p_totalRepair += c_repair;
-                SteamUserStats.SetStat("totalNumRepair", p_totalRepair);
+                //p_totalRepair += c_repair;
+                SteamUserStats.SetStat("totalNumRepair", 50);
                 UnlockAchievement(achv);
             }
 
@@ -1204,8 +1204,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
             if (!achv.isAchieved)
             {
-                p_totalRepair += c_repair;
-                SteamUserStats.SetStat("totalNumRepair", p_totalRepair);
+                //p_totalRepair += c_repair;
+                SteamUserStats.SetStat("totalNumRepair", 100);
                 UnlockAchievement(achv);
             }
 
@@ -1223,20 +1223,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
     public void CheckForWaves()
     {
-        if (c_numberOfWave + p_totalWaves == 10)
-        {
-            Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_WIN_10_WAVES);
-            
-            if (!achv.isAchieved)
-            {
-                p_totalWaves += c_numberOfWave;
-                SteamUserStats.SetStat("totalNumWaves", p_totalWaves);
-                UnlockAchievement(achv);
-            }
-
-            
-
-        }
+       
 
         if(c_numberOfWave == 10)
         {
@@ -1365,6 +1352,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
     public void UpdateStats()
     {
+        //here we update the persistent values and reset the current values for next wave
         p_totalWaves+= c_numberOfWave;
         p_totalTowerBuilt += c_numberOfTowers;
         p_totalTowerlevel1Built += c_numberOftower1;
@@ -1385,6 +1373,25 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         p_totalmoneyRaised += c_moneyRaised;
         p_totalMonsterKilled += c_numberOfMonstersKilled;
 
+        c_numberOfWave = 0;
+        c_numberOfTowers = 0;
+        c_numberOftower1 = 0;
+        c_numberOftower2 = 0;
+        c_numberOftower3 = 0;
+        c_numberOfIceTower = 0;
+        c_numberOfFireTower = 0;
+        c_numberOfMine = 0;
+        c_numberOfKingKilled = 0;
+        c_repair = 0;
+        c_numberOfWandererKilled = 0;
+        c_numberOfWarriorKilled = 0;
+        c_numberOfBomberKilled = 0;
+        c_numberOfFrozen = 0;
+        c_numberOfBurnt = 0;
+        c_moneyCollected = 0;
+        c_moneySpent = 0;
+        c_moneyRaised = 0;
+        c_numberOfMonstersKilled = 0;
 
         //store stats in the steam database if necessary.
         SteamUserStats.SetStat("totalNumWaves", p_totalWaves);
