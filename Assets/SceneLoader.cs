@@ -19,9 +19,9 @@ public class SceneLoader : MonoBehaviour {
     IEnumerator LoadNewScene()
     {
 
-        yield return new WaitForSeconds(3);
-
-        AsyncOperation async = SceneManager.LoadSceneAsync(scene);
+        //yield return new WaitForSeconds(3);
+        Debug.Log("Loading . . . ");
+        AsyncOperation async = SceneManager.LoadSceneAsync("MainScene");
         while (!async.isDone)
         {
             tipText.color = new Color(tipText.color.r, tipText.color.g, tipText.color.b, Mathf.PingPong(Time.time, 1));
@@ -29,6 +29,9 @@ public class SceneLoader : MonoBehaviour {
         }
     }
 
+    private void OnDestroy()
+    {
+        
+    }
 
-	
 }
