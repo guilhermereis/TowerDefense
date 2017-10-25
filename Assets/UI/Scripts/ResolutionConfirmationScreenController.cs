@@ -24,6 +24,11 @@ public class ResolutionConfirmationScreenController : MonoBehaviour {
         cg = GetComponent<CanvasGroup>();
     }
 
+    private void OnDestroy()
+    {
+        countDownFinished -= evaluateCountDownFinished;
+    }
+
     public void stopCountDown()
     {
         isCountingDown = false;

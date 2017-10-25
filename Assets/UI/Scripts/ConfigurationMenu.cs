@@ -41,6 +41,12 @@ public class ConfigurationMenu : MonoBehaviour {
         ResolutionConfirmationScreenController.countDownFinished += onScreenResolutionCountDownFinished;
     }
 
+    private void OnDestroy()
+    {
+        soundSliderDelegate -= processSliderChange;
+        ResolutionConfirmationScreenController.countDownFinished -= onScreenResolutionCountDownFinished;
+    }
+
     void Start()
     {
         cg = GetComponent<CanvasGroup>();
@@ -124,10 +130,12 @@ public class ConfigurationMenu : MonoBehaviour {
         if (resolutions.Length > activeScreenResIndex) {
             resForceValue = true;
             resolutionDropDown.value = activeScreenResIndex;
+            resForceValue = true;
             fullscreenToggle.isOn = Screen.fullScreen;
-
             resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = rgx.Replace(("" + resolutions[activeScreenResIndex]), replacement);
         }
+
+        resForceValue = false;
     }
 
     public void OnScreenResSet(int index) {
