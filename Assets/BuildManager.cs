@@ -244,54 +244,61 @@ public class BuildManager : MonoBehaviour {
     //public void SelectBuilding(UnitBlueprint unit, Vector2 position)
     public void SelectBuilding(UnitBlueprint unit, GameObject gameObject)
     {
-        unitToBuild = null;
-        if (LastSelectedGameObject != null)
+        if (!TopRightMenu.isGamePaused)
         {
-            Transform LastSphere = LastSelectedGameObject.transform.Find("Sphere");
-            Transform LastGroundLine = LastSelectedGameObject.transform.Find("GroundLine");
+            unitToBuild = null;
+            if (LastSelectedGameObject != null)
+            {
+                Transform LastSphere = LastSelectedGameObject.transform.Find("Sphere");
+                Transform LastGroundLine = LastSelectedGameObject.transform.Find("GroundLine");
 
-            if (LastSphere)
-                LastSphere.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                if (LastSphere)
+                    LastSphere.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
-            if (LastGroundLine)
-                LastGroundLine.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                if (LastGroundLine)
+                    LastGroundLine.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            }
+            //if (selectedUnit == unit)
+            selectedUnit = unit;
+            selectedGameObject = gameObject;
+            selectedPosition = gameObject.transform.position;
+
+
+
+            Transform Sphere = selectedGameObject.transform.Find("Sphere");
+            Transform GroundLine = selectedGameObject.transform.Find("GroundLine");
+            if (Sphere)
+                Sphere.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            if (GroundLine)
+                GroundLine.gameObject.GetComponent<MeshRenderer>().enabled = true;
+
+            LastSelectedGameObject = selectedGameObject;
         }
-        //if (selectedUnit == unit)
-        selectedUnit = unit;
-        selectedGameObject = gameObject;
-        selectedPosition = gameObject.transform.position;
-
-        
-
-        Transform Sphere = selectedGameObject.transform.Find("Sphere");
-        Transform GroundLine = selectedGameObject.transform.Find("GroundLine");
-        if (Sphere)
-            Sphere.gameObject.GetComponent<MeshRenderer>().enabled = true;
-        if (GroundLine)
-            GroundLine.gameObject.GetComponent<MeshRenderer>().enabled = true;
-
-        LastSelectedGameObject = selectedGameObject;
     }
     public void SelectBuilding(int indexOfSelectedObject)
     {
-        unitToBuild = null;
-        if (LastSelectedGameObject != null) {
-            LastSelectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
-            LastSelectedGameObject.transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = false;
-        }
+        if (!TopRightMenu.isGamePaused)
+        {
+            unitToBuild = null;
+            if (LastSelectedGameObject != null)
+            {
+                LastSelectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = false;
+                LastSelectedGameObject.transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = false;
+            }
 
-        GridMouse gridMouse = GridMouse.instance;
-        BuildableController buildable =
-                gridMouse.ListOfGameObjects[indexOfSelectedObject].GetComponent<BuildableController>();
-        
-        //if (selectedUnit == unit)
-        selectedUnit = buildable.getUnitBlueprint();
-        selectedGameObject = gridMouse.ListOfGameObjects[indexOfSelectedObject];
-        selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
-        selectedGameObject.transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = true;
-        
-        //selectedPosition = position;
-        LastSelectedGameObject = selectedGameObject;
+            GridMouse gridMouse = GridMouse.instance;
+            BuildableController buildable =
+                    gridMouse.ListOfGameObjects[indexOfSelectedObject].GetComponent<BuildableController>();
+
+            //if (selectedUnit == unit)
+            selectedUnit = buildable.getUnitBlueprint();
+            selectedGameObject = gridMouse.ListOfGameObjects[indexOfSelectedObject];
+            selectedGameObject.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
+            selectedGameObject.transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = true;
+
+            //selectedPosition = position;
+            LastSelectedGameObject = selectedGameObject;
+        }
     }
     public GameObject getSelectedGameObject() {
         return selectedGameObject;
@@ -343,65 +350,68 @@ public class BuildManager : MonoBehaviour {
     }
 
     public void showUpgradeWheel() {
-        if (upgradeWheelController)
+        if (!TopRightMenu.isGamePaused)
         {
-            upgradeWheelController.tower = selectedGameObject;
-            BuildableController buildingController = selectedGameObject.GetComponent<BuildableController>();
-            TowerController towerController = selectedGameObject.GetComponent<TowerController>();
-            string name = buildingController.getUnitBlueprint().name;
-
-            if (buildingController)
+            if (upgradeWheelController)
             {
+                upgradeWheelController.tower = selectedGameObject;
+                BuildableController buildingController = selectedGameObject.GetComponent<BuildableController>();
+                TowerController towerController = selectedGameObject.GetComponent<TowerController>();
+                string name = buildingController.getUnitBlueprint().name;
+
+                if (buildingController)
+                {
 
 
-                if (name == Shop.instance.towerLevel1.name)
-                {
-                    upgradeWheelController.setTowerLvl(0);
-                }
-                else if (name == Shop.instance.towerLevel2.name)
-                {
-                    upgradeWheelController.setTowerLvl(1);
-                }
-                else if (name == Shop.instance.towerLevel3.name)
-                {
-                    upgradeWheelController.setTowerLvl(2);
-                    upgradeWheelController.setSpecialization(1);
-                }
-                else if (name == Shop.instance.towerSlow.name)
-                {
-                    upgradeWheelController.setTowerLvl(1);
-                    upgradeWheelController.setSpecialization(0);
-                }
-                else if (name == Shop.instance.towerTesla.name)
-                {
-                    upgradeWheelController.setTowerLvl(1);
-                    upgradeWheelController.setSpecialization(2);
-                }
-                
-                if (name == Shop.instance.miningCamp.name)
-                {
-                    upgradeWheelController.setMineSellPrice();
+                    if (name == Shop.instance.towerLevel1.name)
+                    {
+                        upgradeWheelController.setTowerLvl(0);
+                    }
+                    else if (name == Shop.instance.towerLevel2.name)
+                    {
+                        upgradeWheelController.setTowerLvl(1);
+                    }
+                    else if (name == Shop.instance.towerLevel3.name)
+                    {
+                        upgradeWheelController.setTowerLvl(2);
+                        upgradeWheelController.setSpecialization(1);
+                    }
+                    else if (name == Shop.instance.towerSlow.name)
+                    {
+                        upgradeWheelController.setTowerLvl(1);
+                        upgradeWheelController.setSpecialization(0);
+                    }
+                    else if (name == Shop.instance.towerTesla.name)
+                    {
+                        upgradeWheelController.setTowerLvl(1);
+                        upgradeWheelController.setSpecialization(2);
+                    }
+
+                    if (name == Shop.instance.miningCamp.name)
+                    {
+                        upgradeWheelController.setMineSellPrice();
+                    }
+                    else
+                    {
+                        upgradeWheelController.setAttackDamage((int)((TowerController)buildingController).getAttackPowerLVL());
+                        upgradeWheelController.setAttackSpeedLvl((int)((TowerController)buildingController).getFireRateLVL());
+                    }
+
+                    upgradeWheelController.isActive = true;
+                    upgradeWheel.SetActive(true);
+                    upgradeWheelController.openWheel();
                 }
                 else
                 {
-                    upgradeWheelController.setAttackDamage((int)((TowerController)buildingController).getAttackPowerLVL());
-                    upgradeWheelController.setAttackSpeedLvl((int)((TowerController)buildingController).getFireRateLVL());
-                }
-                                
-                upgradeWheelController.isActive = true;
-                upgradeWheel.SetActive(true);
-                upgradeWheelController.openWheel();
-            }
-            else
-            {
-                
-                upgradeWheel.SetActive(true);
-                upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
-                upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(false);
-                upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject.SetActive(false);
 
-                upgradeWheelController.isActive = true;
-                upgradeWheelController.openWheel();
+                    upgradeWheel.SetActive(true);
+                    upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
+                    upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(false);
+                    upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject.SetActive(false);
+
+                    upgradeWheelController.isActive = true;
+                    upgradeWheelController.openWheel();
+                }
             }
         }
     }
