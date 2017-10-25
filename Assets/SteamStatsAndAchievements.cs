@@ -1555,7 +1555,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                 SteamUserStats.GetStat("totalNumMoneyRaised", out p_totalmoneyRaised);
                 SteamUserStats.GetStat("totalNumRepair", out p_totalRepair);
 
-
+                Debug.Log("total num of waves " + p_totalWaves);
 
             }
             else
