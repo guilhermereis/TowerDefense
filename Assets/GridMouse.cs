@@ -359,7 +359,7 @@ public class GridMouse : MonoBehaviour
                             }
                             else
                             {
-                                Destroy(temporaryInstance);
+                                DestroySoldierCampPreview();
                             }
                         }
                     }
@@ -664,6 +664,18 @@ public class GridMouse : MonoBehaviour
                         && previewMatrix[x, z + 1] == false)
                     {
                         BuildSoldierCampPreview();
+                        SetPreviewColor(Color.green);
+                    }
+                }
+                else
+                {
+                    if (previewMatrix[x, z] == false
+                        && previewMatrix[x + 1, z + 1] == false
+                        && previewMatrix[x + 1, z] == false
+                        && previewMatrix[x, z + 1] == false)
+                    {
+                        BuildSoldierCampPreview();
+                        SetPreviewColor(Color.red);
                     }
                 }
             }
@@ -694,6 +706,18 @@ public class GridMouse : MonoBehaviour
                     {
 
                         temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance == null) ? new GameObject("PreviewGameObject") : temporaryInstance, position);
+                        SetPreviewColor(Color.green);
+                        previewMatrix[x, z] = true;
+                        //Debug.Log("construiu preview !");
+                    }
+                }
+                else
+                {
+                    if (previewMatrix[x, z] == false)
+                    {
+                        
+                        temporaryInstance = buildManager.BuildPreviewOn((temporaryInstance == null) ? new GameObject("PreviewGameObject") : temporaryInstance, position);
+                        SetPreviewColor(Color.red);
                         previewMatrix[x, z] = true;
                         //Debug.Log("construiu preview !");
                     }
