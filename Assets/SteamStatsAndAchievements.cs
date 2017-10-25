@@ -266,6 +266,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     #region Builds
     public void CheckForTotalTowerBuilt()
     {
+        c_numberOfTowers++;
+
         if (c_numberOfTowers + p_totalTowerBuilt == 10)
         {
             Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_TOWERS);
@@ -517,6 +519,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
     public void CheckForTotalMineBuilt()
     {
+        //Debug.Log("Build mine " + c_numberOfMine);
         if (c_numberOfMine + p_totalMineBuilt == 10)
         {
             Achievement_t achv = achievements.Find(achID => achID.achievementID == Achievement.ACH_BUILD_10_MINE);
@@ -564,11 +567,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         if (!SteamManager.Initialized)
             return;
         
-        c_numberOfTowers ++;
+        
         CheckForTotalTowerBuilt();
 
 
-
+       
         //if(c_numberOfTowers + p_totalTowerBuilt > )
 
         switch (tower)
@@ -1176,10 +1179,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
     public void CheckForRepair()
     {
+      
         if(c_repair + p_totalRepair == 10)
         {
             Achievement_t achv = achievements.Find(achvID => achvID.achievementID == Achievement.ACH_REPAIR_10);
-
             if (!achv.isAchieved)
             {
                 //p_totalRepair += c_repair;
@@ -1335,7 +1338,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
         //for debug
         SteamUserStats.ResetAllStats(true);
-        //SteamUserStats.RequestCurrentStats();
+        SteamUserStats.RequestCurrentStats();
 
         userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
         userStatsReceived = Callback<UserStatsReceived_t>.Create(OnUserStatsReceived);
@@ -1727,6 +1730,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         UpdateAchievements();
         isStoreStats = true;
         
+    }
+
+    private void OnDestroy()
+    {
+        //
     }
 
     private class Achievement_t

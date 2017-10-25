@@ -132,7 +132,7 @@ public class ConfigurationMenu : MonoBehaviour {
             resolutionDropDown.value = activeScreenResIndex;
             resForceValue = true;
             fullscreenToggle.isOn = Screen.fullScreen;
-            resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = rgx.Replace(("" + resolutions[activeScreenResIndex]), replacement);
+            resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = resolutions[activeScreenResIndex].width + "x" + resolutions[activeScreenResIndex].height;
         }
 
         resForceValue = false;

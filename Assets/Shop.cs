@@ -128,7 +128,7 @@ public class Shop : MonoBehaviour {
     {
         if (instance != null) //if instance has been set before 
         {
-            Debug.LogError("More than one Shop in scene !");
+            //Debug.LogError("More than one Shop in scene !");
             return;
         }
         instance = this;
@@ -171,7 +171,7 @@ public class Shop : MonoBehaviour {
 
     public void SelectStandardUnit() {
         if (canBuildPrimary) {
-            Debug.Log("Standard Turret Selected");
+            //Debug.Log("Standard Turret Selected");
             buildManager.SelectUnitToBuild(towerLevel1);
             buildManager.HideOptions();
             
@@ -180,7 +180,7 @@ public class Shop : MonoBehaviour {
 
     public void SelectSecondaryUnit() {
         if (canBuildSecondary) {
-            Debug.Log("Secondary Turret Selected");
+           // Debug.Log("Secondary Turret Selected");
             buildManager.SelectUnitToBuild(miningCamp);
             buildManager.HideOptions();
         }

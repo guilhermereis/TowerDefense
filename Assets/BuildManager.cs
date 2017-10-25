@@ -132,12 +132,12 @@ public class BuildManager : MonoBehaviour {
     public void BuildUnitOn(ref List<GameObject> tempList,int index, Vector3 position, bool upgraded)
     {
         Destroy(GameObject.Find("PreviewGameObject"));
-        Debug.Log("Gonna build !!!");
+        //Debug.Log("Gonna build !!!");
         if (upgraded == false)
         {
             if (PlayerStats.Money < unitToBuild.cost)
             {
-                Debug.Log("Not enough money to build that!");
+                //Debug.Log("Not enough money to build that!");
                 return;
             }
             int spent = PlayerStats.AddMoney(-1 * unitToBuild.cost);
@@ -163,7 +163,7 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.position = getUnitToBuild().position;
 
         tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
-
+        
         Transform sphere = tempList[index].transform.Find("Sphere");
         Transform groundLine = tempList[index].transform.Find("GroundLine");
         
@@ -219,6 +219,7 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.position = getUnitToBuild().position;
 
         tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
+        //GameController.AddBuiltTower(tempList[index].GetComponent<BuildableController>().buildType);
         tempList[index].GetComponent<BuildableController>().BuildEffect();
 
         //if its not a mining camp
@@ -227,12 +228,12 @@ public class BuildManager : MonoBehaviour {
             tempList[index].transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
 
-        for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
-        {
-            Debug.Log("EIS A LISTA");
-            Debug.Log(i + ": " + gridMouse.ListOfGameObjects[i].name);
-        }
-        Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
+        //for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
+        //{
+        //    Debug.Log("EIS A LISTA");
+        //    Debug.Log(i + ": " + gridMouse.ListOfGameObjects[i].name);
+        //}
+        //Debug.Log("Unit built ! Money left: " + PlayerStats.Money);
         Destroy(GameObject.Find("UnitGameObject"));
     }
 

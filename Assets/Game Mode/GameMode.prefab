@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114682633433545104}
   - component: {fileID: 114893865498738820}
   - component: {fileID: 114979860251173350}
+  - component: {fileID: 114600787680053468}
   m_Layer: 0
   m_Name: GameMode
   m_TagString: Untagged
@@ -115,8 +116,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648f5bf18816c87409f202b99ae4bc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartMoney: 90000
+  StartMoney: 500000
   secondChanceAnimator: {fileID: 0}
+--- !u!114 &114600787680053468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580535551379196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b96c0b725e432645b165337a3a60786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114682633433545104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,8 +149,7 @@ MonoBehaviour:
   towerGizmosOffButtonSprite: {fileID: 21300000, guid: 3b70600bc51f4dc42b74a84433e02534,
     type: 3}
   toggleGizmoButton: {fileID: 0}
-  preparationTime: 30
-  stats: {fileID: 0}
+  preparationTime: 40
 --- !u!114 &114830956946701644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,6 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00970f89b5d02284cb47f8d450d6341f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snowlandsAmbientSound: {fileID: 0}
+  grasslandsAmbientSound: {fileID: 0}
+  desertAmbientSound: {fileID: 0}
+  vulcanoLandAmbientSound: {fileID: 0}
 --- !u!114 &114904570169429800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,11 +235,11 @@ MonoBehaviour:
   spawningMonsterLane2: 0
   spawningMonsterLane3: 0
   spawningMonsterLane4: 0
-  waveNumber: 30
-  waveNumberLane1: 30
-  waveNumberLane2: 20
-  waveNumberLane3: 10
-  waveNumberLane4: 1
+  waveNumber: 0
+  waveNumberLane1: 0
+  waveNumberLane2: 0
+  waveNumberLane3: 0
+  waveNumberLane4: 0
   currentMS1: 0
   currentMS2: 0
   currentMS3: 0
@@ -232,7 +247,7 @@ MonoBehaviour:
   waveProgression: 100
   spawnLocation: {fileID: 0}
   hud: {fileID: 0}
-  maxLanes: 4
+  maxLanes: 1
   interval: 10
 --- !u!114 &114979860251173350
 MonoBehaviour:
@@ -257,3 +272,4 @@ MonoBehaviour:
   tripleSpeed: {fileID: 0}
   tripleSelected: {fileID: 21300000, guid: eb4fabc1aa9036d4b8a3e65ada227d6a, type: 3}
   tripleUnselected: {fileID: 21300000, guid: 6378925ba9426cc4f8b1d3d98eb44bb5, type: 3}
+  configMenu: {fileID: 0}
