@@ -24,7 +24,7 @@ public class SceneLoader : MonoBehaviour {
         AsyncOperation async = SceneManager.LoadSceneAsync(scene);
         while (!async.isDone)
         {
-            tipText.color = Random.ColorHSV();//new Color(tipText.color.r, tipText.color.g, tipText.color.b, Mathf.PingPong(Time.time, 1));
+            tipText.color = new Color(tipText.color.r, tipText.color.g, tipText.color.b, Mathf.PingPong(Time.time, 1));
             yield return null;
         }
     }
