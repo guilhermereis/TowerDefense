@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour {
     GameObject victorySound;
 
     public GameObject gameStateUI;
+    public GameObject secondChanceUI;
     private Button startWaveButton;
 
     [Header("UI")]
@@ -208,16 +209,10 @@ public class GameController : MonoBehaviour {
             //
             if (!game_over)
             {
-                if (WaveSpawner.gainSecondChanceCounter >= WaveSpawner.secondChanceWaveCountTarget)
+                game_over = true;
+                if (secondChanceUI != null)
                 {
-                   
-                    game_over = true;
-                    GameObject sc_object = GameObject.Find("SecondChanceDialog");
-                    if (sc_object != null)
-                    {
-                        sc_object.GetComponent<SecondChance>().Show();
-                        Debug.Log("Want to try Again ?");
-                    }
+                    secondChanceUI.GetComponent<TryAgainController>().show();
                 }
             }
         }
