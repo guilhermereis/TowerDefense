@@ -14,7 +14,9 @@ public class Minimap : MonoBehaviour {
        // UpdateMap();
         allSquares = new List<GameObject>();
         scale = GetComponent<RectTransform>().rect.width / 2 / 33f;
+        monsterBatch = new List<GameObject>();
     }
+
     public void addNewSquare()
     {
         allSquares.Add(Instantiate(square, transform));

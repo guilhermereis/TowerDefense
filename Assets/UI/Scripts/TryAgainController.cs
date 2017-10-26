@@ -9,9 +9,7 @@ public class TryAgainController : MonoBehaviour {
     public GameObject hasSecondChanceScreen;
     public GameObject noSecondChanceScreen;
     public GameObject quitConfirmationScreen;
-
-    //HasSecondChance
-
+    public GameObject tryAgainConfirmationPanel;
 
     //NoSecondChance
     public Image AnkFillImage;
@@ -26,6 +24,7 @@ public class TryAgainController : MonoBehaviour {
     public void show() {
         targetFill = (float)WaveSpawner.gainSecondChanceCounter / (float)WaveSpawner.secondChanceWaveCountTarget;
         targetPercent = (int)(targetFill * 100);
+        TopRightMenu.isConfigOn = true;
 
         if (targetFill >= 1f)
         {
@@ -43,6 +42,8 @@ public class TryAgainController : MonoBehaviour {
     }
 
     public void hide() {
+        TopRightMenu.isConfigOn = false;
+
         CanvasGroup cv = GetComponent<CanvasGroup>();
         cv.alpha = 0f;
         cv.blocksRaycasts = false;
@@ -73,9 +74,16 @@ public class TryAgainController : MonoBehaviour {
 
     }
 
-    public void dontUseSecondChance() {
-
+    public void showTryAgainConfirmation() {
+        tryAgainConfirmationPanel.GetComponent<CanvasGroup>().alpha = 1;
+        tryAgainConfirmationPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
+
+    public void hideTryAgainConfirmation() {
+        tryAgainConfirmationPanel.GetComponent<CanvasGroup>().alpha = 0;
+        tryAgainConfirmationPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+
 
     public void showQuitConfirmationScreen()
     {

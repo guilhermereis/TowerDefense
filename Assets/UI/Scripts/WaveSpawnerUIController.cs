@@ -17,9 +17,9 @@ public class WaveSpawnerUIController : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         arrow = transform.Find("Arrow").gameObject;
-        gameObject.SetActive(false);
         arrow.transform.SetParent(transform.parent.gameObject.transform);
-        arrow.SetActive(false);
+        //gameObject.SetActive(false);
+        //arrow.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,7 +60,8 @@ public class WaveSpawnerUIController : MonoBehaviour {
 
     public void hideUI() {
         gameObject.SetActive(false);
-        arrow.SetActive(false);
+        if (arrow)
+            arrow.SetActive(false);
     }
 
     public void enableArrow() {

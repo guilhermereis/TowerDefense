@@ -21,11 +21,13 @@ public class TopRightMenu : MonoBehaviour {
     public Sprite tripleUnselected;
 
     public GameObject configMenu;
-    public static bool isConfigOn = false;
-    public static bool isGamePaused = false;
+    public static bool isConfigOn;
+    public static bool isGamePaused;
 
     public void Start()
     {
+        isConfigOn = false;
+        isGamePaused = false;
         NormalSpeedOnClick();
     }
 

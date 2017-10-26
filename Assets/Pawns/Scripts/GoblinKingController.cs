@@ -104,7 +104,7 @@ public class GoblinKingController : EnemyController {
             }
         }
         else {
-            if(nav)
+            if(nav.isActiveAndEnabled)
                 nav.isStopped = true;
         }
     }

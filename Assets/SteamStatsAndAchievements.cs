@@ -1686,7 +1686,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         {
             if (GameController.gamechangedDelegate != null)
             {
-                //GameController.gamechangedDelegate += OnGameChanged;
+                GameController.gamechangedDelegate += OnGameChanged;
                 Debug.Log("got delegate");
             }
             castleHealth = GameObject.FindObjectOfType<CastleHealth>();

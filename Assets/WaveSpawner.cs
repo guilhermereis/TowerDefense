@@ -212,6 +212,10 @@ public class WaveSpawner : MonoBehaviour {
 
     private void Start()
     {
+        gainSecondChanceCounter = 0;
+        secondChanceWaveCountTarget = 30;
+        loadingAll = false;
+        repetition = 0;
         StartCombinations();
         minimap = GameObject.Find("Minimap").GetComponent<Minimap>();
         waveSpawnerUIs = new Dictionary<string, GameObject>();
@@ -245,6 +249,7 @@ public class WaveSpawner : MonoBehaviour {
         GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
         spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnTransform.position;
         waveSpawnerUIs.Add(spawnUILaneKey, spawner);
+        spawner.GetComponent<WaveSpawnerUIController>().hideUI();
     }
 
     //return total monsters spawned at moment
@@ -592,11 +597,7 @@ public class WaveSpawner : MonoBehaviour {
 
     //waves set up
     void CreateWave()
-    {
-        
-       
-
-
+    {  
         //reseting monsters indexes;
         startedSpawn = false;
         finishedSpawns = 0;
@@ -666,7 +667,10 @@ public class WaveSpawner : MonoBehaviour {
             
             waveMonsters += combinationLane1.Length;
             if (waveSpawnerUIs["Lane1"])
+            {
+                waveSpawnerUIs["Lane1"].gameObject.SetActive(true);
                 waveSpawnerUIs["Lane1"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
+            }
         }
         else if(maxLanes == 2)
         {

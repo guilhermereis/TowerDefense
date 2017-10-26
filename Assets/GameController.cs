@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
     [Header("UI")]
     public Sprite towerGizmosOnButtonSprite;
     public Sprite towerGizmosOffButtonSprite;
-    public static bool towerGizmosOn = true;
+    public static bool towerGizmosOn;
     public GameObject toggleGizmoButton;
 
     [Header("Game State")]
@@ -122,7 +122,7 @@ public class GameController : MonoBehaviour {
         gameState = GameState.Preparation;
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
-
+        towerGizmosOn = true;
     }
 
     private void OnDestroy()

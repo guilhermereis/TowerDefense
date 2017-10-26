@@ -14,8 +14,8 @@ public class PlayerStats : MonoBehaviour {
 
     void Start()
     {
+        Money = 0;
         AddMoney(StartMoney);        
-
         hudCanvas = GameObject.FindGameObjectWithTag("HUD");
         secondChanceMeter = hudCanvas.transform.Find("Player Info").Find("GoldBarUnfilled").Find("GoldBarFilled").gameObject;
         secondChanceAnimator = hudCanvas.transform.Find("Player Info").Find("GoldBarUnfilled").Find("GoldBarFilled").GetComponent<Animator>();
