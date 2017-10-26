@@ -674,12 +674,20 @@ public class WaveSpawner : MonoBehaviour {
             waveNumberLane1++;
             waveNumberLane2++;
             
-            waveLane1 = new Wave(waveNumberLane1 / interval, currentMS1, 10);
-            waveLane2 = new Wave(waveNumberLane2 / interval,currentMS2,10);
+           
             if (waveNumberLane1 % (int)interval == 0)
+            {
                 currentMS1++;
+               
+            }
             if (waveNumberLane2 % (int)interval == 0)
+            {
                 currentMS2++;
+               
+            }
+
+            waveLane1 = new Wave(waveNumberLane1 % (int)interval /interval, currentMS1, 10);
+            waveLane2 = new Wave(waveNumberLane2 % (int)interval / interval, currentMS2, 10);
 
             combinationLane1 = waveLane1.GetCombinaton();
             combinationLane2 = waveLane2.GetCombinaton();
@@ -698,16 +706,25 @@ public class WaveSpawner : MonoBehaviour {
             waveNumberLane2++;
             waveNumberLane3++;
 
-            waveLane1 = new Wave(waveNumberLane1 / interval, currentMS1, 10);
-            waveLane2 = new Wave(waveNumberLane2 / interval, currentMS2, 10);
-            waveLane3 = new Wave(waveNumberLane3 / interval, currentMS3, 10);
 
             if (waveNumberLane1 % (int)interval == 0)
+            {
                 currentMS1++;
+            }
             if (waveNumberLane2 % (int)interval == 0)
+            {
                 currentMS2++;
+            }
             if (waveNumberLane3 % (int)interval == 0)
+            {   
                 currentMS3++;
+            }
+
+            waveLane1 = new Wave(waveNumberLane1 % (int)interval / interval, currentMS1, 10);
+            waveLane2 = new Wave(waveNumberLane2 % (int)interval / interval, currentMS2, 10);
+            waveLane3 = new Wave(waveNumberLane3 % (int)interval / interval, currentMS3, 10);
+
+           
 
             combinationLane1 = waveLane1.GetCombinaton();
             combinationLane2 = waveLane2.GetCombinaton();
@@ -726,20 +743,31 @@ public class WaveSpawner : MonoBehaviour {
             waveNumberLane3++;
             waveNumberLane4++;
 
-            waveLane1 = new Wave(waveNumberLane1 / interval, currentMS1, 10);
-            waveLane2 = new Wave(waveNumberLane2 / interval, currentMS2, 10);
-            waveLane3 = new Wave(waveNumberLane3 / interval, currentMS3, 10);
-
             if (waveNumberLane1 % (int)interval == 0)
+            {
+               
                 currentMS1++;
+            }
             if (waveNumberLane2 % (int)interval == 0)
+            {
+                
                 currentMS2++;
+            }
             if (waveNumberLane3 % (int)interval == 0)
+            {
+                
                 currentMS3++;
+            }
             if (waveNumberLane4 % (int)interval == 0)
+            {
+                
                 currentMS4++;
+            }
 
-            waveLane4 = new Wave(waveNumberLane4 / interval, currentMS4, 10);
+            waveLane1 = new Wave(waveNumberLane1 % (int)interval / interval, currentMS1, 10);
+            waveLane2 = new Wave(waveNumberLane2 % (int)interval / interval, currentMS2, 10);
+            waveLane3 = new Wave(waveNumberLane3 % (int)interval / interval, currentMS3, 10);
+            waveLane4 = new Wave(waveNumberLane4 % (int)interval / interval, currentMS4, 10);
 
             combinationLane1 = waveLane1.GetCombinaton();
             combinationLane2 = waveLane2.GetCombinaton();
