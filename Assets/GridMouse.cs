@@ -26,7 +26,7 @@ public class GridMouse : MonoBehaviour
 
     //ignore layers 8,9,10 and 2 (IgnoreRaycast Layer)
     //(lowest order bit is 0-indexed)
-    private int layerMask = Convert.ToInt32("11111111111111111111000011101001", 2);
+    public static int layerMask = Convert.ToInt32("11111111111111111111000011101001", 2);
     //private int layerMask = ~(1 << 10);
 
     public static GridMouse instance;
