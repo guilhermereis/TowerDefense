@@ -14,6 +14,9 @@ public class AudioManager : MonoBehaviour {
     void Start()
     {
         SoundToPlay.PlayMusic(snowlandsAmbientSound);
+        SoundToPlay.PlayMusic(grasslandsAmbientSound);
+        SoundToPlay.PlayMusic(desertAmbientSound);
+        SoundToPlay.PlayMusic(vulcanoLandAmbientSound);
     }
 	// Update is called once per frame
 	void Update () {
