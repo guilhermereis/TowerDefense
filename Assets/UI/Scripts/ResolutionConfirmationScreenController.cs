@@ -27,6 +27,7 @@ public class ResolutionConfirmationScreenController : MonoBehaviour {
     private void OnDestroy()
     {
         countDownFinished -= evaluateCountDownFinished;
+        countDownFinished = null;
     }
 
     public void stopCountDown()

@@ -234,7 +234,6 @@ public class WaveSpawner : MonoBehaviour {
         waveSpawnerUIHolder = hud.transform.Find("WaveSpawnerUI").gameObject;
 
         instantiateWaveSpawnerUI("Lane1", spawnLocationLane1);
-        instantiateWaveSpawnerUI("Lane2", spawnLocationLane2);
         instantiateWaveSpawnerUI("Lane2A", spawnLocationLane2A);
         instantiateWaveSpawnerUI("Lane2B", spawnLocationLane2B);
         instantiateWaveSpawnerUI("Lane3A", spawnLocationLane3A);
@@ -685,8 +684,6 @@ public class WaveSpawner : MonoBehaviour {
             combinationLane2 = waveLane2.GetCombinaton();
 
             waveMonsters += combinationLane1.Length + combinationLane2.Length;
-            if (waveSpawnerUIs["Lane2"])
-                waveSpawnerUIs["Lane2"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
             if (waveSpawnerUIs["Lane2A"])
                 waveSpawnerUIs["Lane2A"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
             if (waveSpawnerUIs["Lane2B"])

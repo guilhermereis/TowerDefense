@@ -8,7 +8,7 @@ public class TryAgainController : MonoBehaviour {
 
     public GameObject hasSecondChanceScreen;
     public GameObject noSecondChanceScreen;
-    public GameObject quitConfirmation;
+    public GameObject quitConfirmationScreen;
 
     //HasSecondChance
 
@@ -66,7 +66,7 @@ public class TryAgainController : MonoBehaviour {
     }
 
     public void quitToMainMenu() {
-        SceneManager.LoadScene("MenuScene");
+        showQuitConfirmationScreen();
     }
 
     public void useSecondChance() {
@@ -75,6 +75,12 @@ public class TryAgainController : MonoBehaviour {
 
     public void dontUseSecondChance() {
 
+    }
+
+    public void showQuitConfirmationScreen()
+    {
+        quitConfirmationScreen.GetComponent<CanvasGroup>().alpha = 1;
+        quitConfirmationScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
 }

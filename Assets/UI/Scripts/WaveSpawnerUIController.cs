@@ -54,7 +54,8 @@ public class WaveSpawnerUIController : MonoBehaviour {
 
     public void showUI() {
         gameObject.SetActive(true);
-        arrow.SetActive(true);
+        if(arrow)
+            arrow.SetActive(true);
     }
 
     public void hideUI() {

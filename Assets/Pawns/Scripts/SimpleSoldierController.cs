@@ -54,7 +54,12 @@ public class SimpleSoldierController : PawnController {
 		
 	}
 
-	protected override void Awake()
+    private void OnDestroy()
+    {
+        deadSoldier = null;
+    }
+
+    protected override void Awake()
     {
         base.Awake();
         currentState = PawnState.Idle;

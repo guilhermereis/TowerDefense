@@ -57,9 +57,14 @@ public class SoldierCampController : BuildableController {
 		soldiersController = new List<SimpleSoldierController>();
         //spawnPoints = new Transform[3];
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnDestroy()
+    {
+        setEnemy = null;
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         
         //spawns soldiers if there are enemies and is not above the soldiers limit

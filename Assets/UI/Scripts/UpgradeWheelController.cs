@@ -36,6 +36,18 @@ public class UpgradeWheelController : MonoBehaviour {
 
     public bool isActive = true;
     public bool upgradeButtonsEnabled = true;
+    // Use this for initialization
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+        gameObject.SetActive(false);
+        isActive = false;
+        clearButtons();
+        DefaultCoinColor = upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Coin").GetComponent<Image>().color;
+        DefaultTextColor = upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Cost").GetComponent<Text>().color;
+        DefaultButtonColor = upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Image>().color;
+    }
 
     public void clearButtons() {
         upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
@@ -392,17 +404,6 @@ public class UpgradeWheelController : MonoBehaviour {
             }
         }
     }
-    // Use this for initialization
-    void Start()
-    {
-        anim = upgradeWheel.GetComponent<Animator>();
-        gameObject.SetActive(false);
-        isActive = false;
-        clearButtons();
-        DefaultCoinColor = upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Coin").GetComponent<Image>().color;
-        DefaultTextColor = upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Cost").GetComponent<Text>().color;
-        DefaultButtonColor = upgradeWheel.transform.Find("UpgradeAttackDamage").GetComponent<Image>().color;
-    }
 
     // Update is called once per frame
     void Update () {
@@ -435,9 +436,12 @@ public class UpgradeWheelController : MonoBehaviour {
         CheckForEnoughMoney(upgradeAS);
         CheckForEnoughMoney(upgradeAD);
 
-        if (anim.GetBool("DoneClosing")) {
-            onWheelClosed();
-            anim.SetBool("DoneClosing", false);
+        if (anim.gameObject.activeSelf) {
+            if (anim.GetBool("DoneClosing"))
+            {
+                onWheelClosed();
+                anim.SetBool("DoneClosing", false);
+            }
         }
     }
 
@@ -469,7 +473,8 @@ public class UpgradeWheelController : MonoBehaviour {
     }
 
     public void closeWheel() {
-        anim.SetBool("Open", false);
+        if(anim.gameObject.activeSelf)
+            anim.SetBool("Open", false);
     }
 
     public void onWheelClosed() {

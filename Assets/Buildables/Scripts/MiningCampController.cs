@@ -54,7 +54,13 @@ public class MiningCampController : BuildableController {
 
 
     }
-	//add gold until reach maxcapacity
+
+    private void OnDestroy()
+    {
+        full = null;
+    }
+
+    //add gold until reach maxcapacity
     public void AddGold()
     {
      

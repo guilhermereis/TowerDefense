@@ -178,6 +178,11 @@ public class PawnController : MonoBehaviour {
       
     }
 
+    private void OnDestroy()
+    {
+        deadPawn = null;
+    }
+
     public PawnState CurrentState {  get { return currentState; }
     }
 

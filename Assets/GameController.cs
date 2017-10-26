@@ -122,7 +122,14 @@ public class GameController : MonoBehaviour {
         gameState = GameState.Preparation;
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
-        
+
+    }
+
+    private void OnDestroy()
+    {
+        gamechangedDelegate -= evaluateGameStateChanged;
+        endWaveDelegate = null;
+        toggleGizmoDelegate = null;
     }
 
     private void OnGUI()

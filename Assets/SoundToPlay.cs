@@ -17,6 +17,11 @@ public class SoundToPlay : MonoBehaviour
         ConfigurationMenu.soundSliderDelegate += volumesChangedDelegate;
     }
 
+    private void OnDestroy()
+    {
+        ConfigurationMenu.soundSliderDelegate -= volumesChangedDelegate;
+    }
+
     void volumesChangedDelegate() {
         SetAllVolumes();
         List<AudioSource> audiosToRemove = new List<AudioSource>();
@@ -97,6 +102,7 @@ public class SoundToPlay : MonoBehaviour
     {
         MonoBehaviour.Instantiate(soundObject, position, rotation);
     }
+
     public static void PlayAtLocation(AudioSource audioSource, Vector3 position, Quaternion rotation)
     {
         audioSource.Play();

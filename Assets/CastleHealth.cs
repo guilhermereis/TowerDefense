@@ -57,7 +57,7 @@ public class CastleHealth : MonoBehaviour {
 
         enemies = new List<PawnCharacter>();
 
-        maxHealth = 5000000.0f;
+        maxHealth = 500;
 
         health = maxHealth;
 
