@@ -19,7 +19,7 @@ public class TeslaCoilController : TowerController {
     // Update is called once per frame
     public override void Update () {
 
-        if (attackCooldown <= 0)
+        if (attackCooldown <= 0 && GameController.gameState != GameState.GameOver)
         {
 
             if (enemies.Count > 0)

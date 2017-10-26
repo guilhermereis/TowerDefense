@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114979860251173350}
   - component: {fileID: 114600787680053468}
   - component: {fileID: 114654163313329504}
+  - component: {fileID: 114314346464696846}
   m_Layer: 0
   m_Name: GameMode
   m_TagString: Untagged
@@ -117,8 +118,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648f5bf18816c87409f202b99ae4bc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartMoney: 500
+  StartMoney: 50000
   secondChanceAnimator: {fileID: 0}
+--- !u!114 &114314346464696846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580535551379196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b96c0b725e432645b165337a3a60786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114600787680053468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,6 +168,7 @@ MonoBehaviour:
   endWaveSound: {fileID: 1913324748725288, guid: 9f071918a39b0fb409cef2916522bfdd,
     type: 2}
   gameStateUI: {fileID: 0}
+  secondChanceUI: {fileID: 0}
   towerGizmosOnButtonSprite: {fileID: 21300000, guid: a2d8441ebcf8f9149809f5e188307c61,
     type: 3}
   towerGizmosOffButtonSprite: {fileID: 21300000, guid: 3b70600bc51f4dc42b74a84433e02534,
@@ -247,9 +260,9 @@ MonoBehaviour:
   spawningMonsterLane2: 0
   spawningMonsterLane3: 0
   spawningMonsterLane4: 0
-  waveNumber: 0
-  waveNumberLane1: 0
-  waveNumberLane2: 0
+  waveNumber: 10
+  waveNumberLane1: 10
+  waveNumberLane2: 1
   waveNumberLane3: 0
   waveNumberLane4: 0
   currentMS1: 0
@@ -259,7 +272,7 @@ MonoBehaviour:
   waveProgression: 100
   spawnLocation: {fileID: 0}
   hud: {fileID: 0}
-  maxLanes: 1
+  maxLanes: 2
   interval: 10
 --- !u!114 &114979860251173350
 MonoBehaviour:

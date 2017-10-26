@@ -57,9 +57,9 @@ public class CastleHealth : MonoBehaviour {
 
         enemies = new List<PawnCharacter>();
 
-        maxHealth = 5000.0f;
+        maxHealth = 5000000.0f;
 
-        health = 1;
+        health = maxHealth;
 
         castleDestructionAnimator = GetComponent<Animator>();
 

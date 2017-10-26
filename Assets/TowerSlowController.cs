@@ -40,11 +40,11 @@ public class TowerSlowController : TowerController {
         if (attackCooldown <= 0)
         {
 
-            if (enemies.Count>0)
+            if (enemies.Count>0 && GameController.gameState != GameState.GameOver)
             {
 
                 Fire();
-                Debug.Log("THIS TOWERS FIRE RATE IS: " + getFireRate());
+                //Debug.Log("THIS TOWERS FIRE RATE IS: " + getFireRate());
                 //lightningLine.enabled = false;
                 attackCooldown = 1 / getFireRate();
 

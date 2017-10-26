@@ -1461,7 +1461,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         {
             if(pCallback.m_bScoreChanged == 1)
             {
-                Debug.Log("NEW RECORD");
+                //Debug.Log("NEW RECORD");
             }
         }
     }
@@ -1490,10 +1490,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         {
             if (EResult.k_EResultOK == pCallback.m_eResult)
             {
-                Debug.Log("StoreStats sucess");
+                //Debug.Log("StoreStats sucess");
             }else if (pCallback.m_eResult == EResult.k_EResultInvalidParam)
             {
-                Debug.Log("Some Failed to validade");
+               // Debug.Log("Some Failed to validade");
 
                 UserStatsReceived_t callback = new UserStatsReceived_t();
                 callback.m_eResult = EResult.k_EResultOK;
@@ -1503,7 +1503,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         }
         else
         {
-            Debug.Log("StoreStats failed");
+           // Debug.Log("StoreStats failed");
         }
     }
 
