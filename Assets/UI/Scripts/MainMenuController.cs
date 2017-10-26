@@ -52,4 +52,12 @@ public class MainMenuController : MonoBehaviour {
         if (configMenu)
             configMenu.GetComponent<ConfigurationMenu>().Hide();
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("k"))
+        {
+            GameController.TakeScreenshot();
+        }
+    }
 }

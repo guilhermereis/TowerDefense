@@ -18,7 +18,7 @@ public class Minimap : MonoBehaviour {
     public void addNewSquare()
     {
         allSquares.Add(Instantiate(square, transform));
-        allSquares[allSquares.Count-1].transform.parent = transform;
+        allSquares[allSquares.Count-1].transform.SetParent(transform);
         allSquares[allSquares.Count - 1].SetActive(false);
     }
     public static Rect RectTransformToScreenSpace(RectTransform transform)
