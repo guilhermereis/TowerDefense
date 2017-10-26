@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TryAgainController : MonoBehaviour {
 
     public GameObject hasSecondChanceScreen;
     public GameObject noSecondChanceScreen;
+    public GameObject quitConfirmation;
 
     //HasSecondChance
 
@@ -50,16 +52,30 @@ public class TryAgainController : MonoBehaviour {
 	void Start () {
 		
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         if (noSecondChanceScreen.activeInHierarchy) {
-            if (targetFill > AnkFillImage.fillAmount) {
-                string currentText = percentText.text.Substring(0, percentText.text.Length);
-                percentText.text = (Mathf.FloorToInt(Mathf.Lerp(float.Parse(currentText), targetPercent, 0.1f)) * 100) + "%";
-                percentTextShadow.text = percentText.text;
-                AnkFillImage.fillAmount = Mathf.Lerp(AnkFillImage.fillAmount, targetFill, 0.1f);
-            }
+            percentText.text = Mathf.CeilToInt(AnkFillImage.fillAmount * 100) + "%";
+            percentTextShadow.text = percentText.text;
+            AnkFillImage.fillAmount = Mathf.Lerp(AnkFillImage.fillAmount, targetFill, 0.1f);
         }
     }
+
+    public void startOver() {
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    public void quitToMainMenu() {
+        SceneManager.LoadScene("MenuScene");
+    }
+
+    public void useSecondChance() {
+
+    }
+
+    public void dontUseSecondChance() {
+
+    }
+
 }

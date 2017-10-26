@@ -18,35 +18,37 @@ public class WaveSpawnerUIController : MonoBehaviour {
         anim = GetComponent<Animator>();
         arrow = transform.Find("Arrow").gameObject;
         gameObject.SetActive(false);
-        arrow.transform.parent = transform.parent.gameObject.transform;
+        arrow.transform.SetParent(transform.parent.gameObject.transform);
         arrow.SetActive(false);
     }
 
     // Update is called once per frame
     void Update() {
         transform.position = Vector3.Scale(Camera.main.WorldToScreenPoint(new Vector3(-1.5f, 0.5f, 0f) + mapLocation), new Vector3(1f,1f,0f));
-        screenPos = Camera.main.ScreenToViewportPoint(transform.position);
-        arrowOnScreenPos = new Vector2(screenPos.x - 0.5f, screenPos.y - 0.5f) * 2;
 
-        float angle = (Vector2.SignedAngle(arrowOnScreenPos, new Vector2(0f, 1f)) +40f) *-1;
-        arrow.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
-        if (screenPos.x > 0 && screenPos.x < 1 && screenPos.y > 0 && screenPos.y < 1)
+        if (GameController.gameState == GameState.Waving || GameController.gameState == GameState.Action)
         {
-            // On Screen
             disableArrow();
-            return;
         }
-        else
-        {
-            enableArrow();
-            max = Mathf.Max(Mathf.Abs(arrowOnScreenPos.x), Mathf.Abs(arrowOnScreenPos.y)) * 1.1f;
-            arrowOnScreenPos = (arrowOnScreenPos / (max * 2)) + new Vector2(0.5f, 0.5f);
-            arrow.transform.position = new Vector3(arrowOnScreenPos.x * Screen.width, arrowOnScreenPos.y * Screen.height, arrow.transform.position.z);
-        }
+        else {
+            screenPos = Camera.main.ScreenToViewportPoint(transform.position);
+            arrowOnScreenPos = new Vector2(screenPos.x - 0.5f, screenPos.y - 0.5f) * 2;
 
-        if (GameController.gameState == GameState.Waving || GameController.gameState == GameState.Action) {
-            disableArrow();
+            float angle = (Vector2.SignedAngle(arrowOnScreenPos, new Vector2(0f, 1f)) + 40f) * -1;
+            arrow.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+            if (screenPos.x > 0 && screenPos.x < 1 && screenPos.y > 0 && screenPos.y < 1)
+            {
+                disableArrow();
+                return;
+            }
+            else
+            {
+                enableArrow();
+                max = Mathf.Max(Mathf.Abs(arrowOnScreenPos.x), Mathf.Abs(arrowOnScreenPos.y)) * 1.1f;
+                arrowOnScreenPos = (arrowOnScreenPos / (max * 2)) + new Vector2(0.5f, 0.5f);
+                arrow.transform.position = new Vector3(arrowOnScreenPos.x * Screen.width, arrowOnScreenPos.y * Screen.height, arrow.transform.position.z);
+            }
         }
 
     }
