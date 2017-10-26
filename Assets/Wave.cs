@@ -61,7 +61,10 @@ public class Wave  {
         int[] monstersWave;
         float percentageOfMonstersNextMilestone = EvaluateCurveFunction(alpha) /2;
         int totalMonstersNextMilestone = Mathf.RoundToInt( percentageOfMonstersNextMilestone);
+
+        Debug.Log(currentMilestone + "cm");
         
+           
 
         float c = percentageOfMonstersNextMilestone;
         //int thisMilestone = c;
