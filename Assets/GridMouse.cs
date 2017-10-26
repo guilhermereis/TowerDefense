@@ -449,8 +449,7 @@ public class GridMouse : MonoBehaviour
         //If I hit the Grid
         if (hitInfo.transform.gameObject.name == "Grid")
         {
-            if (temporaryInstance != null) { 
-
+            
                 position = temporaryInstance.transform.position;
                 x = Mathf.FloorToInt(position.x + _gridSize.x / 2);
                 z = Mathf.FloorToInt(position.z + _gridSize.y / 2);
@@ -466,7 +465,7 @@ public class GridMouse : MonoBehaviour
                         // Debug.Log("Position = " + position);
                     }
                 }
-            }
+            
         }
         
     }
@@ -535,9 +534,12 @@ public class GridMouse : MonoBehaviour
                 {
                     if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     {
-                       //Debug.Log("DESELECT 2");
-                        HandleBuildingTower(ray, hitInfo, didHit, x, z);
-                        buildManager.DeselectUnitToBuild();
+                        //Debug.Log("DESELECT 2");
+                        if (CheckIfGameObjectIsOfColor(Color.green))
+                        {
+                            HandleBuildingTower(ray, hitInfo, didHit, x, z);
+                            buildManager.DeselectUnitToBuild();
+                        }
                     }
                 }
                 else //if there's nothing to build, then hide the options
