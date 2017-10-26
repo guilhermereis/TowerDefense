@@ -24,8 +24,7 @@ public class TryAgainController : MonoBehaviour {
     // Use this for initialization
 
     public void show() {
-        targetFill = 0.8f;
-        //targetFill = (float)WaveSpawner.gainSecondChanceCounter / (float)WaveSpawner.secondChanceWaveCountTarget;
+        targetFill = (float)WaveSpawner.gainSecondChanceCounter / (float)WaveSpawner.secondChanceWaveCountTarget;
         targetPercent = (int)(targetFill * 100);
 
         if (targetFill >= 1f)
