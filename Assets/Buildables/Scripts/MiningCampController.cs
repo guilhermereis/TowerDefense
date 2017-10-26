@@ -15,6 +15,7 @@ public class MiningCampController : BuildableController {
     public Canvas canvas;
     public GameObject isFullButtonUI;
     public GameObject fullButton;
+    public GameObject moneyCollectedAudio;
     public int storageLevel;
     public int miningRateLevel;
 
@@ -73,6 +74,7 @@ public class MiningCampController : BuildableController {
         currentGold = 0;
         isFull = false;
         fullButton.SetActive(false);
+        SoundToPlay.PlaySfx(moneyCollectedAudio);
         int added = PlayerStats.AddMoney(goldToReturn);
         GameController.MoneyCollected(added, true);
     }

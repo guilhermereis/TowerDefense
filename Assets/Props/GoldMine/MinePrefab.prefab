@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5802c5eecab484399693fa717366af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildSmokeEffectPrefab: {fileID: 0}
   buildType: 6
   buildSoundPrefab: {fileID: 1368383354638678, guid: 87381885d9b53d446bca41f441848bb5,
     type: 2}
@@ -151,6 +152,8 @@ MonoBehaviour:
   isFullButtonUI: {fileID: 1128133831923616, guid: fad5633b0643404439a2de3c7d3ec4a9,
     type: 2}
   fullButton: {fileID: 0}
+  moneyCollectedAudio: {fileID: 1246413673504020, guid: 98162a582fc5f2e4793f593d2bdf8db3,
+    type: 2}
   storageLevel: 0
   miningRateLevel: 0
 --- !u!114 &114691785893720178
