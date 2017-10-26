@@ -71,7 +71,8 @@ public class TryAgainController : MonoBehaviour {
     }
 
     public void useSecondChance() {
-
+        hide();
+        //Use Second chance
     }
 
     public void showTryAgainConfirmation() {
