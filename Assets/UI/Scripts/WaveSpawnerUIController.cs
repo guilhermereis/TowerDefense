@@ -25,17 +25,18 @@ public class WaveSpawnerUIController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         transform.position = Vector3.Scale(Camera.main.WorldToScreenPoint(new Vector3(-1.5f, 0.5f, 0f) + mapLocation), new Vector3(1f,1f,0f));
-        screenPos = Camera.main.ScreenToViewportPoint(transform.position);
-        arrowOnScreenPos = new Vector2(screenPos.x - 0.5f, screenPos.y - 0.5f) * 2;
-
-        float angle = (Vector2.SignedAngle(arrowOnScreenPos, new Vector2(0f, 1f)) +40f) *-1;
-        arrow.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
         if (GameController.gameState == GameState.Waving || GameController.gameState == GameState.Action)
         {
             disableArrow();
         }
         else {
+            screenPos = Camera.main.ScreenToViewportPoint(transform.position);
+            arrowOnScreenPos = new Vector2(screenPos.x - 0.5f, screenPos.y - 0.5f) * 2;
+
+            float angle = (Vector2.SignedAngle(arrowOnScreenPos, new Vector2(0f, 1f)) + 40f) * -1;
+            arrow.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
             if (screenPos.x > 0 && screenPos.x < 1 && screenPos.y > 0 && screenPos.y < 1)
             {
                 disableArrow();
