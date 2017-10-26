@@ -24,7 +24,12 @@ public class MoveTheBigEar : MonoBehaviour {
         if (didHit)
         {
             Debug.DrawLine(Camera.main.transform.position, hitInfo.point, Color.yellow);
-            Vector3 pos = hitInfo.transform.position;
+
+            int x = Mathf.FloorToInt(hitInfo.point.x + GridMouse.instance.getGridSize().x / 2);
+            int z = Mathf.FloorToInt(hitInfo.point.z + GridMouse.instance.getGridSize().y / 2);
+
+            Vector3 pos = GridMouse.instance.CoordToPosition(x,z);
+
             if (hitInfo.transform.gameObject.name == "Grid")
             {
                 TheBigEar.transform.position = new Vector3(pos.x,pos.y,pos.z);
