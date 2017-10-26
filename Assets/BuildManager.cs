@@ -86,11 +86,13 @@ public class BuildManager : MonoBehaviour {
             if (unitToBuild == Shop.instance.miningCamp)
             {
                 newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+                Destroy(temporaryInstance);
                 temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
             }
             else
             {
                 newPosition = position;
+                Destroy(temporaryInstance);
                 temporaryInstance = (GameObject)Instantiate(unitToBuild.prefab, newPosition, unitToBuild.prefab.transform.rotation);
                 temporaryInstance.transform.Find("Sphere").gameObject.GetComponent<MeshRenderer>().enabled = true;
                 temporaryInstance.transform.Find("GroundLine").gameObject.GetComponent<MeshRenderer>().enabled = true;
