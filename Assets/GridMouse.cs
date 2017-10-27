@@ -208,8 +208,6 @@ public class GridMouse : MonoBehaviour
             //Debug.Log(child.name + " IS GONNA CRASH !!!");
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Debug.Log("TILE: " + x + "," + z + " IS GONNA CRASH !!!");
-            //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
             
         }
@@ -223,7 +221,6 @@ public class GridMouse : MonoBehaviour
             {
                // Debug.Log("31, 29 = Edges");
             }
-            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
         foreach (Transform child in EdgesSnow.transform)
@@ -231,7 +228,6 @@ public class GridMouse : MonoBehaviour
 
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
         foreach (Transform child in EdgesDesert.transform)
@@ -239,7 +235,6 @@ public class GridMouse : MonoBehaviour
 
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
         Transform EdgesVolcanic = GameObject.Find("EdgesVolcanic").transform;
@@ -248,7 +243,6 @@ public class GridMouse : MonoBehaviour
 
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
         Transform RockBlockers = GameObject.Find("RockBlockers").transform;
@@ -257,7 +251,6 @@ public class GridMouse : MonoBehaviour
 
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
         Transform RockBlockersLava = GameObject.Find("RockBlockersLava").transform;
@@ -266,7 +259,6 @@ public class GridMouse : MonoBehaviour
 
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
         Transform CubeTrack4 = GameObject.Find("CubeTrack4").transform;
@@ -275,7 +267,6 @@ public class GridMouse : MonoBehaviour
 
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Track");
         }
         Transform FireTiles = GameObject.Find("FireTiles").transform;
@@ -284,7 +275,6 @@ public class GridMouse : MonoBehaviour
 
             x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
-            //Vector3 position = CoordToPosition(x, z);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
         Destroy(CubeTrack);
@@ -779,7 +769,7 @@ public class GridMouse : MonoBehaviour
 
             Vector3 positionCube = new Vector3(position.x+0.1f, position.y + 0.1f, position.z - 0.1f);
             selectionCube.transform.position = positionCube;
-            Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
+            //Debug.Log("TILE: " + x + "," + z + " OF TYPE: " + propertiesMatrix[x, z].type);
 
             if (cursorTexture)
             {
@@ -829,6 +819,9 @@ public class GridMouse : MonoBehaviour
     {
         return new Vector3(-_gridSize.x / 2 + 0.5f + x, 0f + ZOffset, -_gridSize.y / 2 + 0.5f + y);
     }
-
+    public Vector3 PositionToCoord(int x, int y)
+    {
+        return new Vector3(_gridSize.x / 2 - 0.5f + x + 1, 0f - ZOffset, _gridSize.y / 2 - 0.5f + y + 1);
+    }
     
 }

@@ -885,16 +885,24 @@ public class WaveSpawner : MonoBehaviour {
         {
             bc = gridMouse.ListOfGameObjects[i].GetComponent<BuildableController>();
 
-            int x = Mathf.FloorToInt(bc.getUnitBlueprint().position.x);
-            int z = Mathf.FloorToInt(bc.getUnitBlueprint().position.y);
+            int x = Mathf.FloorToInt(bc.getUnitBlueprint().stored_x);
+            int z = Mathf.FloorToInt(bc.getUnitBlueprint().stored_z);
+
+
+            Vector3 newCoords = gridMouse.PositionToCoord(x, z);
+
+            int new_x = Mathf.FloorToInt(newCoords.x);
+            int new_z = Mathf.FloorToInt(newCoords.z);
+            Debug.Log("JUST DESTROYED THESE COORDINATES: "+new_x+", "+new_z);
             //if it's a mining camp
-            if (bc.getUnitBlueprint().name != Shop.instance.miningCamp.name)
+            if (bc.getUnitBlueprint().name == Shop.instance.miningCamp.name)
             {
 
             }
             else //if it's not
             {
-                gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property("Normal");
+                gridMouse.propertiesMatrix[new_x, new_z] = new PropertyScript.Property("Normal");
+                gridMouse.previewMatrix[new_x, new_z] = false;
             }
             Destroy(gridMouse.ListOfGameObjects[i]);
         }

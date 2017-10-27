@@ -163,6 +163,8 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.withInterest_sellcost = getUnitToBuild().withInterest_sellcost;
         newUnitBlueprint.upgrade_cost = getUnitToBuild().upgrade_cost;
         newUnitBlueprint.position = position;
+        newUnitBlueprint.stored_x = position.x;
+        newUnitBlueprint.stored_z = position.z;
 
         tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
         
@@ -219,6 +221,8 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.withInterest_sellcost = getUnitToBuild().withInterest_sellcost;
         newUnitBlueprint.upgrade_cost = getUnitToBuild().upgrade_cost;
         newUnitBlueprint.position = position;
+        newUnitBlueprint.stored_x = position.x;
+        newUnitBlueprint.stored_z = position.z;
 
         tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
         //GameController.AddBuiltTower(tempList[index].GetComponent<BuildableController>().buildType);
