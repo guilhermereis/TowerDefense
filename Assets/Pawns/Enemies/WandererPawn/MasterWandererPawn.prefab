@@ -31,7 +31,7 @@ GameObject:
   - component: {fileID: 136630659319450768}
   - component: {fileID: 114074116741088080}
   m_Layer: 10
-  m_Name: WandererPawn
+  m_Name: MasterWandererPawn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,10 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582ecddf17da3144a8a7fea8362c4b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
-  health: 500
-  defense: 1
-  attack: 50
+  maxHealth: 1200
+  health: 1200
+  defense: 70
+  attack: 125
   attackRate: 1
   isDead: 0
   isSlow: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   type: 0
   finalDestination: {fileID: 0}
   nav: {fileID: 0}
-  speed: 1
+  speed: 1.3
   rig: {fileID: 0}
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}

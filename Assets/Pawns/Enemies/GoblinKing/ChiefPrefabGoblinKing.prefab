@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 136736759631610440}
   - component: {fileID: 114425605980232260}
   m_Layer: 10
-  m_Name: GreatPrefabGoblinKing
+  m_Name: ChiefPrefabGoblinKing
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -934,10 +934,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60910c47c74711a448d00c7a98229d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15000
-  health: 15000
-  defense: 200
-  attack: 11000
+  maxHealth: 20000
+  health: 20000
+  defense: 300
+  attack: 15000
   attackRate: 0.01
   isDead: 0
   isSlow: 0
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   type: 3
   finalDestination: {fileID: 0}
   nav: {fileID: 0}
-  speed: 0.55
+  speed: 0.6
   rig: {fileID: 0}
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}

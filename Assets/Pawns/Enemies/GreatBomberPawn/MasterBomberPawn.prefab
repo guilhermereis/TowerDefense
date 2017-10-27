@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 136408702825601458}
   - component: {fileID: 114056628928038726}
   m_Layer: 10
-  m_Name: GreatBomberPawn
+  m_Name: MasterBomberPawn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
   type: 2
   finalDestination: {fileID: 0}
   nav: {fileID: 0}
-  speed: 2.1
+  speed: 2.4
   rig: {fileID: 0}
   currentDestination: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
@@ -484,10 +484,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47088650f06f2f945a57bb2a176b81ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 600
-  health: 600
-  defense: 10
-  attack: 1000
+  maxHealth: 800
+  health: 800
+  defense: 30
+  attack: 1400
   attackRate: 1
   isDead: 0
   isSlow: 0

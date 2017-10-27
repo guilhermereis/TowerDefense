@@ -8,6 +8,7 @@ public struct Milestone
 {
     public int[] combination;
     public int[] special;
+     
 }
 
 
@@ -173,7 +174,26 @@ public class WaveSpawner : MonoBehaviour {
 
     public void StartCombinations()
     {
-      
+        //1 wanderer 1
+        //2 warrior 2
+        //3 bomber 3
+        //4 great wanderer
+        //5 great warrior
+        //6 great bomber
+        //7 king
+        //8 chief wanderer
+        //9 chief warrior
+        //10 chief bomber
+        //11 chief king
+        //12 lord wanderer
+        //13 lord warrior
+        //14 lord bomber
+        //15 lord king 
+        //16 master wanderer
+        //17 master warrior
+        //18 master bomber
+        //19 master king
+        //20 great king
 
         combinations = new Milestone[10];
         //creating basics milestones combinations
@@ -182,22 +202,22 @@ public class WaveSpawner : MonoBehaviour {
         combinations[0].special = new int[] { 1 };
         combinations[1] = new Milestone();
         combinations[1].combination = new int[] { 2,2,2,2,2};
-        combinations[1].special = new int[] { 8,6,6,6,6,6,6,6 };
+        combinations[1].special = new int[] { 7,3,3,3,3,3,3,3 };
         combinations[2] = new Milestone();
-        combinations[2].combination = new int[] { 3, 3, 2, 2, 2, 2, 2, 2, 2, 2 };
-        combinations[2].special = new int[] { 8,7,3,3,3};
+        combinations[2].combination = new int[] { 3, 3, 2, 2, 2 };
+        combinations[2].special = new int[] { 7,2,2,3,3,2};
         combinations[3] = new Milestone();
-        combinations[3].combination = new int[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-        combinations[3].special = new int[] { 8, 7, 7, 3, 3,4 };
+        combinations[3].combination = new int[] { 4, 4, 4, 4, 4, 4, 3, 3, 3, 3 };
+        combinations[3].special = new int[] { 20,4 , 4, 4, 4 ,4 };
         combinations[4] = new Milestone();
-        combinations[4].combination = new int[] { 3, 3, 3, 3, 3, 4, 4, 4, 4, 4 };
-        combinations[4].special = new int[] { 8, 8, 7, 3, 3, 3 };
+        combinations[4].combination = new int[] { 5, 5, 5, 5, 5, 4, 4, 4, 4, 4 };
+        combinations[4].special = new int[] { 20, 6, 6, 6, 6, 6 };
         combinations[5] = new Milestone();
-        combinations[5].combination = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
-        combinations[5].special = new int[] { 8, 3, 3, 3, 3, 4 };
+        combinations[5].combination = new int[] { 8, 8, 8, 8, 9 ,9 ,9 };
+        combinations[5].special = new int[] { 11, 10, 10, 10, 10, 10 };
         combinations[6] = new Milestone();
-        combinations[6].combination = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 6 };
-        combinations[6].special = new int[] { 8, 3, 3, 3, 3, 4 };
+        combinations[6].combination = new int[] { 12, 12, 12, 12, 12, 12};
+        combinations[6].special = new int[] { 11,20, 13, 3, 3, 3, 4 };
         combinations[7] = new Milestone();
         combinations[7].combination = new int[] { 5, 5, 5, 6, 6, 6, 6, 6, 6, 6 };
         combinations[7].special = new int[] { 8, 3, 3, 3, 3, 4 };
@@ -267,7 +287,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             GameObject monster = Instantiate(King1, spawnLocationLane1.position, Quaternion.identity);
             monster.GetComponent<PawnController>().SetupWaypoints(1,0);
-            monster.GetComponent<PawnController>().SetType(6);
+            
             monsterBatch.Add(monster);
             monster.transform.parent = transform;
             
@@ -283,7 +303,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane1] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane1.position, Quaternion.identity);
                 monster.GetComponent<PawnController>().SetupWaypoints(1,0);
-                monster.GetComponent<PawnController>().SetType(monsterIndex);
+                
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 
@@ -319,7 +339,7 @@ public class WaveSpawner : MonoBehaviour {
             int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
             GameObject monster = Instantiate(King1, spawnLocationLane2A.position, Quaternion.Euler(new Vector3(0, 90, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(2,waypoint);
-            monster.GetComponent<PawnController>().SetType(6);
+            
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
@@ -340,7 +360,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane2] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(2,waypoint);
-                monster.GetComponent<PawnController>().SetType(monsterIndex);
+                
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 
@@ -377,7 +397,7 @@ public class WaveSpawner : MonoBehaviour {
             int waypoint = spawnLocationLane3 == spawnLocationLane3A ? 0 : 1;
             GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
-            monster.GetComponent<PawnController>().SetType(6);
+            
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
@@ -395,7 +415,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
-                monster.GetComponent<PawnController>().SetType(monsterIndex);
+                
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 
@@ -430,7 +450,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             GameObject monster = Instantiate(King1, spawnLocationLane4.position, Quaternion.Euler(new Vector3(0, 180, 0)));
             monster.GetComponent<PawnController>().SetupWaypoints(4,0);
-            monster.GetComponent<PawnController>().SetType(6);
+            
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
@@ -446,7 +466,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane4] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.Euler(new Vector3(0,180,0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(4,0);
-                monster.GetComponent<PawnController>().SetType(monsterIndex);
+                
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
 
