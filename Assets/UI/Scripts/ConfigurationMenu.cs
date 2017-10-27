@@ -9,6 +9,7 @@ public class ConfigurationMenu : MonoBehaviour {
 
     public Slider[] volumeSliders;
     public Toggle fullscreenToggle;
+    public Toggle tutorialToggle;
     public Dropdown resolutionDropDown;
     public GameObject quitConfirmationScreen;
     public GameObject resConfirmationScreen;
@@ -23,6 +24,7 @@ public class ConfigurationMenu : MonoBehaviour {
     public static int previousResIndex;
     public static bool previousFullScreen;
     public static int activeScreenResIndex;
+    public static int tutorialOn;
     public static bool activeFullScreen;
 
     /*Set the following to true everytime you want to force the resolution dropdown to not do
@@ -59,6 +61,7 @@ public class ConfigurationMenu : MonoBehaviour {
         sfx_volume = PlayerPrefs.GetFloat("sfx volume");
         music_volume = PlayerPrefs.GetFloat("music volume");
         activeScreenResIndex = PlayerPrefs.GetInt("resolution index");
+        tutorialOn = PlayerPrefs.GetInt("tutorial");
 
         volumeSliders[0].GetComponent<Slider>().value = master_volume; 
         volumeSliders[1].GetComponent<Slider>().value = sfx_volume; 
@@ -147,6 +150,8 @@ public class ConfigurationMenu : MonoBehaviour {
             resolutionDropDown.value = activeScreenResIndex;
             resForceValue = true;
             fullscreenToggle.isOn = Screen.fullScreen;
+            if(tutorialToggle)
+                tutorialToggle.isOn = tutorialOn == 1 ? true : false;
             resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = resolutions[activeScreenResIndex].width + "x" + resolutions[activeScreenResIndex].height;
         }
 
@@ -186,6 +191,12 @@ public class ConfigurationMenu : MonoBehaviour {
     public void SetFullScreen(bool isFullscreen)
     {
         OnScreenResSet(resolutionDropDown.value);
+    }
+
+    public void SetTutorial(bool isTutorial)
+    {
+        PlayerPrefs.SetInt("tutorial", isTutorial? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void QuitButtonPressed() {

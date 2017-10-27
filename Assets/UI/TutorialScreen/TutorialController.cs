@@ -33,12 +33,30 @@ public class TutorialController : MonoBehaviour {
     private GameObject currentShownStep;
     private tutorialState tutorialState;
 
+    // Use this for initialization
+    void Start()
+    {
+        if (PlayerPrefs.GetInt("tutorial") == 1)
+        {
+            tutorialState = tutorialState.Welcome1;
+            currentShownStep = WelcomePanel;
+            showCurrentStepanel();
+            GameObject HUD = GameObject.FindGameObjectWithTag("TutorialCanvas");
+        }
+        else {
+            confirmSkip();
+        }
+    }
+
+
     public void showSkipConfirm() {
         SkipConfirmationPanel.GetComponent<CanvasGroup>().alpha = 1f;
         SkipConfirmationPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
     public void confirmSkip() {
+        PlayerPrefs.SetInt("tutorial", 0);
+        PlayerPrefs.Save();
         GameController.GameStart();
         GameObject.Destroy(gameObject);
     }
@@ -92,8 +110,7 @@ public class TutorialController : MonoBehaviour {
                 switchTutorialState(tutorialState.Finish14);
                 break;
             case tutorialState.Finish14:
-                GameController.GameStart();
-                GameObject.Destroy(gameObject);
+                confirmSkip();
                 break;
         }
     }
@@ -200,14 +217,6 @@ public class TutorialController : MonoBehaviour {
     private void showCurrentStepanel() {
         currentShownStep.GetComponent<CanvasGroup>().alpha = 1;
         currentShownStep.GetComponent<CanvasGroup>().blocksRaycasts = true;
-    }
-
-	// Use this for initialization
-	void Start () {
-        tutorialState = tutorialState.Welcome1;
-        currentShownStep = WelcomePanel;
-        showCurrentStepanel();
-        GameObject HUD = GameObject.FindGameObjectWithTag("TutorialCanvas");
     }
 	
 	// Update is called once per frame
