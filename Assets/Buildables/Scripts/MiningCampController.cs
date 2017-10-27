@@ -19,6 +19,8 @@ public class MiningCampController : BuildableController {
     public int storageLevel;
     public int miningRateLevel;
 
+    private string UITooltipBaseText = "MINE'S READY!\nCLICK TO COLLECT\n";
+
     protected override void Awake()
     {
         base.Awake();
@@ -48,11 +50,9 @@ public class MiningCampController : BuildableController {
        }
         fullButton = Instantiate(isFullButtonUI);
         fullButton.SetActive(false);
-        fullButton.transform.SetParent(canvas.transform,false);
-        
+        fullButton.transform.SetParent(canvas.transform.Find("GoldMinesButtonHolder").transform,false);
+
         fullButton.GetComponent<Button>().onClick.AddListener(Withdrawl);
-
-
     }
 
     private void OnDestroy()
@@ -69,7 +69,8 @@ public class MiningCampController : BuildableController {
         {
             isFull = true;
             fullButton.SetActive(true);
-
+            string tooltipText = UITooltipBaseText + currentGold + " GOLD";
+            fullButton.GetComponent<TooltipController>().tooltipText = tooltipText;
         }
       
     }
@@ -79,6 +80,7 @@ public class MiningCampController : BuildableController {
         int goldToReturn = currentGold;
         currentGold = 0;
         isFull = false;
+        fullButton.GetComponent<TooltipController>().hideTooltip(null);
         fullButton.SetActive(false);
         SoundToPlay.PlaySfx(moneyCollectedAudio);
         int added = PlayerStats.AddMoney(goldToReturn);
@@ -100,6 +102,8 @@ public class MiningCampController : BuildableController {
     private void Update()
     {
         fullButton.transform.position = Camera.main.WorldToScreenPoint(new Vector3(0f, 0.5f, 0f) + transform.position);
+        float cameraZoom = Mathf.Clamp((1f - Camera.main.orthographicSize / 11), 0.5f, 1f);//Magic Numbers to get a good scale from the camera zoom
+        fullButton.transform.localScale = new Vector3(2*cameraZoom, 2*cameraZoom, 2*cameraZoom);
     }
 
 }

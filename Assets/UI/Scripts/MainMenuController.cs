@@ -16,7 +16,6 @@ public class MainMenuController : MonoBehaviour {
             PlayerPrefs.SetFloat("sfx volume", 0.8f);
             PlayerPrefs.SetFloat("music volume", 0.5f);
             Resolution[] resolutions = Screen.resolutions;
-            Debug.Log("SETTING FIRST TIME NE");
 
             Resolution currentRes = Screen.currentResolution;
             for (int i = 0; i < resolutions.Length; i++)

@@ -100,6 +100,4 @@ public class TooltipController : MonoBehaviour{
             tooltipObject.SetActive(false);
         }
     }
-
-
 }
