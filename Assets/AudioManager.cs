@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource grasslandsAmbientSound;
     public AudioSource desertAmbientSound;
     public AudioSource vulcanoLandAmbientSound;
-
+    public AudioSource backgroundMusic;
 
     // Use this for initialization
     void Start()
@@ -17,7 +17,9 @@ public class AudioManager : MonoBehaviour {
         SoundToPlay.PlayMusic(grasslandsAmbientSound);
         SoundToPlay.PlayMusic(desertAmbientSound);
         SoundToPlay.PlayMusic(vulcanoLandAmbientSound);
+        SoundToPlay.PlayMusic(backgroundMusic, 0.25f);
     }
+
 	// Update is called once per frame
 	void Update () {
 		
