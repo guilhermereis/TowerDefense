@@ -46,6 +46,10 @@ public class CastleHealth : MonoBehaviour {
             }
         }
 
+        if (!repairButton) {
+            repairButton = HUD.transform.Find("Castle Info").transform.Find("RepairButton").gameObject;
+        }
+
         healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
         castleUIFeedbackAnimator = HUD.transform.Find("Castle Info").GetComponent<Animator>();
         tooltipController = repairButton.GetComponent<TooltipController>();
@@ -57,6 +61,7 @@ public class CastleHealth : MonoBehaviour {
         enemies = new List<PawnCharacter>();
 
         maxHealth = 500;
+        UpdateHealthBarGfx(maxHealth);
 
         health = maxHealth;
 
@@ -140,6 +145,7 @@ public class CastleHealth : MonoBehaviour {
             }
 
         }
+
         setRepairCostText(ws);
     }
 
