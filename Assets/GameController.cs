@@ -41,8 +41,6 @@ public class GameController : MonoBehaviour {
     private void OnEnable()
     {
         stats = GameObject.FindObjectOfType<SteamStatsAndAchievements>();
-
-
     }
 
 #region steamstats
@@ -51,8 +49,6 @@ public class GameController : MonoBehaviour {
     {
         if (stats)
             stats.AddBuiltTower(towerType);
-
-
     }
 
     public static void TryAgain()
@@ -119,10 +115,14 @@ public class GameController : MonoBehaviour {
     void Start () {
         gamechangedDelegate+= evaluateGameStateChanged;
         toggleGizmoDelegate += evaluateGizmoToggle;
-        gameState = GameState.Preparation;
+        gameState = GameState.GameActivate;
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
         towerGizmosOn = true;
+    }
+
+    public static void GameStart() {
+        gameState = GameState.Preparation;
     }
 
     private void OnDestroy()
