@@ -266,8 +266,6 @@ public class BuildManager : MonoBehaviour {
             selectedGameObject = gameObject;
             selectedPosition = gameObject.transform.position;
 
-
-
             Transform Sphere = selectedGameObject.transform.Find("Sphere");
             Transform GroundLine = selectedGameObject.transform.Find("GroundLine");
             if (Sphere)
