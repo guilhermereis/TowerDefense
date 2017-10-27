@@ -12,11 +12,11 @@ public class ClickSound : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         gameObject.AddComponent<AudioSource>();
         source.clip = sound;
         source.playOnAwake = false;
         //Any other settings you want to initialize...
-
         button.onClick.AddListener(() => PlaySound());	
 	}
 
