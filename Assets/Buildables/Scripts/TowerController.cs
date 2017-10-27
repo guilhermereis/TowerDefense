@@ -45,8 +45,6 @@ public class TowerController : BuildableController {
     [Header("Weapon")]
     public TowerAmmo currentAmmo;
 
-   
-
     [Header("UI")]
     private TowerGizmoController myGizmoController;
     private GameObject gizmoObject;
@@ -55,7 +53,7 @@ public class TowerController : BuildableController {
 
     // Use this for initialization
     public void Start () {
-        HUD = GameObject.FindGameObjectWithTag("HUD");
+        HUD = GameObject.FindGameObjectWithTag("HUD").transform.Find("TowerGizmosHolder").gameObject;
         gizmoObject = Instantiate(gizmoPrefab, HUD.transform);
         //Debug.Log("Object is: " + gizmoObject);
         myGizmoController = gizmoObject.GetComponent<TowerGizmoController>();
