@@ -82,25 +82,28 @@ public class CastleHealth : MonoBehaviour {
 
     public void Repair()
     {
-        int cost = Mathf.RoundToInt(repairCostMultiplier * CalculateCost(ws.waveNumber));
-        if (PlayerStats.Money >= cost)
-        {
-            if (health < maxHealth)
+        if (!TopRightMenu.isGamePaused) {
+            int cost = Mathf.RoundToInt(repairCostMultiplier * CalculateCost(ws.waveNumber));
+            if (PlayerStats.Money >= cost)
             {
-                int spent = PlayerStats.AddMoney(-1 * cost);
-                GameController.MoneyCollected(spent,false);
-                GameController.Repair();
-                health += repairAmmountPercentual * maxHealth;
-                UpdateHealthBarGfx(health);
+                if (health < maxHealth)
+                {
+                    int spent = PlayerStats.AddMoney(-1 * cost);
+                    GameController.MoneyCollected(spent, false);
+                    GameController.Repair();
+                    health += repairAmmountPercentual * maxHealth;
+                    UpdateHealthBarGfx(health);
+                }
+                else
+                {
+                    GameController.Repair();
+                    Debug.Log("Castle is at full health !");
+                }
             }
             else
             {
-                GameController.Repair();
-                Debug.Log("Castle is at full health !");
+                Debug.Log("You don't have enough money to upgrade the Castle !");
             }
-        }
-        else {
-            Debug.Log("You don't have enough money to upgrade the Castle !");
         }
     }
 

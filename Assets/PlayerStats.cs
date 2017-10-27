@@ -41,7 +41,6 @@ public class PlayerStats : MonoBehaviour {
             if (secondChanceAnimator)
                 secondChanceAnimator.SetBool("IsFilled", false);
         }
-        
     }
 
     public static int AddMoney(int amount)
