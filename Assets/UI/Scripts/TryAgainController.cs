@@ -72,7 +72,6 @@ public class TryAgainController : MonoBehaviour {
 
     public void useSecondChance() {
         hide();
-        //Use Second chance
     }
 
     public void showTryAgainConfirmation() {
@@ -84,7 +83,6 @@ public class TryAgainController : MonoBehaviour {
         tryAgainConfirmationPanel.GetComponent<CanvasGroup>().alpha = 0;
         tryAgainConfirmationPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
-
 
     public void showQuitConfirmationScreen()
     {
