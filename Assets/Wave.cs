@@ -9,12 +9,26 @@ using UnityEngine;
 
 public class Wave  {
 
-    //wanderer 1
-    //warrior 2
-    //bomber 3
+    //1 wanderer 1
+    //2 warrior 2
+    //3 bomber 3
     //4 great wanderer
     //5 great warrior
     //6 great bomber
+    //7 king
+    //8 chief wanderer
+    //9 chief warrior
+    //10 chief bomber
+    //11 chief king
+    //12 lord wanderer
+    //13 lord warrior
+    //14 lord bomber
+    //15 lord king 
+    //16 master wanderer
+    //17 master warrior
+    //18 master bomber
+    //19 master king
+    //20 great king
     public int[] mForce = { 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6 };
 	public int totalScore;
 	public int numberOfMonsters;

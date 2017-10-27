@@ -53,8 +53,8 @@ public class TeslaCoilController : TowerController {
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
-               
-
+                //SoundToPlay.PlaySfx(arrowSoundPrefab,0.125f);
+                SoundToPlay.PlayAtLocation(arrowSoundPrefab, transform.position, Quaternion.identity, 0.125f);
 
 
             }

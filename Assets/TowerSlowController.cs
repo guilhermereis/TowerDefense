@@ -64,11 +64,14 @@ public class TowerSlowController : TowerController {
             target = enemies[i];
             if (!target.GetComponent<PawnCharacter>().isSlow && !(target.GetComponent<PawnController>().currentState == PawnController.PawnState.Dead))
             {
-                Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+                //Instantiate(arrowSoundPrefab, transform.position, Quaternion.identity);
+                //SoundToPlay.PlaySfx(arrowSoundPrefab);
+                SoundToPlay.PlayAtLocation(arrowSoundPrefab, transform.position, Quaternion.identity);
                 GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
+
                
             }
         }
