@@ -7,6 +7,9 @@ public class GoblinKingController : EnemyController {
     private CameraManager cameraManager;
     public GameObject handBone;
     public GameObject soldierThrowPrefab;
+    public AudioClip GiantStepSoundPrefab;
+    private AudioSource source { get { return GetComponent<AudioSource>(); } }
+
     public float attackCountdown = 0f;
 
     private GoblinKingCharacter character;
@@ -25,6 +28,9 @@ public class GoblinKingController : EnemyController {
         anim = (GoblinKingAnimatorController)GetComponentInChildren<GoblinKingAnimatorController>();
         handSocketTransform = handBone.transform;
         cameraManager = GameObject.Find("/GameMode/CameraManager").GetComponent<CameraManager>();
+        gameObject.AddComponent<AudioSource>();
+        source.clip = GiantStepSoundPrefab;
+        source.playOnAwake = false;
     }
 
 
@@ -192,6 +198,7 @@ public class GoblinKingController : EnemyController {
 
     public void Step() {
         cameraManager.shakeCamera(0.5f, 10f, 0.05f);
+        SoundToPlay.PlaySfx(source);
     }
 
     public void Death(string deathEvent) {
