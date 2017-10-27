@@ -188,6 +188,14 @@ public class Shop : MonoBehaviour {
     public void SelectTower2Unit() {
         buildManager.SelectUnitToBuild(towerLevel2);
     }
+    public void SelectIceTowerUnit()
+    {
+        buildManager.SelectUnitToBuild(towerSlow);
+    }
+    public void SelectFireTowerUnit()
+    {
+        buildManager.SelectUnitToBuild(towerTesla);
+    }
     public void SelectTower3Unit()
     {
         buildManager.SelectUnitToBuild(towerLevel3);
