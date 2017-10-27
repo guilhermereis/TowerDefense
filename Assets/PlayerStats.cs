@@ -9,6 +9,8 @@ public class PlayerStats : MonoBehaviour {
     public Animator secondChanceAnimator;
     private GameObject secondChanceMeter;
     private GameObject hudCanvas;
+    private GameObject secondChanceTooltip;
+    private string secondChanceBaseTooltipText = "SECOND CHANCE METER\nIT FILLS WITH GAME'S PROGRESSION\nAND CAN BE USED TO TRY THE CURRENT\nWAVE AGAIN IF YOU LOSE";
 
     private float secondChanceFillTarget = 0f;
 
@@ -17,6 +19,7 @@ public class PlayerStats : MonoBehaviour {
         Money = 0;
         AddMoney(StartMoney);        
         hudCanvas = GameObject.FindGameObjectWithTag("HUD");
+        secondChanceTooltip = hudCanvas.transform.Find("Player Info").Find("TooltipSecondChance").gameObject;
         secondChanceMeter = hudCanvas.transform.Find("Player Info").Find("GoldBarUnfilled").Find("GoldBarFilled").gameObject;
         secondChanceAnimator = hudCanvas.transform.Find("Player Info").Find("GoldBarUnfilled").Find("GoldBarFilled").GetComponent<Animator>();
     }
@@ -25,6 +28,7 @@ public class PlayerStats : MonoBehaviour {
     {
         secondChanceFillTarget = (float)WaveSpawner.gainSecondChanceCounter / (float)WaveSpawner.secondChanceWaveCountTarget;
         secondChanceMeter.GetComponent<Image>().fillAmount = Mathf.Lerp(secondChanceMeter.GetComponent<Image>().fillAmount, secondChanceFillTarget, 0.5f);
+        secondChanceTooltip.GetComponentInChildren<TooltipController>().tooltipText = secondChanceBaseTooltipText + "\nPROGRESS: " + (int)(secondChanceFillTarget*100) + "%";
 
         if (secondChanceMeter.GetComponent<Image>().fillAmount >= 1)
         {
