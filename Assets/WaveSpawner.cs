@@ -586,11 +586,39 @@ public class WaveSpawner : MonoBehaviour {
     {
         startedSpawn = false;
         finishedSpawns = 0;
+
         spawningMonsterLane1 = 0;
         spawningMonsterLane2 = 0;
         spawningMonsterLane3 = 0;
         spawningMonsterLane4 = 0;
-        waveNumber--;
+
+        if (waveNumberLane1 % (int)interval == 0)
+        {
+
+            currentMS1--;
+        }
+        if (waveNumberLane2 % (int)interval == 0)
+        {
+
+            currentMS2--;
+        }
+        if (waveNumberLane3 % (int)interval == 0)
+        {
+
+            currentMS3--;
+        }
+        if (waveNumberLane4 % (int)interval == 0)
+        {
+
+            currentMS4--;
+        }
+
+        waveNumber = Mathf.Clamp(waveNumber-1, 0, waveNumber);
+        waveNumberLane1 = Mathf.Clamp(waveNumberLane1-1, 0, waveNumberLane1);
+        waveNumberLane2 = Mathf.Clamp(waveNumberLane2 - 1, 0, waveNumberLane2);
+        waveNumberLane3 = Mathf.Clamp(waveNumberLane3 - 1, 0, waveNumberLane3);
+        waveNumberLane4 = Mathf.Clamp(waveNumberLane4 - 1, 0, waveNumberLane4);
+
         GameController.ChangeGameState(GameState.Preparation);
     }
 
