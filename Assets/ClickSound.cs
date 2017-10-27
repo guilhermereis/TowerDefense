@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -24,6 +22,7 @@ public class ClickSound : MonoBehaviour {
 
     void PlaySound()
     {
-        source.PlayOneShot(sound);
+        SoundToPlay.PlaySfx(source);
+        //source.PlayOneShot();
     }
 }
