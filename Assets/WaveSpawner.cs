@@ -895,7 +895,16 @@ public class WaveSpawner : MonoBehaviour {
             //if it's a mining camp
             if (bc.getUnitBlueprint().name == Shop.instance.miningCamp.name)
             {
+                gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property("Normal");
+                gridMouse.propertiesMatrix[x+1, z+1] = new PropertyScript.Property("Normal");
+                gridMouse.propertiesMatrix[x+1, z] = new PropertyScript.Property("Normal");
+                gridMouse.propertiesMatrix[x, z+1] = new PropertyScript.Property("Normal");
 
+
+                gridMouse.previewMatrix[x, z] = false;
+                gridMouse.previewMatrix[x+1, z+1] = false;
+                gridMouse.previewMatrix[x+1, z] = false;
+                gridMouse.previewMatrix[x, z+1] = false;
             }
             else //if it's not
             {
