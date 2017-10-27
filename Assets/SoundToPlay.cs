@@ -25,6 +25,9 @@ public class SoundToPlay : MonoBehaviour
     private void Awake()
     {
         ConfigurationMenu.soundSliderDelegate += volumesChangedDelegate;
+        sfx_volume = PlayerPrefs.GetFloat("sfx volume");
+        music_volume = PlayerPrefs.GetFloat("music volume");
+        master_volume = PlayerPrefs.GetFloat("master volume");
     }
 
     private void OnDestroy()
@@ -48,6 +51,22 @@ public class SoundToPlay : MonoBehaviour
         }
     }
 
+    void updateBGsVolumes() {
+        List<AudioSource> audiosToRemove = new List<AudioSource>();
+        BGs = BGs.Where(audio => audio != null).ToList();
+
+        foreach (CustomAudioSource audio in BGs)
+        {
+            if (audio.source)
+            {
+                if (audio.source.isPlaying)
+                {
+                    audio.source.volume = PlayerPrefs.GetFloat("music volume") * audio.nativeVolumeMultiplier;
+                }
+            }
+        }
+    }
+
     public static void SetSoundToPlay(GameObject _soundObject)
     {
         soundObject = _soundObject;
@@ -60,8 +79,8 @@ public class SoundToPlay : MonoBehaviour
     {
         audioSource = _audioSource;
         float master_volume = PlayerPrefs.GetFloat("master volume");
-        SetAllVolumes();
-        SetGlobalVolume(master_volume);
+        //SetAllVolumes();
+        //SetGlobalVolume(master_volume);
     }
 
     public static void SetAllVolumes()
@@ -101,6 +120,7 @@ public class SoundToPlay : MonoBehaviour
         audioSource.volume = music_volume;
         CustomAudioSource cas = new CustomAudioSource(audioSource, volumeMultiplier);
         BGs.Add(cas);
+        audioSource.volume = PlayerPrefs.GetFloat("music volume") * cas.nativeVolumeMultiplier;
         audioSource.Play();
     }
 
