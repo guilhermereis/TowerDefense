@@ -163,8 +163,8 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.withInterest_sellcost = getUnitToBuild().withInterest_sellcost;
         newUnitBlueprint.upgrade_cost = getUnitToBuild().upgrade_cost;
         newUnitBlueprint.position = position;
-        newUnitBlueprint.stored_x = position.x;
-        newUnitBlueprint.stored_z = position.z;
+        newUnitBlueprint.stored_x = Mathf.FloorToInt(position.x - 0.5f + gridMouse.getGridSize().x/2);
+        newUnitBlueprint.stored_z = Mathf.FloorToInt(position.z - 0.5f + gridMouse.getGridSize().y/2);
 
         tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
         
@@ -221,8 +221,8 @@ public class BuildManager : MonoBehaviour {
         newUnitBlueprint.withInterest_sellcost = getUnitToBuild().withInterest_sellcost;
         newUnitBlueprint.upgrade_cost = getUnitToBuild().upgrade_cost;
         newUnitBlueprint.position = position;
-        newUnitBlueprint.stored_x = position.x;
-        newUnitBlueprint.stored_z = position.z;
+        newUnitBlueprint.stored_x = Mathf.FloorToInt(position.x - 0.5f + gridMouse.getGridSize().x/2);
+        newUnitBlueprint.stored_z = Mathf.FloorToInt(position.z - 0.5f + gridMouse.getGridSize().y/2);
 
         tempList[index].GetComponent<BuildableController>().setUnitBlueprintAndType(newUnitBlueprint);
         //GameController.AddBuiltTower(tempList[index].GetComponent<BuildableController>().buildType);

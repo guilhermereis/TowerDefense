@@ -10,8 +10,8 @@ public class UnitBlueprint{
     public int withInterest_sellcost;
     public int upgrade_cost;
     public Vector2 position;
-    public float stored_x;
-    public float stored_z;
+    public int stored_x;
+    public int stored_z;
 
 	// Use this for initialization
 	void Start () {
