@@ -1603,6 +1603,8 @@ MonoBehaviour:
     withInterest_sellcost: 0
     upgrade_cost: 1600
     position: {x: 0, y: 0}
+    stored_x: 0
+    stored_z: 0
   miningCamp:
     name: Camp
     prefab: {fileID: 1032561342832110, guid: 3bc54f6505e27854bad0cd18a7c3c41e, type: 2}
@@ -1611,6 +1613,8 @@ MonoBehaviour:
     withInterest_sellcost: 0
     upgrade_cost: 0
     position: {x: 0, y: 0}
+    stored_x: 0
+    stored_z: 0
   towerLevel2:
     name: Tower2
     prefab: {fileID: 1201677733800902, guid: ac75a40b1780c8d46af9d5e3fd656262, type: 2}
@@ -1619,6 +1623,8 @@ MonoBehaviour:
     withInterest_sellcost: 0
     upgrade_cost: 3000
     position: {x: 0, y: 0}
+    stored_x: 0
+    stored_z: 0
   towerLevel3:
     name: Tower3
     prefab: {fileID: 1452188681296356, guid: f8363005245ff3c48a06ad9be671353f, type: 2}
@@ -1627,6 +1633,8 @@ MonoBehaviour:
     withInterest_sellcost: 0
     upgrade_cost: 0
     position: {x: 0, y: 0}
+    stored_x: 0
+    stored_z: 0
   towerSlow:
     name: TowerSlow
     prefab: {fileID: 1712867522992376, guid: 6cf96096660fd1a4b8c004769bc06724, type: 2}
@@ -1635,6 +1643,8 @@ MonoBehaviour:
     withInterest_sellcost: 0
     upgrade_cost: 4000
     position: {x: 0, y: 0}
+    stored_x: 0
+    stored_z: 0
   towerTesla:
     name: TowerTesla
     prefab: {fileID: 1704192322932422, guid: 4367198b5a49be2428792ee0f0b223da, type: 2}
@@ -1643,6 +1653,8 @@ MonoBehaviour:
     withInterest_sellcost: 0
     upgrade_cost: 4000
     position: {x: 0, y: 0}
+    stored_x: 0
+    stored_z: 0
   upgradeT1As1price: 100
   upgradeT1As2price: 200
   upgradeT1As3price: 300

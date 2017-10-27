@@ -77,14 +77,17 @@ public class MiningCampController : BuildableController {
     //reset isfull state and remove all the money inside
     public void Withdrawl()
     {
-        int goldToReturn = currentGold;
-        currentGold = 0;
-        isFull = false;
-        fullButton.GetComponent<TooltipController>().hideTooltip(null);
-        fullButton.SetActive(false);
-        SoundToPlay.PlaySfx(moneyCollectedAudio);
-        int added = PlayerStats.AddMoney(goldToReturn);
-        GameController.MoneyCollected(added, true);
+        if (!TopRightMenu.isGamePaused)
+        {
+            int goldToReturn = currentGold;
+            currentGold = 0;
+            isFull = false;
+            fullButton.GetComponent<TooltipController>().hideTooltip(null);
+            fullButton.SetActive(false);
+            SoundToPlay.PlaySfx(moneyCollectedAudio);
+            int added = PlayerStats.AddMoney(goldToReturn);
+            GameController.MoneyCollected(added, true);
+        }
     }
    
     public void UpgradeMaxGold()
