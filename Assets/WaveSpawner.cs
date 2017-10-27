@@ -508,8 +508,6 @@ public class WaveSpawner : MonoBehaviour {
                 CreateWave();
                 gainSecondChanceCounter++;
             }
-
-
         }
         else if (GameController.gameState == GameState.BeginWave)
         {
@@ -592,7 +590,8 @@ public class WaveSpawner : MonoBehaviour {
         spawningMonsterLane2 = 0;
         spawningMonsterLane3 = 0;
         spawningMonsterLane4 = 0;
-        GameController.ChangeGameState(GameState.Waving);
+        waveNumber--;
+        GameController.ChangeGameState(GameState.Preparation);
     }
 
     //waves set up

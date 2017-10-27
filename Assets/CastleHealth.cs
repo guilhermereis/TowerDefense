@@ -44,7 +44,6 @@ public class CastleHealth : MonoBehaviour {
                 HUD = c;
                 break;
             }
-
         }
 
         healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
