@@ -950,6 +950,8 @@ MonoBehaviour:
   handBone: {fileID: 1284208273796616}
   soldierThrowPrefab: {fileID: 1813425191251776, guid: 379a4b6340e82fb43920b42d6f7d3ba4,
     type: 2}
+  GiantStepSoundPrefab: {fileID: 8300000, guid: 87e742f283aa92a4faebd6fdc65649bd,
+    type: 3}
   attackCountdown: 0
   isDead: 0
 --- !u!114 &114207508980387538
@@ -985,7 +987,7 @@ MonoBehaviour:
   isSlow: 0
   exploded: 0
   healthBar: {fileID: 0}
-  painSoundPrefab: {fileID: 82079892224167688, guid: a5975b1a21e427944b0d214ad0749fd1,
+  painSoundPrefab: {fileID: 1053340979392252, guid: a5975b1a21e427944b0d214ad0749fd1,
     type: 2}
   coinEffectPrefab: {fileID: 1305955009832706, guid: f24eef603f675644a87d74c950ed34ee,
     type: 2}
