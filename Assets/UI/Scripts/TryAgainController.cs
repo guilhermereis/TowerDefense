@@ -11,6 +11,8 @@ public class TryAgainController : MonoBehaviour {
     public GameObject quitConfirmationScreen;
     public GameObject tryAgainConfirmationPanel;
 
+    WaveSpawner waveSpawner;
+
     //NoSecondChance
     public Image AnkFillImage;
     public Text percentText;
@@ -26,7 +28,8 @@ public class TryAgainController : MonoBehaviour {
         targetPercent = (int)(targetFill * 100);
         TopRightMenu.isConfigOn = true;
 
-        if (targetFill >= 1f)
+        //if (targetFill >= 1f)
+        if (true)
         {
             noSecondChanceScreen.SetActive(false);
             hasSecondChanceScreen.SetActive(true);
@@ -50,8 +53,12 @@ public class TryAgainController : MonoBehaviour {
     }
 
 	void Start () {
-		
-	}
+        GameObject wsObject = GameObject.Find("WaveSpawner");
+        if (wsObject != null)
+        {
+            waveSpawner = wsObject.GetComponent<WaveSpawner>();
+        }
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -72,6 +79,11 @@ public class TryAgainController : MonoBehaviour {
 
     public void useSecondChance() {
         hide();
+
+        WaveSpawner.loadingAll = true;
+        GameController.TryAgain();
+        waveSpawner.doLoadAll();
+        WaveSpawner.loadingAll = false;
     }
 
     public void showTryAgainConfirmation() {

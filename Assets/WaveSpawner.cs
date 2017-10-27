@@ -1005,10 +1005,6 @@ public class WaveSpawner : MonoBehaviour {
         RetryWave();
         gainSecondChanceCounter = 0;
 
-        //Hide Try Again Window
-        SecondChance secondChance = GameObject.Find("SecondChanceDialog").GetComponent<SecondChance>();
-        secondChance.Hide();
-
         CastleHealth.castleDestructionAnimator.enabled = false;
 
         GameObject castleObject = GameObject.FindWithTag("Castle");
