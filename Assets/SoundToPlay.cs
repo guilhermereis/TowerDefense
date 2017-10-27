@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+public class CustomAudioSource {
+    public AudioSource source;
+    public float nativeVolumeMultiplier = 1f;
+
+    public CustomAudioSource(AudioSource source, float volumeMultiplier) {
+        this.source = source;
+        this.nativeVolumeMultiplier = volumeMultiplier;
+    }
+}
+
 public class SoundToPlay : MonoBehaviour
 {
     static GameObject soundObject;
@@ -10,7 +20,7 @@ public class SoundToPlay : MonoBehaviour
     static float sfx_volume;
     static float music_volume;
     static float master_volume;
-    static List<AudioSource> BGs = new List<AudioSource>();
+    static List<CustomAudioSource> BGs = new List<CustomAudioSource>();
 
     private void Awake()
     {
@@ -27,12 +37,12 @@ public class SoundToPlay : MonoBehaviour
         List<AudioSource> audiosToRemove = new List<AudioSource>();
         BGs = BGs.Where(audio => audio != null).ToList();
 
-        foreach (AudioSource audio in BGs)
+        foreach (CustomAudioSource audio in BGs)
         {
-            if(audio){
-                if (audio.isPlaying)
+            if(audio.source){
+                if (audio.source.isPlaying)
                 {
-                    audio.volume = PlayerPrefs.GetFloat("music volume");
+                    audio.source.volume = PlayerPrefs.GetFloat("music volume") * audio.nativeVolumeMultiplier;
                 }
             }
         }
@@ -71,7 +81,8 @@ public class SoundToPlay : MonoBehaviour
         SetSoundToPlay(_soundObject);
         AudioSource src = soundObject.GetComponent<AudioSource>();
         src.volume = music_volume;
-        BGs.Add(src);
+        CustomAudioSource cas = new CustomAudioSource(src, 1f);
+        BGs.Add(cas);
         MonoBehaviour.Instantiate(soundObject);
     }
 
@@ -79,7 +90,17 @@ public class SoundToPlay : MonoBehaviour
     {
         SetSoundToPlay(_audioSource);
         audioSource.volume = music_volume;
-        BGs.Add(audioSource);
+        CustomAudioSource cas = new CustomAudioSource(audioSource, 1f);
+        BGs.Add(cas);
+        audioSource.Play();
+    }
+
+    public static void PlayMusic(AudioSource _audioSource, float volumeMultiplier)
+    {
+        SetSoundToPlay(_audioSource);
+        audioSource.volume = music_volume;
+        CustomAudioSource cas = new CustomAudioSource(audioSource, volumeMultiplier);
+        BGs.Add(cas);
         audioSource.Play();
     }
 
