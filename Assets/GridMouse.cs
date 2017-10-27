@@ -742,9 +742,9 @@ public class GridMouse : MonoBehaviour
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,layerMask);
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
         {
-            //Debug.Log("Deselect via ESC");
+            //Deselect via ESC
             if (temporaryInstance && temporaryInstance.name == "MinePrefab(Clone)")
             {
                 DestroySoldierCampPreview();
