@@ -872,6 +872,7 @@ public class WaveSpawner : MonoBehaviour {
     public void doDestroyAll()
     {
         GameObject upgrade_wheel = GameObject.Find("UpgradeWheel");
+        BuildableController bc;
         if (upgrade_wheel != null)
         {
             UpgradeWheelController uwc = upgrade_wheel.GetComponent<UpgradeWheelController>();
@@ -882,11 +883,23 @@ public class WaveSpawner : MonoBehaviour {
         Debug.Log("Gonna destroy all !");
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
+            bc = gridMouse.ListOfGameObjects[i].GetComponent<BuildableController>();
+
+            int x = Mathf.FloorToInt(bc.getUnitBlueprint().position.x);
+            int z = Mathf.FloorToInt(bc.getUnitBlueprint().position.y);
+            //if it's a mining camp
+            if (bc.getUnitBlueprint().name != Shop.instance.miningCamp.name)
+            {
+
+            }
+            else //if it's not
+            {
+                gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property("Normal");
+            }
             Destroy(gridMouse.ListOfGameObjects[i]);
-            //gridMouse.ListOfGameObjects.RemoveAt(i);
         }
         gridMouse.ListOfGameObjects.Clear();
-        Debug.Log("SIZEEEE: " + gridMouse.ListOfGameObjects.Count);
+        Debug.Log("SIZE: " + gridMouse.ListOfGameObjects.Count);
         //---------------------------------------------------------
         //destroy all monsters
         for (int i = 0; i < monsterBatch.Count; i++)
