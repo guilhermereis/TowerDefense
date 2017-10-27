@@ -313,7 +313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f17e4f6c1255f46b7ff761c9c6c59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealthState: 0
+  buildSmokeEffectPrefab: {fileID: 0}
+  buildType: 6
   buildSoundPrefab: {fileID: 1368383354638678, guid: 87381885d9b53d446bca41f441848bb5,
     type: 2}
   target: {fileID: 0}
@@ -324,7 +325,7 @@ MonoBehaviour:
   attackPoint: {fileID: 1412965963542364}
   arrowPrefab: {fileID: 1513856314003724, guid: 22cf1d925333eb1488968f357beb0d45,
     type: 2}
-  arrowSoundPrefab: {fileID: 1372849123093944, guid: 3e63fb5ebfb2736428ab93128296cbc7,
+  arrowSoundPrefab: {fileID: 1372849123093944, guid: 123b16d51cdfc52438aed327e4c7d083,
     type: 2}
   cannonPoint: {fileID: 0}
   cannonballPrefab: {fileID: 0}

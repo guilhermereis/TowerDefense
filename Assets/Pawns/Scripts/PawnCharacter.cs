@@ -18,7 +18,7 @@ public class PawnCharacter : MonoBehaviour {
     public bool exploded;
 
 	public PawnHealthBarGUI healthBar;
-    public AudioSource painSoundPrefab;
+    public GameObject painSoundPrefab;
 
     public GameObject coinEffectPrefab;
         
@@ -54,6 +54,7 @@ public class PawnCharacter : MonoBehaviour {
             }
 
             SoundToPlay.PlayAtLocation(painSoundPrefab, transform.position, Quaternion.identity);
+            //SoundToPlay.PlaySfx(painSoundPrefab);
             //Instantiate(painSoundPrefab, transform.position, Quaternion.identity);
 
             gameObject.GetComponent<PawnController>().ChangeState(PawnController.PawnState.Dead);

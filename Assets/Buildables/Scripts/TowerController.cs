@@ -301,7 +301,8 @@ public class TowerController : BuildableController {
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
                 newArrow.TowerAttack = attackPower;
-                SoundToPlay.PlayAtLocation(arrowSoundPrefab, transform.position, Quaternion.Euler(0f, rotation.y, 0f));
+                //SoundToPlay.PlayAtLocation(arrowSoundPrefab, transform.position, Quaternion.Euler(0f, rotation.y, 0f));
+                SoundToPlay.PlaySfx(arrowSoundPrefab);
                 //new SoundToPlay(arrowSoundPrefab).PlayAtLocation(transform.position, Quaternion.Euler(0f, rotation.y, 0f));
             }
         }

@@ -12,6 +12,9 @@ public class ConfigurationMenu : MonoBehaviour {
     public Dropdown resolutionDropDown;
     public GameObject quitConfirmationScreen;
     public GameObject resConfirmationScreen;
+    public AudioClip sound;
+    
+    private AudioSource source { get { return GetComponent<AudioSource>(); } }
 
     private float sfx_volume;
     private float music_volume;
@@ -62,8 +65,20 @@ public class ConfigurationMenu : MonoBehaviour {
         volumeSliders[2].GetComponent<Slider>().value = music_volume;
 
         getScreenResolutions();
-    }
 
+        gameObject.AddComponent<AudioSource>();
+        source.clip = sound;
+        source.playOnAwake = false;
+        //Any other settings you want to initialize...
+
+        //toggle.onClick.AddListener(() => PlaySound());        
+        fullscreenToggle.onValueChanged.AddListener((x) => Invoke("MyFunction", 0f));
+    }
+    public void MyFunction()
+    {
+        Debug.Log("CALLED MYFUNCTION");
+        SoundToPlay.PlaySfx(source);
+    }
     public void Hide()
     {
         cg.alpha = 0f;
