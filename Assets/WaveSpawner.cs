@@ -902,13 +902,15 @@ public class WaveSpawner : MonoBehaviour {
         listOfStates = new List<PropertyScript.StructureState>();
         BuildableController bc;
         TowerController tc;
+        TowerSlowController tSc;
+        TeslaCoilController tTc;
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
             if (gridMouse.ListOfGameObjects[i] == null)
             {
-                Debug.Log("IIIIIIIIITS NULL !!!!");
+                Debug.Log("(doSaveAll) IT'S NULL !");
             }
-            Debug.Log("LALALALA COUNT = " + gridMouse.ListOfGameObjects.Count);
+            Debug.Log("(doSaveAll()) COUNT = " + gridMouse.ListOfGameObjects.Count);
 
 
             //Get information from the Buildable
@@ -917,6 +919,13 @@ public class WaveSpawner : MonoBehaviour {
             //Get information from the TowerController
             tc = gridMouse.ListOfGameObjects[i].GetComponent<TowerController>();
             //--------------------------------------------------------------------------
+            //Get information from the TowerSlowController
+            tSc = gridMouse.ListOfGameObjects[i].GetComponent<TowerSlowController>();
+            //--------------------------------------------------------------------------
+            //Get information from the TowerSlowController
+            tTc = gridMouse.ListOfGameObjects[i].GetComponent<TeslaCoilController>();
+
+
             PropertyScript.StructureState state;
             if (tc != null) // If it has a TowerController (AKA: is a tower).
             {
@@ -926,6 +935,20 @@ public class WaveSpawner : MonoBehaviour {
                                                         bc.Health, tc.fireRateLVL, tc.attackPowerLVL);
 
                 Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
+            }
+            else if (tSc != null)
+            {
+                state =
+                    new PropertyScript.StructureState(state.structureName = tSc.getUnitBlueprint().name,
+                                                      gridMouse.ListOfGameObjects[i].transform,
+                                                        bc.Health, tSc.fireRateLVL, tSc.attackPowerLVL);
+            }
+            else if (tTc != null)
+            {
+                state =
+                    new PropertyScript.StructureState(state.structureName = tTc.getUnitBlueprint().name,
+                                                      gridMouse.ListOfGameObjects[i].transform,
+                                                        bc.Health, tTc.fireRateLVL, tTc.attackPowerLVL);
             }
             else // Soldier Camp
             {
@@ -960,7 +983,7 @@ public class WaveSpawner : MonoBehaviour {
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
                 Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-                Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
+                Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerLevel2.name)
             {
@@ -977,7 +1000,41 @@ public class WaveSpawner : MonoBehaviour {
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
                 Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-                Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
+                Debug.Log("LOADED " + listOfStates[i].position + ".");
+            }
+            else if (listOfStates[i].structureName == Shop.instance.towerSlow.name)
+            {
+                shop.SelectIceTowerUnit();
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                Vector2 gridSize = gridMouse.getGridSize();
+                int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
+                int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
+
+                gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+
+                //Set Fire Rate and Attack Power from saved state
+                gridMouse.ListOfGameObjects[added_index]
+                    .GetComponent<TowerSlowController>()
+                        .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
+                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+                Debug.Log("LOADED " + listOfStates[i].position + ".");
+            }
+            else if (listOfStates[i].structureName == Shop.instance.towerTesla.name)
+            {
+                shop.SelectFireTowerUnit();
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                Vector2 gridSize = gridMouse.getGridSize();
+                int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
+                int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
+
+                gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+
+                //Set Fire Rate and Attack Power from saved state
+                gridMouse.ListOfGameObjects[added_index]
+                    .GetComponent<TeslaCoilController>()
+                        .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
+                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+                Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerLevel3.name)
             {
@@ -994,7 +1051,7 @@ public class WaveSpawner : MonoBehaviour {
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
                 Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-                Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
+                Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.miningCamp.name)
             {
@@ -1014,7 +1071,7 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
                 gridMouse.propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
 
-                Debug.Log("LOOOOOOOOOOOOOADED " + listOfStates[i].position + ".");
+                Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else
             {
