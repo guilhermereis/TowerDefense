@@ -148,21 +148,27 @@ public class SoundToPlay : MonoBehaviour
         audioSource.Play();
     }
 
-    public static void PlayAtLocation(GameObject soundObject, Vector3 position, Quaternion rotation)
+    public static void PlayAtLocation(GameObject _soundObject, Vector3 position, Quaternion rotation)
     {
+        SetSoundToPlay(_soundObject);
+        AudioSource src = soundObject.GetComponent<AudioSource>();
+        src.volume = sfx_volume;
         MonoBehaviour.Instantiate(soundObject, position, rotation);
     }
 
-    public static void PlayAtLocation(GameObject soundObject, Vector3 position, Quaternion rotation, float volumeMultiplier)
+    public static void PlayAtLocation(GameObject _soundObject, Vector3 position, Quaternion rotation, float volumeMultiplier)
     {
-
+        SetSoundToPlay(_soundObject);
         AudioSource src = soundObject.GetComponent<AudioSource>();
         src.volume = sfx_volume * volumeMultiplier;
         MonoBehaviour.Instantiate(soundObject, position, rotation);
     }
 
-    public static void PlayAtLocation(AudioSource audioSource, Vector3 position, Quaternion rotation)
+    public static void PlayAtLocation(AudioSource _audioSource, Vector3 position, Quaternion rotation)
     {
+        SetSoundToPlay(_audioSource);
+        AudioSource src = soundObject.GetComponent<AudioSource>();
+        src.volume = sfx_volume;
         audioSource.Play();
     }
 }

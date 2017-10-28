@@ -71,7 +71,7 @@ public class Wave  {
     public int[] GetCombinaton()
     {
        
-        int lenght = 0;
+        int currentMilestoneLenght = 0;
         int[] monstersWave;
         float percentageOfMonstersNextMilestone = EvaluateCurveFunction(alpha) /2;
         int totalMonstersNextMilestone = Mathf.RoundToInt( percentageOfMonstersNextMilestone);
@@ -80,16 +80,16 @@ public class Wave  {
         
            
 
-        float c = percentageOfMonstersNextMilestone;
+       
         //int thisMilestone = c;
 
-        if(c == 0.0f)
+        if(percentageOfMonstersNextMilestone == 0.0f)
         {
-            lenght = WaveSpawner.combinations[currentMilestone ].combination.Length;
+            currentMilestoneLenght = WaveSpawner.combinations[currentMilestone ].combination.Length;
             if(WaveSpawner.combinations[currentMilestone].special!= null)
             {
                 int j = 0;
-                monstersWave = new int[lenght + WaveSpawner.combinations[currentMilestone].special.Length];
+                monstersWave = new int[currentMilestoneLenght + WaveSpawner.combinations[currentMilestone].special.Length];
                 for (int i = 0; i < WaveSpawner.combinations[currentMilestone].combination.Length; i++)
                 {
                     monstersWave[i] = WaveSpawner.combinations[currentMilestone].combination[i];
@@ -108,36 +108,36 @@ public class Wave  {
         {
 
             int count = 0;
-            lenght = WaveSpawner.combinations[currentMilestone].combination.Length;
+            currentMilestoneLenght = WaveSpawner.combinations[currentMilestone].combination.Length;
 
             if (currentMilestone + 1 < WaveSpawner.combinations.Length)
             {
                 //% de 1 e % do outro
-                int lenght2 = WaveSpawner.combinations[currentMilestone+1].combination.Length;
+                int nextMilestonCombination = WaveSpawner.combinations[currentMilestone+1].combination.Length;
                 
                 //int monstersOfCurrentMS = Mathf.RoundToInt((1 - c) * (lenght + lenght2));
 
-                int monstersOfCurrentMS = Mathf.RoundToInt((1 - c) * lenght);
-                int monstersOfNextMS = Mathf.RoundToInt(c * lenght2);
+                int monstersOfCurrentMS = Mathf.RoundToInt((1 - percentageOfMonstersNextMilestone) * currentMilestoneLenght);
+                int monstersOfNextMS = Mathf.RoundToInt(percentageOfMonstersNextMilestone * nextMilestonCombination);
                 int totalMonsters = monstersOfCurrentMS + monstersOfNextMS;
                 monstersWave = new int[totalMonsters];
                 while (count < monstersOfCurrentMS)
                 {
-                    monstersWave[count] = WaveSpawner.combinations[currentMilestone].combination[Random.Range(0, lenght - 1)];
+                    monstersWave[count] = WaveSpawner.combinations[currentMilestone].combination[Random.Range(0, currentMilestoneLenght - 1)];
                     count++;
                 }
                 //count = 0;
 
                 while (count < totalMonsters)
                 {
-                    monstersWave[count] = WaveSpawner.combinations[currentMilestone + 1].combination[Random.Range(0, lenght - 1)];
+                    monstersWave[count] = WaveSpawner.combinations[currentMilestone + 1].combination[Random.Range(0, nextMilestonCombination - 1)];
                     count++;
                 }
 
             }
             else
             {
-                monstersWave = new int[numberOfMonsters + WaveSpawner.repetition++];
+                monstersWave = new int[currentMilestoneLenght + WaveSpawner.repetition++];
 
 
                 for (int k = 0; k < monstersWave.Length; k++)

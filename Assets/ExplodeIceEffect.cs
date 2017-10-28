@@ -7,12 +7,13 @@ public class ExplodeIceEffect : MonoBehaviour {
    
     public GameObject target;
     public bool exploded;
-
+    private AudioSource explodeIceSound;
 	// Use this for initialization
 	void Start () {
 
 
-       
+        explodeIceSound = GetComponent<AudioSource>();
+        SoundToPlay.PlayAtLocation(explodeIceSound,transform.position,Quaternion.identity);
         Destroy(gameObject, 1f);
 	}
 	
