@@ -32,6 +32,8 @@ public class ConfigurationMenu : MonoBehaviour {
     resForceValue = true;
     dropdown.value = newValue;*/
     private bool resForceValue = false;
+    private bool blockFullScreenSound = false;
+    private bool blockTutorialSound = false;
 
     CanvasGroup cg;
 
@@ -78,8 +80,20 @@ public class ConfigurationMenu : MonoBehaviour {
     }
     public void MyFunction()
     {
-        SoundToPlay.PlaySfx(GetComponent<AudioSource>());
+        if(!blockFullScreenSound)
+            SoundToPlay.PlaySfx(GetComponent<AudioSource>());
+
+        blockFullScreenSound = false;
     }
+
+    public void PlayTutoSound() {
+        if (!blockTutorialSound)
+            SoundToPlay.PlaySfx(GetComponent<AudioSource>());
+
+        blockTutorialSound = false;
+    }
+
+
     public void Hide()
     {
         cg.alpha = 0f;
@@ -148,8 +162,11 @@ public class ConfigurationMenu : MonoBehaviour {
             resolutionDropDown.value = activeScreenResIndex;
             resForceValue = true;
             fullscreenToggle.isOn = Screen.fullScreen;
-            if(tutorialToggle)
+            if (tutorialToggle) {
+                blockTutorialSound = true;
                 tutorialToggle.isOn = tutorialOn == 1 ? true : false;
+            }
+                
             resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = resolutions[activeScreenResIndex].width + "x" + resolutions[activeScreenResIndex].height;
         }
 
@@ -195,7 +212,7 @@ public class ConfigurationMenu : MonoBehaviour {
 
     public void SetTutorial(bool isTutorial)
     {
-        MyFunction();
+        PlayTutoSound();
         PlayerPrefs.SetInt("tutorial", isTutorial? 1 : 0);
         PlayerPrefs.Save();
     }
