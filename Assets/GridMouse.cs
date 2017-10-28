@@ -261,6 +261,15 @@ public class GridMouse : MonoBehaviour
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
+        Transform BlackAreaBlockers = GameObject.Find("BlackAreaBlockers").transform;
+        foreach (Transform child in BlackAreaBlockers.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+
         Transform CubeTrack4 = GameObject.Find("CubeTrack4").transform;
         foreach (Transform child in CubeTrack4.transform)
         {
@@ -287,6 +296,7 @@ public class GridMouse : MonoBehaviour
         Destroy(EdgesVolcanic.gameObject);
         Destroy(RockBlockers.gameObject);
         Destroy(RockBlockersLava.gameObject);
+        Destroy(BlackAreaBlockers.gameObject);
         Destroy(FireTiles.gameObject);
         //Destroy(Trees);
     }
