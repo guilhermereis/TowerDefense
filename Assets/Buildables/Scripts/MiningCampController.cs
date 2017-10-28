@@ -18,6 +18,8 @@ public class MiningCampController : BuildableController {
     public GameObject moneyCollectedAudio;
     public int storageLevel;
     public int miningRateLevel;
+    public int mineLevel;
+    public bool isMaxLevel;
 
     private string UITooltipBaseText = "MINE'S READY!\nCLICK TO COLLECT\n";
 
@@ -38,6 +40,7 @@ public class MiningCampController : BuildableController {
 
         storageLevel = 1;
         miningRateLevel = 1;
+        mineLevel = 1;
 
        GameController.endWaveDelegate += AddGold;
        foreach(Canvas c in GameObject.FindObjectsOfType<Canvas>())
@@ -57,11 +60,12 @@ public class MiningCampController : BuildableController {
 
     private void OnDestroy()
     {
+        GameController.endWaveDelegate -= AddGold;
         full = null;
     }
 
     //add gold until reach maxcapacity
-    public void AddGold()
+    private void AddGold()
     {
      
         currentGold = Mathf.Clamp(currentGold + goldByWave, 0, maxCapacity);
@@ -90,16 +94,16 @@ public class MiningCampController : BuildableController {
         }
     }
    
-    public void UpgradeMaxGold()
+    private void UpgradeMaxGold(int multiplier)
     {
         storageLevel++;
-        maxCapacity += 50;
+        maxCapacity = maxCapacity * multiplier;
     }
 
-    public void UpgradeGoldByWave()
+    private void UpgradeGoldByWave(int multplier)
     {
         miningRateLevel++;
-        goldByWave += 50;
+        goldByWave = goldByWave * multplier;
     }
     
     private void Update()
@@ -109,4 +113,26 @@ public class MiningCampController : BuildableController {
         fullButton.transform.localScale = new Vector3(2*cameraZoom, 2*cameraZoom, 2*cameraZoom);
     }
 
+    public void Upgrade()
+    {
+        if (!isMaxLevel)
+        {
+            if (isFull)
+                Withdrawl();
+
+            mineLevel++;
+            
+            UpgradeGoldByWave(2);
+            UpgradeMaxGold(4);
+
+            if(mineLevel == 3)
+                isMaxLevel = true;
+            
+        }
+
+        
+
+    }
+
+   
 }
