@@ -56,6 +56,9 @@ public class ConfigurationMenu : MonoBehaviour {
 
     void Start()
     {
+        gameObject.AddComponent<AudioSource>();
+        source.clip = sound;
+        source.playOnAwake = false;
         cg = GetComponent<CanvasGroup>();
         Hide();
 
@@ -70,10 +73,6 @@ public class ConfigurationMenu : MonoBehaviour {
         volumeSliders[2].GetComponent<Slider>().value = music_volume;
 
         getScreenResolutions();
-
-        gameObject.AddComponent<AudioSource>();
-        source.clip = sound;
-        source.playOnAwake = false;
         //Any other settings you want to initialize...
 
         //toggle.onClick.AddListener(() => PlaySound());        
@@ -165,7 +164,9 @@ public class ConfigurationMenu : MonoBehaviour {
         activeScreenResIndex = index;
         activeFullScreen = fullscreenToggle.isOn;
 
-        Screen.SetResolution(resolutions[index].width, resolutions[index].height, fullscreenToggle.isOn);
+        if (resolutions.Length > index) {
+            Screen.SetResolution(resolutions[index].width, resolutions[index].height, fullscreenToggle.isOn);
+        }        
         if(!resForceValue)
             resConfirmationScreen.GetComponent<ResolutionConfirmationScreenController>().showAndStartCountDown();
         resForceValue = false;
