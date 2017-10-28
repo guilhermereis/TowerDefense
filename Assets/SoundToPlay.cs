@@ -150,27 +150,47 @@ public class SoundToPlay : MonoBehaviour
         audioSource.Play();
     }
 
-    public static void PlayAtLocation(GameObject _soundObject, Vector3 position, Quaternion rotation)
+    public static void PlayAtLocation(GameObject _soundObject, Vector3 position, Quaternion rotation, float distance = 10f)
     {
+        float cameraMultiplier = Mathf.Clamp(1f - (Camera.main.orthographicSize - 3f) / 9f, 0.3f, 1f);
         SetSoundToPlay(_soundObject);
         AudioSource src = soundObject.GetComponent<AudioSource>();
-        src.volume = sfx_volume;
+        if (src.spatialBlend == 0f){
+            src.spatialBlend = 1f;
+            src.maxDistance = distance;
+            src.minDistance = 3f;
+        }
+        src.volume = sfx_volume * cameraMultiplier;
         MonoBehaviour.Instantiate(soundObject, position, rotation);
     }
 
-    public static void PlayAtLocation(GameObject _soundObject, Vector3 position, Quaternion rotation, float volumeMultiplier)
+    public static void PlayAtLocation(GameObject _soundObject, Vector3 position, Quaternion rotation, float volumeMultiplier, float distance = 10f)
     {
+        float cameraMultiplier = Mathf.Clamp(1f - (Camera.main.orthographicSize - 3f) / 9f, 0.3f, 1f);
         SetSoundToPlay(_soundObject);
         AudioSource src = soundObject.GetComponent<AudioSource>();
-        src.volume = sfx_volume * volumeMultiplier;
+        if (src.spatialBlend == 0f)
+        {
+            src.spatialBlend = 1f;
+            src.maxDistance = distance;
+            src.minDistance = 3f;
+        }
+        src.volume = sfx_volume * volumeMultiplier * cameraMultiplier;
         MonoBehaviour.Instantiate(soundObject, position, rotation);
     }
 
-    public static void PlayAtLocation(AudioSource _audioSource, Vector3 position, Quaternion rotation)
+    public static void PlayAtLocation(AudioSource _audioSource, Vector3 position, Quaternion rotation, float distance = 10f)
     {
+        float cameraMultiplier = Mathf.Clamp(1f - (Camera.main.orthographicSize - 3f) / 9f, 0.3f, 1f);
         SetSoundToPlay(_audioSource);
         AudioSource src = soundObject.GetComponent<AudioSource>();
-        src.volume = sfx_volume;
+        if (src.spatialBlend == 0f)
+        {
+            src.spatialBlend = 1f;
+            src.maxDistance = distance;
+            src.minDistance = 3f;
+        }
+        src.volume = sfx_volume * cameraMultiplier;
         audioSource.Play();
     }
 }
