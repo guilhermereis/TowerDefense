@@ -353,6 +353,7 @@ public class GridMouse : MonoBehaviour
                 }
             }
         }
+        SetPreviewColor(Color.blue);
     }
     private Vector2 ReturnFirstFreeTileAround()
     {
@@ -464,7 +465,8 @@ public class GridMouse : MonoBehaviour
             }
             
         }
-        
+
+        SetPreviewColor(Color.blue);
     }
     public void SelectPosition(UnitBlueprint unit, GameObject gameObject)
     {
