@@ -585,10 +585,13 @@ public class GridMouse : MonoBehaviour
     }
     private void SetPreviewColor(Color color)
     {
-        foreach (Material matt in temporaryInstance.GetComponent<MeshRenderer>().materials)
+        if (temporaryInstance)
         {
-            //Debug.Log("SETTING matt: " + matt.name);
-            matt.SetColor("_Color", color);
+            foreach (Material matt in temporaryInstance.GetComponent<MeshRenderer>().materials)
+            {
+                //Debug.Log("SETTING matt: " + matt.name);
+                matt.SetColor("_Color", color);
+            }
         }
         selectionCube.GetComponent<MeshRenderer>().material.SetColor("_Color", color);
     }
