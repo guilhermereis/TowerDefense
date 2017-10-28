@@ -147,7 +147,6 @@ public class CastleHealth : MonoBehaviour {
             }
 
         }
-        Debug.Log(health);
         setRepairCostText(ws);
     }
 
