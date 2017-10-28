@@ -25,7 +25,7 @@ public class TryAgainController : MonoBehaviour {
         targetFill = (float)WaveSpawner.gainSecondChanceCounter / (float)WaveSpawner.secondChanceWaveCountTarget;
         targetPercent = (int)(targetFill * 100);
         TopRightMenu.isSecondChanceOn = true;
-
+        
         if (targetFill >= 1f)
         {
             noSecondChanceScreen.SetActive(false);

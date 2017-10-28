@@ -218,7 +218,14 @@ public class BuildManager : MonoBehaviour {
             newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
         else
             newPosition = position;
+
+        //ESSA PROXIMA LINHA TA DANDO ERRO
+        if (unitToBuild == null)
+        {
+            Debug.Log("THIS FUCKING THING IS NULL");
+        }
         tempList[index] = Instantiate(unitToBuild.prefab, newPosition, rotation);
+
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);
         tempList[index].GetComponent<BuildableController>().setArrayListPosition(index);
 

@@ -1005,6 +1005,7 @@ public class WaveSpawner : MonoBehaviour {
                 state =
                     new PropertyScript.StructureState(state.structureName = bc.getUnitBlueprint().name,
                                                       gridMouse.ListOfGameObjects[i].transform);
+                Debug.Log("ADDED " + bc.getUnitBlueprint().name + " TO THE LIST OF STATES");
             }
             listOfStates.Add(state);
             Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
@@ -1020,8 +1021,8 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (listOfStates[i].structureName == Shop.instance.towerLevel1.name)
             {
-                shop.SelectStandardUnit();
-                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                shop.SelectStandardUnit(true);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, true);
                 Vector2 gridSize = gridMouse.getGridSize();
                 int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
@@ -1038,7 +1039,7 @@ public class WaveSpawner : MonoBehaviour {
             else if (listOfStates[i].structureName == Shop.instance.towerLevel2.name)
             {
                 shop.SelectTower2Unit();
-                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, true);
                 Vector2 gridSize = gridMouse.getGridSize();
                 int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
@@ -1055,7 +1056,7 @@ public class WaveSpawner : MonoBehaviour {
             else if (listOfStates[i].structureName == Shop.instance.towerSlow.name)
             {
                 shop.SelectIceTowerUnit();
-                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, true);
                 Vector2 gridSize = gridMouse.getGridSize();
                 int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
@@ -1072,7 +1073,7 @@ public class WaveSpawner : MonoBehaviour {
             else if (listOfStates[i].structureName == Shop.instance.towerTesla.name)
             {
                 shop.SelectFireTowerUnit();
-                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, true);
                 Vector2 gridSize = gridMouse.getGridSize();
                 int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
@@ -1089,7 +1090,7 @@ public class WaveSpawner : MonoBehaviour {
             else if (listOfStates[i].structureName == Shop.instance.towerLevel3.name)
             {
                 shop.SelectTower3Unit();
-                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, false);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(listOfStates[i].position, true);
                 Vector2 gridSize = gridMouse.getGridSize();
                 int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
@@ -1105,9 +1106,9 @@ public class WaveSpawner : MonoBehaviour {
             }
             else if (listOfStates[i].structureName == Shop.instance.miningCamp.name)
             {
-                shop.SelectSecondaryUnit();
+                shop.SelectSecondaryUnit(true);
                 Vector3 newPosition = new Vector3(listOfStates[i].position.x - 0.5f, listOfStates[i].position.y, listOfStates[i].position.z - 0.5f);
-                int added_index = gridMouse.buildUnitAndAddItToTheList(newPosition, listOfStates[i].rotation);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(newPosition, listOfStates[i].rotation,true);
                 Vector2 gridSize = gridMouse.getGridSize();
 
                 //int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
