@@ -61,7 +61,7 @@ public class CastleHealth : MonoBehaviour {
         enemies = new List<PawnCharacter>();
 
         maxHealth = 5000;
-        UpdateHealthBarGfx(maxHealth);
+        UpdateHealthBarGfx(maxHealth,false);
 
         health = maxHealth;
 
@@ -91,13 +91,12 @@ public class CastleHealth : MonoBehaviour {
                     int spent = PlayerStats.AddMoney(-1 * cost);
                     GameController.MoneyCollected(spent, false);
                     GameController.Repair();
-                    health += repairAmmountPercentual * maxHealth;
+                    health = Mathf.Clamp(health + repairAmmountPercentual * maxHealth,0f,maxHealth);
                     UpdateHealthBarGfx(health);
                 }
                 else
                 {
                     GameController.Repair();
-                    Debug.Log("Castle is at full health !");
                 }
             }
             else
@@ -148,15 +147,16 @@ public class CastleHealth : MonoBehaviour {
             }
 
         }
-
         setRepairCostText(ws);
     }
 
 
-    public void UpdateHealthBarGfx(float value)
+    public void UpdateHealthBarGfx(float value, bool animate = true)
     {
+        if(animate)
+            castleUIFeedbackAnimator.SetTrigger("UnderAttack");
         healthBar.fillAmount = value/maxHealth;
-        castleUIFeedbackAnimator.SetTrigger("UnderAttack");
+        
     }
 
     public void ApplyDamage(float damage)
