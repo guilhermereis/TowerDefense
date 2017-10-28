@@ -13,6 +13,7 @@ public class ConfigurationMenu : MonoBehaviour {
     public Dropdown resolutionDropDown;
     public GameObject quitConfirmationScreen;
     public GameObject resConfirmationScreen;
+    public GameObject startOverConfirmationScreen;
     public AudioClip sound;
     
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
@@ -211,6 +212,20 @@ public class ConfigurationMenu : MonoBehaviour {
     public void hideQuitConfirmationScreen() {
         quitConfirmationScreen.GetComponent<CanvasGroup>().alpha = 0;
         quitConfirmationScreen.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+
+    public void showStartOverConfirmation() {
+        startOverConfirmationScreen.GetComponent<CanvasGroup>().alpha = 1f;
+        startOverConfirmationScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    public void confirmStartOver() {
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    public void hideStartOver() {
+        startOverConfirmationScreen.GetComponent<CanvasGroup>().alpha = 0f;
+        startOverConfirmationScreen.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void Quit()
