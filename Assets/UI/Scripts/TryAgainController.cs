@@ -24,7 +24,7 @@ public class TryAgainController : MonoBehaviour {
     public void show() {
         targetFill = (float)WaveSpawner.gainSecondChanceCounter / (float)WaveSpawner.secondChanceWaveCountTarget;
         targetPercent = (int)(targetFill * 100);
-        TopRightMenu.isConfigOn = true;
+        TopRightMenu.isSecondChanceOn = true;
 
         if (targetFill >= 1f)
         {
@@ -42,7 +42,7 @@ public class TryAgainController : MonoBehaviour {
     }
 
     public void hide() {
-        TopRightMenu.isConfigOn = false;
+        TopRightMenu.isSecondChanceOn = false;
 
         CanvasGroup cv = GetComponent<CanvasGroup>();
         cv.alpha = 0f;

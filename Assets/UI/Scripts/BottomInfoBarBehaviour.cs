@@ -21,6 +21,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
     public Sprite IceIconVariation;
     public Sprite CurrentGoldVariation;
     public Color iceTextColorVariation;
+    public Color mineColorVariation;
+    public Color defaultTextColor;
 
     private Sprite defaultAttackDmgIcon;
     private Color defaultAttackDmgColor;
@@ -34,6 +36,7 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             AttackSpeedTextShadow.GetComponent<Text>().text = "" + controller.getFireRate();
             AttadkDmgIcon.GetComponent<Image>().overrideSprite = defaultAttackDmgIcon;
             DamageText.GetComponent<Text>().color = defaultAttackDmgColor;
+            AttackSpeedText.GetComponent<Text>().color = defaultTextColor;
 
             string unitName = controller.getUnitBlueprint().name;
 
@@ -43,6 +46,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
                 SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl1: ";
                 DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                 DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+                SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S FIRERATE\nATTACKS / SECOND";
+                SelectionName.transform.Find("AttackDamage").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S ATTACK DAMAGE";
             }
             if (unitName == Shop.instance.towerLevel2.name)
             {
@@ -50,6 +55,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
                 SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl2: ";
                 DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                 DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+                SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S FIRERATE\nATTACKS / SECOND";
+                SelectionName.transform.Find("AttackDamage").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S ATTACK DAMAGE";
             }
             if (unitName == Shop.instance.towerLevel3.name)
             {
@@ -57,6 +64,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
                 SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl3: ";
                 DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                 DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+                SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S FIRERATE\nATTACKS / SECOND";
+                SelectionName.transform.Find("AttackDamage").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S ATTACK DAMAGE";
             }
             if (unitName == Shop.instance.towerSlow.name)
             {
@@ -67,6 +76,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
                 DamageTextShadow.GetComponent<Text>().text = "" + slowController.SlowAmount + " s";
                 AttadkDmgIcon.GetComponent<Image>().overrideSprite = IceIconVariation;
                 DamageText.GetComponent<Text>().color = iceTextColorVariation;
+                SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S FIRERATE\nATTACKS / SECOND";
+                SelectionName.transform.Find("AttackDamage").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S SLOW DURATION";
 
             }
             if (unitName == Shop.instance.towerTesla.name)
@@ -75,6 +86,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
                 SelectionNameShadow.GetComponent<Text>().text = " Fire Tower: ";
                 DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
                 DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+                SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S FIRERATE\nATTACKS / SECOND";
+                SelectionName.transform.Find("AttackDamage").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S ATTACK DAMAGE";
             }
             
         }
@@ -92,6 +105,9 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             
             DamageText.GetComponent<Text>().text = "" + mcontroller.currentGold;
             DamageTextShadow.GetComponent<Text>().text = "" + mcontroller.currentGold;
+
+            DamageText.GetComponent<Text>().color = mineColorVariation;
+            AttackSpeedText.GetComponent<Text>().color = mineColorVariation;
         }
     }
 
@@ -111,6 +127,7 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
     void Start () {
         defaultAttackDmgIcon = AttadkDmgIcon.GetComponent<Image>().sprite;
         defaultAttackDmgColor = DamageText.GetComponent<Text>().color;
+        defaultTextColor = AttackSpeedText.GetComponent<Text>().color;
     }
 	
 	// Update is called once per frame

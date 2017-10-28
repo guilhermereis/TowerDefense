@@ -184,6 +184,14 @@ public class GameController : MonoBehaviour {
             TakeScreenshot();
         }
 
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (!TopRightMenu.isConfigOn && !TopRightMenu.isSecondChanceOn) {
+                if (gameState == GameState.Preparation) {
+                    ForceWaveStart();
+                }
+            }
+        }
+
         if (gameState == GameState.Preparation)
         {
             if (countDown > 0f && countDown <= 10f) {
