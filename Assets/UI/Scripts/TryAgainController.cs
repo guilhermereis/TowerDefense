@@ -25,17 +25,25 @@ public class TryAgainController : MonoBehaviour {
         targetFill = (float)WaveSpawner.gainSecondChanceCounter / (float)WaveSpawner.secondChanceWaveCountTarget;
         targetPercent = (int)(targetFill * 100);
         TopRightMenu.isSecondChanceOn = true;
-        
-        if (targetFill >= 1f)
+
+        if (PlayerStats.DebugModeON)
         {
             noSecondChanceScreen.SetActive(false);
             hasSecondChanceScreen.SetActive(true);
         }
-        else {
-            noSecondChanceScreen.SetActive(true);
-            hasSecondChanceScreen.SetActive(false);
+        else
+        {
+            if (targetFill >= 1f)
+            {
+                noSecondChanceScreen.SetActive(false);
+                hasSecondChanceScreen.SetActive(true);
+            }
+            else
+            {
+                noSecondChanceScreen.SetActive(true);
+                hasSecondChanceScreen.SetActive(false);
+            }
         }
-
         CanvasGroup cv = GetComponent<CanvasGroup>();
         cv.alpha = 1f;
         cv.blocksRaycasts = true;

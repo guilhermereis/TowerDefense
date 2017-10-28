@@ -1028,6 +1028,7 @@ public class WaveSpawner : MonoBehaviour {
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
 
                 gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.previewMatrix[x, z] = true;
 
                 //Set Fire Rate and Attack Power from saved state
                 gridMouse.ListOfGameObjects[added_index]
@@ -1045,6 +1046,7 @@ public class WaveSpawner : MonoBehaviour {
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
 
                 gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.previewMatrix[x, z] = true;
 
                 //Set Fire Rate and Attack Power from saved state
                 gridMouse.ListOfGameObjects[added_index]
@@ -1062,6 +1064,7 @@ public class WaveSpawner : MonoBehaviour {
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
 
                 gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.previewMatrix[x, z] = true;
 
                 //Set Fire Rate and Attack Power from saved state
                 gridMouse.ListOfGameObjects[added_index]
@@ -1079,6 +1082,7 @@ public class WaveSpawner : MonoBehaviour {
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
 
                 gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.previewMatrix[x, z] = true;
 
                 //Set Fire Rate and Attack Power from saved state
                 gridMouse.ListOfGameObjects[added_index]
@@ -1096,6 +1100,7 @@ public class WaveSpawner : MonoBehaviour {
                 int z = Mathf.FloorToInt(listOfStates[i].position.z + gridSize.y / 2);
 
                 gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+                gridMouse.previewMatrix[x, z] = true;
 
                 //Set Fire Rate and Attack Power from saved state
                 gridMouse.ListOfGameObjects[added_index]
@@ -1121,6 +1126,11 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
                 gridMouse.propertiesMatrix[x + 1, z] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
                 gridMouse.propertiesMatrix[x, z + 1] = new PropertyScript.Property(buildManager.getUnitToBuild(), ref gridMouse.ListOfGameObjects, added_index, "Obstacle");
+
+                gridMouse.previewMatrix[x, z] = true;
+                gridMouse.previewMatrix[x + 1, z + 1] = true;
+                gridMouse.previewMatrix[x + 1, z] = true;
+                gridMouse.previewMatrix[x, z + 1] = true;
 
                 Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
