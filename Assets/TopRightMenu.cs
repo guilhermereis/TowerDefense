@@ -23,11 +23,13 @@ public class TopRightMenu : MonoBehaviour {
     public GameObject configMenu;
     public static bool isConfigOn;
     public static bool isGamePaused;
+    public static bool isSecondChanceOn;
 
     public void Start()
     {
         isConfigOn = false;
         isGamePaused = false;
+        isSecondChanceOn = false;
         NormalSpeedOnClick();
     }
 
@@ -130,12 +132,15 @@ public class TopRightMenu : MonoBehaviour {
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)){
-            if (isConfigOn)
-            {
-                HideConfigurationMenu();
-            }
-            else {
-                ShowConfigurationMenu();
+            if (!isSecondChanceOn) {
+                if (isConfigOn)
+                {
+                    HideConfigurationMenu();
+                }
+                else
+                {
+                    ShowConfigurationMenu();
+                }
             }
         }
 

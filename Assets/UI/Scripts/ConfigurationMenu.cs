@@ -14,6 +14,7 @@ public class ConfigurationMenu : MonoBehaviour {
     public GameObject quitConfirmationScreen;
     public GameObject resConfirmationScreen;
     public GameObject startOverConfirmationScreen;
+    public GameObject creditsScreen;
     public AudioClip sound;
     
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
@@ -80,7 +81,6 @@ public class ConfigurationMenu : MonoBehaviour {
     }
     public void MyFunction()
     {
-        Debug.Log("CALLED MYFUNCTION");
         SoundToPlay.PlaySfx(source);
     }
     public void Hide()
@@ -196,6 +196,7 @@ public class ConfigurationMenu : MonoBehaviour {
 
     public void SetTutorial(bool isTutorial)
     {
+        MyFunction();
         PlayerPrefs.SetInt("tutorial", isTutorial? 1 : 0);
         PlayerPrefs.Save();
     }
@@ -226,6 +227,16 @@ public class ConfigurationMenu : MonoBehaviour {
     public void hideStartOver() {
         startOverConfirmationScreen.GetComponent<CanvasGroup>().alpha = 0f;
         startOverConfirmationScreen.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+
+    public void showCredits() {
+        creditsScreen.GetComponent<CanvasGroup>().alpha = 1f;
+        creditsScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    public void hideCredits() {
+        creditsScreen.GetComponent<CanvasGroup>().alpha = 0f;
+        creditsScreen.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void Quit()
