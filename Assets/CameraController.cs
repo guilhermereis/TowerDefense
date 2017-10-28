@@ -106,7 +106,7 @@ public class CameraController : MonoBehaviour {
         isMovingRight = false;
         isMovingUp = false;
 
-        if (!TopRightMenu.isConfigOn) {
+        if (!TopRightMenu.isConfigOn && GameController.gameState != GameState.GameActivate) {
             //Using directional keys and calculating acceleration
             if (Input.GetAxisRaw("Horizontal") > 0)
             {

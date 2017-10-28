@@ -7,6 +7,7 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
 
     public float slideSpeed = 5f;
     public float closedPosition = -50f;
+    public Transform closedPositionWaypoint;
     public float openPosition = 0f;
     private GameObject selectedObject;
     private int selectionState = 0; //0 = Nothing selected, 1 = Has selection;
@@ -120,7 +121,7 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             
             case 0:
                 newPos = new Vector3(pos.x,
-                    Mathf.Lerp(pos.y, closedPosition, slideSpeed * Time.deltaTime) ,
+                    Mathf.Lerp(pos.y, closedPositionWaypoint.position.y, slideSpeed * Time.deltaTime) ,
                     pos.z);
                 transform.position = newPos;
                 break;
