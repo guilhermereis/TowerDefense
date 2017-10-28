@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648f5bf18816c87409f202b99ae4bc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartMoney: 50000
+  StartMoney: 500
   secondChanceAnimator: {fileID: 0}
 --- !u!114 &114314346464696846
 MonoBehaviour:
@@ -285,7 +285,7 @@ MonoBehaviour:
   waveProgression: 100
   spawnLocation: {fileID: 0}
   hud: {fileID: 0}
-  maxLanes: 2
+  maxLanes: 1
   interval: 10
 --- !u!114 &114979860251173350
 MonoBehaviour:
