@@ -544,7 +544,7 @@ public class BuildManager : MonoBehaviour {
             gridMouse.propertiesMatrix[x, z].unit = null;
             gridMouse.propertiesMatrix[x, z].type = "Normal";
             gridMouse.previewMatrix[x, z] = false;
-            if (bc.getUnitBlueprint() == Shop.instance.miningCamp)
+            if (bc.getUnitBlueprint().name == Shop.instance.miningCamp.name)
             {
                 gridMouse.propertiesMatrix[x + 1, z + 1].unit = null;
                 gridMouse.propertiesMatrix[x, z + 1].unit = null;
