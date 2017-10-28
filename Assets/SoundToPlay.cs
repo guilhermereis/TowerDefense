@@ -127,6 +127,7 @@ public class SoundToPlay : MonoBehaviour
 
     public static void PlaySfx(GameObject _soundObject, float volumeMultiplier)
     {
+        
         SetSoundToPlay(_soundObject);
         AudioSource src = soundObject.GetComponent<AudioSource>();
         src.volume = sfx_volume *volumeMultiplier;
@@ -135,6 +136,7 @@ public class SoundToPlay : MonoBehaviour
 
     public static void PlaySfx(GameObject _soundObject)
     {
+        
         SetSoundToPlay(_soundObject);
         AudioSource src = soundObject.GetComponent<AudioSource>();
         src.volume = sfx_volume;
