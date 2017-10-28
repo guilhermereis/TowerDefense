@@ -219,11 +219,6 @@ public class BuildManager : MonoBehaviour {
         else
             newPosition = position;
 
-        //ESSA PROXIMA LINHA TA DANDO ERRO
-        if (unitToBuild == null)
-        {
-            Debug.Log("THIS FUCKING THING IS NULL");
-        }
         tempList[index] = Instantiate(unitToBuild.prefab, newPosition, rotation);
 
         //tempList[index] = Instantiate(unitToBuild.prefab, position, unitToBuild.prefab.transform.rotation);

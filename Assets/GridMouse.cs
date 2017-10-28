@@ -775,7 +775,7 @@ public class GridMouse : MonoBehaviour
             //after building the soldier camp, revert to normal scale
             selectionCube.transform.localScale = new Vector3(1f, 0.01f, 1f);
         }
-        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        else if (PlayerStats.DebugModeON && Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             PlayerStats.SetMoney(0);
         }
