@@ -13,13 +13,12 @@ public class AudioManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        SoundToPlay.PlayMusic(snowlandsAmbientSound, 0.6f);
+        SoundToPlay.PlayMusic(snowlandsAmbientSound, 0.3f);
         SoundToPlay.PlayMusic(grasslandsAmbientSound, 0.2f);
-        SoundToPlay.PlayMusic(desertAmbientSound);
+        SoundToPlay.PlayMusic(desertAmbientSound, 0.3f);
         SoundToPlay.PlayMusic(vulcanoLandAmbientSound);
         SoundToPlay.PlayMusic(backgroundMusic, 0.25f);
     }
-
 	// Update is called once per frame
 	void Update () {
 		
