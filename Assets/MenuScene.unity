@@ -2296,7 +2296,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 323.03, y: 179}
+  m_SizeDelta: {x: 323.03003, y: 179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &384741480
 MonoBehaviour:
@@ -3860,7 +3860,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -598}
-  m_SizeDelta: {x: 168.7, y: 313}
+  m_SizeDelta: {x: 168.7, y: 72.6}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &711628305
 MonoBehaviour:
@@ -8768,7 +8768,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -485}
-  m_SizeDelta: {x: 297.6, y: 333}
+  m_SizeDelta: {x: 297.6, y: 87.3}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1239500900
 MonoBehaviour:
@@ -10880,6 +10880,7 @@ GameObject:
   - component: {fileID: 1496510542}
   - component: {fileID: 1496510541}
   - component: {fileID: 1496510540}
+  - component: {fileID: 1496510544}
   m_Layer: 5
   m_Name: ConfigMenuBGPrefab
   m_TagString: Untagged
@@ -10958,6 +10959,86 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!82 &1496510544
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1496510539}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1506765130
 GameObject:
   m_ObjectHideFlags: 0
@@ -11364,8 +11445,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 97.9, y: 196.4}
-  m_Pivot: {x: 1, y: 0}
+  m_SizeDelta: {x: 97.899994, y: 196.4}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1633217194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11385,7 +11466,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: aafc4804ec088d849ad99510d85ef1a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d511568f78f6f8d41818081077ec117e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -13496,7 +13577,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -360.03}
-  m_SizeDelta: {x: 366.7, y: 211.67}
+  m_SizeDelta: {x: 366.7, y: 105.11}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1953151090
 MonoBehaviour:

@@ -16,8 +16,6 @@ public class ConfigurationMenu : MonoBehaviour {
     public GameObject startOverConfirmationScreen;
     public GameObject creditsScreen;
     public AudioClip sound;
-    
-    private AudioSource source { get { return GetComponent<AudioSource>(); } }
 
     private float sfx_volume;
     private float music_volume;
@@ -56,9 +54,9 @@ public class ConfigurationMenu : MonoBehaviour {
 
     void Start()
     {
-        gameObject.AddComponent<AudioSource>();
-        source.clip = sound;
-        source.playOnAwake = false;
+
+        GetComponent<AudioSource>().clip = sound;
+        GetComponent<AudioSource>().playOnAwake = false;
         cg = GetComponent<CanvasGroup>();
         Hide();
 
@@ -80,7 +78,7 @@ public class ConfigurationMenu : MonoBehaviour {
     }
     public void MyFunction()
     {
-        SoundToPlay.PlaySfx(source);
+        SoundToPlay.PlaySfx(GetComponent<AudioSource>());
     }
     public void Hide()
     {
