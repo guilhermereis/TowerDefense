@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TipText : MonoBehaviour {
 
-    public string[] tips = { " Build mine to make money", " Ice towers slow enemies" };
+    public string[] tips = { " Build Mines to make money", " Ice towers slow enemies", " Don't forget to collect money from mine", "Bombers can explode your castle" };
     private Text tipText;
 	// Use this for initialization
 	void Start () {
