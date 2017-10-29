@@ -985,6 +985,7 @@ public class WaveSpawner : MonoBehaviour {
                                                         bc.Health, tc.fireRateLVL, tc.attackPowerLVL);
 
                 Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
+                listOfStates.Add(state);
             }
             else if (tSc != null)
             {
@@ -992,6 +993,7 @@ public class WaveSpawner : MonoBehaviour {
                     new PropertyScript.StructureState(state.structureName = tSc.getUnitBlueprint().name,
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tSc.fireRateLVL, tSc.attackPowerLVL);
+                listOfStates.Add(state);
             }
             else if (tTc != null)
             {
@@ -999,6 +1001,7 @@ public class WaveSpawner : MonoBehaviour {
                     new PropertyScript.StructureState(state.structureName = tTc.getUnitBlueprint().name,
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tTc.fireRateLVL, tTc.attackPowerLVL);
+                listOfStates.Add(state);
             }
             else if (bc != null) // Soldier Camp
             {
@@ -1006,8 +1009,9 @@ public class WaveSpawner : MonoBehaviour {
                     new PropertyScript.StructureState(state.structureName = bc.getUnitBlueprint().name,
                                                       gridMouse.ListOfGameObjects[i].transform);
                 Debug.Log("ADDED " + bc.getUnitBlueprint().name + " TO THE LIST OF STATES");
+                listOfStates.Add(state);
             }
-            listOfStates.Add(state);
+            
             Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
     }
