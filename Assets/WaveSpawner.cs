@@ -1144,6 +1144,9 @@ public class WaveSpawner : MonoBehaviour {
             }
 
         }
+        //this line is REALLY important; the unitToBuild must be deselected or it can
+        //happen that you are able to build a unit without money in the retried wave.
+        buildManager.DeselectUnitToBuild();
         
         //load previously saved money
         PlayerStats.SetMoney(saved_money);
