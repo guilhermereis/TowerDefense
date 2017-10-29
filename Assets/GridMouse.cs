@@ -542,6 +542,12 @@ public class GridMouse : MonoBehaviour
     public void SelectPosition(UnitBlueprint unit, GameObject gameObject)
     {
         buildManager.SelectBuilding(unit, gameObject);
+        MiningCampController mc = gameObject.GetComponent<MiningCampController>();
+        if (mc)
+        {
+            if (mc.isFull)
+                mc.Withdrawl();
+        }
         BuildManager.instance.ShowOptions();
        // Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getFireRate());
        // Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getAttackPower());
