@@ -413,7 +413,7 @@ public class GridMouse : MonoBehaviour
                 }
             }
         }
-        SetPreviewColor(Color.blue);
+        SetPreviewColor(new Color(0f,0f,1f,0.2f));//blue
     }
     private Vector2 ReturnFirstFreeTileAround()
     {
@@ -526,7 +526,7 @@ public class GridMouse : MonoBehaviour
             
         }
 
-        SetPreviewColor(Color.blue);
+        SetPreviewColor(new Color(0f, 0f, 1f, 0.2f));//blue
     }
     public void SelectPosition(UnitBlueprint unit, GameObject gameObject)
     {
@@ -690,7 +690,8 @@ public class GridMouse : MonoBehaviour
             int instance_z = Mathf.FloorToInt(temporaryInstance.transform.position.z + _gridSize.y / 2);
             previewMatrix[instance_x, instance_z] = false;
             Destroy(temporaryInstance);
-            selectionCube.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.blue);
+            selectionCube.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(0f, 0f, 1f, 0.2f)); //blue
+            
         }
     }
     
@@ -708,7 +709,7 @@ public class GridMouse : MonoBehaviour
             previewMatrix[instance_x + 1, instance_z] = false;
             previewMatrix[instance_x, instance_z + 1] = false;
             Destroy(temporaryInstance);
-            selectionCube.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.blue);
+            selectionCube.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(0f, 0f, 1f, 0.2f)); //blue
         }
     }
 
