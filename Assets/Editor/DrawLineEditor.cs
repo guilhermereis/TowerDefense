@@ -9,11 +9,29 @@ public class DrawLineEditor : Editor {
     public Mesh mesh;
     public bool[,] previewMatrix;
     public bool loaded = false;
+    public bool creationIsOn = false;
     void OnSceneGUI()
     {
         // get the chosen game object
         t = target as DrawLine;
         GameObject obj = GameObject.Find("Yatah");
+
+        Event e = Event.current;
+        switch (e.type)
+        {
+            case EventType.keyDown:
+                {
+                    if (Event.current.keyCode == (KeyCode.KeypadMinus))
+                    {
+                        creationIsOn = false;
+                    }
+                    else if (Event.current.keyCode == (KeyCode.KeypadPlus))
+                    {
+                        creationIsOn = true;
+                    }
+                    break;
+                }
+        }
 
         if (!loaded)
         {
@@ -57,7 +75,8 @@ public class DrawLineEditor : Editor {
             if (previewMatrix[x, z] == false)
             {
                 Vector3 position = CoordToPosition(x, z);
-                DoCreateSimplePrefab(position);
+                if (creationIsOn)
+                    DoCreateSimplePrefab(position);
             }
 
             Debug.Log("INSTANTIATED AT " + x + "," + z);
