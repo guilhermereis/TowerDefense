@@ -81,20 +81,28 @@ public class PawnCharacter : MonoBehaviour {
     public virtual bool Damage(float _damage, out bool hit,DamageType _damageType)
     {
         hit = false;
+        float realDamage = 0;
         if (!isDead)
         {
-            float realDamage = _damage - defense;
-            if (realDamage <= 0)
+            if(_damageType == DamageType.Explosion)
             {
-                realDamage = (int) 0.10f * _damage;
                 hit = true;
+                realDamage = _damage;
 
             }
             else
-                hit = true;
+            {
+                realDamage = _damage - defense;
+                if (realDamage <= 0)
+                {
+                    realDamage = (int) 0.10f * _damage;
+                    hit = true;
+                }
+                else
+                    hit = true;
 
+            }
             
-
             health -= realDamage;
 
             //start coroutine that makes pawn stop for a moment
