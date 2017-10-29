@@ -1000,7 +1000,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tTc.fireRateLVL, tTc.attackPowerLVL);
             }
-            else // Soldier Camp
+            else if (bc != null) // Soldier Camp
             {
                 state =
                     new PropertyScript.StructureState(state.structureName = bc.getUnitBlueprint().name,
