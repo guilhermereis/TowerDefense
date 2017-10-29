@@ -9,29 +9,14 @@ public class DrawLineEditor : Editor {
     public Mesh mesh;
     public bool[,] previewMatrix;
     public bool loaded = false;
-    public bool creationIsOn = false;
+    public GameObject father;
     void OnSceneGUI()
     {
         // get the chosen game object
         t = target as DrawLine;
         GameObject obj = GameObject.Find("Yatah");
 
-        Event e = Event.current;
-        switch (e.type)
-        {
-            case EventType.keyDown:
-                {
-                    if (Event.current.keyCode == (KeyCode.KeypadMinus))
-                    {
-                        creationIsOn = false;
-                    }
-                    else if (Event.current.keyCode == (KeyCode.KeypadPlus))
-                    {
-                        creationIsOn = true;
-                    }
-                    break;
-                }
-        }
+        
 
         if (!loaded)
         {
@@ -75,8 +60,8 @@ public class DrawLineEditor : Editor {
             if (previewMatrix[x, z] == false)
             {
                 Vector3 position = CoordToPosition(x, z);
-                if (creationIsOn)
-                    DoCreateSimplePrefab(position);
+                
+                DoCreateSimplePrefab(position);
             }
 
             Debug.Log("INSTANTIATED AT " + x + "," + z);
@@ -94,10 +79,16 @@ public class DrawLineEditor : Editor {
     {
         LoadResources();
         //PrefabUtility.InstantiatePrefab(obj);
+        if (!father)
+        {
+            father = new GameObject("Father");
+            father.transform.parent = t.transform;
+        }
+
         GameObject go = new GameObject("Edge");
         go.transform.position = new Vector3(pos.x, pos.y, pos.z);
         go.transform.localScale = new Vector3(1f, 0.01f, 1f);
-        go.transform.parent = t.transform;
+        go.transform.parent = father.transform;
         MeshFilter meshFilter = go.AddComponent<MeshFilter>();
         meshFilter.mesh = mesh;
         MeshRenderer meshRenderer = go.AddComponent<MeshRenderer>();
