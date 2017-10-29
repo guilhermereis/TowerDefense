@@ -14,7 +14,7 @@ public class PawnCharacter : MonoBehaviour {
     public float attackRate;
     public bool isDead;
     public bool isSlow;
-
+    private bool debug;
     public bool exploded;
 
 	public PawnHealthBarGUI healthBar;
@@ -80,6 +80,7 @@ public class PawnCharacter : MonoBehaviour {
 
     public virtual bool Damage(float _damage, out bool hit,DamageType _damageType)
     {
+        debug = false;
         hit = false;
         float realDamage = 0;
         if (!isDead)
@@ -102,7 +103,10 @@ public class PawnCharacter : MonoBehaviour {
                     hit = true;
 
             }
-            
+
+            if(debug)
+                realDamage = (int)0.20f * _damage;
+
             health -= realDamage;
 
             //start coroutine that makes pawn stop for a moment

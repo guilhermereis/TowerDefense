@@ -127,6 +127,7 @@ public class WaveSpawner : MonoBehaviour {
     int[] bomberCombinationLane3;
     int[] bomberCombinationLane4;
 
+    public int totalCombinations = 10;
     public float interval = 10;
     public static int repetition = 0;
 
@@ -195,11 +196,11 @@ public class WaveSpawner : MonoBehaviour {
         //19 master king
         //20 great king
 
-        combinations = new Milestone[10];
+        combinations = new Milestone[totalCombinations];
         //creating basics milestones combinations
         combinations[0] = new Milestone();
         combinations[0].combination = new int[] { 1,1,1,1,1};
-        combinations[0].special = new int[] { 1,1,1 };
+        combinations[0].special = new int[] { 13,13,12,12,12,10,10,20 };
         combinations[1] = new Milestone();
         combinations[1].combination = new int[] { 1,1,1,1,1,1,2};
         combinations[1].special = new int[] { 2,2,2,2,4,3,3,3,3,3,3 };
@@ -686,7 +687,7 @@ public class WaveSpawner : MonoBehaviour {
             
 
             if (waveNumberLane1 % (int) interval == 0)
-                currentMS1++;
+                currentMS1 = Mathf.Clamp((currentMS1+1) , 0,(totalCombinations));
 
             //waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
             if (isStartingBomber && bomberWaveLane1!= -1)
@@ -726,7 +727,7 @@ public class WaveSpawner : MonoBehaviour {
 
             if (waveNumberLane1 % (int)interval == 0)
             {
-                currentMS1++;
+                currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations)); 
 
             }
 
@@ -753,11 +754,11 @@ public class WaveSpawner : MonoBehaviour {
 
             if (waveNumberLane1 % (int)interval == 0)
             {
-                currentMS1++;
+                currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations));
             }
             if (waveNumberLane2 % (int)interval == 0)
             {
-                currentMS2++;
+                currentMS2 = Mathf.Clamp((currentMS2 + 1), 0, (totalCombinations));
             }
 
             waveLane1 = new Wave(waveNumberLane1 % (int)interval / interval, currentMS1, 10);
@@ -799,22 +800,22 @@ public class WaveSpawner : MonoBehaviour {
             if (waveNumberLane1 % (int)interval == 0)
             {
                
-                currentMS1++;
+                currentMS1= (currentMS1 + 1) % totalCombinations;
             }
             if (waveNumberLane2 % (int)interval == 0)
             {
                 
-                currentMS2++;
+                currentMS2 = Mathf.Clamp((currentMS2 + 1), 0, (totalCombinations));
             }
             if (waveNumberLane3 % (int)interval == 0)
             {
                 
-                currentMS3++;
+                currentMS3 = Mathf.Clamp((currentMS3 + 1), 0, (totalCombinations));
             }
             if (waveNumberLane4 % (int)interval == 0)
             {
                 
-                currentMS4++;
+                currentMS4 = Mathf.Clamp((currentMS4 + 1), 0, (totalCombinations));
             }
 
            
