@@ -286,6 +286,51 @@ public class GridMouse : MonoBehaviour
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
+        //--------------------------------------------------------------------------------------
+        Transform BottomRightRiverBlockers = GameObject.Find("BottomRightRiverBlockers").transform;
+        foreach (Transform child in BottomRightRiverBlockers.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+        Transform BottomLeftRiverBlockers = GameObject.Find("BottomLeftRiverBlockers").transform;
+        foreach (Transform child in BottomLeftRiverBlockers.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+
+        Transform TopRightRiverBlockers = GameObject.Find("TopRightRiverBlockers").transform;
+        foreach (Transform child in TopRightRiverBlockers.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+        
+        Transform TopLeftRiverBlockers = GameObject.Find("TopLeftRiverBlockers").transform;
+        foreach (Transform child in TopLeftRiverBlockers.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+        
+        Transform CenterRiverBlockers = GameObject.Find("CenterRiverBlockers").transform;
+        foreach (Transform child in CenterRiverBlockers.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }
+        //--------------------------------------------------------------------------------------
         Destroy(CubeTrack);
         Destroy(CubeTrack2);
         Destroy(CubeTrack3);
@@ -299,6 +344,11 @@ public class GridMouse : MonoBehaviour
         Destroy(BlackAreaBlockers.gameObject);
         Destroy(FireTiles.gameObject);
         //Destroy(Trees);
+        Destroy(BottomRightRiverBlockers.gameObject);
+        Destroy(BottomLeftRiverBlockers.gameObject);
+        Destroy(TopRightRiverBlockers.gameObject);
+        Destroy(TopLeftRiverBlockers.gameObject);
+        Destroy(CenterRiverBlockers.gameObject);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private bool CheckIfHitStructure()
