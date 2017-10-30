@@ -49,8 +49,8 @@ public class PawnCharacter : MonoBehaviour {
         {
             if (!exploded)
             {
-                PlayerStats.AddMoney(50);
-                GameController.MoneyCollected(50, false);
+                PlayerStats.AddMoney(10);
+                GameController.MoneyCollected(10, false);
             }
 
             SoundToPlay.PlayAtLocation(painSoundPrefab, transform.position, Quaternion.identity);
