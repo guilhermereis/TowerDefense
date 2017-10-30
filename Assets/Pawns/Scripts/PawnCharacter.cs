@@ -96,7 +96,7 @@ public class PawnCharacter : MonoBehaviour {
                 realDamage = _damage - defense;
                 if (realDamage <= 0)
                 {
-                    realDamage = (int) 0.10f * _damage;
+                    realDamage = (int) (0.10f * _damage);
                     hit = true;
                 }
                 else
