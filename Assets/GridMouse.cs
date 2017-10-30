@@ -330,6 +330,16 @@ public class GridMouse : MonoBehaviour
             z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
             propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
         }
+
+        Transform BlackAreaInSnow = GameObject.Find("BlackAreaInSnow").transform;
+        foreach (Transform child in BlackAreaInSnow.transform)
+        {
+
+            x = Mathf.FloorToInt(child.transform.position.x + _gridSize.x / 2);
+            z = Mathf.FloorToInt(child.transform.position.z + _gridSize.y / 2);
+            propertiesMatrix[x, z] = new PropertyScript.Property("Tree");
+        }   
+
         //--------------------------------------------------------------------------------------
         Destroy(CubeTrack);
         Destroy(CubeTrack2);
@@ -349,6 +359,7 @@ public class GridMouse : MonoBehaviour
         Destroy(TopRightRiverBlockers.gameObject);
         Destroy(TopLeftRiverBlockers.gameObject);
         Destroy(CenterRiverBlockers.gameObject);
+        Destroy(BlackAreaInSnow.gameObject);
     }
     //HandlePreviewSoldierCamp(Ray ray, RaycastHit hitInfo, bool didHit, int x, int z)
     private bool CheckIfHitStructure()
@@ -531,6 +542,12 @@ public class GridMouse : MonoBehaviour
     public void SelectPosition(UnitBlueprint unit, GameObject gameObject)
     {
         buildManager.SelectBuilding(unit, gameObject);
+        MiningCampController mc = gameObject.GetComponent<MiningCampController>();
+        if (mc)
+        {
+            if (mc.isFull)
+                mc.Withdrawl();
+        }
         BuildManager.instance.ShowOptions();
        // Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getFireRate());
        // Debug.Log("AAAAAA" + gameObject.GetComponent<TowerController>().getAttackPower());
