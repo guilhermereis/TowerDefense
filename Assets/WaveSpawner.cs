@@ -127,7 +127,7 @@ public class WaveSpawner : MonoBehaviour {
     int[] bomberCombinationLane3;
     int[] bomberCombinationLane4;
 
-    public int totalCombinations = 15;
+    private int totalCombinations = 15;
     public float interval = 10;
     public static int repetition = 0;
 
