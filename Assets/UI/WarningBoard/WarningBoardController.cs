@@ -8,6 +8,7 @@ public class WarningBoardController : MonoBehaviour {
     public WaveSpawner waveSpawner;
     private Animator anim;
     private int openedAtWave = 999999999;
+    public GameObject attentionWarningSound;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class WarningBoardController : MonoBehaviour {
     }
 
     public void openWarningBoard() {
+        SoundToPlay.PlaySfx(attentionWarningSound);
         openedAtWave = waveSpawner.waveNumber;
         anim.SetTrigger("Open");
     }
