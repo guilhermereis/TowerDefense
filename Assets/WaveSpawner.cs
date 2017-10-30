@@ -127,7 +127,7 @@ public class WaveSpawner : MonoBehaviour {
     int[] bomberCombinationLane3;
     int[] bomberCombinationLane4;
 
-    public int totalCombinations = 10;
+    public int totalCombinations = 15;
     public float interval = 10;
     public static int repetition = 0;
 
@@ -199,35 +199,52 @@ public class WaveSpawner : MonoBehaviour {
         combinations = new Milestone[totalCombinations];
         //creating basics milestones combinations
         combinations[0] = new Milestone();
-        combinations[0].combination = new int[] { 1,1,1,1,1};
+        combinations[0].combination = new int[] { 1,1,1,1,1,1,1,1,1};
         combinations[0].special = new int[] { 1,1,1,1,1,1 };
         combinations[1] = new Milestone();
         combinations[1].combination = new int[] { 2,2,2,2,2,2,2,2,2,2};
         combinations[1].special = new int[] { 2,2,2,2,4,3,3,3,3,3,3 };
         combinations[2] = new Milestone();
-        combinations[2].combination = new int[] { 3, 3, 3, 2, 2, 2, 2 };
+        combinations[2].combination = new int[] { 3, 3, 3, 3, 3, 3, 3 };
         combinations[2].special = new int[] { 7,3,3,3,3,2,2,2,2,3};
         combinations[3] = new Milestone();
-        combinations[3].combination = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 3, 3 };
-        combinations[3].special = new int[] { 5,5 , 5, 5, 6 ,6 };
+        combinations[3].combination = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+        combinations[3].special = new int[] { 3,3 , 3, 3, 3 ,3 };
         combinations[4] = new Milestone();
-        combinations[4].combination = new int[] { 5, 5, 5, 5, 5, 6, 6, 6, 6, 6 };
-        combinations[4].special = new int[] { 20, 6, 6, 6, 6, 6 };
+        combinations[4].combination = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+        combinations[4].special = new int[] { 20, 4, 4, 4, 4, 4 };
         combinations[5] = new Milestone();
-        combinations[5].combination = new int[] { 8, 8, 8, 8, 9 ,9 ,9 };
-        combinations[5].special = new int[] { 11, 10, 10, 10, 10, 10 };
+        combinations[5].combination = new int[] { 6,6, 6, 6, 6 ,6 ,6 };
+        combinations[5].special = new int[] { 5, 5, 5, 5, 5, 5 };
         combinations[6] = new Milestone();
-        combinations[6].combination = new int[] { 12, 12, 12, 12, 12, 12};
-        combinations[6].special = new int[] { 11,20, 13, 3, 3, 3, 4 };
+        combinations[6].combination = new int[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+        combinations[6].special = new int[] { 11, 6, 6, 6, 6, 6 };
         combinations[7] = new Milestone();
-        combinations[7].combination = new int[] { 13, 13, 13, 14, 13, 13, 12, 12, 12, 13 };
-        combinations[7].special = new int[] { 15, 14, 14, 14, 14, 14 };
+        combinations[7].combination = new int[] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+        combinations[7].special = new int[] {8 , 8, 8, 8, 8, 8 };
         combinations[8] = new Milestone();
-        combinations[8].combination = new int[] { 16, 16, 16, 16, 17, 17, 17, 17, 17, 17 };
-        combinations[8].special = new int[] { 19, 18, 18, 18, 18, 18 };
-        combinations[9] = new Milestone();
-        combinations[9].combination = new int[] { 17, 17, 18, 18, 18, 18, 18};
-        combinations[9].special = new int[] { 19,20,7,11, 18,18,18,18,18,18,18,3 };
+        combinations[8].combination = new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
+        combinations[8].special = new int[] { 11, 9, 9, 9, 9, 9 };
+        combinations[9].combination = new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
+        combinations[9].special = new int[] { 11, 9, 9, 9, 9, 9 };
+        combinations[10] = new Milestone();
+        combinations[10].combination = new int[] { 12, 12, 12, 12, 12, 12, 12, 12, 12, 12 };
+        combinations[10].special = new int[] { 13, 10, 10, 10, 10, 10 };
+        combinations[11] = new Milestone();
+        combinations[11].combination = new int[] { 13, 13, 13, 13, 13, 13, 13,13};
+        combinations[11].special = new int[] { 14,13,13,14,13,13 };
+        combinations[12] = new Milestone();
+        combinations[12].combination = new int[] { 14, 14, 14, 14, 14, 14, 14, 14 };
+        combinations[12].special = new int[] { 15, 14, 14, 14 };
+        combinations[13] = new Milestone();
+        combinations[13].combination = new int[] { 16, 16, 16, 16, 16, 16, 16, 16 };
+        combinations[13].special = new int[] { 14, 14, 14, 14 };
+        combinations[14] = new Milestone();
+        combinations[14].combination = new int[] { 17, 17, 17, 17, 17, 17, 17, 17 };
+        combinations[14].special = new int[] { 18, 18, 18, 18 };
+        combinations[14] = new Milestone();
+        combinations[14].combination = new int[] { 18, 18, 18, 18, 18, 18, 18, 18 };
+        combinations[14].special = new int[] { 19, 18, 18, 18 };
     }
 
 
