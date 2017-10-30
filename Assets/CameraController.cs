@@ -4,7 +4,7 @@ public class CameraController : MonoBehaviour {
 
     private float customDeltaTime = 0f;
 
-    public float panSpeed = 40f;
+    public float panSpeed = 5f;
     public float panBorderThickness = 10f;
     public float perspectiveRatio = 1.78f;
     
@@ -31,6 +31,12 @@ public class CameraController : MonoBehaviour {
     private bool isMovingLeft = false;
     private bool isMovingRight = false;
 
+    public Transform c0;
+    public Transform c1;
+    public Transform c2;
+    public Transform c3;
+    public Transform c4;
+    private bool isRecording = false;
 
     private void Start(){
         SetInitialValues(true);
@@ -47,6 +53,7 @@ public class CameraController : MonoBehaviour {
 
         if (clockwise)
         {
+            Debug.Log("Clock");
             switch (currentRotation)
             {
                 case 0:
@@ -54,12 +61,15 @@ public class CameraController : MonoBehaviour {
                     break;
                 case 1:
                     cameraStartPosition = new Vector3(-cameraStartPosition.x, cameraStartPosition.y, cameraStartPosition.z);
+                    c1 = c2;
                     break;
                 case 2:
                     cameraStartPosition = new Vector3(cameraStartPosition.x, cameraStartPosition.y, -cameraStartPosition.z);
+                    c1 = c3;
                     break;
                 case 3:
                     cameraStartPosition = new Vector3(-cameraStartPosition.x, cameraStartPosition.y, cameraStartPosition.z);
+                    c1 = c4;
                     break;
             }
         }
@@ -81,8 +91,43 @@ public class CameraController : MonoBehaviour {
             }
         }
     }
+
+    public void Record() {
+        transform.position = cameraStartPosition + c1.position;
+        isRecording = true;
+    }
+
     // Update is called once per frame
     void Update () {
+
+        panSpeed = 5f;
+        if (Input.GetKeyDown(KeyCode.I)) {
+            GameObject hud = GameObject.FindGameObjectWithTag("HUD");
+            hud.GetComponent<CanvasGroup>().alpha = 0f;
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            GameObject hud2 = gameObject.transform.Find("Canvas").gameObject;
+            hud2.SetActive(false);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            panSpeed = 1f;
+        }
+        if (Input.GetKey(KeyCode.LeftAlt))
+        {
+            panSpeed = 0.5f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Record();
+        }
+
+        if (isRecording) {
+           Vector3 sum = c0.position - c1.position;
+           transform.position += sum.normalized * 1f * Time.deltaTime;
+        }
 
         //Setting custom deltaTime according to its timescale
         if (Time.timeScale == 0f)

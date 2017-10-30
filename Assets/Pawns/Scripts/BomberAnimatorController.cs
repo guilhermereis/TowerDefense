@@ -10,6 +10,7 @@ public class BomberAnimatorController : MonoBehaviour {
     public float speedMultiplier = 1f;
     public bool isDead = false;
     private BomberCharacter character;
+    private AudioSource stepAudio;
 
     public void setIsAttacking(bool newIsAttacking)
     {
@@ -27,6 +28,11 @@ public class BomberAnimatorController : MonoBehaviour {
     void Start () {
         anim = (Animator)GetComponent<Animator>();
         character = (BomberCharacter)GetComponentInParent<BomberCharacter>();
+        stepAudio = GetComponentInParent<AudioSource>();
+        if (!stepAudio)
+        {
+            stepAudio = GetComponent<AudioSource>();
+        }
     }
 	
 	// Update is called once per frame
@@ -64,5 +70,10 @@ public class BomberAnimatorController : MonoBehaviour {
     public void DeathEnd()
     {
         character.DeathEnd();
+    }
+
+    public void Step()
+    {
+        SoundToPlay.PlayAtLocation(stepAudio, transform.position, Quaternion.identity, 0.15f, 3f);
     }
 }

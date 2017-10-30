@@ -315,7 +315,7 @@ public class TowerController : BuildableController {
                 arrow.transform.parent = transform;
                 newArrow.Target = target;
                 newArrow.attackPower = attackPower;
-                SoundToPlay.PlayAtLocation(arrowSoundPrefab, transform.position, Quaternion.identity, 5f);
+                //SoundToPlay.PlayAtLocation(arrowSoundPrefab, transform.position, Quaternion.identity,0.01f, 10f);
                 //new SoundToPlay(arrowSoundPrefab).PlayAtLocation(transform.position, Quaternion.identity);
             }
         }else if( currentAmmo == TowerAmmo.CannonBall)

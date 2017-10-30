@@ -9,6 +9,7 @@ public class WandererAnimatorController : MonoBehaviour {
     public bool isDead = false;
     public float speed = 0f;
     public float speedMultiplier = 1f;
+    private AudioSource stepAudio;
 
     public void setIsAttacking(bool newIsAttacking)
     {
@@ -25,6 +26,7 @@ public class WandererAnimatorController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         anim = (Animator)GetComponent<Animator>();
+        stepAudio = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -56,5 +58,9 @@ public class WandererAnimatorController : MonoBehaviour {
                 anim.SetLayerWeight(1, weightLerp);
             }
         }
+    }
+
+    public void Step() {
+        SoundToPlay.PlayAtLocation(stepAudio, transform.position, Quaternion.identity, 0.15f, 3f);
     }
 }

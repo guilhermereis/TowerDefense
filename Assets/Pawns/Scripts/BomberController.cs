@@ -88,7 +88,7 @@ public class BomberController : EnemyController {
             Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
             //Camera.main.GetComponent<CameraShake>().PlayShake();
             gameObject.GetComponent<PawnCharacter>().exploded = true;
-            Instantiate(gameObject.GetComponent<BomberCharacter>().prefabExplosionSound, transform);
+            SoundToPlay.PlayAtLocation(gameObject.GetComponent<BomberCharacter>().prefabExplosionSound, transform.position, Quaternion.identity, 10f);
             //apply damage to itself with total health amount.
             bool hitted;
             character.Damage(character.health,out hitted,DamageType.Explosion);

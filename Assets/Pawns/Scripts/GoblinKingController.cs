@@ -198,7 +198,7 @@ public class GoblinKingController : EnemyController {
 
     public void Step() {
         cameraManager.shakeCamera(0.5f, 10f, 0.05f);
-        SoundToPlay.PlaySfx(source);
+        SoundToPlay.PlayAtLocation(source,transform.position, Quaternion.identity,10f);
     }
 
     public void Death(string deathEvent) {

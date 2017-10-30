@@ -142,7 +142,8 @@ public class WarriorController : EnemyController {
     }
 
     public void processHit() {
-        Instantiate(spearAttackSound, transform.position, Quaternion.identity);
+        SoundToPlay.PlayAtLocation(spearAttackSound, transform.position, Quaternion.identity,0.1f,5f);
+        //Instantiate(spearAttackSound, transform.position, Quaternion.identity);
         if (target.tag == "Ally")
         {
             bool hitted;
