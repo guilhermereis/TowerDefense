@@ -150,7 +150,7 @@ public class Wave  {
                         for (int i = k, p = 0; p < WaveSpawner.combinations[Mathf.Clamp(WaveSpawner.repetition, 0, 14)].combination.Length; i++,p++)
                         {
                             int m = WaveSpawner.combinations[Mathf.Clamp(WaveSpawner.repetition, 0, 14)].combination[p];
-                            monstersWave[i] = Mathf.Clamp(m+1,1,20);
+                            monstersWave[i] = Mathf.Clamp(m+4,m,20);
                         }
                         k = monstersWave.Length;
                     }
