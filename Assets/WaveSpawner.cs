@@ -175,26 +175,27 @@ public class WaveSpawner : MonoBehaviour {
 
     public void StartCombinations()
     {
-        //1 wanderer 1
-        //2 warrior 2
-        //3 bomber 3
-        //4 great wanderer
-        //5 great warrior
-        //6 great bomber
-        //7 king
-        //8 chief wanderer
-        //9 chief warrior
-        //10 chief bomber
-        //11 chief king
-        //12 lord wanderer
-        //13 lord warrior
-        //14 lord bomber
-        //15 lord king 
-        //16 master wanderer
-        //17 master warrior
-        //18 master bomber
-        //19 master king
-        //20 great king
+        //1 Wanderer 1
+        //2 Warrior 2
+        //3 Bomber 3
+        //4 King 
+        //5 Great wanderer
+        //6 Great warrior
+        //7 Great bomber
+        //8 great king
+        //9 Chief wanderer
+        //10 Chief warrior
+        //11 Chief bomber
+        //12 Chief king
+        //13 Lord wanderer
+        //14 Lord warrior
+        //15 Lord bomber
+        //16 Lord king 
+        //17 Master wanderer
+        //18 Master warrior
+        //19 Master bomber
+        //20 Master king
+
 
         combinations = new Milestone[totalCombinations];
         //creating basics milestones combinations
