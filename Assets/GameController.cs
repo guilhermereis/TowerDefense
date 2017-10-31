@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour {
 
     public GameObject endWaveSound;
     GameObject victorySound;
+    public GameObject waveStartSound;
+    public GameObject clock1Sound;
+    public GameObject clock2Sound;
 
     public GameObject gameStateUI;
     public GameObject secondChanceUI;
@@ -37,6 +40,8 @@ public class GameController : MonoBehaviour {
     public float preparationTime = 30.0f;
     float countDown;
     public static SteamStatsAndAchievements stats;
+
+    int CurrentCountdown = 11;
 
     private void OnEnable()
     {
@@ -151,8 +156,10 @@ public class GameController : MonoBehaviour {
         switch (gameState) {
             case GameState.Preparation:
                 gameStateUI.GetComponent<Animator>().SetTrigger("ShowPreparation");
+                CurrentCountdown = 11;
                 break;
             case GameState.BeginWave:
+                SoundToPlay.PlaySfx(waveStartSound,0.2f);
                 gameStateUI.GetComponent<Animator>().SetTrigger("ShowMap");
                 break;
         }
@@ -195,10 +202,22 @@ public class GameController : MonoBehaviour {
         if (gameState == GameState.Preparation)
         {
             if (countDown > 0f && countDown <= 10f) {
+                int countdownValue = Mathf.CeilToInt(countDown);
+                if (countdownValue < CurrentCountdown) {
+                    if (countdownValue % 2 == 0)
+                    {
+                        SoundToPlay.PlaySfx(clock1Sound);
+                    }
+                    else {
+                        SoundToPlay.PlaySfx(clock2Sound);
+                    }
+                    CurrentCountdown = countdownValue;
+                }
+
                 startWaveButton.transform.Find("Countdown").gameObject.SetActive(true);
                 startWaveButton.transform.Find("CountdownShadow").gameObject.SetActive(true);
-                startWaveButton.transform.Find("Countdown").GetComponent<Text>().text = "" + Mathf.CeilToInt(countDown);
-                startWaveButton.transform.Find("CountdownShadow").GetComponent<Text>().text = "" + Mathf.CeilToInt(countDown);
+                startWaveButton.transform.Find("Countdown").GetComponent<Text>().text = "" + countdownValue;
+                startWaveButton.transform.Find("CountdownShadow").GetComponent<Text>().text = "" + countdownValue;
             }
             else {
                 startWaveButton.transform.Find("Countdown").gameObject.SetActive(false);

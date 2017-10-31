@@ -9,50 +9,49 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1053340979392252}
+  m_RootGameObject: {fileID: 1447699608985048}
   m_IsPrefabParent: 1
---- !u!1 &1053340979392252
+--- !u!1 &1447699608985048
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4189535762479150}
-  - component: {fileID: 82079892224167688}
-  - component: {fileID: 114055636097513580}
+  - component: {fileID: 4526480882089622}
+  - component: {fileID: 82648016710701922}
   m_Layer: 0
-  m_Name: PrefabHurtSound
+  m_Name: CastleHit2SoundPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4189535762479150
+--- !u!4 &4526480882089622
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1053340979392252}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1447699608985048}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82079892224167688
+--- !u!82 &82648016710701922
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1053340979392252}
+  m_GameObject: {fileID: 1447699608985048}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 887f538d937ef1849ad21c3662eff535, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7f54627301fee314e8648acbe6d6e013, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5163912
+  m_Volume: 0.9276055
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -60,10 +59,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 3
-  MaxDistance: 10
+  MinDistance: 5
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -121,14 +120,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114055636097513580
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1053340979392252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbfa7e4d14d39844bfff904b9d03bc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

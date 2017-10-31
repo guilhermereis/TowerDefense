@@ -12,12 +12,14 @@ public class CastleHealth : MonoBehaviour {
     private List<PawnCharacter> enemies;
     private Animator castleUIFeedbackAnimator;
     private TooltipController tooltipController;
+    public GameObject castleUnderAttackSound;
 
     public float damageRate = 0.2f;
     public float countdown;
     private bool canBeDamaged;
     private WaveSpawner ws;
     public GameObject repairButton;
+    public GameObject repairSound;
 
     public int repairCostMultiplier = 30;
     public float repairAmmountPercentual = 0.2f;
@@ -25,6 +27,10 @@ public class CastleHealth : MonoBehaviour {
     public Color buttonDisabledColor;
     public Color buttonNoMoneyColor;
     public Color buttonEnabledColor;
+    private float underAttackCounter;
+    public float underAttackCounterLimit = 2f;
+    private bool isUnderAttack = false;
+    private bool isDestroyed = false;
 
     Canvas HUD;
     Image healthBar;
@@ -50,13 +56,16 @@ public class CastleHealth : MonoBehaviour {
             repairButton = HUD.transform.Find("Castle Info").transform.Find("RepairButton").gameObject;
         }
 
+        underAttackCounter = 0f;
         healthBar = HUD.transform.Find("Castle Info").transform.Find("BG").transform.Find("Filled").GetComponent<Image>();
         castleUIFeedbackAnimator = HUD.transform.Find("Castle Info").GetComponent<Animator>();
         tooltipController = repairButton.GetComponent<TooltipController>();
     }
 
 	void Start () {
-        countdown = 0;
+        isUnderAttack = false;
+        isDestroyed = false;
+    countdown = 0;
 
         enemies = new List<PawnCharacter>();
 
@@ -77,7 +86,7 @@ public class CastleHealth : MonoBehaviour {
     public float CalculateCost(float waveNumber)
     {
         float y = Mathf.Log(5 * waveNumber + 1, 10) * 2.55f;
-        return y;
+        return y/10f;
     }
 
     public void Repair()
@@ -93,6 +102,7 @@ public class CastleHealth : MonoBehaviour {
                     GameController.Repair();
                     health = Mathf.Clamp(health + repairAmmountPercentual * maxHealth,0f,maxHealth);
                     UpdateHealthBarGfx(health);
+                    SoundToPlay.PlaySfx(repairSound,0.2f);
                 }
                 else
                 {
@@ -115,6 +125,16 @@ public class CastleHealth : MonoBehaviour {
     //Change this later to actually the monsters hit with theirs fire rate
 	// Update is called once per frame
 	void Update () {
+
+        if (isUnderAttack) {
+            underAttackCounter += Time.deltaTime;
+        }
+
+        if (underAttackCounter >= underAttackCounterLimit)
+        {
+            underAttackCounter = 0f;
+            isUnderAttack = false;
+        }
 
         if (castleDestructionAnimator != null)
         {
@@ -164,14 +184,24 @@ public class CastleHealth : MonoBehaviour {
         wasDamaged = true;
         health -= damage;
         UpdateHealthBarGfx(health);
-        if(health <=0)
-        {
-            CastleDestructionEvent();
-            GameController.ChangeGameState(GameState.GameOver);
-            
-            //gameObject.SetActive(false);
-            
+
+        if (!isDestroyed) {
+            if (!isUnderAttack)
+            {
+                isUnderAttack = true;
+                SoundToPlay.PlaySfx(castleUnderAttackSound);
+            }
+
+            if (health <= 0)
+            {
+                CastleDestructionEvent();
+                GameController.ChangeGameState(GameState.GameOver);
+                isDestroyed = true;
+                //gameObject.SetActive(false);
+
+            }
         }
+        
 
     }
     //here we play the castle destruction animatio, play the explosion effects and play the implosion sound
