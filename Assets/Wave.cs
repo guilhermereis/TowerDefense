@@ -145,7 +145,7 @@ public class Wave  {
                     if (k < WaveSpawner.combinations[currentMilestone].combination.Length)
                         monstersWave[k] = WaveSpawner.combinations[currentMilestone].combination[k];
                     else
-                        monstersWave[k] = 6;
+                        monstersWave[k] = Random.Range(7,21);
                 }
             }
         }
