@@ -630,33 +630,30 @@ public class WaveSpawner : MonoBehaviour {
         spawningMonsterLane3 = 0;
         spawningMonsterLane4 = 0;
 
-        if (waveNumberLane1 % (int)interval == 0)
-        {
-
-            currentMS1--;
-        }
-        if (waveNumberLane2 % (int)interval == 0)
-        {
-
-            currentMS2--;
-        }
-        if (waveNumberLane3 % (int)interval == 0)
-        {
-
-            currentMS3--;
-        }
-        if (waveNumberLane4 % (int)interval == 0)
-        {
-
-            currentMS4--;
-        }
-
-        waveNumber = Mathf.Clamp(waveNumber-1, 0, waveNumber);
-        waveNumberLane1 = Mathf.Clamp(waveNumberLane1-1, 0, waveNumberLane1);
+        waveNumber = Mathf.Clamp(waveNumber - 1, 0, waveNumber);
+        waveNumberLane1 = Mathf.Clamp(waveNumberLane1 - 1, 0, waveNumberLane1);
         waveNumberLane2 = Mathf.Clamp(waveNumberLane2 - 1, 0, waveNumberLane2);
         waveNumberLane3 = Mathf.Clamp(waveNumberLane3 - 1, 0, waveNumberLane3);
         waveNumberLane4 = Mathf.Clamp(waveNumberLane4 - 1, 0, waveNumberLane4);
 
+        if (waveNumberLane1 % (int)interval == 0)
+        {
+            currentMS1--;
+        }
+        if (waveNumberLane2 % (int)interval == 0)
+        {
+            currentMS2--;
+        }
+        if (waveNumberLane3 % (int)interval == 0)
+        {
+            currentMS3--;
+        }
+        if (waveNumberLane4 % (int)interval == 0)
+        {
+            currentMS4--;
+        }
+
+       
         GameController.ChangeGameState(GameState.Preparation);
     }
 
@@ -698,6 +695,8 @@ public class WaveSpawner : MonoBehaviour {
 
         if(maxLanes == 1)
         {
+            currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
+
             waveLane1 = new Wave(waveNumberLane1 / interval, currentMS1, 10);
 
             waveNumberLane1++;
@@ -740,7 +739,8 @@ public class WaveSpawner : MonoBehaviour {
         else if(maxLanes == 2)
         {
 
-
+            currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
+            currentMS2 = Mathf.Clamp(currentMS2, 0, (totalCombinations - 1));
 
             if (waveNumberLane1 % (int)interval == 0)
             {
@@ -767,7 +767,9 @@ public class WaveSpawner : MonoBehaviour {
         }
         else if(maxLanes == 3)
         {
-
+            currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
+            currentMS2 = Mathf.Clamp(currentMS2, 0, (totalCombinations - 1));
+            currentMS3 = Mathf.Clamp(currentMS3, 0, (totalCombinations - 1));
 
             if (waveNumberLane1 % (int)interval == 0)
             {
@@ -801,14 +803,16 @@ public class WaveSpawner : MonoBehaviour {
         else if( maxLanes == 4)
         {
 
-
-
-
-           
+            currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
+            currentMS2 = Mathf.Clamp(currentMS2, 0, (totalCombinations - 1));
+            currentMS3 = Mathf.Clamp(currentMS3, 0, (totalCombinations - 1));
+            currentMS4 = Mathf.Clamp(currentMS4, 0, (totalCombinations - 1));
+            
             waveLane1 = new Wave(waveNumberLane1 % (int)interval / interval, currentMS1, 10);
             waveLane2 = new Wave(waveNumberLane2 % (int)interval / interval, currentMS2, 10);
             waveLane3 = new Wave(waveNumberLane3 % (int)interval / interval, currentMS3, 10);
             waveLane4 = new Wave(waveNumberLane4 % (int)interval / interval, currentMS4, 10);
+
             waveNumberLane1++;
             waveNumberLane2++;
             waveNumberLane3++;
