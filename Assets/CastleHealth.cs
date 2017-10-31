@@ -30,6 +30,7 @@ public class CastleHealth : MonoBehaviour {
     private float underAttackCounter;
     public float underAttackCounterLimit = 2f;
     private bool isUnderAttack = false;
+    private bool isDestroyed = false;
 
     Canvas HUD;
     Image healthBar;
@@ -63,7 +64,8 @@ public class CastleHealth : MonoBehaviour {
 
 	void Start () {
         isUnderAttack = false;
-        countdown = 0;
+        isDestroyed = false;
+    countdown = 0;
 
         enemies = new List<PawnCharacter>();
 
@@ -182,19 +184,24 @@ public class CastleHealth : MonoBehaviour {
         wasDamaged = true;
         health -= damage;
         UpdateHealthBarGfx(health);
-        if (!isUnderAttack) {
-            isUnderAttack = true;
-            SoundToPlay.PlaySfx(castleUnderAttackSound);
+
+        if (!isDestroyed) {
+            if (!isUnderAttack)
+            {
+                isUnderAttack = true;
+                SoundToPlay.PlaySfx(castleUnderAttackSound);
+            }
+
+            if (health <= 0)
+            {
+                CastleDestructionEvent();
+                GameController.ChangeGameState(GameState.GameOver);
+                isDestroyed = true;
+                //gameObject.SetActive(false);
+
+            }
         }
         
-        if(health <=0)
-        {
-            CastleDestructionEvent();
-            GameController.ChangeGameState(GameState.GameOver);
-            
-            //gameObject.SetActive(false);
-            
-        }
 
     }
     //here we play the castle destruction animatio, play the explosion effects and play the implosion sound
