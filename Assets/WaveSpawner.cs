@@ -175,15 +175,15 @@ public class WaveSpawner : MonoBehaviour {
 
     public void StartCombinations()
     {
-        //1 Wanderer 1
-        //2 Warrior 2
-        //3 Bomber 3
-        //4 King 
-        //5 Great wanderer
-        //6 Great warrior
-        //7 Great bomber
-        //8 great king
-        //9 Chief wanderer
+        //1  Wanderer 1
+        //2  Warrior 2
+        //3  Bomber 3
+        //4  King 
+        //5  Great wanderer
+        //6  Great warrior
+        //7  Great bomber
+        //8  Great king
+        //9  Chief wanderer
         //10 Chief warrior
         //11 Chief bomber
         //12 Chief king
