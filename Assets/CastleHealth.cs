@@ -86,7 +86,7 @@ public class CastleHealth : MonoBehaviour {
     public float CalculateCost(float waveNumber)
     {
         float y = Mathf.Log(5 * waveNumber + 1, 10) * 2.55f;
-        return y/10f;
+        return y/2f;
     }
 
     public void Repair()

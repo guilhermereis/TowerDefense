@@ -47,12 +47,10 @@ public class BuildManager : MonoBehaviour {
     }	
 	// Update is called once per frame
 	void Update () {
-        /*
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(1))
         {
-            SceneManager.LoadScene("MenuScene");
+            HideOptions();
         }
-        */
     }
 
     public UnitBlueprint getSelectedUnit()
@@ -384,58 +382,74 @@ public class BuildManager : MonoBehaviour {
                 BuildableController buildingController = selectedGameObject.GetComponent<BuildableController>();
                 TowerController towerController = selectedGameObject.GetComponent<TowerController>();
                 string name = buildingController.getUnitBlueprint().name;
-
-                if (buildingController)
+                if (towerController)
                 {
+                    upgradeWheelController.isMine = false;
+                    if (buildingController)
+                    {
 
+                        if (name == Shop.instance.towerLevel1.name)
+                        {
+                            upgradeWheelController.setTowerLvl(0);
+                        }
+                        else if (name == Shop.instance.towerLevel2.name)
+                        {
+                            upgradeWheelController.setTowerLvl(1);
+                        }
+                        else if (name == Shop.instance.towerLevel3.name)
+                        {
+                            upgradeWheelController.setTowerLvl(2);
+                            upgradeWheelController.setSpecialization(1);
+                        }
+                        else if (name == Shop.instance.towerSlow.name)
+                        {
+                            upgradeWheelController.setTowerLvl(1);
+                            upgradeWheelController.setSpecialization(0);
+                        }
+                        else if (name == Shop.instance.towerTesla.name)
+                        {
+                            upgradeWheelController.setTowerLvl(1);
+                            upgradeWheelController.setSpecialization(2);
+                        }
 
-                    if (name == Shop.instance.towerLevel1.name)
-                    {
-                        upgradeWheelController.setTowerLvl(0);
-                    }
-                    else if (name == Shop.instance.towerLevel2.name)
-                    {
-                        upgradeWheelController.setTowerLvl(1);
-                    }
-                    else if (name == Shop.instance.towerLevel3.name)
-                    {
-                        upgradeWheelController.setTowerLvl(2);
-                        upgradeWheelController.setSpecialization(1);
-                    }
-                    else if (name == Shop.instance.towerSlow.name)
-                    {
-                        upgradeWheelController.setTowerLvl(1);
-                        upgradeWheelController.setSpecialization(0);
-                    }
-                    else if (name == Shop.instance.towerTesla.name)
-                    {
-                        upgradeWheelController.setTowerLvl(1);
-                        upgradeWheelController.setSpecialization(2);
-                    }
+                        if (name == Shop.instance.miningCamp.name)
+                        {
+                            upgradeWheelController.setMineSellPrice();
+                        }
+                        else
+                        {
+                            upgradeWheelController.setAttackDamage((int)((TowerController)buildingController).getAttackPowerLVL());
+                            upgradeWheelController.setAttackSpeedLvl((int)((TowerController)buildingController).getFireRateLVL());
+                        }
 
-                    if (name == Shop.instance.miningCamp.name)
-                    {
-                        upgradeWheelController.setMineSellPrice();
+                        upgradeWheelController.isActive = true;
+                        upgradeWheel.SetActive(true);
+                        upgradeWheelController.openWheel();
                     }
                     else
                     {
-                        upgradeWheelController.setAttackDamage((int)((TowerController)buildingController).getAttackPowerLVL());
-                        upgradeWheelController.setAttackSpeedLvl((int)((TowerController)buildingController).getFireRateLVL());
+
+                        upgradeWheel.SetActive(true);
+                        upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
+                        upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(false);
+                        upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject.SetActive(false);
+
+                        upgradeWheelController.isActive = true;
+                        upgradeWheelController.openWheel();
                     }
-
-                    upgradeWheelController.isActive = true;
-                    upgradeWheel.SetActive(true);
-                    upgradeWheelController.openWheel();
                 }
-                else
-                {
-
-                    upgradeWheel.SetActive(true);
+                else {
+                    upgradeWheelController.isMine = true;
                     upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
                     upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(false);
+                    upgradeWheel.transform.Find("UpgradeTowerLevel").gameObject.SetActive(false);
                     upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject.SetActive(false);
+                    upgradeWheel.transform.Find("UpgradeTowerTesla").gameObject.SetActive(false);
+                    upgradeWheel.transform.Find("UpgradeTowerArcher").gameObject.SetActive(false);
+                    upgradeWheel.transform.Find("UpgradeCampLevel").gameObject.SetActive(false);
 
                     upgradeWheelController.isActive = true;
+                    upgradeWheel.SetActive(true);
                     upgradeWheelController.openWheel();
                 }
             }
