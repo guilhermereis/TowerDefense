@@ -34,7 +34,7 @@ public class WaveSpawner : MonoBehaviour {
     float waveForce;
     public static bool loadingAll = false;
 
-    private int[] timesMonsterAppearedById;
+    private int[,] timesMonsterAppearedById;
 
     AnimationCurve curve;
 
@@ -285,10 +285,13 @@ public class WaveSpawner : MonoBehaviour {
         instantiateWaveSpawnerUI("Lane3B", spawnLocationLane3B);
         instantiateWaveSpawnerUI("Lane4", spawnLocationLane4);
 
-        timesMonsterAppearedById = new int[50];
-        for (int i = 0; i < timesMonsterAppearedById.Length; i++)
+        timesMonsterAppearedById = new int[4,50];
+        for (int k = 0; k < timesMonsterAppearedById.GetLength(0); k++)
         {
-            timesMonsterAppearedById[i] = 0;
+            for (int l = 0; l < timesMonsterAppearedById.GetLength(1); l++)
+            {
+                timesMonsterAppearedById[k, l] = 0;
+            }
         }
     }
 
@@ -323,6 +326,8 @@ public class WaveSpawner : MonoBehaviour {
             kingWaveLane1 = -1;
         }
 
+        bool[] alreadyBoostedMonsterInThisWaveById = new bool[timesMonsterAppearedById.Length];
+        for (int i = 0; i < alreadyBoostedMonsterInThisWaveById.Length; i++) { alreadyBoostedMonsterInThisWaveById[i] = false; }
         while (spawningMonsterLane1 < combination_.Length)
         {
 
@@ -331,7 +336,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane1] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane1.position, Quaternion.identity);
                 monster.GetComponent<PawnController>().SetupWaypoints(1,0);
-                BoostMonsterHP(ref monster, 2);
+                BoostMonsterHP(ref monster, ref alreadyBoostedMonsterInThisWaveById, 0);
 
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
@@ -375,7 +380,8 @@ public class WaveSpawner : MonoBehaviour {
             kingWaveLane2 = -1;
         }
 
-
+        bool[] alreadyBoostedMonsterInThisWaveById = new bool[timesMonsterAppearedById.Length];
+        for (int i = 0; i < alreadyBoostedMonsterInThisWaveById.Length; i++) { alreadyBoostedMonsterInThisWaveById[i] = false; }
         while (spawningMonsterLane2 < combination_.Length)
         {
 
@@ -389,7 +395,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane2] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(2,waypoint);
-                BoostMonsterHP(ref monster, 3);
+                BoostMonsterHP(ref monster, ref alreadyBoostedMonsterInThisWaveById, 1);
 
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
@@ -434,7 +440,8 @@ public class WaveSpawner : MonoBehaviour {
             kingWaveLane3 = -1;
         }
 
-
+        bool[] alreadyBoostedMonsterInThisWaveById = new bool[timesMonsterAppearedById.Length];
+        for (int i = 0; i < alreadyBoostedMonsterInThisWaveById.Length; i++) { alreadyBoostedMonsterInThisWaveById[i] = false; }
         while (spawningMonsterLane3 < combination_.Length)
         {
 
@@ -445,7 +452,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
-                BoostMonsterHP(ref monster, 4);
+                BoostMonsterHP(ref monster, ref alreadyBoostedMonsterInThisWaveById, 2);
 
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
@@ -473,41 +480,26 @@ public class WaveSpawner : MonoBehaviour {
     }
 
 
-    public void BoostMonsterHP(ref GameObject monster, int lane)
+    public void BoostMonsterHP(ref GameObject monster, ref bool[] alreadyBoostedMonsterInThisWaveById, int lane)
     {
         
         PawnController pc = monster.GetComponent<PawnController>();
-        int id = (int) pc.type;
-        timesMonsterAppearedById[id]++;
-        int increase_value = timesMonsterAppearedById[id] * 10;
-        switch (lane)
-        {
-            case 1:
-                {
-                    monster.GetComponent<PawnCharacter>().maxHealth += increase_value * waveNumberLane1;
-                    monster.GetComponent<PawnCharacter>().health += increase_value * waveNumberLane1;
-                    break;
-                }
-            case 2:
-                {
-                    monster.GetComponent<PawnCharacter>().maxHealth += increase_value * waveNumberLane2;
-                    monster.GetComponent<PawnCharacter>().health += increase_value * waveNumberLane2;
-                    break;
-                }
-            case 3:
-                {
-                    monster.GetComponent<PawnCharacter>().maxHealth += increase_value * waveNumberLane3;
-                    monster.GetComponent<PawnCharacter>().health += increase_value * waveNumberLane3;
-                    break;
-                }
-            case 4:
-                {
-                    monster.GetComponent<PawnCharacter>().maxHealth += increase_value * waveNumberLane4;
-                    monster.GetComponent<PawnCharacter>().health += increase_value * waveNumberLane4;
-                    break;
-                }
-        }
+        int id = (int) pc.monster_id;
 
+        
+        if (alreadyBoostedMonsterInThisWaveById[id] == false)
+        {
+            timesMonsterAppearedById[lane, id]++;
+        }
+        int increase_value = timesMonsterAppearedById[lane, id] * 10;
+        Debug.Log("INCREASE VALUE ON LANE " + (lane + 1) + " FOR MONSTER " + id + " = " + increase_value);
+        
+        //Boost monster HP.
+        monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
+        monster.GetComponent<PawnCharacter>().health += increase_value;
+        
+        
+        alreadyBoostedMonsterInThisWaveById[id] = true;
     }
 
     IEnumerator SpawnLane4(int[] combination_)
@@ -526,7 +518,8 @@ public class WaveSpawner : MonoBehaviour {
             kingWaveLane4 = -1;
         }
 
-
+        bool[] alreadyBoostedMonsterInThisWaveById = new bool[timesMonsterAppearedById.Length];
+        for (int i = 0; i < alreadyBoostedMonsterInThisWaveById.Length; i++) { alreadyBoostedMonsterInThisWaveById[i] = false; }
         while (spawningMonsterLane4 < combination_.Length)
         {
 
@@ -535,7 +528,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane4] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.Euler(new Vector3(0,180,0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(4,0);
-                BoostMonsterHP(ref monster,1);
+                BoostMonsterHP(ref monster, ref alreadyBoostedMonsterInThisWaveById, 3);
 
                 
 
