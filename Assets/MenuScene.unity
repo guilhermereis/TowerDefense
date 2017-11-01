@@ -4430,17 +4430,17 @@ Prefab:
     - target: {fileID: 224621831504605204, guid: 017902631eec5cb4b97c968d9a534bf7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -93.7
       objectReference: {fileID: 0}
     - target: {fileID: 224621831504605204, guid: 017902631eec5cb4b97c968d9a534bf7,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224621831504605204, guid: 017902631eec5cb4b97c968d9a534bf7,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224621831504605204, guid: 017902631eec5cb4b97c968d9a534bf7,
         type: 2}
@@ -6791,12 +6791,12 @@ Prefab:
     - target: {fileID: 224345526600904824, guid: 5138c7b6f93f6c8449e9df604aaf756d,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224345526600904824, guid: 5138c7b6f93f6c8449e9df604aaf756d,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224345526600904824, guid: 5138c7b6f93f6c8449e9df604aaf756d,
         type: 2}
@@ -6806,7 +6806,7 @@ Prefab:
     - target: {fileID: 224345526600904824, guid: 5138c7b6f93f6c8449e9df604aaf756d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -115.2
       objectReference: {fileID: 0}
     - target: {fileID: 224345526600904824, guid: 5138c7b6f93f6c8449e9df604aaf756d,
         type: 2}
@@ -11141,18 +11141,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114692293547980558, guid: 99cec0f2ddec74e419e0325991e202ec,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114099086739528384, guid: 99cec0f2ddec74e419e0325991e202ec,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114099086739528384, guid: 99cec0f2ddec74e419e0325991e202ec, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 99cec0f2ddec74e419e0325991e202ec, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1562322976
