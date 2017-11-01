@@ -92,24 +92,11 @@ public class CameraController : MonoBehaviour {
         }
     }
 
-    public void Record() {
-        transform.position = cameraStartPosition + c1.position;
-        isRecording = true;
-    }
 
     // Update is called once per frame
     void Update () {
 
         panSpeed = 5f;
-        if (Input.GetKeyDown(KeyCode.I)) {
-            GameObject hud = GameObject.FindGameObjectWithTag("HUD");
-            hud.GetComponent<CanvasGroup>().alpha = 0f;
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            GameObject hud2 = gameObject.transform.Find("Canvas").gameObject;
-            hud2.SetActive(false);
-        }
 
         if (Input.GetKey(KeyCode.LeftShift)) {
             panSpeed = 1f;
@@ -119,10 +106,6 @@ public class CameraController : MonoBehaviour {
             panSpeed = 0.5f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Record();
-        }
 
         if (isRecording) {
            Vector3 sum = c0.position - c1.position;
