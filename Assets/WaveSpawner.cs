@@ -479,7 +479,7 @@ public class WaveSpawner : MonoBehaviour {
         PawnController pc = monster.GetComponent<PawnController>();
         int id = (int) pc.type;
         timesMonsterAppearedById[id]++;
-        int increase_value = timesMonsterAppearedById[id];
+        int increase_value = timesMonsterAppearedById[id] * 10;
         switch (lane)
         {
             case 1:
