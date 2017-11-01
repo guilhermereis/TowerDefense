@@ -331,7 +331,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane1] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane1.position, Quaternion.identity);
                 monster.GetComponent<PawnController>().SetupWaypoints(1,0);
-                BoostMonsterHP(ref monster, 2);
+                BoostMonsterHP(ref monster, 1);
 
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
@@ -389,7 +389,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane2] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(2,waypoint);
-                BoostMonsterHP(ref monster, 3);
+                BoostMonsterHP(ref monster, 2);
 
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
@@ -445,7 +445,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
-                BoostMonsterHP(ref monster, 4);
+                BoostMonsterHP(ref monster, 3);
 
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
@@ -535,7 +535,7 @@ public class WaveSpawner : MonoBehaviour {
                 int monsterIndex = combination_[spawningMonsterLane4] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.Euler(new Vector3(0,180,0)));
                 monster.GetComponent<PawnController>().SetupWaypoints(4,0);
-                BoostMonsterHP(ref monster,1);
+                BoostMonsterHP(ref monster,4);
 
                 
 
