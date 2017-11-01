@@ -481,36 +481,37 @@ public class WaveSpawner : MonoBehaviour {
     {
         
         PawnController pc = monster.GetComponent<PawnController>();
-        int id = (int) pc.type;
-        timesMonsterAppearedById[id]++;
+        int id = (int) pc.monster_id;
 
         if (alreadyBoostedMonsterInThisWaveById[id] == false)
         {
+            timesMonsterAppearedById[id]++;
             int increase_value = timesMonsterAppearedById[id] * 10;
+            Debug.Log("INCREASE VALUE FOR MONSTER " + id + " = " + increase_value);
             switch (lane)
             {
                 case 1:
                     {
-                        monster.GetComponent<PawnCharacter>().maxHealth += increase_value * waveNumberLane1;
-                        monster.GetComponent<PawnCharacter>().health += increase_value * waveNumberLane1;
+                        monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
+                        monster.GetComponent<PawnCharacter>().health += increase_value;
                         break;
                     }
                 case 2:
                     {
-                        monster.GetComponent<PawnCharacter>().maxHealth += increase_value * waveNumberLane2;
-                        monster.GetComponent<PawnCharacter>().health += increase_value * waveNumberLane2;
+                        monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
+                        monster.GetComponent<PawnCharacter>().health += increase_value;
                         break;
                     }
                 case 3:
                     {
-                        monster.GetComponent<PawnCharacter>().maxHealth += increase_value * waveNumberLane3;
-                        monster.GetComponent<PawnCharacter>().health += increase_value * waveNumberLane3;
+                        monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
+                        monster.GetComponent<PawnCharacter>().health += increase_value;
                         break;
                     }
                 case 4:
                     {
-                        monster.GetComponent<PawnCharacter>().maxHealth += increase_value * waveNumberLane4;
-                        monster.GetComponent<PawnCharacter>().health += increase_value * waveNumberLane4;
+                        monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
+                        monster.GetComponent<PawnCharacter>().health += increase_value;
                         break;
                     }
             }
