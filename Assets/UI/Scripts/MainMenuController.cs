@@ -12,6 +12,7 @@ public class MainMenuController : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("FirstAccess") != 1)
         {
+            Debug.Log("FIRST ACCESS");
             PlayerPrefs.SetFloat("master volume", 1f);
             PlayerPrefs.SetFloat("sfx volume", 0.8f);
             PlayerPrefs.SetFloat("music volume", 0.5f);

@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour {
     private GameObject hudCanvas;
     private GameObject secondChanceTooltip;
     private string secondChanceBaseTooltipText = "SECOND CHANCE METER\nIT FILLS WITH GAME'S PROGRESSION\nAND CAN BE USED TO TRY THE CURRENT\nWAVE AGAIN IF YOU LOSE";
-    public static bool DebugModeON = true;
+    public static bool DebugModeON = false;
 
     private float secondChanceFillTarget = 0f;
 
