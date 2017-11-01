@@ -1331,11 +1331,15 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         SceneManager.sceneLoaded += OnChangedLevel;
 
         if (!SteamManager.Initialized)
+        {
+            Debug.Log("steam manager not initialized");
             return;
+        }
+
 
         //GameController.gamechangedDelegate += OnGameChanged;
         gameID = new CGameID(SteamUtils.GetAppID());
-
+        Debug.Log("Game ID " + gameID );
         //for debug
         SteamUserStats.ResetAllStats(true);
         //SteamUserStats.RequestCurrentStats();
@@ -1350,8 +1354,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         isRequestedStats = false;
         isStatsvalid = false;
 
-             
+        Debug.Log("setup completed ");
     }
+
+
 
     public void UpdateStats()
     {
@@ -1525,7 +1531,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                     {
                         achievement.name = SteamUserStats.GetAchievementDisplayAttribute(achievement.achievementID.ToString(), "name");
                         achievement.desc = SteamUserStats.GetAchievementDisplayAttribute(achievement.achievementID.ToString(), "desc");
-                        Debug.Log("Achievement Achieved " + achievement.name  + " " + achievement.isAchieved + " " + achievement.achievementID);
+                        //Debug.Log("Achievement Achieved " + achievement.name  + " " + achievement.isAchieved + " " + achievement.achievementID);
                     }
                     else
                     {
@@ -1679,6 +1685,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+        //Debug.Log("Update ");
         if (!SteamManager.Initialized)
             return;
 
@@ -1696,10 +1704,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
         if (!isRequestedStats)
         {
-
+            Debug.Log("Requesting status ");
             if (!SteamManager.Initialized)
             {
                 isRequestedStats = true;
+                Debug.Log("status requested ");
                 return;
             }
 
@@ -1713,11 +1722,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
         if (isStoreStats)
         {
-           
+
             //SteamUserStats.UploadLeaderboardScore()
 
         }
-        
+
 
     }
 
@@ -1732,10 +1741,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         
     }
 
-    private void OnDestroy()
-    {
-        //
-    }
+   
 
     private class Achievement_t
     {
