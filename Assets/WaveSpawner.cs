@@ -486,17 +486,19 @@ public class WaveSpawner : MonoBehaviour {
         PawnController pc = monster.GetComponent<PawnController>();
         int id = (int) pc.monster_id;
 
+        
         if (alreadyBoostedMonsterInThisWaveById[id] == false)
         {
-            //Calculate increase value
-            timesMonsterAppearedById[lane,id]++;
-            int increase_value = timesMonsterAppearedById[lane, id] * 10;
-            Debug.Log("INCREASE VALUE ON LANE "+(lane+1)+" FOR MONSTER " + id + " = " + increase_value);
-
-            //Boost monster HP.
-            monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
-            monster.GetComponent<PawnCharacter>().health += increase_value;
+            timesMonsterAppearedById[lane, id]++;
         }
+        int increase_value = timesMonsterAppearedById[lane, id] * 10;
+        Debug.Log("INCREASE VALUE ON LANE " + (lane + 1) + " FOR MONSTER " + id + " = " + increase_value);
+        
+        //Boost monster HP.
+        monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
+        monster.GetComponent<PawnCharacter>().health += increase_value;
+        
+        
         alreadyBoostedMonsterInThisWaveById[id] = true;
     }
 
