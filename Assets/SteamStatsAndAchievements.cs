@@ -1338,7 +1338,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
         //for debug
         SteamUserStats.ResetAllStats(true);
-        SteamUserStats.RequestCurrentStats();
+        //SteamUserStats.RequestCurrentStats();
 
         userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
         userStatsReceived = Callback<UserStatsReceived_t>.Create(OnUserStatsReceived);
@@ -1350,7 +1350,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         isRequestedStats = false;
         isStatsvalid = false;
 
-
+             
     }
 
     public void UpdateStats()
@@ -1525,11 +1525,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
                     {
                         achievement.name = SteamUserStats.GetAchievementDisplayAttribute(achievement.achievementID.ToString(), "name");
                         achievement.desc = SteamUserStats.GetAchievementDisplayAttribute(achievement.achievementID.ToString(), "desc");
-                        //Debug.Log("Achievement Achieved " + achievement.name  + " " + achievement.isAchieved + " " + achievement.achievementID);
+                        Debug.Log("Achievement Achieved " + achievement.name  + " " + achievement.isAchieved + " " + achievement.achievementID);
                     }
                     else
                     {
-                        //Debug.Log("Achievement failed " + achievement.achievementID);
+                        Debug.Log("Achievement failed " + achievement.achievementID);
                     }
                 }
 
