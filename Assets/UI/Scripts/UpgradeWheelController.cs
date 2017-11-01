@@ -8,6 +8,7 @@ public class UpgradeWheelController : MonoBehaviour {
     public GameObject tower;
     private BuildableController buildable;
     public GameObject upgradeWheel;
+    public GameObject sellSound;
     
     private Animator anim;
     private int attackSpeedLvl = 0;
@@ -36,6 +37,7 @@ public class UpgradeWheelController : MonoBehaviour {
 
     public bool isActive = true;
     public bool upgradeButtonsEnabled = true;
+    public bool isMine = false;
     // Use this for initialization
 
     void Start()
@@ -43,6 +45,7 @@ public class UpgradeWheelController : MonoBehaviour {
         anim = GetComponent<Animator>();
         gameObject.SetActive(false);
         isActive = false;
+        isMine = false;
         clearButtons();
         DefaultCoinColor = upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Coin").GetComponent<Image>().color;
         DefaultTextColor = upgradeWheel.transform.Find("UpgradeAttackDamage").transform.Find("Cost").GetComponent<Text>().color;
@@ -331,6 +334,7 @@ public class UpgradeWheelController : MonoBehaviour {
         if (upgradeButtonsEnabled)
         {
             isActive = false;
+            SoundToPlay.PlaySfx(sellSound);
             BuildManager.instance.SellSelectedBuilding();
         }
     }
@@ -407,15 +411,30 @@ public class UpgradeWheelController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
         if (anim)
         {
-            anim.SetInteger("AttackSpeedLvl", attackSpeedLvl);
-            anim.SetInteger("AttackDmgLvl", attackDmgLvl);
-            anim.SetInteger("TowerLvl", towerLvl);
-            anim.SetInteger("Specialization", specialization);
+            if (!isMine)
+            {
+                anim.SetInteger("AttackSpeedLvl", attackSpeedLvl);
+                anim.SetInteger("AttackDmgLvl", attackDmgLvl);
+                anim.SetInteger("TowerLvl", towerLvl);
+                anim.SetInteger("Specialization", specialization);
+            }
+            else {
+                anim.SetInteger("Specialization", 2);
+            }
+            
         }
         if (BuildManager.instance.getSelectedGameObject()) {
-            transform.position = Camera.main.WorldToScreenPoint(new Vector3(0f,0.5f,0f) + BuildManager.instance.getSelectedGameObject().transform.position);
+            if (isMine)
+            {
+                transform.position = Camera.main.WorldToScreenPoint(new Vector3(0f, 0f, 0f) + BuildManager.instance.getSelectedGameObject().transform.position);
+            }
+            else {
+                transform.position = Camera.main.WorldToScreenPoint(new Vector3(0f, 0.5f, 0f) + BuildManager.instance.getSelectedGameObject().transform.position);
+            }
+            
         }
 
         gameObject.SetActive(isActive);
