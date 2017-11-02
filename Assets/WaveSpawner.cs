@@ -990,7 +990,7 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.propertiesMatrix[x+1, z+1] = new PropertyScript.Property("Normal");
                 gridMouse.propertiesMatrix[x+1, z] = new PropertyScript.Property("Normal");
                 gridMouse.propertiesMatrix[x, z+1] = new PropertyScript.Property("Normal");
-
+                PlayerStats.MinesConstructed--;
 
                 gridMouse.previewMatrix[x, z] = false;
                 gridMouse.previewMatrix[x+1, z+1] = false;
