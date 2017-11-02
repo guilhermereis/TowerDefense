@@ -144,6 +144,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1282015055084544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4100167256650210}
+  m_Layer: 0
+  m_Name: CastleTutorialPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1283550422942034
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,6 +444,19 @@ Transform:
   m_Father: {fileID: 4482111022446784}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4100167256650210
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282015055084544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 249, y: -74, z: 344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4482111022446784}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4110026269798510
 Transform:
   m_ObjectHideFlags: 1
@@ -578,6 +606,7 @@ Transform:
   - {fileID: 4879186074032384}
   - {fileID: 4818310972701832}
   - {fileID: 4461433537189278}
+  - {fileID: 4100167256650210}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1556,14 +1585,19 @@ MonoBehaviour:
   health: 5000000
   maxHealth: 5000000
   wasDamaged: 0
+  castleUnderAttackSound: {fileID: 1704905097006840, guid: 037b4748f27de2541b092b912d004616,
+    type: 2}
   damageRate: 0.2
   countdown: 0
   repairButton: {fileID: 0}
+  repairSound: {fileID: 1390330890705764, guid: 36bb27b03a85a1d4197cf9ab88723921,
+    type: 2}
   repairCostMultiplier: 30
   repairAmmountPercentual: 0.2
   buttonDisabledColor: {r: 0.3455882, g: 0.3455882, b: 0.3455882, a: 1}
   buttonNoMoneyColor: {r: 0.64705884, g: 0, b: 0, a: 1}
   buttonEnabledColor: {r: 1, g: 1, b: 1, a: 1}
+  underAttackCounterLimit: 3
 --- !u!135 &135594312606629056
 SphereCollider:
   m_ObjectHideFlags: 1

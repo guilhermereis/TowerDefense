@@ -54,6 +54,7 @@ public class CastleHealth : MonoBehaviour {
 
         if (!repairButton) {
             repairButton = HUD.transform.Find("Castle Info").transform.Find("RepairButton").gameObject;
+            repairButton.GetComponent<Button>().onClick.AddListener(Repair);
         }
 
         underAttackCounter = 0f;

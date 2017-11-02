@@ -136,7 +136,6 @@ public class SoundToPlay : MonoBehaviour
 
     public static void PlaySfx(GameObject _soundObject)
     {
-        Debug.Log("PLAYING AUDIO");
         SetSoundToPlay(_soundObject);
         AudioSource src = soundObject.GetComponent<AudioSource>();
         src.volume = sfx_volume;

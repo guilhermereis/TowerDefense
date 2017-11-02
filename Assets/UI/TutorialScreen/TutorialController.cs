@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum tutorialState {Welcome1,Castle2,CastleHealth3,Repair4,Gold5,
-                            Landscape6,Shop7,WaveCounter8,GameOptions9,
-                            Preparation10,Minimap11,CameraControls12,
-                            SecondChance13,Finish14}
+                            Landscape6,Shop7,Mine8, WaveCounter9,GameOptions10,
+                            Preparation11,Minimap12,CameraControls13,
+                            SecondChance14,Finish15}
 
 public class TutorialController : MonoBehaviour {
 
@@ -16,6 +16,7 @@ public class TutorialController : MonoBehaviour {
     public GameObject RepairPanel;
     public GameObject GoldPanel;
     public GameObject ShopPanel;
+    public GameObject MinesPanel;
     public GameObject WaveCounter;
     public GameObject GameOptionsPanel;
     public GameObject PreparationPanel;
@@ -89,27 +90,30 @@ public class TutorialController : MonoBehaviour {
                 switchTutorialState(tutorialState.Shop7);
                 break;
             case tutorialState.Shop7:
-                switchTutorialState(tutorialState.WaveCounter8);
+                switchTutorialState(tutorialState.Mine8);
                 break;
-            case tutorialState.WaveCounter8:
-                switchTutorialState(tutorialState.GameOptions9);
+            case tutorialState.Mine8:
+                switchTutorialState(tutorialState.WaveCounter9);
                 break;
-            case tutorialState.GameOptions9:
-                switchTutorialState(tutorialState.Preparation10);
+            case tutorialState.WaveCounter9:
+                switchTutorialState(tutorialState.GameOptions10);
                 break;
-            case tutorialState.Preparation10:
-                switchTutorialState(tutorialState.Minimap11);
+            case tutorialState.GameOptions10:
+                switchTutorialState(tutorialState.Preparation11);
                 break;
-            case tutorialState.Minimap11:
-                switchTutorialState(tutorialState.CameraControls12);
+            case tutorialState.Preparation11:
+                switchTutorialState(tutorialState.Minimap12);
                 break;
-            case tutorialState.CameraControls12:
-                switchTutorialState(tutorialState.SecondChance13);
+            case tutorialState.Minimap12:
+                switchTutorialState(tutorialState.CameraControls13);
                 break;
-            case tutorialState.SecondChance13:
-                switchTutorialState(tutorialState.Finish14);
+            case tutorialState.CameraControls13:
+                switchTutorialState(tutorialState.SecondChance14);
                 break;
-            case tutorialState.Finish14:
+            case tutorialState.SecondChance14:
+                switchTutorialState(tutorialState.Finish15);
+                break;
+            case tutorialState.Finish15:
                 confirmSkip();
                 break;
         }
@@ -137,26 +141,29 @@ public class TutorialController : MonoBehaviour {
             case tutorialState.Shop7:
                 switchTutorialState(tutorialState.Landscape6);
                 break;
-            case tutorialState.WaveCounter8:
+            case tutorialState.Mine8:
                 switchTutorialState(tutorialState.Shop7);
                 break;
-            case tutorialState.GameOptions9:
-                switchTutorialState(tutorialState.WaveCounter8);
+            case tutorialState.WaveCounter9:
+                switchTutorialState(tutorialState.Mine8);
                 break;
-            case tutorialState.Preparation10:
-                switchTutorialState(tutorialState.GameOptions9);
+            case tutorialState.GameOptions10:
+                switchTutorialState(tutorialState.WaveCounter9);
                 break;
-            case tutorialState.Minimap11:
-                switchTutorialState(tutorialState.Preparation10);
+            case tutorialState.Preparation11:
+                switchTutorialState(tutorialState.GameOptions10);
                 break;
-            case tutorialState.CameraControls12:
-                switchTutorialState(tutorialState.Minimap11);
+            case tutorialState.Minimap12:
+                switchTutorialState(tutorialState.Preparation11);
                 break;
-            case tutorialState.SecondChance13:
-                switchTutorialState(tutorialState.CameraControls12);
+            case tutorialState.CameraControls13:
+                switchTutorialState(tutorialState.Minimap12);
                 break;
-            case tutorialState.Finish14:
-                switchTutorialState(tutorialState.SecondChance13);
+            case tutorialState.SecondChance14:
+                switchTutorialState(tutorialState.CameraControls13);
+                break;
+            case tutorialState.Finish15:
+                switchTutorialState(tutorialState.SecondChance14);
                 break;
         }
     }
@@ -188,25 +195,28 @@ public class TutorialController : MonoBehaviour {
             case tutorialState.Shop7:
                 currentShownStep = ShopPanel;
                 break;
-            case tutorialState.WaveCounter8:
+            case tutorialState.Mine8:
+                currentShownStep = MinesPanel;
+                break;
+            case tutorialState.WaveCounter9:
                 currentShownStep = WaveCounter;
                 break;
-            case tutorialState.GameOptions9:
+            case tutorialState.GameOptions10:
                 currentShownStep = GameOptionsPanel;
                 break;
-            case tutorialState.Preparation10:
+            case tutorialState.Preparation11:
                 currentShownStep = PreparationPanel;
                 break;
-            case tutorialState.Minimap11:
+            case tutorialState.Minimap12:
                 currentShownStep = MinimapPanel;
                 break;
-            case tutorialState.CameraControls12:
+            case tutorialState.CameraControls13:
                 currentShownStep = CameraControlsPanel;
                 break;
-            case tutorialState.SecondChance13 :
+            case tutorialState.SecondChance14 :
                 currentShownStep = SecondChancePanel;
                 break;
-            case tutorialState.Finish14:
+            case tutorialState.Finish15:
                 currentShownStep = FinishPanel;
                 break;
         }
@@ -227,10 +237,10 @@ public class TutorialController : MonoBehaviour {
         if (tutorialState == tutorialState.Landscape6) {
             currentShownStep.transform.Find("Panel").transform.position = Camera.main.WorldToScreenPoint(GrasslandsPosition.position);
         }
-        if (tutorialState == tutorialState.Preparation10 || tutorialState == tutorialState.Minimap11) {
+        if (tutorialState == tutorialState.Preparation11 || tutorialState == tutorialState.Minimap12) {
             currentShownStep.transform.Find("Panel").transform.position = Camera.main.WorldToScreenPoint(PreparationPanelLocation.position);
         }
-        if (tutorialState == tutorialState.CameraControls12)
+        if (tutorialState == tutorialState.CameraControls13)
         {
             currentShownStep.transform.Find("Panel").transform.position = Camera.main.WorldToScreenPoint(CameraControlsPanelLocation.position);
         }
