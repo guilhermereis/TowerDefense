@@ -209,16 +209,16 @@ public class WaveSpawner : MonoBehaviour {
         combinations[1].special = new int[] {2,2,2,2,2};
         combinations[2] = new Milestone();
         combinations[2].combination = new int[] {1,1,1,2,2,2,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,2};
-        combinations[2].special = new int[] {3,3,3,3,3,3,3};
+        combinations[2].special = new int[] {3,3,3,3,3};
         combinations[3] = new Milestone();
-        combinations[3].combination = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
-        combinations[3].special = new int[] { 3,3 , 3, 3, 3 ,3 };
+        combinations[3].combination = new int[] {5,5,5,5,5,5,5,3,3,3,3,3,3,5,5,5,5,5,5,5,5,5,5,5,3,3,3};
+        combinations[3].special = new int[] {4,6,3,3,3};
         combinations[4] = new Milestone();
-        combinations[4].combination = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-        combinations[4].special = new int[] { 20, 4, 4, 4, 4, 4 };
+        combinations[4].combination = new int[] {5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
+        combinations[4].special = new int[] {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3};
         combinations[5] = new Milestone();
-        combinations[5].combination = new int[] { 6,6, 6, 6, 6 ,6 ,6 };
-        combinations[5].special = new int[] { 5, 5, 5, 5, 5, 5 };
+        combinations[5].combination = new int[] {5,5,5,6,6,6,6,6,6,6,6,6,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,};
+        combinations[5].special = new int[] {7,7,7, 7, 7,7};
         combinations[6] = new Milestone();
         combinations[6].combination = new int[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
         combinations[6].special = new int[] { 11, 6, 6, 6, 6, 6 };
@@ -491,7 +491,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             timesMonsterAppearedById[lane, id]++;
         }
-        int increase_value = timesMonsterAppearedById[lane, id] * 10;
+        int increase_value = timesMonsterAppearedById[lane, id] * 5;
         
         //Boost monster HP.
         monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
