@@ -20,6 +20,7 @@ public class BuildManager : MonoBehaviour {
     public GameObject bottomBar;
     private BottomInfoBarBehaviour bottomBarBehaviour;
     public GameObject upgradeWheel;
+    public GameObject mineCapacity;
     private UpgradeWheelController upgradeWheelController;
 
     void Awake()
@@ -51,6 +52,9 @@ public class BuildManager : MonoBehaviour {
         {
             HideOptions();
         }
+
+        mineCapacity.transform.Find("TextShadow").GetComponent<Text>().text = PlayerStats.MinesConstructed + "/" + PlayerStats.MineCapacity;
+        mineCapacity.transform.Find("TextShadow").transform.Find("Text").GetComponent<Text>().text = PlayerStats.MinesConstructed + "/" + PlayerStats.MineCapacity;
     }
 
     public UnitBlueprint getSelectedUnit()
@@ -145,8 +149,10 @@ public class BuildManager : MonoBehaviour {
         }
 
         Vector3 newPosition;
-        if (unitToBuild == Shop.instance.miningCamp)
+        if (unitToBuild == Shop.instance.miningCamp) {
+            PlayerStats.MinesConstructed++;
             newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+        }
         else
             newPosition = position;
         tempList[index] = Instantiate(unitToBuild.prefab, newPosition, Quaternion.Euler(gridMouse.getPreviewRotation()));
@@ -213,7 +219,10 @@ public class BuildManager : MonoBehaviour {
         }
         Vector3 newPosition;
         if (unitToBuild == Shop.instance.miningCamp)
+        {
             newPosition = new Vector3(position.x + 0.5f, position.y, position.z + 0.5f);
+            PlayerStats.MinesConstructed++;
+        }
         else
             newPosition = position;
 
@@ -517,7 +526,6 @@ public class BuildManager : MonoBehaviour {
             int added = PlayerStats.AddMoney(bc.GetSellCostWithInterest());
             GameController.MoneyCollected(added,false);
 
-            Debug.Log("Sold for " + bc.GetSellCostWithInterest() + ". Current Money: " + PlayerStats.Money);
             string name = getSelectedGameObject().name;
             BuildableController buildable =
                 getSelectedGameObject().GetComponent<BuildableController>();
@@ -562,6 +570,7 @@ public class BuildManager : MonoBehaviour {
             gridMouse.previewMatrix[x, z] = false;
             if (bc.getUnitBlueprint().name == Shop.instance.miningCamp.name)
             {
+                PlayerStats.MinesConstructed--;
                 gridMouse.propertiesMatrix[x + 1, z + 1].unit = null;
                 gridMouse.propertiesMatrix[x, z + 1].unit = null;
                 gridMouse.propertiesMatrix[x + 1, z].unit = null;

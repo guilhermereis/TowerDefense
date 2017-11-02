@@ -5,19 +5,24 @@ public class PlayerStats : MonoBehaviour {
 
     [SerializeField]
     public static int Money;
+    public static int MineCapacity;
+    public static int MinesConstructed;
+
     public int StartMoney;
     public Animator secondChanceAnimator;
     private GameObject secondChanceMeter;
     private GameObject hudCanvas;
     private GameObject secondChanceTooltip;
     private string secondChanceBaseTooltipText = "SECOND CHANCE METER\nIT FILLS WITH GAME'S PROGRESSION\nAND CAN BE USED TO TRY THE CURRENT\nWAVE AGAIN IF YOU LOSE";
-    public static bool DebugModeON = true;
+    public static bool DebugModeON = false;
 
     private float secondChanceFillTarget = 0f;
 
     void Start()
     {
         Money = 0;
+        MineCapacity = 0;
+        MinesConstructed = 0;
         AddMoney(StartMoney);        
         hudCanvas = GameObject.FindGameObjectWithTag("HUD");
         secondChanceTooltip = hudCanvas.transform.Find("Player Info").Find("TooltipSecondChance").gameObject;

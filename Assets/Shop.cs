@@ -43,6 +43,8 @@ public class Shop : MonoBehaviour {
 
     public Color CoinDisabledColor;
     public Color CoinTextDisabledColor;
+    public Color mineCapacityFullColor;
+    public Color mineAvailableColor;
 
     private bool canBuildPrimary = true;
     private bool canBuildSecondary = true;
@@ -155,7 +157,7 @@ public class Shop : MonoBehaviour {
             canBuildPrimary = true;
         }
 
-        if (PlayerStats.Money < miningCamp.cost)
+        if (PlayerStats.Money < miningCamp.cost )
         {
             secondaryUnitButton.interactable = false;
             secondaryUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinDisabledColor;
@@ -166,6 +168,17 @@ public class Shop : MonoBehaviour {
             secondaryUnitButton.transform.Find("Coin").GetComponent<Image>().color = CoinEnabledColor;
             secondaryUnitButton.transform.Find("Coin").transform.Find("Price").GetComponent<Text>().color = CoinTextEnabledColor;
             canBuildSecondary = true;
+        }
+
+        if (PlayerStats.MinesConstructed < PlayerStats.MineCapacity)
+        {
+            secondaryUnitButton.interactable = true;
+            secondaryUnitButton.transform.Find("Capacity").transform.Find("TextShadow").transform.Find("Text").GetComponent<Text>().color = mineAvailableColor;
+        }
+        else
+        {
+            secondaryUnitButton.interactable = false;
+            secondaryUnitButton.transform.Find("Capacity").transform.Find("TextShadow").transform.Find("Text").GetComponent<Text>().color = mineCapacityFullColor;
         }
     }
 
@@ -179,7 +192,7 @@ public class Shop : MonoBehaviour {
     }
 
     public void SelectSecondaryUnit(bool fromDoLoadAll = false) {
-        if (canBuildSecondary || fromDoLoadAll) {
+        if ((canBuildSecondary && PlayerStats.MinesConstructed < PlayerStats.MineCapacity) || fromDoLoadAll) {
            // Debug.Log("Secondary Turret Selected");
             buildManager.SelectUnitToBuild(miningCamp);
             buildManager.HideOptions();

@@ -492,7 +492,6 @@ public class WaveSpawner : MonoBehaviour {
             timesMonsterAppearedById[lane, id]++;
         }
         int increase_value = timesMonsterAppearedById[lane, id] * 10;
-        Debug.Log("INCREASE VALUE ON LANE " + (lane + 1) + " FOR MONSTER " + id + " = " + increase_value);
         
         //Boost monster HP.
         monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
@@ -901,6 +900,7 @@ public class WaveSpawner : MonoBehaviour {
         
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterText").GetComponent<Text>().text = "" + (waveNumber);
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterTextShadow").GetComponent<Text>().text = "" + (waveNumber);
+        PlayerStats.MineCapacity = (int)(waveNumber / 5);
         //FillMonstersType();
         monsterBatch.Clear();
         minimap.ClearMonsterBatch();
