@@ -1341,7 +1341,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         gameID = new CGameID(SteamUtils.GetAppID());
         Debug.Log("Game ID " + gameID );
         //for debug
-        SteamUserStats.ResetAllStats(true);
+        //SteamUserStats.ResetAllStats(true);
         //SteamUserStats.RequestCurrentStats();
 
         userAchievementsStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
@@ -1354,7 +1354,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         isRequestedStats = false;
         isStatsvalid = false;
 
-        Debug.Log("setup completed ");
+        //Debug.Log("setup completed ");
     }
 
 
@@ -1467,7 +1467,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         {
             if(pCallback.m_bScoreChanged == 1)
             {
-                //Debug.Log("NEW RECORD");
+                Debug.Log("NEW RECORD");
             }
         }
     }
@@ -1483,6 +1483,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             SteamAPICall_t uHandle = SteamUserStats.UploadLeaderboardScore(pCallback.m_hSteamLeaderboard, ELeaderboardUploadScoreMethod.k_ELeaderboardUploadScoreMethodKeepBest, p_totalWaves, scoreDetails, 1);
             leaderboardScoreUploaded.Set(uHandle);
 
+        }
+        else
+        {
+            Debug.Log("LeaderBoardNotFound");
         }
     }
 
@@ -1695,7 +1699,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             if (GameController.gamechangedDelegate != null)
             {
                 GameController.gamechangedDelegate += OnGameChanged;
-                Debug.Log("got delegate");
+                
             }
             castleHealth = GameObject.FindObjectOfType<CastleHealth>();
             onPlayScene = false;
@@ -1704,11 +1708,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
         if (!isRequestedStats)
         {
-            Debug.Log("Requesting status ");
+            
             if (!SteamManager.Initialized)
             {
                 isRequestedStats = true;
-                Debug.Log("status requested ");
+               
                 return;
             }
 
