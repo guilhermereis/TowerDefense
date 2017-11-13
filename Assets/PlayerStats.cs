@@ -15,6 +15,9 @@ public class PlayerStats : MonoBehaviour {
     private GameObject secondChanceTooltip;
     private string secondChanceBaseTooltipText = "SECOND CHANCE METER\nIT FILLS WITH GAME'S PROGRESSION\nAND CAN BE USED TO TRY THE CURRENT\nWAVE AGAIN IF YOU LOSE";
     public static bool DebugModeON = false;
+    public static int totalMoneyAccumulated;
+
+    public GameObject spawner;
 
     private float secondChanceFillTarget = 0f;
 
@@ -54,11 +57,15 @@ public class PlayerStats : MonoBehaviour {
         Money += amount;
         GameObject.Find("MoneyText").GetComponent<Text>().text = ""+Money;
         GameObject.Find("MoneyTextShadow").GetComponent<Text>().text = "" + Money;
+        if(amount>0)
+            totalMoneyAccumulated += amount;
         return amount;
     }
     public static void SetMoney(int amount)
     {
         Money = amount;
+        if (amount > 0)
+            totalMoneyAccumulated = amount;
         GameObject.Find("MoneyText").GetComponent<Text>().text = "" + Money;
         GameObject.Find("MoneyTextShadow").GetComponent<Text>().text = "" + Money;
     }

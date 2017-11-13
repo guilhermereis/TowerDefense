@@ -571,7 +571,7 @@ public class GridMouse : MonoBehaviour
             {
                 if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
-                    Debug.Log("DESELECT 1");
+                    //Debug.Log("DESELECT 1");
                     buildManager.DeselectUnitToBuild();
                     buildManager.DeselectSelectedUnit();
                     SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);

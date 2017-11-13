@@ -202,13 +202,13 @@ public class WaveSpawner : MonoBehaviour {
         combinations = new Milestone[totalCombinations];
         //creating basics milestones combinations
         combinations[0] = new Milestone();
-        combinations[0].combination = new int[] {1,1,1,1,1};
+        combinations[0].combination = new int[] {1,1,1,1};
         combinations[0].special = new int[] {};
         combinations[1] = new Milestone();
         combinations[1].combination = new int[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-        combinations[1].special = new int[] {2,2,2,2,2};
+        combinations[1].special = new int[] {2,2,2};
         combinations[2] = new Milestone();
-        combinations[2].combination = new int[] {1,1,1,2,2,2,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,2};
+        combinations[2].combination = new int[] {1,1,1,2,2,2,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,2};
         combinations[2].special = new int[] {3,3,3,3,3};
         combinations[3] = new Milestone();
         combinations[3].combination = new int[] {5,5,5,5,5,5,5,3,3,3,3,3,3,5,5,5,5,5,5,5,5,5,5,5,3,3,3};
@@ -411,7 +411,6 @@ public class WaveSpawner : MonoBehaviour {
             }
             timer -= Time.deltaTime;
             yield return null;
-
         }
 
         finishedSpawns++;
@@ -491,7 +490,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             timesMonsterAppearedById[lane, id]++;
         }
-        int increase_value = timesMonsterAppearedById[lane, id] * 5;
+        int increase_value = timesMonsterAppearedById[lane, id] * 4;
         
         //Boost monster HP.
         monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
@@ -598,7 +597,7 @@ public class WaveSpawner : MonoBehaviour {
             if (isWaving)
             {
                 saved_money = PlayerStats.Money;
-                Debug.Log("SAVED " + saved_money + " MONEY !");
+               // Debug.Log("SAVED " + saved_money + " MONEY !");
                 StopAllCoroutines();
                 GameController.ChangeGameState(GameState.Waving);
                 doSaveAll();
@@ -715,6 +714,8 @@ public class WaveSpawner : MonoBehaviour {
         spawningMonsterLane4 = 0;
 
         waveNumber++;
+
+        Debug.Log("Gold: "+ PlayerStats.totalMoneyAccumulated + " at wave " + waveNumber);
 
         if (waveNumber < 10)
             maxLanes = 1;
@@ -971,7 +972,7 @@ public class WaveSpawner : MonoBehaviour {
             uwc.isActive = false;
             uwc.clearButtons();
         }
-        Debug.Log("Gonna destroy all !");
+        //Debug.Log("Gonna destroy all !");
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
             bc = gridMouse.ListOfGameObjects[i].GetComponent<BuildableController>();
@@ -982,7 +983,7 @@ public class WaveSpawner : MonoBehaviour {
 
             
             
-            Debug.Log("JUST DESTROYED THESE COORDINATES: "+x+", "+z);
+            //Debug.Log("JUST DESTROYED THESE COORDINATES: "+x+", "+z);
             //if it's a mining camp
             if (bc.getUnitBlueprint().name == Shop.instance.miningCamp.name)
             {
@@ -1005,7 +1006,7 @@ public class WaveSpawner : MonoBehaviour {
             Destroy(gridMouse.ListOfGameObjects[i]);
         }
         gridMouse.ListOfGameObjects.Clear();
-        Debug.Log("SIZE: " + gridMouse.ListOfGameObjects.Count);
+        //Debug.Log("SIZE: " + gridMouse.ListOfGameObjects.Count);
         //---------------------------------------------------------
         //destroy all monsters
         for (int i = 0; i < monsterBatch.Count; i++)
@@ -1016,7 +1017,7 @@ public class WaveSpawner : MonoBehaviour {
     }
     public void doSaveAll()
     {
-        Debug.Log("Gonna save all !");
+        //Debug.Log("Gonna save all !");
 
         listOfStates = new List<PropertyScript.StructureState>();
         BuildableController bc;
@@ -1027,9 +1028,9 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (gridMouse.ListOfGameObjects[i] == null)
             {
-                Debug.Log("(doSaveAll) IT'S NULL !");
+                //Debug.Log("(doSaveAll) IT'S NULL !");
             }
-            Debug.Log("(doSaveAll()) COUNT = " + gridMouse.ListOfGameObjects.Count);
+            //Debug.Log("(doSaveAll()) COUNT = " + gridMouse.ListOfGameObjects.Count);
 
 
             //Get information from the Buildable
@@ -1053,7 +1054,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tc.fireRateLVL, tc.attackPowerLVL);
 
-                Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
+                //Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
                 listOfStates.Add(state);
             }
             else if (tSc != null)
@@ -1077,19 +1078,19 @@ public class WaveSpawner : MonoBehaviour {
                 state =
                     new PropertyScript.StructureState(state.structureName = bc.getUnitBlueprint().name,
                                                       gridMouse.ListOfGameObjects[i].transform);
-                Debug.Log("ADDED " + bc.getUnitBlueprint().name + " TO THE LIST OF STATES");
+                //Debug.Log("ADDED " + bc.getUnitBlueprint().name + " TO THE LIST OF STATES");
                 listOfStates.Add(state);
             }
             
-            Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
+           // Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
     }
     public void doLoadAll()
     {
-        Debug.Log("CALLING DESTROY ALL");
+        //Debug.Log("CALLING DESTROY ALL");
         doDestroyAll();
 
-        Debug.Log("Gonna load all " + listOfStates.Count + " !");
+        //Debug.Log("Gonna load all " + listOfStates.Count + " !");
         for (int i = 0; i < listOfStates.Count; i++)
         {
             if (listOfStates[i].structureName == Shop.instance.towerLevel1.name)
@@ -1107,8 +1108,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-                Debug.Log("LOADED " + listOfStates[i].position + ".");
+               // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+               // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerLevel2.name)
             {
@@ -1125,8 +1126,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-                Debug.Log("LOADED " + listOfStates[i].position + ".");
+               // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+               // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerSlow.name)
             {
@@ -1143,8 +1144,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerSlowController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-                Debug.Log("LOADED " + listOfStates[i].position + ".");
+               // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+               // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerTesla.name)
             {
@@ -1161,8 +1162,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TeslaCoilController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-                Debug.Log("LOADED " + listOfStates[i].position + ".");
+               // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+               // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerLevel3.name)
             {
@@ -1179,8 +1180,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-                Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-                Debug.Log("LOADED " + listOfStates[i].position + ".");
+                //Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+               // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.miningCamp.name)
             {
@@ -1205,11 +1206,11 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.previewMatrix[x + 1, z] = true;
                 gridMouse.previewMatrix[x, z + 1] = true;
 
-                Debug.Log("LOADED " + listOfStates[i].position + ".");
+               // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else
             {
-                Debug.Log("DID NOT LOAD");
+               // Debug.Log("DID NOT LOAD");
             }
 
         }

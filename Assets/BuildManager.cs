@@ -41,8 +41,6 @@ public class BuildManager : MonoBehaviour {
             upgradeWheelController = upgradeWheel.GetComponent<UpgradeWheelController>();
 
         GameObject slider = GameObject.Find("Slider");
-        if (slider)
-            Debug.Log("VOLUME: "+slider.GetComponent<Slider>().value);
         GameObject audioOpt = GameObject.FindWithTag("AudioOptions");
         Destroy(audioOpt);
     }	
@@ -199,7 +197,7 @@ public class BuildManager : MonoBehaviour {
         }
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
-            Debug.Log(i+": "+gridMouse.ListOfGameObjects[i].name);
+            //Debug.Log(i+": "+gridMouse.ListOfGameObjects[i].name);
         }
         Destroy(GameObject.Find("UnitGameObject"));
 
@@ -211,7 +209,7 @@ public class BuildManager : MonoBehaviour {
         {
             if (PlayerStats.Money < unitToBuild.cost)
             {
-                Debug.Log("Not enough money to build that!");
+                //Debug.Log("Not enough money to build that!");
                 return;
             }
             int spent = PlayerStats.AddMoney(-1 * unitToBuild.cost);
@@ -589,7 +587,7 @@ public class BuildManager : MonoBehaviour {
             Destroy(getSelectedGameObject());
             //Debug.Log("AQUI: "+gridMouse.propertiesMatrix[x, y].builtGameObject);
             HideOptions();
-            Debug.Log("Vendeu " + name + " na posição " + x + ", " + z);
+            //Debug.Log("Vendeu " + name + " na posição " + x + ", " + z);
         }
     }
 
@@ -604,7 +602,7 @@ public class BuildManager : MonoBehaviour {
 
     public void UpgradeSelectedBuild()
     {
-        Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
+        //Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
         if (getSelectedUnit() != null)
         {
             if (getSelectedUnit().name == "Tower")
@@ -620,11 +618,11 @@ public class BuildManager : MonoBehaviour {
                     //buildManager.DeselectSelectedUnit();                
                     //buildManager.HideOptions();
                     OnUnitUpgrade();
-                    Debug.Log("Upgraded unit: " + "Tower");
+                    //Debug.Log("Upgraded unit: " + "Tower");
                 }
                 else
                 {
-                    Debug.Log("You don't have enough money to upgrade this unit.");
+                   // Debug.Log("You don't have enough money to upgrade this unit.");
                 }
             }
             else if (getSelectedUnit().name == "Tower2")
@@ -640,16 +638,16 @@ public class BuildManager : MonoBehaviour {
                     //buildManager.DeselectSelectedUnit();
                     //buildManager.HideOptions();
                     OnUnitUpgrade();
-                    Debug.Log("Upgraded unit: " + "Tower2");
+                    //Debug.Log("Upgraded unit: " + "Tower2");
                 }
                 else
                 {
-                    Debug.Log("You don't have enough money to upgrade this unit.");
+                    //Debug.Log("You don't have enough money to upgrade this unit.");
                 }
             }
             else
             {
-                Debug.Log("Unit can't be upgraded any further !");
+                //Debug.Log("Unit can't be upgraded any further !");
             }
 
         }
@@ -682,7 +680,7 @@ public class BuildManager : MonoBehaviour {
             PropertyScript.Property propertyInQuestion = gridMouse.propertiesMatrix[x, z];
                        
             gridMouse.SelectPosition(propertyInQuestion.unit, propertyInQuestion.builtGameObject);
-            Debug.Log("Selecionou a posição: " + x + ", " + z);
+            //Debug.Log("Selecionou a posição: " + x + ", " + z);
 
             GameObject obj = getSelectedGameObject();
             
@@ -691,13 +689,13 @@ public class BuildManager : MonoBehaviour {
             if (tSlowc != null)
             {
                 tSlowc.SetFireRateAndAttackPower();
-                Debug.Log("THIS UNIT'S SLOW AMOUNT: " + tSlowc.slowAmount);
+                //Debug.Log("THIS UNIT'S SLOW AMOUNT: " + tSlowc.slowAmount);
             }
             TowerController tc = obj.GetComponent<TowerController>();
             if (tc != null)
             {
                 tc.SetFireRateAndAttackPower();
-                Debug.Log("THIS UNIT'S FIRERATE AND ATTACKPOWER: " + tc.getFireRate() + ", " + tc.getAttackPower());
+                //Debug.Log("THIS UNIT'S FIRERATE AND ATTACKPOWER: " + tc.getFireRate() + ", " + tc.getAttackPower());
             }
             
         }
@@ -706,7 +704,7 @@ public class BuildManager : MonoBehaviour {
 
     public void UpgradeSlow()
     {
-        Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
+        //Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
         if (getSelectedUnit() != null)
         {
             if (PlayerStats.Money - Shop.instance.towerSlow.upgrade_cost >= 0)
@@ -720,18 +718,18 @@ public class BuildManager : MonoBehaviour {
                 //DeselectSelectedUnit();
                 //HideOptions();
                 OnUnitUpgrade();
-                Debug.Log("Upgraded unit: " + "Tower");
+                //Debug.Log("Upgraded unit: " + "Tower");
             }
             else
             {
-                Debug.Log("You don't have enough money to upgrade this unit.");
+                //Debug.Log("You don't have enough money to upgrade this unit.");
             }
 
         }
     }
     public void UpgradeTesla()
     {
-        Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
+        //Debug.Log("Going to upgrade " + getSelectedUnit().name + "!");
         if (getSelectedUnit() != null)
         {
             if (PlayerStats.Money - Shop.instance.towerTesla.upgrade_cost >= 0)
@@ -745,11 +743,11 @@ public class BuildManager : MonoBehaviour {
                 //DeselectSelectedUnit();
                 //HideOptions();
                 OnUnitUpgrade();
-                Debug.Log("Upgraded unit: " + "Tower");
+                //Debug.Log("Upgraded unit: " + "Tower");
             }
             else
             {
-                Debug.Log("You don't have enough money to upgrade this unit.");
+                //Debug.Log("You don't have enough money to upgrade this unit.");
             }
 
         }
