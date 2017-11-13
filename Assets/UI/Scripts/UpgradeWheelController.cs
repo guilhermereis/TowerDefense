@@ -484,9 +484,13 @@ public class UpgradeWheelController : MonoBehaviour {
     }
 
     public void openWheel() {
+        if (anim.GetBool("Open") == false)
+        {
+            SoundToPlay.PlaySfx(openSound);
+        }
         anim.SetBool("Open", true);
         isActive = true;
-        SoundToPlay.PlaySfx(openSound);
+        
     }
 
     public void onWheelOpened() {
