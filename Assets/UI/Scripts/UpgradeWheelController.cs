@@ -9,6 +9,7 @@ public class UpgradeWheelController : MonoBehaviour {
     private BuildableController buildable;
     public GameObject upgradeWheel;
     public GameObject sellSound;
+    public GameObject openSound;
     
     private Animator anim;
     private int attackSpeedLvl = 0;
@@ -483,8 +484,13 @@ public class UpgradeWheelController : MonoBehaviour {
     }
 
     public void openWheel() {
+        if (anim.GetBool("Open") == false)
+        {
+            SoundToPlay.PlaySfx(openSound);
+        }
         anim.SetBool("Open", true);
         isActive = true;
+        
     }
 
     public void onWheelOpened() {

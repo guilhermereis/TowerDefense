@@ -204,11 +204,17 @@ public class GoblinKingController : EnemyController {
     public void Death(string deathEvent) {
         switch (deathEvent) {
             case "Butt":
-                cameraManager.shakeCamera(0.5f, 10f, 0.2f);
-                break;
+                {
+                    cameraManager.shakeCamera(0.5f, 10f, 0.2f);
+                    SoundToPlay.PlayAtLocation(source, transform.position, Quaternion.identity, 10f);
+                    break;                    
+                }
             case "Back":
-                cameraManager.shakeCamera(0.5f, 10f, 0.5f);
-                break;
+                {
+                    cameraManager.shakeCamera(0.5f, 10f, 0.5f);
+                    SoundToPlay.PlayAtLocation(source, transform.position, Quaternion.identity, 10f);
+                    break;
+                }
         }
     }
 }
