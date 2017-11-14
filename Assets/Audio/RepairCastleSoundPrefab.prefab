@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4837455688045732}
   - component: {fileID: 82182010425946520}
+  - component: {fileID: 114987600988183466}
   m_Layer: 0
   m_Name: RepairCastleSoundPrefab
   m_TagString: Untagged
@@ -120,3 +121,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114987600988183466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1390330890705764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adbfa7e4d14d39844bfff904b9d03bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

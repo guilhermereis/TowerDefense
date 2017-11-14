@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4761050874058946}
   - component: {fileID: 82936824865132840}
+  - component: {fileID: 114503758270876536}
   m_Layer: 0
   m_Name: UnderAttackSoundPrefab
   m_TagString: Untagged
@@ -51,7 +52,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 56fc399d78080b04cb926fafc494e3d6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.9430134
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -120,3 +121,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114503758270876536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1704905097006840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adbfa7e4d14d39844bfff904b9d03bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
