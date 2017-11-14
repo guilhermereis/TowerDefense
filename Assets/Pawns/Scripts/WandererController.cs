@@ -24,14 +24,13 @@ public class WandererController : EnemyController
         mats = gameObject.GetComponent<Renderer>().materials;
         mats[0] = frozenMaterial;
         originalMaterial = gameObject.GetComponent<Renderer>().materials;
-
     }
 
     public override void EnterFrozenTime()
     {
         base.EnterFrozenTime();
         if (originalMaterial != null) { }
-            //gameObject.GetComponent<Renderer>().materials[0].SetColor(0,frozenColor);
+            gameObject.GetComponent<Renderer>().materials = mats;
     }
 
     public override void LeaveFrozenTime()

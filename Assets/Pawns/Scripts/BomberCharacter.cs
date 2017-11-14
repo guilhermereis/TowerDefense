@@ -8,7 +8,6 @@ public class BomberCharacter : PawnCharacter {
 
     private void Awake()
     {
-        attack = 700;
     }
 
     // Update is called once per frame

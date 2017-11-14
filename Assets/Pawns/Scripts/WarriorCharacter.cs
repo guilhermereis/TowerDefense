@@ -6,7 +6,6 @@ public class WarriorCharacter : PawnCharacter {
 
 	private void Awake()
 	{
-		attack = 700;
 	}
 
     public override void Die(DamageType damage)

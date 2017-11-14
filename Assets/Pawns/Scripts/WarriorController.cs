@@ -147,15 +147,18 @@ public class WarriorController : EnemyController {
         if (target.tag == "Ally")
         {
             bool hitted;
-            
-            if (target.GetComponent<PawnCharacter>().Damage(character.attack,out hitted, DamageType.Blood))
+
+            if (target.GetComponent<PawnCharacter>().Damage(character.attack, out hitted, DamageType.Blood))
             {
                 enemiesInRange.Remove(target);
                 target = null;
             }
         }
-        else if (target.tag == "Castle")
+        else if (target.tag == "Castle") {
+            Debug.Log(character.attack);
             target.GetComponent<CastleHealth>().ApplyDamage(character.attack);
+        }
+            
 
         attackCountdown = 1 / character.attackRate;
     }
