@@ -1018,7 +1018,6 @@ public class WaveSpawner : MonoBehaviour {
     public void doSaveAll()
     {
         //Debug.Log("Gonna save all !");
-
         listOfStates = new List<PropertyScript.StructureState>();
         BuildableController bc;
         TowerController tc;
