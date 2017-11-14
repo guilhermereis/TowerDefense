@@ -867,8 +867,8 @@ public class WaveSpawner : MonoBehaviour {
 
             if (waveNumberLane1 % (int)interval == 0)
             {
-               
-                currentMS1= (currentMS1 + 1) % totalCombinations;
+
+                currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations - 1));
             }
             if (waveNumberLane2 % (int)interval == 0)
             {
