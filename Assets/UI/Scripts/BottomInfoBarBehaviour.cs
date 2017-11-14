@@ -37,6 +37,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             AttadkDmgIcon.GetComponent<Image>().overrideSprite = defaultAttackDmgIcon;
             DamageText.GetComponent<Text>().color = defaultAttackDmgColor;
             AttackSpeedText.GetComponent<Text>().color = defaultTextColor;
+            SelectionName.transform.Find("AttackDamage").gameObject.SetActive(true);
+            SelectionName.transform.Find("AttackSpeed").GetComponent<Image>().overrideSprite = null;
 
             string unitName = controller.getUnitBlueprint().name;
 
@@ -96,9 +98,9 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             MiningCampController mcontroller = selectedObject.GetComponent<MiningCampController>();
             SelectionName.GetComponent<Text>().text = " Mining Camp: ";
             SelectionNameShadow.GetComponent<Text>().text = " Mining Camp: ";
-            SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "Mine's max gold capacity";
-            SelectionName.transform.Find("AttackDamage").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "Mine's current gold";
-            AttadkDmgIcon.GetComponent<Image>().overrideSprite = CurrentGoldVariation;
+            SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "Mine's gold per turn";
+            SelectionName.transform.Find("AttackDamage").gameObject.SetActive(false);
+            SelectionName.transform.Find("AttackSpeed").GetComponent<Image>().overrideSprite = CurrentGoldVariation;
 
             AttackSpeedText.GetComponent<Text>().text = "" + mcontroller.maxCapacity;
             AttackSpeedTextShadow.GetComponent<Text>().text = "" + mcontroller.maxCapacity;

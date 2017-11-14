@@ -11,6 +11,7 @@ public class ConfigurationMenu : MonoBehaviour {
     public Toggle fullscreenToggle;
     public Toggle tutorialToggle;
     public Dropdown resolutionDropDown;
+    public Dropdown qualityDropDown;
     public GameObject quitConfirmationScreen;
     public GameObject resConfirmationScreen;
     public GameObject startOverConfirmationScreen;
@@ -32,6 +33,7 @@ public class ConfigurationMenu : MonoBehaviour {
     resForceValue = true;
     dropdown.value = newValue;*/
     private bool resForceValue = false;
+    private bool blockQualitySettings = false;
     private bool blockFullScreenSound = false;
     private bool blockTutorialSound = false;
 
@@ -169,7 +171,8 @@ public class ConfigurationMenu : MonoBehaviour {
                 
             resolutionDropDown.transform.Find("Label").GetComponent<Text>().text = resolutions[activeScreenResIndex].width + "x" + resolutions[activeScreenResIndex].height;
         }
-
+        blockQualitySettings = true;
+        qualityDropDown.value = QualitySettings.GetQualityLevel() - 1;
         resForceValue = false;
     }
 
@@ -203,6 +206,13 @@ public class ConfigurationMenu : MonoBehaviour {
         PlayerPrefs.SetInt("Screenmanager Is Fullscreen mode", (fullscreenToggle.isOn) ? 1 : 0);
         PlayerPrefs.SetInt("resolution index", activeScreenResIndex);
         PlayerPrefs.Save();
+    }
+
+    public void setQualitySettings(int index) {
+        if (blockQualitySettings)
+        {
+            QualitySettings.SetQualityLevel(index + 1);
+        }
     }
 
     public void SetFullScreen(bool isFullscreen)
