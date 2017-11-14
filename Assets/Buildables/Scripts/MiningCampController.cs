@@ -78,6 +78,28 @@ public class MiningCampController : BuildableController {
         }
       
     }
+    IEnumerator GoldTextAnimation()
+    {
+        float timer = 1.5f;
+        Text goldText = fullButton.GetComponentInChildren<Text>();
+        Vector3 originalPosition= goldText.transform.position;
+        goldText.enabled = true;
+        while (timer > 0)
+        {
+            Vector3 dir = 20.0f * Vector3.up * Time.deltaTime;
+            goldText.transform.Translate(dir, Space.World);
+            timer -= Time.deltaTime;
+
+            yield return null;
+        }
+        goldText.enabled = false;
+        goldText.transform.position = originalPosition;
+        fullButton.GetComponent<TooltipController>().hideTooltip(null);
+        fullButton.SetActive(false);
+        fullButton.GetComponent<Button>().enabled = true;
+        fullButton.GetComponent<Image>().enabled = true;
+
+    }
     //reset isfull state and remove all the money inside
     public void Withdrawl()
     {
@@ -86,8 +108,12 @@ public class MiningCampController : BuildableController {
             int goldToReturn = currentGold;
             currentGold = 0;
             isFull = false;
-            fullButton.GetComponent<TooltipController>().hideTooltip(null);
-            fullButton.SetActive(false);
+            fullButton.GetComponent<Button>().enabled = false;
+            fullButton.GetComponent<Image>().enabled = false;
+            StopCoroutine(GoldTextAnimation());
+            StartCoroutine(GoldTextAnimation());
+            //fullButton.GetComponent<TooltipController>().hideTooltip(null);
+            //fullButton.SetActive(false);
             SoundToPlay.PlaySfx(moneyCollectedAudio);
             int added = PlayerStats.AddMoney(goldToReturn);
             GameController.MoneyCollected(added, true);
