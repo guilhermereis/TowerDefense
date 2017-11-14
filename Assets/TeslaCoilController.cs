@@ -40,15 +40,12 @@ public class TeslaCoilController : TowerController {
     public override void Fire()
     {
         //Debug.Break();
-       
-
-        RaycastHit hit;
+      
         for (int i = 0; i < enemies.Count; i++)
         {
-            if (enemies[i] != null)
+            target = enemies[i];
+            if (!(target.GetComponent<PawnController>().currentState == PawnController.PawnState.Dead))
             {
-                
-                target = enemies[i];
                 GameObject arrow = Instantiate(arrowPrefab, attackPoint.transform.position, attackPoint.transform.rotation);
                 Arrow newArrow = (Arrow)arrow.GetComponent<Arrow>();
                 arrow.transform.parent = transform;
@@ -67,8 +64,10 @@ public class TeslaCoilController : TowerController {
 
     public override void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(CapsuleCollider))
         {
+            Debug.Log(other.gameObject.name);
             other.gameObject.GetComponent<PawnController>().deadPawn += RemoveDeadEnemy;
             enemies.Add(other.gameObject);
         }

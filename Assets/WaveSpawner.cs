@@ -849,7 +849,7 @@ public class WaveSpawner : MonoBehaviour {
         }
         else if( maxLanes == 4)
         {
-
+            
             currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
             currentMS2 = Mathf.Clamp(currentMS2, 0, (totalCombinations - 1));
             currentMS3 = Mathf.Clamp(currentMS3, 0, (totalCombinations - 1));
