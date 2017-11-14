@@ -38,11 +38,6 @@ public class FireBall : MonoBehaviour {
 	{
 		
 		Instantiate(explosionParticlePrefab,collision.contacts[0].point, Quaternion.identity);
-		for (int i = 0; i < targets.Count; i++)
-		{
-			Debug.Log(targets[i].name);
-			//targets[i].AddExplosionForce(1000, collision.contacts[0].point, 5,3);
-		}
 		Destroy(gameObject);
 
 	}
