@@ -30,10 +30,8 @@ public class WandererController : EnemyController
     public override void EnterFrozenTime()
     {
         base.EnterFrozenTime();
-        if(originalMaterial != null)
-            gameObject.GetComponent<Renderer>().materials = mats;
-
-        
+        if (originalMaterial != null) { }
+            //gameObject.GetComponent<Renderer>().materials[0].SetColor(0,frozenColor);
     }
 
     public override void LeaveFrozenTime()
