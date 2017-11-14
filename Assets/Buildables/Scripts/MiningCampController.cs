@@ -78,10 +78,11 @@ public class MiningCampController : BuildableController {
         }
       
     }
-    IEnumerator GoldTextAnimation()
+    IEnumerator GoldTextAnimation(int gold)
     {
         float timer = 1.5f;
         Text goldText = fullButton.GetComponentInChildren<Text>();
+        goldText.text = gold.ToString();
         Vector3 originalPosition= goldText.transform.position;
         goldText.enabled = true;
         while (timer > 0)
@@ -110,8 +111,8 @@ public class MiningCampController : BuildableController {
             isFull = false;
             fullButton.GetComponent<Button>().enabled = false;
             fullButton.GetComponent<Image>().enabled = false;
-            StopCoroutine(GoldTextAnimation());
-            StartCoroutine(GoldTextAnimation());
+            StopCoroutine(GoldTextAnimation(goldToReturn));
+            StartCoroutine(GoldTextAnimation(goldToReturn));
             //fullButton.GetComponent<TooltipController>().hideTooltip(null);
             //fullButton.SetActive(false);
             SoundToPlay.PlaySfx(moneyCollectedAudio);
