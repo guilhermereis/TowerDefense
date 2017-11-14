@@ -83,18 +83,18 @@ public class MiningCampController : BuildableController {
         float timer = 1.5f;
         Text goldText = fullButton.GetComponentInChildren<Text>();
         goldText.text = gold.ToString();
-        Vector3 originalPosition= goldText.transform.position;
+        Vector3 originalPosition= goldText.transform.localPosition;
         goldText.enabled = true;
         while (timer > 0)
         {
             Vector3 dir = 20.0f * Vector3.up * Time.deltaTime;
-            goldText.transform.Translate(dir, Space.World);
+            goldText.transform.Translate(dir, Space.Self);
             timer -= Time.deltaTime;
 
             yield return null;
         }
         goldText.enabled = false;
-        goldText.transform.position = originalPosition;
+        goldText.transform.localPosition = originalPosition;
         fullButton.GetComponent<TooltipController>().hideTooltip(null);
         fullButton.SetActive(false);
         fullButton.GetComponent<Button>().enabled = true;

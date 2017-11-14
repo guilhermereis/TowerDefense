@@ -730,12 +730,12 @@ public class WaveSpawner : MonoBehaviour {
         {
             openWave(2);
             maxLanes = 3;
-            GameController.UnlockLane(3);
+            GameController.UnlockLane(4);
         }
         else {
             openWave(3);
             maxLanes = 4;
-            GameController.UnlockLane(4);
+            GameController.UnlockLane(3);
         }
 
         waveMonsters = 0;
