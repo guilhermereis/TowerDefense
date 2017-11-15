@@ -8,11 +8,12 @@ public struct Milestone
 {
     public int[] combination;
     public int[] special;
-     
+
 }
 
 
-public class WaveSpawner : MonoBehaviour {
+public class WaveSpawner : MonoBehaviour
+{
     public List<GameObject> monsterBatch;
     public GameObject[] monstersPrefab;
     public GameObject castlePrefab;
@@ -39,17 +40,17 @@ public class WaveSpawner : MonoBehaviour {
     AnimationCurve curve;
 
     public GameObject King1;
-    
-#region Waves
+
+    #region Waves
     private Wave waveLane1;
     private Wave waveLane2;
     private Wave waveLane3;
     private Wave waveLane4;
 
     private GameObject waveCounterUI;
-#endregion
+    #endregion
 
-#region SpawnLocations
+    #region SpawnLocations
     public Transform spawnLocationLane1;
     public Transform spawnLocationLane2A;
     public Transform spawnLocationLane2B;
@@ -58,16 +59,16 @@ public class WaveSpawner : MonoBehaviour {
     public Transform spawnLocationLane3B;
     public Transform spawnLocationLane3;
     public Transform spawnLocationLane4;
-#endregion
+    #endregion
 
-#region SpawningMonstersNumber
+    #region SpawningMonstersNumber
     public int spawningMonsterLane1 = 0;
     public int spawningMonsterLane2 = 0;
     public int spawningMonsterLane3 = 0;
     public int spawningMonsterLane4 = 0;
     #endregion
 
-#region Combinations
+    #region Combinations
     int[] combinationLane1;
     int[] combinationLane2;
     int[] combinationLane3;
@@ -75,7 +76,7 @@ public class WaveSpawner : MonoBehaviour {
     #endregion
 
     public int waveNumber = 0;
-#region WaveNumber
+    #region WaveNumber
     public int waveNumberLane1 = 0;
     public int waveNumberLane2 = 0;
     public int waveNumberLane3 = 0;
@@ -100,7 +101,7 @@ public class WaveSpawner : MonoBehaviour {
     public Canvas hud;
 
     bool startedSpawn = false;
-  
+
     int finishedSpawns = 0;
     public int maxLanes = 1;
 
@@ -202,29 +203,29 @@ public class WaveSpawner : MonoBehaviour {
         combinations = new Milestone[totalCombinations];
         //creating basics milestones combinations
         combinations[0] = new Milestone();
-        combinations[0].combination = new int[] {1,1,1,1};
-        combinations[0].special = new int[] {};
+        combinations[0].combination = new int[] { 1, 1, 1, 1 };
+        combinations[0].special = new int[] { };
         combinations[1] = new Milestone();
-        combinations[1].combination = new int[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-        combinations[1].special = new int[] {2,2,2};
+        combinations[1].combination = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        combinations[1].special = new int[] { 2, 2, 2 };
         combinations[2] = new Milestone();
-        combinations[2].combination = new int[] {1,1,1,2,2,2,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,2};
-        combinations[2].special = new int[] {3,3,3,3,3};
+        combinations[2].combination = new int[] { 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2 };
+        combinations[2].special = new int[] { 3, 3, 3, 3, 3 };
         combinations[3] = new Milestone();
-        combinations[3].combination = new int[] {5,5,5,5,5,5,5,3,3,3,3,3,3,5,5,5,5,5,5,5,5,5,5,5,3,3,3};
-        combinations[3].special = new int[] {4,6,3,3,3};
+        combinations[3].combination = new int[] { 5, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3 };
+        combinations[3].special = new int[] { 4, 6, 3, 3, 3 };
         combinations[4] = new Milestone();
-        combinations[4].combination = new int[] {5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
-        combinations[4].special = new int[] {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3};
+        combinations[4].combination = new int[] { 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
+        combinations[4].special = new int[] { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
         combinations[5] = new Milestone();
-        combinations[5].combination = new int[] {5,5,5,6,6,6,6,6,6,6,6,6,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,};
-        combinations[5].special = new int[] {7,7,7, 7, 7,7};
+        combinations[5].combination = new int[] { 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, };
+        combinations[5].special = new int[] { 7, 7, 7, 7, 7, 7 };
         combinations[6] = new Milestone();
-        combinations[6].combination = new int[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+        combinations[6].combination = new int[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 };
         combinations[6].special = new int[] { 11, 6, 6, 6, 6, 6 };
         combinations[7] = new Milestone();
         combinations[7].combination = new int[] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-        combinations[7].special = new int[] {8 , 8, 8, 8, 8, 8 };
+        combinations[7].special = new int[] { 8, 8, 8, 8, 8, 8 };
         combinations[8] = new Milestone();
         combinations[8].combination = new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
         combinations[8].special = new int[] { 11, 9, 9, 9, 9, 9 };
@@ -234,8 +235,8 @@ public class WaveSpawner : MonoBehaviour {
         combinations[10].combination = new int[] { 12, 12, 12, 12, 12, 12, 12, 12, 12, 12 };
         combinations[10].special = new int[] { 13, 10, 10, 10, 10, 10 };
         combinations[11] = new Milestone();
-        combinations[11].combination = new int[] { 13, 13, 13, 13, 13, 13, 13,13};
-        combinations[11].special = new int[] { 14,13,13,14,13,13 };
+        combinations[11].combination = new int[] { 13, 13, 13, 13, 13, 13, 13, 13 };
+        combinations[11].special = new int[] { 14, 13, 13, 14, 13, 13 };
         combinations[12] = new Milestone();
         combinations[12].combination = new int[] { 14, 14, 14, 14, 14, 14, 14, 14 };
         combinations[12].special = new int[] { 15, 14, 14, 14 };
@@ -285,7 +286,7 @@ public class WaveSpawner : MonoBehaviour {
         instantiateWaveSpawnerUI("Lane3B", spawnLocationLane3B);
         instantiateWaveSpawnerUI("Lane4", spawnLocationLane4);
 
-        timesMonsterAppearedById = new int[4,50];
+        timesMonsterAppearedById = new int[4, 50];
         for (int k = 0; k < timesMonsterAppearedById.GetLength(0); k++)
         {
             for (int l = 0; l < timesMonsterAppearedById.GetLength(1); l++)
@@ -295,7 +296,8 @@ public class WaveSpawner : MonoBehaviour {
         }
     }
 
-    public void instantiateWaveSpawnerUI(string spawnUILaneKey, Transform spawnTransform) {
+    public void instantiateWaveSpawnerUI(string spawnUILaneKey, Transform spawnTransform)
+    {
         GameObject spawner = Instantiate(WaveSpawnerUIPrefab, waveSpawnerUIHolder.transform);
         spawner.GetComponentInChildren<WaveSpawnerUIController>().mapLocation = spawnTransform.position;
         waveSpawnerUIs.Add(spawnUILaneKey, spawner);
@@ -305,7 +307,7 @@ public class WaveSpawner : MonoBehaviour {
     //return total monsters spawned at moment
     public float GetTotalSpawningMonsters()
     {
-        return (float) (spawningMonsterLane1 + spawningMonsterLane2 + spawningMonsterLane3 + spawningMonsterLane4);
+        return (float)(spawningMonsterLane1 + spawningMonsterLane2 + spawningMonsterLane3 + spawningMonsterLane4);
     }
 
     IEnumerator SpawnLane1(int[] combination_)
@@ -313,15 +315,15 @@ public class WaveSpawner : MonoBehaviour {
         float timer = 0;
 
         //spawns king
-        if( waveNumberLane1 == kingWaveLane1)
+        if (waveNumberLane1 == kingWaveLane1)
         {
             GameObject monster = Instantiate(King1, spawnLocationLane1.position, Quaternion.identity);
-            monster.GetComponent<PawnController>().SetupWaypoints(1,0);
+            monster.GetComponent<PawnController>().SetupWaypoints(1, 0);
 
-            
+
             monsterBatch.Add(monster);
             monster.transform.parent = transform;
-            
+
             minimap.UpdateMonsterBatch();
             kingWaveLane1 = -1;
         }
@@ -331,11 +333,11 @@ public class WaveSpawner : MonoBehaviour {
         while (spawningMonsterLane1 < combination_.Length)
         {
 
-            if(timer <= 0)
+            if (timer <= 0)
             {
                 int monsterIndex = combination_[spawningMonsterLane1] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane1.position, Quaternion.identity);
-                monster.GetComponent<PawnController>().SetupWaypoints(1,0);
+                monster.GetComponent<PawnController>().SetupWaypoints(1, 0);
                 BoostMonsterHP(ref monster, ref alreadyBoostedMonsterInThisWaveById, 0);
 
                 monsterBatch.Add(monster);
@@ -367,13 +369,13 @@ public class WaveSpawner : MonoBehaviour {
     {
         float timer = 0;
         //spawns king
-        if (waveNumberLane2  == kingWaveLane2)
+        if (waveNumberLane2 == kingWaveLane2)
         {
             spawnLocationLane2 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane2A : spawnLocationLane2B;
             int waypoint = spawnLocationLane2 == spawnLocationLane2A ? 0 : 1;
             GameObject monster = Instantiate(King1, spawnLocationLane2A.position, Quaternion.Euler(new Vector3(0, 90, 0)));
-            monster.GetComponent<PawnController>().SetupWaypoints(2,waypoint);
-            
+            monster.GetComponent<PawnController>().SetupWaypoints(2, waypoint);
+
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
@@ -394,7 +396,7 @@ public class WaveSpawner : MonoBehaviour {
 
                 int monsterIndex = combination_[spawningMonsterLane2] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane2.position, Quaternion.Euler(new Vector3(0, 90, 0)));
-                monster.GetComponent<PawnController>().SetupWaypoints(2,waypoint);
+                monster.GetComponent<PawnController>().SetupWaypoints(2, waypoint);
                 BoostMonsterHP(ref monster, ref alreadyBoostedMonsterInThisWaveById, 1);
 
                 monsterBatch.Add(monster);
@@ -426,13 +428,13 @@ public class WaveSpawner : MonoBehaviour {
     {
         float timer = 0;
         //spawns king
-        if (waveNumberLane3  == kingWaveLane3)
+        if (waveNumberLane3 == kingWaveLane3)
         {
             spawnLocationLane3 = Mathf.Round(Random.Range(0, 1)) > 0 ? spawnLocationLane3A : spawnLocationLane3B;
             int waypoint = spawnLocationLane3 == spawnLocationLane3A ? 0 : 1;
             GameObject monster = Instantiate(King1, spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
-            monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
-            
+            monster.GetComponent<PawnController>().SetupWaypoints(3, waypoint);
+
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
@@ -450,7 +452,7 @@ public class WaveSpawner : MonoBehaviour {
                 int waypoint = spawnLocationLane3 == spawnLocationLane3A ? 0 : 1;
                 int monsterIndex = combination_[spawningMonsterLane3] - 1;
                 GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane3.position, Quaternion.Euler(new Vector3(0, -90, 0)));
-                monster.GetComponent<PawnController>().SetupWaypoints(3,waypoint);
+                monster.GetComponent<PawnController>().SetupWaypoints(3, waypoint);
                 BoostMonsterHP(ref monster, ref alreadyBoostedMonsterInThisWaveById, 2);
 
                 monsterBatch.Add(monster);
@@ -481,22 +483,22 @@ public class WaveSpawner : MonoBehaviour {
 
     public void BoostMonsterHP(ref GameObject monster, ref bool[] alreadyBoostedMonsterInThisWaveById, int lane)
     {
-        
-        PawnController pc = monster.GetComponent<PawnController>();
-        int id = (int) pc.monster_id;
 
-        
+        PawnController pc = monster.GetComponent<PawnController>();
+        int id = (int)pc.monster_id;
+
+
         if (alreadyBoostedMonsterInThisWaveById[id] == false)
         {
             timesMonsterAppearedById[lane, id]++;
         }
         int increase_value = timesMonsterAppearedById[lane, id] * 4;
-        
+
         //Boost monster HP.
         monster.GetComponent<PawnCharacter>().maxHealth += increase_value;
         monster.GetComponent<PawnCharacter>().health += increase_value;
-        
-        
+
+
         alreadyBoostedMonsterInThisWaveById[id] = true;
     }
 
@@ -508,8 +510,8 @@ public class WaveSpawner : MonoBehaviour {
         if (waveNumberLane4 == kingWaveLane4)
         {
             GameObject monster = Instantiate(King1, spawnLocationLane4.position, Quaternion.Euler(new Vector3(0, 180, 0)));
-            monster.GetComponent<PawnController>().SetupWaypoints(4,0);
-            
+            monster.GetComponent<PawnController>().SetupWaypoints(4, 0);
+
             monsterBatch.Add(monster);
             minimap.UpdateMonsterBatch();
             monster.transform.parent = transform;
@@ -524,11 +526,11 @@ public class WaveSpawner : MonoBehaviour {
             if (timer <= 0)
             {
                 int monsterIndex = combination_[spawningMonsterLane4] - 1;
-                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.Euler(new Vector3(0,180,0)));
-                monster.GetComponent<PawnController>().SetupWaypoints(4,0);
+                GameObject monster = Instantiate(monstersPrefab[monsterIndex], spawnLocationLane4.position, Quaternion.Euler(new Vector3(0, 180, 0)));
+                monster.GetComponent<PawnController>().SetupWaypoints(4, 0);
                 BoostMonsterHP(ref monster, ref alreadyBoostedMonsterInThisWaveById, 3);
 
-                
+
 
                 monsterBatch.Add(monster);
                 minimap.UpdateMonsterBatch();
@@ -550,7 +552,7 @@ public class WaveSpawner : MonoBehaviour {
 
         finishedSpawns++;
 
-        if( finishedSpawns >= maxLanes)
+        if (finishedSpawns >= maxLanes)
         {
             isWaving = false;
             GameController.ChangeGameState(GameState.Action);
@@ -569,18 +571,18 @@ public class WaveSpawner : MonoBehaviour {
                 if (!isStartingKing)
                 {
                     int kingWave = Random.Range(0, 1);
-                    if(kingWave > 0)
+                    if (kingWave > 0)
                     {
                         int kinglane = Random.Range(1, 4);
                         isStartingKing = true;
-                        
+
                     }
                 }
                 if (!isStartingBomber)
                 {
                     int bomberWave = Random.Range(0, 1);
 
-                    if (bomberWave >0)
+                    if (bomberWave > 0)
                     {
                         int bomberLane = Random.Range(0, 1);
                         isStartingBomber = true;
@@ -597,7 +599,7 @@ public class WaveSpawner : MonoBehaviour {
             if (isWaving)
             {
                 saved_money = PlayerStats.Money;
-               // Debug.Log("SAVED " + saved_money + " MONEY !");
+                // Debug.Log("SAVED " + saved_money + " MONEY !");
                 StopAllCoroutines();
                 GameController.ChangeGameState(GameState.Waving);
                 doSaveAll();
@@ -605,11 +607,12 @@ public class WaveSpawner : MonoBehaviour {
         }
 
 
-        else if(GameController.gameState == GameState.Waving)
+        else if (GameController.gameState == GameState.Waving)
         {
 
-            if (!startedSpawn) {
-                
+            if (!startedSpawn)
+            {
+
                 if (maxLanes == 1)
                 {
                     StartCoroutine("SpawnLane1", combinationLane1);
@@ -643,13 +646,13 @@ public class WaveSpawner : MonoBehaviour {
             }
             startedSpawn = true;
         }
-        else if(GameController.gameState == GameState.Action)
+        else if (GameController.gameState == GameState.Action)
         {
             //hud.transform.Find("Wave").transform.Find("Progress").GetComponent<Text>().text = "100%";
-            if(transform.childCount == 0)
+            if (transform.childCount == 0)
                 GameController.ChangeGameState(GameState.EndWave);
         }
-        else if(GameController.gameState == GameState.GameOver)
+        else if (GameController.gameState == GameState.GameOver)
         {
             StopAllCoroutines();
         }
@@ -660,8 +663,8 @@ public class WaveSpawner : MonoBehaviour {
         monstersType = new int[totalMonsters];
         for (int i = 0; i < combination.Length; i++)
         {
-            monstersType[combination[i]-1]++;
-           
+            monstersType[combination[i] - 1]++;
+
         }
     }
 
@@ -676,47 +679,35 @@ public class WaveSpawner : MonoBehaviour {
         spawningMonsterLane4 = 0;
 
         waveNumber = Mathf.Clamp(waveNumber - 1, 0, waveNumber);
-        int[] tempWaveNumberLane = new int[4];
-        tempWaveNumberLane[0] = waveNumberLane1;
-        tempWaveNumberLane[1] = waveNumberLane2;
-        tempWaveNumberLane[2] = waveNumberLane3;
-        tempWaveNumberLane[3] = waveNumberLane4;
-
         waveNumberLane1 = Mathf.Clamp(waveNumberLane1 - 1, 0, waveNumberLane1);
         waveNumberLane2 = Mathf.Clamp(waveNumberLane2 - 1, 0, waveNumberLane2);
         waveNumberLane3 = Mathf.Clamp(waveNumberLane3 - 1, 0, waveNumberLane3);
         waveNumberLane4 = Mathf.Clamp(waveNumberLane4 - 1, 0, waveNumberLane4);
-        Debug.Log("ALL WAVENUMBERLANES: waveNumberLane1 = " + waveNumberLane1
-                  + "\nwaveNumberLane2 = " + waveNumberLane2
-                  + "\nwaveNumberLane3 = " + waveNumberLane3
-                  + "\nwaveNumberLane4 = " + waveNumberLane4);
 
-        
-        if (tempWaveNumberLane[0] % (int)interval == 0)
+        if (waveNumberLane1 % (int)interval == 0)
         {
             currentMS1--;
         }
-        if (tempWaveNumberLane[1] % (int)interval == 0)
+        if (waveNumberLane2 % (int)interval == 0)
         {
             currentMS2--;
         }
-        if (tempWaveNumberLane[2] % (int)interval == 0)
+        if (waveNumberLane3 % (int)interval == 0)
         {
             currentMS3--;
         }
-        if (tempWaveNumberLane[3] % (int)interval == 0)
+        if (waveNumberLane4 % (int)interval == 0)
         {
             currentMS4--;
         }
-        
-       
+
+
         GameController.ChangeGameState(GameState.Preparation);
-        
     }
 
     //waves set up
     void CreateWave()
-    {  
+    {
         //reseting monsters indexes;
         startedSpawn = false;
         finishedSpawns = 0;
@@ -727,7 +718,7 @@ public class WaveSpawner : MonoBehaviour {
 
         waveNumber++;
 
-        Debug.Log("Gold: "+ PlayerStats.totalMoneyAccumulated + " at wave " + waveNumber);
+        Debug.Log("Gold: " + PlayerStats.totalMoneyAccumulated + " at wave " + waveNumber);
 
         if (waveNumber < 10)
             maxLanes = 1;
@@ -744,7 +735,8 @@ public class WaveSpawner : MonoBehaviour {
             maxLanes = 3;
             GameController.UnlockLane(4);
         }
-        else {
+        else
+        {
             openWave(3);
             maxLanes = 4;
             GameController.UnlockLane(3);
@@ -752,20 +744,20 @@ public class WaveSpawner : MonoBehaviour {
 
         waveMonsters = 0;
 
-        if(maxLanes == 1)
+        if (maxLanes == 1)
         {
             currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
 
             waveLane1 = new Wave(waveNumberLane1 / interval, currentMS1, 10);
 
             waveNumberLane1++;
-            
 
-            if (waveNumberLane1 % (int) interval == 0)
-                currentMS1 = Mathf.Clamp((currentMS1+1) , 0,(totalCombinations-1));
+
+            if (waveNumberLane1 % (int)interval == 0)
+                currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations - 1));
 
             //waveLane1 = new Wave(waveNumberLane1 * 2, waveNumberLane1);
-            if (isStartingBomber && bomberWaveLane1!= -1)
+            if (isStartingBomber && bomberWaveLane1 != -1)
             {
                 combinationLane1 = new int[waveNumberLane1 * 2];
                 int[] wC = waveLane1.GetCombinaton();
@@ -787,7 +779,7 @@ public class WaveSpawner : MonoBehaviour {
             {
                 combinationLane1 = waveLane1.GetCombinaton();
             }
-            
+
             waveMonsters += combinationLane1.Length;
             if (waveSpawnerUIs["Lane1"])
             {
@@ -795,7 +787,7 @@ public class WaveSpawner : MonoBehaviour {
                 waveSpawnerUIs["Lane1"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
             }
         }
-        else if(maxLanes == 2)
+        else if (maxLanes == 2)
         {
 
             currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
@@ -803,7 +795,7 @@ public class WaveSpawner : MonoBehaviour {
 
             if (waveNumberLane1 % (int)interval == 0)
             {
-                currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations -1)); 
+                currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations - 1));
 
             }
 
@@ -824,7 +816,7 @@ public class WaveSpawner : MonoBehaviour {
             if (waveSpawnerUIs["Lane2B"])
                 waveSpawnerUIs["Lane2B"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
         }
-        else if(maxLanes == 3)
+        else if (maxLanes == 3)
         {
             currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
             currentMS2 = Mathf.Clamp(currentMS2, 0, (totalCombinations - 1));
@@ -832,11 +824,11 @@ public class WaveSpawner : MonoBehaviour {
 
             if (waveNumberLane1 % (int)interval == 0)
             {
-                currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations -1));
+                currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations - 1));
             }
             if (waveNumberLane2 % (int)interval == 0)
             {
-                currentMS2 = Mathf.Clamp((currentMS2 + 1), 0, (totalCombinations-1));
+                currentMS2 = Mathf.Clamp((currentMS2 + 1), 0, (totalCombinations - 1));
             }
 
             waveLane1 = new Wave(waveNumberLane1 % (int)interval / interval, currentMS1, 10);
@@ -859,16 +851,14 @@ public class WaveSpawner : MonoBehaviour {
             if (waveSpawnerUIs["Lane3B"])
                 waveSpawnerUIs["Lane3B"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
         }
-        else if( maxLanes == 4)
+        else if (maxLanes == 4)
         {
-            
+
             currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
-            //Debug.Log("MS2 = Clamp(" + currentMS2 + ", min = 0 and max =  " +(totalCombinations - 1)+")");
             currentMS2 = Mathf.Clamp(currentMS2, 0, (totalCombinations - 1));
-            //Debug.Log("RESULT = " + currentMS2);
             currentMS3 = Mathf.Clamp(currentMS3, 0, (totalCombinations - 1));
             currentMS4 = Mathf.Clamp(currentMS4, 0, (totalCombinations - 1));
-            
+
             waveLane1 = new Wave(waveNumberLane1 % (int)interval / interval, currentMS1, 10);
             waveLane2 = new Wave(waveNumberLane2 % (int)interval / interval, currentMS2, 10);
             waveLane3 = new Wave(waveNumberLane3 % (int)interval / interval, currentMS3, 10);
@@ -883,26 +873,24 @@ public class WaveSpawner : MonoBehaviour {
             {
 
                 currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations - 1));
-                //Debug.Log("Entered !!!");
             }
             if (waveNumberLane2 % (int)interval == 0)
             {
-                
-                currentMS2 = Mathf.Clamp((currentMS2 + 1), 0, (totalCombinations-1));
-                //Debug.Log("Entered 2 !!!");
+
+                currentMS2 = Mathf.Clamp((currentMS2 + 1), 0, (totalCombinations - 1));
             }
             if (waveNumberLane3 % (int)interval == 0)
             {
-                
-                currentMS3 = Mathf.Clamp((currentMS3 + 1), 0, (totalCombinations-1));
+
+                currentMS3 = Mathf.Clamp((currentMS3 + 1), 0, (totalCombinations - 1));
             }
             if (waveNumberLane4 % (int)interval == 0)
             {
-                
-                currentMS4 = Mathf.Clamp((currentMS4 + 1), 0, (totalCombinations-1));
+
+                currentMS4 = Mathf.Clamp((currentMS4 + 1), 0, (totalCombinations - 1));
             }
 
-           
+
 
             combinationLane1 = waveLane1.GetCombinaton();
             combinationLane2 = waveLane2.GetCombinaton();
@@ -912,9 +900,9 @@ public class WaveSpawner : MonoBehaviour {
             waveMonsters += combinationLane1.Length + combinationLane2.Length + combinationLane3.Length + combinationLane4.Length;
             if (waveSpawnerUIs["Lane4"])
                 waveSpawnerUIs["Lane4"].gameObject.GetComponent<WaveSpawnerUIController>().showUI();
-            
+
         }
-        
+
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterText").GetComponent<Text>().text = "" + (waveNumber);
         hud.transform.Find("Player Info").transform.Find("Wave Counter").transform.Find("WaveCounterTextShadow").GetComponent<Text>().text = "" + (waveNumber);
         PlayerStats.MineCapacity = (int)(waveNumber / 5);
@@ -924,12 +912,14 @@ public class WaveSpawner : MonoBehaviour {
         isWaving = true;
     }
 
-    public void openWave(int waveNumber) {
+    public void openWave(int waveNumber)
+    {
         if (!openLanes[waveNumber])
         {
             openLanes[waveNumber] = true;
 
-            if (waveWarningBoardController){
+            if (waveWarningBoardController)
+            {
                 switch (waveNumber)
                 {
                     case 0:
@@ -941,8 +931,8 @@ public class WaveSpawner : MonoBehaviour {
                     case 2:
                         waveWarningBoardController.setWarningText("Monsters are coming \n through the Volcanoes!");
                         waveWarningBoardController.openWarningBoard();
-                break;
-                case 3:
+                        break;
+                    case 3:
                         waveWarningBoardController.setWarningText("Monsters are coming \n through the Desert!");
                         waveWarningBoardController.openWarningBoard();
                         break;
@@ -997,22 +987,22 @@ public class WaveSpawner : MonoBehaviour {
             int z = bc.getUnitBlueprint().stored_z;
 
 
-            
-            
+
+
             //Debug.Log("JUST DESTROYED THESE COORDINATES: "+x+", "+z);
             //if it's a mining camp
             if (bc.getUnitBlueprint().name == Shop.instance.miningCamp.name)
             {
                 gridMouse.propertiesMatrix[x, z] = new PropertyScript.Property("Normal");
-                gridMouse.propertiesMatrix[x+1, z+1] = new PropertyScript.Property("Normal");
-                gridMouse.propertiesMatrix[x+1, z] = new PropertyScript.Property("Normal");
-                gridMouse.propertiesMatrix[x, z+1] = new PropertyScript.Property("Normal");
+                gridMouse.propertiesMatrix[x + 1, z + 1] = new PropertyScript.Property("Normal");
+                gridMouse.propertiesMatrix[x + 1, z] = new PropertyScript.Property("Normal");
+                gridMouse.propertiesMatrix[x, z + 1] = new PropertyScript.Property("Normal");
                 PlayerStats.MinesConstructed--;
 
                 gridMouse.previewMatrix[x, z] = false;
-                gridMouse.previewMatrix[x+1, z+1] = false;
-                gridMouse.previewMatrix[x+1, z] = false;
-                gridMouse.previewMatrix[x, z+1] = false;
+                gridMouse.previewMatrix[x + 1, z + 1] = false;
+                gridMouse.previewMatrix[x + 1, z] = false;
+                gridMouse.previewMatrix[x, z + 1] = false;
             }
             else //if it's not
             {
@@ -1096,8 +1086,8 @@ public class WaveSpawner : MonoBehaviour {
                 //Debug.Log("ADDED " + bc.getUnitBlueprint().name + " TO THE LIST OF STATES");
                 listOfStates.Add(state);
             }
-            
-           // Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
+
+            // Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
     }
     public void doLoadAll()
@@ -1123,8 +1113,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-               // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-               // Debug.Log("LOADED " + listOfStates[i].position + ".");
+                // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+                // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerLevel2.name)
             {
@@ -1141,8 +1131,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-               // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-               // Debug.Log("LOADED " + listOfStates[i].position + ".");
+                // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+                // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerSlow.name)
             {
@@ -1159,8 +1149,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TowerSlowController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-               // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-               // Debug.Log("LOADED " + listOfStates[i].position + ".");
+                // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+                // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerTesla.name)
             {
@@ -1177,8 +1167,8 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.ListOfGameObjects[added_index]
                     .GetComponent<TeslaCoilController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
-               // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-               // Debug.Log("LOADED " + listOfStates[i].position + ".");
+                // Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
+                // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.towerLevel3.name)
             {
@@ -1196,13 +1186,13 @@ public class WaveSpawner : MonoBehaviour {
                     .GetComponent<TowerController>()
                         .SetFireRateAndAttackPowerByLVL(listOfStates[i].fireRateLVL, listOfStates[i].attackPowerLVL);
                 //Debug.Log("Just Loaded FR, AP = " + listOfStates[i].fireRateLVL + ", " + listOfStates[i].attackPowerLVL);
-               // Debug.Log("LOADED " + listOfStates[i].position + ".");
+                // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else if (listOfStates[i].structureName == Shop.instance.miningCamp.name)
             {
                 shop.SelectSecondaryUnit(true);
                 Vector3 newPosition = new Vector3(listOfStates[i].position.x - 0.5f, listOfStates[i].position.y, listOfStates[i].position.z - 0.5f);
-                int added_index = gridMouse.buildUnitAndAddItToTheList(newPosition, listOfStates[i].rotation,true);
+                int added_index = gridMouse.buildUnitAndAddItToTheList(newPosition, listOfStates[i].rotation, true);
                 Vector2 gridSize = gridMouse.getGridSize();
 
                 //int x = Mathf.FloorToInt(listOfStates[i].position.x + gridSize.x / 2);
@@ -1221,18 +1211,18 @@ public class WaveSpawner : MonoBehaviour {
                 gridMouse.previewMatrix[x + 1, z] = true;
                 gridMouse.previewMatrix[x, z + 1] = true;
 
-               // Debug.Log("LOADED " + listOfStates[i].position + ".");
+                // Debug.Log("LOADED " + listOfStates[i].position + ".");
             }
             else
             {
-               // Debug.Log("DID NOT LOAD");
+                // Debug.Log("DID NOT LOAD");
             }
 
         }
         //this line is REALLY important; the unitToBuild must be deselected or it can
         //happen that you are able to build a unit without money in the retried wave.
         buildManager.DeselectUnitToBuild();
-        
+
         //load previously saved money
         PlayerStats.SetMoney(saved_money);
 
@@ -1259,7 +1249,7 @@ public class WaveSpawner : MonoBehaviour {
         CastleHealth castleHealth = newCastle.GetComponent<CastleHealth>();
         castleHealth.enabled = true;
 
-        
+
 
         castleHealth.health = 5000;
         castleHealth.UpdateHealthBarGfx(5000);
@@ -1277,7 +1267,7 @@ public class WaveSpawner : MonoBehaviour {
         }
 
 
-        
+
 
 
     }
