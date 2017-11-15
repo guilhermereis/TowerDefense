@@ -676,30 +676,42 @@ public class WaveSpawner : MonoBehaviour {
         spawningMonsterLane4 = 0;
 
         waveNumber = Mathf.Clamp(waveNumber - 1, 0, waveNumber);
+        int[] tempWaveNumberLane = new int[4];
+        tempWaveNumberLane[0] = waveNumberLane1;
+        tempWaveNumberLane[1] = waveNumberLane2;
+        tempWaveNumberLane[2] = waveNumberLane3;
+        tempWaveNumberLane[3] = waveNumberLane4;
+
         waveNumberLane1 = Mathf.Clamp(waveNumberLane1 - 1, 0, waveNumberLane1);
         waveNumberLane2 = Mathf.Clamp(waveNumberLane2 - 1, 0, waveNumberLane2);
         waveNumberLane3 = Mathf.Clamp(waveNumberLane3 - 1, 0, waveNumberLane3);
         waveNumberLane4 = Mathf.Clamp(waveNumberLane4 - 1, 0, waveNumberLane4);
+        Debug.Log("ALL WAVENUMBERLANES: waveNumberLane1 = " + waveNumberLane1
+                  + "\nwaveNumberLane2 = " + waveNumberLane2
+                  + "\nwaveNumberLane3 = " + waveNumberLane3
+                  + "\nwaveNumberLane4 = " + waveNumberLane4);
 
-        if (waveNumberLane1 % (int)interval == 0)
+        
+        if (tempWaveNumberLane[0] % (int)interval == 0)
         {
             currentMS1--;
         }
-        if (waveNumberLane2 % (int)interval == 0)
+        if (tempWaveNumberLane[1] % (int)interval == 0)
         {
             currentMS2--;
         }
-        if (waveNumberLane3 % (int)interval == 0)
+        if (tempWaveNumberLane[2] % (int)interval == 0)
         {
             currentMS3--;
         }
-        if (waveNumberLane4 % (int)interval == 0)
+        if (tempWaveNumberLane[3] % (int)interval == 0)
         {
             currentMS4--;
         }
-
+        
        
         GameController.ChangeGameState(GameState.Preparation);
+        
     }
 
     //waves set up
@@ -851,7 +863,9 @@ public class WaveSpawner : MonoBehaviour {
         {
             
             currentMS1 = Mathf.Clamp(currentMS1, 0, (totalCombinations - 1));
+            //Debug.Log("MS2 = Clamp(" + currentMS2 + ", min = 0 and max =  " +(totalCombinations - 1)+")");
             currentMS2 = Mathf.Clamp(currentMS2, 0, (totalCombinations - 1));
+            //Debug.Log("RESULT = " + currentMS2);
             currentMS3 = Mathf.Clamp(currentMS3, 0, (totalCombinations - 1));
             currentMS4 = Mathf.Clamp(currentMS4, 0, (totalCombinations - 1));
             
@@ -869,11 +883,13 @@ public class WaveSpawner : MonoBehaviour {
             {
 
                 currentMS1 = Mathf.Clamp((currentMS1 + 1), 0, (totalCombinations - 1));
+                //Debug.Log("Entered !!!");
             }
             if (waveNumberLane2 % (int)interval == 0)
             {
                 
                 currentMS2 = Mathf.Clamp((currentMS2 + 1), 0, (totalCombinations-1));
+                //Debug.Log("Entered 2 !!!");
             }
             if (waveNumberLane3 % (int)interval == 0)
             {
