@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4924438120630934}
   - component: {fileID: 82973049048063030}
+  - component: {fileID: 114691623963640736}
   m_Layer: 0
   m_Name: CollectMoneySound
   m_TagString: Untagged
@@ -120,3 +121,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114691623963640736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1246413673504020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adbfa7e4d14d39844bfff904b9d03bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
