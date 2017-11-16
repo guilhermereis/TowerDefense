@@ -223,11 +223,11 @@ public class WaveSpawner : MonoBehaviour {
         combinations[6].combination = new int[] {9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,7,7,7,7,7,7,7,7,7,7,7,7,7,7};
         combinations[6].special = new int[] {8,10,10};
         combinations[7] = new Milestone();
-        combinations[7].combination = new int[] {4,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10};
-        combinations[7].special = new int[] {10,10,10,10,10,10};
+        combinations[7].combination = new int[] {8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10};
+        combinations[7].special = new int[] {10,10,10,10,10,11,11};
         combinations[8] = new Milestone();
-        combinations[8].combination = new int[] {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10};
-        combinations[8].special = new int[] {8,11,11,11,11,11,11};
+        combinations[8].combination = new int[] {11,11,11,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10};
+        combinations[8].special = new int[] {8,8,8,8,11,11,11,11,11,11,10,10,10,10,10,10,10,10,10,10};
         combinations[9].combination = new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
         combinations[9].special = new int[] { 11, 9, 9, 9, 9, 9 };
         combinations[10] = new Milestone();
@@ -249,7 +249,6 @@ public class WaveSpawner : MonoBehaviour {
         combinations[14].combination = new int[] { 18, 18, 18, 18, 18, 18, 18, 18 };
         combinations[14].special = new int[] { 19, 18, 18, 18 };
     }
-
 
     private void Start()
     {

@@ -72,6 +72,9 @@ public class PawnCharacter : MonoBehaviour {
                     case 10:
                         goldAmmount = 23;
                         break;
+                    case 11:
+                        goldAmmount = 25;
+                        break;
 
                 }
                 PlayerStats.AddMoney(goldAmmount);
