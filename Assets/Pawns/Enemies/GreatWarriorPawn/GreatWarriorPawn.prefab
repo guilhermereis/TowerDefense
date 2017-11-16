@@ -460,7 +460,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frozenMaterial: {fileID: 2100000, guid: 252514e5b26542346ab891ddd32213d8, type: 2}
-  monster_id: 5
+  frozenColor: {r: 0, g: 0, b: 0, a: 0}
+  monster_id: 6
   currentState: 2
   type: 1
   finalDestination: {fileID: 0}

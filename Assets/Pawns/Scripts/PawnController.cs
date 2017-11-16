@@ -9,6 +9,7 @@ public enum PawnType { Wanderer, Warrior, Bomber, King }
 public class PawnController : MonoBehaviour {
 
     public Material frozenMaterial;
+    public Color frozenColor;
     public int monster_id;
     protected Material[] originalMaterial;
     protected Material[] mats;

@@ -422,8 +422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 800
   health: 800
-  defense: 270
-  attack: 350
+  defense: 360
+  attack: 170
   attackRate: 0.7
   isDead: 0
   isSlow: 0
@@ -460,7 +460,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frozenMaterial: {fileID: 2100000, guid: 252514e5b26542346ab891ddd32213d8, type: 2}
-  monster_id: 9
+  frozenColor: {r: 0, g: 0, b: 0, a: 0}
+  monster_id: 10
   currentState: 2
   type: 1
   finalDestination: {fileID: 0}

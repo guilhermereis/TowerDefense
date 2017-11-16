@@ -54,23 +54,14 @@ public class PawnCharacter : MonoBehaviour {
                     case 4:
                         goldAmmount = 200;
                         break;
-                    case 5:
-                        goldAmmount = 12;
-                        break;
-                    case 6:
-                        goldAmmount = 15;
-                        break;
-                    case 7:
-                        goldAmmount = 14;
-                        break;
                     case 8:
                         goldAmmount = 400;
                         break;
                     case 9:
-                        goldAmmount = 15;
+                        goldAmmount = 12;
                         break;
                     case 10:
-                        goldAmmount = 20;
+                        goldAmmount = 14;
                         break;
 
                 }
