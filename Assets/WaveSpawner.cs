@@ -669,6 +669,7 @@ public class WaveSpawner : MonoBehaviour {
     {
         startedSpawn = false;
         finishedSpawns = 0;
+        isWaving = false;
 
         spawningMonsterLane1 = 0;
         spawningMonsterLane2 = 0;
@@ -704,8 +705,10 @@ public class WaveSpawner : MonoBehaviour {
 
     //waves set up
     void CreateWave()
-    {  
+    {
         //reseting monsters indexes;
+
+        Debug.Log("CREATING WAVE...");
         startedSpawn = false;
         finishedSpawns = 0;
         spawningMonsterLane1 = 0;
@@ -798,8 +801,8 @@ public class WaveSpawner : MonoBehaviour {
             waveLane1 = new Wave(waveNumberLane1 % (int)interval / interval, currentMS1, 10);
 
             waveLane2 = new Wave(waveNumberLane2 % (int)interval / interval, currentMS2, 10);
-            waveNumberLane1++;
 
+            waveNumberLane1++;
             waveNumberLane2++;
 
 
@@ -872,6 +875,11 @@ public class WaveSpawner : MonoBehaviour {
                 
                 currentMS3 = Mathf.Clamp((currentMS3 + 1), 0, (totalCombinations-1));
             }
+
+
+            waveLane4 = new Wave(waveNumberLane4 % (int)interval / interval, currentMS4, 10);
+            waveNumberLane4++;
+
             if (waveNumberLane4 % (int)interval == 0)
             {
                 
@@ -881,12 +889,12 @@ public class WaveSpawner : MonoBehaviour {
             waveLane1 = new Wave(waveNumberLane1 % (int)interval / interval, currentMS1, 10);
             waveLane2 = new Wave(waveNumberLane2 % (int)interval / interval, currentMS2, 10);
             waveLane3 = new Wave(waveNumberLane3 % (int)interval / interval, currentMS3, 10);
-            waveLane4 = new Wave(waveNumberLane4 % (int)interval / interval, currentMS4, 10);
+          
 
             waveNumberLane1++;
             waveNumberLane2++;
             waveNumberLane3++;
-            waveNumberLane4++;
+            
 
             combinationLane1 = waveLane1.GetCombinaton();
             combinationLane2 = waveLane2.GetCombinaton();
