@@ -392,60 +392,43 @@ public class BuildManager : MonoBehaviour {
                 if (towerController)
                 {
                     upgradeWheelController.isMine = false;
-                    if (buildingController)
+                    if (name == Shop.instance.towerLevel1.name)
                     {
-
-                        if (name == Shop.instance.towerLevel1.name)
-                        {
-                            upgradeWheelController.setTowerLvl(0);
-                        }
-                        else if (name == Shop.instance.towerLevel2.name)
-                        {
-                            upgradeWheelController.setTowerLvl(1);
-                        }
-                        else if (name == Shop.instance.towerLevel3.name)
-                        {
-                            upgradeWheelController.setTowerLvl(2);
-                            upgradeWheelController.setSpecialization(1);
-                        }
-                        else if (name == Shop.instance.towerSlow.name)
-                        {
-                            upgradeWheelController.setTowerLvl(1);
-                            upgradeWheelController.setSpecialization(0);
-                        }
-                        else if (name == Shop.instance.towerTesla.name)
-                        {
-                            upgradeWheelController.setTowerLvl(1);
-                            upgradeWheelController.setSpecialization(2);
-                        }
-
-                        if (name == Shop.instance.miningCamp.name)
-                        {
-                            upgradeWheelController.setMineSellPrice();
-                        }
-                        else
-                        {
-                            upgradeWheelController.setAttackDamage((int)((TowerController)buildingController).getAttackPowerLVL());
-                            upgradeWheelController.setAttackSpeedLvl((int)((TowerController)buildingController).getFireRateLVL());
-                        }
-
-                        upgradeWheelController.isActive = true;
-                        upgradeWheel.SetActive(true);
-                        upgradeWheelController.openWheel();
+                        upgradeWheelController.setTowerLvl(0);
                     }
-                    else
+                    else if (name == Shop.instance.towerLevel2.name)
                     {
-
-                        upgradeWheel.SetActive(true);
-                        upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
-                        upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(false);
-                        upgradeWheel.transform.Find("UpgradeTowerIcer").gameObject.SetActive(false);
-
-                        upgradeWheelController.isActive = true;
-                        upgradeWheelController.openWheel();
+                        upgradeWheelController.setTowerLvl(1);
                     }
+                    else if (name == Shop.instance.towerLevel3.name)
+                    {
+                        upgradeWheelController.setTowerLvl(2);
+                        upgradeWheelController.setSpecialization(1);
+                    }
+                    else if (name == Shop.instance.towerSlow.name)
+                    {
+                        upgradeWheelController.setTowerLvl(1);
+                        upgradeWheelController.setSpecialization(0);
+                    }
+                    else if (name == Shop.instance.towerTesla.name)
+                    {
+                        upgradeWheelController.setTowerLvl(1);
+                        upgradeWheelController.setSpecialization(2);
+                    }
+
+                    
+                    
+                    upgradeWheelController.setAttackDamage((int)((TowerController)buildingController).getAttackPowerLVL());
+                    upgradeWheelController.setAttackSpeedLvl((int)((TowerController)buildingController).getFireRateLVL());
+                    
+
+                    upgradeWheelController.isActive = true;
+                    upgradeWheel.SetActive(true);
+                    upgradeWheelController.openWheel();
+                    
                 }
-                else {
+                else if (buildingController) {
+                    upgradeWheelController.setMineSellPrice();
                     upgradeWheelController.isMine = true;
                     upgradeWheel.transform.Find("UpgradeAttackSpeed").gameObject.SetActive(false);
                     upgradeWheel.transform.Find("UpgradeAttackDamage").gameObject.SetActive(false);

@@ -555,20 +555,20 @@ public class GridMouse : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("Just mouse downed");
+        //Debug.Log("Just mouse downed");
         if (canClickGrid)
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
             if (didHit)
             {
-               Debug.Log("Just hit: " + hitInfo.transform.gameObject.name);
+               //Debug.Log("Just hit: " + hitInfo.transform.gameObject.name);
             }
             int x = Mathf.FloorToInt(hitInfo.point.x + _gridSize.x / 2);
             int z = Mathf.FloorToInt(hitInfo.point.z + _gridSize.y / 2);
             PropertyScript.Property propertyInQuestion = propertiesMatrix[x, z];
             
-            Debug.Log("Type = " + propertyInQuestion.type + ", Unit = " + propertyInQuestion.unit);
+            //Debug.Log("Type = " + propertyInQuestion.type + ", Unit = " + propertyInQuestion.unit);
             //printed type = normal, and unit was blank
             if (propertyInQuestion.unit != null) // If the tile contains a Structure
             {
@@ -611,12 +611,12 @@ public class GridMouse : MonoBehaviour
                 }
                 else if (buildManager.getUnitToBuild() == Shop.instance.towerLevel1)
                 {
-                    Debug.Log("ENTERED");
-                    Debug.Log("Clicked x,z = " + x + "," + z);
+                    //Debug.Log("ENTERED");
+                    //Debug.Log("Clicked x,z = " + x + "," + z);
                     if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                     {
                         //Debug.Log("DESELECT 2");
-                        Debug.Log("ENTERED MORE");
+                        //Debug.Log("ENTERED MORE");
                         HandleBuildingTower(ray, hitInfo, didHit, x, z);
                         buildManager.DeselectUnitToBuild();
                         
