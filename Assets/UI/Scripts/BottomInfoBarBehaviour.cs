@@ -96,20 +96,23 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
         else {
             //Get Camp Controller
             MiningCampController mcontroller = selectedObject.GetComponent<MiningCampController>();
-            SelectionName.GetComponent<Text>().text = " Mining Camp: ";
-            SelectionNameShadow.GetComponent<Text>().text = " Mining Camp: ";
-            SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "Mine's gold per turn";
-            SelectionName.transform.Find("AttackDamage").gameObject.SetActive(false);
-            SelectionName.transform.Find("AttackSpeed").GetComponent<Image>().overrideSprite = CurrentGoldVariation;
+            if (mcontroller)
+            {
+                SelectionName.GetComponent<Text>().text = " Mining Camp: ";
+                SelectionNameShadow.GetComponent<Text>().text = " Mining Camp: ";
+                SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "Mine's gold per turn";
+                SelectionName.transform.Find("AttackDamage").gameObject.SetActive(false);
+                SelectionName.transform.Find("AttackSpeed").GetComponent<Image>().overrideSprite = CurrentGoldVariation;
 
-            AttackSpeedText.GetComponent<Text>().text = "" + mcontroller.maxCapacity;
-            AttackSpeedTextShadow.GetComponent<Text>().text = "" + mcontroller.maxCapacity;
-            
-            DamageText.GetComponent<Text>().text = "" + mcontroller.currentGold;
-            DamageTextShadow.GetComponent<Text>().text = "" + mcontroller.currentGold;
+                AttackSpeedText.GetComponent<Text>().text = "" + mcontroller.maxCapacity;
+                AttackSpeedTextShadow.GetComponent<Text>().text = "" + mcontroller.maxCapacity;
 
-            DamageText.GetComponent<Text>().color = mineColorVariation;
-            AttackSpeedText.GetComponent<Text>().color = mineColorVariation;
+                DamageText.GetComponent<Text>().text = "" + mcontroller.currentGold;
+                DamageTextShadow.GetComponent<Text>().text = "" + mcontroller.currentGold;
+
+                DamageText.GetComponent<Text>().color = mineColorVariation;
+                AttackSpeedText.GetComponent<Text>().color = mineColorVariation;
+            }
         }
     }
 

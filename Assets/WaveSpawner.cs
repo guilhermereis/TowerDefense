@@ -1030,6 +1030,7 @@ public class WaveSpawner : MonoBehaviour {
         TowerController tc;
         TowerSlowController tSc;
         TeslaCoilController tTc;
+        FileOperations.openStreamWriter();
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
             if (gridMouse.ListOfGameObjects[i] == null)
@@ -1062,6 +1063,7 @@ public class WaveSpawner : MonoBehaviour {
 
                 //Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (tSc != null)
             {
@@ -1070,6 +1072,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tSc.fireRateLVL, tSc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (tTc != null)
             {
@@ -1078,6 +1081,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tTc.fireRateLVL, tTc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (bc != null) // Soldier Camp
             {
@@ -1086,13 +1090,17 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform);
                 //Debug.Log("ADDED " + bc.getUnitBlueprint().name + " TO THE LIST OF STATES");
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             
            // Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
+        FileOperations.closeStreamWriter();
     }
     public void doLoadAll()
     {
+        listOfStates = FileOperations.loadState();
+        FileOperations.closeReader();
         //Debug.Log("CALLING DESTROY ALL");
         doDestroyAll();
 
@@ -1274,7 +1282,7 @@ public class WaveSpawner : MonoBehaviour {
     }
 
 
-
+    
 
 
 
