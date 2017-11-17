@@ -1072,6 +1072,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tSc.fireRateLVL, tSc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (tTc != null)
             {
@@ -1080,6 +1081,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tTc.fireRateLVL, tTc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (bc != null) // Soldier Camp
             {
@@ -1088,6 +1090,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform);
                 //Debug.Log("ADDED " + bc.getUnitBlueprint().name + " TO THE LIST OF STATES");
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             
            // Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");

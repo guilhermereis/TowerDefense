@@ -111,6 +111,8 @@ public class FileOperations : MonoBehaviour
     {
         writeLineToFile(state.structureName);
         writeLineToFile(state.position.ToString());
+        writeLineToFile(state.attackPowerLVL.ToString());
+        writeLineToFile(state.fireRateLVL.ToString());
 
     }
 }
