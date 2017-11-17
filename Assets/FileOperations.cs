@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class FileOperations : MonoBehaviour
 {
@@ -116,21 +118,52 @@ public class FileOperations : MonoBehaviour
         writeLineToFile(state.fireRateLVL.ToString());
 
     }
-    public static void loadState()
+    public static List<PropertyScript.StructureState> loadState()
     {
+        List<PropertyScript.StructureState> list = new List<PropertyScript.StructureState>();
+        PropertyScript.StructureState newState = new PropertyScript.StructureState();
         try
         {   // Open the text file using a stream reader.
             using (sr = new StreamReader(FILE_NAME))
             {
                 // Read the stream to a string, and write the string to the console.
                 string text = "";
+                int currentLine = 0;
                 do
                 {
-                    text = sr.ReadLine();
-                    Debug.Log("READ " + text);
+                    if (currentLine == 0)
+                    {
+                        newState = new PropertyScript.StructureState();
+                    }
+                    currentLine++;
+                    
+                    if (currentLine == 1)
+                    {
+                        text = sr.ReadLine();
+                        newState.structureName = text;
+                    }
+                    else if (currentLine == 2)
+                    {
+                        text = sr.ReadLine();
+                        newState.position = StringToVector3(text);
+                    }
+                    else if (currentLine == 3)
+                    {
+                        text = sr.ReadLine();
+                        newState.attackPowerLVL = Convert.ToInt32(text);
+                    }
+                    else if (currentLine == 4)
+                    {
+                        text = sr.ReadLine();
+                        newState.fireRateLVL = Convert.ToInt32(text);
+                        list.Add(newState);
+                        //
+                        currentLine = 0;
+                    }
 
 
                 } while (text != null);
+                
             }
         }
         catch (Exception e)
@@ -138,7 +171,27 @@ public class FileOperations : MonoBehaviour
             Debug.LogError("The file could not be read:");
             Debug.LogError(e.Message);
         }
+        return list;
 
+    }
+    public static Vector3 StringToVector3(string sVector)
+    {
+        // Remove the parentheses
+        if (sVector.StartsWith("(") && sVector.EndsWith(")"))
+        {
+            sVector = sVector.Substring(1, sVector.Length - 2);
+        }
+
+        // split the items
+        string[] sArray = sVector.Split(',');
+
+        // store as a Vector3
+        Vector3 result = new Vector3(
+            float.Parse(sArray[0]),
+            float.Parse(sArray[1]),
+            float.Parse(sArray[2]));
+
+        return result;
     }
     public static void closeReader()
     {
