@@ -481,29 +481,7 @@ public class BuildManager : MonoBehaviour {
         upgradeWheel.SetActive(false);
     }
 
-    public void SelectStructure(Structure structure)
-    {
-        unitToBuild = null;
 
-    }
-    /*
-    public void SelectNode(Node node)
-    {
-        if (selectedNode == node)
-        {
-            DeselectNode();
-        }
-        selectedNode = node;
-        unitToBuild = null;
-
-        nodeUI.SetTarget(node);
-    }
-    public void DeselectNode()
-    {
-        selectedNode = null;
-        nodeUI.Hide();
-    }
-    */
     public void SelectUnitToBuild(UnitBlueprint unit)
     {
         unitToBuild = unit;
