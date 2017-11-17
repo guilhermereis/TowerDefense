@@ -420,10 +420,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b074752b74c8a1642bdd6498d7deb4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 900
-  health: 900
-  defense: 370
-  attack: 400
+  maxHealth: 10000
+  health: 10000
+  defense: 180
+  attack: 220
   attackRate: 0.7
   isDead: 0
   isSlow: 0
