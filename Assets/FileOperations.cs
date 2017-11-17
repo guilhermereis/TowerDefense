@@ -5,6 +5,7 @@ using UnityEngine;
 public class FileOperations : MonoBehaviour
 {
     private static StreamWriter sw;
+    private static StreamReader sr;
     private const string FILE_NAME = "MyFile.txt";
     // Use this for initialization
     public static void writeToFile(string text)
@@ -114,5 +115,33 @@ public class FileOperations : MonoBehaviour
         writeLineToFile(state.attackPowerLVL.ToString());
         writeLineToFile(state.fireRateLVL.ToString());
 
+    }
+    public static void loadState()
+    {
+        try
+        {   // Open the text file using a stream reader.
+            using (sr = new StreamReader(FILE_NAME))
+            {
+                // Read the stream to a string, and write the string to the console.
+                string text = "";
+                do
+                {
+                    text = sr.ReadLine();
+                    Debug.Log("READ " + text);
+
+
+                } while (text != null);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("The file could not be read:");
+            Debug.LogError(e.Message);
+        }
+
+    }
+    public static void closeReader()
+    {
+        sr.Close();
     }
 }
