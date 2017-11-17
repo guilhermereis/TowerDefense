@@ -7,6 +7,7 @@
 
 using UnityEngine;
 using System.Collections;
+#if DISABLESTEAMWORKS
 using Steamworks;
 
 //
@@ -176,3 +177,4 @@ public class SteamManager : MonoBehaviour
         SteamAPI.RunCallbacks();
     }
 }
+#endif

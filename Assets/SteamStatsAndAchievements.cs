@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using Steamworks;
 using UnityEngine;
-
+#if DISABLESTEAMWORKS
+using Steamworks;
+#endif
 public class SteamStatsAndAchievements : MonoBehaviour {
+#if DISABLESTEAMWORKS
 
     private enum Achievement: int
     {
@@ -263,7 +265,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     // Set total number of builds built
     //-----------------------------------------------------------------------------
 
-    #region Builds
+#region Builds
     public void CheckForTotalTowerBuilt()
     {
         c_numberOfTowers++;
@@ -632,10 +634,10 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         c_numberOfMine++;
         CheckForTotalMineBuilt();
     }
-    #endregion
+#endregion
 
 
-    #region Monsters
+#region Monsters
 
     public void CheckForTotalGoblinsKilled()
     {
@@ -913,7 +915,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         CheckForTotalWandererKilled();
     }
 
-    #endregion
+#endregion
 
     public void CheckForTotalMoneyCollected()
     {
@@ -1763,4 +1765,5 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             isAchieved = false;
         }
     }
+#endif
 }

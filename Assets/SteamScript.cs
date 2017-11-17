@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+#if DISABLESTEAMWORKS
 using Steamworks;
 using UnityEngine;
 
@@ -25,3 +26,4 @@ public class SteamScript : MonoBehaviour {
     }
 
 }
+#endif

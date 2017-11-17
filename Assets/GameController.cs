@@ -40,36 +40,45 @@ public class GameController : MonoBehaviour {
     public float preparationTime = 30.0f;
     float countDown;
     public static SteamStatsAndAchievements stats;
-
     int CurrentCountdown = 11;
+#if DISABLESTEAMWORKS
+ 
 
     private void OnEnable()
     {
         stats = GameObject.FindObjectOfType<SteamStatsAndAchievements>();
     }
+#endif
 
-#region steamstats
+    #region steamstats
     //add built towers during game
     public static void AddBuiltTower(BuildType towerType)
     {
+        #if DISABLESTEAMWORKS
         if (stats)
             stats.AddBuiltTower(towerType);
+        #endif
     }
 
     public static void TryAgain()
     {
+        #if DISABLESTEAMWORKS
         if (stats)
             stats.TryAgain();
+#endif
     }
 
     public static void AddBuiltMine()
     {
+#if DISABLESTEAMWORKS
         if (stats)
             stats.AddMine();
+#endif
     }
 
     public static void UnlockLane(int lane)
     {
+#if DISABLESTEAMWORKS
         if (stats)
         {
             if (lane == 2)
@@ -79,43 +88,52 @@ public class GameController : MonoBehaviour {
             else if(lane == 4)
                 stats.UnlockLane4();
         }
-        
+#endif
     }
 
     public static void Freeze()
     {
+#if DISABLESTEAMWORKS
         if (stats)
          stats.FreezeGoblin();
-        
+#endif
     }
 
     public static void Repair()
     {
+#if DISABLESTEAMWORKS
         if (stats)
             stats.Repair();
+#endif
     }
 
     public static void AddMonsterKilled(PawnType monsterType, DamageType _damage)
     {
+#if DISABLESTEAMWORKS
         if (stats)
             stats.AddMonstersKilled(monsterType,_damage);
+#endif
     }
-
     public static void MoneyCollected(int gold, bool wasCollected)
     {
+#if DISABLESTEAMWORKS
         if (stats)
             stats.AddMoneyCollected(gold, wasCollected);
+#endif
     }
 
     public static void MoneySpent(int gold)
     {
+#if DISABLESTEAMWORKS
         if (stats)
             stats.SpendMoney(gold);
+#endif
     }
 
     //public static void Add
 
 #endregion
+
     // Use this for initialization
     void Start () {
         gamechangedDelegate+= evaluateGameStateChanged;

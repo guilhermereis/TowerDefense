@@ -4,7 +4,7 @@
 
 // Changes to this file will be reverted when you update Steamworks.NET
 
-#if !DISABLESTEAMWORKS
+#if DISABLESTEAMWORKS
 
 namespace Steamworks {
 	[System.Serializable]
