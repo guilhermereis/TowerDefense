@@ -1030,6 +1030,7 @@ public class WaveSpawner : MonoBehaviour {
         TowerController tc;
         TowerSlowController tSc;
         TeslaCoilController tTc;
+        FileOperations.openStreamWriter();
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
             if (gridMouse.ListOfGameObjects[i] == null)
@@ -1062,6 +1063,7 @@ public class WaveSpawner : MonoBehaviour {
 
                 //Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (tSc != null)
             {
@@ -1090,6 +1092,7 @@ public class WaveSpawner : MonoBehaviour {
             
            // Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
+        FileOperations.closeStreamWriter();
     }
     public void doLoadAll()
     {

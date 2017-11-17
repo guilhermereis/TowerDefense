@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FileOperations : MonoBehaviour
 {
-
+    private static StreamWriter sw;
     private const string FILE_NAME = "MyFile.txt";
     // Use this for initialization
     public static void writeToFile(string text)
@@ -15,6 +15,27 @@ public class FileOperations : MonoBehaviour
         sw.Write(text);
         sw.Close();
 
+    }
+    public static void openStreamWriter()
+    {
+        sw = new StreamWriter(FILE_NAME);
+    }
+    public static StreamWriter getStreamWriterInstance()
+    {
+        return sw;
+    }
+    public static void writeLineToFile(string text)
+    {
+        //' Create an instance of StreamWriter to write text to a file.
+        StreamWriter sw = getStreamWriterInstance();
+        //' Add some text to the file.
+        sw.WriteLine(text);
+        
+
+    }
+    public static void closeStreamWriter()
+    {
+        getStreamWriterInstance().Close();
     }
     public static void writeToFile2()
     {
@@ -76,6 +97,20 @@ public class FileOperations : MonoBehaviour
                      
 
         
+
+    }
+
+    //public string structureName;
+    //public Transform transform;
+    //public Vector3 position;
+    //public Quaternion rotation;
+    //public float currentHealth;
+    //public int attackPowerLVL;
+    //public int fireRateLVL;
+    public static void writeState(PropertyScript.StructureState state)
+    {
+        writeLineToFile(state.structureName);
+        writeLineToFile(state.position.ToString());
 
     }
 }
