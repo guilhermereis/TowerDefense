@@ -20,11 +20,11 @@ public class TowerController : BuildableController {
     //-----------SETTING BASE AP AND FR-----------------
     protected int Tower1BaseAP = 100;
     protected int Tower2BaseAP = 200;
-    protected int Tower3BaseAP = 300;
+    protected int Tower3BaseAP = 500;
 
     protected float Tower1BaseFR = 0.7f;
     protected float Tower2BaseFR = 1.4f;
-    protected float Tower3BaseFR = 2.1f;
+    protected float Tower3BaseFR = 3f;
     //--------------------------------------------------
 
     #endregion

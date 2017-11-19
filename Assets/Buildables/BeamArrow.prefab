@@ -82,11 +82,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e631ff1916cd948980e34de315b4ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 500
+  attackPower: 700
   target: {fileID: 0}
   speed: 3
   damagePrefabParticle: {fileID: 0}
   bloodPrefabParticle: {fileID: 0}
+  missPrefabParticle: {fileID: 0}
 --- !u!198 &198594069113213428
 ParticleSystem:
   m_ObjectHideFlags: 1

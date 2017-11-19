@@ -67,31 +67,41 @@ public class PawnCharacter : MonoBehaviour {
                         goldAmmount = 400;
                         break;
                     case 9:
-                        goldAmmount = 20;
+                        goldAmmount = 22;
                         break;
                     case 10:
-                        goldAmmount = 25;
+                        goldAmmount = 27;
                         break;
                     case 11:
-                        goldAmmount = 30;
+                        goldAmmount = 32;
                         break;
                     case 12:
                         goldAmmount = 800;
                         break;
                     case 13:
-                        goldAmmount = 40;
-                        break;
-                    case 14:
                         goldAmmount = 50;
                         break;
-                    case 15:
+                    case 14:
                         goldAmmount = 60;
                         break;
-                    case 16:
-                        goldAmmount = 1200;
+                    case 15:
+                        goldAmmount = 70;
                         break;
-
-
+                    case 16:
+                        goldAmmount = 2000;
+                        break;
+                    case 17:
+                        goldAmmount = 70;
+                        break;
+                    case 18:
+                        goldAmmount = 80;
+                        break;
+                    case 19:
+                        goldAmmount = 100;
+                        break;
+                    case 20:
+                        goldAmmount = 5000;
+                        break;
                 }
                 PlayerStats.AddMoney(goldAmmount);
                 GameController.MoneyCollected(goldAmmount, false);
