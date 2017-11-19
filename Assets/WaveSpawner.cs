@@ -227,21 +227,21 @@ public class WaveSpawner : MonoBehaviour {
         combinations[7].special = new int[] {10,10,10,10,10,11,11};
         combinations[8] = new Milestone();
         combinations[8].combination = new int[] {11,11,11,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10};
-        combinations[8].special = new int[] {8,8,8,8,11,11,11,11,11,11,10,10,10,10,10,10,10,10,10,10};
-        combinations[9].combination = new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
-        combinations[9].special = new int[] { 11, 9, 9, 9, 9, 9 };
+        combinations[8].special = new int[] {8,10,8,10,8,11,8,11,11,11,11,11,10,10,10,10,13,13};
+        combinations[9].combination = new int[] {10,13,10,13,10,13,10,13,10,13,13,13,13,13,10,13,10,13,13,13,13,13,13,11,11,11,11};
+        combinations[9].special = new int[] {14,14,14,14,14,14,14,14,14};
         combinations[10] = new Milestone();
-        combinations[10].combination = new int[] { 12, 12, 12, 12, 12, 12, 12, 12, 12, 12 };
-        combinations[10].special = new int[] { 13, 10, 10, 10, 10, 10 };
+        combinations[10].combination = new int[] {13,13,13,13,13,13,13,13,13,13,13,13,13,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14};
+        combinations[10].special = new int[] {15,15,15,15,14,14,14,14,14,14,15};
         combinations[11] = new Milestone();
-        combinations[11].combination = new int[] { 13, 13, 13, 13, 13, 13, 13,13};
-        combinations[11].special = new int[] { 14,13,13,14,13,13 };
+        combinations[11].combination = new int[] {14,14,14,15,15,15,14,14,14,14,14,15,15,15,15,15,15,15,15,15,14,14,14,13,13,13,14,15,15,14,14,14};
+        combinations[11].special = new int[] {12,15,15,15,15,15,15,15,15,15,15,17,17,17};
         combinations[12] = new Milestone();
-        combinations[12].combination = new int[] { 14, 14, 14, 14, 14, 14, 14, 14 };
-        combinations[12].special = new int[] { 15, 14, 14, 14 };
+        combinations[12].combination = new int[] {12,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17};
+        combinations[12].special = new int[] {17,17,17,15,15,12,15,18,12,18};
         combinations[13] = new Milestone();
-        combinations[13].combination = new int[] { 16, 16, 16, 16, 16, 16, 16, 16 };
-        combinations[13].special = new int[] { 14, 14, 14, 14 };
+        combinations[13].combination = new int[] {12,17,17,17,17,17,17,17,17,17,17,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,17,17,12};
+        combinations[13].special = new int[] {16,19,19,19,19,19,19,19,19,19,19,19};
         combinations[14] = new Milestone();
         combinations[14].combination = new int[] { 17, 17, 17, 17, 17, 17, 17, 17 };
         combinations[14].special = new int[] { 18, 18, 18, 18 };
@@ -1030,6 +1030,7 @@ public class WaveSpawner : MonoBehaviour {
         TowerController tc;
         TowerSlowController tSc;
         TeslaCoilController tTc;
+        FileOperations.openStreamWriter();
         for (int i = 0; i < gridMouse.ListOfGameObjects.Count; i++)
         {
             if (gridMouse.ListOfGameObjects[i] == null)
@@ -1062,6 +1063,7 @@ public class WaveSpawner : MonoBehaviour {
 
                 //Debug.Log("Just Saved FR, AP = " + tc.fireRateLVL + ", " + tc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (tSc != null)
             {
@@ -1070,6 +1072,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tSc.fireRateLVL, tSc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (tTc != null)
             {
@@ -1078,6 +1081,7 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform,
                                                         bc.Health, tTc.fireRateLVL, tTc.attackPowerLVL);
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             else if (bc != null) // Soldier Camp
             {
@@ -1086,13 +1090,17 @@ public class WaveSpawner : MonoBehaviour {
                                                       gridMouse.ListOfGameObjects[i].transform);
                 //Debug.Log("ADDED " + bc.getUnitBlueprint().name + " TO THE LIST OF STATES");
                 listOfStates.Add(state);
+                FileOperations.writeState(state);
             }
             
            // Debug.Log("Added " + gridMouse.ListOfGameObjects[i].transform.position + ".");
         }
+        FileOperations.closeStreamWriter();
     }
     public void doLoadAll()
     {
+        listOfStates = FileOperations.loadState();
+        FileOperations.closeReader();
         //Debug.Log("CALLING DESTROY ALL");
         doDestroyAll();
 
@@ -1274,7 +1282,7 @@ public class WaveSpawner : MonoBehaviour {
     }
 
 
-
+    
 
 
 
