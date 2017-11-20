@@ -55,7 +55,6 @@ public class BeamArrow : Arrow {
             if (hitted)
             {
                 Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
-                GetComponentInParent<TowerController>().enemies.Remove(other.gameObject);
                 StopParticles();
                 GetComponentInChildren<SphereCollider>().enabled = false;
 

@@ -65,6 +65,7 @@ public class UpgradeWheelController : MonoBehaviour {
 
     public void setMineSellPrice()
     {
+        Debug.Log("PRICEEEEEEE");
         buildable = tower.GetComponent<BuildableController>();
         upgradeWheel.transform.Find("SellTower").transform.Find("Cost").GetComponent<Text>().text = "" + buildable.GetSellCostWithInterest();
         Debug.Log("5 SET SELL COST TO " + buildable.GetSellCostWithInterest());

@@ -34,11 +34,15 @@ public class IceArrow : Arrow {
         {
 
             SoundToPlay.PlayAtLocation(GetComponent<AudioSource>(), target.transform.position, Quaternion.identity);
+            if (QualitySettings.GetQualityLevel() > 2)
+            {
+                GameObject ice = Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
+                ice.GetComponent<CrystalIce>().target = target;
+                ice.transform.parent = target.transform;
+            }
+
             Instantiate(bloodPrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
-            GameObject ice = Instantiate(damagePrefabParticle, target.transform.position + target.GetComponent<CapsuleCollider>().center, Quaternion.Euler(new Vector3(-90, 0, 0)));
             target.GetComponent<PawnCharacter>().StartCoroutine("SlowTime", transform.parent.gameObject.GetComponent<TowerSlowController>().SlowAmount);
-            ice.GetComponent<CrystalIce>().target = target;
-            ice.transform.parent = target.transform;
             GameController.Freeze();
 
             GetComponent<BoxCollider>().enabled = false;

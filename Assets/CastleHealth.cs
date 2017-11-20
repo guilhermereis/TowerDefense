@@ -21,7 +21,7 @@ public class CastleHealth : MonoBehaviour {
     public GameObject repairButton;
     public GameObject repairSound;
 
-    public int repairCostMultiplier = 30;
+    public int repairCostMultiplier = 1;
     public float repairAmmountPercentual = 0.2f;
 
     public Color buttonDisabledColor;
@@ -86,8 +86,8 @@ public class CastleHealth : MonoBehaviour {
 
     public float CalculateCost(float waveNumber)
     {
-        float y = Mathf.Log(5 * waveNumber + 1, 10) * 2.55f;
-        return y/2f;
+        float y = 8 * waveNumber;
+        return y;
     }
 
     public void Repair()
@@ -118,7 +118,7 @@ public class CastleHealth : MonoBehaviour {
     }
 
     void setRepairCostText(WaveSpawner ws) {
-        string baseString = "PAY TO REPAIR "+ repairAmmountPercentual *100 + "% OF YOUR CASTLE'S HEALTH\nTHE PRICE INCREASES WITH THE PROGRESSION OF THE GAME\nCURRENT COST: ";
+        string baseString = "REPAIR "+ repairAmmountPercentual *100 + "% OF YOUR CASTLE'S HEALTH\nTHE PRICE INCREASES WITH TIME\nCURRENT COST: ";
         tooltipController.tooltipText = baseString + Mathf.RoundToInt(repairCostMultiplier * CalculateCost(ws.waveNumber));
     }
 

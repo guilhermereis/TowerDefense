@@ -19,9 +19,12 @@ public class CrystalIce : MonoBehaviour {
             {
                 if(brokenIce!= null)
                 {
-                    GameObject ice = Instantiate(brokenIce, transform.position, Random.rotation);
-                    //ice.transform.parent = gameObject.transform.parent;
-                    ice.GetComponent<ExplodeIceEffect>().ExplodeIce();
+                    if (QualitySettings.GetQualityLevel() > 3) {
+                        GameObject ice = Instantiate(brokenIce, transform.position, Random.rotation);
+                        ice.transform.parent = gameObject.transform.parent;
+                        ice.GetComponent<ExplodeIceEffect>().ExplodeIce();
+                    }
+                    
                     Destroy(gameObject);
 
                 }

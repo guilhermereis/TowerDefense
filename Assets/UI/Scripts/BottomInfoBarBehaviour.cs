@@ -42,7 +42,6 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
 
             string unitName = controller.getUnitBlueprint().name;
 
-
             if (unitName == Shop.instance.towerLevel1.name) {
                 SelectionName.GetComponent<Text>().text = " Tower Lvl1: ";
                 SelectionNameShadow.GetComponent<Text>().text = " Tower Lvl1: ";
@@ -86,8 +85,8 @@ public class BottomInfoBarBehaviour : MonoBehaviour {
             {
                 SelectionName.GetComponent<Text>().text = " Fire Tower: ";
                 SelectionNameShadow.GetComponent<Text>().text = " Fire Tower: ";
-                DamageText.GetComponent<Text>().text = "" + controller.getAttackPower();
-                DamageTextShadow.GetComponent<Text>().text = "" + controller.getAttackPower();
+                DamageText.GetComponent<Text>().text = "" + 1000;
+                DamageTextShadow.GetComponent<Text>().text = "" + 1000;
                 SelectionName.transform.Find("AttackSpeed").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S FIRERATE\nATTACKS / SECOND";
                 SelectionName.transform.Find("AttackDamage").transform.Find("TooltipPrefab").gameObject.GetComponentInChildren<TooltipController>().tooltipText = "TOWER'S ATTACK DAMAGE";
             }

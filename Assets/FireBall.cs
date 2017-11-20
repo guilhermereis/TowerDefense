@@ -26,20 +26,13 @@ public class FireBall : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-	
-
 		rig.MovePosition(transform.position + dir.normalized * speed * Time.deltaTime);
-
-
-
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		
 		Instantiate(explosionParticlePrefab,collision.contacts[0].point, Quaternion.identity);
 		Destroy(gameObject);
-
 	}
 
 	private void OnTriggerEnter(Collider other)
