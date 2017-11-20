@@ -20,6 +20,7 @@ public class WaveSpawner : MonoBehaviour {
     public WarningBoardController waveWarningBoardController;
 
     private Minimap minimap;
+    Canvas hud_canvas;
     private int saved_money = 0;
     public static int gainSecondChanceCounter = 0;
     public static int secondChanceWaveCountTarget = 30;
@@ -1021,6 +1022,25 @@ public class WaveSpawner : MonoBehaviour {
             Destroy(monsterBatch[i]);
         }
         monsterBatch.Clear();
+
+        //destroy gold buttons
+        foreach (Canvas c in GameObject.FindObjectsOfType<Canvas>())
+        {
+            if (c.CompareTag("HUD"))
+            {
+                hud_canvas = c;
+                break;
+            }
+        }
+        if (hud_canvas)
+        {
+            Transform goldMinesButtonHolder = hud_canvas.transform.Find("GoldMinesButtonHolder");
+            foreach (Transform child in goldMinesButtonHolder)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
     }
     public void doSaveAll()
     {
