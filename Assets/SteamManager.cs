@@ -7,7 +7,7 @@
 
 using UnityEngine;
 using System.Collections;
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
 using Steamworks;
 
 //

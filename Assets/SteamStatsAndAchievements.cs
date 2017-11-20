@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
 using Steamworks;
 #endif
 public class SteamStatsAndAchievements : MonoBehaviour {
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
 
     private enum Achievement: int
     {

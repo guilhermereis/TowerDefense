@@ -11,7 +11,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Los Exaltados!
-  productName: Goblins Keep Coming!
+  productName: Goblins Keep Coming
   defaultCursor: {fileID: 2800000, guid: 68960342ac1709945a09f266e57871b9, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -529,11 +529,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: TowerDefense
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: Los Exaltados!
+  metroCertificateIssuer: Los Exaltados!
+  metroCertificateNotAfter: 005f97c8b97ed401
   metroApplicationDescription: TowerDefense
   wsaImages: {}
   metroTileShortName: 

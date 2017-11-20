@@ -4,7 +4,7 @@
 
 // Changes to this file will be reverted when you update Steamworks.NET
 
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
 
 // If we're running in the Unity Editor we need the editors platform.
 #if UNITY_EDITOR_WIN

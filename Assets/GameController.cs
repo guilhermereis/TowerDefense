@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour {
     float countDown;
     public static SteamStatsAndAchievements stats;
     int CurrentCountdown = 11;
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
  
 
     private void OnEnable()
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour {
     //add built towers during game
     public static void AddBuiltTower(BuildType towerType)
     {
-        #if DISABLESTEAMWORKS
+        #if !DISABLESTEAMWORKS
         if (stats)
             stats.AddBuiltTower(towerType);
         #endif
@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour {
 
     public static void TryAgain()
     {
-        #if DISABLESTEAMWORKS
+        #if !DISABLESTEAMWORKS
         if (stats)
             stats.TryAgain();
 #endif
@@ -70,7 +70,7 @@ public class GameController : MonoBehaviour {
 
     public static void AddBuiltMine()
     {
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
         if (stats)
             stats.AddMine();
 #endif
@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour {
 
     public static void UnlockLane(int lane)
     {
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
         if (stats)
         {
             if (lane == 2)
@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour {
 
     public static void Freeze()
     {
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
         if (stats)
          stats.FreezeGoblin();
 #endif
@@ -101,7 +101,7 @@ public class GameController : MonoBehaviour {
 
     public static void Repair()
     {
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
         if (stats)
             stats.Repair();
 #endif
@@ -109,14 +109,14 @@ public class GameController : MonoBehaviour {
 
     public static void AddMonsterKilled(PawnType monsterType, DamageType _damage)
     {
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
         if (stats)
             stats.AddMonstersKilled(monsterType,_damage);
 #endif
     }
     public static void MoneyCollected(int gold, bool wasCollected)
     {
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
         if (stats)
             stats.AddMoneyCollected(gold, wasCollected);
 #endif
@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour {
 
     public static void MoneySpent(int gold)
     {
-#if DISABLESTEAMWORKS
+#if !DISABLESTEAMWORKS
         if (stats)
             stats.SpendMoney(gold);
 #endif
