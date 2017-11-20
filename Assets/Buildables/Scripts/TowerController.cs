@@ -365,8 +365,6 @@ public class TowerController : BuildableController {
 
 	void ChangeTarget() { }
 
-   
-
 	public override void OnTriggerExit(Collider other)
 	{
         if (other.gameObject.CompareTag("Enemy"))
@@ -379,10 +377,7 @@ public class TowerController : BuildableController {
                 else
 				    target = null;
 		    }
-
         }
-
-		
 	}
     public float getFireRate()
     {

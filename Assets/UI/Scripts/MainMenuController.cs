@@ -36,7 +36,7 @@ public class MainMenuController : MonoBehaviour {
 
     private void Start()
     {
-        SoundToPlay.PlayMusic(mainMenuBG);
+        SoundToPlay.PlayMusic(mainMenuBG,0.7f);
     }
     public void StartGame() {
         SceneManager.LoadScene("LoadingScene");

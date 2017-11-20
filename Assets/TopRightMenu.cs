@@ -125,7 +125,7 @@ public class TopRightMenu : MonoBehaviour {
         clearButtons();
         tripleSpeed.image.overrideSprite = tripleSelected;
         tripleSpeed.interactable = false;
-        Time.timeScale = 6;
+        Time.timeScale = 3;
         isGamePaused = false;
     }
 
