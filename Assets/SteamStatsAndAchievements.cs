@@ -1638,6 +1638,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
 
     public void ResetAllCurrentStats()
     {
+        Debug.Log("reseting current stats...");
         c_numberOfTowers = 0;
         c_numberOfWave = 0;
         c_numberOfTowers = 0;
@@ -1701,8 +1702,11 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             if (GameController.gamechangedDelegate != null)
             {
                 GameController.gamechangedDelegate += OnGameChanged;
-                
+                ResetAllCurrentStats();
+
             }
+           
+               
             castleHealth = GameObject.FindObjectOfType<CastleHealth>();
             onPlayScene = false;
 
