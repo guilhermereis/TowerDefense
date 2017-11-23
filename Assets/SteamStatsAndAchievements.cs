@@ -1364,7 +1364,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
     public void UpdateStats()
     {
         //here we update the persistent values and reset the current values for next wave
-        p_totalWaves+= c_numberOfWave;
+        p_totalWaves += 1;
         p_totalTowerBuilt += c_numberOfTowers;
         p_totalTowerlevel1Built += c_numberOftower1;
         p_totalTowerlevel2Built += c_numberOftower2;
@@ -1384,7 +1384,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         p_totalmoneyRaised += c_moneyRaised;
         p_totalMonsterKilled += c_numberOfMonstersKilled;
 
-        c_numberOfWave = 0;
+        //c_numberOfWave = 0;
         c_numberOfTowers = 0;
         c_numberOftower1 = 0;
         c_numberOftower2 = 0;
@@ -1482,7 +1482,7 @@ public class SteamStatsAndAchievements : MonoBehaviour {
            
             scoreDetails = new int[1];
             scoreDetails[0] = 1;
-            SteamAPICall_t uHandle = SteamUserStats.UploadLeaderboardScore(pCallback.m_hSteamLeaderboard, ELeaderboardUploadScoreMethod.k_ELeaderboardUploadScoreMethodKeepBest, p_totalWaves, scoreDetails, 1);
+            SteamAPICall_t uHandle = SteamUserStats.UploadLeaderboardScore(pCallback.m_hSteamLeaderboard, ELeaderboardUploadScoreMethod.k_ELeaderboardUploadScoreMethodKeepBest, c_numberOfWave, scoreDetails, 1);
             leaderboardScoreUploaded.Set(uHandle);
 
         }
@@ -1675,14 +1675,21 @@ public class SteamStatsAndAchievements : MonoBehaviour {
             ResetAllCurrentStats();
         }else if (GameController.gameState == GameState.EndWave)
         {
+            Debug.Log("end Wave");
             AddWaves();
             Debug.Log("total waves " +p_totalWaves);
+
             UpdateStats();
             
         }else if(GameController.gameState == GameState.GameOver)
         {
+            AddWaves();
             p_totalDefeats++;
+            //p_totalWaves += c_numberOfWave;
             UpdateStats();
+            Debug.Log("total waves " + p_totalWaves);
+            Debug.Log("current run " + c_numberOfWave);
+            //GameController.gamechangedDelegate -= OnGameChanged;
             //getting leaderboard;
             SteamAPICall_t fHandle =  SteamUserStats.FindLeaderboard(leaderboardName);
             findLeaderBoard.Set(fHandle);
@@ -1701,6 +1708,8 @@ public class SteamStatsAndAchievements : MonoBehaviour {
         {
             if (GameController.gamechangedDelegate != null)
             {
+                GameController.gamechangedDelegate -= OnGameChanged;
+                
                 GameController.gamechangedDelegate += OnGameChanged;
                 ResetAllCurrentStats();
 

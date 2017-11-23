@@ -138,16 +138,16 @@ public class GameController : MonoBehaviour {
     void Start () {
         gamechangedDelegate+= evaluateGameStateChanged;
         toggleGizmoDelegate += evaluateGizmoToggle;
-        ChangeGameState(GameState.GameActivate);
-        //gameState = GameState.GameActivate;
+        //ChangeGameState(GameState.GameActivate);
+        gameState = GameState.GameActivate;
         countDown = preparationTime;
         startWaveButton = gameStateUI.transform.Find("StartWave").gameObject.GetComponent<Button>();
         towerGizmosOn = true;
     }
 
     public static void GameStart() {
-        //gameState = GameState.Preparation;
-        ChangeGameState(GameState.Preparation);
+        gameState = GameState.Preparation;
+        //ChangeGameState(GameState.Preparation);
     }
 
     private void OnDestroy()
